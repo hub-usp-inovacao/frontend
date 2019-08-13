@@ -1,6 +1,6 @@
 # Solus
 
-> My gnarly Nuxt.js project
+> My hunky-dory Nuxt.js project
 
 ## Build Setup
 
