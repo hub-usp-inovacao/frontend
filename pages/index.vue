@@ -1,3 +1,5 @@
 <template>
-  <div>HELLO</div>
+  <v-app>
+    HOME
+  </v-app>
 </template>
