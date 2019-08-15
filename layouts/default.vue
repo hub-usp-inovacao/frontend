@@ -14,43 +14,43 @@
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
-      <nuxt />
+      <v-container>
+        <nuxt />
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      title: "SOLUS",
-      items: [
-        {
-          title: "Home",
-          to: "/"
-        },
-        {
-          title: "Iniciativas",
-          to: "/iniciativas"
-        },
-        {
-          title: "D&I",
-          to: "/desenvolvimento-e-inovacao"
-        },
-        {
-          title: "Educação",
-          to: "/educacao"
-        },
-        {
-          title: "Empresas",
-          to: "/empresas"
-        },
-        {
-          title: "Contato",
-          to: "/contato"
-        }
-      ]
-    };
-  }
+  data: () => ({
+    title: "SOLUS",
+    items: [
+      {
+        title: "Home",
+        to: "/"
+      },
+      {
+        title: "Iniciativas",
+        to: "/iniciativas"
+      },
+      {
+        title: "D&I",
+        to: "/desenvolvimento-e-inovacao"
+      },
+      {
+        title: "Educação",
+        to: "/educacao"
+      },
+      {
+        title: "Empresas",
+        to: "/empresas"
+      },
+      {
+        title: "Contato",
+        to: "/contato"
+      }
+    ]
+  })
 };
 </script>
