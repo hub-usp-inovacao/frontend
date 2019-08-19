@@ -3,7 +3,7 @@
     <v-data-iterator :items="sheet" :search="search" single-expand>
       <template v-slot:header>
         <v-toolbar>
-          <v-text-field v-model="search" hide-details append-icon="*" label="Search"></v-text-field>
+          <v-text-field v-model="search" hide-details append-icon="search" label="Search"></v-text-field>
         </v-toolbar>
       </template>
 
