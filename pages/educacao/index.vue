@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    ola
-    {{test}}
-    <Table :test="this.test" />
+    <Table :s="sheet" :h="headers" />
   </v-app>
 </template>
 
@@ -13,31 +11,35 @@ export default {
   components: {
     Table
   },
-  data() {
-    return {
-      sheet: [],
-      headers: [{ value: "name" }, { value: "sector" }],
-      test: "hey"
-    };
+  data: () => ({
+    sheet: [],
+    headers: [
+      { text: "Disciplinas", value: "name" },
+      { text: "Campus", value: "campus" },
+      { text: "Unidade", value: "unity" },
+      { text: "Descrição", value: "description" }
+    ]
+  }),
+  methods: {
+    async sheetQuery() {
+      const request = await fetch(
+        "https://spreadsheets.google.com/feeds/list/102q6lFiHtBFA24ldqTjmAgUlGFeSFATARn260i7WVvs/oqw270x/public/values?alt=json"
+      );
+      const data = await request.json();
+      data.feed.entry.forEach(row => {
+        let v = {
+          name: row.gsx$matéria.$t,
+          campus: row.gsx$campus.$t,
+          unity: row.gsx$unidade.$t,
+          url: row.gsx$url.$t,
+          description: row.gsx$descriçãocurtaaté170caracteres.$t
+        };
+        this.sheet.push(v);
+      });
+    }
+  },
+  created() {
+    this.sheetQuery();
   }
-  // methods: {
-  //   async sheetQuery() {
-  //     const request = await fetch(
-  //       "https://spreadsheets.google.com/feeds/list/1-m11ldmwNK7yIB7RcCWRxs5uDoRFG_lPu2WSlDN1fVo/od6/public/values?alt=json"
-  //     );
-  //     const data = await request.json();
-  //     data.feed.entry.forEach(row => {
-  //       let v = {
-  //         name: row.gsx$nomefantasia.$t,
-  //         sector: row.gsx$setordeatuaçãocnae.$t
-  //       };
-  //       this.sheet.push(v);
-  //     });
-  //     this.sheet = data;
-  //   }
-  // },
-  // created() {
-  //   this.sheetQuery();
-  // }
 };
 </script>

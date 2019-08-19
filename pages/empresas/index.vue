@@ -1,35 +1,41 @@
 <template>
   <v-app>
-    <Table :s="sheet" :h="headers" />
     <Grid :s="sheet" :h="headers" />
   </v-app>
 </template>
 
 <script>
-import Table from "@/components/Table.vue";
 import Grid from "@/components/Grid.vue";
 
 export default {
   components: {
-    Table,
     Grid
   },
   data() {
     return {
-      headers: [{ value: "name" }, { value: "sector" }],
+      headers: [
+        { value: "name" },
+        { value: "sector" },
+        { value: "logo" },
+        { value: "url" },
+        { value: "description" }
+      ],
       sheet: []
     };
   },
   methods: {
     async sheetQuery() {
       const request = await fetch(
-        "https://spreadsheets.google.com/feeds/list/1-m11ldmwNK7yIB7RcCWRxs5uDoRFG_lPu2WSlDN1fVo/od6/public/values?alt=json"
+        "https://spreadsheets.google.com/feeds/list/1KMMPp5tW_Ou4ZkvkQrvni_8A-_NDD7hkS-qPrNjRTRY/o6mbfy9/public/values?alt=json"
       );
       const data = await request.json();
       data.feed.entry.forEach(row => {
         let v = {
-          name: row.gsx$nomefantasia.$t,
-          sector: row.gsx$setordeatuaçãocnae.$t
+          name: row.gsx$_cn6ca.$t,
+          sector: row.gsx$tecnologiasqueutiliza.$t,
+          logo: row.gsx$logo.$t,
+          url: row.gsx$website.$t,
+          description: row.gsx$descriçãodonegócio.$t
         };
         this.sheet.push(v);
       });
