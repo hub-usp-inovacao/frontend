@@ -26,7 +26,7 @@
                 <v-spacer></v-spacer>
 
                 <v-btn icon @click="show = !show">
-                  <v-icon>{{ show ? '*' : '*' }}</v-icon>
+                  <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
                 </v-btn>
               </v-card-actions>
 
@@ -45,11 +45,11 @@
 
 <script>
 export default {
-  props: ["s", "h"],
+  props: ['s', 'h'],
   data: () => ({
     sheet: [],
     headers: [],
-    search: "",
+    search: '',
     show: false
   }),
   methods: {
