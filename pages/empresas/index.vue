@@ -23,15 +23,6 @@ export default {
       sheet: []
     };
   },
-  head() {
-    return {
-      meta: {
-        hid: 'Empresas',
-        name: 'Empresas',
-        content: 'Empresas'
-      }
-    };
-  },
   methods: {
     async sheetQuery() {
       const request = await fetch(
