@@ -13,6 +13,7 @@
         >{{item.title}}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
+
     <v-content>
       <v-container>
         <nuxt />

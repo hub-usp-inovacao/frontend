@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Grid :s="sheet" :h="headers" :sz="sheet.length" />
+    <Grid :s="sheet" :h="headers" :size="sheet.length" />
   </v-app>
 </template>
 
