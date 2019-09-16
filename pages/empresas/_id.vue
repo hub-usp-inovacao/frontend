@@ -6,10 +6,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      id: this.$route.params.id
-    };
-  }
+  data: () => ({
+    id: this.$route.params.id
+  })
 };
 </script>

@@ -11,18 +11,16 @@ export default {
   components: {
     Grid
   },
-  data() {
-    return {
-      headers: [
-        { value: "name" },
-        { value: "sector" },
-        { value: "logo" },
-        { value: "url" },
-        { value: "description" }
-      ],
-      sheet: []
-    };
-  },
+  data: () => ({
+    headers: [
+      { value: "name" },
+      { value: "sector" },
+      { value: "logo" },
+      { value: "url" },
+      { value: "description" }
+    ],
+    sheet: []
+  }),
   head() {
     return {
       meta: {

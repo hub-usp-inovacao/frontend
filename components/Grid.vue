@@ -9,46 +9,40 @@
         </template>
 
         <template v-slot:default="props">
-          <v-row>
-            <v-col
-              v-for="(item, i) in props.items"
-              :key="item.name"
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
-              tile
-            >
-              <v-card>
-                <v-container v-if="item.logo">
-                  <v-img :src="item.logo"></v-img>
-                </v-container>
+          <masonry :cols="cols">
+            <div v-for="(item, i) in props.items" :key="item">
+              <v-container>
+                <v-card tile>
+                  <v-container v-if="item.logo" fluid>
+                    <v-img :src="item.logo"></v-img>
+                  </v-container>
 
-                <v-card-title>
-                  <div class="display-1">{{item.name}}</div>
-                </v-card-title>
+                  <v-card-title>
+                    <div class="display-1">{{item.name}}</div>
+                  </v-card-title>
 
-                <v-card-text v-if="item.sector">
-                  <span class="grey--text subtitle-1">{{item.sector}}</span>
-                </v-card-text>
+                  <v-card-text v-if="item.sector">
+                    <span class="grey--text subtitle-1">{{item.sector}}</span>
+                  </v-card-text>
 
-                <v-card-actions>
-                  <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn>
-                  <v-btn v-if="item.url" color="purple" :href="item.url" text>VISITE O SITE</v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn v-if="item.description" icon @click="showDescription(i);">
-                    <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
-                  </v-btn>
-                </v-card-actions>
+                  <v-card-actions>
+                    <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn>
+                    <v-btn v-if="item.url" color="purple" :href="item.url" text>VISITE O SITE</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn v-if="item.description" icon @click="showDescription(i);">
+                      <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+                    </v-btn>
+                  </v-card-actions>
 
-                <v-expand-transition>
-                  <div v-show="show[i]">
-                    <v-card-text class="body-2">{{item.description}}</v-card-text>
-                  </div>
-                </v-expand-transition>
-              </v-card>
-            </v-col>
-          </v-row>
+                  <v-expand-transition>
+                    <div v-show="show[i]">
+                      <v-card-text class="body-2">{{item.description}}</v-card-text>
+                    </div>
+                  </v-expand-transition>
+                </v-card>
+              </v-container>
+            </div>
+          </masonry>
         </template>
       </v-data-iterator>
     </v-container>
@@ -62,7 +56,8 @@ export default {
     sheet: [],
     headers: [],
     search: "",
-    show: []
+    show: [],
+    cols: 1
   }),
   methods: {
     set() {
@@ -72,10 +67,27 @@ export default {
     },
     showDescription(i) {
       this.$set(this.show, i, !this.show[i]);
+    },
+    set_cols() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return 1;
+        case "sm":
+          return 2;
+        case "md":
+          return 3;
+        case "lg":
+          return 4;
+        case "xl":
+          return 5;
+      }
     }
   },
   created() {
     this.set();
+  },
+  mounted() {
+    this.cols = this.set_cols();
   }
 };
 </script>
