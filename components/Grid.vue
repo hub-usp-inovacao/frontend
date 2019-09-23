@@ -10,7 +10,7 @@
 
         <template v-slot:default="props">
           <masonry :cols="cols">
-            <div v-for="(item, i) in props.items" :key="item">
+            <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
                 <v-card tile>
                   <v-container v-if="item.logo" fluid>
@@ -81,6 +81,14 @@ export default {
         case "xl":
           return 5;
       }
+    },
+    refillArray() {
+      this.show.fill(false);
+    }
+  },
+  watch: {
+    search() {
+      this.refillArray();
     }
   },
   created() {
