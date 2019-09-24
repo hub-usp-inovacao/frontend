@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container fluid>
+    <v-container fluid v-bind="{ [grid-list-lg]: true}">
       <v-data-iterator :items="sheet" :search="search" :items-per-page="16" single-expand>
         <template v-slot:header>
           <v-text-field
