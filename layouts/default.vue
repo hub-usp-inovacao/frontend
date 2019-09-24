@@ -4,7 +4,14 @@
       <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn text v-for="(item, i) in items" :key="i" :to="item.to" router>{{item.title}}</v-btn>
+        <v-btn
+          class="all"
+          text
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+        >{{item.title}}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -66,8 +73,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-btn {
+<style>
+.all {
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
 }

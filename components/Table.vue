@@ -1,10 +1,18 @@
 <template>
   <v-app>
     <v-form>
-      <v-text-field v-model="search" append-icon="search" label="Search"></v-text-field>
-      <v-select :items="items" label="Unidade" v-model="select"></v-select>
+      <v-text-field
+        class="all"
+        v-model="search"
+        hide-details
+        append-icon="search"
+        label="Search"
+        outlined
+      ></v-text-field>
+      <v-divider />
+      <v-select class="all" :items="items" label="Unidade" v-model="select" outlined></v-select>
     </v-form>
-    <v-data-table :headers="headers" :items="sheet" :search="search"></v-data-table>
+    <v-data-table class="all" :headers="headers" :items="sheet" :search="search"></v-data-table>
   </v-app>
 </template>
 
@@ -16,7 +24,8 @@ export default {
     headers: [],
     search: "",
     select: "",
-    items: ["IME", "FAU", "FEA", "EP"]
+    distinct: [],
+    items: ["", "IME", "FAU", "FEA", "EP", "EESC", "FFCLRP", "IFSC", "EACH", "ECA", "IP"]
   }),
   methods: {
     set() {
@@ -27,6 +36,7 @@ export default {
           return !this.select ? true : item.unity == this.select;
         }
       });
+      this.distinct = [...new Set(this.headers.unity)];
     }
   },
   created() {
@@ -34,3 +44,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.v-text-field {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+</style>

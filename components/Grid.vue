@@ -3,14 +3,21 @@
     <v-container fluid>
       <v-data-iterator :items="sheet" :search="search" :items-per-page="16" single-expand>
         <template v-slot:header>
-          <v-text-field v-model="search" hide-details append-icon="search" label="Search" outlined></v-text-field>
+          <v-text-field
+            class="all"
+            v-model="search"
+            hide-details
+            append-icon="search"
+            label="Search"
+            outlined
+          ></v-text-field>
         </template>
 
         <template v-slot:default="props">
           <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
-                <v-card tile outlined>
+                <v-card tile outlined class="all">
                   <v-container v-if="item.logo" fluid>
                     <v-img :src="item.logo"></v-img>
                   </v-container>
@@ -71,7 +78,7 @@ export default {
         case "sm":
           return 2;
         case "md":
-          return 1;
+          return 3;
         case "lg":
           return 4;
         case "xl":
@@ -95,10 +102,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.v-card {
-  font-family: "Oswald", sans-serif;
-  text-transform: uppercase;
-}
-</style>
