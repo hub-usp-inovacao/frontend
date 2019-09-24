@@ -33,7 +33,8 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -52,16 +53,12 @@ export default {
    */
   vuetify: {
     theme: {
-      dark: true,
       themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+        light: {
+          primary: "#5E35B1",
+          secondary: colors.blue.darken1,
+          accent: colors.blue.darken1,
+          error: colors.blue.darken1
         }
       }
     }

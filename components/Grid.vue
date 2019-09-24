@@ -3,22 +3,20 @@
     <v-container fluid>
       <v-data-iterator :items="sheet" :search="search" :items-per-page="16" single-expand>
         <template v-slot:header>
-          <v-toolbar>
-            <v-text-field v-model="search" hide-details append-icon="search" label="Search"></v-text-field>
-          </v-toolbar>
+          <v-text-field v-model="search" hide-details append-icon="search" label="Search" outlined></v-text-field>
         </template>
 
         <template v-slot:default="props">
           <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item">
               <v-container>
-                <v-card tile>
+                <v-card tile outlined>
                   <v-container v-if="item.logo" fluid>
                     <v-img :src="item.logo"></v-img>
                   </v-container>
 
                   <v-card-title>
-                    <div class="display-1">{{item.name}}</div>
+                    {{item.name}}
                   </v-card-title>
 
                   <v-card-text v-if="item.sector">
@@ -27,7 +25,7 @@
 
                   <v-card-actions>
                     <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn>
-                    <v-btn v-if="item.url" color="purple" :href="item.url" text>VISITE O SITE</v-btn>
+                    <v-btn v-if="item.url" color="primary" :href="item.url" text>VISITE O SITE</v-btn>
                     <v-spacer></v-spacer>
                     <v-btn v-if="item.description" icon @click="showDescription(i);">
                       <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
@@ -91,3 +89,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.v-card {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+</style>

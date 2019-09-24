@@ -1,16 +1,10 @@
 <template>
   <v-app>
-    <v-toolbar class="white--text">
-      <v-toolbar-title>{{title}}</v-toolbar-title>
+    <v-toolbar flat>
+      <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn
-          class="white--text flat"
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-        >{{item.title}}</v-btn>
+        <v-btn text v-for="(item, i) in items" :key="i" :to="item.to" router>{{item.title}}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -24,6 +18,22 @@
 
 <script>
 export default {
+  head() {
+    return {
+      script: [
+        {
+          src:
+            "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+        }
+      ],
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald"
+        }
+      ]
+    };
+  },
   data: () => ({
     title: "SOLUS",
     items: [
@@ -55,3 +65,10 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+.v-btn {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+</style>
