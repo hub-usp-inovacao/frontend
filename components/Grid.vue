@@ -15,9 +15,7 @@
                     <v-img :src="item.logo"></v-img>
                   </v-container>
 
-                  <v-card-title>
-                    {{item.name}}
-                  </v-card-title>
+                  <v-card-title>{{item.name}}</v-card-title>
 
                   <v-card-text v-if="item.sector">
                     <span class="grey--text subtitle-1">{{item.sector}}</span>
@@ -34,7 +32,7 @@
 
                   <v-expand-transition>
                     <div v-show="show[i]">
-                      <v-card-text class="body-2">{{item.description}}</v-card-text>
+                      <v-card-text>{{item.description}}</v-card-text>
                     </div>
                   </v-expand-transition>
                 </v-card>
@@ -73,7 +71,7 @@ export default {
         case "sm":
           return 2;
         case "md":
-          return 3;
+          return 1;
         case "lg":
           return 4;
         case "xl":
@@ -100,7 +98,7 @@ export default {
 
 <style scoped>
 .v-card {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
 }
 </style>

@@ -68,7 +68,7 @@ export default {
 
 <style scoped>
 .v-btn {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
 }
 </style>
