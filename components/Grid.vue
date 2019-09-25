@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container fluid>
-      <v-data-iterator :items="sheet" :search="typed" :items-per-page="16" single-expand>
+      <v-data-iterator :items="sheet" :search="typed" :items-per-page="16">
         <template v-slot:header>
           <v-text-field
             class="all"
