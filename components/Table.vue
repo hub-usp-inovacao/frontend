@@ -9,8 +9,7 @@
         hide-details
         outlined
       ></v-text-field>
-      <v-divider /
-      {{$vuetify.breakpoint.name}}
+      <v-divider />
       <v-select class="all" :items="items" label="Unidade" v-model="select" outlined></v-select>
     </v-form>
     <v-data-table class="all" :headers="headers" :items="sheet" :search="search"></v-data-table>
