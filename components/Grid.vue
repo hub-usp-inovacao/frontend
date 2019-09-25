@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container fluid>
+    <v-container>
       <v-data-iterator :items="sheet" :search="typed" :items-per-page="16">
         <template v-slot:header>
           <v-text-field
@@ -18,7 +18,7 @@
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
                 <v-card class="all" tile outlined>
-                  <v-container v-if="item.logo" fluid>
+                  <v-container v-if="item.logo">
                     <v-img :src="item.logo"></v-img>
                   </v-container>
 
