@@ -14,7 +14,7 @@
         </template>
 
         <template v-slot:default="props">
-          <masonry>
+          <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
                 <v-card class="all" tile outlined>
