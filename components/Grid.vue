@@ -1,14 +1,14 @@
 <template>
   <v-app>
-    <v-container fluid v-bind="{ [grid-list-lg]: true}">
-      <v-data-iterator :items="sheet" :search="search" :items-per-page="16" single-expand>
+    <v-container fluid>
+      <v-data-iterator :items="sheet" :search="typed" :items-per-page="16" single-expand>
         <template v-slot:header>
           <v-text-field
             class="all"
             v-model="search"
-            hide-details
             append-icon="search"
             label="Search"
+            hide-details
             outlined
           ></v-text-field>
         </template>
@@ -17,7 +17,7 @@
           <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
-                <v-card tile outlined class="all">
+                <v-card class="all" tile outlined>
                   <v-container v-if="item.logo" fluid>
                     <v-img :src="item.logo"></v-img>
                   </v-container>
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { debounce } from "debounce";
+
 export default {
   props: ["s", "h", "size"],
   data: () => ({
@@ -60,7 +62,8 @@ export default {
     headers: [],
     search: "",
     show: [],
-    cols: 1
+    cols: 1,
+    typed: ""
   }),
   methods: {
     set() {
@@ -92,7 +95,10 @@ export default {
   watch: {
     search() {
       this.refillArray();
-    }
+    },
+    search: debounce(function() {
+      this.typed = this.search;
+    }, 1000)
   },
   created() {
     this.set();
