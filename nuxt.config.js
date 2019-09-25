@@ -55,8 +55,8 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: "#5E35B1",
-          secondary: colors.blue.darken1,
+          primary: "#FBE8A6",
+          secondary: "#F4976C",
           accent: colors.blue.darken1,
           error: colors.blue.darken1
         }
