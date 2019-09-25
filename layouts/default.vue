@@ -6,10 +6,10 @@
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
           class="all"
-          text
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
+          text
           router
         >{{item.title}}</v-btn>
       </v-toolbar-items>

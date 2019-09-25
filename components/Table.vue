@@ -4,9 +4,9 @@
       <v-text-field
         class="all"
         v-model="search"
-        hide-details
         append-icon="search"
         label="Search"
+        hide-details
         outlined
       ></v-text-field>
       <v-divider />
@@ -25,7 +25,19 @@ export default {
     search: "",
     select: "",
     distinct: [],
-    items: ["", "IME", "FAU", "FEA", "EP", "EESC", "FFCLRP", "IFSC", "EACH", "ECA", "IP"]
+    items: [
+      "",
+      "IME",
+      "FAU",
+      "FEA",
+      "EP",
+      "EESC",
+      "FFCLRP",
+      "IFSC",
+      "EACH",
+      "ECA",
+      "IP"
+    ]
   }),
   methods: {
     set() {
@@ -36,7 +48,6 @@ export default {
           return !this.select ? true : item.unity == this.select;
         }
       });
-      this.distinct = [...new Set(this.headers.unity)];
     }
   },
   created() {
@@ -44,10 +55,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.v-text-field {
-  font-family: "Oswald", sans-serif;
-  text-transform: uppercase;
-}
-</style>

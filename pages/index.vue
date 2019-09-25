@@ -1,3 +1,3 @@
 <template>
-  <v-app>HELLO</v-app>
+  <v-app>HOME</v-app>
 </template>
