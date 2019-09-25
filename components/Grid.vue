@@ -98,7 +98,7 @@ export default {
     },
     search: debounce(function() {
       this.typed = this.search;
-    }, 500)
+    }, 200)
   },
   created() {
     this.set();
