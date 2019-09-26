@@ -11,7 +11,6 @@
             hide-details
             outlined
             clearable
-            solo
           ></v-text-field>
         </template>
 
@@ -19,7 +18,7 @@
           <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
-                <v-card class="all alo" elevation="3" @click="showDescription(i);" :hover="false">
+                <v-card class="all" elevation="3" @click="showDescription(i);">
                   <v-container v-if="item.logo">
                     <v-img :src="item.logo"></v-img>
                   </v-container>
@@ -113,6 +112,6 @@ export default {
 
 <style scoped>
 .alo {
-border-radius: 500px;
+border-radius: 50px;
 }
 <style>
