@@ -19,7 +19,7 @@
           <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
-                <v-card class="all" elevation="3" @click="showDescription(i);" :ripple="false">
+                <v-card class="all alo" elevation="3" @click="showDescription(i);" :ripple="false">
                   <v-container v-if="item.logo">
                     <v-img :src="item.logo"></v-img>
                   </v-container>
@@ -109,4 +109,10 @@ export default {
     this.cols = this.set_cols();
   }
 };
-</script>
+</script
+
+<style scoped>
+.alo {
+border-radius: 50px;
+}
+<style>
