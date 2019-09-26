@@ -1,7 +1,7 @@
 <template>
-  <v-app>
+  <div>
     <Grid :s="sheet" :h="headers" :size="sheet.length" />
-  </v-app>
+  </div>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-data-iterator :items="sheet" :search="typed" :items-per-page="16">
+  <div>
+    <v-container class="test">
+      <v-data-iterator :items="sheet" :search="typed" :items-per-page="32">
         <template v-slot:header>
           <v-text-field
             class="all"
@@ -10,6 +10,8 @@
             label="Search"
             hide-details
             outlined
+            clearable
+            solo
           ></v-text-field>
         </template>
 
@@ -17,12 +19,12 @@
           <masonry :cols="cols">
             <div v-for="(item, i) in props.items" :key="item.name">
               <v-container>
-                <v-card class="all" tile outlined>
+                <v-card class="all" elevation="3" ripple hover @click="showDescription(i);">
                   <v-container v-if="item.logo">
                     <v-img :src="item.logo"></v-img>
                   </v-container>
 
-                  <v-card-title>{{item.name}}</v-card-title>
+                  <v-card-title class="primary--text">{{item.name}}</v-card-title>
 
                   <v-card-text v-if="item.sector">
                     <span class="grey--text subtitle-1">{{item.sector}}</span>
@@ -32,7 +34,7 @@
                     <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn>
                     <v-btn v-if="item.url" color="primary" :href="item.url" text>VISITE O SITE</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn v-if="item.description" icon @click="showDescription(i);">
+                    <v-btn v-if="item.description" icon>
                       <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -49,7 +51,7 @@
         </template>
       </v-data-iterator>
     </v-container>
-  </v-app>
+  </div>
 </template>
 
 <script>

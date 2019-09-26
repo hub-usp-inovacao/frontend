@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
-          class="all"
+          class="primary--text all"
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -15,7 +15,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-content>
+    <v-content class="test">
       <v-container fluid>
         <nuxt />
       </v-container>
@@ -77,5 +77,9 @@ export default {
 .all {
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
+}
+
+.test {
+  background-color: #CFD8DC;
 }
 </style>

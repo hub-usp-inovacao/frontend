@@ -33,8 +33,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-  ],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
@@ -55,10 +54,14 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: "#FBE8A6",
-          secondary: "#F4976C",
-          accent: colors.blue.darken1,
-          error: colors.blue.darken1
+          primary: colors.indigo.lighten1,
+          secondary: colors.indigo.darken1,
+          accent: "#303C6C",
+          error: colors.blue.darken1,
+          background: "#CFD8DC"
+        },
+        options: {
+          customProperties: true
         }
       }
     }
