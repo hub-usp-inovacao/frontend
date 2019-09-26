@@ -113,6 +113,6 @@ export default {
 
 <style scoped>
 .alo {
-border-radius: 50px;
+border-radius: 500px;
 }
 <style>
