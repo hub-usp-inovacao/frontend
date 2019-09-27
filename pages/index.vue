@@ -8,9 +8,6 @@
             class="display-1"
           >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</v-row>
         </v-col>
-        <v-col>
-          <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"></v-img>
-        </v-col>
       </v-row>
     </v-container>
     <v-container>INFO</v-container>
