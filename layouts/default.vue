@@ -16,9 +16,9 @@
     </v-toolbar>
 
     <v-content class="test">
-      <v-container fluid>
+      <!-- <v-container fluid> -->
         <nuxt />
-      </v-container>
+      <!-- </v-container> -->
     </v-content>
   </v-app>
 </template>
@@ -75,11 +75,10 @@ export default {
 
 <style>
 .all {
-  font-family: "Oswald", sans-serif;
-  text-transform: uppercase;
+  font-family: "Verdana", sans-serif;
 }
 
 .test {
-  background-color: #cfd8dc;
+  background-color: #E9ECF0;
 }
 </style>

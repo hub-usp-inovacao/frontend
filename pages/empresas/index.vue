@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Grid :s="sheet" :h="headers" :size="sheet.length" />
+    <Grid :propsSheet="sheet" :propsHeaders="headers" :propsSize="sheet.length" />
   </div>
 </template>
 
@@ -28,14 +28,15 @@ export default {
       );
       const data = await request.json();
       data.feed.entry.forEach(row => {
-        let v = {
+        let company = {
           name: row.gsx$_cn6ca.$t,
           sector: row.gsx$tecnologiasqueutiliza.$t,
           logo: row.gsx$logo.$t,
           url: row.gsx$website.$t,
           description: row.gsx$descriçãodonegócio.$t
         };
-        this.sheet.push(v);
+        if (company.logo)
+          this.sheet.push(company);
       });
     }
   },
