@@ -2,15 +2,15 @@
   <div>
     <v-data-iterator :items="sheet" :search="typed" :items-per-page="128" hide-default-footer>
       <template v-slot:header>
-          <v-text-field
-            class="all"
-            v-model="search"
-            append-icon="search"
-            label="Search"
-            hide-details
-            outlined
-            clearable
-          ></v-text-field>
+        <v-text-field
+          class="all"
+          v-model="search"
+          append-icon="search"
+          label="Search"
+          hide-details
+          outlined
+          clearable
+        ></v-text-field>
       </template>
 
       <template v-slot:default="props">
@@ -34,21 +34,6 @@
                   <v-card-text v-if="item.sector">
                     <span class="grey--text subtitle-1">{{item.sector}}</span>
                   </v-card-text>
-
-                  <!-- <v-card-actions> -->
-                  <!-- <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn> -->
-                  <!-- <v-btn v-if="item.url" color="primary" :href="item.url" text>VISITE O SITE</v-btn> -->
-                  <!-- <v-spacer></v-spacer>
-                  <v-btn v-if="item.description" icon>
-                    <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
-                  </v-btn>-->
-                  <!-- </v-card-actions> -->
-
-                  <!-- <v-expand-transition>
-                  <div class="transition-fast-in-fast-out" v-show="show[i]">
-                    <v-card-text>{{item.description}}</v-card-text>
-                  </div>
-                  </v-expand-transition>-->
                 </v-card>
               </v-container>
             </v-hover>
