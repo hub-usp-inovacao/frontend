@@ -80,6 +80,6 @@ export default {
 }
 
 .test {
-  background-color: #CFD8DC;
+  background-color: #cfd8dc;
 }
 </style>

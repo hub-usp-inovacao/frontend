@@ -1,8 +1,7 @@
 <template>
   <div>
-    <v-container class="test">
-      <v-data-iterator :items="sheet" :search="typed" :items-per-page="32">
-        <template v-slot:header>
+    <v-data-iterator :items="sheet" :search="typed" :items-per-page="128" hide-default-footer>
+      <template v-slot:header>
           <v-text-field
             class="all"
             v-model="search"
@@ -12,15 +11,22 @@
             outlined
             clearable
           ></v-text-field>
-        </template>
+      </template>
 
-        <template v-slot:default="props">
-          <masonry :cols="cols">
-            <div v-for="(item, i) in props.items" :key="item.name">
+      <template v-slot:default="props">
+        <masonry :cols="cols">
+          <div v-for="item in props.items" :key="item.name">
+            <v-hover v-slot:default="{ hover }">
               <v-container>
-                <v-card class="all" elevation="3" @click="showDescription(i);">
+                <v-card class="all" target="_blank" :href="item.url" tile outlined hover ripple>
                   <v-container v-if="item.logo">
-                    <v-img :src="item.logo"></v-img>
+                    <v-img :src="item.logo">
+                      <v-expand-transition>
+                        <div v-if="hover" class="d-flex primary white--text" style="height: 100%;">
+                          <v-container>{{item.description}}</v-container>
+                        </div>
+                      </v-expand-transition>
+                    </v-img>
                   </v-container>
 
                   <v-card-title class="primary--text">{{item.name}}</v-card-title>
@@ -29,27 +35,27 @@
                     <span class="grey--text subtitle-1">{{item.sector}}</span>
                   </v-card-text>
 
-                  <v-card-actions>
-                    <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn>
-                    <v-btn v-if="item.url" color="primary" :href="item.url" text>VISITE O SITE</v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn v-if="item.description" icon>
-                      <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
-                    </v-btn>
-                  </v-card-actions>
+                  <!-- <v-card-actions> -->
+                  <!-- <v-btn :to="`/empresas/${item.name}`" text>SAIBA MAIS</v-btn> -->
+                  <!-- <v-btn v-if="item.url" color="primary" :href="item.url" text>VISITE O SITE</v-btn> -->
+                  <!-- <v-spacer></v-spacer>
+                  <v-btn v-if="item.description" icon>
+                    <v-icon>{{ show[i] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+                  </v-btn>-->
+                  <!-- </v-card-actions> -->
 
-                  <v-expand-transition>
-                    <div v-show="show[i]">
-                      <v-card-text>{{item.description}}</v-card-text>
-                    </div>
-                  </v-expand-transition>
+                  <!-- <v-expand-transition>
+                  <div class="transition-fast-in-fast-out" v-show="show[i]">
+                    <v-card-text>{{item.description}}</v-card-text>
+                  </div>
+                  </v-expand-transition>-->
                 </v-card>
               </v-container>
-            </div>
-          </masonry>
-        </template>
-      </v-data-iterator>
-    </v-container>
+            </v-hover>
+          </div>
+        </masonry>
+      </template>
+    </v-data-iterator>
   </div>
 </template>
 
@@ -64,7 +70,8 @@ export default {
     search: "",
     show: [],
     cols: 1,
-    typed: ""
+    typed: "",
+    mycolor: ""
   }),
   methods: {
     set() {
@@ -91,6 +98,9 @@ export default {
     },
     refillArray() {
       this.show.fill(false);
+    },
+    generator: function(event) {
+      return "#" + ((Math.random() * 0xffffff) << 0).toString(16);
     }
   },
   watch: {
@@ -114,4 +124,14 @@ export default {
 .alo {
 border-radius: 50px;
 }
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+
 <style>
