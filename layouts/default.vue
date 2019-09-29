@@ -17,7 +17,7 @@
 
     <v-content class="test">
       <!-- <v-container fluid> -->
-        <nuxt />
+      <nuxt />
       <!-- </v-container> -->
     </v-content>
   </v-app>
@@ -36,7 +36,8 @@ export default {
       link: [
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald"
+          href:
+            "https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100&display=swap"
         }
       ]
     };
@@ -75,10 +76,10 @@ export default {
 
 <style>
 .all {
-  font-family: "Verdana", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 .test {
-  background-color: #E9ECF0;
+  background-color: #e9ecf0;
 }
 </style>

@@ -55,7 +55,7 @@ export default {
       themes: {
         light: {
           primary: colors.indigo.lighten1,
-          secondary: "#85DCB",
+          secondary: "#E88B3A",
           accent: "#E88B3A",
           error: colors.blue.darken1,
           background: "#CFD8DC"

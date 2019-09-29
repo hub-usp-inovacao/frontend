@@ -1,32 +1,45 @@
 <template>
   <div>
+    <v-container class="my-12">
+      <v-row>
+        <v-col class="my-12">
+          <h1 class="all">Empresas da Universidade de São Paulo</h1>
+          <p class="all">São as empresas criadas por alunos e ex-alunos USP ao longo dos anos.</p>
+          <v-btn
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
+          >Cadastre a sua</v-btn>
+        </v-col>
+        <v-col>
+          <v-img :src="office" aspect-ratio="16/9" max-width="600px" max-height="300px"></v-img>
+        </v-col>
+      </v-row>
+      <div class="my-4">
+        <v-text-field
+          class="all"
+          v-model="search"
+          append-icon="search"
+          label="Procure uma tecnologa ou empresa cadastrada"
+          hide-details
+          outlined
+          clearable
+        ></v-text-field>
+      </div>
+    </v-container>
     <v-data-iterator :items="sheet" :search="typed" :items-per-page="128" hide-default-footer>
-      <template v-slot:header>
-        <div class="my-12 mx-3">
-          <v-text-field
-            class="all"
-            v-model="search"
-            append-icon="search"
-            label="Procure Empresas"
-            hide-details
-            outlined
-            clearable
-          ></v-text-field>
-        </div>
-      </template>
+      <template v-slot:header></template>
 
       <template v-slot:default="props">
         <v-divider></v-divider>
         <masonry class="my-12 mx-12" :cols="cols">
           <div v-for="item in props.items" :key="item.name">
             <v-hover v-slot:default="{ hover }">
-              <!-- <v-container> -->
+              <v-container>
                 <v-card
-                  class="all mx-1 my-2"
+                  class="all"
+                  color="#dde8ed"
                   target="_blank"
                   :href="item.url"
-                  :elevation="hover ? 1 : 0"
-                  tile
+                  :elevation="hover ? 2 : 1"
                   outlined
                   hover
                   ripple
@@ -36,10 +49,12 @@
                       <v-expand-transition>
                         <div
                           v-if="hover"
-                          class="d-flex white--text"
-                          style="height: 100%; background-color: #135494; opacity: .9;"
+                          style="height: 100%; background-color: #135494; opacity: .9;border-radius: 12px;"
                         >
-                          <v-container style="font-size: 0.8em;">{{item.description}}</v-container>
+                          <v-container
+                            class="white--text justify-center"
+                            style="font-size: 0.8em;"
+                          >{{item.description}}</v-container>
                         </div>
                       </v-expand-transition>
                     </v-img>
@@ -47,13 +62,16 @@
 
                   <v-divider></v-divider>
 
-                  <v-card-title style="color: #135494; font-size: 1.0em;">{{item.name}}</v-card-title>
+                  <v-card-title
+                    class="justify-center"
+                    style="color: #135494;font-size: 1.2em;"
+                  >{{item.name}}</v-card-title>
 
-                  <!-- <v-card-text v-if="item.sector">
-                    <span class="white--text subtitle-1">{{item.sector}}</span>
-                  </v-card-text>-->
+                  <v-card-text v-if="item.sector">
+                    <span class="justify-center black--text subtitle-1">{{item.sector}}</span>
+                  </v-card-text>
                 </v-card>
-              <!-- </v-container> -->
+              </v-container>
             </v-hover>
           </div>
         </masonry>
@@ -73,7 +91,8 @@ export default {
     search: "",
     show: [],
     cols: 1,
-    typed: ""
+    typed: "",
+    office: require("../static/office.jpg")
   }),
   methods: {
     setProps() {
