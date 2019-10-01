@@ -46,7 +46,8 @@
         :headers="headers"
         :items="sheet"
         :search="search"
-        :items-per-page="128"
+        :items-per-page="128
+        calculate-widths
         hide-default-footer
       ></v-data-table>
     </v-container>
