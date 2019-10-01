@@ -13,7 +13,7 @@
             >Cadastre a sua</v-btn>
           </v-col>
           <v-col>
-            <v-img :src="office" aspect-ratio="16/9" max-width="600px" max-height="300px"></v-img>
+            <!-- <v-img :src="office" aspect-ratio="16/9" max-width="600px" max-height="300px"></v-img> -->
           </v-col>
         </v-row>
       </v-container>
@@ -30,16 +30,26 @@
       <v-container>
         <v-row>
           <v-col>
-            <v-select class="all" :items="items" label="Unidade" v-model="select" outlined></v-select>
+            <v-select class="all" :items="unity" label="Unidade" v-model="select" outlined></v-select>
           </v-col>
           <v-col>
-            <v-select class="all" :items="items" label="Campus" v-model="select" outlined></v-select>
+            <v-select class="all" :items="campus" label="Campus" v-model="select2" outlined></v-select>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
     <v-divider />
-    <v-data-table class="all my-12" :headers="headers" :items="sheet" :search="search"></v-data-table>
+    <v-container>
+      <v-data-table
+        class="all my-12"
+        style="font-weight: bold; border-style: solid; border-color: #5aa18e;border-radius: 6px;"
+        :headers="headers"
+        :items="sheet"
+        :search="search"
+        :items-per-page="128"
+        hide-default-footer
+      ></v-data-table>
+    </v-container>
   </v-app>
 </template>
 
@@ -51,8 +61,9 @@ export default {
     headers: [],
     search: "",
     select: "",
+    select2: "",
     distinct: [],
-    items: [
+    unity: [
       "",
       "IME",
       "FAU",
@@ -64,6 +75,11 @@ export default {
       "EACH",
       "ECA",
       "IP"
+    ],
+    campus: [
+      "",
+      "SÃO CARLOS",
+      "RIBEIRÃO PRETO"
     ]
   }),
   methods: {
@@ -72,7 +88,7 @@ export default {
       this.headers = this.h;
       this.headers.push({
         filter: (value, search, item) => {
-          return !this.select ? true : item.unity == this.select;
+          return !this.select && !this.select2 ? true : item.unity == this.select || item.campus == this.select2;
         }
       });
     }

@@ -10,7 +10,7 @@
           >Cadastre a sua</v-btn>
         </v-col>
         <v-col>
-          <v-img :src="office" aspect-ratio="16/9" max-width="600px" max-height="300px"></v-img>
+          <!-- <img src="office.jpg" width="400px" height="300px"/> -->
         </v-col>
       </v-row>
       <div class="my-4">
@@ -34,43 +34,45 @@
           <div v-for="item in props.items" :key="item.name">
             <v-hover v-slot:default="{ hover }">
               <v-container>
-                <v-card
-                  class="all"
-                  color="#dde8ed"
-                  target="_blank"
-                  :href="item.url"
-                  :elevation="hover ? 2 : 1"
-                  outlined
-                  hover
-                  ripple
-                >
-                  <v-container v-if="item.logo">
-                    <v-img :src="item.logo">
-                      <v-expand-transition>
-                        <div
-                          v-if="hover"
-                          style="height: 100%; background-color: #135494; opacity: .9;border-radius: 12px;"
-                        >
-                          <v-container
-                            class="white--text justify-center"
-                            style="font-size: 0.8em;"
-                          >{{item.description}}</v-container>
-                        </div>
-                      </v-expand-transition>
-                    </v-img>
-                  </v-container>
+                <div style="border-style: solid; border-color: #5aa18e;border-radius: 6px;">
+                  <v-card
+                    class="all"
+                    color="#dde8ed"
+                    target="_blank"
+                    :href="item.url"
+                    :elevation="hover ? 2 : 0"
+                    outlined
+                    hover
+                    ripple
+                  >
+                    <v-container v-if="item.logo">
+                      <v-img :src="item.logo">
+                        <v-expand-transition>
+                          <div
+                            v-if="hover"
+                            style="height: 100%; border-style: solid; border-color: #ffffff;background-color: #41b089; opacity: .9;border-radius: 12px;"
+                          >
+                            <v-container
+                              class="white--text justify-center"
+                              style="font-size: 0.8em; font-weight: bold;"
+                            >{{item.description}}</v-container>
+                          </div>
+                        </v-expand-transition>
+                      </v-img>
+                    </v-container>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-card-title
-                    class="justify-center"
-                    style="color: #135494;font-size: 1.2em;"
-                  >{{item.name}}</v-card-title>
+                    <v-card-title
+                      class="justify-center"
+                      style="color: #135494;font-size: 1.2em;"
+                    >{{item.name}}</v-card-title>
 
-                  <v-card-text v-if="item.sector">
-                    <span class="justify-center black--text subtitle-1">{{item.sector}}</span>
-                  </v-card-text>
-                </v-card>
+                    <v-card-text v-if="item.sector">
+                      <span class="justify-center black--text subtitle-1">{{item.sector}}</span>
+                    </v-card-text>
+                  </v-card>
+                </div>
               </v-container>
             </v-hover>
           </div>
@@ -91,8 +93,7 @@ export default {
     search: "",
     show: [],
     cols: 1,
-    typed: "",
-    office: require("../static/office.jpg")
+    typed: ""
   }),
   methods: {
     setProps() {

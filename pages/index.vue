@@ -14,19 +14,23 @@
       </v-row>
     </v-container>
 
+    <v-divider class="my-12"></v-divider>
+    <v-divider class="my-12"></v-divider>
+    <!-- <v-divider class="my-12"></v-divider> -->
+
     <v-container>
-      <template>
+      <!-- <template> -->
         <v-timeline>
           <v-timeline-item v-for="item in options" :key="item.title" hide-dot>
-            <v-img slot="opposite" src="https://picsum.photos/300/200?random"></v-img>
+            <v-img data-aos="flip-up" slot="opposite" src="https://picsum.photos/300/200?random"></v-img>
 
             <v-container>
-              <div class="headline">{{item.title}}</div>
-              <div>{{item.description}}</div>
+              <div data-aos="slide-up" data-aos-delay="400" class="headline">{{item.title}}</div>
+              <div data-aos="slide-down" data-aos-delay="400">{{item.description}}</div>
             </v-container>
           </v-timeline-item>
         </v-timeline>
-      </template>
+      <!-- </template> -->
     </v-container>
   </v-app>
 </template>
@@ -56,7 +60,8 @@ export default {
           "Diretório de empresas criadas por alunos e ex-alunos USP ao longo dos anos."
       }
     ]
-  })
+  }),
+
 };
 </script>
 

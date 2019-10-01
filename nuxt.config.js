@@ -37,7 +37,8 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: "~/plugins/vue-masonry", ssr: false }],
+  plugins: [{ src: "~/plugins/vue-masonry", ssr: false }, { src: "~/plugins/aos", ssr: false }],
+  
   /*
    ** Nuxt.js dev-modules
    */
@@ -54,7 +55,7 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: colors.indigo.lighten1,
+          primary: "#5AA18E",
           secondary: "#E88B3A",
           accent: "#E88B3A",
           error: colors.blue.darken1,

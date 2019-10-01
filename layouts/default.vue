@@ -77,6 +77,7 @@ export default {
 <style>
 .all {
   font-family: "IBM Plex Sans", sans-serif;
+  font-weight: bold;
 }
 
 .test {
