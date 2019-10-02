@@ -25,7 +25,7 @@
         ></v-text-field>
       </div>
     </v-container>
-    <v-data-iterator :items="sheet" :search="typed" :items-per-page="128" hide-default-footer>
+    <v-data-iterator :items="sheet" :search="typed" :items-per-page="128" :page="page" hide-default-footer>
       <template v-slot:header></template>
 
       <template v-slot:default="props">
@@ -78,6 +78,10 @@
             </v-hover>
           </div>
         </masonry>
+        <v-pagination
+        v-model="page"
+        :length="6"
+      ></v-pagination>
         </v-container>
       </template>
     </v-data-iterator>
@@ -95,7 +99,8 @@ export default {
     search: "",
     show: [],
     cols: 1,
-    typed: ""
+    typed: "",
+    page: 1
   }),
   methods: {
     setProps() {
