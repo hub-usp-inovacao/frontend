@@ -30,7 +30,7 @@
 
       <template v-slot:default="props">
         <v-divider></v-divider>
-        <masonry class="my-12 mx-12" :cols="cols">
+        <masonry class="my-12" :cols="cols">
           <div v-for="item in props.items" :key="item.name">
             <v-hover v-slot:default="{ hover }">
               <v-container>
