@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
-          class="primary--text all"
+          class="primary--text"
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -37,7 +37,7 @@ export default {
         {
           rel: "stylesheet",
           href:
-            "https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100&display=swap"
+            "https://fonts.googleapis.com/css?family=Merriweather:300&display=swap"
         }
       ]
     };
@@ -75,12 +75,7 @@ export default {
 </script>
 
 <style>
-.all {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-weight: bold;
-}
-
 .test {
-  background-color: #ffffff;
+  background-color: #f2f2f2;
 }
 </style>

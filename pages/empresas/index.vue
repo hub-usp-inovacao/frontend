@@ -1,5 +1,17 @@
 <template>
   <div>
+    <v-container class="my-12">
+      <v-row>
+        <v-col class="my-12">
+          <h1>Empresas da Universidade de São Paulo</h1>
+          <p>São as empresas criadas por alunos e ex-alunos USP ao longo dos anos.</p>
+          <v-btn
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
+          >Cadastre a sua</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <Grid :propsSheet="sheet" :propsHeaders="headers" :propsSize="sheet.length" />
   </div>
 </template>
@@ -14,10 +26,11 @@ export default {
   data: () => ({
     headers: [
       { value: "name" },
-      { value: "sector" },
+      { value: "tech" },
       { value: "logo" },
       { value: "url" },
-      { value: "description" }
+      { value: "description" },
+      { value: "products" }
     ],
     sheet: []
   }),
@@ -30,13 +43,13 @@ export default {
       data.feed.entry.forEach(row => {
         let company = {
           name: row.gsx$_cn6ca.$t,
-          sector: row.gsx$tecnologiasqueutiliza.$t,
+          tech: row.gsx$tecnologiasqueutiliza.$t,
           logo: row.gsx$logo.$t,
           url: row.gsx$website.$t,
-          description: row.gsx$descriçãodonegócio.$t
+          description: row.gsx$descriçãodonegócio.$t,
+          products: row.gsx$principaisprodutosouserviços.$t,
         };
-        if (company.logo)
-          this.sheet.push(company);
+        this.sheet.push(company);
       });
     }
   },
