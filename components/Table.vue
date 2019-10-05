@@ -47,8 +47,14 @@
         :items="sheet"
         :search="search"
         :items-per-page="128"
+        :page="page"
+        calculate-widths
         hide-default-footer
       ></v-data-table>
+      <v-pagination
+        v-model="page"
+        :length="6"
+      ></v-pagination>
     </v-container>
   </v-app>
 </template>
@@ -80,7 +86,8 @@ export default {
       "",
       "SÃO CARLOS",
       "RIBEIRÃO PRETO"
-    ]
+    ],
+    page: 1
   }),
   methods: {
     set() {

@@ -12,22 +12,23 @@
 
       <v-row>
         <v-col>
-          <v-select :items="unity" label="Incubadora" v-model="select" outlined></v-select>
+          <v-select label="Incubadora" outlined></v-select>
         </v-col>
         <v-col>
-          <v-select :items="campus" label="Campus" v-model="select2" outlined></v-select>
+          <v-select label="Campus" outlined></v-select>
         </v-col>
         <v-col>
-          <v-select :items="campus" label="Unidade" v-model="select2" outlined></v-select>
+          <v-select label="Unidade" outlined></v-select>
         </v-col>
       </v-row>
     </v-container>
 
     <v-data-iterator
       :class="margin"
-      :items="sheet"
+      :items="propsSheet"
       :search="typed"
-      :items-per-page="64"
+      :items-per-page="itemsPerPage"
+      :page="page"
       hide-default-footer
     >
       <template v-slot:default="props">
@@ -58,6 +59,7 @@
             </v-container>
           </div>
         </masonry>
+        <v-pagination v-model="page" :length="numberOfPages"></v-pagination>
       </template>
     </v-data-iterator>
   </div>
@@ -67,21 +69,18 @@
 import { debounce } from "debounce";
 
 export default {
-  props: ["propsSheet", "propsHeaders", "propsSize"],
+  props: ["propsSheet"],
   data: () => ({
-    sheet: [],
-    headers: [],
     search: "",
     columns: 1,
     typed: "",
     margin: "",
-    margin2: ""
+    margin2: "",
+    page: 1,
+    numberOfPages: 1,
+    itemsPerPage: 32
   }),
   methods: {
-    setProps() {
-      this.sheet = this.propsSheet;
-      this.headers = this.propsHeaders;
-    },
     setCols() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
@@ -107,10 +106,12 @@ export default {
   watch: {
     search: debounce(function() {
       this.typed = this.search;
-    }, 400)
-  },
-  created() {
-    this.setProps();
+    }, 400),
+    propsSheet() {
+      this.numberOfPages = Math.ceil(
+        this.propsSheet.length / this.itemsPerPage
+      );
+    }
   },
   mounted() {
     this.columns = this.setCols();

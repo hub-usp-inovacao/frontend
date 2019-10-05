@@ -12,7 +12,7 @@
       </v-row>
     </v-container>
 
-    <Grid :propsSheet="sheet" :propsHeaders="headers" :propsSize="sheet.length" />
+    <Grid :propsSheet="sheet" />
   </div>
 </template>
 
@@ -24,14 +24,6 @@ export default {
     Grid
   },
   data: () => ({
-    headers: [
-      { value: "name" },
-      { value: "tech" },
-      { value: "logo" },
-      { value: "url" },
-      { value: "description" },
-      { value: "products" }
-    ],
     sheet: []
   }),
   methods: {
@@ -47,7 +39,7 @@ export default {
           logo: row.gsx$logo.$t,
           url: row.gsx$website.$t,
           description: row.gsx$descriçãodonegócio.$t,
-          products: row.gsx$principaisprodutosouserviços.$t,
+          products: row.gsx$principaisprodutosouserviços.$t
         };
         this.sheet.push(company);
       });
