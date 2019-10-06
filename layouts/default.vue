@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-toolbar color="transparent" flat>
+    <v-toolbar color="transparent" class="hidden-sm-and-down" flat>
       <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
+      <v-toolbar-items>
         <v-btn
           class="primary--text"
           v-for="(item, i) in items"
