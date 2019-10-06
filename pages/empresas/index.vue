@@ -1,15 +1,12 @@
 <template>
   <div>
-    <v-container class="my-12">
-      <v-row>
-        <v-col class="my-12">
-          <h1>Empresas da Universidade de São Paulo</h1>
-          <p>São as empresas criadas por alunos e ex-alunos USP ao longo dos anos.</p>
-          <v-btn
-            href="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
-          >Cadastre a sua</v-btn>
-        </v-col>
-      </v-row>
+    <v-container>
+      <h1>Empresas da Universidade de São Paulo</h1>
+      <p class="my-4">São as empresas criadas por alunos e ex-alunos USP ao longo dos anos.</p>
+      <v-btn
+        class="my-4"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
+      >Cadastre a sua</v-btn>
     </v-container>
 
     <Grid

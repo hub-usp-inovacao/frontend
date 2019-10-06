@@ -15,9 +15,39 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-content class="test">
+    <v-bottom-navigation
+      class="hidden-md-and-up"
+      v-model="bottomNav"
+      hide-on-scroll
+      fixed
+      mandatory
+      grow
+      shift
+    >
+      <v-btn value="recent" to="/iniciativas">
+        <span>Iniciativas</span>
+        <v-icon>mdi-account-group</v-icon>
+      </v-btn>
+
+      <v-btn value="favorites" to="/desenvolvimento-e-inovacao">
+        <span>D&I</span>
+        <v-icon>mdi-lightbulb-on</v-icon>
+      </v-btn>
+
+      <v-btn value="education" to="/educacao">
+        <span>Educação</span>
+        <v-icon>mdi-book-open-page-variant</v-icon>
+      </v-btn>
+
+      <v-btn value="companies" to="/empresas">
+        <span>Empresas</span>
+        <v-icon>mdi-office-building</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
+
+    <v-content class="test mb-12">
       <!-- <v-container fluid> -->
-      <nuxt />
+      <nuxt class="mb-12" />
       <!-- </v-container> -->
     </v-content>
   </v-app>

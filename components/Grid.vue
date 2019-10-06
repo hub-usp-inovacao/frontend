@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-container ref="start">
+    <v-divider ref="start" class="mb-6"></v-divider>
+
+    <v-container>
       <v-text-field
         v-model="search"
         append-icon="search"
@@ -11,28 +13,6 @@
       ></v-text-field>
 
       <div class="hidden-md-and-up">
-        <v-bottom-navigation v-model="bottomNav" hide-on-scroll fixed>
-          <v-btn value="recent">
-            <span>Iniciativas</span>
-            <v-icon>mdi-history</v-icon>
-          </v-btn>
-
-          <v-btn value="favorites">
-            <span>D&I</span>
-            <v-icon>mdi-heart</v-icon>
-          </v-btn>
-
-          <v-btn value="nearby">
-            <span>Educação</span>
-            <v-icon>mdi-map-marker</v-icon>
-          </v-btn>
-
-          <v-btn value="nearby">
-            <span>Empresas</span>
-            <v-icon>mdi-map-marker</v-icon>
-          </v-btn>
-        </v-bottom-navigation>
-
         <v-select
           class="my-4"
           :items="propsIncubator"
@@ -93,6 +73,8 @@
 
       <v-btn @click="clearFilters()">Limpar filtros</v-btn>
     </v-container>
+
+    <v-divider class="mt-6"></v-divider>
 
     <v-data-iterator
       :class="margin"
@@ -159,9 +141,7 @@ export default {
     selectIncubator: "",
     selectCampus: "",
     selectUnity: "",
-    options: {},
-    drawer: false,
-    group: null
+    options: {}
   }),
   methods: {
     setCols() {
@@ -174,7 +154,7 @@ export default {
           return 2;
         case "md":
           this.margin2 = "my-12";
-          return 2;
+          return 3;
         case "lg":
           this.margin = "mx-6";
           this.margin2 = "my-12 mx-12";
@@ -182,7 +162,7 @@ export default {
         case "xl":
           this.margin = "mx-6";
           this.margin2 = "my-12 mx-12";
-          return 3;
+          return 4;
       }
     },
     customFilter(items, search) {
@@ -220,9 +200,6 @@ export default {
     }, 400),
     page() {
       this.$vuetify.goTo(this.$refs.start, this.options);
-    },
-    group() {
-      this.drawer = false;
     }
   },
   mounted() {
