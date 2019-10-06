@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container ref="start">
       <v-text-field
         v-model="search"
         append-icon="search"
@@ -113,7 +113,7 @@
         <v-pagination
           v-model="page"
           :length="numberOfPages(props.pagination.itemsLength)"
-          total-visible="6"
+          total-visible="7"
         ></v-pagination>
       </template>
     </v-data-iterator>
@@ -136,7 +136,7 @@ export default {
     selectIncubator: "",
     selectCampus: "",
     selectUnity: "",
-    debugFlag: true
+    options: {}
   }),
   methods: {
     setCols() {
@@ -192,7 +192,10 @@ export default {
   watch: {
     search: debounce(function() {
       this.typed = this.search;
-    }, 400)
+    }, 400),
+    page() {
+      this.$vuetify.goTo(this.$refs.start, this.options);
+    }
   },
   mounted() {
     this.columns = this.setCols();
