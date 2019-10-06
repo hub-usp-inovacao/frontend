@@ -17,10 +17,8 @@
 
     <v-bottom-navigation
       class="hidden-md-and-up"
-      v-model="bottomNav"
       hide-on-scroll
       fixed
-      mandatory
       grow
       shift
     >
