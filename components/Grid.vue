@@ -74,7 +74,7 @@
       <v-btn @click="clearFilters()">Limpar filtros</v-btn>
     </v-container>
 
-    <v-divider class="mt-6"></v-divider>
+    <!-- <v-divider class="mt-6"></v-divider> -->
 
     <v-data-iterator
       :class="margin"
@@ -147,21 +147,18 @@ export default {
     setCols() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          this.margin2 = "my-12";
           return 1;
         case "sm":
-          this.margin2 = "my-12";
           return 2;
         case "md":
-          this.margin2 = "my-12";
           return 3;
         case "lg":
-          this.margin = "mx-6";
-          this.margin2 = "my-12 mx-12";
+          this.margin = "mx-9";
+          this.margin2 = "mx-12";
           return 3;
         case "xl":
-          this.margin = "mx-6";
-          this.margin2 = "my-12 mx-12";
+          this.margin = "mx-9";
+          this.margin2 = "mx-12";
           return 4;
       }
     },
