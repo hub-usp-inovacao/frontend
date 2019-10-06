@@ -113,7 +113,7 @@
         <v-pagination
           v-model="page"
           :length="numberOfPages(props.pagination.itemsLength)"
-          total-visible="6"
+          total-visible="7"
         ></v-pagination>
       </template>
     </v-data-iterator>
