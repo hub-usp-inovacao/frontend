@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar flat>
+    <v-toolbar color="transparent" flat>
       <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -77,5 +77,13 @@ export default {
 <style>
 .test {
   background-color: #f2f2f2;
+}
+
+.invisible {
+  top: 0;
+  opacity: 1;
+  padding: 0;
+  margin: 0;
+  left: 0;
 }
 </style>

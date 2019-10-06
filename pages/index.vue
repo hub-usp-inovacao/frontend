@@ -1,5 +1,33 @@
 <template>
   <v-app>
+    <v-carousel height="100vh" show-arrows cycle>
+      <v-carousel-item v-for="photo in photos" :key="photo">
+        <v-img height="100vh" style="opacity: 0.8" :src="photo">
+          <v-container>
+            <div style="position: absolute; top: 30%">
+              <slide-x-transition>
+                <v-row>
+                  <v-col>
+                    <v-container
+                      class="display-3 white--text"
+                      style="font-weight: bold; line-height: 1.3; text-align: left"
+                    >
+                      Conheça a
+                      <span class="black--text" style="background-color: red">Inovação</span> e
+                      <span class="red--text" style="background-color: black">Empreendedorismo</span> na Universidade de São Paulo
+                    </v-container>
+                  </v-col>
+                  <v-col></v-col>
+                  <!-- <p
+                  class="headline white--text"
+                  >Conheça a Inovação e Empreendedorismo na Universidade de São Paulo</p>-->
+                </v-row>
+              </slide-x-transition>
+            </div>
+          </v-container>
+        </v-img>
+      </v-carousel-item>
+    </v-carousel>
     <v-container class="d-block">
       <v-row>
         <v-col class="align-self-end">
@@ -13,6 +41,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <!-- <v-container class="interhack" fluid></v-container> -->
 
     <v-divider class="my-12"></v-divider>
     <v-divider class="my-12"></v-divider>
@@ -59,6 +88,12 @@ export default {
         description:
           "Diretório de empresas criadas por alunos e ex-alunos USP ao longo dos anos."
       }
+    ],
+    photos: [
+      "http://www.imagens.usp.br/wp-content/uploads/Pra%C3%A7a_Relogio_106-17_Foto-Cec%C3%ADlia-Bastos-09.jpg",
+      "https://scontent.fcgh10-1.fna.fbcdn.net/v/t1.0-9/69706113_2451371548234209_8904991690364813312_n.jpg?_nc_cat=100&_nc_oc=AQkvGc7zPNgHoSwZitURzpgQdXrOvLxBtGCapb44J_InwoRAJ_2UnReaLOYyteUfTNk&_nc_ht=scontent.fcgh10-1.fna&oh=744435c1dcfe438f7c6cd614ef629707&oe=5E2582E6",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR129vKvGeA6u26aQGwm6wMkjWwGks7ekT-SzrgBB6drudKkrSA",
+      "https://jornal.usp.br/wp-content/uploads/20180109_hackathon_OceanUSP_01.jpg"
     ]
   })
 };

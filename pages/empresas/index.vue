@@ -12,7 +12,12 @@
       </v-row>
     </v-container>
 
-    <Grid :propsSheet="sheet" />
+    <Grid
+      :propsSheet="sheet"
+      :propsIncubator="incubator"
+      :propsCampus="campus"
+      :propsUnity="unity"
+    />
   </div>
 </template>
 
@@ -24,7 +29,10 @@ export default {
     Grid
   },
   data: () => ({
-    sheet: []
+    sheet: [],
+    incubator: [],
+    campus: [],
+    unity: []
   }),
   methods: {
     async sheetQuery() {
@@ -39,10 +47,29 @@ export default {
           logo: row.gsx$logo.$t,
           url: row.gsx$website.$t,
           description: row.gsx$descriçãodonegócio.$t,
-          products: row.gsx$principaisprodutosouserviços.$t
+          products: row.gsx$principaisprodutosouserviços.$t,
+          incubator: row.gsx$incubadora.$t,
+          campus: row.gsx$campus.$t,
+          unity: row.gsx$unidadedossocios.$t
         };
+
+        if (!this.incubator.includes(company.incubator))
+          this.incubator.push(company.incubator);
+
+        if (!this.campus.includes(company.campus))
+          this.campus.push(company.campus);
+
+        if (!this.unity.includes(company.unity)) this.unity.push(company.unity);
+
+        if (company.url.substring(0, 4) != "http")
+          company.url = "http://" + company.url;
+
         this.sheet.push(company);
       });
+
+      this.incubator.sort();
+      this.campus.sort();
+      this.unity.sort();
     }
   },
   created() {

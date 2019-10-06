@@ -30,10 +30,10 @@
       <v-container>
         <v-row>
           <v-col>
-            <v-select class="all" :items="unity" label="Unidade" v-model="select" outlined></v-select>
+            <v-select :items="unity" label="Unidade" v-model="select" outlined></v-select>
           </v-col>
           <v-col>
-            <v-select class="all" :items="campus" label="Campus" v-model="select2" outlined></v-select>
+            <v-select :items="campus" label="Campus" v-model="select2" outlined></v-select>
           </v-col>
         </v-row>
       </v-container>
@@ -51,10 +51,7 @@
         calculate-widths
         hide-default-footer
       ></v-data-table>
-      <v-pagination
-        v-model="page"
-        :length="6"
-      ></v-pagination>
+      <v-pagination v-model="page" :length="6"></v-pagination>
     </v-container>
   </v-app>
 </template>
@@ -82,11 +79,7 @@ export default {
       "ECA",
       "IP"
     ],
-    campus: [
-      "",
-      "SÃO CARLOS",
-      "RIBEIRÃO PRETO"
-    ],
+    campus: ["", "SÃO CARLOS", "RIBEIRÃO PRETO"],
     page: 1
   }),
   methods: {
@@ -95,7 +88,9 @@ export default {
       this.headers = this.h;
       this.headers.push({
         filter: (value, search, item) => {
-          return !this.select && !this.select2 ? true : item.unity == this.select || item.campus == this.select2;
+          return !this.select && !this.select2
+            ? true
+            : item.unity == this.select || item.campus == this.select2;
         }
       });
     }

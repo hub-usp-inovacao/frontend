@@ -10,25 +10,74 @@
         clearable
       ></v-text-field>
 
-      <v-row>
-        <v-col>
-          <v-select label="Incubadora" outlined></v-select>
-        </v-col>
-        <v-col>
-          <v-select label="Campus" outlined></v-select>
-        </v-col>
-        <v-col>
-          <v-select label="Unidade" outlined></v-select>
-        </v-col>
-      </v-row>
+      <div v-if="this.$vuetify.breakpoint.name == 'xs'">
+        <v-select
+          class="my-4"
+          :items="propsIncubator"
+          label="Incubadora"
+          v-model="selectIncubator"
+          outlined
+          hide-details
+        ></v-select>
+        <v-select
+          class="my-4"
+          :items="propsCampus"
+          label="Campus"
+          v-model="selectCampus"
+          outlined
+          hide-details
+        ></v-select>
+        <v-select
+          class="my-4"
+          :items="propsUnity"
+          label="Unidade"
+          v-model="selectUnity"
+          outlined
+          hide-details
+        ></v-select>
+      </div>
+
+      <div v-else>
+        <v-row>
+          <v-col>
+            <v-select
+              :items="propsIncubator"
+              label="Incubadora"
+              v-model="selectIncubator"
+              outlined
+              hide-details
+            ></v-select>
+          </v-col>
+          <v-col>
+            <v-select
+              :items="propsCampus"
+              label="Campus"
+              v-model="selectCampus"
+              outlined
+              hide-details
+            ></v-select>
+          </v-col>
+          <v-col>
+            <v-select
+              :items="propsUnity"
+              label="Unidade"
+              v-model="selectUnity"
+              outlined
+              hide-details
+            ></v-select>
+          </v-col>
+        </v-row>
+      </div>
+
+      <v-btn @click="clearFilters()">Limpar filtros</v-btn>
     </v-container>
 
     <v-data-iterator
       :class="margin"
       :items="propsSheet"
-      :search="typed"
       :items-per-page="itemsPerPage"
       :page="page"
+      :custom-filter="customFilter"
       hide-default-footer
     >
       <template v-slot:default="props">
@@ -37,13 +86,15 @@
             <v-container>
               <v-hover v-slot:default="{ hover }">
                 <v-card target="_blank" :href="item.url" elevation="1" outlined ripple>
-                  <v-img :src="item.logo">
-                    <v-fade-transition>
-                      <v-overlay v-if="hover" absolute color="primary">
-                        <v-btn style="font-weight: bold">Visite o site</v-btn>
-                      </v-overlay>
-                    </v-fade-transition>
-                  </v-img>
+                  <v-container>
+                    <v-img :src="item.logo">
+                      <v-fade-transition>
+                        <v-overlay v-if="hover" absolute color="primary">
+                          <v-btn style="font-weight: bold">Visite o site</v-btn>
+                        </v-overlay>
+                      </v-fade-transition>
+                    </v-img>
+                  </v-container>
 
                   <v-divider></v-divider>
 
@@ -59,7 +110,11 @@
             </v-container>
           </div>
         </masonry>
-        <v-pagination v-model="page" :length="numberOfPages"></v-pagination>
+        <v-pagination
+          v-model="page"
+          :length="numberOfPages(props.pagination.itemsLength)"
+          total-visible="6"
+        ></v-pagination>
       </template>
     </v-data-iterator>
   </div>
@@ -69,7 +124,7 @@
 import { debounce } from "debounce";
 
 export default {
-  props: ["propsSheet"],
+  props: ["propsSheet", "propsIncubator", "propsCampus", "propsUnity"],
   data: () => ({
     search: "",
     columns: 1,
@@ -77,8 +132,11 @@ export default {
     margin: "",
     margin2: "",
     page: 1,
-    numberOfPages: 1,
-    itemsPerPage: 32
+    itemsPerPage: 32,
+    selectIncubator: "",
+    selectCampus: "",
+    selectUnity: "",
+    debugFlag: true
   }),
   methods: {
     setCols() {
@@ -101,17 +159,40 @@ export default {
           this.margin2 = "my-12 mx-12";
           return 3;
       }
+    },
+    customFilter(items, search) {
+      let filtered = [];
+      items.forEach(item => {
+        if (
+          (!this.selectIncubator || item.incubator == this.selectIncubator) &&
+          (!this.selectCampus || item.campus == this.selectCampus) &&
+          (!this.selectUnity || item.unity == this.selectUnity) &&
+          (!this.typed || this.filterBySearch(item))
+        )
+          filtered.push(item);
+      });
+      return filtered;
+    },
+    filterBySearch(item) {
+      let strings = Object.values(item);
+      for (let i = 0; i < strings.length; i++)
+        if (strings[i].toLowerCase().includes(this.search)) return true;
+      return false;
+    },
+    clearFilters() {
+      this.search = "";
+      this.selectIncubator = "";
+      this.selectCampus = "";
+      this.selectUnity = "";
+    },
+    numberOfPages(length) {
+      return Math.ceil(length / this.itemsPerPage);
     }
   },
   watch: {
     search: debounce(function() {
       this.typed = this.search;
-    }, 400),
-    propsSheet() {
-      this.numberOfPages = Math.ceil(
-        this.propsSheet.length / this.itemsPerPage
-      );
-    }
+    }, 400)
   },
   mounted() {
     this.columns = this.setCols();
