@@ -15,7 +15,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-bottom-navigation class="hidden-md-and-up" hide-on-scroll fixed shift>
+    <v-bottom-navigation class="hidden-md-and-up" hide-on-scroll fixed grow shift>
       <v-btn to="/iniciativas">
         <span>Iniciativas</span>
         <v-icon>mdi-account-group</v-icon>
