@@ -15,23 +15,23 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-bottom-navigation class="hidden-md-and-up" hide-on-scroll app fixed grow shift>
-      <v-btn bottom to="/iniciativas">
+    <v-bottom-navigation class="hidden-md-and-up" hide-on-scroll fixed shift>
+      <v-btn to="/iniciativas">
         <span>Iniciativas</span>
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
 
-      <v-btn bottom to="/desenvolvimento-e-inovacao">
+      <v-btn to="/desenvolvimento-e-inovacao">
         <span>D&I</span>
         <v-icon>mdi-lightbulb-on</v-icon>
       </v-btn>
 
-      <v-btn bottom to="/educacao">
+      <v-btn to="/educacao">
         <span>Educação</span>
         <v-icon>mdi-book-open-page-variant</v-icon>
       </v-btn>
 
-      <v-btn bottom to="/empresas">
+      <v-btn to="/empresas">
         <span>Empresas</span>
         <v-icon>mdi-office-building</v-icon>
       </v-btn>
