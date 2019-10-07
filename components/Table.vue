@@ -1,95 +1,115 @@
 <template>
-  <v-app>
-    <v-form>
-      <v-container>
-        <h1 class="all">Educação em Inovação e Empreendedorismo na USP</h1>
-        <p
-          class="all"
-        >Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo.</p>
-        <v-btn
-          href="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
-        >Cadastre a sua</v-btn>
-      </v-container>
-      <v-container>
-        <v-text-field
-          class="all"
-          v-model="search"
-          append-icon="search"
-          label="Procure uma palavra-chave entre as disciplinas cadastradas"
-          hide-details
-          outlined
-        ></v-text-field>
-      </v-container>
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-select :items="unity" label="Unidade" v-model="select" outlined></v-select>
-          </v-col>
-          <v-col>
-            <v-select :items="campus" label="Campus" v-model="select2" outlined></v-select>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
-    <v-divider />
+  <div>
+    <v-divider ref="start" class="my-4" />
+
+    <v-container>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Procure uma palavra-chave entre as disciplinas cadastradas"
+        hide-details
+        outlined
+      />
+    </v-container>
+
+    <v-container class="hidden-md-and-up">
+      <v-select :items="propsCampus" label="Campus" v-model="selectCampus" outlined />
+      <v-select :items="propsUnity" label="Unidade" v-model="selectUnity" outlined />
+      <v-select :items="propsField" label="Área" v-model="selectField" outlined />
+      <v-select :items="propsLevel" label="Nível" v-model="selectLevel" outlined />
+    </v-container>
+
+    <v-container class="hidden-sm-and-down">
+      <v-row>
+        <v-col>
+          <v-select :items="propsCampus" label="Campus" v-model="selectCampus" outlined />
+        </v-col>
+        <v-col>
+          <v-select :items="propsUnity" label="Unidade" v-model="selectUnity" outlined />
+        </v-col>
+        <v-col>
+          <v-select :items="propsField" label="Área" v-model="selectField" outlined />
+        </v-col>
+        <v-col>
+          <v-select :items="propsLevel" label="Nível" v-model="selectLevel" outlined />
+        </v-col>
+      </v-row>
+      <v-btn @click="clearFilters()">Limpar filtros</v-btn>
+    </v-container>
+
     <v-container>
       <v-data-table
-        class="all my-12"
-        style="font-weight: bold; border-style: solid; border-color: #5aa18e;border-radius: 6px;"
-        :headers="headers"
-        :items="sheet"
+        class="my-12"
+        :headers="propsHeaders"
+        :items="propsSheet"
         :search="search"
-        :items-per-page="128"
+        :items-per-page="itemsPerPage"
         :page="page"
         calculate-widths
         hide-default-footer
-      ></v-data-table>
-      <v-pagination v-model="page" :length="6"></v-pagination>
+      >
+        <template v-slot:item.name="{item}">
+          <a target="_blank" :href="item.url">{{item.name}}</a>
+        </template>
+      </v-data-table>
+
+      <v-pagination v-model="page" :length="numberOfPages(propsSheet.length)" total-visible="7" />
     </v-container>
-  </v-app>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ["s", "h"],
+  props: [
+    "propsSheet",
+    "propsHeaders",
+    "propsCampus",
+    "propsUnity",
+    "propsField",
+    "propsLevel"
+  ],
   data: () => ({
-    sheet: [],
-    headers: [],
     search: "",
-    select: "",
-    select2: "",
+    selectCampus: "",
+    selectUnity: "",
+    selectField: "",
+    selectLevel: "",
     distinct: [],
-    unity: [
-      "",
-      "IME",
-      "FAU",
-      "FEA",
-      "EP",
-      "EESC",
-      "FFCLRP",
-      "IFSC",
-      "EACH",
-      "ECA",
-      "IP"
-    ],
-    campus: ["", "SÃO CARLOS", "RIBEIRÃO PRETO"],
-    page: 1
+    page: 1,
+    options: {},
+    itemsPerPage: 32
   }),
   methods: {
-    set() {
-      this.sheet = this.s;
-      this.headers = this.h;
-      this.headers.push({
+    setFilter() {
+      this.propsHeaders.push({
         filter: (value, search, item) => {
-          return !this.select && !this.select2
-            ? true
-            : item.unity == this.select || item.campus == this.select2;
+          return (
+            (!this.selectCampus || item.campus == this.selectCampus) &&
+            (!this.selectUnity || item.unity == this.selectUnity) &&
+            (!this.selectField || item.field == this.selectField) &&
+            (!this.selectLevel || item.level == this.selectLevel)
+          );
         }
       });
+    },
+    clearFilters() {
+      this.search = "";
+      this.selectCampus = "";
+      this.selectUnity = "";
+      this.selectField = "";
+      this.selectLevel = "";
+    },
+    numberOfPages(length) {
+      return Math.ceil(length / this.itemsPerPage);
+    }
+  },
+  watch: {
+    page() {
+      this.$vuetify.goTo(this.$refs.start, this.options);
     }
   },
   created() {
-    this.set();
+    this.setFilter();
   }
 };
 </script>

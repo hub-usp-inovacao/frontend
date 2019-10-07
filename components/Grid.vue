@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-divider ref="start" class="mb-6"></v-divider>
+    <v-divider ref="start" class="mb-6" />
 
     <v-container>
       <v-text-field
@@ -10,7 +10,7 @@
         hide-details
         outlined
         clearable
-      ></v-text-field>
+      />
 
       <div class="hidden-md-and-up">
         <v-select
@@ -20,7 +20,7 @@
           v-model="selectIncubator"
           outlined
           hide-details
-        ></v-select>
+        />
         <v-select
           class="my-4"
           :items="propsCampus"
@@ -28,7 +28,7 @@
           v-model="selectCampus"
           outlined
           hide-details
-        ></v-select>
+        />
         <v-select
           class="my-4"
           :items="propsUnity"
@@ -36,7 +36,7 @@
           v-model="selectUnity"
           outlined
           hide-details
-        ></v-select>
+        />
       </div>
 
       <div class="hidden-sm-and-down">
@@ -48,7 +48,7 @@
               v-model="selectIncubator"
               outlined
               hide-details
-            ></v-select>
+            />
           </v-col>
           <v-col>
             <v-select
@@ -57,7 +57,7 @@
               v-model="selectCampus"
               outlined
               hide-details
-            ></v-select>
+            />
           </v-col>
           <v-col>
             <v-select
@@ -66,15 +66,13 @@
               v-model="selectUnity"
               outlined
               hide-details
-            ></v-select>
+            />
           </v-col>
         </v-row>
       </div>
 
       <v-btn @click="clearFilters()">Limpar filtros</v-btn>
     </v-container>
-
-    <!-- <v-divider class="mt-6"></v-divider> -->
 
     <v-data-iterator
       :class="margin"
@@ -100,7 +98,7 @@
                     </v-img>
                   </v-container>
 
-                  <v-divider></v-divider>
+                  <v-divider />
 
                   <v-card-title
                     class="hoverUnderline justify-center title primary--text"
@@ -119,7 +117,7 @@
           v-model="page"
           :length="numberOfPages(props.pagination.itemsLength)"
           total-visible="7"
-        ></v-pagination>
+        />
       </template>
     </v-data-iterator>
   </div>
@@ -177,8 +175,9 @@ export default {
     },
     filterBySearch(item) {
       let strings = Object.values(item);
+      this.typed = this.typed.toLowerCase();
       for (let i = 0; i < strings.length; i++)
-        if (strings[i].toLowerCase().includes(this.search)) return true;
+        if (strings[i].toLowerCase().includes(this.typed)) return true;
       return false;
     },
     clearFilters() {
