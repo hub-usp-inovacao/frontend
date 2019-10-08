@@ -53,13 +53,18 @@
         </template>
       </v-data-table>
 
-      <v-pagination v-model="page" :length="numberOfPages(propsSheet.length)" total-visible="7" />
+      <Pagination :propsLength="propsSheet.length" :propsPage="page" @input="page = $event" />
     </v-container>
   </div>
 </template>
 
 <script>
+import Pagination from "../components/Pagination.vue";
+
 export default {
+  components: {
+    Pagination
+  },
   props: [
     "propsSheet",
     "propsHeaders",
@@ -74,7 +79,6 @@ export default {
     selectUnity: "",
     selectField: "",
     selectLevel: "",
-    distinct: [],
     page: 1,
     options: {},
     itemsPerPage: 32
@@ -98,9 +102,6 @@ export default {
       this.selectUnity = "";
       this.selectField = "";
       this.selectLevel = "";
-    },
-    numberOfPages(length) {
-      return Math.ceil(length / this.itemsPerPage);
     }
   },
   watch: {

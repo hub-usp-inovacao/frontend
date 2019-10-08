@@ -85,38 +85,14 @@
       <template v-slot:default="props">
         <masonry :class="margin2" :cols="columns">
           <div v-for="item in props.items" :key="item.name">
-            <v-container>
-              <v-hover v-slot:default="{ hover }">
-                <v-card target="_blank" :href="item.url" elevation="1" outlined ripple>
-                  <v-container>
-                    <v-img :src="item.logo">
-                      <v-fade-transition>
-                        <v-overlay v-if="hover" absolute color="primary">
-                          <v-btn style="font-weight: bold">Visite o site</v-btn>
-                        </v-overlay>
-                      </v-fade-transition>
-                    </v-img>
-                  </v-container>
-
-                  <v-divider />
-
-                  <v-card-title
-                    class="hoverUnderline justify-center title primary--text"
-                  >{{item.name}}</v-card-title>
-
-                  <v-card-text v-if="item.description">
-                    <span>{{item.description}}</span>
-                  </v-card-text>
-                </v-card>
-              </v-hover>
-            </v-container>
+            <Card :propsItem="item" :propsImage="true" v-on:test="a += $event" />
           </div>
         </masonry>
 
-        <v-pagination
-          v-model="page"
-          :length="numberOfPages(props.pagination.itemsLength)"
-          total-visible="7"
+        <Pagination
+          :propsLength="props.pagination.itemsLength"
+          :propsPage="page"
+          @input="page = $event"
         />
       </template>
     </v-data-iterator>
@@ -125,8 +101,14 @@
 
 <script>
 import { debounce } from "debounce";
+import Card from "../components/Card.vue";
+import Pagination from "../components/Pagination.vue";
 
 export default {
+  components: {
+    Card,
+    Pagination
+  },
   props: ["propsSheet", "propsIncubator", "propsCampus", "propsUnity"],
   data: () => ({
     search: "",
@@ -185,9 +167,6 @@ export default {
       this.selectIncubator = "";
       this.selectCampus = "";
       this.selectUnity = "";
-    },
-    numberOfPages(length) {
-      return Math.ceil(length / this.itemsPerPage);
     }
   },
   watch: {

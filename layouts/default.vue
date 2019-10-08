@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar color="transparent" class="hidden-sm-and-down" flat>
+    <v-toolbar class="hidden-sm-and-down" flat>
       <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
       <v-spacer />
       <v-toolbar-items>
@@ -30,7 +30,7 @@
       </v-btn>
     </v-bottom-navigation>
 
-    <v-content class="test mb-12">
+    <v-content class="bgcolor mb-12">
       <!-- <v-container fluid> -->
       <nuxt class="mb-12" />
       <!-- </v-container> -->
@@ -90,16 +90,8 @@ export default {
 </script>
 
 <style>
-.test {
+.bgcolor {
   background-color: #f2f2f2;
-}
-
-.invisible {
-  top: 0;
-  opacity: 1;
-  padding: 0;
-  margin: 0;
-  left: 0;
 }
 
 #app .v-bottom-navigation .v-btn {

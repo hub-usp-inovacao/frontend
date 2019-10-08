@@ -1,3 +1,3 @@
 <template>
-  <v-app>CONTATO</v-app>
+  <v-app>Contato</v-app>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <h1>Educação em Inovação e Empreendedorismo na USP</h1>
+      <h1>Educação em Inovação e Empreendedorismo</h1>
       <p
         class="my-1"
       >Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo.</p>

@@ -1,37 +1,22 @@
 <template>
   <v-app>
-    <v-tabs>
-      <v-tab>Agentes Institucionais</v-tab>
-      <v-tab>Entidades Estudantis</v-tab>
-      <v-tab>Espaços e Coworking</v-tab>
-      <v-tab>Ideação e Viabilidade</v-tab>
-      <v-tab>Incubadoras e Parques Tecnologias</v-tab>
-      <v-tab-item>
-        <v-container>
-          <List op="Finance"/>
-        </v-container>
-      </v-tab-item>
-      <v-tab-item>
-        <v-container>
-          <List op="Health Care"/>
-        </v-container>
-      </v-tab-item>
-      <v-tab-item>
-        <v-container>
-          <List op="Technology"/>
-        </v-container>
-      </v-tab-item>
-      <v-tab-item>
-        <v-container>
-          <List op="Capital Goods"/>
-        </v-container>
-      </v-tab-item>
-      <v-tab-item>
-        <v-container>
-          <List op="n/a"/>
-        </v-container>
-      </v-tab-item>
-    </v-tabs>
+    <v-container>
+      <h1>Iniciativas em Inovação e Empreendedorismo</h1>
+      <p
+        class="my-1"
+      >Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade.</p>
+      <v-btn
+        class="mt-3 mb-6"
+        target="_blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd2gMMb3t01oDwYSbsgoUK1hCeEiC9zq7tt2AKzMoJ2Dcu1SA/viewform"
+      >Cadastre a sua</v-btn>
+
+      <List propsCategory="Grupos Estudantis" propsColor="#e3584b" />
+      <List propsCategory="Espaços e Laboratórios" propsColor="#966acc" />
+      <List propsCategory="Ideação" propsColor="#77d47b" />
+      <List propsCategory="Grupos de Pesquisa" propsColor="#f0e660" />
+      <List propsCategory="Incubadora de Empresas" propsColor="#678fe6" />
+    </v-container>
   </v-app>
 </template>
 

@@ -1,12 +1,10 @@
 <template>
   <v-app>
     <v-container>
-      <h1>{{propsCategory}}</h1>
-
       <v-text-field
         v-model="search"
         append-icon="search"
-        label="Procura uma palavra-chave ou entre as iniciativas cadastradas"
+        label="Procure uma palavra-chave"
         hide-details
         outlined
         clearable
@@ -17,7 +15,7 @@
       <template v-slot:default="props">
         <masonry :cols="columns">
           <div v-for="item in props.items" :key="item.name">
-            <Card :propsColor="propsColor" :propsItem="item" />
+            <Card :propsItem="item" />
           </div>
         </masonry>
       </template>
@@ -32,7 +30,7 @@ export default {
   components: {
     Card
   },
-  props: ["propsCategory", "propsColor"],
+  props: ["propsID"],
   data: () => ({
     sheet: [],
     search: "",
@@ -41,20 +39,20 @@ export default {
   methods: {
     async sheetQuery() {
       const request = await fetch(
-        "https://spreadsheets.google.com/feeds/list/1mT1w-DhAADDE-2khFau3J8wJgp41nDeVn4e_Sr5dvW8/ou9zsos/public/values?alt=json"
+        "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/" +
+          this.propsID +
+          "/public/values?alt=json"
       );
       const data = await request.json();
       data.feed.entry.forEach(row => {
-        let iniciative = {
-          name: row.gsx$nome.$t,
-          description: row.gsx$descriçãocurta.$t,
+        let di = {
+          name: row.gsx$nomedoinstituto.$t,
+          description: row.gsx$descriçãogeral.$t,
           url: row.gsx$site.$t,
-          campus: row.gsx$campusdeatuação.$t,
-          unity: row.gsx$localizaçãounidade.$t,
-          category: row.gsx$categoria.$t
+          campus: row.gsx$campus.$t,
+          unity: row.gsx$unidade.$t
         };
-        if (iniciative.category == this.propsCategory)
-          this.sheet.push(iniciative);
+        if (di.name != "Nome do Instituto") this.sheet.push(di);
       });
     },
     setCols() {
