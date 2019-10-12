@@ -13,8 +13,8 @@
                       style="font-weight: bold; line-height: 1.3; text-align: left"
                     >
                       Conheça a
-                      <span class="black--text" style="background-color: red">Inovação</span> e
-                      <span class="red--text" style="background-color: black">Empreendedorismo</span> na Universidade de São Paulo
+                      <span style="color: #e69027; background-color: #2353ba">Inovação</span> e
+                      <span style="color: #2353ba; background-color: #e69027">Empreendedorismo</span> na Universidade de São Paulo
                     </v-container>
                   </v-col>
                   <v-col></v-col>
@@ -30,14 +30,18 @@
     </v-carousel>
     <v-container class="d-block">
       <v-row>
-        <v-col class="align-self-end">
-          <p class="display-4 all">SOLUS</p>
+        <v-col class="align-self-end" data-aos-duration="3000" data-aos="zoom-in">
+          <p class="display-4">SOLUS</p>
           <p
-            class="headline all"
+            class="headline"
           >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</p>
         </v-col>
         <v-col>
-          <v-img src="https://picsum.photos/400/250?random"></v-img>
+          <v-img
+            data-aos-duration="3000"
+            data-aos="zoom-in"
+            src="https://picsum.photos/400/250?random"
+          ></v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -49,16 +53,35 @@
 
     <v-container>
       <!-- <template> -->
-      <v-timeline>
-        <v-timeline-item v-for="item in options" :key="item.title" hide-dot>
-          <v-img data-aos="flip-up" slot="opposite" src="https://picsum.photos/300/200?random"></v-img>
+      <v-timeline class="hidden-sm-and-down">
+        <v-timeline-item v-for="(item, i) in options" :key="item.title" hide-dot>
+          <v-img
+            :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
+            data-aos-duration="3000"
+            slot="opposite"
+            src="https://picsum.photos/300/200?random"
+          ></v-img>
 
-          <v-container>
-            <div data-aos="slide-up" data-aos-delay="400" class="headline">{{item.title}}</div>
-            <div data-aos="slide-down" data-aos-delay="400">{{item.description}}</div>
+          <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
+            <div align="center" data-aos-delay="400" class="headline">{{item.title}}</div>
+            <div align="center" data-aos-delay="400">{{item.description}}</div>
           </v-container>
         </v-timeline-item>
       </v-timeline>
+      <div class="hidden-md-and-up" v-for="(item, i) in options" :key="item.title">
+        <v-img
+          :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
+          data-aos-duration="3000"
+          slot="opposite"
+          src="https://picsum.photos/300/200?random"
+        ></v-img>
+
+        <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
+          <div align="center" data-aos-delay="400" class="headline">{{item.title}}</div>
+          <div align="center" data-aos-delay="400">{{item.description}}</div>
+          <v-divider class="my-6"/>
+        </v-container>
+      </div>
       <!-- </template> -->
     </v-container>
   </v-app>

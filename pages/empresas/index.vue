@@ -1,14 +1,10 @@
 <template>
   <div>
-    <v-container>
-      <h1>Empresas da Universidade de São Paulo</h1>
-      <p class="my-4">São as empresas criadas por alunos e ex-alunos USP ao longo dos anos.</p>
-      <v-btn
-        class="my-4"
-        target="_blank"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
-      >Cadastre a sua</v-btn>
-    </v-container>
+    <Description
+      propsTitle="Empresas da Universidade de São Paulo"
+      propsDescription="São as empresas criadas por alunos e ex-alunos USP ao longo dos anos."
+      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
+    />
 
     <Grid
       :propsSheet="sheet"
@@ -21,10 +17,12 @@
 
 <script>
 import Grid from "@/components/Grid.vue";
+import Description from "@/components/Description.vue";
 
 export default {
   components: {
-    Grid
+    Grid,
+    Description
   },
   data: () => ({
     sheet: [],

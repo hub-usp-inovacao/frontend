@@ -1,16 +1,10 @@
 <template>
   <v-app>
-    <v-container>
-      <h1>Educação em Inovação e Empreendedorismo</h1>
-      <p
-        class="my-1"
-      >Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo.</p>
-      <v-btn
-        class="mt-3"
-        target="_blank"
-        href="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
-      >Cadastre a sua</v-btn>
-    </v-container>
+    <Description
+      propsTitle="Educação em Inovação e Empreendedorismo"
+      propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo."
+      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
+    />
 
     <Table
       :propsSheet="sheet"
@@ -25,10 +19,12 @@
 
 <script>
 import Table from "../components/Table.vue";
+import Description from "../components/Description.vue";
 
 export default {
   components: {
-    Table
+    Table,
+    Description
   },
   data: () => ({
     sheet: [],

@@ -1,16 +1,12 @@
 <template>
   <v-app>
-    <v-container>
-      <h1>Desenvolvimento e Inovação</h1>
-      <p
-        class="my-1"
-      >Laboratórios, organizações e programas que atuam com desenvolvimento & inovação.</p>
-      <v-btn
-        class="mt-3"
-        target="_blank"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
-      >Cadastre a sua</v-btn>
+    <Description
+      propsTitle="Desenvolvimento e Inovação"
+      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
+      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
+    />
 
+    <v-container>
       <v-tabs class="mt-8" grow>
         <v-tab>{{tabs.tab1.name}}</v-tab>
         <v-tab>{{tabs.tab2.name}}</v-tab>
@@ -47,10 +43,12 @@
 
 <script>
 import Tab from "../components/Tab.vue";
+import Description from "../components/Description.vue";
 
 export default {
   components: {
-    Tab
+    Tab,
+    Description
   },
   data: () => ({
     tabs: {

@@ -1,10 +1,22 @@
 <template>
   <v-app>
-    <v-toolbar class="hidden-sm-and-down" flat>
+    <v-toolbar
+      :style="this.$route.name == 'index' ? 'background-color: transparent' : ''"
+      class="hidden-sm-and-down"
+      :absolute="this.$route.name == 'index'"
+      flat
+    >
       <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
       <v-spacer />
       <v-toolbar-items>
-        <v-btn v-for="(item, i) in items" :key="i" :to="item.to" text router>{{item.title}}</v-btn>
+        <v-btn
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          :class="$route.name == 'index' ? 'white--text' : ''"
+          text
+          router
+        >{{item.title}}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -79,10 +91,6 @@ export default {
       {
         title: "Empresas",
         to: "/empresas"
-      },
-      {
-        title: "Contato",
-        to: "/contato"
       }
     ]
   })

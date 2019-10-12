@@ -17,7 +17,7 @@
       <template v-slot:default="props">
         <masonry :cols="columns">
           <div v-for="item in props.items" :key="item.name">
-            <Card :propsColor="propsColor" :propsItem="item" />
+            <Card :propsColor="propsColor" :propsItem="item" :propsFont="true"/>
           </div>
         </masonry>
       </template>

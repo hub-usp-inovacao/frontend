@@ -24,9 +24,10 @@
             <v-divider />
           </div>
 
-          <v-card-title class="hoverUnderline justify-center title primary--text">{{propsItem.name}}</v-card-title>
+          <v-card-title v-if="propsFont" align="center" class="hoverUnderline justify-center title white--text">{{propsItem.name}}</v-card-title>
+          <v-card-title v-else align="center" class="hoverUnderline justify-center title primary--text">{{propsItem.name}}</v-card-title>
 
-          <v-card-text v-if="propsItem.description">
+          <v-card-text align="center" v-if="propsItem.description">
             <span>{{propsItem.description}}</span>
           </v-card-text>
         </v-card>
@@ -37,6 +38,6 @@
 
 <script>
 export default {
-  props: ["propsItem", "propsImage", "propsColor"]
+  props: ["propsItem", "propsImage", "propsColor", "propsFont"]
 };
 </script>
