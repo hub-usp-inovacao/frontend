@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-carousel height="100vh" show-arrows cycle>
-      <v-carousel-item v-for="photo in photos" :key="photo">
+    <v-carousel height="100vh" show-arrows cycle hide-delimiters>
+      <v-carousel-item v-for="photo in photos" :key="photo" >
         <v-img height="100vh" style="opacity: 0.8" :src="photo">
           <v-container>
             <div style="position: absolute; top: 30%">
