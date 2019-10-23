@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-carousel height="100vh" show-arrows cycle hide-delimiters>
-      <v-carousel-item v-for="photo in photos" :key="photo" >
+      <v-carousel-item v-for="photo in photos" :key="photo">
         <v-img height="100vh" style="opacity: 0.8" :src="photo">
           <v-container>
             <div style="position: absolute; top: 30%">
@@ -28,12 +28,13 @@
         </v-img>
       </v-carousel-item>
     </v-carousel>
-    <v-container class="d-block">
-      <v-row>
+
+    <v-container>
+      <v-row class="align-content-center">
         <v-col class="align-self-end" data-aos-duration="3000" data-aos="zoom-in">
-          <p class="display-4">SOLUS</p>
+          <p class="display-4 font-weight-medium">SOLUS</p>
           <p
-            class="headline"
+            class="headline font-weight-light"
           >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</p>
         </v-col>
         <v-col>
@@ -45,44 +46,33 @@
         </v-col>
       </v-row>
     </v-container>
-    <!-- <v-container class="interhack" fluid></v-container> -->
 
-    <v-divider class="my-12"></v-divider>
-    <v-divider class="my-12"></v-divider>
-    <!-- <v-divider class="my-12"></v-divider> -->
+    <v-divider></v-divider>
 
     <v-container>
-      <!-- <template> -->
-      <v-timeline class="hidden-sm-and-down">
-        <v-timeline-item v-for="(item, i) in options" :key="item.title" hide-dot>
+      <v-row
+        v-for="(item,i) in options"
+        :key="item.title"
+        :class="i % 2 ? 'flex-row-reverse' : 'flex-row'"
+      >
+        <v-col>
           <v-img
             :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
             data-aos-duration="3000"
-            slot="opposite"
             src="https://picsum.photos/300/200?random"
           ></v-img>
-
+        </v-col>
+        <v-col class="align-self-center">
           <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
-            <div align="center" data-aos-delay="400" class="headline">{{item.title}}</div>
-            <div align="center" data-aos-delay="400">{{item.description}}</div>
+            <p class="display-2" align="center" data-aos-delay="400">{{item.title}}</p>
+            <p
+              class="title font-weight-light"
+              align="center"
+              data-aos-delay="400"
+            >{{item.description}}</p>
           </v-container>
-        </v-timeline-item>
-      </v-timeline>
-      <div class="hidden-md-and-up" v-for="(item, i) in options" :key="item.title">
-        <v-img
-          :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
-          data-aos-duration="3000"
-          slot="opposite"
-          src="https://picsum.photos/300/200?random"
-        ></v-img>
-
-        <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
-          <div align="center" data-aos-delay="400" class="headline">{{item.title}}</div>
-          <div align="center" data-aos-delay="400">{{item.description}}</div>
-          <v-divider class="my-6"/>
-        </v-container>
-      </div>
-      <!-- </template> -->
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -123,7 +113,4 @@ export default {
 </script>
 
 <style scoped>
-.transparent {
-  background-color: transparent;
-}
 </style>
