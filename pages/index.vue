@@ -56,11 +56,13 @@
         :class="i % 2 ? 'flex-row-reverse' : 'flex-row'"
       >
         <v-col>
-          <v-img
-            :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
-            data-aos-duration="3000"
-            src="https://picsum.photos/300/200?random"
-          ></v-img>
+          <a :href="item.to">
+            <v-img
+              :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
+              data-aos-duration="3000"
+              src="https://picsum.photos/300/200?random"
+            ></v-img>
+          </a>
         </v-col>
         <v-col class="align-self-center">
           <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
@@ -84,22 +86,26 @@ export default {
       {
         title: "Iniciativas",
         description:
-          "Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade."
+          "Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade.",
+        to: "/iniciativas"
       },
       {
         title: "Desenvolvimento & Inovação",
         description:
-          "Laboratórios e grupos de pesquisa que atuam em projetos de inovação e empreendedorismo."
+          "Laboratórios e grupos de pesquisa que atuam em projetos de inovação e empreendedorismo.",
+        to: "/desenvolvimento-e-inovacao"
       },
       {
         title: "Educação",
         description:
-          "Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo."
+          "Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo.",
+        to: "/educacao"
       },
       {
         title: "Empresas",
         description:
-          "Diretório de empresas criadas por alunos e ex-alunos USP ao longo dos anos."
+          "Diretório de empresas criadas por alunos e ex-alunos USP ao longo dos anos.",
+        to: "/empresas"
       }
     ],
     photos: [
