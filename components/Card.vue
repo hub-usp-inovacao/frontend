@@ -24,8 +24,8 @@
             <v-divider />
           </div>
 
-          <v-card-title v-if="propsFont" align="center" class="hoverUnderline justify-center title white--text">{{propsItem.name}}</v-card-title>
-          <v-card-title v-else align="center" class="hoverUnderline justify-center title primary--text">{{propsItem.name}}</v-card-title>
+          <v-card-title v-if="propsFont" align="center" class="hoverUnderline justify-center title white--text zoom">{{propsItem.name}}</v-card-title>
+          <v-card-title v-else align="center" class="hoverUnderline justify-center title primary--text zoom">{{propsItem.name}}</v-card-title>
 
           <v-card-text align="center" v-if="propsItem.description">
             <span>{{propsItem.description}}</span>

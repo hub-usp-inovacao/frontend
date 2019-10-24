@@ -105,4 +105,11 @@ export default {
 #app .v-bottom-navigation .v-btn {
   height: inherit !important;
 }
+
+.zoom {
+  transition: transform 0.2s;
+}
+.zoom:hover {
+  transform: scale(1.1);
+}
 </style>

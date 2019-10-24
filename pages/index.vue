@@ -9,7 +9,7 @@
                 <v-row>
                   <v-col>
                     <v-container
-                      class="display-3 white--text"
+                      class="display-3 white--text zoom"
                       style="font-weight: bold; line-height: 1.3; text-align: left"
                     >
                       Conheça a
@@ -32,13 +32,14 @@
     <v-container>
       <v-row class="align-content-center">
         <v-col class="align-self-end" data-aos-duration="3000" data-aos="zoom-in">
-          <p class="display-4 font-weight-medium">SOLUS</p>
+          <p class="display-4 font-weight-medium zoom">SOLUS</p>
           <p
-            class="headline font-weight-light"
+            class="headline font-weight-light zoom"
           >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</p>
         </v-col>
         <v-col>
           <v-img
+            class="zoom"
             data-aos-duration="3000"
             data-aos="zoom-in"
             src="https://picsum.photos/400/250?random"
@@ -58,6 +59,7 @@
         <v-col>
           <a :href="item.to">
             <v-img
+              class="zoom"
               :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
               data-aos-duration="3000"
               src="https://picsum.photos/300/200?random"
@@ -66,9 +68,9 @@
         </v-col>
         <v-col class="align-self-center">
           <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
-            <p class="display-2" align="center" data-aos-delay="400">{{item.title}}</p>
+            <p class="display-2 zoom" align="center" data-aos-delay="400">{{item.title}}</p>
             <p
-              class="title font-weight-light"
+              class="title font-weight-light zoom"
               align="center"
               data-aos-delay="400"
             >{{item.description}}</p>
@@ -117,6 +119,3 @@ export default {
   })
 };
 </script>
-
-<style scoped>
-</style>
