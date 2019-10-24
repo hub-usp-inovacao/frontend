@@ -38,12 +38,14 @@
           >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</p>
         </v-col>
         <v-col>
-          <v-img
-            class="zoom"
-            data-aos-duration="3000"
-            data-aos="zoom-in"
-            src="https://picsum.photos/400/250?random"
-          ></v-img>
+          <div class="zoom">
+            <v-img
+              class="zoom"
+              data-aos-duration="3000"
+              data-aos="zoom-in"
+              src="https://picsum.photos/400/250?random"
+            ></v-img>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -58,23 +60,25 @@
       >
         <v-col>
           <a :href="item.to">
-            <v-img
-              class="zoom"
-              :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
-              data-aos-duration="3000"
-              src="https://picsum.photos/300/200?random"
-            ></v-img>
+            <div class="zoom">
+              <v-img
+                class="zoom"
+                :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
+                data-aos-duration="3000"
+                src="https://picsum.photos/300/200?random"
+              ></v-img>
+            </div>
           </a>
         </v-col>
         <v-col class="align-self-center">
-          <v-container :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
+          <div :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
             <p class="display-2 zoom" align="center" data-aos-delay="400">{{item.title}}</p>
             <p
               class="title font-weight-light zoom"
               align="center"
               data-aos-delay="400"
             >{{item.description}}</p>
-          </v-container>
+          </div>
         </v-col>
       </v-row>
     </v-container>
