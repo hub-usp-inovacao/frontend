@@ -159,7 +159,10 @@ export default {
       let strings = Object.values(item);
       this.typed = this.typed.toLowerCase();
       for (let i = 0; i < strings.length; i++)
-        if (strings[i].toLowerCase().includes(" " + this.typed)) return true;
+        if (strings[i].toLowerCase().includes(" " + this.typed)) {
+          console.log(strings[i]);
+          return true;
+        }
       return false;
     },
     clearFilters() {
