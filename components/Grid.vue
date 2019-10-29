@@ -80,6 +80,7 @@
       :items-per-page="itemsPerPage"
       :page="page"
       :custom-filter="customFilter"
+      no-data-text="Indexando resultados"
       hide-default-footer
     >
       <template v-slot:default="props">

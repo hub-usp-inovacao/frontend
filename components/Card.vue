@@ -12,7 +12,7 @@
         >
           <div v-if="propsImage">
             <v-container>
-              <v-img :src="propsItem.logo">
+              <v-img :src="propsItem.logo" contain max-height="25vh">
                 <v-fade-transition>
                   <v-overlay v-if="hover" absolute color="primary">
                     <v-btn style="font-weight: bold">Visite o site</v-btn>

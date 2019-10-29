@@ -47,6 +47,7 @@
         :page="page"
         calculate-widths
         hide-default-footer
+        no-data-text="Indexando Resultados"
       >
         <template v-slot:item.name="{item}">
           <a target="_blank" :href="item.url">{{item.name}}</a>
