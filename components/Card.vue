@@ -2,12 +2,10 @@
   <v-container>
     <v-hover v-slot:default="{ hover }">
       <v-card
-        :color="propsColor"
         :elevation="hover ? 5 : 0"
         target="_blank"
         :href="propsItem.url"
         outlined
-        tile
         ripple
       >
         <div v-if="propsImage">
@@ -28,7 +26,7 @@
           <div
             v-if="propsFont"
             align="center"
-            class="hoverUnderline justify-center white--text font-weight-bold"
+            class="hoverUnderline justify-center font-regular"
             style="font-size: 17px"
           >{{propsItem.name}}</div>
           <v-card-title
