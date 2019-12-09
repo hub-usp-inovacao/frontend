@@ -42,7 +42,9 @@
       </v-btn>
     </v-bottom-navigation>
 
-    <v-content class="bgcolor mb-12">
+    <v-content
+      class="bgcolor mb-12"
+    >
       <!-- <v-container fluid> -->
       <nuxt class="mb-12" />
       <!-- </v-container> -->
@@ -99,7 +101,8 @@ export default {
 
 <style>
 .bgcolor {
-  background-color: #f2f2f2;
+  background-image: url('../assets/dust_scratches.png');
+  background-repeat: repeat;
 }
 
 #app .v-bottom-navigation .v-btn {
