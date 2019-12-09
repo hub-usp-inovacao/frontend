@@ -101,7 +101,7 @@ export default {
 
 <style>
 .bgcolor {
-  background-image: url('../assets/dust_scratches.png');
+  background-image: url('../layouts/dust_scratches.png');
   background-repeat: repeat;
 }
 
