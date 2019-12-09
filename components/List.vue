@@ -6,13 +6,13 @@
 
     <v-data-iterator
       :items="propsData"
-      :search="propsSearch"
       :items-per-page="128"
+      :custom-filter="customFilter"
       hide-default-footer
       no-data-text="Carregando dados..."
     >
       <template v-slot:default="props">
-        <masonry :cols="columns">
+        <masonry :cols="2">
           <div v-for="item in props.items" :key="item.name">
             <Card :propsColor="propsColor" :propsItem="item" :propsFont="true" />
           </div>
@@ -29,7 +29,14 @@ export default {
   components: {
     Card
   },
-  props: ["propsCategory", "propsColor", "propsData", "propsSearch"],
+  props: [
+    "propsCategory",
+    "propsColor",
+    "propsData",
+    "propsSearch",
+    "propsCampus",
+    "propsUnity"
+  ],
   data: () => ({
     columns: 1
   }),
@@ -47,6 +54,28 @@ export default {
         case "xl":
           return 4;
       }
+    },
+    customFilter(items, search) {
+      let filtered = [];
+      items.forEach(item => {
+        if (
+          (!this.propsCampus.length ||
+            this.propsCampus.includes(item.campus)) &&
+          (!this.propsUnity.length || this.propsUnity.includes(item.unity)) &&
+          (!this.propsSearch || this.filterBySearch(item))
+        )
+          filtered.push(item);
+      });
+      return filtered;
+    },
+    filterBySearch(item) {
+      let strings = Object.values(item);
+      this.propsSearch = this.propsSearch.toLowerCase();
+
+      for (let i = 0; i < strings.length; i++)
+        if (strings[i].toLowerCase().includes(" " + this.propsSearch))
+          return true;
+      return false;
     }
   },
   mounted() {
