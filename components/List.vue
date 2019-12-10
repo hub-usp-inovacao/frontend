@@ -72,9 +72,11 @@ export default {
       let strings = Object.values(item);
       this.propsSearch = this.propsSearch.toLowerCase();
 
-      for (let i = 0; i < strings.length; i++)
+      for (let i = 0; i < strings.length; i++) {
+        strings[i] = " " + strings[i];
         if (strings[i].toLowerCase().includes(" " + this.propsSearch))
           return true;
+      }
       return false;
     }
   },
