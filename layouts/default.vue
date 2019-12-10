@@ -101,8 +101,7 @@ export default {
 
 <style>
 .bgcolor {
-  background-image: url('../layouts/dust_scratches.png');
-  background-repeat: repeat;
+  background-color: #f2f2f2;
 }
 
 #app .v-bottom-navigation .v-btn {
