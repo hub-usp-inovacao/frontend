@@ -1,62 +1,73 @@
 <template>
   <div>
+    <!--
     <Description
       propsTitle="Iniciativas em Inovação e Empreendedorismo"
       propsDescription="Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd2gMMb3t01oDwYSbsgoUK1hCeEiC9zq7tt2AKzMoJ2Dcu1SA/viewform"
-    />
+    />-->
 
     <div class="mx-5">
-      <v-row>
+      <v-row no-gutters>
         <v-col>
-          <v-container style="position: fixed">
-            <v-text-field
-              style="width: 400px"
-              v-model="search"
-              append-icon="search"
-              label="Procure ..."
-              hide-details
-              outlined
-              clearable
-            />
-            <v-select
-              class="my-4"
-              style="width: 400px"
-              :items="titles"
-              label="Categoria"
-              v-model="selectCategory"
-              outlined
-              chips
-              multiple
-              hide-details
-            />
-            <v-select
-              class="my-4"
-              style="width: 400px"
-              :items="campus"
-              label="Campus"
-              v-model="selectCampus"
-              outlined
-              chips
-              multiple
-              hide-details
-            />
-            <v-select
-              class="my-4"
-              style="width: 400px"
-              :items="unity"
-              label="Unidade"
-              v-model="selectUnity"
-              outlined
-              chips
-              multiple
-              hide-details
-            />
-            <v-btn @click="clearFilters()">Limpar filtros</v-btn>
-          </v-container>
+          <div style="width: 400px; position: fixed; overflow-y: auto; bottom: 0; top: 65px;">
+            <v-container>
+              <v-container>
+                <h1 align="center">INICIATIVAS</h1>
+              </v-container>
+              <v-container>
+                <v-text-field
+                  v-model="search"
+                  append-icon="search"
+                  label="Procure ..."
+                  hide-details
+                  outlined
+                  clearable
+                />
+              </v-container>
+              <v-container>
+                <v-select
+                  :items="titles"
+                  label="Categoria"
+                  v-model="selectCategory"
+                  outlined
+                  chips
+                  multiple
+                  hide-details
+                />
+              </v-container>
+              <v-container>
+                <v-select
+                  :items="campus"
+                  label="Campus"
+                  v-model="selectCampus"
+                  outlined
+                  chips
+                  multiple
+                  hide-details
+                />
+              </v-container>
+              <v-container>
+                <v-select
+                  :items="unity"
+                  label="Unidade"
+                  v-model="selectUnity"
+                  outlined
+                  chips
+                  multiple
+                  hide-details
+                />
+              </v-container>
+              <v-container>
+                <v-btn @click="clearFilters()">Limpar filtros</v-btn>
+                <v-btn @click="selectCategory = titles">Adicionar tudo</v-btn>
+              </v-container>
+            </v-container>
+          </div>
         </v-col>
+
         <v-col :cols="8">
-          <div v-for="item in selectCategory" :key="item">
+          <v-container v-for="item in selectCategory" :key="item">
             <List
               :propsCategory="titles[findIndex(item)]"
               :propsColor="colors[findIndex(item)]"
@@ -66,7 +77,7 @@
               :propsUnity="selectUnity"
               class="mt-10"
             />
-          </div>
+          </v-container>
         </v-col>
       </v-row>
     </div>
