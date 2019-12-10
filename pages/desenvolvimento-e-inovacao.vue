@@ -7,7 +7,7 @@
     />
 
     <v-container>
-      <v-tabs class="mt-8" grow>
+      <v-tabs class="mt-8" grow fixed>
         <v-tab>{{tabs.tab1.name}}</v-tab>
         <v-tab>{{tabs.tab2.name}}</v-tab>
         <v-tab>{{tabs.tab3.name}}</v-tab>

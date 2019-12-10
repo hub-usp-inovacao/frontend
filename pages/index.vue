@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-carousel height="100vh" show-arrows cycle hide-delimiters>
       <v-carousel-item v-for="photo in photos" :key="photo">
         <v-img height="100vh" style="opacity: 0.8" :src="photo">
@@ -82,7 +82,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-app>
+  </div>
 </template>
 
 <script>

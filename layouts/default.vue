@@ -42,11 +42,9 @@
       </v-btn>
     </v-bottom-navigation>
 
-    <v-content
-      class="bgcolor mb-12"
-    >
+    <v-content class="bgcolor">
       <!-- <v-container fluid> -->
-      <nuxt class="mb-12" />
+      <nuxt />
       <!-- </v-container> -->
     </v-content>
   </v-app>
