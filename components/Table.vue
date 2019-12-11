@@ -3,39 +3,32 @@
     <v-divider ref="start" class="my-4" />
 
     <v-container>
-      <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Procure uma palavra-chave entre as disciplinas cadastradas"
-        hide-details
-        outlined
-      />
+      <Input :propsModel="search" @input="search = $event" />
     </v-container>
 
-    <v-container class="hidden-md-and-up">
-      <v-select :items="propsCampus" label="Campus" v-model="selectCampus" outlined />
-      <v-select :items="propsUnity" label="Unidade" v-model="selectUnity" outlined />
-      <v-select :items="propsField" label="Área" v-model="selectField" outlined />
-      <v-select :items="propsLevel" label="Nível" v-model="selectLevel" outlined />
+    <v-container v-for="property in propsProperties" :key="property.label" class="hidden-md-and-up">
+      <Select
+        :propsItems="property.data"
+        :propsLabel="property.label"
+        :propsModel="property.select"
+        @input="property.select = $event"
+      />
     </v-container>
 
     <v-container class="hidden-sm-and-down">
       <v-row>
-        <v-col>
-          <v-select :items="propsCampus" label="Campus" v-model="selectCampus" outlined />
-        </v-col>
-        <v-col>
-          <v-select :items="propsUnity" label="Unidade" v-model="selectUnity" outlined />
-        </v-col>
-        <v-col>
-          <v-select :items="propsField" label="Área" v-model="selectField" outlined />
-        </v-col>
-        <v-col>
-          <v-select :items="propsLevel" label="Nível" v-model="selectLevel" outlined />
+        <v-col v-for="property in propsProperties" :key="property.label">
+          <Select
+            :propsItems="property.data"
+            :propsLabel="property.label"
+            :propsModel="property.select"
+            @input="property.select = $event"
+          />
         </v-col>
       </v-row>
-      <v-btn @click="clearFilters()">Limpar filtros</v-btn>
     </v-container>
+
+    <v-btn @click="clearFilters()">Limpar filtros</v-btn>
 
     <v-container>
       <v-data-table
@@ -45,9 +38,9 @@
         :search="search"
         :items-per-page="itemsPerPage"
         :page="page"
+        no-data-text="Indexando resultados ..."
         calculate-widths
         hide-default-footer
-        no-data-text="Indexando Resultados"
       >
         <template v-slot:item.name="{item}">
           <a target="_blank" :href="item.url">{{item.name}}</a>
@@ -61,25 +54,18 @@
 
 <script>
 import Pagination from "../components/Pagination.vue";
+import Select from "../components/Select.vue";
+import Input from "../components/Input.vue";
 
 export default {
   components: {
-    Pagination
+    Pagination,
+    Select,
+    Input
   },
-  props: [
-    "propsSheet",
-    "propsHeaders",
-    "propsCampus",
-    "propsUnity",
-    "propsField",
-    "propsLevel"
-  ],
+  props: ["propsSheet", "propsHeaders", "propsProperties"],
   data: () => ({
     search: "",
-    selectCampus: "",
-    selectUnity: "",
-    selectField: "",
-    selectLevel: "",
     page: 1,
     options: {},
     itemsPerPage: 32
@@ -89,20 +75,25 @@ export default {
       this.propsHeaders.push({
         filter: (value, search, item) => {
           return (
-            (!this.selectCampus || item.campus == this.selectCampus) &&
-            (!this.selectUnity || item.unity == this.selectUnity) &&
-            (!this.selectField || item.field == this.selectField) &&
-            (!this.selectLevel || item.level == this.selectLevel)
+            (!this.propsProperties.campus.select.length ||
+              this.propsProperties.campus.select.includes(item.campus)) &&
+            (!this.propsProperties.unities.select.length ||
+              this.propsProperties.unities.select.includes(item.unity)) &&
+            (!this.propsProperties.fields.select.length ||
+              this.propsProperties.fields.select.includes(item.field)) &&
+            (!this.propsProperties.levels.select.length ||
+              this.propsProperties.levels.select.includes(item.level)) &&
+            (!this.propsProperties.categories.select.length ||
+              this.propsProperties.categories.select.includes(item.category))
           );
         }
       });
     },
     clearFilters() {
       this.search = "";
-      this.selectCampus = "";
-      this.selectUnity = "";
-      this.selectField = "";
-      this.selectLevel = "";
+      Object.values(this.propsProperties).forEach(property => {
+        property.select = [];
+      });
     }
   },
   watch: {

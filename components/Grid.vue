@@ -3,69 +3,67 @@
     <v-divider ref="start" class="mb-6" />
 
     <v-container>
-      <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Procure uma tecnologia ou empresa cadastrada"
-        hide-details
-        outlined
-        clearable
-      />
+      <Input :propsModel="search" @input="search = $event"/>
 
       <div class="hidden-md-and-up">
-        <v-select
-          class="my-4"
-          :items="propsIncubator"
-          label="Incubadora"
-          v-model="selectIncubator"
-          outlined
-          hide-details
+        <Select
+          :propsItems="propsIncubator"
+          propsLabel="Incubadora"
+          :propsModel="selectIncubator"
+          @input="selectIncubator = $event"
         />
-        <v-select
-          class="my-4"
-          :items="propsCampus"
-          label="Campus"
-          v-model="selectCampus"
-          outlined
-          hide-details
+        <Select
+          :propsItems="propsCampus"
+          propsLabel="Campus"
+          :propsModel="selectCampus"
+          @input="selectCampus = $event"
         />
-        <v-select
-          class="my-4"
-          :items="propsUnity"
-          label="Unidade"
-          v-model="selectUnity"
-          outlined
-          hide-details
+        <Select
+          :propsItems="propsUnity"
+          propsLabel="Unidade"
+          :propsModel="selectUnity"
+          @input="selectUnity = $event"
+        />
+        <Select
+          :propsItems="propsCNAE"
+          propsLabel="CNAE"
+          :propsModel="selectCNAE"
+          @input="selectCNAE = $event"
         />
       </div>
 
       <div class="hidden-sm-and-down">
         <v-row>
           <v-col>
-            <v-select
-              :items="propsIncubator"
-              label="Incubadora"
-              v-model="selectIncubator"
-              outlined
-              hide-details
+            <Select
+              :propsItems="propsIncubator"
+              propsLabel="Incubadora"
+              :propsModel="selectIncubator"
+              @input="selectIncubator = $event"
             />
           </v-col>
           <v-col>
-            <v-select
-              :items="propsCampus"
-              label="Campus"
-              v-model="selectCampus"
-              outlined
-              hide-details
+            <Select
+              :propsItems="propsCampus"
+              propsLabel="Campus"
+              :propsModel="selectCampus"
+              @input="selectCampus = $event"
             />
           </v-col>
           <v-col>
-            <v-select
-              :items="propsUnity"
-              label="Unidade"
-              v-model="selectUnity"
-              outlined
-              hide-details
+            <Select
+              :propsItems="propsUnity"
+              propsLabel="Unidade"
+              :propsModel="selectUnity"
+              @input="selectUnity = $event"
+            />
+          </v-col>
+          <v-col>
+            <Select
+              :propsItems="propsCNAE"
+              propsLabel="CNAE"
+              :propsModel="selectCNAE"
+              @input="selectCNAE = $event"
             />
           </v-col>
         </v-row>
@@ -104,13 +102,23 @@
 import { debounce } from "debounce";
 import Card from "../components/Card.vue";
 import Pagination from "../components/Pagination.vue";
+import Select from "../components/Select.vue";
+import Input from "../components/Input.vue";
 
 export default {
   components: {
     Card,
-    Pagination
+    Pagination,
+    Select,
+    Input
   },
-  props: ["propsSheet", "propsIncubator", "propsCampus", "propsUnity"],
+  props: [
+    "propsSheet",
+    "propsIncubator",
+    "propsCampus",
+    "propsUnity",
+    "propsCNAE"
+  ],
   data: () => ({
     search: "",
     columns: 1,
@@ -119,9 +127,10 @@ export default {
     margin2: "",
     page: 1,
     itemsPerPage: 32,
-    selectIncubator: "",
-    selectCampus: "",
-    selectUnity: "",
+    selectIncubator: [],
+    selectCampus: [],
+    selectUnity: [],
+    selectCNAE: [],
     options: {}
   }),
   methods: {
@@ -147,9 +156,12 @@ export default {
       let filtered = [];
       items.forEach(item => {
         if (
-          (!this.selectIncubator || item.incubator == this.selectIncubator) &&
-          (!this.selectCampus || item.campus == this.selectCampus) &&
-          (!this.selectUnity || item.unity == this.selectUnity) &&
+          (!this.selectIncubator.length ||
+            this.selectIncubator.includes(item.incubator)) &&
+          (!this.selectCampus.length ||
+            this.selectCampus.includes(item.campus)) &&
+          (!this.selectUnity.length || this.selectUnity.includes(item.unity)) &&
+          (!this.selectCNAE.length || this.selectCNAE.includes(item.cnae)) &&
           (!this.typed || this.filterBySearch(item))
         )
           filtered.push(item);
@@ -160,17 +172,15 @@ export default {
       let strings = Object.values(item);
       this.typed = this.typed.toLowerCase();
       for (let i = 0; i < strings.length; i++)
-        if (strings[i].toLowerCase().includes(" " + this.typed)) {
-          console.log(strings[i]);
-          return true;
-        }
+        if (strings[i].toLowerCase().includes(" " + this.typed)) return true;
       return false;
     },
     clearFilters() {
       this.search = "";
-      this.selectIncubator = "";
-      this.selectCampus = "";
-      this.selectUnity = "";
+      this.selectIncubator = [];
+      this.selectCampus = [];
+      this.selectUnity = [];
+      this.selectCNAE = [];
     }
   },
   watch: {

@@ -1,13 +1,7 @@
 <template>
   <v-container>
     <v-hover v-slot:default="{ hover }">
-      <v-card
-        :elevation="hover ? 5 : 0"
-        target="_blank"
-        :href="propsItem.url"
-        outlined
-        ripple
-      >
+      <v-card :elevation="hover ? 5 : 2" target="_blank" :href="propsItem.url" ripple>
         <div v-if="propsImage">
           <v-container>
             <v-img :src="propsItem.logo" contain max-height="25vh">
@@ -26,7 +20,7 @@
           <div
             v-if="propsFont"
             align="center"
-            class="hoverUnderline justify-center font-regular"
+            class="hoverUnderline justify-center font-weight-regular"
             style="font-size: 17px"
           >{{propsItem.name}}</div>
           <v-card-title
@@ -42,7 +36,11 @@
           >{{propsItem.category}}</div>
         </v-container>
 
-        <div align="center" class="font-weight-light" style="background-color: white; font-size: 14px">
+        <div
+          align="center"
+          class="font-weight-light"
+          style="background-color: white; font-size: 14px"
+        >
           <v-container>{{propsItem.description}}</v-container>
         </div>
       </v-card>

@@ -1,19 +1,13 @@
 <template>
   <v-app>
+    <!--
     <Description
       propsTitle="Educação em Inovação e Empreendedorismo"
       propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
-    />
+    />-->
 
-    <Table
-      :propsSheet="sheet"
-      :propsHeaders="headers"
-      :propsCampus="campus"
-      :propsUnity="unity"
-      :propsField="field"
-      :propsLevel="level"
-    />
+    <Table :propsSheet="sheet" :propsHeaders="headers" :propsProperties="properties" />
   </v-app>
 </template>
 
@@ -29,55 +23,88 @@ export default {
   data: () => ({
     sheet: [],
     headers: [
-      { text: "Disciplinas", value: "name" },
+      { text: "Disciplina", value: "name" },
+      { text: "Categoria", value: "category" },
       { text: "Área", value: "field" },
-      { text: "Unidade", value: "unity" },
       { text: "Campus", value: "campus" },
-      { text: "Nível", value: "level" },
-      { text: "Descrição", value: "description", sortable: false }
+      { text: "Unidade", value: "unity" },
+      { text: "Nível", value: "level" }
     ],
-    campus: [""],
-    unity: [""],
-    field: [],
-    level: []
+    urls: [
+      "https://spreadsheets.google.com/feeds/list/1Ix-DhWFeELDEy9PRAfaQo7rR6aHc0UWRxbhNFe9kv3Y/o7xkuxw/public/values?alt=json",
+      "https://spreadsheets.google.com/feeds/list/1Ix-DhWFeELDEy9PRAfaQo7rR6aHc0UWRxbhNFe9kv3Y/oqw270x/public/values?alt=json"
+    ],
+    properties: {
+      categories: {
+        label: "Categorias",
+        data: [],
+        select: []
+      },
+      fields: {
+        label: "Áreas",
+        data: [],
+        select: []
+      },
+      campus: {
+        label: "Campus",
+        data: [],
+        select: []
+      },
+      unities: {
+        label: "Unidades",
+        data: [],
+        select: []
+      },
+      levels: {
+        label: "Níveis",
+        data: [],
+        select: []
+      }
+    }
   }),
   methods: {
-    async sheetQuery() {
-      const request = await fetch(
-        "https://spreadsheets.google.com/feeds/list/102q6lFiHtBFA24ldqTjmAgUlGFeSFATARn260i7WVvs/oqw270x/public/values?alt=json"
-      );
+    async querySheet(url, i) {
+      const request = await fetch(url);
       const data = await request.json();
-      data.feed.entry.forEach(row => {
+
+      data.feed.entry.forEach(item => {
         let subject = {
-          name: row.gsx$matéria.$t,
-          campus: row.gsx$campus.$t,
-          unity: row.gsx$unidade.$t,
-          url: row.gsx$url.$t,
-          description: row.gsx$descriçãocurtaaté170caracteres.$t,
-          field: row.gsx$departamentoprogramaouáreadeconcentração.$t,
-          level: row.gsx$nívelgpg.$t
+          name: item.gsx$matéria.$t,
+          campus: item.gsx$campus.$t,
+          unity: item.gsx$unidade.$t,
+          url: i ? item.gsx$_clrrx : item.gsx$site.$t,
+          description: item.gsx$descriçãocurtaaté170caracteres.$t,
+          field: item.gsx$departamentoprogramaouáreadeconcentração.$t,
+          level: item.gsx$categoria.$t,
+          category: item.gsx$categorias.$t
         };
 
-        if (!this.campus.includes(subject.campus))
-          this.campus.push(subject.campus);
+        if (!this.properties.campus.data.includes(subject.campus))
+          this.properties.campus.data.push(subject.campus);
 
-        if (!this.unity.includes(subject.unity)) this.unity.push(subject.unity);
+        if (!this.properties.unities.data.includes(subject.unity))
+          this.properties.unities.data.push(subject.unity);
 
-        if (!this.field.includes(subject.field)) this.field.push(subject.field);
+        if (!this.properties.fields.data.includes(subject.field))
+          this.properties.fields.data.push(subject.field);
 
-        if (!this.level.includes(subject.level)) this.level.push(subject.level);
+        if (!this.properties.levels.data.includes(subject.level))
+          this.properties.levels.data.push(subject.level);
+
+        if (!this.properties.categories.data.includes(subject.category))
+          this.properties.categories.data.push(subject.category);
 
         this.sheet.push(subject);
       });
 
-      this.campus.sort();
-      this.unity.sort();
-      this.field.sort();
-      this.level.sort();
+      //       TODO: Sorting not working (I think it's the async await, it was working before)
+      //      Object.values(this.properties).forEach(property => {
+      //        property.sort();
+      //      });
     }
   },
   created() {
-    this.sheetQuery();
+    for (let i = 0; i < this.urls.length; i++) this.querySheet(this.urls[i], i);
   }
 };
 </script>

@@ -1,5 +1,0 @@
-[ "Grupos Estudantis", "", "Espaços e Laboratórios", "Ideação", "Grupos de Pesquisa", "Entidade Estudantil", "Grupos Estudantos", "Incubadoras e Parques tecnológicos", "Incubadora de Empresas" ] 
-
-https://spreadsheets.google.com/feeds/worksheets/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/public/basic?alt=json
-
-https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/od6/public/values?alt=json
