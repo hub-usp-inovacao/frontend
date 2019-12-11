@@ -2,13 +2,13 @@
   <v-app>
     <v-content class="bgcolor">
       <v-toolbar
-        :style="this.$route.name == 'index' ? 'background-color: transparent' : ''"
         class="hidden-sm-and-down"
+        :color="this.$route.name == 'index' ? 'transparent' : ''"
         :absolute="this.$route.name == 'index'"
         flat
       >
         <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
-        <v-spacer />
+        <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn
             v-for="(item, i) in items"

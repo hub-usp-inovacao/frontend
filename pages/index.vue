@@ -17,10 +17,7 @@
                       <span style="color: #2353ba; background-color: #e69027">Empreendedorismo</span> na Universidade de São Paulo
                     </v-container>
                   </v-col>
-                  <v-col></v-col>
-                  <!-- <p
-                  class="headline white--text"
-                  >Conheça a Inovação e Empreendedorismo na Universidade de São Paulo</p>-->
+                  <v-spacer></v-spacer>
                 </v-row>
               </slide-x-transition>
             </div>

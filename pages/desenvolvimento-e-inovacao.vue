@@ -24,6 +24,7 @@
             </v-expansion-panel>
           </v-expansion-panels>
         </v-col>
+
         <v-col>
           <v-card>
             <v-container v-if="showing">
