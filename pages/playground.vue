@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app class="blue-background">
+    <!-- <v-app class="blue-background">
       <v-row>
         <v-col align-self="center">
           <v-container px-10>
@@ -15,15 +15,21 @@
         </v-col>
         <v-col class="image-background" align-self="stretch"></v-col>
       </v-row>
-    </v-app>
+    </v-app>-->
 
-    <v-container style="min-height: 100vh;">
+    <Panel
+      propsTitle="Desenvolvimento e Inovação"
+      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
+      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
+      propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
+    />
+    <v-container>
       <v-row>
         <v-col>
-          <v-expansion-panels v-model="panel">
+          <v-expansion-panels v-model="panel" accordion>
             <v-expansion-panel v-for="items in this.tabs" :key="items.name">
               <v-expansion-panel-header class="title font-weight-regular">{{items.name}}</v-expansion-panel-header>
-              <v-expansion-panel-content class="overflow">
+              <v-expansion-panel-content class="overflow50">
                 <v-list-item-group>
                   <v-list-item
                     v-for="item in items.content"
@@ -36,15 +42,16 @@
           </v-expansion-panels>
         </v-col>
         <v-col>
-          <v-card>
+          <Card :propsItem="showing" />
+          <!-- <v-card>
             <v-container v-if="showing">
               <v-card-title align="center" class="title">{{showing.name}}</v-card-title>
-              <v-container class="font-weight-light">{{showing.description}}</v-container>
-              <div align="center">
+              <v-container class="font-weight-light" style="oveflow:auto">{{showing.description}}</v-container>
+              <div align="center" v-if="showing.url">
                 <v-btn depressed dark color="#da1955" :href="showing.url">Visite o site</v-btn>
               </div>
             </v-container>
-          </v-card>
+          </v-card>-->
         </v-col>
       </v-row>
     </v-container>
@@ -52,10 +59,20 @@
 </template>
 
 <script>
+import Card from "../components/Card.vue";
+import Panel from "../components/Panel.vue";
+
 export default {
+  components: {
+    Card,
+    Panel
+  },
   data: () => ({
     panel: 0,
-    showing: null,
+    showing: {
+      name: "Escolha um item na lista",
+      description: "O texto será exibido aqui."
+    },
     tabs: {
       tab1: {
         name: "INCT",
@@ -101,9 +118,6 @@ export default {
   },
   beforeMount() {
     this.sheetQuery();
-  },
-  show() {
-    console.log("OI");
   }
 };
 </script>
@@ -119,9 +133,8 @@ export default {
   background-image: url("http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg");
   background-size: cover;
 }
-.overflow {
+.overflow50 {
   max-height: 50vh;
-  position: relative;
   overflow-y: auto;
 }
 </style>>
