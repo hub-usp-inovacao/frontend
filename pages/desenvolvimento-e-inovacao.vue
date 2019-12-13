@@ -7,22 +7,8 @@
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
     <v-container style="height: 85vh">
-      <v-row>
+      <v-row class="hidden-sm-and-down">
         <v-col>
-          <!-- <v-expansion-panels v-model="panel" accordion outlined>
-            <v-expansion-panel v-for="items in this.tabs" :key="items.name">
-              <v-expansion-panel-header class="title font-weight-regular">{{items.name}}</v-expansion-panel-header>
-              <v-expansion-panel-content class="overflow50">
-                <v-list-item-group>
-                  <v-list-item
-                    v-for="item in items.content"
-                    :key="item.name"
-                    @click="showing = item"
-                  >{{item.name}}</v-list-item>
-                </v-list-item-group>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>-->
           <v-card outlined tile>
             <v-list>
               <div v-for="tab in this.tabs" :key="tab.name">
@@ -61,6 +47,7 @@
           </v-card>
         </v-col>
       </v-row>
+      
     </v-container>
   </div>
 </template>

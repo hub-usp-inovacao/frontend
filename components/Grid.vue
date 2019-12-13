@@ -2,9 +2,9 @@
   <div>
     <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 0.94)">
       <v-container>
-      <Input :propsModel="search" @input="search = $event" />
-    </v-container>
-      <div class="hidden-md-and-up">
+        <Input :propsModel="search" @input="search = $event" />
+      </v-container>
+      <v-container class="hidden-md-and-up">
         <Select
           :propsItems="propsIncubator"
           propsLabel="Incubadora"
@@ -29,7 +29,7 @@
           :propsModel="selectCNAE"
           @input="selectCNAE = $event"
         />
-      </div>
+      </v-container>
 
       <v-container class="hidden-sm-and-down">
         <v-row>
@@ -68,12 +68,11 @@
         </v-row>
       </v-container>
       <v-container>
-      <v-btn outlined tile @click="clearFilters()">Limpar filtros</v-btn>
+        <v-btn outlined tile @click="clearFilters()">Limpar filtros</v-btn>
       </v-container>
     </div>
 
     <v-data-iterator
-      :class="margin"
       :items="propsSheet"
       :items-per-page="itemsPerPage"
       :page="page"
@@ -83,10 +82,10 @@
       hide-default-footer
     >
       <template v-slot:default="props">
-        <masonry :class="margin2" :cols="columns">
-          <v-container v-for="item in props.items" :key="item.name">
+        <masonry :cols="setCols()">
+          <div v-for="item in props.items" :key="item.name">
             <Card :propsItem="item" :propsImage="true" v-on:test="a += $event" />
-          </v-container>
+          </div>
         </masonry>
 
         <Pagination
