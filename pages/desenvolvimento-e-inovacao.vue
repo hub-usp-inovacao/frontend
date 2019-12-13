@@ -2,14 +2,14 @@
   <div>
     <Panel
       propsTitle="Desenvolvimento & Inovação"
-      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento e inovação."
+      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
-    <v-container style="height: 100vh">
+    <v-container style="height: 85vh">
       <v-row>
         <v-col>
-          <v-expansion-panels v-model="panel" accordion>
+          <!-- <v-expansion-panels v-model="panel" accordion outlined>
             <v-expansion-panel v-for="items in this.tabs" :key="items.name">
               <v-expansion-panel-header class="title font-weight-regular">{{items.name}}</v-expansion-panel-header>
               <v-expansion-panel-content class="overflow50">
@@ -22,18 +22,42 @@
                 </v-list-item-group>
               </v-expansion-panel-content>
             </v-expansion-panel>
-          </v-expansion-panels>
+          </v-expansion-panels>-->
+          <v-card outlined tile>
+            <v-list>
+              <div v-for="tab in this.tabs" :key="tab.name">
+                <v-list-group v-model="tab.active">
+                  <template v-slot:activator>
+                    <v-list-item-title>{{tab.name}}</v-list-item-title>
+                  </template>
+                  <v-list-item-group class="overflow50" v-model="tab.select">
+                    <v-list-item
+                      v-for="item in tab.content"
+                      :key="item.name"
+                      @click="current = item; for(i in tabs) tabs[i].select=-1;"
+                    >{{item.name}}</v-list-item>
+                  </v-list-item-group>
+                </v-list-group>
+                <v-divider v-if="tab != tabs[3]" />
+              </div>
+            </v-list>
+          </v-card>
         </v-col>
 
         <v-col>
-          <v-card>
-            <v-container v-if="showing">
-              <v-card-title align="center" class="title">{{showing.name}}</v-card-title>
-              <v-container class="font-weight-light" style="oveflow:auto">{{showing.description}}</v-container>
-              <div align="center" v-if="showing.url">
-                <v-btn depressed dark color="#da1955" :href="showing.url">Visite o site</v-btn>
+          <v-card outlined tile>
+            <div style="max-height: 82vh; overflow: auto;">
+              <div align="center" class="title ma-5">{{current.name}}</div>
+              <div class="font-weight-light ma-5">{{current.description}}</div>
+              <div align="center" class="ma-5" v-if="current.url">
+                <v-btn
+                  depressed
+                  dark
+                  color="rgba(239, 127, 45, 1)"
+                  :href="current.url"
+                >Visite o site</v-btn>
               </div>
-            </v-container>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -51,29 +75,33 @@ export default {
     Panel
   },
   data: () => ({
-    panel: 0,
-    showing: {
+    current: {
       name: "Escolha um item na lista",
       description: "O texto será exibido aqui."
     },
     tabs: [
       {
         name: "INCT",
+        select: -1,
+        active: true,
         workSheetID: "od6",
         content: []
       },
       {
         name: "CEPID",
+        select: -1,
         workSheetID: "ocum0f9",
         content: []
       },
       {
         name: "EMBRAPII",
+        select: -1,
         workSheetID: "omymu3b",
         content: []
       },
       {
         name: "Centrais Multiusuário",
+        select: -1,
         workSheetID: "owgefr6",
         content: []
       }
@@ -122,4 +150,4 @@ export default {
   max-height: 50vh;
   overflow-y: auto;
 }
-</style>>
+</style>
