@@ -2,8 +2,8 @@
   <div>
     <v-divider ref="start" class="mb-6" />
 
-    <v-container>
-      <Input :propsModel="search" @input="search = $event"/>
+    <v-container style="width: 100%; background-color: rgba(239, 127, 45, 0.84)">
+      <Input :propsModel="search" @input="search = $event" />
 
       <div class="hidden-md-and-up">
         <Select
@@ -78,19 +78,21 @@
       :items-per-page="itemsPerPage"
       :page="page"
       :custom-filter="customFilter"
-      no-data-text="Indexando resultados"
+      loading
+      loading-text="Indexando resultados ..."
       hide-default-footer
     >
       <template v-slot:default="props">
         <masonry :class="margin2" :cols="columns">
-          <div v-for="item in props.items" :key="item.name">
+          <v-container v-for="item in props.items" :key="item.name">
             <Card :propsItem="item" :propsImage="true" v-on:test="a += $event" />
-          </div>
+          </v-container>
         </masonry>
 
         <Pagination
           :propsLength="props.pagination.itemsLength"
           :propsPage="page"
+          :propsItemsPerPage="itemsPerPage"
           @input="page = $event"
         />
       </template>

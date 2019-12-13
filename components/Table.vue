@@ -28,7 +28,9 @@
       </v-row>
     </v-container>
 
-    <v-btn @click="clearFilters()">Limpar filtros</v-btn>
+    <v-container>
+      <v-btn @click="clearFilters()">Limpar filtros</v-btn>
+    </v-container>
 
     <v-container>
       <v-data-table
@@ -36,8 +38,7 @@
         :headers="propsHeaders"
         :items="propsSheet"
         :search="search"
-        :items-per-page="itemsPerPage"
-        :page="page"
+        :items-per-page="200"
         no-data-text="Indexando resultados ..."
         calculate-widths
         hide-default-footer
@@ -46,8 +47,6 @@
           <a target="_blank" :href="item.url">{{item.name}}</a>
         </template>
       </v-data-table>
-
-      <Pagination :propsLength="propsSheet.length" :propsPage="page" @input="page = $event" />
     </v-container>
   </div>
 </template>
@@ -65,10 +64,7 @@ export default {
   },
   props: ["propsSheet", "propsHeaders", "propsProperties"],
   data: () => ({
-    search: "",
-    page: 1,
-    options: {},
-    itemsPerPage: 32
+    search: ""
   }),
   methods: {
     setFilter() {
@@ -96,12 +92,7 @@ export default {
       });
     }
   },
-  watch: {
-    page() {
-      this.$vuetify.goTo(this.$refs.start, this.options);
-    }
-  },
-  created() {
+  mounted() {
     this.setFilter();
   }
 };

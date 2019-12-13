@@ -1,12 +1,7 @@
 <template>
   <v-app>
     <v-content class="bgcolor">
-      <v-toolbar
-        class="hidden-sm-and-down"
-        :color="this.$route.name == 'index' ? 'transparent' : ''"
-        :absolute="this.$route.name == 'index'"
-        flat
-      >
+      <v-toolbar class="hidden-sm-and-down" style="background-color: transparent;" absolute flat>
         <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
         <v-spacer></v-spacer>
         <v-toolbar-items>
@@ -14,7 +9,7 @@
             v-for="(item, i) in items"
             :key="i"
             :to="item.to"
-            :class="$route.name == 'index' ? 'white--text' : ''"
+            class="white--text"
             text
             router
           >{{item.title}}</v-btn>
@@ -47,11 +42,17 @@
       <nuxt />
       <!-- </v-container> -->
     </v-content>
+    <Footer />
   </v-app>
 </template>
 
 <script>
+import Footer from "../components/Footer.vue";
+
 export default {
+  components: {
+    Footer
+  },
   head() {
     return {
       script: [

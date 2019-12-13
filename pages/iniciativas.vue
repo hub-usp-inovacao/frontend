@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!--
-    <Description
+    <Panel
       propsTitle="Iniciativas em Inovação e Empreendedorismo"
       propsDescription="Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd2gMMb3t01oDwYSbsgoUK1hCeEiC9zq7tt2AKzMoJ2Dcu1SA/viewform"
-    />-->
+      propsImg="http://imagens.usp.br/wp-content/uploads/Poli_Febrace_81-16_foto-Cec%C3%ADlia-Bastos-30.jpg"
+    />
 
     <div class="mx-5">
       <v-row no-gutters>
@@ -55,16 +55,16 @@
 
 <script>
 import List from "../components/List.vue";
-import Description from "../components/Description.vue";
 import Select from "../components/Select.vue";
 import Input from "../components/Input.vue";
+import Panel from "@/components/Panel2.vue";
 
 export default {
   components: {
     List,
-    Description,
     Select,
-    Input
+    Input,
+    Panel
   },
   data: () => ({
     sheetData: [[], [], [], [], [], []],
@@ -129,10 +129,10 @@ export default {
 
       this.properties.category.data.push(data.feed.title.$t);
 
-      //       TODO: Sorting not working (I think it's the async await, it was working before)
-      //       Object.values(this.properties).forEach(property => {
-      //        property.data.sort();
-      //      });
+      // TODO: Sorting not working (it was working before)
+      // Object.values(this.properties).forEach(property => {
+      //   property.data.sort();
+      // });
     },
     findIndex(category_str) {
       for (let i = 0; i < this.properties.category.data.length; i++)
@@ -146,7 +146,7 @@ export default {
       });
     }
   },
-  beforeMount() {
+  mounted() {
     for (let i = 0; i < this.urls.length; i++) this.querySheet(this.urls[i], i);
   }
 };
@@ -155,7 +155,6 @@ export default {
 <style scoped>
 .fix-left {
   width: 400px;
-  position: fixed;
   overflow-y: auto;
   bottom: 0;
   top: 65px;

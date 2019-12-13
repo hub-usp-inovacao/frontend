@@ -11,7 +11,13 @@
       ></v-text-field>
     </v-container>
 
-    <v-data-iterator :items="sheet" :search="search" :items-per-page="128" hide-default-footer no-data-text="Indexando Resultados">
+    <v-data-iterator
+      :items="sheet"
+      :search="search"
+      :items-per-page="128"
+      hide-default-footer
+      no-data-text="Indexando Resultados"
+    >
       <template v-slot:default="props">
         <masonry :cols="columns">
           <div v-for="item in props.items" :key="item.name">

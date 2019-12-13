@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!--
-    <Description
+    <Panel
       propsTitle="Empresas da Universidade de São Paulo"
       propsDescription="São as empresas criadas por alunos e ex-alunos USP ao longo dos anos."
-      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSf_0YARRMgCe3Cy6GI03BexcRdjQqR5BOM0qwqCRaSnGoVwJQ/viewform"
-    />-->
+      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd18N4l-8w2vu_aIWfRaSETG3nP94ZyvhNbh-4QFmNltKRkQw/viewform"
+      propsImg="http://imagens.usp.br/wp-content/uploads/Projeto-Arte-e-Ci%C3%AAncia_IF_Foto-Marcos-Santos_U0Y8223-1-scaled.jpg"
+    />
 
     <Grid
       :propsSheet="sheet"
@@ -19,12 +19,12 @@
 
 <script>
 import Grid from "@/components/Grid.vue";
-import Description from "@/components/Description.vue";
+import Panel from "@/components/Panel2.vue";
 
 export default {
   components: {
     Grid,
-    Description
+    Panel
   },
   data: () => ({
     sheet: [],

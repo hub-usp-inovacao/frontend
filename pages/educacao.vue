@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <!--
-    <Description
+    <Panel
       propsTitle="Educação em Inovação e Empreendedorismo"
       propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
-    />-->
+      propsImg="http://imagens.usp.br/wp-content/uploads/Lab._Engenharia_Separa%C3%A7%C3%B5es_FVZEA_285-18_foto-Cec%C3%ADlia-Bastos-34.jpg"
+    />
 
     <Table :propsSheet="sheet" :propsHeaders="headers" :propsProperties="properties" />
   </v-app>
@@ -13,12 +13,12 @@
 
 <script>
 import Table from "../components/Table.vue";
-import Description from "../components/Description.vue";
+import Panel from "@/components/Panel2.vue";
 
 export default {
   components: {
     Table,
-    Description
+    Panel
   },
   data: () => ({
     sheet: [],

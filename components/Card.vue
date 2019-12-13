@@ -20,20 +20,22 @@
           <div
             v-if="propsFont"
             align="center"
-            class="hoverUnderline justify-center font-weight-regular"
+            class="justify-center font-weight-regular"
             style="font-size: 17px"
           >{{propsItem.name}}</div>
-          <v-card-title
+
+          <div
             v-else
             align="center"
-            class="hoverUnderline justify-center title primary--text"
-          >{{propsItem.name}}</v-card-title>
+            class="justify-center font-weight-bold primary--text"
+            :style="hover ? 'text-decoration: underline; font-size: 20px;' : 'font-size: 20px'"
+          >{{propsItem.name}}</div>
 
           <div
             align="center"
             class="font-weight-thin"
             style="text-transform: lowercase; font-size: 14px"
-          >{{propsItem.category}}</div>
+          >{{propsItem.tech}}</div>
         </v-container>
 
         <div

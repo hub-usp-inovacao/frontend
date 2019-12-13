@@ -1,18 +1,15 @@
 <template>
-  <div>
+  <v-container>
     <v-pagination v-model="propsPage" :length="numberOfPages()" total-visible="7" />
-  </div>
+  </v-container>
 </template>
 
 <script>
 export default {
-  props: ["propsLength", "propsPage"],
-  data: () => ({
-    itemsPerPage: 32
-  }),
+  props: ["propsLength", "propsPage", "propsItemsPerPage"],
   methods: {
     numberOfPages() {
-      return Math.ceil(this.propsLength / this.itemsPerPage);
+      return Math.ceil(this.propsLength / this.propsItemsPerPage);
     }
   },
   watch: {

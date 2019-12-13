@@ -1,12 +1,12 @@
 <template>
   <div>
     <Panel
-      propsTitle="Desenvolvimento e Inovação"
+      propsTitle="Desenvolvimento & Inovação"
       propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
-    <v-container>
+    <v-container style="height: 100vh">
       <v-row>
         <v-col>
           <v-expansion-panels v-model="panel" accordion>
@@ -43,7 +43,7 @@
 
 <script>
 import Card from "../components/Card.vue";
-import Panel from "../components/Panel.vue";
+import Panel from "../components/Panel2.vue";
 
 export default {
   components: {
