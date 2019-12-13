@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content class="bgcolor">
+    <v-content class="bgcolor pb-10">
       <v-toolbar class="hidden-sm-and-down" style="background-color: transparent;" absolute flat>
         <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
         <v-spacer></v-spacer>
@@ -64,8 +64,7 @@ export default {
       link: [
         {
           rel: "stylesheet",
-          href:
-            "https://fonts.googleapis.com/css?family=Merriweather:300&display=swap"
+          href: "https://fonts.googleapis.com/css?family=Monda&display=swap"
         }
       ]
     };
@@ -101,6 +100,7 @@ export default {
 <style>
 .bgcolor {
   background-color: #f2f2f2;
+  font-family: "Monda", sans-serif;
 }
 
 #app .v-bottom-navigation .v-btn {

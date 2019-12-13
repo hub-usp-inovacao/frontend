@@ -1,10 +1,9 @@
 <template>
   <div>
-    <v-divider ref="start" class="mb-6" />
-
-    <v-container style="width: 100%; background-color: rgba(239, 127, 45, 0.84)">
+    <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 0.94)">
+      <v-container>
       <Input :propsModel="search" @input="search = $event" />
-
+    </v-container>
       <div class="hidden-md-and-up">
         <Select
           :propsItems="propsIncubator"
@@ -32,7 +31,7 @@
         />
       </div>
 
-      <div class="hidden-sm-and-down">
+      <v-container class="hidden-sm-and-down">
         <v-row>
           <v-col>
             <Select
@@ -67,10 +66,11 @@
             />
           </v-col>
         </v-row>
-      </div>
-
-      <v-btn @click="clearFilters()">Limpar filtros</v-btn>
-    </v-container>
+      </v-container>
+      <v-container>
+      <v-btn outlined tile @click="clearFilters()">Limpar filtros</v-btn>
+      </v-container>
+    </div>
 
     <v-data-iterator
       :class="margin"

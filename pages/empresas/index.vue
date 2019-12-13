@@ -1,7 +1,7 @@
 <template>
   <div>
     <Panel
-      propsTitle="Empresas da Universidade de São Paulo"
+      propsTitle="Empresas"
       propsDescription="São as empresas criadas por alunos e ex-alunos USP ao longo dos anos."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd18N4l-8w2vu_aIWfRaSETG3nP94ZyvhNbh-4QFmNltKRkQw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Projeto-Arte-e-Ci%C3%AAncia_IF_Foto-Marcos-Santos_U0Y8223-1-scaled.jpg"

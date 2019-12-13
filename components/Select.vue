@@ -1,9 +1,10 @@
 <template>
-  <v-container>
+  <div>
     <v-select
       :items="propsItems"
       :label="propsLabel"
       v-model="propsModel"
+      color="rgba(29, 112, 191, 0.7)"
       chips
       multiple
       hide-details
@@ -12,7 +13,7 @@
       deletable-chips
       small-chips
     />
-  </v-container>
+  </div>
 </template>
 
 <script>

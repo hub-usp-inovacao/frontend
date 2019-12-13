@@ -1,14 +1,15 @@
 <template>
-  <v-container>
+  <div>
     <v-text-field
       v-model="propsModel"
       append-icon="search"
       label="Procurar ..."
+      color="rgba(29, 112, 191, 0.7)"
       hide-details
       clearable
       autofocus
     />
-  </v-container>
+  </div>
 </template>
 
 <script>

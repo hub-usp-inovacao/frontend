@@ -12,8 +12,8 @@
 
         <v-container>
           <div align="center">
-            <v-btn v-for="icon in icons" :key="icon" class="mx-4 zoom" dark icon>
-              <v-icon size="35px">{{ icon }}</v-icon>
+            <v-btn target="_blank" :href="icon.url" v-for="icon in icons" :key="icon.label" class="mx-4 zoom" dark icon fab>
+              <v-icon size="35px">{{ icon.label }}</v-icon>
             </v-btn>
           </div>
         </v-container>
@@ -32,7 +32,24 @@
 <script>
 export default {
   data: () => ({
-    icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"]
+    icons: [
+      {
+        label: "mdi-facebook",
+        url: "https://www.facebook.com/inovacaonausp/"
+      },
+      {
+        label: "mdi-twitter",
+        url: "https://twitter.com/inovacaonausp"
+      },
+      {
+        label: "mdi-linkedin",
+        url: "https://www.linkedin.com/in/inovacaonausp/"
+      },
+      {
+        label: "mdi-instagram",
+        url: "http://www.instagram.com/inovacaonausp/"
+      },
+    ]
   })
 };
 </script>

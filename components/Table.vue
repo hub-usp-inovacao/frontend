@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-divider ref="start" class="my-4" />
-
+    <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 0.94)">
+      
     <v-container>
       <Input :propsModel="search" @input="search = $event" />
     </v-container>
@@ -29,9 +29,10 @@
     </v-container>
 
     <v-container>
-      <v-btn @click="clearFilters()">Limpar filtros</v-btn>
+      <v-btn outlined tile @click="clearFilters()">Limpar filtros</v-btn>
     </v-container>
 
+    </div>
     <v-container>
       <v-data-table
         class="my-12"

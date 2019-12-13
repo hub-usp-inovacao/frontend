@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-pagination v-model="propsPage" :length="numberOfPages()" total-visible="7" />
+    <v-pagination v-model="propsPage" :length="numberOfPages()" total-visible="7" color="rgba(29, 112, 191)"/>
   </v-container>
 </template>
 

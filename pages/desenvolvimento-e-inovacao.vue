@@ -2,7 +2,7 @@
   <div>
     <Panel
       propsTitle="Desenvolvimento & Inovação"
-      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
+      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento e inovação."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />

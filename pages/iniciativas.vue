@@ -1,8 +1,8 @@
 <template>
   <div>
     <Panel
-      propsTitle="Iniciativas em Inovação e Empreendedorismo"
-      propsDescription="Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade."
+      propsTitle="Iniciativas"
+      propsDescription="Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na universidade."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd2gMMb3t01oDwYSbsgoUK1hCeEiC9zq7tt2AKzMoJ2Dcu1SA/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Poli_Febrace_81-16_foto-Cec%C3%ADlia-Bastos-30.jpg"
     />
@@ -16,21 +16,30 @@
                 <h1 align="center" class="font-weight-regular">INICIATIVAS</h1>
               </v-container>
 
+              <v-container>
               <Input :propsModel="search" @input="search = $event" />
+            </v-container>
 
               <div v-for="property in properties" :key="property.label">
+              <v-container>
                 <Select
                   :propsItems="property.data"
                   :propsLabel="property.label"
                   :propsModel="property.select"
                   @input="property.select = $event"
                 />
+                </v-container>
               </div>
 
               <v-container>
-                <v-btn @click="clearFilters()">Limpar filtros</v-btn>
-
-                <v-btn @click="properties.category.select = properties.category.data">Adicionar tudo</v-btn>
+                <v-row>
+                  <v-col>
+                <v-btn @click="clearFilters()" outlined tile>Limpar filtros</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn color="rgba(29, 112, 191, 0.7)" style="color: white" @click="properties.category.select = properties.category.data" tile>Adicionar tudo</v-btn>
+                </v-col>
+              </v-row>
               </v-container>
             </v-container>
           </div>
@@ -154,7 +163,7 @@ export default {
 
 <style scoped>
 .fix-left {
-  width: 400px;
+  width: 435px;
   overflow-y: auto;
   bottom: 0;
   top: 65px;

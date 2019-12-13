@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <Panel
-      propsTitle="Educação em Inovação e Empreendedorismo"
-      propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo."
+      propsTitle="Educação"
+      propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Lab._Engenharia_Separa%C3%A7%C3%B5es_FVZEA_285-18_foto-Cec%C3%ADlia-Bastos-34.jpg"
     />
