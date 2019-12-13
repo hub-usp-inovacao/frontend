@@ -6,8 +6,8 @@
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
-    <v-container style="height: 85vh">
-      <v-row class="hidden-sm-and-down">
+    <v-container class="hidden-sm-and-down" style="height: 85vh">
+      <v-row>
         <v-col>
           <v-card outlined tile>
             <v-list>
@@ -47,7 +47,32 @@
           </v-card>
         </v-col>
       </v-row>
-      
+    </v-container>
+    <v-container class="hidden-md-and-up">
+      <div>
+        <v-select
+          background-color="white"
+          class="mx-3 mt-5"
+          color="rgba(239, 127, 45, 1)"
+          label="Categoria"
+          v-model="category"
+          outlined
+          :items="tabs.map(function(t) {return t.name})"
+        ></v-select>
+        <v-card
+          class="ma-3"
+          outlined
+          tile
+          v-for="item in this.tabs[getIndex()].content"
+          :key="item.name"
+        >
+          <div align="center" class="title ma-5">{{item.name}}</div>
+          <div class="font-weight-light ma-5">{{item.description}}</div>
+          <div align="center" class="ma-5" v-if="item.url">
+            <v-btn depressed dark color="rgba(239, 127, 45, 1)" :href="item.url">Visite o site</v-btn>
+          </div>
+        </v-card>
+      </div>
     </v-container>
   </div>
 </template>
@@ -62,6 +87,7 @@ export default {
     Panel
   },
   data: () => ({
+    category: "INCT",
     current: {
       name: "Escolha um item na lista",
       description: "O texto será exibido aqui."
@@ -114,6 +140,12 @@ export default {
           if (di.name != "Nome do Instituto") this.tabs[i].content.push(di);
         });
       }
+    },
+    getIndex() {
+      for (var i in this.tabs)
+        if (this.tabs[i].name === this.category) return i;
+
+      return 0;
     }
   },
   beforeMount() {
