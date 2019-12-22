@@ -7,7 +7,7 @@
       propsImg="http://imagens.usp.br/wp-content/uploads/Poli_Febrace_81-16_foto-Cec%C3%ADlia-Bastos-30.jpg"
     />
 
-    <div class="mx-5">
+    <div class="mx-5" style="min-height: 100vh">
       <v-row no-gutters>
         <v-col>
           <div class="fix-left">
@@ -17,29 +17,34 @@
               </v-container>
 
               <v-container>
-              <Input :propsModel="search" @input="search = $event" />
-            </v-container>
+                <Input :propsModel="search" @input="search = $event" />
+              </v-container>
 
               <div v-for="property in properties" :key="property.label">
-              <v-container>
-                <Select
-                  :propsItems="property.data"
-                  :propsLabel="property.label"
-                  :propsModel="property.select"
-                  @input="property.select = $event"
-                />
+                <v-container>
+                  <Select
+                    :propsItems="property.data"
+                    :propsLabel="property.label"
+                    :propsModel="property.select"
+                    @input="property.select = $event"
+                  />
                 </v-container>
               </div>
 
               <v-container>
                 <v-row>
                   <v-col>
-                <v-btn @click="clearFilters()" outlined tile>Limpar filtros</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn color="rgba(29, 112, 191, 0.7)" style="color: white" @click="properties.category.select = properties.category.data" tile>Adicionar tudo</v-btn>
-                </v-col>
-              </v-row>
+                    <v-btn @click="clearFilters()" outlined tile>Limpar filtros</v-btn>
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      color="rgba(29, 112, 191, 0.7)"
+                      style="color: white"
+                      @click="properties.category.select = properties.category.data"
+                      tile
+                    >Adicionar tudo</v-btn>
+                  </v-col>
+                </v-row>
               </v-container>
             </v-container>
           </div>

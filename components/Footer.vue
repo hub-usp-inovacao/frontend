@@ -12,9 +12,21 @@
 
         <v-container>
           <div align="center">
-            <v-btn target="_blank" :href="icon.url" v-for="icon in icons" :key="icon.label" class="mx-4 zoom" dark icon fab>
+            <!-- <v-hover v-slot:default="{ hover }"> -->
+            <v-btn
+              target="_blank"
+              :href="icon.url"
+              v-for="icon in icons"
+              :key="icon.label"
+              class="mx-4 zoom"
+              :color="hover ? icon.color : ''"
+              dark
+              icon
+              fab
+            >
               <v-icon size="35px">{{ icon.label }}</v-icon>
             </v-btn>
+            <!-- </v-hover> -->
           </div>
         </v-container>
       </v-card-title>
@@ -35,20 +47,24 @@ export default {
     icons: [
       {
         label: "mdi-facebook",
-        url: "https://www.facebook.com/inovacaonausp/"
+        url: "https://www.facebook.com/inovacaonausp/",
+        color: "rgba(59,89,153 ,1 )"
       },
       {
         label: "mdi-twitter",
-        url: "https://twitter.com/inovacaonausp"
+        url: "https://twitter.com/inovacaonausp",
+        color: "#00aced"
       },
       {
         label: "mdi-linkedin",
-        url: "https://www.linkedin.com/in/inovacaonausp/"
+        url: "https://www.linkedin.com/in/inovacaonausp/",
+        color: "#0e76a8"
       },
       {
         label: "mdi-instagram",
-        url: "http://www.instagram.com/inovacaonausp/"
-      },
+        url: "http://www.instagram.com/inovacaonausp/",
+        color: "#C13584"
+      }
     ]
   })
 };

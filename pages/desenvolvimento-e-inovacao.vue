@@ -6,7 +6,7 @@
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
-    <v-container class="hidden-sm-and-down" style="height: 85vh">
+    <v-container class="hidden-sm-and-down" style="height: 100vh">
       <v-row>
         <v-col>
           <v-card outlined tile>
@@ -33,12 +33,17 @@
         <v-col>
           <v-card outlined tile>
             <div style="max-height: 82vh; overflow: auto;">
-              <div align="center" class="title ma-5">{{current.name}}</div>
-              <div class="font-weight-light ma-5">{{current.description}}</div>
+              <v-container>
+                <div align="center" class="title mt-5 mx-5">{{current.name}}</div>
+              </v-container>
+              <v-container>
+                <div class="font-weight-light mx-5">{{current.description}}</div>
+              </v-container>
               <div align="center" class="ma-5" v-if="current.url">
                 <v-btn
                   depressed
                   dark
+                  tile
                   color="rgba(239, 127, 45, 1)"
                   :href="current.url"
                 >Visite o site</v-btn>

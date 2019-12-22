@@ -11,7 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "fibers": "^4.0.1",
+    "fibers": "^4.0.2",
     "nuxt": "^2.10.0"
   },
   "devDependencies": {

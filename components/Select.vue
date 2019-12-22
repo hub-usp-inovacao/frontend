@@ -5,6 +5,7 @@
       :label="propsLabel"
       v-model="propsModel"
       color="rgba(29, 112, 191, 0.7)"
+      style="color: white"
       chips
       multiple
       hide-details

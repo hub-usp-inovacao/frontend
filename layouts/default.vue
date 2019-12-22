@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content class="bgcolor pb-10">
+    <v-content class="bgcolor">
       <v-toolbar class="hidden-sm-and-down" style="background-color: transparent;" absolute flat>
         <!-- <v-toolbar-title>{{title}}</v-toolbar-title> -->
         <v-spacer></v-spacer>

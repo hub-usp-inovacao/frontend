@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-5">
     <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 0.94)">
       <v-container>
         <Input :propsModel="search" @input="search = $event" />
@@ -7,7 +7,7 @@
       <v-container class="hidden-md-and-up">
         <Select
           :propsItems="propsIncubator"
-          propsLabel="Incubadora"
+          propsLabel="Incubadoras"
           :propsModel="selectIncubator"
           @input="selectIncubator = $event"
         />
@@ -19,7 +19,7 @@
         />
         <Select
           :propsItems="propsUnity"
-          propsLabel="Unidade"
+          propsLabel="Unidades"
           :propsModel="selectUnity"
           @input="selectUnity = $event"
         />
@@ -36,7 +36,7 @@
           <v-col>
             <Select
               :propsItems="propsIncubator"
-              propsLabel="Incubadora"
+              propsLabel="Incubadoras"
               :propsModel="selectIncubator"
               @input="selectIncubator = $event"
             />
@@ -52,7 +52,7 @@
           <v-col>
             <Select
               :propsItems="propsUnity"
-              propsLabel="Unidade"
+              propsLabel="Unidades"
               :propsModel="selectUnity"
               @input="selectUnity = $event"
             />
@@ -72,13 +72,22 @@
       </v-container>
     </div>
 
+    <v-container>
+      <h1
+        class="pt-2 font-weight-bold"
+        style="color: rgba(29, 112, 191, 0.7)"
+        align="center"
+      >EMPRESAS</h1>
+    </v-container>
+
     <v-data-iterator
       :items="propsSheet"
       :items-per-page="itemsPerPage"
       :page="page"
       :custom-filter="customFilter"
-      loading
+      style="padding-left: 150px; padding-right: 150px"
       loading-text="Indexando resultados ..."
+      loading
       hide-default-footer
     >
       <template v-slot:default="props">

@@ -1,37 +1,39 @@
 <template>
   <div>
     <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 0.94)">
-      
-    <v-container>
-      <Input :propsModel="search" @input="search = $event" />
-    </v-container>
+      <v-container>
+        <Input :propsModel="search" @input="search = $event" />
+      </v-container>
 
-    <v-container v-for="property in propsProperties" :key="property.label" class="hidden-md-and-up">
-      <Select
-        :propsItems="property.data"
-        :propsLabel="property.label"
-        :propsModel="property.select"
-        @input="property.select = $event"
-      />
-    </v-container>
+      <v-container
+        v-for="property in propsProperties"
+        :key="property.label"
+        class="hidden-md-and-up"
+      >
+        <Select
+          :propsItems="property.data"
+          :propsLabel="property.label"
+          :propsModel="property.select"
+          @input="property.select = $event"
+        />
+      </v-container>
 
-    <v-container class="hidden-sm-and-down">
-      <v-row>
-        <v-col v-for="property in propsProperties" :key="property.label">
-          <Select
-            :propsItems="property.data"
-            :propsLabel="property.label"
-            :propsModel="property.select"
-            @input="property.select = $event"
-          />
-        </v-col>
-      </v-row>
-    </v-container>
+      <v-container class="hidden-sm-and-down">
+        <v-row>
+          <v-col v-for="property in propsProperties" :key="property.label">
+            <Select
+              :propsItems="property.data"
+              :propsLabel="property.label"
+              :propsModel="property.select"
+              @input="property.select = $event"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
 
-    <v-container>
-      <v-btn outlined tile @click="clearFilters()">Limpar filtros</v-btn>
-    </v-container>
-
+      <v-container>
+        <v-btn outlined tile @click="clearFilters()">Limpar filtros</v-btn>
+      </v-container>
     </div>
     <v-container>
       <v-data-table
