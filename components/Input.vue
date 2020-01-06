@@ -4,7 +4,7 @@
       v-model="propsModel"
       append-icon="search"
       label="Procurar ..."
-      color="rgba(29, 112, 191, 0.7)"
+      color="white"
       hide-details
       clearable
       autofocus

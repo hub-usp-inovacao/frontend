@@ -16,7 +16,7 @@
                   depressed
                   tile
                   dark
-                  color="rgba(239, 127, 45, 0.84)"
+                  color="rgba(239, 127, 45, 1)"
                   target="_blank"
                   :href="propsUrl"
                 >Cadastre-se</v-btn>

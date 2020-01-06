@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 0.94)">
+    <div ref="start" class="py-7" style="background-color: rgba(239, 127, 45, 1)">
       <v-container>
         <Input :propsModel="search" @input="search = $event" />
       </v-container>
