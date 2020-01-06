@@ -6,151 +6,158 @@
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
-    <v-container class="hidden-sm-and-down" style="height: 100vh">
-      <v-row>
-        <v-col>
-          <v-card outlined tile>
-            <v-list>
-              <div v-for="tab in this.tabs" :key="tab.name">
-                <v-list-group v-model="tab.active">
-                  <template v-slot:activator>
-                    <v-list-item-title>{{tab.name}}</v-list-item-title>
-                  </template>
-                  <v-list-item-group class="overflow50" v-model="tab.select">
-                    <v-list-item
-                      v-for="item in tab.content"
-                      :key="item.name"
-                      @click="current = item; for(var i in tabs) tabs[i].select=-1;"
-                    >{{item.name}}</v-list-item>
-                  </v-list-item-group>
-                </v-list-group>
-                <v-divider v-if="tab != tabs[3]" />
-              </div>
-            </v-list>
-          </v-card>
-        </v-col>
 
-        <v-col>
-          <v-card outlined tile>
-            <div style="max-height: 82vh; overflow: auto;">
-              <v-container>
-                <div align="center" class="title mt-5 mx-5">{{current.name}}</div>
-              </v-container>
-              <v-container>
-                <div class="font-weight-light mx-5">{{current.description}}</div>
-              </v-container>
-              <div align="center" class="ma-5" v-if="current.url">
-                <v-btn
-                  depressed
-                  dark
-                  tile
-                  color="rgba(239, 127, 45, 1)"
-                  :href="current.url"
-                >Visite o site</v-btn>
-              </div>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-container class="hidden-md-and-up">
-      <div>
-        <v-select
-          background-color="white"
-          class="mx-3 mt-5"
-          color="rgba(239, 127, 45, 1)"
-          label="Categoria"
-          v-model="category"
-          outlined
-          :items="tabs.map(function(t) {return t.name})"
-        ></v-select>
-        <v-card
-          class="ma-3"
-          outlined
-          tile
-          v-for="item in this.tabs[getIndex()].content"
-          :key="item.name"
-        >
-          <div align="center" class="title ma-5">{{item.name}}</div>
-          <div class="font-weight-light ma-5">{{item.description}}</div>
-          <div align="center" class="ma-5" v-if="item.url">
-            <v-btn depressed dark color="rgba(239, 127, 45, 1)" :href="item.url">Visite o site</v-btn>
-          </div>
-        </v-card>
-      </div>
+    <div class="py-7" style="background-color: rgba(239, 127, 45, 1)">
+      <v-container>
+        <v-text-field append-icon="search" label="Pesquisar" color="white" v-model="typed"></v-text-field>
+      </v-container>
+    </div>
+    <v-container>
+      <v-data-iterator
+        :items="entries"
+        item-key="name"
+        :search="search"
+        group-by="id"
+        sort-by="name"
+        no-results-text="Não encontramos nada..."
+        loading
+        loading-text="Indexando resultados..."
+      >
+        <template v-slot:default="{ items, isExpanded, expand }">
+          <masonry :cols="size">
+            <v-container v-for="item in items" :key="item.name">
+              <v-card>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                    <v-list-item-subtitle>{{item.unity}}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+
+                <p class="mx-5" v-html="isExpanded(item) ? item.long : item.short"></p>
+
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn depressed dark color="rgb(239, 127, 45)" :href="item.url">Visite o site</v-btn>
+                  <v-spacer />
+                  <v-btn icon @click="expand(item,!isExpanded(item))">
+                    <v-icon>{{ isExpanded(item) ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                  </v-btn>
+                </v-card-actions>
+
+                <v-spacer />
+              </v-card>
+            </v-container>
+          </masonry>
+        </template>
+      </v-data-iterator>
     </v-container>
   </div>
 </template>
 
 <script>
+import { debounce } from "debounce";
 import Card from "../components/Card.vue";
+import Input from "../components/Input.vue";
 import Panel from "../components/Panel2.vue";
 
 export default {
   components: {
     Card,
+    Input,
     Panel
   },
   data: () => ({
-    category: "INCT",
-    current: {
-      name: "Escolha um item na lista",
-      description: "O texto será exibido aqui."
-    },
+    search: "",
+    typed: "",
+    entries: [],
     tabs: [
       {
         name: "INCT",
-        select: -1,
-        active: true,
-        workSheetID: "od6",
+        url:
+          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/od6/public/values?alt=json",
         content: []
       },
       {
         name: "CEPID",
-        select: -1,
-        workSheetID: "ocum0f9",
+        url:
+          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/ocum0f9/public/values?alt=json",
         content: []
       },
       {
         name: "EMBRAPII",
-        select: -1,
-        workSheetID: "omymu3b",
-        content: []
-      },
-      {
-        name: "Centrais Multiusuário",
-        select: -1,
-        workSheetID: "owgefr6",
+        url:
+          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/omymu3b/public/values?alt=json",
         content: []
       }
+      // {
+      //   name: "Centrais Multiusuário",
+      //   url:
+      //     "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/owgefr6/public/values?alt=json",
+      //   content: []
+      // }
     ]
   }),
   methods: {
+    setCols() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return 1;
+        case "sm":
+          return 2;
+        case "md":
+          return 3;
+        case "lg":
+          return 3;
+        case "xl":
+          return 4;
+      }
+    },
     async sheetQuery() {
       for (var i in this.tabs) {
-        const request = await fetch(
-          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/" +
-            this.tabs[i].workSheetID +
-            "/public/values?alt=json"
-        );
+        const request = await fetch(this.tabs[i].url);
         const data = await request.json();
         data.feed.entry.forEach(row => {
           let di = {
             name: row.gsx$nomedoinstituto.$t,
-            description: row.gsx$descriçãogeral.$t,
+            short: row.gsx$descriçãocurta.$t,
+            long: row.gsx$descriçãogeral.$t,
             url: row.gsx$site.$t,
             campus: row.gsx$campus.$t,
-            unity: row.gsx$unidade.$t
+            unity: row.gsx$unidade.$t,
+            id: this.tabs[i].name
           };
-          if (di.name != "Nome do Instituto") this.tabs[i].content.push(di);
+          if (di.name != "Nome do Instituto") {
+            this.tabs[i].content.push(di);
+            this.entries.push(di);
+          }
         });
       }
-    },
-    getIndex() {
-      for (var i in this.tabs)
-        if (this.tabs[i].name === this.category) return i;
-
-      return 0;
+    }
+  },
+  watch: {
+    typed: debounce(function() {
+      this.search = this.typed;
+    }, 400)
+  },
+  computed: {
+    size: function() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return 1;
+        case "sm":
+          return 2;
+        case "md":
+          return 3;
+        case "lg":
+          this.margin = "mx-9";
+          this.margin2 = "mx-12";
+          return 3;
+        case "xl":
+          this.margin = "mx-9";
+          this.margin2 = "mx-12";
+          return 4;
+      }
     }
   },
   beforeMount() {

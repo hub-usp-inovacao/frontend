@@ -19,7 +19,7 @@
               v-for="icon in icons"
               :key="icon.label"
               class="mx-4 zoom"
-              :color="hover ? icon.color : ''"
+              :color="icon.color"
               dark
               icon
               fab

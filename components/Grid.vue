@@ -197,6 +197,7 @@ export default {
     search: debounce(function() {
       this.typed = this.search;
     }, 400),
+
     page() {
       this.$vuetify.goTo(this.$refs.start, this.options);
     }

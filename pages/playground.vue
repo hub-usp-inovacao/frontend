@@ -12,11 +12,13 @@
         <v-text-field append-icon="search" label="Pesquisar" color="white" v-model="typed"></v-text-field>
       </v-container>
     </div>
-    <v-container v-for="tab in tabs" :key="tab.name">
-      <div style="font-size: 40px; color: rgb(29, 112, 191)" align="center">{{tab.name}}</div>
+    <v-container>
       <v-data-iterator
-        :items="tab.content"
+        :items="entries"
         item-key="name"
+        :search="search"
+        group-by="id"
+        sort-by="name"
         no-results-text="Não encontramos nada..."
         loading
         loading-text="Indexando resultados..."
