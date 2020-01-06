@@ -20,7 +20,7 @@
                     <v-list-item
                       v-for="item in tab.content"
                       :key="item.name"
-                      @click="current = item; for(i in tabs) tabs[i].select=-1;"
+                      @click="current = item; for(var i in tabs) tabs[i].select=-1;"
                     >{{item.name}}</v-list-item>
                   </v-list-item-group>
                 </v-list-group>

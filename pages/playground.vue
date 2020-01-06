@@ -1,66 +1,52 @@
 <template>
   <div>
-    <!-- <v-app class="blue-background">
-      <v-row>
-        <v-col align-self="center">
-          <v-container px-10>
-            <p class="display-2 white--text">Desenvolvimento e Inovação</p>
-            <p class="title white--text font-weight-light">
-              Laboratórios, organizações e
-              programas que atuam com
-              desenvolvimento & inovação.
-            </p>
-            <v-btn depressed dark color="#da1955">Cadastre-se</v-btn>
-          </v-container>
-        </v-col>
-        <v-col class="image-background" align-self="stretch"></v-col>
-      </v-row>
-    </v-app>-->
-
     <Panel
-      propsTitle="Desenvolvimento e Inovação"
+      propsTitle="Desenvolvimento & Inovação"
       propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
       propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
     />
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-expansion-panels v-model="panel" accordion>
-            <v-expansion-panel v-for="items in this.tabs" :key="items.name">
-              <v-expansion-panel-header class="title font-weight-regular">{{items.name}}</v-expansion-panel-header>
-              <v-expansion-panel-content class="overflow50">
-                <v-list-item-group>
-                  <v-list-item
-                    v-for="item in items.content"
-                    :key="item.name"
-                    @click="showing = item"
-                  >{{item.name}}</v-list-item>
-                </v-list-item-group>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </v-col>
-        <v-col>
-          <Card :propsItem="showing" />
-          <!-- <v-card>
-            <v-container v-if="showing">
-              <v-card-title align="center" class="title">{{showing.name}}</v-card-title>
-              <v-container class="font-weight-light" style="oveflow:auto">{{showing.description}}</v-container>
-              <div align="center" v-if="showing.url">
-                <v-btn depressed dark color="#da1955" :href="showing.url">Visite o site</v-btn>
-              </div>
-            </v-container>
-          </v-card>-->
-        </v-col>
-      </v-row>
-    </v-container>
+
+    <v-data-iterator
+      :items="tabs[0].content"
+      item-key="name"
+      loading
+      loading-text="Indexando resultados..."
+      hide-default-footer
+    >
+      <template v-slot:default="{ items, isExpanded, expand }">
+        <v-container>
+          <v-row>
+            <v-col v-for="item in items" :key="item.name" cols="12" sm="6" md="4" lg="4">
+              <v-card outlined>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                    <v-list-item-subtitle>{{item.unity}}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-card-text v-if="!isExpanded(item)">{{item.short}}</v-card-text>
+                <v-card-text v-else>{{item.long}}</v-card-text>
+                <v-container>
+                  <div align="center">
+                    <v-btn icon @click="expand(item,!isExpanded(item))">
+                      <v-icon>{{ isExpanded(item) ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                    </v-btn>
+                  </div>
+                </v-container>
+                <v-spacer />
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </template>
+    </v-data-iterator>
   </div>
 </template>
 
 <script>
 import Card from "../components/Card.vue";
-import Panel from "../components/Panel.vue";
+import Panel from "../components/Panel2.vue";
 
 export default {
   components: {
@@ -68,52 +54,66 @@ export default {
     Panel
   },
   data: () => ({
-    panel: 0,
-    showing: {
+    category: "INCT",
+    current: {
       name: "Escolha um item na lista",
       description: "O texto será exibido aqui."
     },
-    tabs: {
-      tab1: {
+    tabs: [
+      {
         name: "INCT",
+        select: -1,
+        active: true,
         workSheetID: "od6",
         content: []
       },
-      tab2: {
+      {
         name: "CEPID",
+        select: -1,
         workSheetID: "ocum0f9",
         content: []
       },
-      tab3: {
+      {
         name: "EMBRAPII",
+        select: -1,
         workSheetID: "omymu3b",
         content: []
       },
-      tab4: {
+      {
         name: "Centrais Multiusuário",
+        select: -1,
         workSheetID: "owgefr6",
         content: []
       }
-    }
+    ]
   }),
   methods: {
     async sheetQuery() {
-      const request = await fetch(
-        "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/" +
-          this.tabs.tab1.workSheetID +
-          "/public/values?alt=json"
-      );
-      const data = await request.json();
-      data.feed.entry.forEach(row => {
-        let di = {
-          name: row.gsx$nomedoinstituto.$t,
-          description: row.gsx$descriçãogeral.$t,
-          url: row.gsx$site.$t,
-          campus: row.gsx$campus.$t,
-          unity: row.gsx$unidade.$t
-        };
-        if (di.name != "Nome do Instituto") this.tabs.tab1.content.push(di);
-      });
+      for (var i in this.tabs) {
+        const request = await fetch(
+          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/" +
+            this.tabs[i].workSheetID +
+            "/public/values?alt=json"
+        );
+        const data = await request.json();
+        data.feed.entry.forEach(row => {
+          let di = {
+            name: row.gsx$nomedoinstituto.$t,
+            short: row.gsx$descriçãocurta.$t,
+            long: row.gsx$descriçãogeral.$t,
+            url: row.gsx$site.$t,
+            campus: row.gsx$campus.$t,
+            unity: row.gsx$unidade.$t
+          };
+          if (di.name != "Nome do Instituto") this.tabs[i].content.push(di);
+        });
+      }
+    },
+    getIndex() {
+      for (var i in this.tabs)
+        if (this.tabs[i].name === this.category) return i;
+
+      return 0;
     }
   },
   beforeMount() {
@@ -138,4 +138,3 @@ export default {
   overflow-y: auto;
 }
 </style>
-

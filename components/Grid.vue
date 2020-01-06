@@ -72,13 +72,13 @@
       </v-container>
     </div>
 
-    <v-container>
+    <!-- <v-container>
       <h1
         class="pt-2 font-weight-bold"
         style="color: rgba(29, 112, 191, 0.7)"
         align="center"
       >EMPRESAS</h1>
-    </v-container>
+    </v-container> -->
 
     <v-data-iterator
       :items="propsSheet"
