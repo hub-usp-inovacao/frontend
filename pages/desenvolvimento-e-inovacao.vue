@@ -34,7 +34,13 @@
                   </v-list-item-content>
                 </v-list-item>
 
-                <p class="mx-5" v-html="isExpanded(item) ? item.long : item.short"></p>
+                <v-card-text v-show="!isExpanded(item)">{{item.short}}</v-card-text>
+
+                <v-expand-transition>
+                  <div v-show="isExpanded(item)">
+                    <v-card-text>{{item.long}}</v-card-text>
+                  </div>
+                </v-expand-transition>
 
                 <v-card-actions>
                   <v-spacer />
