@@ -9,7 +9,12 @@
 
     <div class="py-7" style="background-color: rgba(239, 127, 45, 1)">
       <v-container>
-        <v-text-field append-icon="search" label="Pesquisar" color="white" v-model="typed"></v-text-field>
+        <v-text-field
+          append-icon="search"
+          label="Pesquisar"
+          color="white"
+          v-model="typed"
+        ></v-text-field>
       </v-container>
     </div>
     <v-container>
@@ -29,19 +34,34 @@
               <v-card>
                 <v-list-item three-line>
                   <v-list-item-content>
-                    <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
-                    <v-list-item-subtitle>{{item.unity}}</v-list-item-subtitle>
+                    <v-list-item-title class="headline mb-1">{{
+                      item.name
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle>{{
+                      item.unity
+                    }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
 
-                <p class="mx-5" v-html="isExpanded(item) ? item.long : item.short"></p>
+                <p
+                  class="mx-5"
+                  v-html="isExpanded(item) ? item.long : item.short"
+                ></p>
 
                 <v-card-actions>
                   <v-spacer />
-                  <v-btn depressed dark color="rgb(239, 127, 45)" :href="item.url">Visite o site</v-btn>
+                  <v-btn
+                    depressed
+                    dark
+                    color="rgb(239, 127, 45)"
+                    :href="item.url"
+                    >Visite o site</v-btn
+                  >
                   <v-spacer />
-                  <v-btn icon @click="expand(item,!isExpanded(item))">
-                    <v-icon>{{ isExpanded(item) ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                  <v-btn icon @click="expand(item, !isExpanded(item))">
+                    <v-icon>{{
+                      isExpanded(item) ? "mdi-chevron-up" : "mdi-chevron-down"
+                    }}</v-icon>
                   </v-btn>
                 </v-card-actions>
 
