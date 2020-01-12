@@ -46,7 +46,7 @@
         class="py-8"
         :style="i % 2 ? 'background-color: yellow' : 'background-color: blue'"
       >
-        <v-col class="pa-0">
+        <v-col class="pa-0" :style="i % 2 ? 'order: 2' : ''">
           <a :href="item.to">
             <div class="zoom">
               <v-img
@@ -59,7 +59,7 @@
             </div>
           </a>
         </v-col>
-        <v-col class="align-self-center pa-0">
+        <v-col class="align-self-center pa-0" :style="i % 2 ? 'order: 1' : ''">
           <div data-aos="fade-left" data-aos-duration="3000">
             <p class="display-2" align="center" data-aos-delay="400">{{item.title}}</p>
             <p
