@@ -38,45 +38,42 @@
     </v-container>
 
     <v-divider />
-
-    <v-container>
-      <v-row
-        v-for="(item, i) in options"
-        :key="item.title"
-        class="py-8"
-        :style="i % 2 ? 'background-color: rgb(239, 127, 45)' : 'background-color: rgb(29, 112, 191)'"
-      >
-        <v-col class="pa-0" :style="i % 2 ? 'order: 2' : ''">
-          <a :href="item.to">
-            <div class="zoom">
-              <v-img
-                style="margin: auto; border-radius: 50%; width: 400px; height: 400px"
-                class="zoom"
-                :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
-                data-aos-duration="2000"
-                :src="urls[i]"
-              ></v-img>
-            </div>
-          </a>
-        </v-col>
-        <v-col class="align-self-center pa-0" :style="i % 2 ? 'order: 1' : ''">
-          <div :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
-            <p
-              class="display-2"
-              style="color: white"
-              align="center"
-              data-aos-delay="400"
-            >{{item.title}}</p>
-            <p
-              class="title font-weight-light"
-              style="color: white"
-              align="center"
-              data-aos-delay="400"
-            >{{item.description}}</p>
+    <v-row
+      v-for="(item, i) in options"
+      :key="item.title"
+      class="py-8 px-8"
+      :style="i % 2 ? 'background-color: rgb(239, 127, 45)' : 'background-color: rgb(29, 112, 191)'"
+    >
+      <v-col class="pa-0" :style="i % 2 ? 'order: 2' : ''">
+        <a :href="item.to">
+          <div class="zoom">
+            <v-img
+              style="margin: auto; border-radius: 50%; width: 400px; height: 400px"
+              class="zoom"
+              :data-aos="i % 2 ? 'fade-left' : 'fade-right'"
+              data-aos-duration="2000"
+              :src="urls[i]"
+            ></v-img>
           </div>
-        </v-col>
-      </v-row>
-    </v-container>
+        </a>
+      </v-col>
+      <v-col class="align-self-center pa-0" :style="i % 2 ? 'order: 1' : ''">
+        <div :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
+          <p
+            class="display-2"
+            style="color: white"
+            align="center"
+            data-aos-delay="400"
+          >{{item.title}}</p>
+          <p
+            class="title font-weight-light"
+            style="color: white"
+            align="center"
+            data-aos-delay="400"
+          >{{item.description}}</p>
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
