@@ -118,6 +118,15 @@ export default {
       "http://imagens.usp.br/wp-content/uploads/Lab._Engenharia_Separa%C3%A7%C3%B5es_FVZEA_285-18_foto-Cec%C3%ADlia-Bastos-34.jpg",
       "http://imagens.usp.br/wp-content/uploads/Projeto-Arte-e-Ci%C3%AAncia_IF_Foto-Marcos-Santos_U0Y8223-1-scaled.jpg"
     ]
-  })
+  }),
+  head: {
+    title: "Solus",
+    meta: [
+      {
+        name: "google-site-verification",
+        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE"
+      }
+    ]
+  }
 };
 </script>

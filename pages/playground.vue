@@ -9,12 +9,7 @@
 
     <div class="py-7" style="background-color: rgba(239, 127, 45, 1)">
       <v-container>
-        <v-text-field
-          append-icon="search"
-          label="Pesquisar"
-          color="white"
-          v-model="typed"
-        ></v-text-field>
+        <v-text-field append-icon="search" label="Pesquisar" color="white" v-model="typed"></v-text-field>
       </v-container>
     </div>
     <v-container>
@@ -34,34 +29,25 @@
               <v-card>
                 <v-list-item three-line>
                   <v-list-item-content>
-                    <v-list-item-title class="headline mb-1">{{
-                      item.name
-                    }}</v-list-item-title>
-                    <v-list-item-subtitle>{{
-                      item.unity
-                    }}</v-list-item-subtitle>
+                    <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                    <v-list-item-subtitle>{{item.unity}}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
 
-                <p
-                  class="mx-5"
-                  v-html="isExpanded(item) ? item.long : item.short"
-                ></p>
+                <v-card-text>{{item.short}}</v-card-text>
+
+                <v-expand-transition>
+                  <div v-show="isExpanded(item)">
+                    <v-card-text>{{item.long}}</v-card-text>
+                  </div>
+                </v-expand-transition>
 
                 <v-card-actions>
                   <v-spacer />
-                  <v-btn
-                    depressed
-                    dark
-                    color="rgb(239, 127, 45)"
-                    :href="item.url"
-                    >Visite o site</v-btn
-                  >
+                  <v-btn depressed dark color="rgb(239, 127, 45)" :href="item.url">Visite o site</v-btn>
                   <v-spacer />
-                  <v-btn icon @click="expand(item, !isExpanded(item))">
-                    <v-icon>{{
-                      isExpanded(item) ? "mdi-chevron-up" : "mdi-chevron-down"
-                    }}</v-icon>
+                  <v-btn icon @click="expand(item,!isExpanded(item))">
+                    <v-icon>{{ isExpanded(item) ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                   </v-btn>
                 </v-card-actions>
 
@@ -93,21 +79,9 @@ export default {
     entries: [],
     tabs: [
       {
-        name: "INCT",
+        name: "Competências",
         url:
-          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/od6/public/values?alt=json",
-        content: []
-      },
-      {
-        name: "CEPID",
-        url:
-          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/ocum0f9/public/values?alt=json",
-        content: []
-      },
-      {
-        name: "EMBRAPII",
-        url:
-          "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/omymu3b/public/values?alt=json",
+          "https://sheets.googleapis.com/v4/spreadsheets/1KEqDUMBmt7n5fZh1L4gqMj8lIuiaWziIlt53TdFAN5w/values/'Respostas%20ao%20formul%C3%A1rio%201'?key=AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
         content: []
       }
       // {
@@ -134,25 +108,22 @@ export default {
       }
     },
     async sheetQuery() {
-      for (var i in this.tabs) {
-        const request = await fetch(this.tabs[i].url);
-        const data = await request.json();
-        data.feed.entry.forEach(row => {
-          let di = {
-            name: row.gsx$nomedoinstituto.$t,
-            short: row.gsx$descriçãocurta.$t,
-            long: row.gsx$descriçãogeral.$t,
-            url: row.gsx$site.$t,
-            campus: row.gsx$campus.$t,
-            unity: row.gsx$unidade.$t,
-            id: this.tabs[i].name
-          };
-          if (di.name != "Nome do Instituto") {
-            this.tabs[i].content.push(di);
-            this.entries.push(di);
-          }
-        });
-      }
+      const request = await fetch(this.tabs[0].url);
+      const data = await request.json();
+      data.values.slice(1).forEach(row => {
+        let di = {
+          associate: row[1],
+          name: row[2],
+          email: row[3],
+          phone: row[4],
+          unity: row[5],
+          campus: row[6],
+          lab: row[9],
+          short: row[11],
+          url: row[12]
+        };
+        this.entries.push(di);
+      });
     }
   },
   watch: {
