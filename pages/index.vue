@@ -1,33 +1,27 @@
 <template>
   <div>
-    <v-img
-      height="100vh"
-      src="http://imagens.usp.br/wp-content/uploads/Caverda-digital-391-15-Foto-Marcos-Santos20150916_014.jpg"
-    >
-      <v-container>
-        <div style="position: absolute; top: 30%">
-          <slide-x-transition>
-            <v-row>
-              <v-col>
-                <v-container
-                  class="display-3 white--text"
-                  style="font-weight: bold; line-height: 1.3; text-align: left"
-                >
-                  Conheça a
-                  <span
-                    style="color: rgb(239, 127, 45); background-color: rgb(29, 112, 191)"
-                  >Inovação</span> e
-                  <span
-                    style="color: rgb(29, 112, 191); background-color: rgb(239, 127, 45)"
-                  >Empreendedorismo</span> na Universidade de São Paulo
-                </v-container>
-              </v-col>
-              <v-spacer></v-spacer>
-            </v-row>
-          </slide-x-transition>
-        </div>
+    <v-app style="background-color: #FFA726">
+      <v-container fill-height>
+        <v-row align="center">
+          <v-col>
+            <p class="display-3 white--text font-weight-regular">Portal Solus</p>
+            <p class="headline white--text font-weight-light">
+              Faça uma busca e conheça a
+              <span>inovação</span> e o empreendedorismo na Universidade de São Paulo
+            </p>
+            <v-text-field
+              filled
+              rounded
+              color="white"
+              label="Buscar no Solus"
+              append-outer-icon="search"
+            ></v-text-field>
+          </v-col>
+
+          <v-spacer />
+        </v-row>
       </v-container>
-    </v-img>
+    </v-app>
 
     <v-container class="py-10">
       <p align="center" class="display-4 font-weight-medium">SOLUS</p>
@@ -42,6 +36,7 @@
       v-for="(item, i) in options"
       :key="item.title"
       class="py-8 px-8"
+      align="center"
       :style="i % 2 ? 'background-color: rgb(239, 127, 45)' : 'background-color: rgb(29, 112, 191)'"
     >
       <v-col class="pa-0" :style="i % 2 ? 'order: 2' : ''">
@@ -57,7 +52,7 @@
           </div>
         </a>
       </v-col>
-      <v-col class="align-self-center pa-0" :style="i % 2 ? 'order: 1' : ''">
+      <v-col class="pa-0" :style="i % 2 ? 'order: 1' : ''">
         <div :data-aos="i % 2 ? 'fade-right' : 'fade-left'" data-aos-duration="3000">
           <p
             class="display-2"
@@ -127,6 +122,9 @@ export default {
         content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE"
       }
     ]
+  },
+  created() {
+    console.log(this.$nuxt.$route.name);
   }
 };
 </script>

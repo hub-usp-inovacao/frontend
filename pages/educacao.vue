@@ -105,6 +105,8 @@ export default {
   },
   created() {
     for (let i = 0; i < this.urls.length; i++) this.querySheet(this.urls[i], i);
+
+    console.log(this.$nuxt.$route.name);
   }
 };
 </script>
