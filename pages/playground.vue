@@ -34,11 +34,17 @@
                   </v-list-item-content>
                 </v-list-item>
 
-                <v-card-text>{{item.short}}</v-card-text>
+                <v-card-text>
+                  <div>
+                    {{item.knownledge}}
+                    <br v-if="item.knownledge" />
+                    {{item.abilities}}
+                  </div>
+                </v-card-text>
 
                 <v-expand-transition>
                   <div v-show="isExpanded(item)">
-                    <v-card-text>{{item.long}}</v-card-text>
+                    <v-card-text>{{item.short}}</v-card-text>
                   </div>
                 </v-expand-transition>
 
@@ -120,9 +126,11 @@ export default {
           campus: row[6],
           lab: row[9],
           short: row[11],
-          url: row[12]
+          url: row[12],
+          abilities: row[13],
+          knownledge: row[16]
         };
-        this.entries.push(di);
+        if (di.name) this.entries.push(di);
       });
     }
   },
