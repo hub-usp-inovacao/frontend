@@ -7,7 +7,7 @@
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
-          class="white--text mx-2"
+          class="white--text mx-2 text-capitalize"
           color="light-blue darken-1"
           active-class
           depressed

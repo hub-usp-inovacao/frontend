@@ -4,7 +4,7 @@
       <v-container fill-height>
         <v-row align="center">
           <v-col>
-            <p class="display-3 white--text font-weight-regular">Portal Solus</p>
+            <p class="display-2 white--text font-weight-regular">Portal Solus</p>
             <p class="headline white--text font-weight-light">
               Faça uma busca e conheça a
               <span>inovação</span> e o empreendedorismo na Universidade de São Paulo
@@ -15,6 +15,7 @@
               color="white"
               label="Buscar no Solus"
               append-outer-icon="search"
+              style="width: 50%"
             ></v-text-field>
           </v-col>
 
@@ -23,15 +24,54 @@
       </v-container>
     </v-app>
 
-    <v-container class="py-10">
+    <v-app>
+      <v-container
+        fluid
+        fill-height
+        style="background: linear-gradient(rgba(0,0,0,0.1), white, rgba(0,0,0,0.1));"
+      >
+        <v-container>
+          <v-row align="baseline">
+            <v-col>
+              <v-row justify="center">
+                <p
+                  class="headline font-weight-regular"
+                  align="center"
+                >Empresas criadas por alunos da USP</p>
+              </v-row>
+
+              <v-row justify="center">
+                <v-col v-for="n in 3" :key="n" cols="auto">
+                  <v-icon color="#000" x-large>mdi-google</v-icon>
+                </v-col>
+              </v-row>
+
+              <v-row align="center">
+                <v-col>
+                  <p class="headline font-weight-medium">Um mundo de inovações.</p>
+                  <p
+                    class="title font-weight-light"
+                  >O Portal Solus conecta investidores, empreendedores e entusiastas às iniciativas e aos projetos ligados à inovação dentro da USP</p>
+                </v-col>
+
+                <v-col>
+                  <v-card height="500px"></v-card>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+    <!-- <v-container class="py-10">
       <p align="center" class="display-4 font-weight-medium">SOLUS</p>
       <p
         align="center"
         class="headline font-weight-light"
       >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</p>
-    </v-container>
+    </v-container>-->
 
-    <v-divider />
+    <!-- <v-divider />
     <v-row
       v-for="(item, i) in options"
       :key="item.title"
@@ -68,7 +108,7 @@
           >{{item.description}}</p>
         </div>
       </v-col>
-    </v-row>
+    </v-row>-->
   </div>
 </template>
 
