@@ -15,11 +15,11 @@
               color="white"
               label="Buscar no Solus"
               append-outer-icon="search"
-              style="width: 50%"
+              :style="this.$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 70%'"
             ></v-text-field>
           </v-col>
 
-          <v-spacer />
+          <v-spacer class="hidden-sm-and-down" />
         </v-row>
       </v-container>
     </v-app>
@@ -164,7 +164,7 @@ export default {
     ]
   },
   created() {
-    console.log(this.$nuxt.$route.name);
+    console.log(this.$vuetify.breakpoint);
   }
 };
 </script>
