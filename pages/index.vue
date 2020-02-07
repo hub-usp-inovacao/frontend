@@ -1,5 +1,38 @@
 <template>
   <div>
+    <v-app>
+      <v-carousel cycle height="100vh" hide-delimiters :show-arrows="false">
+        <v-carousel-item v-for="(photo,i) in photos" :key="i" :src="photo"></v-carousel-item>
+      </v-carousel>
+      <div style="position: absolute; top: 0; height: 100vh; width: 100vw">
+        <v-row class="fill-height">
+          <v-col style="background-color: rgba(255, 167, 38, 0.9);" align-self="stretch">
+            <v-row class="fill-height" justify="center">
+              <v-col align-self="center" :cols="this.$vuetify.breakpoint.xs ? 12 : 8">
+                <v-container>
+                  <p class="display-2 white--text font-weight-medium">Portal Solus</p>
+                  <p class="headline white--text font-weight-light">
+                    Faça uma busca e conheça a
+                    inovação e o empreendedorismo na Universidade de São Paulo
+                  </p>
+                  <v-text-field
+                    solo
+                    flat
+                    rounded
+                    color="white"
+                    label="Buscar no Solus"
+                    append-outer-icon="search"
+                    :style="this.$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 70%'"
+                  ></v-text-field>
+                </v-container>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-spacer class="hidden-sm-and-down" />
+        </v-row>
+      </div>
+    </v-app>
+
     <v-app style="background-color: #FFA726">
       <v-container fill-height>
         <v-row align="center">
@@ -69,9 +102,8 @@
         align="center"
         class="headline font-weight-light"
       >Onde você encontra as iniciativas de inovação e empreendedorismo nos diversos campi da USP.</p>
-    </v-container>-->
+    </v-container>
 
-    <!-- <v-divider />
     <v-row
       v-for="(item, i) in options"
       :key="item.title"
@@ -143,7 +175,7 @@ export default {
     ],
     photos: [
       "http://www.imagens.usp.br/wp-content/uploads/Pra%C3%A7a_Relogio_106-17_Foto-Cec%C3%ADlia-Bastos-09.jpg",
-      "https://scontent.fcgh10-1.fna.fbcdn.net/v/t1.0-9/69706113_2451371548234209_8904991690364813312_n.jpg?_nc_cat=100&_nc_oc=AQkvGc7zPNgHoSwZitURzpgQdXrOvLxBtGCapb44J_InwoRAJ_2UnReaLOYyteUfTNk&_nc_ht=scontent.fcgh10-1.fna&oh=744435c1dcfe438f7c6cd614ef629707&oe=5E2582E6",
+      "http://imagens.usp.br/wp-content/uploads/Nova-Vers%C3%A3o-do-Chip-Sampa-Foto-Marcos-Santos-USP-Imagens-12.jpg",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR129vKvGeA6u26aQGwm6wMkjWwGks7ekT-SzrgBB6drudKkrSA",
       "https://jornal.usp.br/wp-content/uploads/20180109_hackathon_OceanUSP_01.jpg"
     ],
@@ -163,8 +195,6 @@ export default {
       }
     ]
   },
-  created() {
-    console.log(this.$vuetify.breakpoint);
-  }
+  created() {}
 };
 </script>
