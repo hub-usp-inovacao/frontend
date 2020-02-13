@@ -3,15 +3,15 @@
     <div class="panel_bg"></div>
     <div style="height: 100%; position: relative;">
       <v-row class="fill-height" align="center" justify="space-around" no-gutters>
-        <v-col cols="7">
+        <v-col cols="10" sm="7">
           <v-row justify="center">
-            <v-col cols="10" sm="8">
+            <v-col cols="11" sm="9">
               <p class="display-2 white--text font-weight-medium">{{propsTitle}}</p>
               <p class="title white--text font-weight-light">{{propsDescription}}</p>
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="6" sm="5">
+        <v-col cols="10" sm="5">
           <v-text-field
             solo
             flat
@@ -19,7 +19,7 @@
             color="white"
             label="Buscar"
             append-outer-icon="search"
-            :style="this.$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 70%'"
+            :style="this.$vuetify.breakpoint.smAndDown ? 'width: 90%' : 'width: 70%'"
           ></v-text-field>
         </v-col>
       </v-row>
