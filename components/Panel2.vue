@@ -1,32 +1,29 @@
 <template>
   <v-app>
-    <v-img :src="propsImg" height="100vh" aspect-ratio="1">
-      <v-row class="fill-height">
-        <v-col class="blue-background" align-self="stretch">
-          <v-row class="fill-height">
-            <v-col align-self="center">
-              <v-container mx-5>
-                <p
-                  class="white--text font-weight-bold"
-                  style=" text-transform: uppercase;
-                          font-size: 40px;"
-                >{{propsTitle}}</p>
-                <p class="title white--text font-weight-light">{{propsDescription}}</p>
-                <v-btn
-                  depressed
-                  tile
-                  dark
-                  color="rgba(239, 127, 45, 1)"
-                  target="_blank"
-                  :href="propsUrl"
-                >Cadastre-se</v-btn>
-              </v-container>
+    <div class="panel_bg"></div>
+    <div style="height: 100%; position: relative;">
+      <v-row class="fill-height" align="center" justify="space-around" no-gutters>
+        <v-col cols="7">
+          <v-row justify="center">
+            <v-col cols="10" sm="8">
+              <p class="display-2 white--text font-weight-medium">{{propsTitle}}</p>
+              <p class="title white--text font-weight-light">{{propsDescription}}</p>
             </v-col>
           </v-row>
         </v-col>
-        <v-spacer class="hidden-sm-and-down" />
+        <v-col cols="6" sm="5">
+          <v-text-field
+            solo
+            flat
+            rounded
+            color="white"
+            label="Buscar"
+            append-outer-icon="search"
+            :style="this.$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 70%'"
+          ></v-text-field>
+        </v-col>
       </v-row>
-    </v-img>
+    </div>
   </v-app>
 </template>
 
@@ -37,10 +34,14 @@ export default {
 </script>
 
 <style scoped>
-.blue-background {
-  background-color: rgba(29, 112, 191, 0.7);
-}
-.fill-height {
+.panel_bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
   height: 100%;
+  /* background: rgb(216, 216, 216); */
+  background: rgba(255, 167, 38, 1);
+  transform: skewY(-6deg);
+  transform-origin: top left;
 }
 </style>

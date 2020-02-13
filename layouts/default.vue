@@ -2,7 +2,6 @@
   <v-app>
     <v-content>
       <v-toolbar class="hidden-sm-and-down" color="transparent" style="right: 0" absolute flat>
-        <v-spacer />
         <v-btn
           v-for="(item, i) in items"
           :key="i"
