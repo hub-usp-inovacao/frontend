@@ -50,10 +50,12 @@
                 >Empresas criadas por alunos da USP</p>
               </v-row>
 
-              <v-row justify="center">
-                <v-col v-for="n in 3" :key="n" cols="auto">
-                  <v-icon color="#000" x-large>mdi-google</v-icon>
-                </v-col>
+              <v-row justify="center" align="center" no-gutters>
+                <img :src="require('@/images/logo_99taxi.png')" style="height: 12vh;" class="mx-5" />
+
+                <img :src="require('@/images/logo_ifood.svg')" style="height: 12vh;" class="mx-5" />
+
+                <img :src="require('@/images/logo_gympass.png')" style="height: 4vh;" class="mx-5" />
               </v-row>
 
               <v-row align="center">
@@ -65,7 +67,7 @@
                 </v-col>
 
                 <v-col>
-                  <v-card height="500px"></v-card>
+                  <v-img :src="require('@/vectors/home_globo.svg')" contain height="80vh"></v-img>
                 </v-col>
               </v-row>
             </v-col>
