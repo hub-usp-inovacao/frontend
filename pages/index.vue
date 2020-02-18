@@ -35,27 +35,25 @@
     </v-app>
 
     <v-app>
-      <v-container
-        fluid
-        fill-height
-        style="background: linear-gradient(rgba(0,0,0,0.1), white, rgba(0,0,0,0.1));"
-      >
+      <v-container fluid fill-height style="background: linear-gradient(rgba(0,0,0,0.15), white);">
         <v-container>
           <v-row align="baseline">
             <v-col>
               <v-row justify="center">
-                <p
-                  class="headline font-weight-regular"
-                  align="center"
-                >Empresas criadas por alunos da USP</p>
+                <v-col>
+                  <p
+                    class="headline font-weight-regular"
+                    align="center"
+                  >Empresas criadas por alunos da USP</p>
+                </v-col>
               </v-row>
 
-              <v-row justify="center" align="center" no-gutters>
-                <img :src="require('@/images/logo_99taxi.png')" style="height: 12vh;" class="mx-5" />
+              <v-row justify="space-around" align="center">
+                <img :src="require('@/images/logo_ifood.svg')" style="height: 12vh;" />
 
-                <img :src="require('@/images/logo_ifood.svg')" style="height: 12vh;" class="mx-5" />
+                <img :src="require('@/images/logo_99taxi.png')" style="height: 12vh;" />
 
-                <img :src="require('@/images/logo_gympass.png')" style="height: 4vh;" class="mx-5" />
+                <img :src="require('@/images/logo_gympass.png')" style="height: 4vh;" />
               </v-row>
 
               <v-row align="center">
@@ -67,10 +65,54 @@
                 </v-col>
 
                 <v-col>
-                  <v-img :src="require('@/vectors/home_globo.svg')" contain height="80vh"></v-img>
+                  <img
+                    :src="require('@/vectors/home_globo.svg')"
+                    style="max-height: 80vh; max-width: 100vw; object-fit: contain;"
+                  />
                 </v-col>
               </v-row>
             </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+
+    <v-app>
+      <v-container fill-height>
+        <v-row justify="center" align="baseline">
+          <v-col cols="10" sm="8">
+            <v-row justify="center">
+              <v-col>
+                <p
+                  class="headline font-weight-medium text-center"
+                >Com uma extensa biblioteca disponível.</p>
+                <p
+                  class="title font-weight-light"
+                >Tenha acesso a um grande acervo de projetos, espaços de coworking, empresas juniores, instituições e muito mais.</p>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
+
+    <v-app>
+      <v-container fill-height fluid style="background-color: rgba(255, 167, 38, 0.9); ">
+        <v-container>
+          <v-row justify="center" align="baseline">
+            <v-col cols="10" sm="8">
+              <p
+                class="headline white--text font-weight-medium text-center"
+              >Abrangendo todos os campi da USP.</p>
+
+              <p
+                class="title white--text font-weight-light text-center"
+              >De Ribeirão Preto a Lorena. O Solus tem cobertura em todos os projetos da Universidade</p>
+            </v-col>
+            <img
+              :src="require('@/vectors/home_mapa.svg')"
+              style="max-width: 80vw; max-height: 80vh;"
+            />
           </v-row>
         </v-container>
       </v-container>
