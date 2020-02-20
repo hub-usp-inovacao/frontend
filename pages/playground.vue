@@ -1,18 +1,49 @@
 <template>
   <div>
     <Panel
-      propsTitle="Desenvolvimento & Inovação"
-      propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
-      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
-      propsImg="http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg"
+      propsTitle="Educação"
+      propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
+      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
     />
 
-    <div class="py-7" style="background-color: rgba(239, 127, 45, 1)">
-      <v-container>
-        <v-text-field append-icon="search" label="Pesquisar" color="white" v-model="typed"></v-text-field>
-      </v-container>
-    </div>
-    <v-container>
+    <v-app>
+      <v-item-group mandatory v-model="showing">
+        <v-container>
+          <v-row justify="space-around">
+            <v-col v-for="tab in tabs" :key="tab.name" cols="12" md="3">
+              <v-item v-slot:default="{ active, toggle }">
+                <v-card
+                  :color="active ? 'rgb(3, 155, 229)' : ''"
+                  class="d-flex flex-column justify-space-around align-center"
+                  height="20vh"
+                  @click="toggle"
+                >
+                  <v-container>
+                    <p class="subtitle-1 font-weight-light my-0">Disciplinas de</p>
+                    <p class="display-1 font-weight-medium my-0">{{tab.name}}</p>
+                  </v-container>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>
+
+      <v-row>
+        <v-col>
+          <v-card height="80vh">
+            <v-list>
+              <v-list-item-group v-model="current_item">
+                <v-list-item></v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </v-col>
+        <v-card height="80vh"></v-card>
+        <v-col></v-col>
+      </v-row>
+    </v-app>
+    <!-- <v-container>
       <v-data-iterator
         :items="entries"
         item-key="name"
@@ -63,7 +94,7 @@
           </masonry>
         </template>
       </v-data-iterator>
-    </v-container>
+    </v-container>-->
   </div>
 </template>
 
@@ -82,14 +113,23 @@ export default {
   data: () => ({
     search: "",
     typed: "",
-    entries: [],
+    showing: 0,
+    current_item: "",
     tabs: [
       {
-        name: "Competências",
-        url:
-          "https://sheets.googleapis.com/v4/spreadsheets/1KEqDUMBmt7n5fZh1L4gqMj8lIuiaWziIlt53TdFAN5w/values/'Respostas%20ao%20formul%C3%A1rio%201'?key=AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
-        content: []
+        name: "Graduação",
+        entries: []
+      },
+      {
+        name: "Pós-Graduação",
+        entries: []
       }
+      // {
+      //   name: "Competências",
+      //   url:
+      //     "https://sheets.googleapis.com/v4/spreadsheets/1KEqDUMBmt7n5fZh1L4gqMj8lIuiaWziIlt53TdFAN5w/values/'Respostas%20ao%20formul%C3%A1rio%201'?key=AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+      //   content: []
+      // }
       // {
       //   name: "Centrais Multiusuário",
       //   url:

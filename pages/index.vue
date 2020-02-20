@@ -5,8 +5,8 @@
         <v-carousel-item v-for="(photo,i) in photos" :key="i" :src="photo"></v-carousel-item>
       </v-carousel>
 
-      <div style="position: absolute; top: 0; height: 100%; width: 100%;">
-        <v-row class="fill-height">
+      <div style="position: absolute; top: 0; height: 100%; width: 100%;" class="fit-page">
+        <v-row class="fill-height fit-page">
           <v-col style="background-color: rgba(255, 167, 38, 0.9); " align-self="stretch">
             <v-row class="fill-height" justify="center">
               <v-col align-self="center" cols="10" sm="8">
@@ -176,3 +176,10 @@ export default {
   }
 };
 </script>
+
+<style >
+.fit-page {
+  max-width: 100%;
+  max-height: 100%;
+}
+</style>
