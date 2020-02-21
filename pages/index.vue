@@ -58,7 +58,7 @@
 
                 <img :src="require('@/images/logo_99taxi.png')" style="height: 12vh;" />
 
-                <img :src="require('@/images/logo_gympass.png')" style="height: 4vh;" />
+                <img :src="require('@/images/logo_gympass.svg')" style="height: 4vh;" />
               </v-row>
 
               <v-row align="center">
