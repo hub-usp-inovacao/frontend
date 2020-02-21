@@ -99,7 +99,12 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-img :src="require('@/images/background_cards.svg')" width="100vw"></v-img>
+
+      <v-img
+        :src="require('@/images/background_cards.svg')"
+        width="100vw"
+        gradient="white, transparent 30%"
+      ></v-img>
     </v-app>
 
     <v-app>
