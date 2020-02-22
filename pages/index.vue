@@ -85,17 +85,13 @@
     <v-app>
       <v-container fill-height>
         <v-row justify="center" align="baseline">
-          <v-col cols="10" sm="8">
-            <v-row justify="center">
-              <v-col>
-                <p
-                  class="headline font-weight-medium text-center"
-                >Com uma extensa biblioteca disponível.</p>
-                <p
-                  class="title font-weight-light"
-                >Tenha acesso a um grande acervo de projetos, espaços de coworking, empresas juniores, instituições e muito mais.</p>
-              </v-col>
-            </v-row>
+          <v-col cols="12" sm="8">
+            <p
+              class="headline font-weight-medium text-center"
+            >Com uma extensa biblioteca disponível.</p>
+            <p
+              class="title font-weight-light"
+            >Tenha acesso a um grande acervo de projetos, espaços de coworking, empresas juniores, instituições e muito mais.</p>
           </v-col>
         </v-row>
       </v-container>

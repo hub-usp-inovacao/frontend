@@ -1,10 +1,10 @@
 # Solus
 
-> My hunky-dory Nuxt.js project
+> My brilliant Nuxt.js project
 
 ## Build Setup
 
-```bash
+``` bash
 # install dependencies
 $ yarn install
 

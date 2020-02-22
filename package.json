@@ -1,8 +1,8 @@
 {
   "name": "Solus",
   "version": "1.0.0",
-  "description": "My hunky-dory Nuxt.js project",
-  "author": "",
+  "description": "My brilliant Nuxt.js project",
+  "author": "Gabriel Brandão",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -11,15 +11,13 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "fibers": "^4.0.2",
-    "nuxt": "^2.10.0"
+    "core-js": "^3.6.4",
+    "debounce": "^1.2.0",
+    "nuxt": "^2.0.0",
+    "vue-fuse": "^2.2.0"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.9.0",
-    "aos": "^3.0.0-beta.6",
-    "debounce": "^1.2.0",
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
+    "@nuxtjs/vuetify": "^1.0.0",
     "vue-masonry-css": "^1.0.3"
   }
 }
