@@ -38,9 +38,9 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: "~/plugins/vue-masonry", ssr: false },
-    { src: "~/plugins/aos", ssr: false },
-    "~/plugins/mixinCommonMethods"
+    { src: "~/plugins/aos.js", ssr: false },
+    { src: "~/plugins/vue-masonry.js", ssr: false },
+    { src: "~/plugins/vue-fuse.js", ssr: false },
   ],
 
   /*
