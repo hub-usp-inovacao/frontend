@@ -91,7 +91,7 @@
       hide-default-footer
     >
       <template v-slot:default="props">
-        <masonry :cols="3">
+        <masonry :cols="setCols()">
           <div v-for="item in props.items" :key="item.name">
             <Card :propsItem="item" :propsImage="true" v-on:test="a += $event" />
           </div>
