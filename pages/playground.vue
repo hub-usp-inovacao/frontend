@@ -29,58 +29,56 @@
       </v-item-group>
     </div>
 
-    <div v-if="$vuetify.breakpoint.mdAndUp">
-      <v-row justify="center">
-        <v-col cols="5">
-          <v-card height="80vh">
-            <div v-if="entries.length > 0" class="fill-height">
-              <v-list rounded style="max-height: 100%; overflow-y: auto;">
-                <v-list-item-group v-model="current_item">
-                  <v-list-item v-for="item in entries" :key="item.name">{{ item.name }}</v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </div>
+    <v-row justify="center">
+      <v-col cols="5">
+        <v-card height="80vh">
+          <div v-if="entries.length > 0" class="fill-height">
+            <v-list rounded style="max-height: 100%; overflow-y: auto;">
+              <v-list-item-group v-model="current_item">
+                <v-list-item v-for="item in entries" :key="item.name">{{ item.name }}</v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </div>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height" justify="center" align="center">
-                <p class="title font-weight-light">Não encontramos nada relacionado a sua busca</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
+          <div v-else class="fill-height">
+            <v-row class="fill-height" justify="center" align="center">
+              <p class="title font-weight-light">Não encontramos nada relacionado a sua busca</p>
+            </v-row>
+          </div>
+        </v-card>
+      </v-col>
 
-        <v-col cols="5">
-          <v-card height="80vh">
-            <div v-if="current_item != -1" class="fill-height" style="overflow-y: auto;">
-              <v-container px-6>
-                <p class="title">{{entries[current_item].name}}</p>
-                <p class="body-2 font-italic my-2">{{entries[current_item].category}}</p>
-                <p class="body-2">{{entries[current_item].campi}} - {{entries[current_item].unity}}</p>
-              </v-container>
-              <v-container px-6>
-                <p class="body-1">{{entries[current_item].description.long}}</p>
-              </v-container>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="entries[current_item].url"
-                >Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
+      <v-col cols="5">
+        <v-card height="80vh">
+          <div v-if="current_item != -1" class="fill-height" style="overflow-y: auto;">
+            <v-container px-6>
+              <p class="title">{{entries[current_item].name}}</p>
+              <p class="body-2 font-italic my-2">{{entries[current_item].category}}</p>
+              <p class="body-2">{{entries[current_item].campi}} - {{entries[current_item].unity}}</p>
+            </v-container>
+            <v-container px-6>
+              <p class="body-1">{{entries[current_item].description.long}}</p>
+            </v-container>
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                depressed
+                dark
+                color="rgb(255, 167, 38)"
+                :href="entries[current_item].url"
+              >Saiba mais</v-btn>
+              <v-spacer />
+            </v-card-actions>
+          </div>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height" justify="center" align="center">
-                <p class="title font-weight-light">Selecione um Item na lista ao lado</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
+          <div v-else class="fill-height">
+            <v-row class="fill-height" justify="center" align="center">
+              <p class="title font-weight-light">Selecione um Item na lista ao lado</p>
+            </v-row>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-app>
 </template>
 
@@ -178,6 +176,7 @@ export default {
   },
   beforeMount() {
     this.sheetQuery();
+    console.log(this.tabs[0]);
   }
 };
 </script>
