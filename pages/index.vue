@@ -29,7 +29,7 @@
                     color="white"
                     label="Buscar no Solus"
                     append-outer-icon="search"
-                    :style="this.$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 90%'"
+                    :style="$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 90%'"
                   ></v-text-field>
                 </v-container>
               </v-col>
