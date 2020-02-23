@@ -4,13 +4,14 @@
       propsTitle="Educação"
       propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
+      @input="typed = $event"
     />
 
     <v-app>
       <v-item-group mandatory v-model="showing">
         <v-container>
           <v-row justify="space-around">
-            <v-col v-for="tab in tabs" :key="tab.name" cols="12" md="3">
+            <v-col v-for="tab in tabs" :key="tab.name" cols="4" md="3">
               <v-item v-slot:default="{ active, toggle }">
                 <v-card
                   :color="active ? 'rgb(3, 155, 229)' : ''"
@@ -29,72 +30,43 @@
         </v-container>
       </v-item-group>
 
-      <v-row>
-        <v-col>
+      <v-row justify="center">
+        <v-col cols="5">
           <v-card height="80vh">
-            <v-list>
+            <v-list rounded style="max-height: 100%; overflow-y: auto;">
               <v-list-item-group v-model="current_item">
-                <v-list-item></v-list-item>
+                <v-list-item v-for="item in entries" :key="item.name">{{ item.name }}</v-list-item>
               </v-list-item-group>
             </v-list>
           </v-card>
         </v-col>
-        <v-card height="80vh"></v-card>
-        <v-col></v-col>
+
+        <v-col cols="5">
+          <v-card height="80vh" v-if="current_item != -1">
+            <v-container px-6>
+              <p class="title">{{entries[current_item].name}}</p>
+              <p class="body-2">{{entries[current_item].campi}} - {{entries[current_item].unity}}</p>
+            </v-container>
+            <v-container px-6>
+              <p class="body-1">{{entries[current_item].description}}</p>
+            </v-container>
+
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                depressed
+                dark
+                color="rgb(255, 167, 38)"
+                :href="entries[current_item].url"
+              >Visite o site</v-btn>
+              <v-spacer />
+            </v-card-actions>
+
+            <v-spacer />
+          </v-card>
+        </v-col>
       </v-row>
     </v-app>
-    <!-- <v-container>
-      <v-data-iterator
-        :items="entries"
-        item-key="name"
-        :search="search"
-        group-by="id"
-        sort-by="name"
-        no-results-text="Não encontramos nada..."
-        loading
-        loading-text="Indexando resultados..."
-      >
-        <template v-slot:default="{ items, isExpanded, expand }">
-          <masonry :cols="setCols()">
-            <v-container v-for="item in items" :key="item.name">
-              <v-card>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
-                    <v-list-item-subtitle>{{item.unity}}</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-card-text>
-                  <div>
-                    {{item.knownledge}}
-                    <br v-if="item.knownledge" />
-                    {{item.abilities}}
-                  </div>
-                </v-card-text>
-
-                <v-expand-transition>
-                  <div v-show="isExpanded(item)">
-                    <v-card-text>{{item.short}}</v-card-text>
-                  </div>
-                </v-expand-transition>
-
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn depressed dark color="rgb(239, 127, 45)" :href="item.url">Visite o site</v-btn>
-                  <v-spacer />
-                  <v-btn icon @click="expand(item,!isExpanded(item))">
-                    <v-icon>{{ isExpanded(item) ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                  </v-btn>
-                </v-card-actions>
-
-                <v-spacer />
-              </v-card>
-            </v-container>
-          </masonry>
-        </template>
-      </v-data-iterator>
-    </v-container>-->
   </div>
 </template>
 
@@ -114,7 +86,10 @@ export default {
     search: "",
     typed: "",
     showing: 0,
-    current_item: "",
+    current_item: -1,
+    sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
+    api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    entries: [],
     tabs: [
       {
         name: "Graduação",
@@ -124,18 +99,6 @@ export default {
         name: "Pós-Graduação",
         entries: []
       }
-      // {
-      //   name: "Competências",
-      //   url:
-      //     "https://sheets.googleapis.com/v4/spreadsheets/1KEqDUMBmt7n5fZh1L4gqMj8lIuiaWziIlt53TdFAN5w/values/'Respostas%20ao%20formul%C3%A1rio%201'?key=AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
-      //   content: []
-      // }
-      // {
-      //   name: "Centrais Multiusuário",
-      //   url:
-      //     "https://spreadsheets.google.com/feeds/list/1zYd3cb3rsSz8U64Liay9Ti2_GMpdfDAeSturoFo5sAQ/owgefr6/public/values?alt=json",
-      //   content: []
-      // }
     ]
   }),
   methods: {
@@ -154,30 +117,61 @@ export default {
       }
     },
     async sheetQuery() {
-      const request = await fetch(this.tabs[0].url);
+      const request = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'DISCIPLINAS'?key=${this.api_key}`
+      );
       const data = await request.json();
+
       data.values.slice(1).forEach(row => {
         let di = {
-          associate: row[1],
-          name: row[2],
-          email: row[3],
-          phone: row[4],
+          name: row[0],
+          description: row[3],
+          campi: row[4],
           unity: row[5],
-          campus: row[6],
-          lab: row[9],
-          short: row[11],
-          url: row[12],
-          abilities: row[13],
-          knownledge: row[16]
+          category: row[6],
+          url: row[7],
+          long_description: row[8],
+          area: row[9],
+          start_date: row[10]
         };
-        if (di.name) this.entries.push(di);
+        if (row[1].localeCompare("Graduação") == 0)
+          this.tabs[0].entries.push(di);
+        else this.tabs[1].entries.push(di);
       });
+
+      this.entries = this.tabs[0].entries;
+    },
+    fuzzySearch: async function() {
+      if (this.typed === "") {
+        this.entries = this.tabs[this.showing].entries;
+        return;
+      }
+
+      var options = {
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: ["name", "long_description"]
+      };
+
+      await this.$search(
+        this.typed,
+        this.tabs[this.showing].entries,
+        options
+      ).then(results => {
+        this.entries = results;
+      });
+
+      this.current_item = -1;
     }
   },
   watch: {
-    typed: debounce(function() {
-      this.search = this.typed;
-    }, 400)
+    typed: debounce(async function() {
+      await this.fuzzySearch();
+      console.log(this.typed);
+    }, 500)
   },
   beforeMount() {
     this.sheetQuery();

@@ -19,6 +19,7 @@
             color="white"
             label="Buscar"
             append-outer-icon="search"
+            v-model="typed"
             :style="this.$vuetify.breakpoint.smAndDown ? 'width: 90%' : 'width: 70%'"
           ></v-text-field>
         </v-col>
@@ -29,7 +30,15 @@
 
 <script>
 export default {
-  props: ["propsTitle", "propsDescription", "propsUrl", "propsImg"]
+  data: () => ({
+    typed: ""
+  }),
+  props: ["propsTitle", "propsDescription", "propsUrl"],
+  watch: {
+    typed(p) {
+      this.$emit("input", p);
+    }
+  }
 };
 </script>
 
