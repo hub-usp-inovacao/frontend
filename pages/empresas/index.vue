@@ -1,5 +1,6 @@
 <template>
-  <div>
+<p class="display-2">Página em construção</p>
+  <!-- <div>
     <Panel
       propsTitle="Empresas"
       propsDescription="São as empresas criadas por alunos e ex-alunos USP ao longo dos anos."
@@ -13,8 +14,8 @@
       :propsCampus="properties.campus"
       :propsUnity="properties.unity"
       :propsCNAE="properties.cnae"
-    />
-  </div>
+    />-->
+  </div> 
 </template>
 
 <script>

@@ -17,6 +17,7 @@
           solo
           flat
           rounded
+          clearable
           color="white"
           label="Buscar"
           append-outer-icon="search"

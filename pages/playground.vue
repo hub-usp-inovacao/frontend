@@ -8,15 +8,16 @@
       @input="search = $event"
     />
 
-    <div>
+    <div class="hidden-sm-and-down">
       <v-item-group mandatory>
-        <v-row justify="space-around">
+        <v-row justify="space-around" class="ma-0">
           <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="10" sm="5" md="3">
             <v-item>
               <v-card
                 :color="current_tab == i ? '#ECEFF1' : ''"
                 class="d-flex flex-column justify-space-around align-center"
                 @click="current_tab = i; current_item = -1"
+                :raised="current_tab == i"
               >
                 <v-container>
                   <p class="subtitle-1 font-weight-light my-0">Disciplinas de</p>
@@ -29,56 +30,140 @@
       </v-item-group>
     </div>
 
-    <v-row justify="center">
-      <v-col cols="5">
-        <v-card height="80vh">
-          <div v-if="entries.length > 0" class="fill-height">
-            <v-list rounded style="max-height: 100%; overflow-y: auto;">
-              <v-list-item-group v-model="current_item">
-                <v-list-item v-for="item in entries" :key="item.name">{{ item.name }}</v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </div>
+    <div class="hidden-md-and-up">
+      <v-item-group mandatory>
+        <v-row justify="center" class="ma-0">
+          <v-col
+            v-for="(tab,i) in tabs"
+            :key="tab.name"
+            cols="5"
+            sm="4"
+            class="pa-0"
+            style="border: 5px solid #039BE5;"
+            :class="i == 0 ? 'left-border' : 'right-border'"
+          >
+            <v-item>
+              <v-card
+                :color="current_tab == i ? '#039BE5' : '#ffa726'"
+                class="d-flex flex-column justify-space-around align-center"
+                elevation="0"
+                tile
+                height="100%"
+                @click="current_tab = i; current_item = -1"
+              >
+                <v-container>
+                  <p class="caption font-weight-light white--text my-0">Disciplinas de</p>
+                  <p class="subtitle-1 font-weight-medium white--text my-0">{{tab.name}}</p>
+                </v-container>
+              </v-card>
+            </v-item>
+          </v-col>
+        </v-row>
+      </v-item-group>
+    </div>
 
-          <div v-else class="fill-height">
-            <v-row class="fill-height" justify="center" align="center">
-              <p class="title font-weight-light">Não encontramos nada relacionado a sua busca</p>
-            </v-row>
-          </div>
-        </v-card>
-      </v-col>
+    <div class="hidden-sm-and-down">
+      <v-row justify="center" class="ma-0">
+        <v-col cols="5">
+          <v-card height="80vh">
+            <div v-if="entries.length > 0" class="fill-height">
+              <v-list rounded style="max-height: 100%; overflow-y: auto;">
+                <v-list-item-group>
+                  <v-list-item
+                    v-for="(item,i) in entries"
+                    :key="item.title"
+                    @click="current_item = i"
+                  >{{ item.title }}</v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </div>
 
-      <v-col cols="5">
-        <v-card height="80vh">
-          <div v-if="current_item != -1" class="fill-height" style="overflow-y: auto;">
-            <v-container px-6>
-              <p class="title">{{entries[current_item].name}}</p>
-              <p class="body-2 font-italic my-2">{{entries[current_item].category}}</p>
-              <p class="body-2">{{entries[current_item].campi}} - {{entries[current_item].unity}}</p>
+            <div v-else class="fill-height">
+              <v-row class="fill-height ma-0" justify="center" align="center">
+                <p class="title font-weight-light">Não encontramos nada relacionado a sua pesquisa</p>
+              </v-row>
+            </div>
+          </v-card>
+        </v-col>
+
+        <v-col cols="5">
+          <v-card height="80vh">
+            <div v-if="current_item >= 0" class="fill-height" style="overflow-y: auto;">
+              <v-container px-6>
+                <p class="title">{{entries[current_item].title}}</p>
+                <p class="body-2 font-italic my-2">{{entries[current_item].category}}</p>
+                <p class="body-2">{{entries[current_item].campi}} - {{entries[current_item].unity}}</p>
+              </v-container>
+
+              <v-container px-6>
+                <p class="body-1">{{entries[current_item].description.long}}</p>
+              </v-container>
+
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  depressed
+                  dark
+                  color="rgb(255, 167, 38)"
+                  :href="entries[current_item].url"
+                >Saiba mais</v-btn>
+                <v-spacer />
+              </v-card-actions>
+            </div>
+
+            <div v-else class="fill-height">
+              <v-row class="fill-height ma-0" justify="center" align="center">
+                <p class="title font-weight-light">Selecione um Item na lista ao lado</p>
+              </v-row>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+
+    <div class="hidden-md-and-up">
+      <v-row justify="center" class="ma-0">
+        <v-col cols="10">
+          <v-card>
+            <v-container>
+              <v-select
+                flat
+                rounded
+                filled
+                v-model="current_item"
+                color="#37474F"
+                :items="entries.map((item,i) => ({text: item.title, value: i}))"
+                no-data-text="Não encontramos nada"
+                label="Escolha uma disciplina"
+              ></v-select>
             </v-container>
-            <v-container px-6>
-              <p class="body-1">{{entries[current_item].description.long}}</p>
-            </v-container>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                depressed
-                dark
-                color="rgb(255, 167, 38)"
-                :href="entries[current_item].url"
-              >Saiba mais</v-btn>
-              <v-spacer />
-            </v-card-actions>
-          </div>
 
-          <div v-else class="fill-height">
-            <v-row class="fill-height" justify="center" align="center">
-              <p class="title font-weight-light">Selecione um Item na lista ao lado</p>
-            </v-row>
-          </div>
-        </v-card>
-      </v-col>
-    </v-row>
+            <div v-if="current_item >= 0">
+              <v-container px-6>
+                <p class="title">{{entries[current_item].title}}</p>
+                <p class="body-2 font-italic my-2">{{entries[current_item].category}}</p>
+                <p class="body-2">{{entries[current_item].campi}} - {{entries[current_item].unity}}</p>
+              </v-container>
+
+              <v-container px-6>
+                <p class="body-1">{{entries[current_item].description.long}}</p>
+              </v-container>
+
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  depressed
+                  dark
+                  color="rgb(255, 167, 38)"
+                  :href="entries[current_item].url"
+                >Saiba mais</v-btn>
+                <v-spacer />
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
   </v-app>
 </template>
 
@@ -98,6 +183,7 @@ export default {
     search: "",
     current_tab: 0,
     current_item: -1,
+    current_item_mobile: "",
     sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
     api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
     entries: [],
@@ -121,7 +207,7 @@ export default {
 
       data.values.slice(1).forEach(row => {
         let di = {
-          name: row[0],
+          title: row[0],
           description: {
             short: row[3],
             long: row[8]
@@ -141,7 +227,7 @@ export default {
       this.entries = this.tabs[0].entries;
     },
     fuzzySearch: async function() {
-      if (this.search === "") {
+      if (!this.search) {
         this.entries = this.tabs[this.current_tab].entries;
         return;
       }
@@ -154,7 +240,11 @@ export default {
         distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 1,
-        keys: ["name", "long_description", "campi"]
+        keys: [
+          { name: "title", weight: 0.5 },
+          { name: "description.long", weight: 0.3 },
+          { name: "campi", weight: 0.2 }
+        ]
       };
 
       await this.$search(
@@ -168,6 +258,7 @@ export default {
   },
   watch: {
     search: debounce(async function() {
+      console.log(this.search);
       await this.fuzzySearch();
     }, 500),
     current_tab: debounce(async function() {
@@ -176,7 +267,6 @@ export default {
   },
   beforeMount() {
     this.sheetQuery();
-    console.log(this.tabs[0]);
   }
 };
 </script>
@@ -192,10 +282,16 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 70vh;
+  height: 80vh;
   /* background: rgb(216, 216, 216); */
   background: rgba(255, 167, 38, 1);
   transform: skewY(-5deg);
   transform-origin: top left;
+}
+.left-border {
+  border-radius: 5px 0 0 5px;
+}
+.right-border {
+  border-radius: 0 5px 5px 0;
 }
 </style>

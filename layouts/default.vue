@@ -7,7 +7,7 @@
           :key="i"
           :to="item.to"
           class="white--text mx-2 text-capitalize"
-          color="light-blue darken-1"
+          color="#039BE5"
           active-class
           depressed
           rounded
@@ -15,7 +15,7 @@
         >{{item.title}}</v-btn>
       </v-toolbar>
 
-      <!-- <v-bottom-navigation class="hidden-md-and-up" fixed grow shift>
+      <v-bottom-navigation class="hidden-md-and-up" fixed grow shift>
         <v-btn to="/iniciativas">
           <span>Iniciativas</span>
           <v-icon>mdi-account-group</v-icon>
@@ -35,7 +35,7 @@
           <span>Empresas</span>
           <v-icon>mdi-office-building</v-icon>
         </v-btn>
-      </v-bottom-navigation>-->
+      </v-bottom-navigation>
 
       <!-- <v-container fluid> -->
       <nuxt />

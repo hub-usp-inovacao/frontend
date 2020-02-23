@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Panel
+    <p class="display-2">Página em construção</p>
+    <!-- <Panel
       propsTitle="Iniciativas"
       propsDescription="Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na universidade."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd2gMMb3t01oDwYSbsgoUK1hCeEiC9zq7tt2AKzMoJ2Dcu1SA/viewform"
@@ -63,7 +64,7 @@
           </v-container>
         </v-col>
       </v-row>
-    </div>
+    </div>-->
   </div>
 </template>
 

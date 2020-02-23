@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Panel
+    <p class="display-2">Página em construção</p>
+    <!-- <Panel
       propsTitle="Desenvolvimento & Inovação"
       propsDescription="Laboratórios, organizações e programas que atuam com desenvolvimento & inovação."
       propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
@@ -67,7 +68,7 @@
           </template>
         </v-data-iterator>
       </div>
-    </v-container>
+    </v-container>-->
   </div>
 </template>
 
