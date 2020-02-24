@@ -130,7 +130,9 @@
                 flat
                 rounded
                 filled
+                hide-details
                 v-model="current_item"
+                menu-props="auto"
                 color="#37474F"
                 :items="entries.map((item,i) => ({text: item.title, value: i}))"
                 no-data-text="Não encontramos nada"
@@ -282,9 +284,9 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 80vh;
+  height: 30rem;
   /* background: rgb(216, 216, 216); */
-  background: rgba(255, 167, 38, 1);
+  background: #ffa726;
   transform: skewY(-5deg);
   transform-origin: top left;
 }
