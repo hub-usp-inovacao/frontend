@@ -20,8 +20,10 @@
           clearable
           color="white"
           label="Buscar"
-          append-outer-icon="search"
+          counter="32"
           v-model="typed"
+          append-outer-icon="search"
+          :loading="propsLoad"
           :style="this.$vuetify.breakpoint.smAndDown ? 'width: 90%' : 'width: 70%'"
         ></v-text-field>
       </v-col>
@@ -34,7 +36,7 @@ export default {
   data: () => ({
     typed: ""
   }),
-  props: ["propsTitle", "propsDescription", "propsUrl"],
+  props: ["propsTitle", "propsDescription", "propsUrl", "propsLoad"],
   watch: {
     typed(p) {
       this.$emit("input", p);

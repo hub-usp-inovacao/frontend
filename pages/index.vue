@@ -46,10 +46,7 @@
             <v-col>
               <v-row justify="center">
                 <v-col>
-                  <p
-                    class="headline font-weight-regular"
-                    align="center"
-                  >Empresas criadas por alunos da USP</p>
+                  <p class="headline font-weight-regular" align="center">Empresas com DNA USP</p>
                 </v-col>
               </v-row>
 
