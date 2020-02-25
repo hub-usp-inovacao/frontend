@@ -103,6 +103,88 @@
         </v-col>
       </v-row>
     </div>
+
+    <div class="hidden-md-and-up">
+      <v-row justify="center" class="ma-0">
+        <v-col cols="11" sm="10">
+          <v-card>
+            <v-container>
+              <v-select
+                flat
+                rounded
+                filled
+                hide-details
+                v-model="item_index"
+                menu-props="auto"
+                color="#37474F"
+                :items="search_entries.map((item,i) => ({content: item, index: i}))"
+                item-value="index"
+                no-data-text="Não encontramos nada"
+                label="Escolha uma disciplina"
+              >
+                <template v-slot:selection="{ item }">
+                  <span class="text-truncate">{{ item.content.name }}</span>
+                </template>
+                <template v-slot:item="{ item }">
+                  <v-list-item-content>
+                    <v-list-item-title v-text="item.content.name"></v-list-item-title>
+                    <v-list-item-subtitle v-text="item.content.knownledge"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </template>
+              </v-select>
+            </v-container>
+
+            <div v-if="item_index >= 0">
+              <v-container px-6>
+                <p class="title">{{current_item.name}}</p>
+                <p class="body-2 font-italic font-weight-light my-2">{{current_item.association}}</p>
+                <p class="body-2 my-0">{{current_item.campus}}</p>
+                <p class="body-2 font-weight-light my-0">{{current_item.unity}}</p>
+              </v-container>
+
+              <v-container px-6>
+                <p class="body-1 font-weight-medium my-0">
+                  {{current_item.role}}
+                  <span class="font-weight-regular">em</span>
+                  {{current_item.group_initials}}
+                </p>
+                <p class="body-2">{{current_item.group_name}}</p>
+                <p class="body-2 font-weight-light my-0">{{current_item.description}}</p>
+              </v-container>
+
+              <v-container px-6>
+                <p class="body-1 font-weight-medium my-0">Competências:</p>
+                <p class="body-2 font-weight-light my-0">{{current_item.skills}}</p>
+              </v-container>
+
+              <v-container px-6>
+                <p class="body-1 font-weight-medium my-0">Serviços:</p>
+
+                <p
+                  v-for="item in current_item.services"
+                  :key="item"
+                  class="body-2 font-weight-light my-0"
+                >
+                  <span v-if="item">&bull;</span>
+                  {{item}}
+                </p>
+              </v-container>
+
+              <v-card-actions v-if="current_item.url">
+                <v-spacer />
+                <v-btn
+                  depressed
+                  dark
+                  color="rgb(255, 167, 38)"
+                  :href="current_item.url[0]"
+                >Saiba mais</v-btn>
+                <v-spacer />
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
   </div>
 </template>
 
