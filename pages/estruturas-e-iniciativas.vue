@@ -69,16 +69,10 @@
 </template>
 
 <script>
-import List from "../components/List.vue";
-import Select from "../components/Select.vue";
-import Input from "../components/Input.vue";
-import Panel from "@/components/Panel2.vue";
+import Panel from "@/components/Panel.vue";
 
 export default {
   components: {
-    List,
-    Select,
-    Input,
     Panel
   },
   data: () => ({

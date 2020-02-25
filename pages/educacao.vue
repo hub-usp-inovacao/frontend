@@ -1,10 +1,10 @@
 <template>
-  <v-app>
+  <div>
     <div class="panel_bg"></div>
     <Panel
       propsTitle="Educação"
       propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
-      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
+      propsUrl="https://forms.gle/uFRgcqZ4SdbHUqe39"
       :propsLoad="loading_search"
       @input="search = $event"
     />
@@ -180,7 +180,7 @@
     <div class="hidden-sm-and-down">
       <v-row justify="center" class="ma-0">
         <v-col cols="5">
-          <v-card height="35rem">
+          <v-card height="35rem" :loading="loading_data">
             <div v-if="filtered_entries.length > 0" class="fill-height">
               <v-list rounded style="max-height: 100%; overflow-y: auto;">
                 <v-list-item-group>
@@ -188,7 +188,11 @@
                     v-for="(item,i) in filtered_entries"
                     :key="item.title"
                     @click="current_item = i"
-                  >{{ item.title }}</v-list-item>
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list-item-group>
               </v-list>
             </div>
@@ -289,34 +293,34 @@
         </v-col>
       </v-row>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
 import { debounce } from "debounce";
-import Card from "../components/Card.vue";
-import Input from "../components/Input.vue";
-import Panel from "../components/Panel2.vue";
+import Panel from "../components/Panel.vue";
 
 export default {
   components: {
-    Card,
-    Input,
     Panel
   },
   data: () => ({
     search: "",
     current_tab: 0,
     current_item: -1,
+
     loading_data: true,
     loading_search: false,
+
     selected_campus: [],
     selected_unity: [],
     campi_list: [],
     unity_list: [],
+
     sheet_name: "DISCIPLINAS",
     sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
     api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+
     entries: [],
     tabs: [
       {

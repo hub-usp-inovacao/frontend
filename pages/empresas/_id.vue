@@ -1,13 +1,9 @@
 <template>
   <v-app>
-    <div>{{id}}</div>
+    <div>{{$route.params.id}}</div>
   </v-app>
 </template>
 
 <script>
-export default {
-  data: () => ({
-    id: this.$route.params.id
-  })
-};
+export default {};
 </script>

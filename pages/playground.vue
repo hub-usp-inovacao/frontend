@@ -293,14 +293,10 @@
 
 <script>
 import { debounce } from "debounce";
-import Card from "../components/Card.vue";
-import Input from "../components/Input.vue";
-import Panel from "../components/Panel2.vue";
+import Panel from "../components/Panel.vue";
 
 export default {
   components: {
-    Card,
-    Input,
     Panel
   },
   data: () => ({

@@ -1,30 +1,14 @@
 <template>
-<p class="display-2">Página em construção</p>
-  <!-- <div>
-    <Panel
-      propsTitle="Empresas"
-      propsDescription="São as empresas criadas por alunos e ex-alunos USP ao longo dos anos."
-      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLSd18N4l-8w2vu_aIWfRaSETG3nP94ZyvhNbh-4QFmNltKRkQw/viewform"
-      propsImg="http://imagens.usp.br/wp-content/uploads/Projeto-Arte-e-Ci%C3%AAncia_IF_Foto-Marcos-Santos_U0Y8223-1-scaled.jpg"
-    />
-
-    <Grid
-      :propsSheet="sheet"
-      :propsIncubator="properties.incubator"
-      :propsCampus="properties.campus"
-      :propsUnity="properties.unity"
-      :propsCNAE="properties.cnae"
-    />-->
-  </div> 
+  <div>
+    <p class="display-2">Página em construção</p>
+  </div>
 </template>
 
 <script>
-import Grid from "@/components/Grid.vue";
-import Panel from "@/components/Panel2.vue";
+import Panel from "@/components/Panel.vue";
 
 export default {
   components: {
-    Grid,
     Panel
   },
   data: () => ({

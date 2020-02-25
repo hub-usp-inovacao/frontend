@@ -76,12 +76,12 @@ export default {
         to: "/"
       },
       {
-        title: "Iniciativas",
-        to: "/iniciativas"
+        title: "E&I",
+        to: "/estruturas-e-iniciativas"
       },
       {
-        title: "D&I",
-        to: "/desenvolvimento-e-inovacao"
+        title: "Competências",
+        to: "/competencias"
       },
       {
         title: "Educação",
@@ -90,6 +90,10 @@ export default {
       {
         title: "Empresas",
         to: "/empresas"
+      },
+      {
+        title: "Patentes",
+        to: "/patentes"
       },
       {
         title: "Contato",
