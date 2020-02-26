@@ -1,6 +1,5 @@
 <template>
   <div style="min-height: 100vh;">
-    <div class="panel_bg"></div>
     <Panel
       propsTitle="Competências"
       propsDescription="Descubra as competências e áreas de atuação dos pesquisadores da USP."
@@ -14,79 +13,25 @@
     <div>
       <v-container>
         <v-row justify="center" class="ma-0">
-          <v-col cols="6" sm="4" md="3">
-            <v-select
-              flat
-              filled
-              rounded
-              hide-details
-              multiple
-              v-model="selected_campus"
-              menu-props="auto"
-              color="white"
-              :items="campi_list"
-              no-data-text="Não encontramos nada"
-              label="Campus"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >,&#160;(+{{ selected_campus.length - 1 }})</span>
-              </template>
-            </v-select>
+          <v-col cols="6" sm="5" md="3">
+            <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
           </v-col>
 
-          <v-col cols="6" sm="4" md="3">
-            <v-select
-              flat
-              filled
-              rounded
-              hide-details
-              multiple
-              v-model="selected_unity"
-              menu-props="auto"
-              color="white"
-              :items="unity_list"
-              no-data-text="Não encontramos nada"
-              label="Unidade"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >,&#160;(+{{ selected_unity.length - 1 }})</span>
-              </template>
-            </v-select>
+          <v-col cols="6" sm="5" md="3">
+            <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
           </v-col>
 
-          <v-col cols="6" sm="4" md="3">
-            <v-select
-              flat
-              filled
-              rounded
-              hide-details
-              multiple
-              v-model="selected_association"
-              menu-props="auto"
-              color="white"
+          <v-col cols="6" sm="5" md="3">
+            <Select
               :items="association_list"
-              no-data-text="Não encontramos nada"
-              label="Associação"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >,&#160;(+{{ selected_association.length - 1 }})</span>
-              </template>
-            </v-select>
+              label="Vínculo"
+              @select="selected_association = $event"
+            />
           </v-col>
 
-          <v-col cols="6" v-show="$vuetify.breakpoint.xs"></v-col>
+          <v-col cols="6" sm="5" md="3">
+            <Select :items="known_list" label="Conhecimento" @select="selected_known = $event" />
+          </v-col>
         </v-row>
       </v-container>
     </div>
@@ -109,7 +54,7 @@
                       <v-list-item-title>
                         <span class="font-weight-light">{{ item.name }}</span>
                       </v-list-item-title>
-                      <v-list-item-subtitle>{{item.knownledge}}</v-list-item-subtitle>
+                      <v-list-item-subtitle>{{item.knownledge.toString()}}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list-item-group>
@@ -212,7 +157,7 @@
                 <template v-slot:item="{ item }">
                   <v-list-item-content>
                     <v-list-item-title v-text="item.content.name"></v-list-item-title>
-                    <v-list-item-subtitle v-text="item.content.knownledge"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-text="item.content.knownledge.toString()"></v-list-item-subtitle>
                   </v-list-item-content>
                 </template>
               </v-select>
@@ -275,10 +220,12 @@
 <script>
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
+import Select from "../components/Select.vue";
 
 export default {
   components: {
-    Panel
+    Panel,
+    Select
   },
   data: () => ({
     search: "",
@@ -291,9 +238,12 @@ export default {
     selected_campus: [],
     selected_unity: [],
     selected_association: [],
+    selected_known: [],
+
     campi_list: [],
     unity_list: [],
     association_list: [],
+    known_list: [],
 
     sheet_name: "RESPOSTAS",
     sheet_id: "18l8qAjZuJU6jMqoY8ohYc4FsaIoNqg_GjCa5htYPBm8",
@@ -320,6 +270,7 @@ export default {
       let campi = new Set();
       let unity = new Set();
       let association = new Set();
+      let known = new Set();
 
       let regex_url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
@@ -344,12 +295,13 @@ export default {
               skills: row[13],
               services: row[14].split(/[\s\n]*[;][\s\n]*/),
               equipment: row[15].split(/[\s\n]*[;][\s\n]*/),
-              knownledge: row[16],
+              knownledge: row[16].split(/,/),
               key_words: row[17].split(/[\s\n]*[;][\s\n]*/)
             };
             if (di.campus) campi.add(di.campus);
             if (di.unity) unity.add(di.unity);
             if (di.association) association.add(di.association);
+            di.knownledge.forEach(item => known.add(item));
             this.entries.push(di);
           });
         })
@@ -358,6 +310,7 @@ export default {
       this.campi_list = Array.from(campi);
       this.unity_list = Array.from(unity);
       this.association_list = Array.from(association);
+      this.known_list = Array.from(known);
       this.search_entries = this.entries;
     },
     async fuzzySearch() {
@@ -370,6 +323,7 @@ export default {
 
       var options = {
         tokenize: true,
+        shouldSort: false,
         matchAllTokens: true,
         threshold: 0.2,
         location: 0,
@@ -392,6 +346,21 @@ export default {
           this.search_entries = results;
         })
         .finally((this.loading_search = false));
+    },
+    filter_data(item) {
+      if (
+        (!this.selected_campus.length ||
+          this.selected_campus.includes(item.campus)) &&
+        (!this.selected_unity.length ||
+          this.selected_unity.includes(item.unity)) &&
+        (!this.selected_association.length ||
+          this.selected_association.includes(item.association)) &&
+        (!this.selected_known.length ||
+          this.selected_known.filter(known => item.knownledge.includes(known))
+            .length)
+      )
+        return true;
+      return false;
     }
   },
   watch: {
@@ -406,6 +375,9 @@ export default {
     },
     selected_association: function() {
       this.item_index = -1;
+    },
+    selected_known: function() {
+      this.item_index = -1;
     }
   },
   computed: {
@@ -417,22 +389,12 @@ export default {
       if (
         !this.selected_campus.length &&
         !this.selected_unity.length &&
-        !this.selected_association.length
+        !this.selected_association.length &&
+        !this.selected_known.length
       )
         return this.search_entries;
 
-      let filtered = [];
-      this.search_entries.forEach(item => {
-        if (
-          (!this.selected_campus.length ||
-            this.selected_campus.includes(item.campus)) &&
-          (!this.selected_unity.length ||
-            this.selected_unity.includes(item.unity)) &&
-          (!this.selected_association.length ||
-            this.selected_association.includes(item.association))
-        )
-          filtered.push(item);
-      });
+      let filtered = this.search_entries.filter(item => this.filter_data(item));
 
       return filtered;
     }
@@ -449,7 +411,7 @@ export default {
   top: 0;
   width: 100%;
   height: 40rem;
-  /* background: rgb(216, 216, 216); */
+
   background: #ffa726;
   transform: skewY(-5deg);
   transform-origin: top left;

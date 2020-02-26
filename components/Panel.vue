@@ -46,12 +46,11 @@ export default {
 .panel_bg {
   position: absolute;
   top: 0;
-
   width: 100%;
-  height: 60%;
-  /* background: rgb(216, 216, 216); */
-  background: rgb(255, 167, 38);
-  transform: skewY(-6deg);
+  height: 40rem;
+
+  background: #ffa726;
+  transform: skewY(-5deg);
   transform-origin: top left;
 }
 </style>

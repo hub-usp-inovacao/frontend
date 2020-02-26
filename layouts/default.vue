@@ -1,45 +1,32 @@
 <template>
   <v-app>
+    <div class="panel_bg"></div>
+    <v-toolbar class="hidden-sm-and-down" color="transparent" style="right: 0" absolute flat>
+      <v-btn
+        v-for="(item, i) in items"
+        :key="i"
+        :to="item.to"
+        class="white--text mx-2 text-capitalize"
+        color="#039BE5"
+        active-class
+        depressed
+        rounded
+        small
+      >{{item.title}}</v-btn>
+    </v-toolbar>
+    <v-app-bar class="hidden-md-and-up" color="white" dense flat>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    </v-app-bar>
+
     <v-content>
-      <v-toolbar class="hidden-sm-and-down" color="transparent" style="right: 0" absolute flat>
-        <v-btn
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          class="white--text mx-2 text-capitalize"
-          color="#039BE5"
-          active-class
-          depressed
-          rounded
-          small
-        >{{item.title}}</v-btn>
-      </v-toolbar>
-
-      <v-bottom-navigation class="hidden-md-and-up" fixed grow shift>
-        <v-btn to="/iniciativas">
-          <span>Iniciativas</span>
-          <v-icon>mdi-account-group</v-icon>
-        </v-btn>
-
-        <v-btn to="/desenvolvimento-e-inovacao">
-          <span>D&I</span>
-          <v-icon>mdi-lightbulb-on</v-icon>
-        </v-btn>
-
-        <v-btn to="/educacao">
-          <span>Educação</span>
+      <!-- <v-bottom-navigation class="hidden-md-and-up" fixed grow shift>
+        <v-btn v-for="item in items" :key="item.title" :to="item.to">
+          <span>{{item.title}}</span>
           <v-icon>mdi-book-open-page-variant</v-icon>
         </v-btn>
+      </v-bottom-navigation>-->
 
-        <v-btn to="/empresas">
-          <span>Empresas</span>
-          <v-icon>mdi-office-building</v-icon>
-        </v-btn>
-      </v-bottom-navigation>
-
-      <!-- <v-container fluid> -->
       <nuxt />
-      <!-- </v-container> -->
     </v-content>
     <Footer />
   </v-app>
@@ -76,11 +63,11 @@ export default {
         to: "/"
       },
       {
-        title: "E&I",
-        to: "/estruturas-e-iniciativas"
+        title: "Competências",
+        to: "/competencias"
       },
       {
-        title: "Competências",
+        title: "Iniciativas",
         to: "/competencias"
       },
       {
@@ -119,5 +106,15 @@ export default {
 }
 .zoom:hover {
   transform: scale(1.1);
+}
+.panel_bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 40rem;
+
+  background: #ffa726;
+  transform: skewY(-5deg);
+  transform-origin: top left;
 }
 </style>

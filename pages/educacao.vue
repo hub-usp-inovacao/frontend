@@ -1,6 +1,5 @@
 <template>
   <div style="min-height: 100vh;">
-    <div class="panel_bg"></div>
     <Panel
       propsTitle="Educação"
       propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
@@ -13,12 +12,12 @@
 
     <div class="hidden-sm-and-down">
       <v-item-group mandatory>
-        <v-row justify="space-around" class="ma-0">
+        <v-row justify="center" class="ma-0">
           <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="3">
             <v-item>
               <v-card
                 :color="current_tab === i ? '#ECEFF1' : ''"
-                @click="current_tab = i; current_item = -1"
+                @click="current_tab = i; item_index = -1"
                 :raised="current_tab === i"
                 class="d-flex flex-column justify-space-around align-center"
                 height="100%"
@@ -34,53 +33,11 @@
           <v-col cols="3">
             <v-card height="100%" class="d-flex flex-column justify-space-around align-center">
               <v-container>
-                <v-select
-                  flat
-                  dense
-                  rounded
-                  filled
-                  hide-details
-                  multiple
-                  v-model="selected_campus"
-                  menu-props="auto"
-                  color="#37474F"
-                  :items="campi_list"
-                  no-data-text="Não encontramos nada"
-                  label="Campus"
-                >
-                  <template v-slot:selection="{ item, index }">
-                    <span v-if="index === 0">{{ item }}</span>
-                    <span
-                      v-if="index === 1"
-                      class="grey--text caption"
-                    >,&#160;(+{{ selected_campus.length - 1 }})</span>
-                  </template>
-                </v-select>
+                <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
               </v-container>
 
               <v-container>
-                <v-select
-                  flat
-                  dense
-                  rounded
-                  filled
-                  hide-details
-                  multiple
-                  v-model="selected_unity"
-                  menu-props="auto"
-                  color="#37474F"
-                  :items="unity_list"
-                  no-data-text="Não encontramos nada"
-                  label="Unidade"
-                >
-                  <template v-slot:selection="{ item, index }">
-                    <span v-if="index === 0">{{ item }}</span>
-                    <span
-                      v-if="index === 1"
-                      class="grey--text caption"
-                    >,&#160;(+{{ selected_unity.length - 1 }})</span>
-                  </template>
-                </v-select>
+                <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
               </v-container>
             </v-card>
           </v-col>
@@ -107,7 +64,7 @@
                 elevation="0"
                 tile
                 height="100%"
-                @click="current_tab = i; current_item = -1"
+                @click="current_tab = i; item_index = -1"
               >
                 <v-container>
                   <p class="caption font-weight-light white--text my-0">Disciplinas de</p>
@@ -117,55 +74,18 @@
             </v-item>
           </v-col>
         </v-row>
-        <v-row justify="center" class="ma-0">
-          <v-col cols="5" sm="4">
-            <v-select
-              flat
-              solo
-              rounded
-              hide-details
-              multiple
-              v-model="selected_campus"
-              menu-props="auto"
-              color="white"
-              :items="campi_list"
-              no-data-text="Não encontramos nada"
-              label="Campus"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >,&#160;(+{{ selected_campus.length - 1 }})</span>
-              </template>
-            </v-select>
-          </v-col>
 
-          <v-col cols="5" sm="4">
-            <v-select
-              flat
-              solo
-              rounded
-              hide-details
-              multiple
-              v-model="selected_unity"
-              menu-props="auto"
-              color="white"
-              :items="unity_list"
-              no-data-text="Não encontramos nada"
-              label="Unidade"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >,&#160;(+{{ selected_campus.length - 1 }})</span>
-              </template>
-            </v-select>
-          </v-col>
-        </v-row>
+        <v-container>
+          <v-row justify="center" class="ma-0">
+            <v-col cols="6" sm="4">
+              <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
+            </v-col>
+
+            <v-col cols="6" sm="4">
+              <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-item-group>
     </div>
 
@@ -181,7 +101,7 @@
                   <v-list-item
                     v-for="(item,i) in filtered_entries"
                     :key="item.title"
-                    @click="current_item = i"
+                    @click="item_index = i"
                   >
                     <v-list-item-content>
                       <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -205,27 +125,20 @@
 
         <v-col cols="5">
           <v-card height="35rem">
-            <div v-if="current_item >= 0" class="fill-height" style="overflow-y: auto;">
+            <div v-if="item_index >= 0" class="fill-height" style="overflow-y: auto;">
               <v-container px-6>
-                <p class="title">{{filtered_entries[current_item].title}}</p>
-                <p class="body-2 font-italic my-2">{{filtered_entries[current_item].category}}</p>
-                <p
-                  class="body-2"
-                >{{filtered_entries[current_item].campus}} - {{filtered_entries[current_item].unity}}</p>
+                <p class="title">{{current_item.title}}</p>
+                <p class="body-2 font-italic my-2">{{current_item.category}}</p>
+                <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
               </v-container>
 
               <v-container px-6>
-                <p class="body-1">{{filtered_entries[current_item].description.long}}</p>
+                <p class="body-1">{{current_item.description.long}}</p>
               </v-container>
 
               <v-card-actions>
                 <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="filtered_entries[current_item].url"
-                >Saiba mais</v-btn>
+                <v-btn depressed dark color="rgb(255, 167, 38)" :href="current_item.url">Saiba mais</v-btn>
                 <v-spacer />
               </v-card-actions>
             </div>
@@ -250,7 +163,7 @@
                 rounded
                 filled
                 hide-details
-                v-model="current_item"
+                v-model="item_index"
                 menu-props="auto"
                 color="#37474F"
                 :items="filtered_entries.map((item,i) => ({text: item.title, value: i}))"
@@ -259,27 +172,20 @@
               ></v-select>
             </v-container>
 
-            <div v-if="current_item >= 0">
+            <div v-if="item_index >= 0">
               <v-container px-6>
-                <p class="title">{{filtered_entries[current_item].title}}</p>
-                <p class="body-2 font-italic my-2">{{filtered_entries[current_item].category}}</p>
-                <p
-                  class="body-2"
-                >{{filtered_entries[current_item].campus}} - {{filtered_entries[current_item].unity}}</p>
+                <p class="title">{{current_item.title}}</p>
+                <p class="body-2 font-italic my-2">{{current_item.category}}</p>
+                <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
               </v-container>
 
               <v-container px-6>
-                <p class="body-1">{{filtered_entries[current_item].description.long}}</p>
+                <p class="body-1">{{current_item.description.long}}</p>
               </v-container>
 
               <v-card-actions>
                 <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="filtered_entries[current_item].url"
-                >Saiba mais</v-btn>
+                <v-btn depressed dark color="rgb(255, 167, 38)" :href="current_item.url">Saiba mais</v-btn>
                 <v-spacer />
               </v-card-actions>
             </div>
@@ -293,15 +199,17 @@
 <script>
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
+import Select from "../components/Select.vue";
 
 export default {
   components: {
-    Panel
+    Panel,
+    Select
   },
   data: () => ({
     search: "",
     current_tab: 0,
-    current_item: -1,
+    item_index: -1,
 
     loading_data: true,
     loading_search: false,
@@ -370,7 +278,7 @@ export default {
         return;
       }
       this.loading_search = true;
-      this.current_item = -1;
+      this.item_index = -1;
 
       var options = {
         tokenize: true,
@@ -402,13 +310,17 @@ export default {
       await this.fuzzySearch();
     }, 500),
     selected_campus: function() {
-      this.current_item = -1;
+      this.item_index = -1;
     },
     selected_unity: function() {
-      this.current_item = -1;
+      this.item_index = -1;
     }
   },
   computed: {
+    current_item: function() {
+      if (this.item_index < 0) return null;
+      return this.filtered_entries[this.item_index];
+    },
     filtered_entries: function() {
       if (!this.selected_campus.length && !this.selected_unity.length)
         return this.entries;
