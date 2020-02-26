@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height: 100vh;">
     <div class="panel_bg"></div>
     <Panel
       propsTitle="Competências"
@@ -9,6 +9,90 @@
       @input="search = $event"
     />
 
+    <!-- Seleção e Filtro -->
+
+    <div>
+      <v-container>
+        <v-row justify="center" class="ma-0">
+          <v-col cols="6" sm="4" md="3">
+            <v-select
+              flat
+              filled
+              rounded
+              hide-details
+              multiple
+              v-model="selected_campus"
+              menu-props="auto"
+              color="white"
+              :items="campi_list"
+              no-data-text="Não encontramos nada"
+              label="Campus"
+            >
+              <template v-slot:selection="{ item, index }">
+                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
+                <span
+                  v-if="index === 1"
+                  class="grey--text caption"
+                >(+{{ selected_campus.length - 1 }})</span>
+              </template>
+            </v-select>
+          </v-col>
+
+          <v-col cols="6" sm="4" md="3">
+            <v-select
+              flat
+              filled
+              rounded
+              hide-details
+              multiple
+              v-model="selected_unity"
+              menu-props="auto"
+              color="white"
+              :items="unity_list"
+              no-data-text="Não encontramos nada"
+              label="Unidade"
+            >
+              <template v-slot:selection="{ item, index }">
+                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
+                <span
+                  v-if="index === 1"
+                  class="grey--text caption"
+                >(+{{ selected_campus.length - 1 }})</span>
+              </template>
+            </v-select>
+          </v-col>
+
+          <v-col cols="6" sm="4" md="3">
+            <v-select
+              flat
+              filled
+              rounded
+              hide-details
+              multiple
+              v-model="selected_association"
+              menu-props="auto"
+              color="white"
+              :items="association_list"
+              no-data-text="Não encontramos nada"
+              label="Associação"
+            >
+              <template v-slot:selection="{ item, index }">
+                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
+                <span
+                  v-if="index === 1"
+                  class="grey--text caption"
+                >(+{{ selected_campus.length - 1 }})</span>
+              </template>
+            </v-select>
+          </v-col>
+
+          <v-col cols="6" v-show="$vuetify.breakpoint.xs"></v-col>
+        </v-row>
+      </v-container>
+    </div>
+
+    <!-- Lista e Card de Exibição -->
+
     <div class="hidden-sm-and-down">
       <v-row justify="center" class="ma-0">
         <v-col cols="5">
@@ -17,7 +101,7 @@
               <v-list rounded style="max-height: 100%; overflow-y: auto;">
                 <v-list-item-group>
                   <v-list-item
-                    v-for="(item,i) in search_entries"
+                    v-for="(item,i) in filtered_entries"
                     :key="item.email"
                     @click="item_index = i"
                   >
@@ -107,7 +191,7 @@
     <div class="hidden-md-and-up">
       <v-row justify="center" class="ma-0">
         <v-col cols="11" sm="10">
-          <v-card>
+          <v-card :loading="loading_data">
             <v-container>
               <v-select
                 flat
@@ -117,10 +201,10 @@
                 v-model="item_index"
                 menu-props="auto"
                 color="#37474F"
-                :items="search_entries.map((item,i) => ({content: item, index: i}))"
+                :items="filtered_entries.map((item,i) => ({content: item, index: i}))"
                 item-value="index"
                 no-data-text="Não encontramos nada"
-                label="Escolha uma disciplina"
+                :label="loading_data? 'Carregando itens': 'Escolha um pesquisador'"
               >
                 <template v-slot:selection="{ item }">
                   <span class="text-truncate">{{ item.content.name }}</span>
@@ -263,9 +347,9 @@ export default {
               knownledge: row[16],
               key_words: row[17].split(/\s*(;|,)\s*/)
             };
-            campi.add(di.campus);
-            unity.add(di.unity);
-            association.add(di.association);
+            if (di.campus) campi.add(di.campus);
+            if (di.unity) unity.add(di.unity);
+            if (di.association) association.add(di.association);
             this.entries.push(di);
           });
         })
@@ -305,11 +389,44 @@ export default {
   watch: {
     search: debounce(async function() {
       await this.fuzzySearch();
-    }, 500)
+    }, 500),
+    selected_campus: function() {
+      this.item_index = -1;
+    },
+    selected_unity: function() {
+      this.item_index = -1;
+    },
+    selected_association: function() {
+      this.item_index = -1;
+    }
   },
   computed: {
-    current_item() {
-      return this.search_entries[this.item_index];
+    current_item: function() {
+      if (this.item_index < 0) return null;
+      return this.filtered_entries[this.item_index];
+    },
+    filtered_entries() {
+      if (
+        !this.selected_campus.length &&
+        !this.selected_unity.length &&
+        !this.selected_association.length
+      )
+        return this.search_entries;
+
+      let filtered = [];
+      this.search_entries.forEach(item => {
+        if (
+          (!this.selected_campus.length ||
+            this.selected_campus.includes(item.campus)) &&
+          (!this.selected_unity.length ||
+            this.selected_unity.includes(item.unity)) &&
+          (!this.selected_association.length ||
+            this.selected_association.includes(item.association))
+        )
+          filtered.push(item);
+      });
+
+      return filtered;
     }
   },
   beforeMount() {

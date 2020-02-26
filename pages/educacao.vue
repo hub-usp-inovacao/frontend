@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height: 100vh;">
     <div class="panel_bg"></div>
     <Panel
       propsTitle="Educação"
@@ -249,7 +249,7 @@
     <div class="hidden-md-and-up">
       <v-row justify="center" class="ma-0">
         <v-col cols="11" sm="10">
-          <v-card>
+          <v-card :loading="loading_data">
             <v-container>
               <v-select
                 flat
@@ -261,7 +261,7 @@
                 color="#37474F"
                 :items="filtered_entries.map((item,i) => ({text: item.title, value: i}))"
                 no-data-text="Não encontramos nada"
-                label="Escolha uma disciplina"
+                :label="loading_data ? 'Carregando itens' : 'Escolha uma disciplina'"
               ></v-select>
             </v-container>
 
@@ -422,10 +422,10 @@ export default {
       let filtered = [];
       this.entries.forEach(item => {
         if (
-          (this.selected_campus.includes(item.campus) ||
-            !this.selected_campus.length) &&
-          (this.selected_unity.includes(item.unity) ||
-            !this.selected_unity.length)
+          (!this.selected_campus.length ||
+            this.selected_campus.includes(item.campus)) &&
+          (!this.selected_unity.length ||
+            this.selected_unity.includes(item.unity))
         )
           filtered.push(item);
       });
