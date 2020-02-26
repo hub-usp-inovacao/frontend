@@ -41,7 +41,6 @@
                   filled
                   hide-details
                   multiple
-                  chips
                   v-model="selected_campus"
                   menu-props="auto"
                   color="#37474F"
@@ -50,13 +49,11 @@
                   label="Campus"
                 >
                   <template v-slot:selection="{ item, index }">
-                    <v-chip v-if="index === 0">
-                      <span>{{ item }}</span>
-                    </v-chip>
+                    <span v-if="index === 0">{{ item }}</span>
                     <span
                       v-if="index === 1"
                       class="grey--text caption"
-                    >(+{{ selected_campus.length - 1 }})</span>
+                    >,&#160;(+{{ selected_campus.length - 1 }})</span>
                   </template>
                 </v-select>
               </v-container>
@@ -69,7 +66,6 @@
                   filled
                   hide-details
                   multiple
-                  chips
                   v-model="selected_unity"
                   menu-props="auto"
                   color="#37474F"
@@ -78,13 +74,11 @@
                   label="Unidade"
                 >
                   <template v-slot:selection="{ item, index }">
-                    <v-chip v-if="index === 0">
-                      <span>{{ item }}</span>
-                    </v-chip>
+                    <span v-if="index === 0">{{ item }}</span>
                     <span
                       v-if="index === 1"
                       class="grey--text caption"
-                    >(+{{ selected_unity.length - 1 }})</span>
+                    >,&#160;(+{{ selected_unity.length - 1 }})</span>
                   </template>
                 </v-select>
               </v-container>
@@ -143,7 +137,7 @@
                 <span
                   v-if="index === 1"
                   class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
+                >,&#160;(+{{ selected_campus.length - 1 }})</span>
               </template>
             </v-select>
           </v-col>
@@ -167,7 +161,7 @@
                 <span
                   v-if="index === 1"
                   class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
+                >,&#160;(+{{ selected_campus.length - 1 }})</span>
               </template>
             </v-select>
           </v-col>
@@ -371,7 +365,7 @@ export default {
       this.entries = this.tabs[0].entries;
     },
     async fuzzySearch() {
-      if (!this.search) {
+      if (!this.search.trim()) {
         this.entries = this.tabs[this.current_tab].entries;
         return;
       }

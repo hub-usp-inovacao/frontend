@@ -1,12 +1,10 @@
 <template>
-  <div style="height: 20em; position: relative;">
-    <!-- <div class="panel_bg"></div> -->
-
-    <v-row class="fill-height" align="end" justify="space-around" no-gutters>
+  <div style="height: 20rem; position: relative;">
+    <v-row class="fill-height ma-0" align="end" justify="space-around" no-gutters>
       <v-col cols="10" sm="7">
         <v-row justify="center">
           <v-col cols="11" sm="9">
-            <p class="display-2 white--text font-weight-medium">{{propsTitle}}</p>
+            <p class="display-1 white--text font-weight-medium">{{propsTitle}}</p>
             <p class="title white--text font-weight-light">{{propsDescription}}</p>
           </v-col>
         </v-row>

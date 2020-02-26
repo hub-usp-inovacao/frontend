@@ -33,7 +33,7 @@
                 <span
                   v-if="index === 1"
                   class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
+                >,&#160;(+{{ selected_campus.length - 1 }})</span>
               </template>
             </v-select>
           </v-col>
@@ -57,7 +57,7 @@
                 <span
                   v-if="index === 1"
                   class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
+                >,&#160;(+{{ selected_unity.length - 1 }})</span>
               </template>
             </v-select>
           </v-col>
@@ -81,7 +81,7 @@
                 <span
                   v-if="index === 1"
                   class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
+                >,&#160;(+{{ selected_association.length - 1 }})</span>
               </template>
             </v-select>
           </v-col>
@@ -118,7 +118,7 @@
 
             <div v-else class="fill-height">
               <v-row class="fill-height ma-0" justify="center" align="center">
-                <p v-if="loading_data" class="title font-weight-light text-center">Indexando itens</p>
+                <p v-if="loading_data" class="title font-weight-light text-center">Carregando itens</p>
                 <p
                   v-else
                   class="title font-weight-light text-center"
@@ -342,10 +342,10 @@ export default {
               description: row[11],
               url: row[12].match(regex_url),
               skills: row[13],
-              services: row[14].split(/[\s\n]*[;,][\s\n]*/),
-              equipment: row[15].split(/\s*(;|,)\s*/),
+              services: row[14].split(/[\s\n]*[;][\s\n]*/),
+              equipment: row[15].split(/[\s\n]*[;][\s\n]*/),
               knownledge: row[16],
-              key_words: row[17].split(/\s*(;|,)\s*/)
+              key_words: row[17].split(/[\s\n]*[;][\s\n]*/)
             };
             if (di.campus) campi.add(di.campus);
             if (di.unity) unity.add(di.unity);
@@ -361,7 +361,7 @@ export default {
       this.search_entries = this.entries;
     },
     async fuzzySearch() {
-      if (!this.search) {
+      if (!this.search.trim()) {
         this.search_entries = this.entries;
         return;
       }
@@ -373,10 +373,18 @@ export default {
         matchAllTokens: true,
         threshold: 0.2,
         location: 0,
-        distance: 100,
+        distance: 200,
         maxPatternLength: 32,
         minMatchCharLength: 2,
-        keys: ["description", "group_name", "unity", "campus", "key_words"]
+        keys: [
+          "description",
+          "knownledge",
+          "skills",
+          "group_name",
+          "unity",
+          "campus",
+          "key_words"
+        ]
       };
 
       await this.$search(this.search.trim(), this.entries, options)
