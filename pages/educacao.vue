@@ -268,8 +268,8 @@ export default {
         })
         .finally(() => (this.loading_data = false));
 
-      this.campi_list = Array.from(campi);
-      this.unity_list = Array.from(unity);
+      this.campi_list = Array.from(campi).sort(this.compare_string);
+      this.unity_list = Array.from(unity).sort(this.compare_string);
       this.entries = this.tabs[0].entries;
     },
     async fuzzySearch() {
@@ -300,6 +300,9 @@ export default {
           this.entries = results;
         })
         .finally((this.loading_search = false));
+    },
+    compare_string(a, b) {
+      return a.localeCompare(b);
     }
   },
   watch: {

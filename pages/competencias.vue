@@ -307,10 +307,10 @@ export default {
         })
         .finally(() => (this.loading_data = false));
 
-      this.campi_list = Array.from(campi);
-      this.unity_list = Array.from(unity);
-      this.association_list = Array.from(association);
-      this.known_list = Array.from(known);
+      this.campi_list = Array.from(campi).sort(this.compare_string);
+      this.unity_list = Array.from(unity).sort(this.compare_string);
+      this.association_list = Array.from(association).sort(this.compare_string);
+      this.known_list = Array.from(known).sort(this.compare_string);
       this.search_entries = this.entries;
     },
     async fuzzySearch() {
@@ -361,6 +361,9 @@ export default {
       )
         return true;
       return false;
+    },
+    compare_string(a, b) {
+      return a.localeCompare(b);
     }
   },
   watch: {
