@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p class="display-2">Página em construção</p>
+    <Panel url="https://forms.gle/LjSkgb46xqcQdkkv6" />
+    <v-container>
+      <p class="display-2 text-center">Página em construção</p>
+    </v-container>
   </div>
 </template>
 

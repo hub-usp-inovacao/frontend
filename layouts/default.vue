@@ -7,7 +7,7 @@
         :key="i"
         :to="item.to"
         class="white--text mx-2 text-capitalize"
-        color="#039BE5"
+        color="secondary"
         active-class
         depressed
         rounded
@@ -67,8 +67,8 @@ export default {
         to: "/competencias"
       },
       {
-        title: "Iniciativas",
-        to: "/competencias"
+        title: "Inovacão",
+        to: "/inovacao"
       },
       {
         title: "Educação",

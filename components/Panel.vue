@@ -4,8 +4,13 @@
       <v-col cols="10" sm="7">
         <v-row justify="center">
           <v-col cols="11" sm="9">
-            <p class="display-1 white--text font-weight-medium">{{propsTitle}}</p>
-            <p class="title white--text font-weight-light">{{propsDescription}}</p>
+            <p class="display-1 white--text font-weight-medium">{{title}}</p>
+
+            <p class="title white--text font-weight-light">{{description}}</p>
+
+            <v-btn v-if="url" :href="url" rounded large depressed color="secondary">
+              <span class="white--text">Conecte-se</span>
+            </v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -20,7 +25,7 @@
           counter="32"
           v-model="typed"
           append-outer-icon="search"
-          :loading="propsLoad"
+          :loading="loading"
           :style="this.$vuetify.breakpoint.smAndDown ? 'width: 90%' : 'width: 70%'"
         ></v-text-field>
       </v-col>
@@ -33,7 +38,7 @@ export default {
   data: () => ({
     typed: ""
   }),
-  props: ["propsTitle", "propsDescription", "propsUrl", "propsLoad"],
+  props: ["title", "description", "url", "loading"],
   watch: {
     typed(p) {
       this.$emit("input", p);

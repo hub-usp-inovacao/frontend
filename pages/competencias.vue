@@ -1,10 +1,10 @@
 <template>
   <div style="min-height: 100vh;">
     <Panel
-      propsTitle="Competências"
-      propsDescription="Descubra as competências e áreas de atuação dos pesquisadores da USP."
-      propsUrl="https://forms.gle/dDooKL5G2sApfjqb6"
-      :propsLoad="loading_search"
+      title="Competências"
+      description="Descubra as competências e áreas de atuação dos pesquisadores da USP."
+      url="https://forms.gle/dDooKL5G2sApfjqb6"
+      :loading="loading_search"
       @input="search = $event"
     />
 
@@ -83,6 +83,13 @@
                 <p class="body-2 font-weight-light my-0">{{current_item.unity}}</p>
               </v-container>
 
+              <v-container px-6 py-0>
+                <p class="body-2">
+                  Contato:&#160;
+                  <span class="font-weight-light">{{current_item.email}}</span>
+                </p>
+              </v-container>
+
               <v-container px-6>
                 <p class="body-1 font-weight-medium my-0">
                   {{current_item.role}}
@@ -111,14 +118,22 @@
                 </p>
               </v-container>
 
+              <v-container px-6>
+                <p class="body-1 font-weight-medium my-0">Equipamentos:</p>
+
+                <p
+                  v-for="item in current_item.equipment"
+                  :key="item"
+                  class="body-2 font-weight-light my-0"
+                >
+                  <span v-if="item">&bull;</span>
+                  {{item}}
+                </p>
+              </v-container>
+
               <v-card-actions v-if="current_item.url">
                 <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="current_item.url[0]"
-                >Saiba mais</v-btn>
+                <v-btn depressed dark color="primary" :href="current_item.url[0]">Saiba mais</v-btn>
                 <v-spacer />
               </v-card-actions>
             </div>
@@ -201,12 +216,7 @@
 
               <v-card-actions v-if="current_item.url">
                 <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="current_item.url[0]"
-                >Saiba mais</v-btn>
+                <v-btn depressed dark color="primary" :href="current_item.url[0]">Saiba mais</v-btn>
                 <v-spacer />
               </v-card-actions>
             </div>

@@ -1,10 +1,10 @@
 <template>
   <div style="min-height: 100vh;">
     <Panel
-      propsTitle="Educação"
-      propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
-      propsUrl="https://forms.gle/uFRgcqZ4SdbHUqe39"
-      :propsLoad="loading_search"
+      title="Educação"
+      description="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
+      url="https://forms.gle/tAuVq5oAYiGo52u46"
+      :loading="loading_search"
       @input="search = $event"
     />
 
