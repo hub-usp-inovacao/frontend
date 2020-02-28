@@ -186,6 +186,13 @@
                 <p class="body-2 font-weight-light my-0">{{current_item.unity}}</p>
               </v-container>
 
+              <v-container px-6 py-0>
+                <p class="body-2">
+                  Contato:&#160;
+                  <span class="font-weight-light">{{current_item.email}}</span>
+                </p>
+              </v-container>
+
               <v-container px-6>
                 <p class="body-1 font-weight-medium my-0">
                   {{current_item.role}}
@@ -206,6 +213,19 @@
 
                 <p
                   v-for="item in current_item.services"
+                  :key="item"
+                  class="body-2 font-weight-light my-0"
+                >
+                  <span v-if="item">&bull;</span>
+                  {{item}}
+                </p>
+              </v-container>
+
+              <v-container px-6>
+                <p class="body-1 font-weight-medium my-0">Equipamentos:</p>
+
+                <p
+                  v-for="item in current_item.equipment"
                   :key="item"
                   class="body-2 font-weight-light my-0"
                 >

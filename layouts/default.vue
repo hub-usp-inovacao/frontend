@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="page-t">
     <div class="panel_bg"></div>
     <v-toolbar class="hidden-sm-and-down" color="transparent" style="right: 0" absolute flat>
       <v-btn
@@ -14,11 +14,11 @@
         small
       >{{item.title}}</v-btn>
     </v-toolbar>
-    <v-app-bar class="hidden-md-and-up" color="white" dense flat>
+    <v-app-bar class="hidden-md-and-up" color="white" dense flat fixed>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-content>
+    <v-content :class="$vuetify.breakpoint.xs ? 'mt-12' : ''">
       <!-- <v-bottom-navigation class="hidden-md-and-up" fixed grow shift>
         <v-btn v-for="item in items" :key="item.title" :to="item.to">
           <span>{{item.title}}</span>

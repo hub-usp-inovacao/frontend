@@ -9,7 +9,7 @@
             <p class="title white--text font-weight-light">{{description}}</p>
 
             <v-btn v-if="url" :href="url" rounded large depressed color="secondary">
-              <span class="white--text">Conecte-se</span>
+              <span class="white--text text-capitalize">Conecte-se</span>
             </v-btn>
           </v-col>
         </v-row>

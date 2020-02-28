@@ -13,7 +13,11 @@
       :label="label"
     >
       <template v-slot:selection="{ item, index }">
-        <span v-if="index === 0" class="text-truncate">{{ item }}</span>
+        <span
+          v-if="index === 0"
+          class="text-truncate"
+          :style="selected.length > 1 ? 'max-width: 50%' : 'max-width: 80%'"
+        >{{ item }}</span>
         <span v-if="index === 1" class="gray--text caption">,&#160;(+{{ selected.length - 1 }})</span>
       </template>
     </v-select>
