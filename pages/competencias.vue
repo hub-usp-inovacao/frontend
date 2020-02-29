@@ -2,7 +2,7 @@
   <div style="min-height: 100vh;">
     <Panel
       title="Competências"
-      description="Descubra as competências e áreas de atuação dos pesquisadores da USP."
+      description="Nesta seção você pode consultar quais competências os pesquisadores da USP dominam, quem são eles e como contatá-los."
       url="https://forms.gle/dDooKL5G2sApfjqb6"
       :loading="loading_search"
       @input="search = $event"
@@ -367,7 +367,9 @@ export default {
           "group_name",
           "unity",
           "campus",
-          "key_words"
+          "key_words",
+          "equipment",
+          "services"
         ]
       };
 

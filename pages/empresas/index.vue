@@ -1,8 +1,14 @@
 <template>
   <div>
-    <Panel url="https://forms.gle/LjSkgb46xqcQdkkv6" />
-    <v-container>
-      <p class="display-2 text-center">Página em construção</p>
+    <Panel
+      title="Empresas"
+      description="Incubadoras e outras estruturas da Universidade facilitam a criação de empresas e negócios por parte de estudantes e pesquisadores. Estas são as empresas com DNA USP, que estão organizadas, no Portal Solus, por área de atuação e tecnologias aplicáveis."
+      url="https://forms.gle/LjSkgb46xqcQdkkv6"
+    />
+    <v-container style="height: 20rem;">
+      <v-row class="fill-height" justify="center" align="center">
+        <div align="center" class="display-2 text-center">Página em construção</div>
+      </v-row>
     </v-container>
   </div>
 </template>

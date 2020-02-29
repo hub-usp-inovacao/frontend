@@ -19,13 +19,6 @@
     </v-app-bar>
 
     <v-content :class="$vuetify.breakpoint.xs ? 'mt-12' : ''">
-      <!-- <v-bottom-navigation class="hidden-md-and-up" fixed grow shift>
-        <v-btn v-for="item in items" :key="item.title" :to="item.to">
-          <span>{{item.title}}</span>
-          <v-icon>mdi-book-open-page-variant</v-icon>
-        </v-btn>
-      </v-bottom-navigation>-->
-
       <nuxt />
     </v-content>
     <Footer />
@@ -111,7 +104,7 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 40rem;
+  height: 50%;
 
   background: #ffa726;
   transform: skewY(-5deg);

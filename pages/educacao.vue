@@ -2,7 +2,7 @@
   <div style="min-height: 100vh;">
     <Panel
       title="Educação"
-      description="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
+      description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas do Empreendedorismo e da Inovação. Ao fazer uma busca, você encontrará as unidades, códigos e links de acesso para as emendas no sistema institucional da Universidade, o Júpiter"
       url="https://forms.gle/tAuVq5oAYiGo52u46"
       :loading="loading_search"
       @input="search = $event"
@@ -113,7 +113,7 @@
 
             <div v-else class="fill-height">
               <v-row class="fill-height ma-0" justify="center" align="center">
-                <p v-if="loading_data" class="title font-weight-light text-center">Indexando itens</p>
+                <p v-if="loading_data" class="title font-weight-light text-center">Carregando itens</p>
                 <p
                   v-else
                   class="title font-weight-light text-center"

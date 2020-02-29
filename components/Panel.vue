@@ -1,6 +1,6 @@
 <template>
-  <div style="height: 20rem; position: relative;">
-    <v-row class="fill-height ma-0" align="end" justify="space-around" no-gutters>
+  <div class="mt-12" style="position: relative;">
+    <v-row class="fill-height ma-0" align="center" justify="space-around" no-gutters>
       <v-col cols="10" sm="7">
         <v-row justify="center">
           <v-col cols="11" sm="9">
