@@ -1,35 +1,46 @@
 <template>
   <div>
-    <v-app>
+    <v-app style="max-height: 100vh;">
       <v-carousel cycle height="100%" hide-delimiters :show-arrows="false">
         <v-carousel-item v-for="(photo,i) in photos" :key="i" :src="photo"></v-carousel-item>
       </v-carousel>
 
-      <div style="position: absolute; top: 0; height: 100%; width: 100%;">
-        <v-row class="fill-height fit-page mx-0">
+      <div style="position: absolute; top: 0; height: 100%; width: 100%; overflow: auto;">
+        <v-row class="fill-height fit-page ma-0">
           <v-col
-            style="background-color: rgba(255, 167, 38, 0.9); "
-            cols="12"
-            sm="8"
-            md="6"
+            style="background-color: rgba(255, 167, 38, 0.9)"
             align-self="stretch"
+            cols="12"
+            sm="10"
+            md="7"
           >
             <v-row class="fill-height" justify="center">
-              <v-col align-self="center" cols="10" sm="8">
+              <v-col align-self="center" cols="11" sm="10" class="pa-0">
                 <v-container>
-                  <p class="display-2 white--text font-weight-medium">Portal Solus</p>
-                  <p class="headline white--text font-weight-light">
-                    Faça uma busca e conheça a
-                    inovação e o empreendedorismo na Universidade de São Paulo
-                  </p>
+                  <p
+                    class="white--text font-weight-medium"
+                    :class="$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2'"
+                  >Portal Solus</p>
+
+                  <p
+                    class="white--text ma-0"
+                    :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                  >Aqui você encontra as mais diversas informações sobre empreendedorismo e inovação na Universidade de São Paulo</p>
+
+                  <p
+                    class="white--text font-weight-light"
+                    :class="$vuetify.breakpoint.smAndDown ? 'body-2' : 'body-1'"
+                  >Você pode navegar usando as páginas específicas ou fazer uma busca geral utilizando palavras-chave.</p>
+
                   <v-text-field
                     solo
                     flat
                     rounded
                     color="white"
-                    label="Buscar no Solus"
+                    label="Buscar"
                     append-outer-icon="search"
-                    :style="$vuetify.breakpoint.xs ? 'width: 100%' : 'width: 90%'"
+                    :dense="$vuetify.breakpoint.smAndDown"
+                    :style="setSearchBarWidth"
                   ></v-text-field>
                 </v-container>
               </v-col>
@@ -40,68 +51,83 @@
     </v-app>
 
     <v-app>
-      <v-container fluid fill-height style="background: linear-gradient(rgba(0,0,0,0.15), white);">
-        <v-container>
-          <v-row align="baseline">
-            <v-col>
-              <v-row justify="center">
-                <v-col>
-                  <p class="headline font-weight-regular" align="center">Empresas com DNA USP</p>
-                </v-col>
-              </v-row>
+      <v-container fill-height>
+        <v-row class="ma-0" align="center">
+          <v-col cols="12" sm="7">
+            <p class="display-1 font-weight-medium ma-0">Um lugar só com:</p>
 
-              <v-row justify="space-around" align="center">
-                <img :src="require('@/images/logo_ifood.svg')" style="height: 12vh;" />
+            <v-row
+              class="fill-height"
+              :class="$vuetify.breakpoint.smAndDown ? 'ml-2' : 'ml-6'"
+              align-content="space-around"
+            >
+              <v-col cols="12">
+                <p
+                  class="title font-weight-regular"
+                >&bull; As diversas iniciativas e estruturas da USP.</p>
+              </v-col>
 
-                <img :src="require('@/images/logo_99taxi.png')" style="height: 12vh;" />
+              <v-col cols="12">
+                <p class="title font-weight-regular">&bull; Os pesquisadores e suas competências.</p>
+              </v-col>
 
-                <img :src="require('@/images/logo_gympass.png')" style="height: 4vh;" />
-              </v-row>
+              <v-col cols="12">
+                <p
+                  class="title font-weight-regular"
+                >&bull; Todas as patentes que a USP detém e disponibiliza para parceria com empresas e outras instituições interessadas.</p>
+              </v-col>
 
-              <v-row align="center">
-                <v-col cols="12" sm="6">
-                  <p class="headline font-weight-medium">Um mundo de inovações.</p>
-                  <p
-                    class="title font-weight-light"
-                  >O Portal Solus conecta investidores, empreendedores e entusiastas às iniciativas e aos projetos ligados à inovação dentro da USP</p>
-                </v-col>
+              <v-col cols="12">
+                <p
+                  class="title font-weight-regular"
+                >&bull; As disciplinas de graduação e pós-graduação sobre empreendedorismo e inovação.</p>
+              </v-col>
 
-                <v-col>
-                  <img
-                    :src="require('@/vectors/home_globo.svg')"
-                    style="max-height: 80vh; max-width: 100%; object-fit: contain;"
-                  />
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-container>
+              <v-col cols="12">
+                <p
+                  class="title font-weight-regular"
+                >&bull; As empresas com DNA USP, criadas a partir de iniciativas incubadas na USP ou que seus fundadores e criadores foram alunos ou pesquisadores da USP.</p>
+              </v-col>
+            </v-row>
+          </v-col>
+
+          <v-col align-self="end">
+            <img
+              :src="require('@/vectors/home_globo.svg')"
+              style="max-height: 80vh; max-width: 100%; content-fit: contain"
+            />
+          </v-col>
+        </v-row>
       </v-container>
     </v-app>
 
     <v-app>
       <v-container fill-height>
-        <v-row justify="center" align="baseline">
-          <v-col cols="10" sm="8">
-            <v-row justify="center">
-              <v-col>
-                <p
-                  class="headline font-weight-medium text-center"
-                >Com uma extensa biblioteca disponível.</p>
-                <p
-                  class="title font-weight-light"
-                >Tenha acesso a um grande acervo de projetos, espaços de coworking, empresas juniores, instituições e muito mais.</p>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
+        <v-container>
+          <p class="display-1 font-weight-medium">USP: Um lugar para empreender e inovar</p>
+        </v-container>
+
+        <v-container>
+          <p
+            class="title font-weight-light"
+          >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
+        </v-container>
       </v-container>
 
-      <v-img
-        :src="require('@/images/background_cards.svg')"
-        width="100vw"
-        gradient="white, transparent 30%"
-      ></v-img>
+      <v-row justify="center" align="space-around">
+        <v-col cols="3">
+          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
+        </v-col>
+        <v-col cols="3">
+          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
+        </v-col>
+        <v-col cols="3">
+          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
+        </v-col>
+        <v-col cols="3">
+          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
+        </v-col>
+      </v-row>
     </v-app>
 
     <v-app>
@@ -171,6 +197,18 @@ export default {
       "http://imagens.usp.br/wp-content/uploads/Projeto-Arte-e-Ci%C3%AAncia_IF_Foto-Marcos-Santos_U0Y8223-1-scaled.jpg"
     ]
   }),
+  computed: {
+    setSearchBarWidth() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return { width: "100%" };
+        case "sm":
+          return { width: "80%" };
+        default:
+          return { width: "60%" };
+      }
+    }
+  },
   head: {
     title: "Solus",
     meta: [

@@ -18,7 +18,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-content :class="$vuetify.breakpoint.xs ? 'mt-12' : ''">
+    <v-content :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <nuxt />
     </v-content>
     <Footer />
