@@ -104,7 +104,7 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 50%;
+  height: 100vh;
 
   background: #ffa726;
   transform: skewY(-5deg);

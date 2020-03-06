@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Land -->
     <v-app style="max-height: 100vh;">
       <v-carousel cycle height="100%" hide-delimiters :show-arrows="false">
         <v-carousel-item v-for="(photo,i) in photos" :key="i" :src="photo"></v-carousel-item>
@@ -36,7 +37,6 @@
                     solo
                     flat
                     rounded
-                    color="white"
                     label="Buscar"
                     append-outer-icon="search"
                     :dense="$vuetify.breakpoint.smAndDown"
@@ -50,6 +50,7 @@
       </div>
     </v-app>
 
+    <!-- Um lugar só com... -->
     <v-app>
       <v-container fill-height>
         <v-row class="ma-0" align="center">
@@ -63,29 +64,29 @@
             >
               <v-col cols="12">
                 <p
-                  class="title font-weight-regular"
+                  class="title font-weight-light"
                 >&bull; As diversas iniciativas e estruturas da USP.</p>
               </v-col>
 
               <v-col cols="12">
-                <p class="title font-weight-regular">&bull; Os pesquisadores e suas competências.</p>
+                <p class="title font-weight-light">&bull; Os pesquisadores e suas competências.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  class="title font-weight-regular"
+                  class="title font-weight-light"
                 >&bull; Todas as patentes que a USP detém e disponibiliza para parceria com empresas e outras instituições interessadas.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  class="title font-weight-regular"
+                  class="title font-weight-light"
                 >&bull; As disciplinas de graduação e pós-graduação sobre empreendedorismo e inovação.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  class="title font-weight-regular"
+                  class="title font-weight-light"
                 >&bull; As empresas com DNA USP, criadas a partir de iniciativas incubadas na USP ou que seus fundadores e criadores foram alunos ou pesquisadores da USP.</p>
               </v-col>
             </v-row>
@@ -101,53 +102,124 @@
       </v-container>
     </v-app>
 
+    <!-- USP: Um lugar para empreender... -->
     <v-app>
       <v-container fill-height>
         <v-container>
-          <p class="display-1 font-weight-medium">USP: Um lugar para empreender e inovar</p>
-        </v-container>
+          <v-container>
+            <p class="display-1 font-weight-medium">USP: Um lugar para empreender e inovar</p>
+          </v-container>
 
-        <v-container>
-          <p
-            class="title font-weight-light"
-          >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
-        </v-container>
-      </v-container>
+          <v-container>
+            <p
+              class="title font-weight-light"
+            >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
+          </v-container>
 
-      <v-row justify="center" align="space-around">
-        <v-col cols="3">
-          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
-        </v-col>
-        <v-col cols="3">
-          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
-        </v-col>
-        <v-col cols="3">
-          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
-        </v-col>
-        <v-col cols="3">
-          <v-img :src="require('@/images/logo_ifood.svg')" height="10rem" contain />
-        </v-col>
-      </v-row>
-    </v-app>
+          <v-row justify="center" align="center" class="ma-0">
+            <v-col cols="6" lg="3">
+              <v-row justify="center">
+                <img :src="require('@/vectors/home_patents_icon.svg')" />
+              </v-row>
 
-    <v-app>
-      <v-container fill-height fluid style="background-color: rgba(255, 167, 38, 0.9); ">
-        <v-container>
-          <v-row justify="center" align="baseline">
-            <v-col cols="10" sm="6">
-              <p
-                class="headline white--text font-weight-medium text-center"
-              >Abrangendo todos os campi da USP.</p>
-
-              <p
-                class="title white--text font-weight-light text-center"
-              >De Ribeirão Preto a Lorena. O Solus tem cobertura em todos os projetos da Universidade</p>
+              <p class="mt-5 display-1 text-center" style="color: #4AD5FF">Licenciamento de patentes</p>
             </v-col>
 
-            <img
-              :src="require('@/vectors/home_mapa.svg')"
-              style="max-width: 80vw; max-height: 80vh;"
-            />
+            <v-col cols="6" lg="3">
+              <v-row justify="center">
+                <img :src="require('@/vectors/home_partnership_icon.svg')" />
+              </v-row>
+
+              <p class="mt-5 display-1 text-center" style="color: #4AD5FF">Parcerias de pesquisas</p>
+            </v-col>
+
+            <v-col cols="6" lg="3">
+              <v-row justify="center">
+                <img :src="require('@/vectors/home_teaching_icon.svg')" />
+              </v-row>
+
+              <p class="mt-5 display-1 text-center" style="color: #4AD5FF">Cursos</p>
+            </v-col>
+
+            <v-col cols="6" lg="3">
+              <v-row justify="center">
+                <img :src="require('@/vectors/home_events_icon.svg')" />
+              </v-row>
+
+              <p class="mt-5 display-1 text-center" style="color: #4AD5FF">Eventos</p>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+
+    <!-- Solus: Encontre o que voce... -->
+    <v-app>
+      <v-container fill-height fluid style="background-color: #3890E8 ">
+        <v-container fill-height>
+          <v-row class="ma-0 fill-height" align="center">
+            <v-col cols="12" sm="7">
+              <p
+                class="display-1 white--text font-weight-medium mb-8"
+              >Solus: Encontre o que você procura</p>
+
+              <p class="title white--text font-weight-light">
+                O Portal Solus facilita a conexão entre a sociedade e a USP.
+                Simples e intuitivo, basta digitar palavras-chave na ferramenta de
+                busca para obter os contatos de instituições, estruturas, empresas
+                e pesquisadores especialistas nos assuntos buscados.
+              </p>
+            </v-col>
+
+            <v-col cols="12" sm="5">
+              <v-card flat tile width="100%" height="15rem" color="#38E8E2">
+                <v-container fill-height>
+                  <v-row justify="center" class="ma-0">
+                    <v-col cols="12">
+                      <v-text-field solo flat rounded readonly append-outer-icon="search">
+                        <template v-slot:label>
+                          <vue-typer :text="search_bar"></vue-typer>
+                        </template>
+                      </v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+
+    <!-- DNA USP -->
+    <v-app>
+      <v-container fill-height>
+        <v-container>
+          <v-row justify="center" class="ma-0">
+            <v-col cols="12" md="5">
+              <v-row justify="center">
+                <img
+                  :src="require('@/vectors/home_dna_usp.svg')"
+                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                />
+              </v-row>
+            </v-col>
+
+            <v-col cols="12" md="7">
+              <p class="display-1 font-weight-medium ma-0">Empresas com DNA USP:</p>
+
+              <p
+                class="display-1 font-weight-medium"
+              >Resultados de uma Universidade Inovadora e Empreendora</p>
+
+              <p class="title font-weight-light">
+                A marca DNA USP foi criada para identificar empresas constituídas por
+                alunos, ex-alunos e pesquisadores que passaram pela Universidade de
+                São Paulo ao longo dos anos, bem como empresas resultantes de
+                processos de incubação ou de aceleração em alguma das incubadoras
+                associadas à USP.
+              </p>
+            </v-col>
           </v-row>
         </v-container>
       </v-container>
@@ -158,43 +230,17 @@
 <script>
 export default {
   data: () => ({
-    options: [
-      {
-        title: "Iniciativas",
-        description:
-          "Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade.",
-        to: "/iniciativas"
-      },
-      {
-        title: "Desenvolvimento & Inovação",
-        description:
-          "Laboratórios e grupos de pesquisa que atuam em projetos de inovação e empreendedorismo.",
-        to: "/desenvolvimento-e-inovacao"
-      },
-      {
-        title: "Educação",
-        description:
-          "Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo.",
-        to: "/educacao"
-      },
-      {
-        title: "Empresas",
-        description:
-          "Diretório de empresas criadas por alunos e ex-alunos USP ao longo dos anos.",
-        to: "/empresas"
-      }
+    search_bar: [
+      "Buscar",
+      "Biotecnologia",
+      "Laboratórios",
+      "Inteligência Artificial"
     ],
     photos: [
       "http://www.imagens.usp.br/wp-content/uploads/Pra%C3%A7a_Relogio_106-17_Foto-Cec%C3%ADlia-Bastos-09.jpg",
       "http://imagens.usp.br/wp-content/uploads/Nova-Vers%C3%A3o-do-Chip-Sampa-Foto-Marcos-Santos-USP-Imagens-12.jpg",
       "http://imagens.usp.br/wp-content/uploads/Centro-de-Pesquisa-e-Inova%C3%A7%C3%A3o-Inova-USP_U0Y8422.jpg",
       "http://imagens.usp.br/wp-content/uploads/27112013simuladorpolitpnfotomarcossantos004.jpg"
-    ],
-    urls: [
-      "http://imagens.usp.br/wp-content/uploads/Poli_Febrace_81-16_foto-Cec%C3%ADlia-Bastos-30.jpg",
-      "http://imagens.usp.br/wp-content/uploads/Instala%C3%A7%C3%B5es-Instituto-Pasteur-USP_Foto-Marcos-Santos_U0Y8339.jpg",
-      "http://imagens.usp.br/wp-content/uploads/Lab._Engenharia_Separa%C3%A7%C3%B5es_FVZEA_285-18_foto-Cec%C3%ADlia-Bastos-34.jpg",
-      "http://imagens.usp.br/wp-content/uploads/Projeto-Arte-e-Ci%C3%AAncia_IF_Foto-Marcos-Santos_U0Y8223-1-scaled.jpg"
     ]
   }),
   computed: {

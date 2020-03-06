@@ -39,8 +39,9 @@ export default {
    */
   plugins: [
     { src: "~/plugins/aos.js", ssr: false },
-    { src: "~/plugins/vue-masonry.js", ssr: true },
-    { src: "~/plugins/vue-fuse.js", ssr: true },
+    { src: "~/plugins/vue-fuse.js", ssr: false },
+    { src: "~/plugins/vue-masonry.js", ssr: false },
+    { src: "~/plugins/vue-typer.js", ssr: false },
   ],
 
   /*
