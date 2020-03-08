@@ -38,7 +38,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: "~/plugins/breakpoint.js", mode: 'client' },
+    { src: "~/plugins/breakpoint.js" },
     { src: "~/plugins/vue-fuse.js", mode: 'client' },
     { src: "~/plugins/vue-masonry.js", mode: 'client' },
     { src: "~/plugins/vue-typer.js", mode: 'client' },

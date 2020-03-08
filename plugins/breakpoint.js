@@ -20,12 +20,14 @@ const defaults = {
   xlOnly: false
 }
 
-//create a property on the prototype of all instances that holds the breakpoint state
-Vue.prototype.$breakpoint = new Vue({
+let breakpoint = new Vue({
   data: () => ({ ...defaults })
 })
 
-export default async function ({ app }) {
+//create a property on the prototype of all instances that holds the breakpoint state
+Vue.prototype.$breakpoint = breakpoint
+
+export default async function ({ app }, inject) {
   //init mixins and the watchers if they don't exist yet
   app.mixins = app.mixins || []
   app.watch = app.watch || {}
