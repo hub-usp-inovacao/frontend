@@ -20,17 +20,17 @@
                 <v-container>
                   <p
                     class="white--text font-weight-medium"
-                    :class="$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2'"
+                    :class="$breakpoint.smAndDown ? 'display-1' : 'display-2'"
                   >Portal Solus</p>
 
                   <p
                     class="white--text ma-0"
-                    :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   >Aqui você encontra as mais diversas informações sobre empreendedorismo e inovação na Universidade de São Paulo</p>
 
                   <p
                     class="white--text font-weight-light"
-                    :class="$vuetify.breakpoint.smAndDown ? 'body-2' : 'body-1'"
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'body-1'"
                   >Você pode navegar usando as páginas específicas ou fazer uma busca geral utilizando palavras-chave.</p>
 
                   <v-text-field
@@ -39,7 +39,7 @@
                     rounded
                     label="Buscar"
                     append-outer-icon="search"
-                    :dense="$vuetify.breakpoint.smAndDown"
+                    :dense="$breakpoint.smAndDown"
                     :style="setSearchBarWidth"
                   ></v-text-field>
                 </v-container>
@@ -56,46 +56,46 @@
         <v-row class="ma-0" align="center">
           <v-col cols="12" sm="7">
             <p
-              :class="$vuetify.breakpoint.smAndDown ? 'headline' : 'display-1'"
+              :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium"
             >Um lugar só com:</p>
 
             <v-row
               class="fill-height"
-              :class="$vuetify.breakpoint.smAndDown ? 'ml-2' : 'ml-6'"
+              :class="$breakpoint.smAndDown ? 'ml-2' : 'ml-6'"
               align-content="space-around"
             >
               <v-col cols="12">
                 <p
-                  :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                  :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
                 >&bull; As diversas iniciativas e estruturas da USP.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                  :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
                 >&bull; Os pesquisadores e suas competências.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                  :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
                 >&bull; Todas as patentes que a USP detém e disponibiliza para parceria com empresas e outras instituições interessadas.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                  :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
                 >&bull; As disciplinas de graduação e pós-graduação sobre empreendedorismo e inovação.</p>
               </v-col>
 
               <v-col cols="12">
                 <p
-                  :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                  :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
                 >&bull; As empresas com DNA USP, criadas a partir de iniciativas incubadas na USP ou que seus fundadores e criadores foram alunos ou pesquisadores da USP.</p>
               </v-col>
@@ -118,14 +118,14 @@
         <v-container>
           <v-container>
             <p
-              :class="$vuetify.breakpoint.smAndDown ? 'headline' : 'display-1'"
+              :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium"
             >USP: Um lugar para empreender e inovar</p>
           </v-container>
 
           <v-container>
             <p
-              :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+              :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="font-weight-light"
             >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
           </v-container>
@@ -140,8 +140,8 @@
               </v-row>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center"
+                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                class="mt-5 text-center font-weight-medium"
                 style="color: #4AD5FF"
               >Licenciamento de patentes</p>
             </v-col>
@@ -155,8 +155,8 @@
               </v-row>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center"
+                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                class="mt-5 text-center font-weight-medium"
                 style="color: #4AD5FF"
               >Parcerias de pesquisas</p>
             </v-col>
@@ -170,8 +170,8 @@
               </v-row>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center"
+                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                class="mt-5 text-center font-weight-medium"
                 style="color: #4AD5FF"
               >Cursos</p>
             </v-col>
@@ -185,8 +185,8 @@
               </v-row>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center"
+                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                class="mt-5 text-center font-weight-medium"
                 style="color: #4AD5FF"
               >Eventos</p>
             </v-col>
@@ -202,12 +202,12 @@
           <v-row class="ma-0 fill-height" align="center">
             <v-col cols="12" sm="7">
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'headline' : 'display-1'"
+                :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium white--text mb-8"
               >Solus: Encontre o que você procura</p>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                 class="white--text font-weight-light"
               >
                 O Portal Solus facilita a conexão entre a sociedade e a USP.
@@ -253,19 +253,16 @@
 
             <v-col cols="12" md="7">
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'headline' : 'display-1'"
+                :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium mb-0"
               >Empresas com DNA USP:</p>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'headline' : 'display-1'"
+                :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium mb-8"
               >Resultados de uma Universidade Inovadora e Empreendora</p>
 
-              <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
-                class="font-weight-light"
-              >
+              <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
                 A marca DNA USP foi criada para identificar empresas constituídas por
                 alunos, ex-alunos e pesquisadores que passaram pela Universidade de
                 São Paulo ao longo dos anos, bem como empresas resultantes de
@@ -314,12 +311,12 @@
           <v-row class="ma-0 fill-height" align="center">
             <v-col cols="12" md="7">
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'headline' : 'display-1'"
+                :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium mb-8"
               >AUSPIN: A Agência de Inovação e Empreendedorismo da USP</p>
 
               <p
-                :class="$vuetify.breakpoint.smAndDown ? 'body-1' : 'title'"
+                :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                 class="font-weight-light"
               >É responsável pelo registro e licenciamento de propriedade intelectual, pela transferência de tecnologias desenvolvidas na USP para empresas e organizações, e pelo fomento ao empreendedorismo junto a todas as unidades - faculdades, institutos, laboratórios - da USP. Com escritórios e representações que atendem todos os campi da USP, a AUSPIN está à sua disposição para facilitar seu contato com pesquisadores, laboratórios, empresas e estruturas relacionadas à inovação e ao empreendedorismo na Universidade de São Paulo.</p>
             </v-col>
@@ -347,6 +344,15 @@
 
 <script>
 export default {
+  head: {
+    title: "Solus",
+    meta: [
+      {
+        name: "google-site-verification",
+        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE"
+      }
+    ]
+  },
   data: () => ({
     search_bar: [
       "Buscar",
@@ -372,15 +378,6 @@ export default {
           return { width: "60%" };
       }
     }
-  },
-  head: {
-    title: "Solus",
-    meta: [
-      {
-        name: "google-site-verification",
-        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE"
-      }
-    ]
   }
 };
 </script>
