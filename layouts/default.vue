@@ -49,19 +49,23 @@ export default {
     };
   },
   data: () => ({
-    title: "SOLUS",
+    activeItem: 0,
     items: [
       {
         title: "Home",
         to: "/"
       },
       {
-        title: "Competências",
-        to: "/competencias"
+        title: "Iniciativas",
+        to: "/iniciativas"
       },
       {
-        title: "Inovacão",
+        title: "P&D&I",
         to: "/inovacao"
+      },
+      {
+        title: "Competências",
+        to: "/competencias"
       },
       {
         title: "Educação",
