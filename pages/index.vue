@@ -141,7 +141,7 @@
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-medium"
+                class="mt-5 text-center font-weight-regular"
                 style="color: #4AD5FF"
               >Licenciamento de patentes</p>
             </v-col>
@@ -156,7 +156,7 @@
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-medium"
+                class="mt-5 text-center font-weight-regular"
                 style="color: #4AD5FF"
               >Parcerias de pesquisas</p>
             </v-col>
@@ -171,7 +171,7 @@
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-medium"
+                class="mt-5 text-center font-weight-regular"
                 style="color: #4AD5FF"
               >Cursos</p>
             </v-col>
@@ -186,7 +186,7 @@
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-medium"
+                class="mt-5 text-center font-weight-regular"
                 style="color: #4AD5FF"
               >Eventos</p>
             </v-col>

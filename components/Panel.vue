@@ -2,21 +2,21 @@
   <v-container fill-height fluid mt-12 style="position: relative; min-height: 60vh">
     <v-row class="ma-0" align="center" justify="space-around" no-gutters>
       <v-col>
-        <v-row justify="center">
-          <v-col cols="11" sm="9">
+        <v-row class="ma-0" justify="center">
+          <v-col cols="12" sm="9">
             <p class="display-2 font-weight-regular">{{title}}</p>
 
             <p class="title font-weight-light" style="line-height: normal;">{{description}}</p>
 
-            <v-btn v-if="url" :href="url" rounded large depressed color="secondary">
+            <!-- <v-btn v-if="url" :href="url" rounded large depressed color="secondary">
               <span class="text-capitalize">Conecte-se</span>
-            </v-btn>
+            </v-btn>-->
           </v-col>
         </v-row>
       </v-col>
 
       <v-col cols="11" sm="5" align-self="end">
-        <v-row>
+        <v-row class="ma-0">
           <v-col>
             <v-text-field
               background-color="#88E3FF"

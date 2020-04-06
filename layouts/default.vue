@@ -11,7 +11,9 @@
         rounded
         small
       >
-        <span class="font-regular text-capitalize">{{item.title}}</span>
+        <template v-slot:default>
+          <span class="font-weight-medium text-capitalize">{{item.title}}</span>
+        </template>
       </v-btn>
     </v-toolbar>
     <v-app-bar class="hidden-md-and-up" color="white" dense flat fixed>

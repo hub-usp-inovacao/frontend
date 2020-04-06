@@ -2,7 +2,7 @@
   <div style="min-height: 100vh;">
     <Panel
       title="Competências"
-      description="Nesta seção você pode consultar quais competências os pesquisadores da USP dominam, quem são eles e como contatá-los."
+      description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua sub-área (ex.: Matemática)."
       url="https://forms.gle/dDooKL5G2sApfjqb6"
       :loading="loading_search"
       @input="search = $event"

@@ -2,7 +2,7 @@
   <div>
     <Panel
       title="Inovação"
-      description="Laboratórios, organizações e programas para o estímulo e suporte da inovação e empreendedorismo na universidade."
+      description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
       url="https://forms.gle/3z4Vn3ewgP6UKJey6"
       :loading="loading_search"
       @input="search = $event"
