@@ -1,36 +1,41 @@
 <template>
-  <div class="mt-12" style="position: relative;">
-    <v-row class="fill-height ma-0" align="center" justify="space-around" no-gutters>
-      <v-col cols="10" sm="7">
+  <v-container fill-height fluid mt-12 style="position: relative; min-height: 60vh">
+    <v-row class="ma-0" align="center" justify="space-around" no-gutters>
+      <v-col>
         <v-row justify="center">
           <v-col cols="11" sm="9">
-            <p class="display-1 white--text font-weight-medium">{{title}}</p>
+            <p class="display-2 font-weight-regular">{{title}}</p>
 
-            <p class="title white--text font-weight-light">{{description}}</p>
+            <p class="title font-weight-light" style="line-height: normal;">{{description}}</p>
 
             <v-btn v-if="url" :href="url" rounded large depressed color="secondary">
-              <span class="white--text text-capitalize">Conecte-se</span>
+              <span class="text-capitalize">Conecte-se</span>
             </v-btn>
           </v-col>
         </v-row>
       </v-col>
 
-      <v-col cols="10" sm="5">
-        <v-text-field
-          solo
-          flat
-          rounded
-          color="white"
-          label="Buscar"
-          counter="32"
-          v-model="typed"
-          append-outer-icon="search"
-          :loading="loading"
-          :style="this.$vuetify.breakpoint.smAndDown ? 'width: 90%' : 'width: 70%'"
-        ></v-text-field>
+      <v-col cols="11" sm="5" align-self="end">
+        <v-row>
+          <v-col>
+            <v-text-field
+              background-color="#88E3FF"
+              solo
+              flat
+              rounded
+              color="black"
+              label="Buscar"
+              counter="32"
+              v-model="typed"
+              append-outer-icon="search"
+              :style="setSearchBarWidth"
+              :loading="loading"
+            ></v-text-field>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -42,6 +47,18 @@ export default {
   watch: {
     typed(p) {
       this.$emit("input", p);
+    }
+  },
+  computed: {
+    setSearchBarWidth() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return { width: "100%" };
+        case "sm":
+          return { width: "80%" };
+        default:
+          return { width: "70%" };
+      }
     }
   }
 };

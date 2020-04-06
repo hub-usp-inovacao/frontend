@@ -60,11 +60,11 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: "#ffa726",
-          secondary: "#039BE5",
-          accent: "#E88B3A",
+          primary: "#ffb163",
+          secondary: "#4AD4FF",
+          tertiary: "#108CB3",
           error: colors.blue.darken1,
-          background: "#ffa726"
+          background: "#f2f2f2"
         },
         options: {
           customProperties: true

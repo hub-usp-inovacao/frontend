@@ -9,7 +9,7 @@
       <div style="position: absolute; top: 0; height: 100%; width: 100%; overflow: auto;">
         <v-row class="fill-height fit-page ma-0">
           <v-col
-            style="background-color: rgba(255, 167, 38, 0.9)"
+            style="background-color: rgba(255, 177, 99, .9)"
             align-self="stretch"
             cols="12"
             sm="10"

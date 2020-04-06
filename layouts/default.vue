@@ -6,13 +6,13 @@
         v-for="(item, i) in items"
         :key="i"
         :to="item.to"
-        class="white--text mx-2 text-capitalize"
-        color="secondary"
-        active-class
-        depressed
+        class="white--text mx-2 secondary"
+        active-class="tertiary"
         rounded
         small
-      >{{item.title}}</v-btn>
+      >
+        <span class="font-regular text-capitalize">{{item.title}}</span>
+      </v-btn>
     </v-toolbar>
     <v-app-bar class="hidden-md-and-up" color="white" dense flat fixed>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -106,7 +106,7 @@ export default {
   width: 100%;
   height: 100vh;
 
-  background: #ffa726;
+  background: #ececec;
   transform: skewY(-5deg);
   transform-origin: top left;
 }
