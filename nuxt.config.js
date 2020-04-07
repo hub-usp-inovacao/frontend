@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+import get_data from "./hooks";
 
 export default {
   mode: "universal",
@@ -80,5 +81,12 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) { }
+  },
+  hooks: {
+    generate: {
+      before (nuxt, generateOptions) {
+        get_data();
+      }
+    }
   }
 };

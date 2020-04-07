@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "fibers": "^4.0.2",
     "nuxt": "^2.10.0",
     "vue-fuse": "^2.2.0",
