@@ -1,95 +1,99 @@
 <template>
-  <div style="min-height: 100vh;">
-    <Panel
-      title="Educação"
-      description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento e códigos e links para acesso às ementas no sistema institucional da Universidade, o Júpiter."
-      url="https://forms.gle/tAuVq5oAYiGo52u46"
-      :loading="loading_search"
-      @input="search = $event"
-    />
+  <div>
+    <div class="background">
+      <Panel
+        title="Educação"
+        description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento e códigos e links para acesso às ementas no sistema institucional da Universidade, o Júpiter."
+        url="https://forms.gle/tAuVq5oAYiGo52u46"
+        :loading="loading_search"
+        @input="search = $event"
+      />
 
-    <!-- Seleção e Filtro -->
+      <!-- Seleção e Filtro -->
 
-    <div class="hidden-sm-and-down">
-      <v-item-group mandatory>
-        <v-row justify="center" class="ma-0">
-          <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="3">
-            <v-item>
-              <v-card
-                :color="current_tab === i ? '#ECEFF1' : ''"
-                @click="current_tab = i; item_index = -1"
-                :raised="current_tab === i"
-                class="d-flex flex-column justify-space-around align-center"
-                height="100%"
-              >
-                <v-container>
-                  <p class="subtitle-1 font-weight-light my-0">Disciplinas de</p>
-                  <p class="display-1 font-weight-medium my-0">{{tab.name}}</p>
-                </v-container>
-              </v-card>
-            </v-item>
-          </v-col>
-
-          <v-col cols="3">
-            <v-card height="100%" class="d-flex flex-column justify-space-around align-center">
-              <v-container>
-                <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
-              </v-container>
-
-              <v-container>
-                <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-item-group>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <v-item-group mandatory>
-        <v-row justify="center" class="ma-0">
-          <v-col
-            v-for="(tab,i) in tabs"
-            :key="tab.name"
-            cols="5"
-            sm="4"
-            class="pa-0"
-            style="border: 5px solid #039BE5;"
-            :class="i === 0 ? 'left-border' : 'right-border'"
-          >
-            <v-item>
-              <v-card
-                :color="current_tab === i ? '#039BE5' : '#ffa726'"
-                class="d-flex flex-column justify-space-around align-center"
-                elevation="0"
-                tile
-                height="100%"
-                @click="current_tab = i; item_index = -1"
-              >
-                <v-container>
-                  <p class="caption font-weight-light white--text my-0">Disciplinas de</p>
-                  <p class="subtitle-1 font-weight-medium white--text my-0">{{tab.name}}</p>
-                </v-container>
-              </v-card>
-            </v-item>
-          </v-col>
-        </v-row>
-
-        <v-container>
+      <div class="hidden-sm-and-down">
+        <v-item-group mandatory>
           <v-row justify="center" class="ma-0">
-            <v-col cols="6" sm="4">
-              <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
+            <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="3">
+              <v-item>
+                <v-card
+                  :color="current_tab === i ? '#ECEFF1' : ''"
+                  @click="current_tab = i; item_index = -1"
+                  :raised="current_tab === i"
+                  class="d-flex flex-column justify-space-around align-center"
+                  height="100%"
+                >
+                  <v-container>
+                    <p class="subtitle-1 font-weight-light my-0">Disciplinas de</p>
+                    <p class="display-1 font-weight-medium my-0">{{tab.name}}</p>
+                  </v-container>
+                </v-card>
+              </v-item>
             </v-col>
 
-            <v-col cols="6" sm="4">
-              <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
+            <v-col cols="3">
+              <v-card height="100%" class="d-flex flex-column justify-space-around align-center">
+                <v-container>
+                  <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
+                </v-container>
+
+                <v-container>
+                  <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
+                </v-container>
+              </v-card>
             </v-col>
           </v-row>
-        </v-container>
-      </v-item-group>
+        </v-item-group>
+      </div>
+
+      <div class="hidden-md-and-up">
+        <v-item-group mandatory>
+          <v-row justify="center" class="ma-0">
+            <v-col
+              v-for="(tab,i) in tabs"
+              :key="tab.name"
+              cols="5"
+              sm="4"
+              class="pa-0"
+              style="border: 5px solid #039BE5;"
+              :class="i === 0 ? 'left-border' : 'right-border'"
+            >
+              <v-item>
+                <v-card
+                  :color="current_tab === i ? '#039BE5' : '#ffa726'"
+                  class="d-flex flex-column justify-space-around align-center"
+                  elevation="0"
+                  tile
+                  height="100%"
+                  @click="current_tab = i; item_index = -1"
+                >
+                  <v-container>
+                    <p class="caption font-weight-light white--text my-0">Disciplinas de</p>
+                    <p class="subtitle-1 font-weight-medium white--text my-0">{{tab.name}}</p>
+                  </v-container>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+
+          <v-container>
+            <v-row justify="center" class="ma-0">
+              <v-col cols="6" sm="4">
+                <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
+              </v-col>
+
+              <v-col cols="6" sm="4">
+                <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-item-group>
+      </div>
     </div>
 
     <!-- Lista e Card de Exibição -->
+
+    <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
       <v-row justify="center" class="ma-0">
@@ -200,11 +204,13 @@
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Select from "../components/Select.vue";
+import Background from "../components/Background.vue";
 
 export default {
   components: {
     Panel,
-    Select
+    Select,
+    Background
   },
   data: () => ({
     search: "",
@@ -349,20 +355,13 @@ export default {
 </script>
 
 <style scoped>
-.panel_bg {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 40rem;
-  /* background: rgb(216, 216, 216); */
-  background: #ffa726;
-  transform: skewY(-5deg);
-  transform-origin: top left;
-}
 .left-border {
   border-radius: 5px 0 0 5px;
 }
 .right-border {
   border-radius: 0 5px 5px 0;
+}
+.absolute {
+  position: absolute;
 }
 </style>

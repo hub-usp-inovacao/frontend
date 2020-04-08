@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height fluid mt-12 style="position: relative; min-height: 60vh">
+  <v-container fill-height fluid style="position: relative; min-height: 60vh">
     <v-row class="ma-0" align="center" justify="space-around" no-gutters>
       <v-col>
         <v-row class="ma-0" justify="center">
@@ -65,14 +65,4 @@ export default {
 </script>
 
 <style scoped>
-.panel_bg {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 40rem;
-
-  background: #ffa726;
-  transform: skewY(-5deg);
-  transform-origin: top left;
-}
 </style>

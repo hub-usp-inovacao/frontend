@@ -1,54 +1,58 @@
 <template>
   <div>
-    <Panel
-      title="Inovação"
-      description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
-      url="https://forms.gle/3z4Vn3ewgP6UKJey6"
-      :loading="loading_search"
-      @input="search = $event"
-    />
+    <div class="background">
+      <Panel
+        title="P&amp;D&amp;I"
+        description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
+        url="https://forms.gle/3z4Vn3ewgP6UKJey6"
+        :loading="loading_search"
+        @input="search = $event"
+      />
 
-    <!-- Seleção e Filtro -->
+      <!-- Seleção e Filtro -->
 
-    <div>
-      <v-item-group mandatory>
-        <v-row justify="center" class="ma-0">
-          <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="9" sm="3">
-            <v-item>
-              <v-card
-                :color="current_tab === i ? '#ECEFF1' : ''"
-                @click="current_tab = i; item_index = -1"
-                :raised="current_tab === i"
-                class="d-flex flex-column justify-space-around align-center"
-                height="100%"
-              >
-                <p class="title text-center font-weight-light my-5">{{tab.name}}</p>
-              </v-card>
-            </v-item>
-          </v-col>
-        </v-row>
-      </v-item-group>
+      <div>
+        <v-item-group mandatory>
+          <v-row justify="center" class="ma-0">
+            <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="9" sm="3">
+              <v-item>
+                <v-card
+                  :color="current_tab === i ? '#ECEFF1' : ''"
+                  @click="current_tab = i; item_index = -1"
+                  :raised="current_tab === i"
+                  class="d-flex flex-column justify-space-around align-center"
+                  height="100%"
+                >
+                  <p class="title text-center font-weight-light my-5">{{tab.name}}</p>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+        </v-item-group>
 
-      <v-container>
-        <v-row justify="center" class="ma-0">
-          <v-col cols="6" sm="5" md="3">
-            <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
-          </v-col>
+        <v-container>
+          <v-row justify="center" class="ma-0">
+            <v-col cols="6" sm="5" md="3">
+              <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
+            </v-col>
 
-          <v-col cols="6" sm="5" md="3">
-            <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
-          </v-col>
+            <v-col cols="6" sm="5" md="3">
+              <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
+            </v-col>
 
-          <v-col cols="6" sm="5" md="3">
-            <Select :items="known_list" label="Conhecimento" @select="selected_known = $event" />
-          </v-col>
+            <v-col cols="6" sm="5" md="3">
+              <Select :items="known_list" label="Conhecimento" @select="selected_known = $event" />
+            </v-col>
 
-          <v-col v-show="$vuetify.breakpoint.smAndDown" cols="6" sm="5"></v-col>
-        </v-row>
-      </v-container>
+            <v-col v-show="$vuetify.breakpoint.smAndDown" cols="6" sm="5"></v-col>
+          </v-row>
+        </v-container>
+      </div>
     </div>
 
     <!-- Lista e Card de Exibição -->
+
+    <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
       <v-row justify="center" class="ma-0">
@@ -160,11 +164,13 @@
 import { debounce } from "debounce";
 import Panel from "@/components/Panel.vue";
 import Select from "@/components/Select.vue";
+import Background from "@/components/Background.vue";
 
 export default {
   components: {
     Panel,
-    Select
+    Select,
+    Background
   },
   data: () => ({
     search: "",
@@ -357,4 +363,7 @@ export default {
 </script>
 
 <style scoped>
+.absolute {
+  position: absolute;
+}
 </style>

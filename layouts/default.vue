@@ -1,19 +1,16 @@
 <template>
   <v-app id="page-t">
-    <div class="panel_bg"></div>
     <v-toolbar class="hidden-sm-and-down" color="transparent" style="right: 0" absolute flat>
       <v-btn
         v-for="(item, i) in items"
         :key="i"
         :to="item.to"
         class="white--text mx-2 secondary"
-        active-class="tertiary"
+        active-class="tertiary font-weight-bold"
         rounded
         small
       >
-        <template v-slot:default>
-          <span class="font-weight-medium text-capitalize">{{item.title}}</span>
-        </template>
+        <span class="text-capitalize">{{item.title}}</span>
       </v-btn>
     </v-toolbar>
     <v-app-bar class="hidden-md-and-up" color="white" dense flat fixed>
@@ -115,5 +112,8 @@ export default {
   background: #ececec;
   transform: skewY(-5deg);
   transform-origin: top left;
+}
+.absolute {
+  position: absolute;
 }
 </style>

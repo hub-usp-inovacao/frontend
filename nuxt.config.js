@@ -65,7 +65,7 @@ export default {
           secondary: "#4AD4FF",
           tertiary: "#108CB3",
           error: colors.blue.darken1,
-          background: "#f2f2f2"
+          background: "#ececec"
         },
         options: {
           customProperties: true
@@ -84,7 +84,7 @@ export default {
   },
   hooks: {
     generate: {
-      before (nuxt, generateOptions) {
+      before(nuxt, generateOptions) {
         get_data();
       }
     }

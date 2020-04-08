@@ -1,42 +1,46 @@
 <template>
   <div style="min-height: 100vh;">
-    <Panel
-      title="Competências"
-      description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua sub-área (ex.: Matemática)."
-      url="https://forms.gle/dDooKL5G2sApfjqb6"
-      :loading="loading_search"
-      @input="search = $event"
-    />
+    <div class="background">
+      <Panel
+        title="Competências"
+        description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua sub-área (ex.: Matemática)."
+        url="https://forms.gle/dDooKL5G2sApfjqb6"
+        :loading="loading_search"
+        @input="search = $event"
+      />
 
-    <!-- Seleção e Filtro -->
+      <!-- Seleção e Filtro -->
 
-    <div>
-      <v-container>
-        <v-row justify="center" class="ma-0">
-          <v-col cols="6" sm="5" md="3">
-            <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
-          </v-col>
+      <div>
+        <v-container>
+          <v-row justify="center" class="ma-0">
+            <v-col cols="6" sm="5" md="3">
+              <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
+            </v-col>
 
-          <v-col cols="6" sm="5" md="3">
-            <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
-          </v-col>
+            <v-col cols="6" sm="5" md="3">
+              <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
+            </v-col>
 
-          <v-col cols="6" sm="5" md="3">
-            <Select
-              :items="association_list"
-              label="Vínculo"
-              @select="selected_association = $event"
-            />
-          </v-col>
+            <v-col cols="6" sm="5" md="3">
+              <Select
+                :items="association_list"
+                label="Vínculo"
+                @select="selected_association = $event"
+              />
+            </v-col>
 
-          <v-col cols="6" sm="5" md="3">
-            <Select :items="known_list" label="Conhecimento" @select="selected_known = $event" />
-          </v-col>
-        </v-row>
-      </v-container>
+            <v-col cols="6" sm="5" md="3">
+              <Select :items="known_list" label="Conhecimento" @select="selected_known = $event" />
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
     </div>
 
     <!-- Lista e Card de Exibição -->
+
+    <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
       <v-row justify="center" class="ma-0">
@@ -251,11 +255,13 @@
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Select from "../components/Select.vue";
+import Background from "../components/Background.vue";
 
 export default {
   components: {
     Panel,
-    Select
+    Select,
+    Background
   },
   data: () => ({
     search: "",
@@ -441,15 +447,8 @@ export default {
 </script>
 
 <style scoped>
-.panel_bg {
+.absolute {
   position: absolute;
-  top: 0;
-  width: 100%;
-  height: 40rem;
-
-  background: #ffa726;
-  transform: skewY(-5deg);
-  transform-origin: top left;
 }
 .left-border {
   border-radius: 5px 0 0 5px;
