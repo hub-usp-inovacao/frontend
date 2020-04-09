@@ -24,7 +24,7 @@
                   >Portal Solus</p>
 
                   <p
-                    class="white--text ma-0"
+                    class="white--text font-weight-medium ma-0"
                     :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   >Aqui você encontra as mais diversas informações sobre empreendedorismo e inovação na Universidade de São Paulo</p>
 

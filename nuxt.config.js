@@ -52,12 +52,15 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [
+  ],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
+    customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
     theme: {
       themes: {
         light: {
