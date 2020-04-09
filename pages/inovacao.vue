@@ -13,24 +13,30 @@
 
       <div>
         <v-item-group mandatory>
-          <v-row justify="center" class="ma-0">
-            <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="9" sm="3">
-              <v-item>
-                <v-card
-                  :color="current_tab === i ? '#ECEFF1' : ''"
-                  @click="current_tab = i; item_index = -1"
-                  :raised="current_tab === i"
-                  class="d-flex flex-column justify-space-around align-center"
-                  height="100%"
-                >
-                  <p class="title text-center font-weight-light my-5">{{tab.name}}</p>
-                </v-card>
-              </v-item>
-            </v-col>
-          </v-row>
+          <v-container>
+            <v-row justify="center" class="ma-0">
+              <v-col v-for="(tab,i) in tabs" :key="tab.name">
+                <v-item>
+                  <v-card
+                    :color="current_tab === i ? '#003836' : '#005C59'"
+                    @click="current_tab = i; item_index = -1"
+                    :raised="current_tab === i"
+                    height="100%"
+                  >
+                    <v-card-title>
+                      <p class="title white--text font-weight-bold mb-0">{{tab.name}}</p>
+                    </v-card-title>
+                    <v-card-text>
+                      <p class="caption white--text font-wight-light mb-0">{{tab.description}}</p>
+                    </v-card-text>
+                  </v-card>
+                </v-item>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-item-group>
 
-        <v-container>
+        <!-- <v-container>
           <v-row justify="center" class="ma-0">
             <v-col cols="6" sm="5" md="3">
               <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
@@ -46,7 +52,7 @@
 
             <v-col v-show="$vuetify.breakpoint.smAndDown" cols="6" sm="5"></v-col>
           </v-row>
-        </v-container>
+        </v-container>-->
       </div>
     </div>
 
@@ -55,66 +61,76 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="5">
-          <v-card height="35rem" :loading="loading_data">
-            <div v-if="filtered_entries.length > 0" class="fill-height">
-              <v-list rounded style="max-height: 100%; overflow-y: auto;">
-                <v-list-item-group>
-                  <v-list-item
-                    v-for="(item,i) in filtered_entries"
-                    :key="item.title"
-                    @click="item_index = i"
-                  >
-                    <v-list-item-content>
-                      <v-list-item-title>{{ item.name }}</v-list-item-title>
-                      <v-list-item-subtitle>{{item.key_words}}</v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </div>
+      <v-container fluid>
+        <v-row justify="center" class="ma-0">
+          <v-col cols="5">
+            <v-card height="35rem" :loading="loading_data">
+              <div v-if="filtered_entries.length > 0" class="fill-height">
+                <v-list rounded style="max-height: 100%; overflow-y: auto;">
+                  <v-list-item-group>
+                    <v-list-item
+                      v-for="(item,i) in filtered_entries"
+                      :key="item.title"
+                      @click="item_index = i"
+                    >
+                      <v-list-item-content>
+                        <v-list-item-title>{{ item.name }}</v-list-item-title>
+                        <v-list-item-subtitle>{{item.key_words}}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </div>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p v-if="loading_data" class="title font-weight-light text-center">Carregando itens</p>
-                <p
-                  v-else
-                  class="title font-weight-light text-center"
-                >Não encontramos nada relacionado a sua pesquisa</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
+              <div v-else class="fill-height">
+                <v-row class="fill-height ma-0" justify="center" align="center">
+                  <p
+                    v-if="loading_data"
+                    class="title font-weight-light text-center"
+                  >Carregando itens</p>
+                  <p
+                    v-else
+                    class="title font-weight-light text-center"
+                  >Não encontramos nada relacionado a sua pesquisa</p>
+                </v-row>
+              </div>
+            </v-card>
+          </v-col>
 
-        <v-col cols="5">
-          <v-card height="35rem">
-            <div v-if="item_index >= 0" class="fill-height" style="overflow-y: auto;">
-              <v-container px-6>
-                <p class="title">{{current_item.name}}</p>
-                <p class="body-2 font-italic my-2">{{current_item.knownledge.toString()}}</p>
-                <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
-              </v-container>
+          <v-col cols="5">
+            <v-card height="35rem">
+              <div v-if="item_index >= 0" class="fill-height" style="overflow-y: auto;">
+                <v-container px-6>
+                  <p class="title">{{current_item.name}}</p>
+                  <p class="body-2 font-italic my-2">{{current_item.knownledge.toString()}}</p>
+                  <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
+                </v-container>
 
-              <v-container px-6>
-                <p class="body-2">{{current_item.description.long}}</p>
-              </v-container>
+                <v-container px-6>
+                  <p class="body-2">{{current_item.description.long}}</p>
+                </v-container>
 
-              <v-card-actions>
-                <v-spacer />
-                <v-btn depressed dark color="rgb(255, 167, 38)" :href="current_item.url">Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn
+                    depressed
+                    dark
+                    color="rgb(255, 167, 38)"
+                    :href="current_item.url"
+                  >Saiba mais</v-btn>
+                  <v-spacer />
+                </v-card-actions>
+              </div>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p class="title font-weight-light text-center">Selecione um Item na lista ao lado</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
+              <div v-else class="fill-height">
+                <v-row class="fill-height ma-0" justify="center" align="center">
+                  <p class="title font-weight-light text-center">Selecione um Item na lista ao lado</p>
+                </v-row>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
 
     <div class="hidden-md-and-up">
@@ -130,7 +146,7 @@
                 v-model="item_index"
                 menu-props="auto"
                 color="#37474F"
-                :items="filtered_entries.map((item,i) => ({text: item.title, value: i}))"
+                :items="filtered_entries.map((item,i) => ({text: item.name, value: i}))"
                 no-data-text="Não encontramos nada"
                 :label="loading_data ? 'Carregando itens' : 'Escolha uma disciplina'"
               ></v-select>
@@ -197,34 +213,30 @@ export default {
     search_entries: [],
     loading_search: false,
     tabs: [
-      // {
-      //   name: "Centrais multiusuários",
-      //   description: "",
-      //   entries: []
-      // },
       {
         name: "CEPIDS",
         description:
-          "Centros de Pesquisa, Inovação e Difusão (CEPIDs), apoiados pela FAPESP, que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante.",
+          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
         entries: []
       },
       {
         name: "EMBRAPII",
         description:
-          "A Associação Brasileira de Pesquisa e Inovação Industrial é uma organização que apoia instituições de pesquisa tecnológica, em selecionadas áreas de competência, para que executem projetos de desenvolvimento de pesquisa tecnológica para inovação, em cooperação com empresas do setor industrial.",
+          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
         entries: []
       },
       {
         name: "INCTs",
         description:
-          "Os Institutos Nacionais de Ciência e Tecnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
+          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
+        entries: []
+      },
+      {
+        name: "NAP",
+        description:
+          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
         entries: []
       }
-      // {
-      //   name: "Outros",
-      //   description: "",
-      //   entries: []
-      // }
     ]
   }),
   methods: {
