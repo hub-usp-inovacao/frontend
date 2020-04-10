@@ -1,293 +1,20 @@
 <template>
   <v-app>
-    <div class="panel_bg"></div>
-    <Panel
-      propsTitle="Educação"
-      propsDescription="Cursos e disciplinas para ensino de inovação e empreendedorismo na USP."
-      propsUrl="https://docs.google.com/forms/d/e/1FAIpQLScetP0_LFQSvijjfaB7YRMZ1el-UbYRCsbigNnW6StdeYbS7g/viewform"
-      :propsLoad="loading_search"
-      @input="search = $event"
-    />
-
-    <!-- Seleção e Filtro -->
-
-    <div class="hidden-sm-and-down">
-      <v-item-group mandatory>
-        <v-row justify="space-around" class="ma-0">
-          <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="3">
-            <v-item>
-              <v-card
-                :color="current_tab === i ? '#ECEFF1' : ''"
-                @click="current_tab = i; current_item = -1"
-                :raised="current_tab === i"
-                class="d-flex flex-column justify-space-around align-center"
-                height="100%"
-              >
-                <v-container>
-                  <p class="subtitle-1 font-weight-light my-0">Disciplinas de</p>
-                  <p class="display-1 font-weight-medium my-0">{{tab.name}}</p>
-                </v-container>
-              </v-card>
-            </v-item>
-          </v-col>
-
-          <v-col cols="3">
-            <v-card height="100%" class="d-flex flex-column justify-space-around align-center">
-              <v-container>
-                <v-select
-                  flat
-                  dense
-                  rounded
-                  filled
-                  hide-details
-                  multiple
-                  chips
-                  v-model="selected_campus"
-                  menu-props="auto"
-                  color="#37474F"
-                  :items="campi_list"
-                  no-data-text="Não encontramos nada"
-                  label="Campus"
-                >
-                  <template v-slot:selection="{ item, index }">
-                    <v-chip v-if="index === 0">
-                      <span>{{ item }}</span>
-                    </v-chip>
-                    <span
-                      v-if="index === 1"
-                      class="grey--text caption"
-                    >(+{{ selected_campus.length - 1 }})</span>
-                  </template>
-                </v-select>
-              </v-container>
-
-              <v-container>
-                <v-select
-                  flat
-                  dense
-                  rounded
-                  filled
-                  hide-details
-                  multiple
-                  chips
-                  v-model="selected_unity"
-                  menu-props="auto"
-                  color="#37474F"
-                  :items="unity_list"
-                  no-data-text="Não encontramos nada"
-                  label="Unidade"
-                >
-                  <template v-slot:selection="{ item, index }">
-                    <v-chip v-if="index === 0">
-                      <span>{{ item }}</span>
-                    </v-chip>
-                    <span
-                      v-if="index === 1"
-                      class="grey--text caption"
-                    >(+{{ selected_unity.length - 1 }})</span>
-                  </template>
-                </v-select>
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-item-group>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <v-item-group mandatory>
-        <v-row justify="center" class="ma-0">
-          <v-col
-            v-for="(tab,i) in tabs"
-            :key="tab.name"
-            cols="5"
-            sm="4"
-            class="pa-0"
-            style="border: 5px solid #039BE5;"
-            :class="i === 0 ? 'left-border' : 'right-border'"
-          >
-            <v-item>
-              <v-card
-                :color="current_tab === i ? '#039BE5' : '#ffa726'"
-                class="d-flex flex-column justify-space-around align-center"
-                elevation="0"
-                tile
-                height="100%"
-                @click="current_tab = i; current_item = -1"
-              >
-                <v-container>
-                  <p class="caption font-weight-light white--text my-0">Disciplinas de</p>
-                  <p class="subtitle-1 font-weight-medium white--text my-0">{{tab.name}}</p>
-                </v-container>
-              </v-card>
-            </v-item>
-          </v-col>
-
-          <v-col cols="5">
-            <v-select
-              flat
-              solo
-              rounded
-              hide-details
-              multiple
-              v-model="selected_campus"
-              menu-props="auto"
-              color="white"
-              :items="campi_list"
-              no-data-text="Não encontramos nada"
-              label="Campus"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
-              </template>
-            </v-select>
-          </v-col>
-
-          <v-col cols="5">
-            <v-select
-              flat
-              solo
-              rounded
-              hide-details
-              multiple
-              v-model="selected_unity"
-              menu-props="auto"
-              color="white"
-              :items="unity_list"
-              no-data-text="Não encontramos nada"
-              label="Unidade"
-            >
-              <template v-slot:selection="{ item, index }">
-                <span v-if="index === 0" class="text-truncate">{{ item }}</span>
-                <span
-                  v-if="index === 1"
-                  class="grey--text caption"
-                >(+{{ selected_campus.length - 1 }})</span>
-              </template>
-            </v-select>
-          </v-col>
-        </v-row>
-      </v-item-group>
-    </div>
-
-    <!-- Lista e Card de Exibição -->
-
-    <div class="hidden-sm-and-down">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="5">
-          <v-card height="35rem">
-            <div v-if="filtered_entries.length > 0" class="fill-height">
-              <v-list rounded style="max-height: 100%; overflow-y: auto;">
-                <v-list-item-group>
-                  <v-list-item
-                    v-for="(item,i) in filtered_entries"
-                    :key="item.title"
-                    @click="current_item = i"
-                  >{{ item.title }}</v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </div>
-
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p v-if="loading_data" class="title font-weight-light text-center">Indexando itens</p>
-                <p
-                  v-else
-                  class="title font-weight-light text-center"
-                >Não encontramos nada relacionado a sua pesquisa</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-
-        <v-col cols="5">
-          <v-card height="35rem">
-            <div v-if="current_item >= 0" class="fill-height" style="overflow-y: auto;">
-              <v-container px-6>
-                <p class="title">{{filtered_entries[current_item].title}}</p>
-                <p class="body-2 font-italic my-2">{{filtered_entries[current_item].category}}</p>
-                <p
-                  class="body-2"
-                >{{filtered_entries[current_item].campus}} - {{filtered_entries[current_item].unity}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1">{{filtered_entries[current_item].description.long}}</p>
-              </v-container>
-
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="filtered_entries[current_item].url"
-                >Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
-
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p class="title font-weight-light text-center">Selecione um Item na lista ao lado</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="11" sm="10">
-          <v-card>
-            <v-container>
-              <v-select
-                flat
-                rounded
-                filled
-                hide-details
-                v-model="current_item"
-                menu-props="auto"
-                color="#37474F"
-                :items="filtered_entries.map((item,i) => ({text: item.title, value: i}))"
-                no-data-text="Não encontramos nada"
-                label="Escolha uma disciplina"
-              ></v-select>
-            </v-container>
-
-            <div v-if="current_item >= 0">
-              <v-container px-6>
-                <p class="title">{{filtered_entries[current_item].title}}</p>
-                <p class="body-2 font-italic my-2">{{filtered_entries[current_item].category}}</p>
-                <p
-                  class="body-2"
-                >{{filtered_entries[current_item].campus}} - {{filtered_entries[current_item].unity}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1">{{filtered_entries[current_item].description.long}}</p>
-              </v-container>
-
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  depressed
-                  dark
-                  color="rgb(255, 167, 38)"
-                  :href="filtered_entries[current_item].url"
-                >Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
+    <v-card class="mx-auto" max-width="300" tile>
+      <v-list shaped>
+        <v-subheader>REPORTS</v-subheader>
+        <v-list-item-group v-model="item" color="primary">
+          <v-list-item v-for="(item, i) in items" :key="i">
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
   </v-app>
 </template>
 
@@ -300,6 +27,30 @@ export default {
     Panel
   },
   data: () => ({
+    item: 1,
+    items: [
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" },
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" },
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" },
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" },
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" },
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" },
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" }
+    ],
     search: "",
     current_tab: 0,
     current_item: -1,

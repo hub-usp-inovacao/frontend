@@ -19,80 +19,12 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <v-container fluid>
-        <v-row justify="center" class="ma-0">
-          <v-col cols="5">
-            <v-card height="35rem" :loading="loading_data">
-              <div v-if="filtered_entries.length > 0" class="fill-height">
-                <v-list rounded style="max-height: 100%; overflow-y: auto;">
-                  <v-list-item-group>
-                    <v-list-item
-                      v-for="(item,i) in filtered_entries"
-                      :key="item.title"
-                      @click="item_index = i"
-                    >
-                      <v-list-item-content>
-                        <v-list-item-title>{{ item.name }}</v-list-item-title>
-                        <v-list-item-subtitle>{{item.key_words}}</v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list-item-group>
-                </v-list>
-              </div>
-
-              <div v-else class="fill-height">
-                <v-row class="fill-height ma-0" justify="center" align="center">
-                  <p
-                    v-if="loading_data"
-                    class="title font-weight-light text-center"
-                  >Carregando itens</p>
-                  <p
-                    v-else
-                    class="title font-weight-light text-center"
-                  >Não encontramos nada relacionado a sua pesquisa</p>
-                </v-row>
-              </div>
-            </v-card>
-          </v-col>
-
-          <v-col cols="5">
-            <v-card height="35rem">
-              <div v-if="item_index >= 0" class="fill-height" style="overflow-y: auto;">
-                <v-container px-6>
-                  <p class="title">{{current_item.name}}</p>
-                  <p class="body-2 font-italic my-2">{{current_item.knownledge.toString()}}</p>
-                  <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
-                </v-container>
-
-                <v-container px-6>
-                  <p class="body-2">{{current_item.description.long}}</p>
-                </v-container>
-
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn
-                    depressed
-                    dark
-                    color="rgb(255, 167, 38)"
-                    :href="current_item.url"
-                  >Saiba mais</v-btn>
-                  <v-spacer />
-                </v-card-actions>
-              </div>
-
-              <div v-else class="fill-height">
-                <v-row class="fill-height ma-0" justify="center" align="center">
-                  <p class="title font-weight-light text-center">Selecione um Item na lista ao lado</p>
-                </v-row>
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+      <ListAndCard :items="filtered_entries" />
     </div>
 
     <div class="hidden-md-and-up">
-      <v-row justify="center" class="ma-0">
+      <SelectAndCard :items="filtered_entries" />
+      <!-- <v-row justify="center" class="ma-0">
         <v-col cols="11" sm="10">
           <v-card :loading="loading_data">
             <v-container>
@@ -129,7 +61,7 @@
             </div>
           </v-card>
         </v-col>
-      </v-row>
+      </v-row>-->
     </div>
   </div>
 </template>
@@ -140,13 +72,17 @@ import Panel from "@/components/Panel.vue";
 import Select from "@/components/Select.vue";
 import Background from "@/components/Background.vue";
 import CardButton from "@/components/CardButton.vue";
+import ListAndCard from "@/components/ListAndCard.vue";
+import SelectAndCard from "@/components/SelectAndCard.vue";
 
 export default {
   components: {
     Panel,
     Select,
     Background,
-    CardButton
+    CardButton,
+    ListAndCard,
+    SelectAndCard
   },
   data: () => ({
     search: "",
@@ -216,7 +152,7 @@ export default {
         .then(request => request.json())
         .then(data => {
           data.values.slice(1).forEach(row => {
-            console.log(row);
+            // console.log(row);
             let di = {
               category: row[0],
               name: row[1],
@@ -252,7 +188,7 @@ export default {
       this.known_list = Array.from(known).sort(this.compare_string);
       this.entries = this.tabs[0].entries;
 
-      console.log(this.entries);
+      // console.log(this.entries);
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
