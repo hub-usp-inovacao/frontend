@@ -1,5 +1,5 @@
 <template>
-  <v-app id="page-t">
+  <v-app>
     <v-toolbar class="hidden-sm-and-down" color="transparent" style="right: 0" absolute flat>
       <v-btn
         v-for="(item, i) in items"
@@ -33,12 +33,6 @@ export default {
   },
   head() {
     return {
-      script: [
-        {
-          src:
-            "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
-        }
-      ],
       link: [
         {
           rel: "stylesheet",
@@ -112,8 +106,5 @@ export default {
   background: #ececec;
   transform: skewY(-5deg);
   transform-origin: top left;
-}
-.absolute {
-  position: absolute;
 }
 </style>
