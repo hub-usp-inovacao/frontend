@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height fluid style="position: relative; min-height: 60vh">
-    <v-row class="ma-0" align="center" justify="space-around" no-gutters>
+    <v-row class="ma-0 mt-12" align="center" justify="space-around" no-gutters>
       <v-col>
         <v-row class="ma-0" justify="center">
           <v-col cols="12" sm="9">
