@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height fluid style="position: relative; min-height: 60vh">
+  <v-container fill-height fluid style="position: relative; min-height: 20rem">
     <v-row class="ma-0 mt-12" align="center" justify="space-around" no-gutters>
       <v-col>
         <v-row class="ma-0" justify="center">
@@ -7,10 +7,6 @@
             <p class="display-2 font-weight-regular">{{title}}</p>
 
             <p class="title font-weight-light" style="line-height: normal;">{{description}}</p>
-
-            <!-- <v-btn v-if="url" :href="url" rounded large depressed color="secondary">
-              <span class="text-capitalize">Conecte-se</span>
-            </v-btn>-->
           </v-col>
         </v-row>
       </v-col>

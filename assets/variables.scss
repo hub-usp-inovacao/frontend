@@ -1,8 +1,17 @@
 $body-font-family: "Roboto", sans-serif;
+$card-title-word-break: break-word !default;
 $card-border-radius: 24px !default;
 $primary: #ffb163;
 $secondary: #4AD4FF;
 $tertiary: #108CB3;
 $background: #ececec;
+
+.absolute {
+    position: absolute;
+}
+
+.p {
+    word-break: break-word;
+}
 
 @import '~vuetify/src/styles/styles.sass';

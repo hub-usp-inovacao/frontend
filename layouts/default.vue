@@ -82,29 +82,13 @@ export default {
 </script>
 
 <style>
-.bgcolor {
-  background-color: #f2f2f2;
-  font-family: "Monda", sans-serif;
-}
-
 #app .v-bottom-navigation .v-btn {
   height: inherit !important;
 }
-
 .zoom {
   transition: transform 0.2s;
 }
 .zoom:hover {
   transform: scale(1.1);
-}
-.panel_bg {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-
-  background: #ececec;
-  transform: skewY(-5deg);
-  transform-origin: top left;
 }
 </style>
