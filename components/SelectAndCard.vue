@@ -22,21 +22,23 @@
         </v-container>
 
         <div v-if="current_item >= 0">
-          <v-container px-6>
-            <p class="title">{{item.name}}</p>
-            <p class="body-2 font-italic my-2">{{item.category}}</p>
-            <p class="body-2">{{item.campus}} - {{item.unity}}</p>
-          </v-container>
+          <slot name="item" :item="item">
+            <v-container px-6>
+              <p class="title">{{item.name}}</p>
+              <p class="body-2 font-italic my-2">{{item.category}}</p>
+              <p class="body-2">{{item.campus}} - {{item.unity}}</p>
+            </v-container>
 
-          <v-container px-6>
-            <p class="body-2">{{item.description.long}}</p>
-          </v-container>
+            <v-container px-6>
+              <p class="body-2">{{item.description.long}}</p>
+            </v-container>
 
-          <v-card-actions>
-            <v-spacer />
-            <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
-            <v-spacer />
-          </v-card-actions>
+            <v-card-actions>
+              <v-spacer />
+              <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
+              <v-spacer />
+            </v-card-actions>
+          </slot>
         </div>
       </v-card>
     </v-col>
