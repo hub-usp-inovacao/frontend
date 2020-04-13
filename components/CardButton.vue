@@ -12,7 +12,7 @@
                 height="100%"
               >
                 <slot name="card" :item="item">
-                  <v-card-title class="justify-center">
+                  <v-card-title class="justify-center" style="word-break: keep-all">
                     <p class="title white--text font-weight-bold text-center mb-0">{{item.name}}</p>
                   </v-card-title>
 

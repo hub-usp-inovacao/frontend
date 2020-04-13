@@ -11,31 +11,7 @@
 
       <!-- Seleção e Filtro -->
 
-      <div>
-        <v-container>
-          <v-row justify="center" class="ma-0">
-            <v-col cols="6" sm="5" md="3">
-              <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
-            </v-col>
-
-            <v-col cols="6" sm="5" md="3">
-              <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
-            </v-col>
-
-            <v-col cols="6" sm="5" md="3">
-              <Select
-                :items="association_list"
-                label="Vínculo"
-                @select="selected_association = $event"
-              />
-            </v-col>
-
-            <v-col cols="6" sm="5" md="3">
-              <Select :items="known_list" label="Conhecimento" @select="selected_known = $event" />
-            </v-col>
-          </v-row>
-        </v-container>
-      </div>
+      <CardButton :tabs="tabs" color="#6b1c28" active="#6a0515" @tab="updateTab($event)" />
     </div>
 
     <!-- Lista e Card de Exibição -->
@@ -256,12 +232,14 @@ import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Select from "../components/Select.vue";
 import Background from "../components/Background.vue";
+import CardButton from "../components/CardButton.vue";
 
 export default {
   components: {
     Panel,
     Select,
-    Background
+    Background,
+    CardButton,
   },
   data: () => ({
     search: "",
@@ -270,6 +248,7 @@ export default {
     loading_search: false,
 
     item_index: -1,
+    current_tab: -1,
 
     selected_campus: [],
     selected_unity: [],
@@ -290,16 +269,47 @@ export default {
     loading_search: false,
     tabs: [
       {
-        name: "Competências",
-        entries: []
+        name: "Ciências Exatas e da Terra",
+        description: "",
       },
       {
-        name: "Inovação",
-        entries: []
-      }
+        name: "Ciências Biológicas",
+        description: "",
+      },
+      {
+        name: "Engenharias",
+        description: "",
+      },
+      {
+        name: "Ciências da Saúde",
+        description: "",
+      },
+      {
+        name: "Ciências Agrárias",
+        description: "",
+      },
+      {
+        name: "Ciências Sociais Aplicadas",
+        description: "",
+      },
+      {
+        name: "Ciências Humanas",
+        description: "",
+      },
+      {
+        name: "Linguística, Letras e Artes",
+        description: "",
+      },
+      {
+        name: "Outros",
+        description: "",
+      },
     ]
   }),
   methods: {
+    updateTab(t) {
+      this.current_tab = t;
+    },
     async sheetQuery() {
       this.loading_data = true;
 
