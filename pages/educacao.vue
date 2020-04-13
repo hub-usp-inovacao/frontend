@@ -9,193 +9,59 @@
         @input="search = $event"
       />
 
-      <!-- Seleção e Filtro -->
-
-      <div class="hidden-sm-and-down">
-        <v-item-group mandatory>
-          <v-row justify="center" class="ma-0">
-            <v-col v-for="(tab,i) in tabs" :key="tab.name" cols="3">
-              <v-item>
-                <v-card
-                  :color="current_tab === i ? '#ECEFF1' : ''"
-                  @click="current_tab = i; item_index = -1"
-                  :raised="current_tab === i"
-                  class="d-flex flex-column justify-space-around align-center"
-                  height="100%"
-                >
-                  <v-container>
-                    <p class="subtitle-1 font-weight-light my-0">Disciplinas de</p>
-                    <p class="display-1 font-weight-medium my-0">{{tab.name}}</p>
-                  </v-container>
-                </v-card>
-              </v-item>
-            </v-col>
-
-            <v-col cols="3">
-              <v-card height="100%" class="d-flex flex-column justify-space-around align-center">
-                <v-container>
-                  <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
-                </v-container>
-
-                <v-container>
-                  <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
-                </v-container>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-item-group>
-      </div>
-
-      <div class="hidden-md-and-up">
-        <v-item-group mandatory>
-          <v-row justify="center" class="ma-0">
-            <v-col
-              v-for="(tab,i) in tabs"
-              :key="tab.name"
-              cols="5"
-              sm="4"
-              class="pa-0"
-              style="border: 5px solid #039BE5;"
-              :class="i === 0 ? 'left-border' : 'right-border'"
-            >
-              <v-item>
-                <v-card
-                  :color="current_tab === i ? '#039BE5' : '#ffa726'"
-                  class="d-flex flex-column justify-space-around align-center"
-                  elevation="0"
-                  tile
-                  height="100%"
-                  @click="current_tab = i; item_index = -1"
-                >
-                  <v-container>
-                    <p class="caption font-weight-light white--text my-0">Disciplinas de</p>
-                    <p class="subtitle-1 font-weight-medium white--text my-0">{{tab.name}}</p>
-                  </v-container>
-                </v-card>
-              </v-item>
-            </v-col>
-          </v-row>
-
-          <v-container>
-            <v-row justify="center" class="ma-0">
-              <v-col cols="6" sm="4">
-                <Select :items="campi_list" label="Campus" @select="selected_campus = $event" />
-              </v-col>
-
-              <v-col cols="6" sm="4">
-                <Select :items="unity_list" label="Unidade" @select="selected_unity = $event" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-item-group>
-      </div>
+      <CardButton :tabs="tabs" color="#db8337" active="#bf6213" @tab="updateTab($event)" />
     </div>
-
-    <!-- Lista e Card de Exibição -->
 
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="5">
-          <v-card height="35rem" :loading="loading_data">
-            <div v-if="filtered_entries.length > 0" class="fill-height">
-              <v-list rounded style="max-height: 100%; overflow-y: auto;">
-                <v-list-item-group>
-                  <v-list-item
-                    v-for="(item,i) in filtered_entries"
-                    :key="item.title"
-                    @click="item_index = i"
-                  >
-                    <v-list-item-content>
-                      <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </div>
+      <ListAndCard :items="entries">
+        <v-template #li="{item}">
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-template>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p v-if="loading_data" class="title font-weight-light text-center">Carregando itens</p>
-                <p
-                  v-else
-                  class="title font-weight-light text-center"
-                >Não encontramos nada relacionado a sua pesquisa</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
+        <v-template #item="{item}">
+          <v-card-title px-6>
+            <p class="title">{{item.title}}</p>
+          </v-card-title>
 
-        <v-col cols="5">
-          <v-card height="35rem">
-            <div v-if="item_index >= 0" class="fill-height" style="overflow-y: auto;">
-              <v-container px-6>
-                <p class="title">{{current_item.title}}</p>
-                <p class="body-2 font-italic my-2">{{current_item.category}}</p>
-                <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
-              </v-container>
+          <v-card-text px-6>
+            <p class="body-2 font-italic mb-0">{{item.category}}</p>
 
-              <v-container px-6>
-                <p class="body-1">{{current_item.description.long}}</p>
-              </v-container>
+            <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
 
-              <v-card-actions>
-                <v-spacer />
-                <v-btn depressed dark color="rgb(255, 167, 38)" :href="current_item.url">Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
+            <p class="body-1">{{item.description.long}}</p>
+          </v-card-text>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p class="title font-weight-light text-center">Selecione um Item na lista ao lado</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
+          <v-card-actions class="justify-center">
+            <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
+          </v-card-actions>
+        </v-template>
+      </ListAndCard>
     </div>
 
     <div class="hidden-md-and-up">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="11" sm="10">
-          <v-card :loading="loading_data">
-            <v-container>
-              <v-select
-                flat
-                rounded
-                filled
-                hide-details
-                v-model="item_index"
-                menu-props="auto"
-                color="#37474F"
-                :items="filtered_entries.map((item,i) => ({text: item.title, value: i}))"
-                no-data-text="Não encontramos nada"
-                :label="loading_data ? 'Carregando itens' : 'Escolha uma disciplina'"
-              ></v-select>
-            </v-container>
+      <SelectAndCard :items="entries">
+        <v-template #item="{item}">
+          <v-container px-6>
+            <p class="title">{{item.title}}</p>
+            <p class="body-2 font-italic my-2">{{item.category}}</p>
+            <p class="body-2">{{item.campus}} - {{item.unity}}</p>
+          </v-container>
 
-            <div v-if="item_index >= 0">
-              <v-container px-6>
-                <p class="title">{{current_item.title}}</p>
-                <p class="body-2 font-italic my-2">{{current_item.category}}</p>
-                <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
-              </v-container>
+          <v-container px-6>
+            <p class="body-1">{{item.description.long}}</p>
+          </v-container>
 
-              <v-container px-6>
-                <p class="body-1">{{current_item.description.long}}</p>
-              </v-container>
-
-              <v-card-actions>
-                <v-spacer />
-                <v-btn depressed dark color="rgb(255, 167, 38)" :href="current_item.url">Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
+            <v-spacer />
+          </v-card-actions>
+        </v-template>
+      </SelectAndCard>
     </div>
   </div>
 </template>
@@ -203,22 +69,22 @@
 <script>
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
-import Select from "../components/Select.vue";
 import Background from "../components/Background.vue";
+import CardButton from "../components/CardButton.vue";
+import ListAndCard from "../components/ListAndCard.vue";
+import SelectAndCard from "../components/SelectAndCard.vue";
 
 export default {
   components: {
     Panel,
-    Select,
-    Background
+    Background,
+    CardButton,
+    ListAndCard,
+    SelectAndCard
   },
   data: () => ({
     search: "",
     current_tab: 0,
-    item_index: -1,
-
-    loading_data: true,
-    loading_search: false,
 
     selected_campus: [],
     selected_unity: [],
@@ -232,16 +98,33 @@ export default {
     entries: [],
     tabs: [
       {
-        name: "Graduação",
+        name: "Inovação",
+        description: "Cursos e disciplinas relacionados à área de Inovação.",
         entries: []
       },
       {
-        name: "Pós-Graduação",
+        name: "Empreendedorismo",
+        description:
+          "Cursos e disciplinas relacionados à área de Empreendedorismo.",
+        entries: []
+      },
+      {
+        name: "Propriedade Intelectual",
+        description:
+          "Cursos e disciplinas relacionados à área de Propriedade Intelectual.",
+        entries: []
+      },
+      {
+        name: "Negócios",
+        description: "Cursos e disciplinas relacionados à área de Negócios.",
         entries: []
       }
     ]
   }),
   methods: {
+    updateTab(t) {
+      this.current_tab = t;
+    },
     async sheetQuery() {
       this.loading_data = true;
       let campi = new Set();
@@ -317,19 +200,9 @@ export default {
     }, 500),
     current_tab: debounce(async function() {
       await this.fuzzySearch();
-    }, 500),
-    selected_campus: function() {
-      this.item_index = -1;
-    },
-    selected_unity: function() {
-      this.item_index = -1;
-    }
+    }, 500)
   },
   computed: {
-    current_item: function() {
-      if (this.item_index < 0) return null;
-      return this.filtered_entries[this.item_index];
-    },
     filtered_entries: function() {
       if (!this.selected_campus.length && !this.selected_unity.length)
         return this.entries;
@@ -348,9 +221,7 @@ export default {
       return filtered;
     }
   },
-  beforeMount() {
-    this.sheetQuery();
-  }
+  beforeMount() {}
 };
 </script>
 
