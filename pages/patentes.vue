@@ -10,7 +10,7 @@
         <template #card="{item}">
           <v-container fill-height>
             <v-row class="align-center justify-center ma-0">
-              <p class="white--text subtitle-1 text-center mb-0">{{item.name}}</p>
+              <p class="white--text subtitle-1 font-weight-medium text-center mb-0">{{item.name}}</p>
             </v-row>
           </v-container>
         </template>
