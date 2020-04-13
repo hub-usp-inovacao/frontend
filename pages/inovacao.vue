@@ -9,12 +9,8 @@
         @input="search = $event"
       />
 
-      <!-- Seleção e Filtro -->
-
-      <CardButton :tabs="tabs" @tab="updateTab($event)" />
+      <CardButton :tabs="tabs" color="#005C59" active="#003836" @tab="updateTab($event)" />
     </div>
-
-    <!-- Lista e Card de Exibição -->
 
     <Background class="absolute" />
 
@@ -24,44 +20,6 @@
 
     <div class="hidden-md-and-up">
       <SelectAndCard :items="filtered_entries" />
-      <!-- <v-row justify="center" class="ma-0">
-        <v-col cols="11" sm="10">
-          <v-card :loading="loading_data">
-            <v-container>
-              <v-select
-                flat
-                rounded
-                filled
-                hide-details
-                v-model="item_index"
-                menu-props="auto"
-                color="#37474F"
-                :items="filtered_entries.map((item,i) => ({text: item.name, value: i}))"
-                no-data-text="Não encontramos nada"
-                :label="loading_data ? 'Carregando itens' : 'Escolha uma disciplina'"
-              ></v-select>
-            </v-container>
-
-            <div v-if="item_index >= 0">
-              <v-container px-6>
-                <p class="title">{{current_item.name}}</p>
-                <p class="body-2 font-italic my-2">{{current_item.category}}</p>
-                <p class="body-2">{{current_item.campus}} - {{current_item.unity}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-2">{{current_item.description.long}}</p>
-              </v-container>
-
-              <v-card-actions>
-                <v-spacer />
-                <v-btn depressed dark color="rgb(255, 167, 38)" :href="current_item.url">Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>-->
     </div>
   </div>
 </template>
@@ -90,8 +48,7 @@ export default {
     loading_data: true,
     loading_search: false,
 
-    current_tab: 0,
-    item_index: -1,
+    current_tab: -1,
 
     selected_campus: [],
     selected_unity: [],
@@ -107,7 +64,6 @@ export default {
 
     entries: [],
     search_entries: [],
-    loading_search: false,
     tabs: [
       {
         name: "CEPIDS",
@@ -138,7 +94,6 @@ export default {
   methods: {
     updateTab(t) {
       this.current_tab = t;
-      this.item_index = -1;
     },
     async sheetQuery() {
       this.loading_data = true;
@@ -251,10 +206,6 @@ export default {
     }
   },
   computed: {
-    current_item: function() {
-      if (this.item_index < 0) return null;
-      return this.filtered_entries[this.item_index];
-    },
     filtered_entries: function() {
       if (
         !this.selected_campus.length &&
@@ -275,7 +226,4 @@ export default {
 </script>
 
 <style scoped>
-.absolute {
-  position: absolute;
-}
 </style>
