@@ -1,124 +1,195 @@
 <template>
-  <v-app>
-    <v-card class="mx-auto" max-width="300" tile>
-      <v-list shaped>
-        <v-subheader>REPORTS</v-subheader>
-        <v-list-item-group v-model="item" color="primary">
-          <v-list-item v-for="(item, i) in items" :key="i">
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-card>
-  </v-app>
+  <div>
+    <div class="background">
+      <Panel
+        title="P&amp;D&amp;I"
+        description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
+        url="https://forms.gle/3z4Vn3ewgP6UKJey6"
+        :loading="loading_search"
+        @input="search = $event"
+      />
+
+      <CardButton :tabs="tabs" color="#005C59" active="#003836" @tab="updateTab($event)" />
+    </div>
+
+    <Background class="absolute" />
+
+    <div class="hidden-sm-and-down">
+      <ListAndCard :items="filtered_entries" />
+    </div>
+
+    <div class="hidden-md-and-up">
+      <SelectAndCard :items="filtered_entries" />
+    </div>
+
+    <div class="back">
+      <svg
+        width="1262"
+        height="367"
+        viewBox="0 0 1262 367"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M405 143L-14 0V367H1262L1083 287L1115 237L821 73L405 143Z"
+          fill="#4AD4FF"
+          fill-opacity="0.34"
+        />
+      </svg>
+    </div>
+    <div class="back">
+      <svg
+        width="713"
+        height="196"
+        viewBox="0 0 713 196"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M501 0L790 89L766 268L0 195L101 134L501 0Z" fill="#4DA0BA" />
+      </svg>
+    </div>
+    <div class="back">
+      <svg
+        width="1166"
+        height="266"
+        viewBox="0 0 1166 266"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M452 168L-14 0V266H1166L953 224L652 91L452 168Z" fill="#108CB3" />
+      </svg>
+    </div>
+  </div>
 </template>
 
 <script>
 import { debounce } from "debounce";
-import Panel from "../components/Panel.vue";
+import Panel from "@/components/Panel.vue";
+import Select from "@/components/Select.vue";
+import Background from "@/components/Background.vue";
+import CardButton from "@/components/CardButton.vue";
+import ListAndCard from "@/components/ListAndCard.vue";
+import SelectAndCard from "@/components/SelectAndCard.vue";
 
 export default {
   components: {
-    Panel
+    Panel,
+    Select,
+    Background,
+    CardButton,
+    ListAndCard,
+    SelectAndCard
   },
   data: () => ({
-    item: 1,
-    items: [
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" }
-    ],
     search: "",
-    current_tab: 0,
-    current_item: -1,
+    unity_list: [],
     loading_data: true,
     loading_search: false,
+
+    current_tab: -1,
+
     selected_campus: [],
     selected_unity: [],
+    selected_known: [],
+
     campi_list: [],
     unity_list: [],
-    sheet_name: "DISCIPLINAS",
+    known_list: [],
+
+    sheet_name: "D&I",
     sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
     api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+
     entries: [],
+    search_entries: [],
     tabs: [
       {
-        name: "Graduação",
+        name: "CEPIDS",
+        description:
+          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
         entries: []
       },
       {
-        name: "Pós-Graduação",
+        name: "EMBRAPII",
+        description:
+          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
+        entries: []
+      },
+      {
+        name: "INCTs",
+        description:
+          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
+        entries: []
+      },
+      {
+        name: "NAP",
+        description:
+          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
         entries: []
       }
     ]
   }),
   methods: {
+    updateTab(t) {
+      this.current_tab = t;
+    },
     async sheetQuery() {
       this.loading_data = true;
       let campi = new Set();
       let unity = new Set();
+      let known = new Set();
+
       await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'${this.sheet_name}'?key=${this.api_key}`
       )
         .then(request => request.json())
         .then(data => {
           data.values.slice(1).forEach(row => {
+            // console.log(row);
             let di = {
-              title: row[0],
+              category: row[0],
+              name: row[1],
+              campus: row[2],
+              unity: row[3],
+              url: row[5],
               description: {
-                short: row[3],
+                short: row[9],
                 long: row[8]
               },
-              campus: row[4],
-              unity: row[5],
-              category: row[6],
-              url: row[7],
-              area: row[9],
-              start_date: row[10]
+              knownledge: row[11].split(/,/),
+              key_words: row[13]
             };
-            campi.add(di.campus);
-            unity.add(di.unity);
-            if (row[1].localeCompare("Graduação") === 0)
-              this.tabs[0].entries.push(di);
-            else this.tabs[1].entries.push(di);
+
+            let tab = this.tabs.find(
+              tab => tab.name.localeCompare(di.category) == 0
+            );
+
+            if (tab) {
+              campi.add(di.campus);
+              unity.add(di.unity);
+              di.knownledge.forEach(item => {
+                if (item) known.add(item);
+              });
+              tab.entries.push(di);
+            }
           });
         })
         .finally(() => (this.loading_data = false));
 
-      this.campi_list = Array.from(campi);
-      this.unity_list = Array.from(unity);
+      this.campi_list = Array.from(campi).sort(this.compare_string);
+      this.unity_list = Array.from(unity).sort(this.compare_string);
+      this.known_list = Array.from(known).sort(this.compare_string);
       this.entries = this.tabs[0].entries;
+
+      // console.log(this.entries);
     },
     async fuzzySearch() {
-      if (!this.search) {
+      if (!this.search.trim()) {
         this.entries = this.tabs[this.current_tab].entries;
         return;
       }
       this.loading_search = true;
-      this.current_item = -1;
+      this.item_index = -1;
 
       var options = {
         tokenize: true,
@@ -128,7 +199,7 @@ export default {
         distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 2,
-        keys: ["title", "campus", "description.long", "unity"]
+        keys: ["name", "campus", "description.long", "unity"]
       };
 
       await this.$search(
@@ -140,6 +211,22 @@ export default {
           this.entries = results;
         })
         .finally((this.loading_search = false));
+    },
+    filter_data(item) {
+      if (
+        (!this.selected_campus.length ||
+          this.selected_campus.includes(item.campus)) &&
+        (!this.selected_unity.length ||
+          this.selected_unity.includes(item.unity)) &&
+        (!this.selected_known.length ||
+          this.selected_known.filter(known => item.knownledge.includes(known))
+            .length)
+      )
+        return true;
+      return false;
+    },
+    compare_string(a, b) {
+      return a.localeCompare(b);
     }
   },
   watch: {
@@ -150,27 +237,22 @@ export default {
       await this.fuzzySearch();
     }, 500),
     selected_campus: function() {
-      this.current_item = -1;
+      this.item_index = -1;
     },
     selected_unity: function() {
-      this.current_item = -1;
+      this.item_index = -1;
     }
   },
   computed: {
     filtered_entries: function() {
-      if (!this.selected_campus.length && !this.selected_unity.length)
+      if (
+        !this.selected_campus.length &&
+        !this.selected_unity.length &&
+        !this.selected_known.length
+      )
         return this.entries;
 
-      let filtered = [];
-      this.entries.forEach(item => {
-        if (
-          (this.selected_campus.includes(item.campus) ||
-            !this.selected_campus.length) &&
-          (this.selected_unity.includes(item.unity) ||
-            !this.selected_unity.length)
-        )
-          filtered.push(item);
-      });
+      let filtered = this.entries.filter(item => this.filter_data(item));
 
       return filtered;
     }
@@ -182,26 +264,9 @@ export default {
 </script>
 
 <style scoped>
-.blue-background {
-  background-color: #2b80d1;
-}
-.pink-background {
-  background-color: #da1955;
-}
-.panel_bg {
+.back {
   position: absolute;
-  top: 0;
-  width: 100%;
-  height: 40rem;
-  /* background: rgb(216, 216, 216); */
-  background: #ffa726;
-  transform: skewY(-5deg);
-  transform-origin: top left;
-}
-.left-border {
-  border-radius: 5px 0 0 5px;
-}
-.right-border {
-  border-radius: 0 5px 5px 0;
+  display: block;
+  bottom: 0;
 }
 </style>
