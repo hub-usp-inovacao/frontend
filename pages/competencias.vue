@@ -11,7 +11,15 @@
 
       <!-- Seleção e Filtro -->
 
-      <CardButton :tabs="tabs" color="#6b1c28" active="#6a0515" @tab="updateTab($event)" />
+      <CardButton :tabs="tabs" color="#6b1c28" active="#6a0515" @tab="updateTab($event)">
+        <template #card="{item}">
+          <v-container fill-height>
+            <v-row class="align-center justify-center ma-0">
+              <p class="white--text subtitle-1 font-weight-medium text-center mb-0">{{item.name}}</p>
+            </v-row>
+          </v-container>
+        </template>
+      </CardButton>
     </div>
 
     <!-- Lista e Card de Exibição -->
@@ -239,7 +247,7 @@ export default {
     Panel,
     Select,
     Background,
-    CardButton,
+    CardButton
   },
   data: () => ({
     search: "",
@@ -270,40 +278,40 @@ export default {
     tabs: [
       {
         name: "Ciências Exatas e da Terra",
-        description: "",
+        description: ""
       },
       {
         name: "Ciências Biológicas",
-        description: "",
+        description: ""
       },
       {
         name: "Engenharias",
-        description: "",
+        description: ""
       },
       {
         name: "Ciências da Saúde",
-        description: "",
+        description: ""
       },
       {
         name: "Ciências Agrárias",
-        description: "",
+        description: ""
       },
       {
         name: "Ciências Sociais Aplicadas",
-        description: "",
+        description: ""
       },
       {
         name: "Ciências Humanas",
-        description: "",
+        description: ""
       },
       {
         name: "Linguística, Letras e Artes",
-        description: "",
+        description: ""
       },
       {
         name: "Outros",
-        description: "",
-      },
+        description: ""
+      }
     ]
   }),
   methods: {
