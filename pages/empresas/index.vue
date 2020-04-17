@@ -10,78 +10,37 @@
 
     <Background class="absolute" />
 
-    <v-container style="height: 20rem;">
-      <v-row class="fill-height" justify="center" align="center">
-        <div align="center" class="display-2 text-center">Página em construção</div>
-      </v-row>
-    </v-container>
+    <div class="hidden-sm-and-down">
+      <ListAndCard :items="entries" />
+    </div>
+
+    <div class="hidden-md-and-up">
+      <SelectAndCard :items="entries" />
+    </div>
   </div>
 </template>
 
 <script>
 import Panel from "@/components/Panel.vue";
 import Background from "@/components/Background.vue";
+import ListAndCard from "@/components/ListAndCard.vue";
+import SelectAndCard from "@/components/SelectAndCard.vue";
 
 export default {
   components: {
     Panel,
-    Background
+    Background,
+    ListAndCard,
+    SelectAndCard
   },
   data: () => ({
-    sheet: [],
-    properties: {
-      incubator: [],
-      campus: [],
-      unity: [],
-      cnae: []
-    }
+    entries: []
   }),
   methods: {
     async querySheet() {
-      const request = await fetch(
-        "https://spreadsheets.google.com/feeds/list/1cKw_4pAW_sQu0wUg1_iEOzIv7ITFJDDcsHMvp-qFx9o/o6mbfy9/public/values?alt=json"
-      );
-      const data = await request.json();
-
-      data.feed.entry.forEach(item => {
-        let company = {
-          name: item.gsx$_cn6ca.$t,
-          tech: item.gsx$tecnologiasqueutiliza.$t,
-          logo: item.gsx$logo.$t,
-          url: item.gsx$website.$t,
-          description: item.gsx$descriçãodonegócio.$t,
-          products: item.gsx$principaisprodutosouserviços.$t,
-          incubator: item.gsx$incubadora.$t,
-          campus: item.gsx$campus.$t,
-          unity: item.gsx$unidadedossocios.$t,
-          cnae: item.gsx$códigocnae.$t
-        };
-
-        if (!this.properties.incubator.includes(company.incubator))
-          this.properties.incubator.push(company.incubator);
-
-        if (!this.properties.campus.includes(company.campus))
-          this.properties.campus.push(company.campus);
-
-        if (!this.properties.unity.includes(company.unity))
-          this.properties.unity.push(company.unity);
-
-        if (!this.properties.cnae.includes(company.cnae))
-          this.properties.cnae.push(company.cnae);
-
-        if (company.url.substring(0, 4) != "http")
-          company.url = "http://" + company.url;
-
-        this.sheet.push(company);
-      });
-
-      Object.values(this.properties).forEach(property => {
-        property.sort();
-      });
+      return;
     }
   },
-  created() {
-    this.querySheet();
-  }
+  created() {}
 };
 </script>

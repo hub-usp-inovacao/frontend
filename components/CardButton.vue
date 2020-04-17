@@ -12,13 +12,13 @@
                 height="100%"
               >
                 <slot name="card" :item="item">
-                  <v-card-title class="justify-center">
-                    <p class="title white--text font-weight-bold text-center mb-0">{{item.name}}</p>
-                  </v-card-title>
-
-                  <v-card-text v-if="item.description">
-                    <p class="caption white--text font-wight-light ma-0">{{item.description}}</p>
-                  </v-card-text>
+                  <v-container fill-height>
+                    <v-row class="align-center justify-center ma-0">
+                      <p
+                        class="white--text subtitle-1 font-weight-medium text-center mb-0"
+                      >{{item.name}}</p>
+                    </v-row>
+                  </v-container>
                 </slot>
               </v-card>
             </v-item>
