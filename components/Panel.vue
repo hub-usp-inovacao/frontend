@@ -19,7 +19,7 @@
               solo
               flat
               rounded
-              color="black"
+              color="tertiary"
               label="Buscar"
               counter="32"
               v-model="typed"

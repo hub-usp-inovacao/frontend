@@ -2,9 +2,9 @@
   <div>
     <v-select
       flat
-      filled
-      rounded
+      solo
       hide-details
+      dense
       :multiple="multiple"
       v-model="selected"
       menu-props="auto"
