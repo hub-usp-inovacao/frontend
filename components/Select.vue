@@ -5,7 +5,7 @@
       filled
       rounded
       hide-details
-      multiple
+      :multiple="multiple"
       v-model="selected"
       menu-props="auto"
       :items="items"
@@ -29,7 +29,7 @@ export default {
   data: () => ({
     selected: []
   }),
-  props: ["items", "label"],
+  props: ["items", "label", "multiple"],
   watch: {
     selected(s) {
       this.$emit("select", s);
