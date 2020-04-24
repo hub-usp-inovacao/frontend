@@ -5,26 +5,41 @@
         title="Educação"
         description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento e códigos e links para acesso às ementas no sistema institucional da Universidade, o Júpiter."
         url="https://forms.gle/tAuVq5oAYiGo52u46"
-        :loading="loading_search"
         @input="search = $event"
       />
 
       <CardButton :tabs="tabs" color="#db8337" active="#bf6213" @tab="updateTab($event)" />
+
+      <v-container>
+        <v-row class="ma-0">
+          <v-col>
+            <p class="font-weight-medium">Filtros:</p>
+          </v-col>
+        </v-row>
+        <v-row class="ma-0">
+          <v-col cols="6" sm="4" md="3">
+            <Select :items="campi_list" label="Campi" />
+          </v-col>
+          <v-col cols="6" sm="4" md="3">
+            <Select :items="categories" label="Categoria" />
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
 
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
       <ListAndCard :items="entries">
-        <v-template #li="{item}">
+        <template #li="{item}">
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
-        </v-template>
+        </template>
 
-        <v-template #item="{item}">
+        <template #item="{item}">
           <v-card-title px-6>
-            <p class="title">{{item.title}}</p>
+            <p class="title">{{item.name}}</p>
           </v-card-title>
 
           <v-card-text px-6>
@@ -36,17 +51,17 @@
           </v-card-text>
 
           <v-card-actions class="justify-center">
-            <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
+            <v-btn depressed dark color="primary" :href="item.url">Saiba mais</v-btn>
           </v-card-actions>
-        </v-template>
+        </template>
       </ListAndCard>
     </div>
 
     <div class="hidden-md-and-up">
       <SelectAndCard :items="entries">
-        <v-template #item="{item}">
+        <template #item="{item}">
           <v-container px-6>
-            <p class="title">{{item.title}}</p>
+            <p class="title">{{item.name}}</p>
             <p class="body-2 font-italic my-2">{{item.category}}</p>
             <p class="body-2">{{item.campus}} - {{item.unity}}</p>
           </v-container>
@@ -60,7 +75,7 @@
             <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
             <v-spacer />
           </v-card-actions>
-        </v-template>
+        </template>
       </SelectAndCard>
     </div>
   </div>
@@ -70,6 +85,7 @@
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
+import Select from "../components/Select.vue";
 import CardButton from "../components/CardButton.vue";
 import ListAndCard from "../components/ListAndCard.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
@@ -78,6 +94,7 @@ export default {
   components: {
     Panel,
     Background,
+    Select,
     CardButton,
     ListAndCard,
     SelectAndCard
@@ -90,6 +107,7 @@ export default {
     selected_unity: [],
     campi_list: [],
     unity_list: [],
+    categories: ["Graduacão", "Pós-Graduação"],
 
     sheet_name: "DISCIPLINAS",
     sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
@@ -136,7 +154,7 @@ export default {
         .then(data => {
           data.values.slice(1).forEach(row => {
             let di = {
-              title: row[0],
+              name: row[0],
               description: {
                 short: row[3],
                 long: row[8]
@@ -148,11 +166,16 @@ export default {
               area: row[9],
               start_date: row[10]
             };
-            campi.add(di.campus);
-            unity.add(di.unity);
-            if (row[1].localeCompare("Graduação") === 0)
-              this.tabs[0].entries.push(di);
-            else this.tabs[1].entries.push(di);
+
+            let tab = this.tabs.find(
+              tab => tab.name.localeCompare(di.category) == 0
+            );
+
+            if (tab) {
+              campi.add(di.campus);
+              unity.add(di.unity);
+              tab.entries.push(di);
+            }
           });
         })
         .finally(() => (this.loading_data = false));
@@ -198,9 +221,9 @@ export default {
     search: debounce(async function() {
       await this.fuzzySearch();
     }, 500),
-    current_tab: debounce(async function() {
+    current_tab: async function() {
       await this.fuzzySearch();
-    }, 500)
+    }
   },
   computed: {
     filtered_entries: function() {
@@ -221,7 +244,9 @@ export default {
       return filtered;
     }
   },
-  beforeMount() {}
+  beforeMount() {
+    // this.sheetQuery();
+  }
 };
 </script>
 
@@ -231,8 +256,5 @@ export default {
 }
 .right-border {
   border-radius: 0 5px 5px 0;
-}
-.absolute {
-  position: absolute;
 }
 </style>

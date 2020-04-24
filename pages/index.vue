@@ -239,73 +239,71 @@
 
     <!-- DNA USP -->
     <v-app>
-      <v-container fill-height>
-        <v-container>
-          <v-row justify="center" align-content="space-around" class="mx-0">
-            <v-col cols="12" md="5">
-              <v-row justify="center">
-                <img
-                  :src="require('@/vectors/home_dna_usp.svg')"
-                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                />
-              </v-row>
-            </v-col>
+      <v-container mt-12>
+        <v-row justify="center" align-content="space-around" class="mx-0">
+          <v-col cols="12" md="5">
+            <v-row justify="center">
+              <img
+                :src="require('@/vectors/home_dna_usp.svg')"
+                style="max-width: 100%; max-height: 100%; object-fit: contain;"
+              />
+            </v-row>
+          </v-col>
 
-            <v-col cols="12" md="7">
-              <p
-                :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
-                class="font-weight-medium mb-0"
-              >Empresas com DNA USP:</p>
+          <v-col cols="12" md="7">
+            <p
+              :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
+              class="font-weight-medium mb-0"
+            >Empresas com DNA USP:</p>
 
-              <p
-                :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
-                class="font-weight-medium mb-8"
-              >Resultados de uma Universidade Inovadora e Empreendora</p>
+            <p
+              :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
+              class="font-weight-medium mb-8"
+            >Resultados de uma Universidade Inovadora e Empreendora</p>
 
-              <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
-                A marca DNA USP foi criada para identificar empresas constituídas por
-                alunos, ex-alunos e pesquisadores que passaram pela Universidade de
-                São Paulo ao longo dos anos, bem como empresas resultantes de
-                processos de incubação ou de aceleração em alguma das incubadoras
-                associadas à USP.
-              </p>
-            </v-col>
-          </v-row>
+            <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
+              A marca DNA USP foi criada para identificar empresas constituídas por
+              alunos, ex-alunos e pesquisadores que passaram pela Universidade de
+              São Paulo ao longo dos anos, bem como empresas resultantes de
+              processos de incubação ou de aceleração em alguma das incubadoras
+              associadas à USP.
+            </p>
+          </v-col>
+        </v-row>
 
-          <v-row justify="center" class="mx-0">
-            <v-col cols="4" sm="3">
-              <v-row justify="center" align="center" class="fill-height">
-                <img
-                  :src="require('@/vectors/logo_gympass.svg')"
-                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                />
-              </v-row>
-            </v-col>
+        <v-row justify="center" class="mx-0">
+          <v-col cols="4" sm="3">
+            <v-row justify="center" align="center" class="fill-height">
+              <img
+                :src="require('@/vectors/logo_gympass.svg')"
+                style="max-width: 100%; max-height: 100%; object-fit: contain;"
+              />
+            </v-row>
+          </v-col>
 
-            <v-col cols="4" sm="3">
-              <v-row justify="center" align="center" class="fill-height">
-                <img
-                  :src="require('@/vectors/logo_ifood.svg')"
-                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                />
-              </v-row>
-            </v-col>
+          <v-col cols="4" sm="3">
+            <v-row justify="center" align="center" class="fill-height">
+              <img
+                :src="require('@/vectors/logo_ifood.svg')"
+                style="max-width: 100%; max-height: 100%; object-fit: contain;"
+              />
+            </v-row>
+          </v-col>
 
-            <v-col cols="4" sm="3">
-              <v-row justify="center" align="center" class="fill-height">
-                <img
-                  :src="require('@/vectors/logo_99.svg')"
-                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                />
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-container>
+          <v-col cols="4" sm="3">
+            <v-row justify="center" align="center" class="fill-height">
+              <img
+                :src="require('@/vectors/logo_99.svg')"
+                style="max-width: 100%; max-height: 100%; object-fit: contain;"
+              />
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
     </v-app>
 
     <!-- AUSPIN -->
-    <v-app>
+    <div>
       <v-container fill-height>
         <v-container>
           <v-row class="ma-0 fill-height" align="center">
@@ -332,18 +330,56 @@
           </v-row>
         </v-container>
       </v-container>
-    </v-app>
+    </div>
 
     <!-- Conecte-se -->
     <v-app>
-      <div class="light-blue-layer"></div>
-      <div class="dark-blue-layer"></div>
+      <BottomCurves class="absolute" style="bottom: 0" />
+
+      <v-container fill-height style="position: relative">
+        <v-row class="ma-0 mb-12" align="center">
+          <v-col cols="12" md="7" align-self="start">
+            <p
+              :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
+              class="font-weight-medium mb-8"
+            >Conecte-se</p>
+
+            <p
+              :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
+              class="font-weight-light"
+            >Cadastre a sua inovação, estrutura, competência, empresa ou patente no portal e a promova no mundo da inovação e do empreendedorismo na USP :</p>
+          </v-col>
+
+          <v-col cols="12" md="5">
+            <v-card height="10rem" color="secondary">
+              <v-container fill-height>
+                <v-row justify="center" align="center">
+                  <v-btn x-large rounded depressed color="rgba(175, 236, 255, 0.4)">
+                    <span class="white--text font-weight-black">CLIQUE AQUI</span>
+                  </v-btn>
+                </v-row>
+              </v-container>
+            </v-card>
+            <p
+              class="caption font-italic font-weight-light"
+            >A AUSPIN analisará sua solicitação e tomará as providências adequadas no menor tempo possível.</p>
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <!-- <div class="light-blue-layer"></div>
+      <div class="dark-blue-layer"></div>-->
     </v-app>
   </div>
 </template>
 
 <script>
+import BottomCurves from "../components/BottomCurves.vue";
+
 export default {
+  components: {
+    BottomCurves
+  },
   head: {
     title: "Solus",
     meta: [

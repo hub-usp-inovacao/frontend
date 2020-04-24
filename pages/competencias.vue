@@ -5,7 +5,6 @@
         title="Competências"
         description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua sub-área (ex.: Matemática)."
         url="https://forms.gle/dDooKL5G2sApfjqb6"
-        :loading="loading_search"
         @input="search = $event"
       />
 
@@ -30,10 +29,14 @@
         <v-row>
           <v-col cols="3">
             <v-card>
-              <v-card-title class="title font-weight-bold mb-0">Subáreas: </v-card-title>
+              <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
               <v-list>
                 <v-list-item v-for="(subarea,i) in tabs[current_tab].subareas" :key="i">
-                  <v-checkbox v-model="selected_subareas" :label="subarea.name" :value="subarea.name"></v-checkbox>
+                  <v-checkbox
+                    v-model="selected_subareas"
+                    :label="subarea.name"
+                    :value="subarea.name"
+                  ></v-checkbox>
                 </v-list-item>
               </v-list>
             </v-card>
@@ -42,12 +45,8 @@
           <!-- Filtro -->
           <v-col cols="3">
             <v-card>
-              <v-card-title class="title font-weight-bold mb-0">Subáreas: </v-card-title>
-              <v-select
-                rounded
-                v-model="selected_filter"
-                :items="filters">
-              </v-select>
+              <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
+              <v-select rounded v-model="selected_filter" :items="filters"></v-select>
             </v-card>
           </v-col>
         </v-row>
@@ -82,12 +81,12 @@ export default {
     filters: [
       {
         text: "Docentes",
-        value: 0,
+        value: 0
       },
       {
         text: "Outro",
-        value: 1,
-      },
+        value: 1
+      }
     ],
     selected_filter: 0,
 
@@ -114,14 +113,14 @@ export default {
         description: "",
         subareas: [
           {
-            name: "Matemática",
+            name: "Matemática"
           },
           {
-            name: "Probabilidade e Estatística",
+            name: "Probabilidade e Estatística"
           },
           {
-            name: "Ciência da Computação",
-          },
+            name: "Ciência da Computação"
+          }
         ]
       },
       {

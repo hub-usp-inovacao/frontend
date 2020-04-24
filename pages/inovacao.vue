@@ -15,11 +15,29 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="filtered_entries" />
+      <ListAndCard :items="entries">
+        <template #item="{item}">
+          <v-card-title px-6>
+            <p class="title">{{item.name}}</p>
+          </v-card-title>
+
+          <v-card-text px-6>
+            <p class="body-2 font-italic mb-0">{{item.knownledge.toString()}}</p>
+
+            <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
+
+            <p class="body-2">{{item.description.long}}</p>
+          </v-card-text>
+
+          <v-card-actions class="justify-center">
+            <v-btn depressed dark color="tertiary" :href="item.url">Saiba mais</v-btn>
+          </v-card-actions>
+        </template>
+      </ListAndCard>
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries" />
+      <SelectAndCard :items="entries" />
     </div>
   </div>
 </template>
@@ -48,22 +66,13 @@ export default {
     loading_data: true,
     loading_search: false,
 
-    current_tab: -1,
-
-    selected_campus: [],
-    selected_unity: [],
-    selected_known: [],
-
-    campi_list: [],
-    unity_list: [],
-    known_list: [],
+    current_tab: 0,
 
     sheet_name: "D&I",
     sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
     api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
 
     entries: [],
-    search_entries: [],
     tabs: [
       {
         name: "CEPIDS",
@@ -107,7 +116,6 @@ export default {
         .then(request => request.json())
         .then(data => {
           data.values.slice(1).forEach(row => {
-            // console.log(row);
             let di = {
               category: row[0],
               name: row[1],
@@ -126,24 +134,12 @@ export default {
               tab => tab.name.localeCompare(di.category) == 0
             );
 
-            if (tab) {
-              campi.add(di.campus);
-              unity.add(di.unity);
-              di.knownledge.forEach(item => {
-                if (item) known.add(item);
-              });
-              tab.entries.push(di);
-            }
+            if (tab) tab.entries.push(di);
           });
         })
         .finally(() => (this.loading_data = false));
 
-      this.campi_list = Array.from(campi).sort(this.compare_string);
-      this.unity_list = Array.from(unity).sort(this.compare_string);
-      this.known_list = Array.from(known).sort(this.compare_string);
       this.entries = this.tabs[0].entries;
-
-      // console.log(this.entries);
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
@@ -175,17 +171,15 @@ export default {
         .finally((this.loading_search = false));
     },
     filter_data(item) {
-      if (
-        (!this.selected_campus.length ||
+      return (
+        (this.selected_campus.length == 0 ||
           this.selected_campus.includes(item.campus)) &&
-        (!this.selected_unity.length ||
+        (this.selected_unity.length == 0 ||
           this.selected_unity.includes(item.unity)) &&
-        (!this.selected_known.length ||
+        (this.selected_known.length == 0 ||
           this.selected_known.filter(known => item.knownledge.includes(known))
             .length)
-      )
-        return true;
-      return false;
+      );
     },
     compare_string(a, b) {
       return a.localeCompare(b);
@@ -195,14 +189,8 @@ export default {
     search: debounce(async function() {
       await this.fuzzySearch();
     }, 500),
-    current_tab: debounce(async function() {
+    current_tab: async function() {
       await this.fuzzySearch();
-    }, 500),
-    selected_campus: function() {
-      this.item_index = -1;
-    },
-    selected_unity: function() {
-      this.item_index = -1;
     }
   },
   computed: {
