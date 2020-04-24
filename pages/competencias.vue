@@ -9,7 +9,7 @@
         @input="search = $event"
       />
 
-      <!-- Seleção e Filtro -->
+      <!-- Seleção de Área -->
 
       <CardButton :tabs="tabs" color="#6b1c28" active="#6a0515" @tab="updateTab($event)">
         <template #card="{item}">
@@ -22,215 +22,36 @@
       </CardButton>
     </div>
 
-    <!-- Lista e Card de Exibição -->
-
     <Background class="absolute" />
 
-    <div class="hidden-sm-and-down">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="5">
-          <v-card height="35rem" :loading="loading_data">
-            <div v-if="search_entries.length > 0" class="fill-height">
-              <v-list rounded style="max-height: 100%; overflow-y: auto;">
-                <v-list-item-group>
-                  <v-list-item
-                    v-for="(item,i) in filtered_entries"
-                    :key="item.email"
-                    @click="item_index = i"
-                  >
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <span class="font-weight-light">{{ item.name }}</span>
-                      </v-list-item-title>
-                      <v-list-item-subtitle>{{item.knownledge.toString()}}</v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
+    <!-- Seleção de Subárea e Filtro -->
+    <div>
+      <v-container>
+        <v-row>
+          <v-col cols="3">
+            <v-card>
+              <v-card-title class="title font-weight-bold mb-0">Subáreas: </v-card-title>
+              <v-list>
+                <v-list-item v-for="(subarea,i) in tabs[current_tab].subareas" :key="i">
+                  <v-checkbox v-model="selected_subareas" :label="subarea.name" :value="subarea.name"></v-checkbox>
+                </v-list-item>
               </v-list>
-            </div>
+            </v-card>
+          </v-col>
 
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p v-if="loading_data" class="title font-weight-light text-center">Carregando itens</p>
-                <p
-                  v-else
-                  class="title font-weight-light text-center"
-                >Não encontramos nada relacionado a sua pesquisa</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-
-        <v-col cols="5">
-          <v-card height="35rem">
-            <div v-if="item_index >= 0" class="fill-height" style="overflow-y: auto;">
-              <v-container px-6>
-                <p class="title">{{current_item.name}}</p>
-                <p class="body-2 font-italic font-weight-light my-2">{{current_item.association}}</p>
-                <p class="body-2 my-0">{{current_item.campus}}</p>
-                <p class="body-2 font-weight-light my-0">{{current_item.unity}}</p>
-              </v-container>
-
-              <v-container px-6 py-0>
-                <p class="body-2">
-                  Contato:&#160;
-                  <span class="font-weight-light">{{current_item.email}}</span>
-                </p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">
-                  {{current_item.role}}
-                  <span class="font-weight-regular">em</span>
-                  {{current_item.group_initials}}
-                </p>
-                <p class="body-2">{{current_item.group_name}}</p>
-                <p class="body-2 font-weight-light my-0">{{current_item.description}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">Competências:</p>
-                <p class="body-2 font-weight-light my-0">{{current_item.skills}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">Serviços:</p>
-
-                <p
-                  v-for="item in current_item.services"
-                  :key="item"
-                  class="body-2 font-weight-light my-0"
-                >
-                  <span v-if="item">&bull;</span>
-                  {{item}}
-                </p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">Equipamentos:</p>
-
-                <p
-                  v-for="item in current_item.equipment"
-                  :key="item"
-                  class="body-2 font-weight-light my-0"
-                >
-                  <span v-if="item">&bull;</span>
-                  {{item}}
-                </p>
-              </v-container>
-
-              <v-card-actions v-if="current_item.url">
-                <v-spacer />
-                <v-btn depressed dark color="primary" :href="current_item.url[0]">Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
-
-            <div v-else class="fill-height">
-              <v-row class="fill-height ma-0" justify="center" align="center">
-                <p class="title font-weight-light text-center">Selecione um Item na lista ao lado</p>
-              </v-row>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <v-row justify="center" class="ma-0">
-        <v-col cols="11" sm="10">
-          <v-card :loading="loading_data">
-            <v-container>
+          <!-- Filtro -->
+          <v-col cols="3">
+            <v-card>
+              <v-card-title class="title font-weight-bold mb-0">Subáreas: </v-card-title>
               <v-select
-                flat
                 rounded
-                filled
-                hide-details
-                v-model="item_index"
-                menu-props="auto"
-                color="#37474F"
-                :items="filtered_entries.map((item,i) => ({content: item, index: i}))"
-                item-value="index"
-                no-data-text="Não encontramos nada"
-                :label="loading_data? 'Carregando itens': 'Escolha um pesquisador'"
-              >
-                <template v-slot:selection="{ item }">
-                  <span class="text-truncate">{{ item.content.name }}</span>
-                </template>
-                <template v-slot:item="{ item }">
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.content.name"></v-list-item-title>
-                    <v-list-item-subtitle v-text="item.content.knownledge.toString()"></v-list-item-subtitle>
-                  </v-list-item-content>
-                </template>
+                v-model="selected_filter"
+                :items="filters">
               </v-select>
-            </v-container>
-
-            <div v-if="item_index >= 0">
-              <v-container px-6>
-                <p class="title">{{current_item.name}}</p>
-                <p class="body-2 font-italic font-weight-light my-2">{{current_item.association}}</p>
-                <p class="body-2 my-0">{{current_item.campus}}</p>
-                <p class="body-2 font-weight-light my-0">{{current_item.unity}}</p>
-              </v-container>
-
-              <v-container px-6 py-0>
-                <p class="body-2">
-                  Contato:&#160;
-                  <span class="font-weight-light">{{current_item.email}}</span>
-                </p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">
-                  {{current_item.role}}
-                  <span class="font-weight-regular">em</span>
-                  {{current_item.group_initials}}
-                </p>
-                <p class="body-2">{{current_item.group_name}}</p>
-                <p class="body-2 font-weight-light my-0">{{current_item.description}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">Competências:</p>
-                <p class="body-2 font-weight-light my-0">{{current_item.skills}}</p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">Serviços:</p>
-
-                <p
-                  v-for="item in current_item.services"
-                  :key="item"
-                  class="body-2 font-weight-light my-0"
-                >
-                  <span v-if="item">&bull;</span>
-                  {{item}}
-                </p>
-              </v-container>
-
-              <v-container px-6>
-                <p class="body-1 font-weight-medium my-0">Equipamentos:</p>
-
-                <p
-                  v-for="item in current_item.equipment"
-                  :key="item"
-                  class="body-2 font-weight-light my-0"
-                >
-                  <span v-if="item">&bull;</span>
-                  {{item}}
-                </p>
-              </v-container>
-
-              <v-card-actions v-if="current_item.url">
-                <v-spacer />
-                <v-btn depressed dark color="primary" :href="current_item.url[0]">Saiba mais</v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
   </div>
 </template>
@@ -256,7 +77,19 @@ export default {
     loading_search: false,
 
     item_index: -1,
-    current_tab: -1,
+    current_tab: 0,
+    selected_subareas: [],
+    filters: [
+      {
+        text: "Docentes",
+        value: 0,
+      },
+      {
+        text: "Outro",
+        value: 1,
+      },
+    ],
+    selected_filter: 0,
 
     selected_campus: [],
     selected_unity: [],
@@ -278,39 +111,58 @@ export default {
     tabs: [
       {
         name: "Ciências Exatas e da Terra",
-        description: ""
+        description: "",
+        subareas: [
+          {
+            name: "Matemática",
+          },
+          {
+            name: "Probabilidade e Estatística",
+          },
+          {
+            name: "Ciência da Computação",
+          },
+        ]
       },
       {
         name: "Ciências Biológicas",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Engenharias",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Ciências da Saúde",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Ciências Agrárias",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Ciências Sociais Aplicadas",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Ciências Humanas",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Linguística, Letras e Artes",
-        description: ""
+        description: "",
+        subareas: []
       },
       {
         name: "Outros",
-        description: ""
+        description: "",
+        subareas: []
       }
     ]
   }),
