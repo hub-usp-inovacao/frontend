@@ -13,11 +13,15 @@
         <span class="text-capitalize">{{item.title}}</span>
       </v-btn>
     </v-toolbar>
+
     <v-app-bar class="hidden-md-and-up" color="white" dense flat fixed>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-content :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
+      <v-snackbar :value="true" :timeout="0">
+        <div class="text-center">Página de uso exclusivamente interno</div>
+      </v-snackbar>
       <nuxt />
     </v-content>
     <Footer />
