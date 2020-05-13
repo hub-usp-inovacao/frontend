@@ -106,7 +106,7 @@ export default {
 
     search: "",
 
-    levels: ["Graduacão", "Pós-Graduação"],
+    levels: ["Graduação", "Pós-Graduação"],
     tabs: [
       {
         name: "Inovação",
@@ -174,7 +174,7 @@ export default {
               area: "dado perdido",
               // start_date: row[10],
               start_date: row[6],
-              level: row[12] // GRADUAÇÂO ou PÓS
+              level: row[12] // Graduação ou Pós-Graduação
             };
 
             campi.add(di.campus);
@@ -217,6 +217,7 @@ export default {
       this.curr.campus = new_campus;
     },
     updateLevel(new_level) {
+      console.log(new_level);
       this.curr.level = new_level;
     },
     updateTab(t) {
