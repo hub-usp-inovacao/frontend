@@ -1,8 +1,8 @@
 <template>
   <div>
     <svg
-      width="1276"
-      height="388"
+      :width="width"
+      :height="lightHeight"
       viewBox="0 0 1276 388"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -15,8 +15,8 @@
     </svg>
 
     <svg
-      width="1180"
-      height="234"
+      :width="width"
+      :height="darkHeight"
       viewBox="0 0 1180 234"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -25,6 +25,31 @@
     </svg>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    windowWidth: 0
+  }),
+  computed: {
+    width: function() {
+      return this.windowWidth;
+    },
+    lightHeight: function() {
+      return (388 / 1276) * this.width;
+    },
+    darkHeight: function() {
+      return (234 / 1180) * this.width;
+    }
+  },
+  mounted() {
+    this.windowWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+      this.windowWidth = window.innerWidth;
+    });
+  }
+};
+</script>
 
 <style scoped>
 svg {

@@ -20,7 +20,7 @@
 
     <v-content :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <v-snackbar :value="true" :timeout="0">
-        <div class="text-center">Página de uso exclusivamente interno</div>
+        <span class="text-center">Página de uso exclusivamente interno</span>
       </v-snackbar>
       <nuxt />
     </v-content>
