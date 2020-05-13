@@ -18,10 +18,10 @@
         </v-row>
         <v-row class="ma-0">
           <v-col cols="6" sm="4" md="3">
-            <Select :items="campi_list" label="Campi" />
+            <Select :items="campi_list" label="Campi" @select="updateCampus" />
           </v-col>
           <v-col cols="6" sm="4" md="3">
-            <Select :items="categories" label="Categoria" />
+            <Select :items="levels" label="Categoria" @select="updateLevel" />
           </v-col>
         </v-row>
       </v-container>
@@ -30,7 +30,7 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="entries">
+      <ListAndCard :items="filtered_entries">
         <template #li="{item}">
           <v-list-item-content>
             <v-list-item-title>{{ item.name }}</v-list-item-title>
@@ -43,7 +43,7 @@
           </v-card-title>
 
           <v-card-text px-6>
-            <p class="body-2 font-italic mb-0">{{item.category}}</p>
+            <!-- <p class="body-2 font-italic mb-0">{{item.category}}</p> -->
 
             <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
 
@@ -58,7 +58,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="entries">
+      <SelectAndCard :items="filtered_entries">
         <template #item="{item}">
           <v-container px-6>
             <p class="title">{{item.name}}</p>
@@ -100,93 +100,94 @@ export default {
     SelectAndCard
   },
   data: () => ({
-    search: "",
-    current_tab: 0,
-
-    selected_campus: [],
-    selected_unity: [],
-    campi_list: [],
-    unity_list: [],
-    categories: ["Graduacão", "Pós-Graduação"],
-
-    sheet_name: "DISCIPLINAS",
-    sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
+    sheet_name: "XYZ",
+    sheet_id: "1U_SQMkSDU-FGc5tCLjbAet5p9ECHDCBIUiOaBo9VeYc",
     api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
 
-    entries: [],
+    search: "",
+
+    levels: ["Graduacão", "Pós-Graduação"],
     tabs: [
       {
         name: "Inovação",
-        description: "Cursos e disciplinas relacionados à área de Inovação.",
-        entries: []
+        description: "Cursos e disciplinas relacionados à área de Inovação."
       },
       {
         name: "Empreendedorismo",
         description:
-          "Cursos e disciplinas relacionados à área de Empreendedorismo.",
-        entries: []
+          "Cursos e disciplinas relacionados à área de Empreendedorismo."
       },
       {
         name: "Propriedade Intelectual",
         description:
-          "Cursos e disciplinas relacionados à área de Propriedade Intelectual.",
-        entries: []
+          "Cursos e disciplinas relacionados à área de Propriedade Intelectual."
       },
       {
         name: "Negócios",
-        description: "Cursos e disciplinas relacionados à área de Negócios.",
-        entries: []
+        description: "Cursos e disciplinas relacionados à área de Negócios."
       }
-    ]
+    ],
+
+    disciplines: [],
+    campi_list: [],
+    searched_disciplines: undefined,
+
+    curr: {
+      tab: 0,
+      campus: undefined,
+      level: undefined
+    }
   }),
   methods: {
-    updateTab(t) {
-      this.current_tab = t;
-    },
     async sheetQuery() {
       this.loading_data = true;
-      let campi = new Set();
-      let unity = new Set();
-      await fetch(
+      const campi = new Set();
+
+      fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'${this.sheet_name}'?key=${this.api_key}`
       )
         .then(request => request.json())
         .then(data => {
           data.values.slice(1).forEach(row => {
             let di = {
-              name: row[0],
+              name: row[0], // 0
               description: {
-                short: row[3],
-                long: row[8]
+                // short: row[3],
+                short: row[4],
+                // long: row[8]
+                long: row[5]
               },
-              campus: row[4],
-              unity: row[5],
-              category: row[6],
-              url: row[7],
-              area: row[9],
-              start_date: row[10]
+              // campus: row[4],
+              campus: row[1],
+              // unity: row[5],
+              unity: row[2],
+              // category: row[6], // múltiplas opções
+              category: {
+                business: row[8].length > 0,
+                enterpreneuship: row[9].length > 0,
+                innovation: row[10].length > 0,
+                intelectual_property: row[11].length > 0
+              },
+              // url: row[7],
+              url: row[3],
+              // area: row[9], // perdido "depto/prog ou área de concentração"
+              area: "dado perdido",
+              // start_date: row[10],
+              start_date: row[6],
+              level: row[12] // GRADUAÇÂO ou PÓS
             };
 
-            let tab = this.tabs.find(
-              tab => tab.name.localeCompare(di.category) == 0
-            );
-
-            if (tab) {
-              campi.add(di.campus);
-              unity.add(di.unity);
-              tab.entries.push(di);
-            }
+            campi.add(di.campus);
+            this.disciplines.push(di);
           });
         })
-        .finally(() => (this.loading_data = false));
-
-      this.campi_list = Array.from(campi).sort(this.compare_string);
-      this.unity_list = Array.from(unity).sort(this.compare_string);
-      this.entries = this.tabs[0].entries;
+        .finally(() => {
+          this.loading_data = false;
+          this.campi_list = Array.from(campi).sort(this.compare_string);
+        });
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
-        this.entries = this.tabs[this.current_tab].entries;
         return;
       }
       this.loading_search = true;
@@ -203,18 +204,23 @@ export default {
         keys: ["title", "campus", "description.long", "unity"]
       };
 
-      await this.$search(
-        this.search.trim(),
-        this.tabs[this.current_tab].entries,
-        options
-      )
+      this.$search(this.search.trim(), this.disciplines, options)
         .then(results => {
-          this.entries = results;
+          this.searched_disciplines = results;
         })
         .finally((this.loading_search = false));
     },
     compare_string(a, b) {
       return a.localeCompare(b);
+    },
+    updateCampus(new_campus) {
+      this.curr.campus = new_campus;
+    },
+    updateLevel(new_level) {
+      this.curr.level = new_level;
+    },
+    updateTab(t) {
+      this.curr.tab = t;
     }
   },
   watch: {
@@ -227,25 +233,38 @@ export default {
   },
   computed: {
     filtered_entries: function() {
-      if (!this.selected_campus.length && !this.selected_unity.length)
-        return this.entries;
+      const { tab, campus, level } = this.curr;
 
-      let filtered = [];
-      this.entries.forEach(item => {
-        if (
-          (!this.selected_campus.length ||
-            this.selected_campus.includes(item.campus)) &&
-          (!this.selected_unity.length ||
-            this.selected_unity.includes(item.unity))
-        )
-          filtered.push(item);
+      const tabCategory = [
+        "innovation",
+        "enterpreneuship",
+        "intelectual_property",
+        "business"
+      ];
+
+      const selectedCategory = tabCategory[tab];
+
+      const base =
+        this.searched_disciplines !== undefined
+          ? this.searched_disciplines
+          : this.disciplines;
+
+      return base.filter(disc => {
+        const sameCategory = disc.category[selectedCategory];
+
+        const sameCampus =
+          campus !== undefined
+            ? campus === "Todos" || disc.campus === campus
+            : true;
+
+        const sameLevel = level !== undefined ? disc.level === level : true;
+
+        return sameCategory && sameCampus && sameLevel;
       });
-
-      return filtered;
     }
   },
   beforeMount() {
-    // this.sheetQuery();
+    this.sheetQuery();
   }
 };
 </script>
