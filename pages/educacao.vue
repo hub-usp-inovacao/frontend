@@ -43,7 +43,12 @@
           </v-card-title>
 
           <v-card-text px-6>
-            <!-- <p class="body-2 font-italic mb-0">{{item.category}}</p> -->
+            <p class="body-2 mb-2">
+              <v-chip v-if="item.category.business">Negócios</v-chip>
+              <v-chip v-if="item.category.innovation">Inovação</v-chip>
+              <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
+              <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
+            </p>
 
             <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
 
@@ -62,7 +67,12 @@
         <template #item="{item}">
           <v-container px-6>
             <p class="title">{{item.name}}</p>
-            <p class="body-2 font-italic my-2">{{item.category}}</p>
+            <p class="body-2 my-2">
+              <v-chip v-if="item.category.business">Negócios</v-chip>
+              <v-chip v-if="item.category.innovation">Inovação</v-chip>
+              <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
+              <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
+            </p>
             <p class="body-2">{{item.campus}} - {{item.unity}}</p>
           </v-container>
 
