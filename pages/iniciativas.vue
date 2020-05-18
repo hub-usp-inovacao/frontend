@@ -43,9 +43,9 @@ export default {
 
     current_tab: -1,
 
-    sheet_name: "",
-    sheet_id: "",
-    api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    sheet_name: "INICIATIVAS",
+    sheet_id: process.env.sheetID,
+    api_key: process.env.sheetsAPIKey,
 
     entries: [],
     search_entries: [],

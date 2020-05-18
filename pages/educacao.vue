@@ -110,9 +110,9 @@ export default {
     SelectAndCard
   },
   data: () => ({
-    sheet_name: "XYZ",
-    sheet_id: "1U_SQMkSDU-FGc5tCLjbAet5p9ECHDCBIUiOaBo9VeYc",
-    api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    sheet_name: "DISCIPLINAS",
+    sheet_id: process.env.sheetID,
+    api_key: process.env.sheetsAPIKey,
 
     search: "",
 

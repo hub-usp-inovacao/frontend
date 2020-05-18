@@ -69,8 +69,8 @@ export default {
     current_tab: 0,
 
     sheet_name: "D&I",
-    sheet_id: "1VZR_UAGJGD-hkc_ukuKLEsxaNpP2rNQ-OpnN59zwsIY",
-    api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    sheet_id: process.env.sheetID,
+    api_key: process.env.sheetsAPIKey,
 
     entries: [],
     tabs: [

@@ -2,6 +2,10 @@ import colors from "vuetify/es5/util/colors";
 import get_data from "./hooks";
 
 export default {
+  env: {
+    sheetsAPIKey: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    sheetID: "1U_SQMkSDU-FGc5tCLjbAet5p9ECHDCBIUiOaBo9VeYc",
+  },
   mode: "universal",
   /*
    ** Headers of the page
@@ -15,17 +19,17 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: process.env.npm_package_description || ""
-      }
+        content: process.env.npm_package_description || "",
+      },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",
         href:
-          "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
-      }
-    ]
+          "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons",
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -40,9 +44,9 @@ export default {
    */
   plugins: [
     { src: "~/plugins/breakpoint.js" },
-    { src: "~/plugins/vue-fuse.js", mode: 'client' },
-    { src: "~/plugins/vue-masonry.js", mode: 'client' },
-    { src: "~/plugins/vue-typer.js", mode: 'client' },
+    { src: "~/plugins/vue-fuse.js", mode: "client" },
+    { src: "~/plugins/vue-masonry.js", mode: "client" },
+    { src: "~/plugins/vue-typer.js", mode: "client" },
   ],
 
   /*
@@ -52,14 +56,13 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-  ],
+  modules: [],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ["~/assets/variables.scss"],
     treeShake: true,
     theme: {
       themes: {
@@ -68,13 +71,13 @@ export default {
           secondary: "#4AD4FF",
           tertiary: "#108CB3",
           error: colors.blue.darken1,
-          background: "#ececec"
+          background: "#ececec",
         },
         options: {
-          customProperties: true
-        }
-      }
-    }
+          customProperties: true,
+        },
+      },
+    },
   },
   /*
    ** Build configuration
@@ -83,13 +86,13 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { }
+    extend(config, ctx) {},
   },
   hooks: {
     generate: {
       before(nuxt, generateOptions) {
         get_data();
-      }
-    }
-  }
+      },
+    },
+  },
 };
