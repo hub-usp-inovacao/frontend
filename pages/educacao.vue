@@ -99,6 +99,7 @@ import Select from "../components/Select.vue";
 import CardButton from "../components/CardButton.vue";
 import ListAndCard from "../components/ListAndCard.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -110,10 +111,6 @@ export default {
     SelectAndCard
   },
   data: () => ({
-    sheet_name: "DISCIPLINAS",
-    sheet_id: process.env.sheetID,
-    api_key: process.env.sheetsAPIKey,
-
     search: "",
 
     levels: ["Graduação", "Pós-Graduação"],
@@ -138,8 +135,6 @@ export default {
       }
     ],
 
-    disciplines: [],
-    campi_list: [],
     searched_disciplines: undefined,
 
     curr: {
@@ -149,53 +144,6 @@ export default {
     }
   }),
   methods: {
-    async sheetQuery() {
-      this.loading_data = true;
-      const campi = new Set();
-
-      fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'${this.sheet_name}'?key=${this.api_key}`
-      )
-        .then(request => request.json())
-        .then(data => {
-          data.values.slice(1).forEach(row => {
-            let di = {
-              name: row[0], // 0
-              description: {
-                // short: row[3],
-                short: row[4],
-                // long: row[8]
-                long: row[5]
-              },
-              // campus: row[4],
-              campus: row[1],
-              // unity: row[5],
-              unity: row[2],
-              // category: row[6], // múltiplas opções
-              category: {
-                business: row[8].length > 0,
-                enterpreneuship: row[9].length > 0,
-                innovation: row[10].length > 0,
-                intelectual_property: row[11].length > 0
-              },
-              // url: row[7],
-              url: row[3],
-              // area: row[9], // perdido "depto/prog ou área de concentração"
-              area: "dado perdido",
-              // start_date: row[10],
-              start_date: row[6],
-              level: row[12] // Graduação ou Pós-Graduação
-            };
-
-            campi.add(di.campus);
-            this.disciplines.push(di);
-          });
-        })
-        .finally(() => {
-          this.loading_data = false;
-          this.campi_list = Array.from(campi).sort(this.compare_string);
-        });
-    },
     async fuzzySearch() {
       if (!this.search.trim()) {
         return;
@@ -216,18 +164,14 @@ export default {
 
       this.$search(this.search.trim(), this.disciplines, options)
         .then(results => {
-          this.searched_disciplines = results;
+          this.searched_disciplines = results.length > 0 ? results : undefined;
         })
         .finally((this.loading_search = false));
-    },
-    compare_string(a, b) {
-      return a.localeCompare(b);
     },
     updateCampus(new_campus) {
       this.curr.campus = new_campus;
     },
     updateLevel(new_level) {
-      console.log(new_level);
       this.curr.level = new_level;
     },
     updateTab(t) {
@@ -243,13 +187,24 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      dataStatus: "educacao/dataStatus",
+      storeDisciplines: "educacao/disciplines",
+      campi: "educacao/campi"
+    }),
+    disciplines: function() {
+      return this.dataStatus == "ok" ? this.storeDisciplines : [];
+    },
+    campi_list: function() {
+      return this.dataStatus == "ok" ? this.campi : [];
+    },
     filtered_entries: function() {
       const { tab, campus, level } = this.curr;
 
       const tabCategory = [
         "innovation",
-        "enterpreneuship",
-        "intelectual_property",
+        "entrepreneurship",
+        "intellectualProperty",
         "business"
       ];
 
@@ -275,7 +230,12 @@ export default {
     }
   },
   beforeMount() {
-    this.sheetQuery();
+    const payload = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID
+    };
+
+    this.$store.dispatch("educacao/fetchSpreadsheets", payload);
   }
 };
 </script>

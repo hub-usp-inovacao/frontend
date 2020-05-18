@@ -29,6 +29,14 @@ export const state = () => ({
 export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   disciplines: (state) => state.disciplines,
+  campi: (state) => {
+    return Array.from(
+      state.disciplines.reduce(
+        (campiSet, di) => campiSet.add(di.campus),
+        new Set()
+      )
+    ).sort((a, b) => a.localeCompare(b));
+  },
 };
 
 export const mutations = {
@@ -44,24 +52,25 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchSpreadsheets(ctx, env) {
+  async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
     const sheetName = "DISCIPLINAS";
 
     ctx.commit("setLoadingStatus");
 
-    fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        ctx.commit("setDisciplines", data.values.slice(1).map(rowToObj));
-        ctx.commit("unsetLoadingStatus");
-      })
-      .catch((error) => {
-        ctx.commit("unsetLoadingStatus");
-        console.log("error occuried while fetching...");
-        console.log(error);
-      });
+    try {
+      const resp = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
+      );
+
+      const data = await resp.json();
+
+      ctx.commit("setDisciplines", data.values.slice(1).map(rowToObj));
+    } catch (error) {
+      console.log("error occuried while fetching...");
+      console.log(error);
+    }
+
+    ctx.commit("unsetLoadingStatus");
   },
 };
