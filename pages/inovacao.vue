@@ -30,7 +30,7 @@
           </v-card-text>
 
           <v-card-actions class="justify-center">
-            <v-btn depressed dark color="tertiary" :href="item.url">Saiba mais</v-btn>
+            <v-btn depressed dark color="tertiary" :href="item.url" :target="'_blank'">Saiba mais</v-btn>
           </v-card-actions>
         </template>
       </ListAndCard>
@@ -101,6 +101,12 @@ export default {
     ]
   }),
   methods: {
+    formatURL(raw) {
+      const head = raw.substr(0, 4);
+
+      if (head !== "http") return `http://${raw}`;
+      return raw;
+    },
     updateTab(t) {
       this.current_tab = t;
     },
@@ -121,7 +127,7 @@ export default {
               name: row[1],
               campus: row[2],
               unity: row[3],
-              url: row[5],
+              url: this.formatURL(row[5]),
               description: {
                 short: row[9],
                 long: row[8]
