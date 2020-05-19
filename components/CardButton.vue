@@ -23,7 +23,7 @@
               </v-card>
             </v-item>
           </v-col>
-          <v-responsive v-if="tabs.length > 5 && wrap(i)" :key="`width-${i}`" width="100%"></v-responsive>
+          <v-responsive v-if="tabs.length > 6 && wrap(i)" :key="`width-${i}`" width="100%"></v-responsive>
         </template>
       </v-row>
     </v-container>

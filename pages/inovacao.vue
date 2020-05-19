@@ -15,14 +15,16 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="entries">
+      <ListAndCard :items="filtered_entries">
         <template #item="{item}">
           <v-card-title px-6>
             <p class="title">{{item.name}}</p>
           </v-card-title>
 
           <v-card-text px-6>
-            <p class="body-2 font-italic mb-0">{{item.knownledge.toString()}}</p>
+            <p v-if="item.knowledge.length > 0" class="body-2">
+              <v-chip class="mx-1" v-for="k of item.knowledge" :key="k">{{ k }}</v-chip>
+            </p>
 
             <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
 
@@ -37,7 +39,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="entries" />
+      <SelectAndCard :items="filtered_entries" />
     </div>
   </div>
 </template>
@@ -50,6 +52,7 @@ import Background from "@/components/Background.vue";
 import CardButton from "@/components/CardButton.vue";
 import ListAndCard from "@/components/ListAndCard.vue";
 import SelectAndCard from "@/components/SelectAndCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -62,26 +65,20 @@ export default {
   },
   data: () => ({
     search: "",
-    unity_list: [],
-    loading_data: true,
     loading_search: false,
 
     current_tab: 0,
 
-    sheet_name: "D&I",
-    sheet_id: process.env.sheetID,
-    api_key: process.env.sheetsAPIKey,
-
     entries: [],
     tabs: [
       {
-        name: "CEPIDS",
+        name: "CEPIDs",
         description:
           "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
         entries: []
       },
       {
-        name: "EMBRAPII",
+        name: "EMBRAPIIs",
         description:
           "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
         entries: []
@@ -93,63 +90,29 @@ export default {
         entries: []
       },
       {
-        name: "NAP",
+        name: "NAPs",
         description:
           "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
+        entries: []
+      },
+      {
+        name: "Centrais Multiusuários",
+        description: "",
+        entries: []
+      },
+      {
+        name: "Serviços Tecnológicos",
+        description: "",
         entries: []
       }
     ]
   }),
   methods: {
-    formatURL(raw) {
-      const head = raw.substr(0, 4);
-
-      if (head !== "http") return `http://${raw}`;
-      return raw;
-    },
     updateTab(t) {
       this.current_tab = t;
     },
-    async sheetQuery() {
-      this.loading_data = true;
-      let campi = new Set();
-      let unity = new Set();
-      let known = new Set();
-
-      await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'${this.sheet_name}'?key=${this.api_key}`
-      )
-        .then(request => request.json())
-        .then(data => {
-          data.values.slice(1).forEach(row => {
-            let di = {
-              category: row[0],
-              name: row[1],
-              campus: row[2],
-              unity: row[3],
-              url: this.formatURL(row[5]),
-              description: {
-                short: row[9],
-                long: row[8]
-              },
-              knownledge: row[11].split(/,/),
-              key_words: row[13]
-            };
-
-            let tab = this.tabs.find(
-              tab => tab.name.localeCompare(di.category) == 0
-            );
-
-            if (tab) tab.entries.push(di);
-          });
-        })
-        .finally(() => (this.loading_data = false));
-
-      this.entries = this.tabs[0].entries;
-    },
     async fuzzySearch() {
       if (!this.search.trim()) {
-        this.entries = this.tabs[this.current_tab].entries;
         return;
       }
       this.loading_search = true;
@@ -166,29 +129,11 @@ export default {
         keys: ["name", "campus", "description.long", "unity"]
       };
 
-      await this.$search(
-        this.search.trim(),
-        this.tabs[this.current_tab].entries,
-        options
-      )
+      this.$search(this.search.trim(), this.pdis, options)
         .then(results => {
-          this.entries = results;
+          this.searched_pdis = results.length > 0 ? results : undefined;
         })
         .finally((this.loading_search = false));
-    },
-    filter_data(item) {
-      return (
-        (this.selected_campus.length == 0 ||
-          this.selected_campus.includes(item.campus)) &&
-        (this.selected_unity.length == 0 ||
-          this.selected_unity.includes(item.unity)) &&
-        (this.selected_known.length == 0 ||
-          this.selected_known.filter(known => item.knownledge.includes(known))
-            .length)
-      );
-    },
-    compare_string(a, b) {
-      return a.localeCompare(b);
     }
   },
   watch: {
@@ -200,21 +145,41 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      dataStatus: "pdi/dataStatus",
+      storePDIs: "pdi/pdis"
+    }),
+    pdis: function() {
+      return this.dataStatus == "ok" ? this.storePDIs : [];
+    },
     filtered_entries: function() {
-      if (
-        !this.selected_campus.length &&
-        !this.selected_unity.length &&
-        !this.selected_known.length
-      )
-        return this.entries;
+      const tab = this.current_tab;
 
-      let filtered = this.entries.filter(item => this.filter_data(item));
+      const tabCategory = [
+        "CEPID",
+        "EMBRAPII",
+        "INCT",
+        "NAP",
+        "Centrais multiusuários",
+        "Serviços tecnológicos"
+      ];
 
-      return filtered;
+      const selectedCategory = tabCategory[tab];
+
+      const base =
+        this.searched_pdis !== undefined ? this.searched_pdis : this.pdis;
+
+      return base.filter(pdi => pdi.category == selectedCategory);
     }
   },
   beforeMount() {
-    this.sheetQuery();
+    const payload = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID
+    };
+
+    if (this.dataStatus == "ok" && this.pdis.length == 0)
+      this.$store.dispatch("pdi/fetchSpreadsheets", payload);
   }
 };
 </script>
