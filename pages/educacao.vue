@@ -235,7 +235,8 @@ export default {
       sheetID: process.env.sheetID
     };
 
-    this.$store.dispatch("educacao/fetchSpreadsheets", payload);
+    if (this.dataStatus == "ok" && this.disciplines.length == 0)
+      this.$store.dispatch("educacao/fetchSpreadsheets", payload);
   }
 };
 </script>
