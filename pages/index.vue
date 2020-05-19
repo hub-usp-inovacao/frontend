@@ -375,6 +375,7 @@
 
 <script>
 import BottomCurves from "../components/BottomCurves.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -404,6 +405,12 @@ export default {
     ]
   }),
   computed: {
+    ...mapGetters({
+      eduStatus: "educacao/dataStatus",
+      pdiStatus: "pdi/dataStatus",
+      disciplines: "educacao/disciplines",
+      pdis: "pdi/pdis"
+    }),
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
@@ -414,6 +421,23 @@ export default {
           return { width: "60%" };
       }
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchDisciplines: "educacao/fetchSpreadsheets",
+      fetchPDIs: "pdi/fetchSpreadsheets"
+    })
+  },
+  beforeMount() {
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID
+    };
+
+    if (this.eduStatus == "ok" && this.disciplines.length == 0)
+      this.fetchDisciplines(env);
+
+    if (this.pdiStatus == "ok" && this.pdis.length == 0) this.fetchPDIs(env);
   }
 };
 </script>
