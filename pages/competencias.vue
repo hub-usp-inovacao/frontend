@@ -32,13 +32,13 @@
               <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
               <v-container fluid class="d-flex flex-wrap justify-space-between">
                 <v-checkbox
-                  class="mx-6"
-                  v-for="(sub, i) in tabs[current_tab].subareas"
-                  :key="i"
+                  class="mx-12"
+                  v-for="sub of selectedTab.subareas"
+                  :key="sub"
                   v-model="selected_subareas"
-                  :label="sub.name"
-                  :value="sub.name"
-                ></v-checkbox>
+                  :label="sub"
+                  :value="sub"
+                >{{ sub }}</v-checkbox>
               </v-container>
             </v-card>
           </v-col>
@@ -115,7 +115,6 @@ export default {
   },
   data: () => ({
     search: "",
-    unity_list: [],
     loading_search: false,
 
     item_index: -1,
@@ -123,65 +122,130 @@ export default {
     selected_subareas: [],
 
     entries: [],
-    search_entries: [],
+    searched_skills: undefined,
     loading_search: false,
 
-    // http://lattes.cnpq.br/web/dgp/arvore-do-conhecimento
+    // http://lattes.cnpq.br/documents/11871/24930/TabeladeAreasdoConhecimento.pdf/d192ff6b-3e0a-4074-a74d-c280521bd5f7
     tabs: [
       {
-        name: "Ciências Exatas e da Terra",
+        name: "Ciências Agrárias",
         description: "",
         subareas: [
-          {
-            name: "Matemática"
-          },
-          {
-            name: "Probabilidade e Estatística"
-          },
-          {
-            name: "Ciência da Computação"
-          }
+          "Agronomia",
+          "Recursos Florestais e Engenharia Florestal",
+          "Engenharia Agrícola",
+          "Zootecnia",
+          "Medicina Veterinária",
+          "Recursos Pesqueiros e Engenharia de Pesca",
+          "Ciência e Tecnologia de Alimentos"
         ]
       },
       {
         name: "Ciências Biológicas",
         description: "",
-        subareas: []
-      },
-      {
-        name: "Educação",
-        description: "",
-        subareas: []
+        subareas: [
+          "Biologia Geral",
+          "Genética",
+          "Botânica",
+          "Zoologia",
+          "Ecologia",
+          "Morfologia",
+          "Fisiologia",
+          "Bioquímica",
+          "Biofísica",
+          "Farmacologia",
+          "Imunologia",
+          "Microbiologia",
+          "Parasitologia"
+        ]
       },
       {
         name: "Ciências da Saúde",
         description: "",
-        subareas: []
+        subareas: [
+          "Medicina",
+          "Odontologia",
+          "Farmácia",
+          "Enfermagem",
+          "Nutrição",
+          "Saúde Coletiva",
+          "Fonoaudiologia",
+          "Fisioterapia e Terapia Ocupacional",
+          "Educação Física"
+        ]
       },
       {
-        name: "Ciências Agrárias",
+        name: "Ciências Exatas e da Terra",
         description: "",
-        subareas: []
+        subareas: [
+          "Matemática",
+          "Probabilidade e Estatística",
+          "Ciência da Computação",
+          "Astronomia",
+          "Física",
+          "Química",
+          "GeoCiências",
+          "Oceanografia"
+        ]
       },
       {
-        name: "Ciências Sociais Aplicadas",
+        name: "Engenharias",
         description: "",
-        subareas: []
+        subareas: [
+          "Engenharia Civil",
+          "Engenharia de Minas",
+          "Engenharia de Materiais e Metalúrgica",
+          "Engenharia Elétrica",
+          "Engenharia Mecânica",
+          "Engenharia Química",
+          "Engenharia Sanitária",
+          "Engenharia de Produção",
+          "Engenharia Nuclear",
+          "Engenharia de Transportes",
+          "Engenharia Naval e Oceânica",
+          "Engenharia Aeroespacial",
+          "Engenharia Biomédica"
+        ]
       },
       {
         name: "Ciências Humanas",
         description: "",
-        subareas: []
+        subareas: [
+          "Filosofia",
+          "Sociologia",
+          "Antropologia",
+          "Arqueologia",
+          "História",
+          "Geografia",
+          "Psicologia",
+          "Educação",
+          "Ciência Política",
+          "Teologia"
+        ]
+      },
+      {
+        name: "Ciências Sociais Aplicadas",
+        description: "",
+        subareas: [
+          "Direito",
+          "Administração",
+          "Economia",
+          "Arquitetura e Urbanismo",
+          "Planejamento Urbano e Regional",
+          "Demografia",
+          "Ciência da Informação",
+          "Museologia",
+          "Comunicação",
+          "Serviço Social",
+          "Economia Doméstica",
+          "Desenho Industrial",
+          "Turismo"
+        ]
       },
       {
         name: "Linguística, Letras e Artes",
         description: "",
-        subareas: []
-      },
-      {
-        name: "Outros",
-        description: "",
-        subareas: []
+        subareas: ["Linguística", "Letras", "Artes"]
       }
     ]
   }),
@@ -195,7 +259,6 @@ export default {
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
-        this.search_entries = this.entries;
         return;
       }
       this.loading_search = true;
@@ -211,21 +274,22 @@ export default {
         maxPatternLength: 32,
         minMatchCharLength: 2,
         keys: [
-          "description",
-          "knownledge",
-          "skills",
-          "group_name",
-          "unity",
-          "campus",
-          "key_words",
-          "equipment",
-          "services"
+          "name",
+          "categories",
+          "groupName",
+          "groupInitials",
+          "descriptions.skills",
+          "descriptions.services",
+          "descriptions.equipments",
+          "area.major",
+          "area.minor",
+          "keywords"
         ]
       };
 
-      await this.$search(this.search.trim(), this.entries, options)
+      this.$search(this.search.trim(), this.skills, options)
         .then(results => {
-          this.search_entries = results;
+          this.searched_skills = results.length > 0 ? results : undefined;
         })
         .finally((this.loading_search = false));
     }
@@ -233,19 +297,29 @@ export default {
   watch: {
     search: debounce(async function() {
       await this.fuzzySearch();
-    }, 500)
+    }, 500),
+    current_tab: async function() {
+      await this.fuzzySearch();
+    }
   },
   computed: {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills"
     }),
+    selectedTab() {
+      return this.tabs[this.current_tab];
+    },
     filtered_entries() {
       const allMinors = this.tabs[this.current_tab].subareas;
       const currentArea = {
         major: this.tabs[this.current_tab].name,
         minors: this.selected_subareas
       };
+
+      if (this.searched_skills !== undefined) {
+        return this.searched_skills;
+      }
 
       return this.skills
         .filter(skill => {

@@ -1,7 +1,15 @@
 const formatURL = (raw) => (raw.substr(0, 4) == "http" ? raw : `http://${raw}`);
 
+const formatName = (raw) => {
+  return raw
+    .toLocaleLowerCase()
+    .split(" ")
+    .map((s) => s[0].toLocaleUpperCase() + s.slice(1))
+    .join(" ");
+};
+
 const rowToObj = (row) => ({
-  name: row[1],
+  name: formatName(row[1]),
   email: row[2],
   phone: row[3],
   unity: row[4],
@@ -18,7 +26,7 @@ const rowToObj = (row) => ({
   },
   area: {
     major: row[16],
-    minor: row[17],
+    minors: row[17] != undefined && row[17] != "" ? row[17].split(/,;/) : [],
   },
   keywords: row[18].split(";"),
 });
