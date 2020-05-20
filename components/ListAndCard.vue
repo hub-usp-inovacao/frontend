@@ -46,24 +46,23 @@
       <v-col cols="5">
         <v-card height="35rem">
           <div v-if="current_item >= 0" class="fill-height" style="overflow-y: auto;">
-            <slot name="item" :item="item">
-              <v-card-title px-6>
+            <slot name="item" :item="item"></slot>
+          </div>
+          <!-- <v-card-title px-6>
                 <p class="title">{{item.name}}</p>
               </v-card-title>
 
               <v-card-text px-6>
-                <!-- <p class="body-2 font-italic mb-0">{{item.knownledge.toString()}}</p> -->
+                <p class="body-2 font-italic mb-0">{{item.knownledge.toString()}}</p>
 
-                <!-- <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p> -->
+                <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
 
                 <p class="body-2">{{item.description.long}}</p>
               </v-card-text>
 
               <v-card-actions class="justify-center">
                 <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
-              </v-card-actions>
-            </slot>
-          </div>
+          </v-card-actions>-->
 
           <div v-else class="fill-height">
             <v-row class="fill-height ma-0" justify="center" align="center">
