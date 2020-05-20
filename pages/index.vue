@@ -408,8 +408,11 @@ export default {
     ...mapGetters({
       eduStatus: "educacao/dataStatus",
       pdiStatus: "pdi/dataStatus",
+      skillsStatus: "competencia/dataStatus",
+
       disciplines: "educacao/disciplines",
-      pdis: "pdi/pdis"
+      pdis: "pdi/pdis",
+      skills: "competencia/skills"
     }),
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
@@ -425,7 +428,8 @@ export default {
   methods: {
     ...mapActions({
       fetchDisciplines: "educacao/fetchSpreadsheets",
-      fetchPDIs: "pdi/fetchSpreadsheets"
+      fetchPDIs: "pdi/fetchSpreadsheets",
+      fetchSkills: "competencia/fetchSpreadsheets"
     })
   },
   beforeMount() {
@@ -434,10 +438,17 @@ export default {
       sheetID: process.env.sheetID
     };
 
-    if (this.eduStatus == "ok" && this.disciplines.length == 0)
+    if (this.eduStatus == "ok" && this.disciplines.length == 0) {
       this.fetchDisciplines(env);
+    }
 
-    if (this.pdiStatus == "ok" && this.pdis.length == 0) this.fetchPDIs(env);
+    if (this.pdiStatus == "ok" && this.pdis.length == 0) {
+      this.fetchPDIs(env);
+    }
+
+    if (this.skillsStatus == "ok" && this.skills.length == 0) {
+      this.fetchSkills(env);
+    }
   }
 };
 </script>
