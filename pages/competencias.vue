@@ -23,34 +23,75 @@
 
     <Background class="absolute" />
 
-    <!-- Seleção de Subárea e Filtro -->
+    <!-- Seleção de Subárea -->
     <div>
       <v-container>
         <v-row>
-          <v-col cols="3">
+          <v-col cols="12">
             <v-card>
               <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
-              <v-list>
-                <v-list-item v-for="(subarea,i) in tabs[current_tab].subareas" :key="i">
-                  <v-checkbox
-                    v-model="selected_subareas"
-                    :label="subarea.name"
-                    :value="subarea.name"
-                  ></v-checkbox>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-col>
-
-          <!-- Filtro -->
-          <v-col cols="3">
-            <v-card>
-              <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
-              <v-select rounded v-model="selected_filter" :items="filters"></v-select>
+              <v-container fluid class="d-flex flex-wrap justify-space-between">
+                <v-checkbox
+                  class="mx-6"
+                  v-for="(sub, i) in tabs[current_tab].subareas"
+                  :key="i"
+                  v-model="selected_subareas"
+                  :label="sub.name"
+                  :value="sub.name"
+                ></v-checkbox>
+              </v-container>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
+    </div>
+
+    <div class="hidden-sm-and-down">
+      <ListAndCard :items="filtered_entries">
+        <template #li="{item}">
+          <v-list-item-content>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <template #item="{item}">
+          <v-card-title px-6>
+            <p class="title">{{item.name}}</p>
+          </v-card-title>
+
+          <v-card-text px-6>
+            <p v-if="item.keywords.length > 0">
+              <v-chip class="mx-1" v-for="k in item.keywords" :key="k">{{ k }}</v-chip>
+            </p>
+
+            <p class="body-2 mb-2">
+              <!--{{ item.phone }} - -->
+              {{ item.email }}
+            </p>
+
+            <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
+
+            <p v-if="item.descriptions.skills" class="body-1">
+              <span class="title font-weight-bold">Competências:</span>
+              {{item.descriptions.skills}}
+            </p>
+
+            <p v-if="item.descriptions.services" class="body-1">
+              <span class="title font-weight-bold">Serviços Tecnológicos:</span>
+              {{item.descriptions.services}}
+            </p>
+
+            <p v-if="item.descriptions.equipments" class="body-1">
+              <span class="title font-weight-bold">Equipamentos:</span>
+              {{item.descriptions.equipments}}
+            </p>
+          </v-card-text>
+
+          <v-card-actions class="justify-center">
+            <v-btn depressed dark color="primary" :href="item.url">Saiba mais</v-btn>
+          </v-card-actions>
+        </template>
+      </ListAndCard>
     </div>
   </div>
 </template>
@@ -61,52 +102,31 @@ import Panel from "../components/Panel.vue";
 import Select from "../components/Select.vue";
 import Background from "../components/Background.vue";
 import CardButton from "../components/CardButton.vue";
+import ListAndCard from "../components/ListAndCard.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     Panel,
     Select,
     Background,
-    CardButton
+    CardButton,
+    ListAndCard
   },
   data: () => ({
     search: "",
     unity_list: [],
-    loading_data: true,
     loading_search: false,
 
     item_index: -1,
     current_tab: 0,
     selected_subareas: [],
-    filters: [
-      {
-        text: "Docentes",
-        value: 0
-      },
-      {
-        text: "Outro",
-        value: 1
-      }
-    ],
-    selected_filter: 0,
-
-    selected_campus: [],
-    selected_unity: [],
-    selected_association: [],
-    selected_known: [],
-
-    campi_list: [],
-    unity_list: [],
-    association_list: [],
-    known_list: [],
-
-    sheet_name: "RESPOSTAS",
-    sheet_id: "18l8qAjZuJU6jMqoY8ohYc4FsaIoNqg_GjCa5htYPBm8",
-    api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
 
     entries: [],
     search_entries: [],
     loading_search: false,
+
+    // http://lattes.cnpq.br/web/dgp/arvore-do-conhecimento
     tabs: [
       {
         name: "Ciências Exatas e da Terra",
@@ -129,7 +149,7 @@ export default {
         subareas: []
       },
       {
-        name: "Engenharias",
+        name: "Educação",
         description: "",
         subareas: []
       },
@@ -166,57 +186,12 @@ export default {
     ]
   }),
   methods: {
+    ...mapActions({
+      fetchSpreadsheets: "competencia/fetchSpreadsheets"
+    }),
     updateTab(t) {
       this.current_tab = t;
-    },
-    async sheetQuery() {
-      this.loading_data = true;
-
-      let campi = new Set();
-      let unity = new Set();
-      let association = new Set();
-      let known = new Set();
-
-      let regex_url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-
-      await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'${this.sheet_name}'?key=${this.api_key}`
-      )
-        .then(request => request.json())
-        .then(data => {
-          data.values.slice(1).forEach(row => {
-            let di = {
-              association: row[1],
-              name: row[2],
-              email: row[3],
-              unity: row[5],
-              campus: row[6],
-              role: row[7],
-              category: row[8],
-              group_name: row[9],
-              group_initials: row[10],
-              description: row[11],
-              url: row[12].match(regex_url),
-              skills: row[13],
-              services: row[14].split(/[\s\n]*[;][\s\n]*/),
-              equipment: row[15].split(/[\s\n]*[;][\s\n]*/),
-              knownledge: row[16].split(/,/),
-              key_words: row[17].split(/[\s\n]*[;][\s\n]*/)
-            };
-            if (di.campus) campi.add(di.campus);
-            if (di.unity) unity.add(di.unity);
-            if (di.association) association.add(di.association);
-            di.knownledge.forEach(item => known.add(item));
-            this.entries.push(di);
-          });
-        })
-        .finally(() => (this.loading_data = false));
-
-      this.campi_list = Array.from(campi).sort(this.compare_string);
-      this.unity_list = Array.from(unity).sort(this.compare_string);
-      this.association_list = Array.from(association).sort(this.compare_string);
-      this.known_list = Array.from(known).sort(this.compare_string);
-      this.search_entries = this.entries;
+      this.selected_subareas = [];
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
@@ -253,64 +228,52 @@ export default {
           this.search_entries = results;
         })
         .finally((this.loading_search = false));
-    },
-    filter_data(item) {
-      if (
-        (!this.selected_campus.length ||
-          this.selected_campus.includes(item.campus)) &&
-        (!this.selected_unity.length ||
-          this.selected_unity.includes(item.unity)) &&
-        (!this.selected_association.length ||
-          this.selected_association.includes(item.association)) &&
-        (!this.selected_known.length ||
-          this.selected_known.filter(known => item.knownledge.includes(known))
-            .length)
-      )
-        return true;
-      return false;
-    },
-    compare_string(a, b) {
-      return a.localeCompare(b);
     }
   },
   watch: {
     search: debounce(async function() {
       await this.fuzzySearch();
-    }, 500),
-    selected_campus: function() {
-      this.item_index = -1;
-    },
-    selected_unity: function() {
-      this.item_index = -1;
-    },
-    selected_association: function() {
-      this.item_index = -1;
-    },
-    selected_known: function() {
-      this.item_index = -1;
-    }
+    }, 500)
   },
   computed: {
-    current_item: function() {
-      if (this.item_index < 0) return null;
-      return this.filtered_entries[this.item_index];
-    },
+    ...mapGetters({
+      dataStatus: "competencia/dataStatus",
+      skills: "competencia/skills"
+    }),
     filtered_entries() {
-      if (
-        !this.selected_campus.length &&
-        !this.selected_unity.length &&
-        !this.selected_association.length &&
-        !this.selected_known.length
-      )
-        return this.search_entries;
+      const allMinors = this.tabs[this.current_tab].subareas;
+      const currentArea = {
+        major: this.tabs[this.current_tab].name,
+        minors: this.selected_subareas
+      };
 
-      let filtered = this.search_entries.filter(item => this.filter_data(item));
+      return this.skills
+        .filter(skill => {
+          if (skill.area.major != currentArea.major) {
+            return false;
+          }
 
-      return filtered;
+          // potencialmente isso vai embora porque toda área deve ter subárea
+          if (allMinors.length == 0) {
+            return true;
+          }
+
+          return skill.area.minors.reduce(
+            (acc, skillMinor) => acc || currentArea.minors.includes(skillMinor),
+            false
+          );
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
     }
   },
   beforeMount() {
-    this.sheetQuery();
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID
+    };
+
+    if (this.dataStatus == "ok" && this.skills.length == 0)
+      this.fetchSpreadsheets(env);
   }
 };
 </script>
