@@ -1,4 +1,4 @@
-const formatURL = (raw) => (raw.substr(0, 4) == "http" ? raw : `http://${raw}`);
+import { formatURL } from "../../lib";
 
 const rowToObj = (row) => ({
   category: row[0],

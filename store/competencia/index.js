@@ -1,15 +1,7 @@
-const formatURL = (raw) => (raw.substr(0, 4) == "http" ? raw : `http://${raw}`);
-
-const formatName = (raw) => {
-  return raw
-    .toLocaleLowerCase()
-    .split(" ")
-    .map((s) => s[0].toLocaleUpperCase() + s.slice(1))
-    .join(" ");
-};
+import { capitalizeName, formatURL } from "../../lib";
 
 const rowToObj = (row) => ({
-  name: formatName(row[1]),
+  name: capitalizeName(row[1]),
   email: row[2],
   phone: row[3],
   unity: row[4],
