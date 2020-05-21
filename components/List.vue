@@ -9,7 +9,7 @@
         <v-list-item-group v-model="selectedItem">
           <v-list-item v-for="i in items" :key="i">
             <v-list-item-content>
-              <v-list-item-title v-text="i" />
+              <v-list-item-title v-text="i.name" />
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -20,27 +20,26 @@
       </div>
     </div>
     <div v-else>
-      <v-container>
-        <v-row class="fill-height ma-0" justify="center" align="center">
-          <p
-            class="title font-weight-light text-center mb-0"
-          >Não encontramos nada relacionado à sua pesquisa</p>
-        </v-row>
-      </v-container>
+      <NotFound />
     </div>
   </v-card>
 </template>
 
 <script>
+import NotFound from "./NotFound.vue";
+
 export default {
-  props: ["items"],
+  components: {
+    NotFound
+  },
+  props: ["items", "value"],
   data: () => ({
     selectedItem: ""
   }),
   watch: {
     selectedItem() {
       const i = this.selectedItem;
-      this.$emit("selected", this.items[i]);
+      this.$emit("input", this.items[i]);
     }
   }
 };
