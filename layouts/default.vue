@@ -5,7 +5,7 @@
         v-for="(item, i) in items"
         :key="i"
         :to="item.to"
-        class="white--text mx-2 secondary"
+        class="white--text mx-2 secondary py-4 px-6 subtitle-1"
         active-class="tertiary font-weight-bold"
         rounded
         small
