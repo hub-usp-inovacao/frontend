@@ -4,6 +4,7 @@
       <Panel
         title="Iniciativas"
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de inicativas e acessar as formas de contatar cada uma delas."
+        @input="search = $event"
       />
 
       <CardButton :tabs="tabs" color="#222c63" active="#111633" @tab="updateTab($event)" />
@@ -12,11 +13,20 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="entries" />
+      <ListAndDetails :items="filtered_entries">
+        <template #content="{ item }">
+          <p class="body-2">{{ item.unity }}</p>
+          <p class="body-2 mb-4">{{ item.local }}</p>
+          <p>{{ item.description.long }}</p>
+        </template>
+        <template #buttons="{ item }">
+          <v-btn :href="item.url" color="#222c63" class="white--text" target="_blank">Saiba Mais</v-btn>
+        </template>
+      </ListAndDetails>
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="entries" />
+      <SelectAndCard :items="filtered_entries" />
     </div>
   </div>
 </template>
@@ -26,123 +36,82 @@ import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
 import CardButton from "../components/CardButton.vue";
-import ListAndCard from "../components/ListAndCard.vue";
+import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     Panel,
     Background,
     CardButton,
-    ListAndCard,
+    ListAndDetails,
     SelectAndCard
   },
   data: () => ({
     search: "",
     loading_search: false,
 
-    current_tab: -1,
+    current_tab: 0,
 
-    sheet_name: "INICIATIVAS",
-    sheet_id: process.env.sheetID,
-    api_key: process.env.sheetsAPIKey,
-
-    entries: [],
-    search_entries: [],
+    searched_iniciatives: undefined,
     tabs: [
       {
         name: "Agentes Institucionais",
         description:
-          "Órgãos institucionais da USP que atuam no fomento e estímulo ao empreendedorismo.",
-        entries: []
+          "Órgãos institucionais da USP que atuam no fomento e estímulo ao empreendedorismo."
       },
       {
         name: "Entidades Estudantis",
         description:
-          "Organizações estudantis que estimulam o empreendedorismo na comunidade de alunos e também que propiciam experiências empreendedoras.",
-        entries: []
+          "Organizações estudantis que estimulam o empreendedorismo na comunidade de alunos e também que propiciam experiências empreendedoras."
       },
       {
         name: "Espaços de Coworking",
         description:
-          "Espaços da USP que recebem e interagem com projetos de inovação e empreendedorismo.",
-        entries: []
+          "Espaços da USP que recebem e interagem com projetos de inovação e empreendedorismo."
       },
       {
         name: "Ideação e Viabilidade",
         description:
-          "Programas que atuam nas fases iniciais do desenvolvimento de projetos e de startups.",
-        entries: []
+          "Programas que atuam nas fases iniciais do desenvolvimento de projetos e de startups."
       },
       {
-        name: "Incubadoras e Parques Técnológicos",
+        name: "Incubadoras e Parques Tecnológicos",
         description:
-          "Os chamados “Habitats” de inovação da Universidade, espaços que abrigam empresas nascentes de bases técnológicas oriundas ou não da USP.",
-        entries: []
+          "Os chamados “Habitats” de inovação da Universidade, espaços que abrigam empresas nascentes de bases técnológicas oriundas ou não da USP."
       }
     ]
   }),
+  computed: {
+    ...mapGetters({
+      iniciatives: "iniciativas/iniciatives",
+      dataStatus: "iniciativas/dataStatus"
+    }),
+    filtered_entries() {
+      const currentCategory = this.tabs[this.current_tab].name;
+
+      const base =
+        this.searched_iniciatives !== undefined
+          ? this.searched_iniciatives
+          : this.iniciatives;
+
+      return base.filter(ini => ini.category == currentCategory);
+    }
+  },
   methods: {
+    ...mapActions({
+      fetchSpreadsheets: "iniciativas/fetchSpreadsheets"
+    }),
     updateTab(t) {
       this.current_tab = t;
     },
-    async sheetQuery() {
-      this.loading_data = true;
-      let campi = new Set();
-      let unity = new Set();
-      let known = new Set();
-
-      await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values/'${this.sheet_name}'?key=${this.api_key}`
-      )
-        .then(request => request.json())
-        .then(data => {
-          data.values.slice(1).forEach(row => {
-            // console.log(row);
-            let di = {
-              category: row[0],
-              name: row[1],
-              campus: row[2],
-              unity: row[3],
-              url: row[5],
-              description: {
-                short: row[9],
-                long: row[8]
-              },
-              knownledge: row[11].split(/,/),
-              key_words: row[13]
-            };
-
-            let tab = this.tabs.find(
-              tab => tab.name.localeCompare(di.category) == 0
-            );
-
-            if (tab) {
-              campi.add(di.campus);
-              unity.add(di.unity);
-              di.knownledge.forEach(item => {
-                if (item) known.add(item);
-              });
-              tab.entries.push(di);
-            }
-          });
-        })
-        .finally(() => (this.loading_data = false));
-
-      this.campi_list = Array.from(campi).sort(this.compare_string);
-      this.unity_list = Array.from(unity).sort(this.compare_string);
-      this.known_list = Array.from(known).sort(this.compare_string);
-      this.entries = this.tabs[0].entries;
-
-      // console.log(this.entries);
-    },
     async fuzzySearch() {
       if (!this.search.trim()) {
-        this.entries = this.tabs[this.current_tab].entries;
+        this.searched_iniciatives = undefined;
         return;
       }
       this.loading_search = true;
-      this.item_index = -1;
 
       var options = {
         tokenize: true,
@@ -152,34 +121,22 @@ export default {
         distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 2,
-        keys: ["name", "campus", "description.long", "unity"]
+        keys: [
+          "name",
+          "category",
+          "description.long",
+          "keywords",
+          "services",
+          "local",
+          "unity"
+        ]
       };
 
-      await this.$search(
-        this.search.trim(),
-        this.tabs[this.current_tab].entries,
-        options
-      )
+      this.$search(this.search.trim(), this.iniciatives, options)
         .then(results => {
-          this.entries = results;
+          this.searched_iniciatives = results.length > 0 ? results : undefined;
         })
         .finally((this.loading_search = false));
-    },
-    filter_data(item) {
-      if (
-        (!this.selected_campus.length ||
-          this.selected_campus.includes(item.campus)) &&
-        (!this.selected_unity.length ||
-          this.selected_unity.includes(item.unity)) &&
-        (!this.selected_known.length ||
-          this.selected_known.filter(known => item.knownledge.includes(known))
-            .length)
-      )
-        return true;
-      return false;
-    },
-    compare_string(a, b) {
-      return a.localeCompare(b);
     }
   },
   watch: {
@@ -190,7 +147,16 @@ export default {
       await this.fuzzySearch();
     }, 500)
   },
-  beforeMount() {}
+  beforeMount() {
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID
+    };
+
+    if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
+      this.fetchSpreadsheets(env);
+    }
+  }
 };
 </script>
 
