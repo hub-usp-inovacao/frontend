@@ -1,6 +1,7 @@
 import { formatURL } from "../../lib";
 
-const rowToObj = (row) => ({
+const rowToObj = (row, id) => ({
+  id,
   name: row[0],
   description: {
     short: row[4],

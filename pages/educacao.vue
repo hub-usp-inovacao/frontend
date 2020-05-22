@@ -30,36 +30,21 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="filtered_entries">
-        <template #li="{item}">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-          </v-list-item-content>
+      <ListAndDetails :items="filtered_entries">
+        <template #content="sProps">
+          <p>{{ sProps.item.unity }}</p>
+          <p>{{ sProps.item.campus }}</p>
+          <p>{{ sProps.item.description.long }}</p>
         </template>
-
-        <template #item="{item}">
-          <v-card-title px-6>
-            <p class="title">{{item.name}}</p>
-          </v-card-title>
-
-          <v-card-text px-6>
-            <p class="body-2 mb-2">
-              <v-chip v-if="item.category.business">Negócios</v-chip>
-              <v-chip v-if="item.category.innovation">Inovação</v-chip>
-              <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
-              <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
-            </p>
-
-            <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
-
-            <p class="body-1">{{item.description.long}}</p>
-          </v-card-text>
-
-          <v-card-actions class="justify-center">
-            <v-btn depressed dark color="primary" :href="item.url">Saiba mais</v-btn>
-          </v-card-actions>
+        <template #buttons="sProps">
+          <v-btn
+            class="white--text"
+            color="#db8337"
+            :href="sProps.item.url"
+            target="_blank"
+          >Saiba Mais</v-btn>
         </template>
-      </ListAndCard>
+      </ListAndDetails>
     </div>
 
     <div class="hidden-md-and-up">
@@ -97,8 +82,8 @@ import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
 import Select from "../components/Select.vue";
 import CardButton from "../components/CardButton.vue";
-import ListAndCard from "../components/ListAndCard.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
+import ListAndDetails from "../components/ListAndDetails.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -107,7 +92,7 @@ export default {
     Background,
     Select,
     CardButton,
-    ListAndCard,
+    ListAndDetails,
     SelectAndCard
   },
   data: () => ({
@@ -210,10 +195,34 @@ export default {
 
       const selectedCategory = tabCategory[tab];
 
-      const base =
+      let base =
         this.searched_disciplines !== undefined
           ? this.searched_disciplines
           : this.disciplines;
+
+      base = base.map(disc => {
+        const kw = [];
+
+        if (disc.category.innovation) {
+          kw.push("inovação");
+        }
+
+        if (disc.category.entrepreneurship) {
+          kw.push("empreendedorismo");
+        }
+
+        if (disc.category.intellectualProperty) {
+          kw.push("propriedade intelectual");
+        }
+
+        if (disc.category.business) {
+          kw.push("negócios");
+        }
+
+        disc.keywords = kw;
+
+        return disc;
+      });
 
       return base.filter(disc => {
         const sameCategory = disc.category[selectedCategory];

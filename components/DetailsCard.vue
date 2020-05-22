@@ -3,7 +3,7 @@
     <v-card v-if="hasItem" height="35rem" class="d-flex flex-column">
       <v-card-title>{{ item.name }}</v-card-title>
       <v-card-subtitle>
-        <v-chip-group v-if="item.keywords.length > 0">
+        <v-chip-group v-if="item.keywords && item.keywords.length > 0">
           <v-chip v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
         </v-chip-group>
       </v-card-subtitle>
