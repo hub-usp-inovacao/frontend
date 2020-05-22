@@ -15,27 +15,18 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="filtered_entries">
-        <template #item="{item}">
-          <v-card-title px-6>
-            <p class="title">{{item.name}}</p>
-          </v-card-title>
+      <ListAndDetails :items="filtered_entries">
+        <template #content="sProps">
+          <p class="body-2">{{ sProps.item.unity }}</p>
+          <p class="body-2 mb-10">{{ sProps.item.campus }}</p>
 
-          <v-card-text px-6>
-            <p v-if="item.knowledge.length > 0" class="body-2">
-              <v-chip class="mx-1" v-for="k of item.knowledge" :key="k">{{ k }}</v-chip>
-            </p>
-
-            <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
-
-            <p class="body-2">{{item.description.long}}</p>
-          </v-card-text>
-
-          <v-card-actions class="justify-center">
-            <v-btn depressed dark color="tertiary" :href="item.url" :target="'_blank'">Saiba mais</v-btn>
-          </v-card-actions>
+          <p class="body-2">{{ sProps.item.description.long }}</p>
         </template>
-      </ListAndCard>
+
+        <template #buttons="sProps">
+          <v-btn target="_blank" :href="sProps.item.url" color="#005C59">Saiba Mais</v-btn>
+        </template>
+      </ListAndDetails>
     </div>
 
     <div class="hidden-md-and-up">
@@ -50,7 +41,7 @@ import Panel from "@/components/Panel.vue";
 import Select from "@/components/Select.vue";
 import Background from "@/components/Background.vue";
 import CardButton from "@/components/CardButton.vue";
-import ListAndCard from "@/components/ListAndCard.vue";
+import ListAndDetails from "@/components/ListAndDetails.vue";
 import SelectAndCard from "@/components/SelectAndCard.vue";
 import { mapGetters } from "vuex";
 
@@ -60,7 +51,7 @@ export default {
     Select,
     Background,
     CardButton,
-    ListAndCard,
+    ListAndDetails,
     SelectAndCard
   },
   data: () => ({
