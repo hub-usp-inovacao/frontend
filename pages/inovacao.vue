@@ -24,7 +24,12 @@
         </template>
 
         <template #buttons="sProps">
-          <v-btn target="_blank" :href="sProps.item.url" color="#005C59">Saiba Mais</v-btn>
+          <v-btn
+            class="white--text"
+            target="_blank"
+            :href="sProps.item.url"
+            color="#005C59"
+          >Saiba Mais</v-btn>
         </template>
       </ListAndDetails>
     </div>
