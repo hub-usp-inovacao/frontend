@@ -131,6 +131,7 @@ export default {
   methods: {
     async fuzzySearch() {
       if (!this.search.trim()) {
+        this.searched_disciplines = undefined;
         return;
       }
       this.loading_search = true;

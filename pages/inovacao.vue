@@ -109,6 +109,7 @@ export default {
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
+        this.searched_pdis = undefined;
         return;
       }
       this.loading_search = true;

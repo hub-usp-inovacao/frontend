@@ -255,6 +255,7 @@ export default {
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
+        this.searched_skills = undefined;
         return;
       }
       this.loading_search = true;
