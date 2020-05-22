@@ -47,51 +47,40 @@
     </div>
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="filtered_entries">
-        <template #li="{item}">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-          </v-list-item-content>
+      <ListAndDetails :items="filtered_entries">
+        <template #content="sProps">
+          <p class="body-2 mb-2">{{ sProps.item.email }}</p>
+          <p class="body-2 mb-2">{{ sProps.item.unity }}</p>
+          <p class="body-2 mb-2">{{ sProps.item.campus }}</p>
+
+          <v-expansion-panels>
+            <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
+              <v-expansion-panel-header class="font-weight-bold">{{ desc.title }}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <p
+                  v-for="description in sProps.item.descriptions[desc.key]"
+                  :key="description"
+                >{{ description }}</p>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </template>
-
-        <template #item="{item}">
-          <v-card-title px-6>
-            <p class="title">{{item.name}}</p>
-          </v-card-title>
-
-          <v-card-text px-6>
-            <p v-if="item.keywords.length > 0">
-              <v-chip class="mx-1" v-for="k in item.keywords" :key="k">{{ k }}</v-chip>
-            </p>
-
-            <p class="body-2 mb-2">
-              <!--{{ item.phone }} - -->
-              {{ item.email }}
-            </p>
-
-            <p class="body-2 mb-10">{{item.campus}} - {{item.unity}}</p>
-
-            <p v-if="item.descriptions.skills" class="body-1">
-              <span class="title font-weight-bold">Competências:</span>
-              {{item.descriptions.skills}}
-            </p>
-
-            <p v-if="item.descriptions.services" class="body-1">
-              <span class="title font-weight-bold">Serviços Tecnológicos:</span>
-              {{item.descriptions.services}}
-            </p>
-
-            <p v-if="item.descriptions.equipments" class="body-1">
-              <span class="title font-weight-bold">Equipamentos:</span>
-              {{item.descriptions.equipments}}
-            </p>
-          </v-card-text>
-
-          <v-card-actions class="justify-center">
-            <v-btn depressed dark color="primary" :href="item.url">Saiba mais</v-btn>
-          </v-card-actions>
+        <template #buttons="sProps">
+          <v-btn
+            class="white--text"
+            color="#6b1c28"
+            target="_blank"
+            :href="sProps.item.url"
+          >saiba mais</v-btn>
+          <v-btn
+            class="white--text"
+            color="#6b1c28"
+            target="_blank"
+            :disabled="!sProps.item.lattes"
+            :href="sProps.item.lattes"
+          >lattes</v-btn>
         </template>
-      </ListAndCard>
+      </ListAndDetails>
     </div>
   </div>
 </template>
@@ -102,7 +91,7 @@ import Panel from "../components/Panel.vue";
 import Select from "../components/Select.vue";
 import Background from "../components/Background.vue";
 import CardButton from "../components/CardButton.vue";
-import ListAndCard from "../components/ListAndCard.vue";
+import ListAndDetails from "../components/ListAndDetails.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -111,7 +100,7 @@ export default {
     Select,
     Background,
     CardButton,
-    ListAndCard
+    ListAndDetails
   },
   data: () => ({
     search: "",
@@ -124,6 +113,12 @@ export default {
     entries: [],
     searched_skills: undefined,
     loading_search: false,
+
+    itemDescriptions: [
+      { key: "skills", title: "Competências" },
+      { key: "services", title: "Serviços Tecnológicos" },
+      { key: "equipments", title: "Equipamentos" }
+    ],
 
     // http://lattes.cnpq.br/documents/11871/24930/TabeladeAreasdoConhecimento.pdf/d192ff6b-3e0a-4074-a74d-c280521bd5f7
     tabs: [
