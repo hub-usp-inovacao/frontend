@@ -12,7 +12,7 @@ const rowToObj = (row) => ({
   },
   knowledge:
     row[12] != undefined && row[12].length > 0 ? row[12].split(",") : [],
-  keywords: row[14],
+  keywords: row[14] != undefined && row[14] != "" ? row[14].split(",") : [],
 });
 
 export const state = () => ({
