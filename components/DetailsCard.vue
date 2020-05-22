@@ -7,7 +7,7 @@
           <v-chip v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
         </v-chip-group>
       </v-card-subtitle>
-      <v-card-text>
+      <v-card-text style="overflow-y: auto;">
         <slot name="content"></slot>
       </v-card-text>
       <v-card-actions class="d-flex justify-space-around">
