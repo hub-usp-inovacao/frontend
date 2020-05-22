@@ -38,6 +38,8 @@
                     flat
                     rounded
                     label="Buscar"
+                    v-model="search"
+                    @keydown.enter="submitSearch"
                     append-outer-icon="search"
                     :dense="$breakpoint.smAndDown"
                     :style="setSearchBarWidth"
@@ -374,6 +376,7 @@
 </template>
 
 <script>
+import { debounce } from "debounce";
 import BottomCurves from "../components/BottomCurves.vue";
 import { mapActions, mapGetters } from "vuex";
 
@@ -397,6 +400,7 @@ export default {
       "Laboratórios",
       "Inteligência Artificial"
     ],
+    search: "",
     photos: [
       "http://www.imagens.usp.br/wp-content/uploads/Pra%C3%A7a_Relogio_106-17_Foto-Cec%C3%ADlia-Bastos-09.jpg",
       "http://imagens.usp.br/wp-content/uploads/Nova-Vers%C3%A3o-do-Chip-Sampa-Foto-Marcos-Santos-USP-Imagens-12.jpg",
@@ -409,10 +413,12 @@ export default {
       eduStatus: "educacao/dataStatus",
       pdiStatus: "pdi/dataStatus",
       skillsStatus: "competencia/dataStatus",
+      iniciativesStatus: "iniciativas/dataStatus",
 
       disciplines: "educacao/disciplines",
       pdis: "pdi/pdis",
-      skills: "competencia/skills"
+      skills: "competencia/skills",
+      iniciatives: "iniciativas/iniciatives"
     }),
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
@@ -429,8 +435,18 @@ export default {
     ...mapActions({
       fetchDisciplines: "educacao/fetchSpreadsheets",
       fetchPDIs: "pdi/fetchSpreadsheets",
-      fetchSkills: "competencia/fetchSpreadsheets"
-    })
+      fetchSkills: "competencia/fetchSpreadsheets",
+      fetchIniciatives: "iniciativas/fetchSpreadsheets"
+    }),
+    submitSearch() {
+      if (!this.search.trim()) {
+        return;
+      }
+      this.$router.push({
+        name: "search_results",
+        params: { search: this.search }
+      });
+    }
   },
   beforeMount() {
     const env = {
@@ -448,6 +464,10 @@ export default {
 
     if (this.skillsStatus == "ok" && this.skills.length == 0) {
       this.fetchSkills(env);
+    }
+
+    if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
+      this.fetchIniciatives(env);
     }
   }
 };
