@@ -30,6 +30,7 @@
           <v-col cols="12">
             <v-card>
               <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
+              <v-card-subtitle>você pode fazer múltiplas seleções</v-card-subtitle>
               <v-container fluid class="d-flex flex-wrap justify-space-between">
                 <v-checkbox
                   class="mx-12"
