@@ -1,5 +1,7 @@
 import { capitalizeName, formatURL } from "../../lib";
 
+const descRgxSplitter = /;/;
+
 const rowToObj = (row) => ({
   name: capitalizeName(row[1]),
   email: row[2],
@@ -12,9 +14,18 @@ const rowToObj = (row) => ({
   groupInitials: row[9],
   url: formatURL(row[12]),
   descriptions: {
-    skills: row[13],
-    services: row[14],
-    equipments: row[15],
+    skills:
+      row[13] != undefined && row[13] != ""
+        ? row[13].split(descRgxSplitter)
+        : [],
+    services:
+      row[14] != undefined && row[14] != ""
+        ? row[14].split(descRgxSplitter)
+        : [],
+    equipments:
+      row[15] != undefined && row[15] != ""
+        ? row[15].split(descRgxSplitter)
+        : [],
   },
   area: {
     major: row[16],
