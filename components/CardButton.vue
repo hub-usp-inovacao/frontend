@@ -1,7 +1,7 @@
 <template>
   <v-item-group mandatory>
     <v-container>
-      <v-row justify="center" class="ma-0">
+      <v-row justify="space-around" class="ma-0">
         <template v-for="(item,i) in tabs">
           <v-col :key="item.name">
             <v-item>
@@ -10,6 +10,7 @@
                 @click="updateTab(i)"
                 :raised="tab === i"
                 height="100%"
+                min-height="100px"
               >
                 <slot name="card" :item="item">
                   <v-container fill-height>
@@ -35,21 +36,34 @@ export default {
   data: () => ({
     tab: 0
   }),
+  computed: {
+    row_length: function() {
+      let length;
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          length = 2;
+        case "sm":
+          length = 3;
+        case "md":
+          length = 4;
+        default:
+          length = 6;
+      }
+
+      if (this.tabs.length > length) {
+        length = Math.ceil(this.tabs.length / length);
+        length = this.tabs.length / length;
+      }
+
+      return length;
+    },
+  },
   methods: {
     updateTab(i) {
       this.tab = i;
     },
     wrap(i) {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return (i + 1) % 2 == 0;
-        case "sm":
-          return (i + 1) % 3 == 0;
-        case "md":
-          return (i + 1) % 4 == 0;
-        default:
-          return (i + 1) % 5 == 0;
-      }
+      return (i + 1) % this.row_length == 0;
     }
   },
   props: ["tabs", "color", "active"],
