@@ -24,28 +24,27 @@
     <Background class="absolute" />
 
     <!-- Seleção de Subárea -->
-    <div>
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <v-card>
-              <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
-              <v-card-subtitle>você pode fazer múltiplas seleções</v-card-subtitle>
-              <v-container fluid class="d-flex flex-wrap justify-space-between">
-                <v-checkbox
-                  class="mx-12"
+    <v-container>
+      <v-row>
+        <v-col offset="1" cols="10">
+          <v-card>
+            <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
+            <v-card-subtitle>você pode fazer múltiplas seleções</v-card-subtitle>
+            <v-card-text class="d-flex flex-wrap justify-center">
+              <v-chip-group v-model="selected_subareas" multiple :column="true">
+                <v-chip
+                  outlined
+                  filter
                   v-for="sub of selectedTab.subareas"
                   :key="sub"
-                  v-model="selected_subareas"
-                  :label="sub"
                   :value="sub"
-                >{{ sub }}</v-checkbox>
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
+                >{{ sub }}</v-chip>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
 
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="filtered_entries">
