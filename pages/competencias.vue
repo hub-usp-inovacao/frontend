@@ -57,10 +57,25 @@
             <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
               <v-expansion-panel-header class="font-weight-bold">{{ desc.title }}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <p
+                <v-list>
+                  <v-list-item-group>
+                    <v-list-item
+                      v-for="description in sProps.item.descriptions[desc.key]"
+                      :key="description"
+                    >
+                      <v-list-item-icon>
+                        <v-icon v-text="'mdi-circle-small'"></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>{{ description }}</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+                <!-- <p
                   v-for="description in sProps.item.descriptions[desc.key]"
                   :key="description"
-                >{{ description }}</p>
+                >{{ description }}</p>-->
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
