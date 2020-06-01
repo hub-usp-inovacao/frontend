@@ -132,65 +132,163 @@
             >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
           </v-container>
 
-          <v-row justify="space-around" align="center" class="ma-0">
-            <v-col cols="5" lg="3">
-              <v-row justify="center">
-                <img
-                  :src="require('@/vectors/home_patents_icon.svg')"
-                  style="max-width: 100%; max-height: 100%;"
-                />
-              </v-row>
+          <v-row align="center">
+            <v-col cols="12" lg="6">
+              <v-row align="center">
+                <v-col cols="4">
+                  <img
+                    :src="require('@/vectors/home_iniciatives_icon.svg')"
+                    style="max-width: 100%; max-height: 100%;"
+                  />
+                </v-col>
 
-              <p
-                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-regular"
-                style="color: #4AD5FF"
-              >Licenciamento de patentes</p>
+                <v-col cols="8">
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                    class="ma-0 text-left font-weight-regular"
+                    style="color: #4AD5FF"
+                  >Iniciativas</p>
+
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                    class="ma-0 text-left font-weight-light"
+                    style="color: #4AD5FF"
+                  >Conheça as diversas iniciativas para estímulo à inovação
+                  e ao empreendedorismo na Universidade de São Paulo.</p>
+                </v-col>
+              </v-row>
             </v-col>
 
-            <v-col cols="5" lg="3">
+            <v-col cols="12" lg="6">
               <v-row justify="center">
-                <img
-                  :src="require('@/vectors/home_partnership_icon.svg')"
-                  style="max-width: 100%; max-height: 100%;"
-                />
-              </v-row>
+                <v-col cols="4">
+                  <img
+                    :src="require('@/vectors/home_teaching_icon.svg')"
+                    style="max-width: 100%; max-height: 100%;"
+                  />
+                </v-col>
 
-              <p
-                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-regular"
-                style="color: #4AD5FF"
-              >Parcerias de pesquisas</p>
+                <v-col cols="8">
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                    class="ma-0 text-left font-weight-regular"
+                    style="color: #4AD5FF"
+                  >Educação</p>
+
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                    class="ma-0 text-left font-weight-light"
+                    style="color: #4AD5FF"
+                  >Busque as disciplinas de graduação e pós-graduação
+                  relacionadas a Empreendedorismo, Inovação, Propriedade 
+                  Intelectual e Negócios.</p>
+                </v-col>
+              </v-row>
             </v-col>
 
-            <v-col cols="5" lg="3">
+            <v-col cols="12" lg="6">
               <v-row justify="center">
-                <img
-                  :src="require('@/vectors/home_teaching_icon.svg')"
-                  style="max-width: 100%; max-height: 100%;"
-                />
-              </v-row>
+                <v-col cols="4">
+                  <img
+                    :src="require('@/vectors/home_pdi_icon.svg')"
+                    style="max-width: 100%; max-height: 100%;"
+                  />
+                </v-col>
 
-              <p
-                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-regular"
-                style="color: #4AD5FF"
-              >Cursos</p>
+                <v-col cols="8">
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                    class="ma-0 text-left font-weight-regular"
+                    style="color: #4AD5FF"
+                  >P &amp; D &amp; I</p>
+
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                    class="ma-0 text-left font-weight-light"
+                    style="color: #4AD5FF"
+                  >Veja as informações de laboratórios, organizações e
+                  programas que atuam no desenvolvimento e inovação na USP.</p>
+                </v-col>
+              </v-row>
             </v-col>
 
-            <v-col cols="5" lg="3">
+            <v-col cols="12" lg="6">
               <v-row justify="center">
-                <img
-                  :src="require('@/vectors/home_events_icon.svg')"
-                  style="max-width: 100%; max-height: 100%;"
-                />
-              </v-row>
+                <v-col cols="4">
+                  <img
+                    :src="require('@/vectors/home_partnership_icon.svg')"
+                    style="max-width: 100%; max-height: 100%;"
+                  />
+                </v-col>
 
-              <p
-                :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                class="mt-5 text-center font-weight-regular"
-                style="color: #4AD5FF"
-              >Eventos</p>
+                <v-col cols="8">
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                    class="ma-0 text-left font-weight-regular"
+                    style="color: #4AD5FF"
+                  >Empresas</p>
+
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                    class="ma-0 text-left font-weight-light"
+                    style="color: #4AD5FF"
+                  >Conheça empresas com DNA USP, criadas por iniciativas de
+                  alunos, ex-alunos e projetos ligados à Universidade,
+                  organizadas por área de atuação e tecnologias aplicáveis.</p>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="12" lg="6">
+              <v-row justify="center">
+                <v-col cols="4">
+                  <img
+                    :src="require('@/vectors/home_competencies_icon.svg')"
+                    style="max-width: 100%; max-height: 100%;"
+                  />
+                </v-col>
+
+                <v-col cols="8">
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                    class="ma-0 text-left font-weight-regular"
+                    style="color: #4AD5FF"
+                  >Competências</p>
+
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                    class="ma-0 text-left font-weight-light"
+                    style="color: #4AD5FF"
+                  >Consulte pesquisadores e grupos de pesquisa da USP por suas
+                  áreas de competência e especialidades.</p>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="12" lg="6">
+              <v-row justify="center">
+                <v-col cols="4">
+                  <img
+                    :src="require('@/vectors/home_patents_icon.svg')"
+                    style="max-width: 100%; max-height: 100%;"
+                  />
+                </v-col>
+
+                <v-col cols="8">
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                    class="ma-0 text-left font-weight-regular"
+                    style="color: #4AD5FF"
+                  >Patentes</p>
+
+                  <p
+                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                    class="ma-0 text-left font-weight-light"
+                    style="color: #4AD5FF"
+                  >Consulte as patentes da USP disponíveis para licenciamento
+                  e aplicação de empresas e organizações.</p>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
         </v-container>
