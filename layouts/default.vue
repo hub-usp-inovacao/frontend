@@ -35,8 +35,9 @@
     </v-navigation-drawer>
 
     <v-content :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
-      <v-snackbar :value="true" :timeout="0">
-        <span class="text-center">Página de uso exclusivamente interno</span>
+      <v-snackbar :multi-line="true" :value="true" :timeout="0">
+        Página de uso exclusivamente interno - encontrou um problema?
+        <v-btn href="https://forms.gle/TiEe6zYq9GsYgDww5" target="_blank">Reporte aqui</v-btn>
       </v-snackbar>
       <nuxt />
     </v-content>
