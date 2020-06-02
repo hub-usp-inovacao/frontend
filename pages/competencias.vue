@@ -97,6 +97,52 @@
         </template>
       </ListAndDetails>
     </div>
+
+    <div class="hidden-md-and-up">
+      <SelectAndCard :items="filtered_entries.map(e => ({ ...e, description: { long: '' }}))">
+        <template #item="{ item }">
+          <v-container>
+            <p class="title">{{ item.name }}</p>
+            <p class="body-2 my">{{ item.email }}</p>
+            <p class="body-2 my">{{ item.unity }}</p>
+            <p class="body-2 my">{{ item.campus }}</p>
+          </v-container>
+
+          <v-expansion-panels>
+            <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
+              <v-expansion-panel-header class="font-weight-bold">{{ desc.title }}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-list>
+                  <v-list-item-group>
+                    <v-list-item
+                      v-for="description in item.descriptions[desc.key]"
+                      :key="description"
+                    >
+                      <v-list-item-icon>
+                        <v-icon v-text="'mdi-circle-small'"></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>{{ description }}</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+                <!-- <p
+                  v-for="description in sProps.item.descriptions[desc.key]"
+                  :key="description"
+                >{{ description }}</p>-->
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <v-card-actions>
+            <v-spacer />
+            <v-btn depressed dark color="#6b1c28" :href="item.url">Saiba Mais</v-btn>
+            <v-spacer />
+          </v-card-actions>
+        </template>
+      </SelectAndCard>
+    </div>
   </div>
 </template>
 
@@ -107,6 +153,7 @@ import Select from "../components/Select.vue";
 import Background from "../components/Background.vue";
 import CardButton from "../components/CardButton.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
+import SelectAndCard from "../components/SelectAndCard.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -115,7 +162,8 @@ export default {
     Select,
     Background,
     CardButton,
-    ListAndDetails
+    ListAndDetails,
+    SelectAndCard
   },
   data: () => ({
     search: "",
