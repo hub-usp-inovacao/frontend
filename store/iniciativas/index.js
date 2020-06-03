@@ -42,6 +42,8 @@ export const actions = {
     const { sheetsAPIKey, sheetID } = env;
     const sheetName = "INICIATIVAS";
 
+    ctx.commit("setLoadingStatus");
+
     try {
       const resp = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
@@ -54,5 +56,7 @@ export const actions = {
       console.log("error occuried while fetching...");
       console.log(error);
     }
+
+    ctx.commit("unsetLoadingStatus");
   },
 };
