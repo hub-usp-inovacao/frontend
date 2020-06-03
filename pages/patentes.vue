@@ -20,7 +20,33 @@
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndCard :items="entries" />
+      <ListAndDetails :items="filtered_entries">
+        <template #content="{ item }">
+          <p>{{ item.classification.primary.cip }}</p>
+          <p>{{ item.classification.primary.subareas }}</p>
+          <p v-if="item.ipcs.length > 0 && item.ipcs[0] != ''">
+            <span class="font-weight-bold">IPCs:</span>
+            {{ item.ipcs.join(', ') }}
+          </p>
+          <p>
+            <span class="font-weight-bold">Titulares:</span>
+            {{ item.owners.join(', ') }}
+          </p>
+          <p>
+            <span class="font-weight-bold">Inventores:</span>
+            {{ item.inventors.join('; ') }}
+          </p>
+          <p>
+            <span class="font-weight-bold">Países com proteção:</span>
+            {{ item.countriesWithProtection.join(', ') }}
+          </p>
+          <p>{{ item.sumary }}</p>
+        </template>
+
+        <template #buttons="{ item }">
+          <v-btn color="#64318A" :href="item.url" class="white--text">Saiba Mais</v-btn>
+        </template>
+      </ListAndDetails>
     </div>
 
     <div class="hidden-md-and-up">
@@ -34,15 +60,16 @@ import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
 import CardButton from "../components/CardButton.vue";
-import ListAndCard from "../components/ListAndCard.vue";
+import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     Panel,
     Background,
     CardButton,
-    ListAndCard,
+    ListAndDetails,
     SelectAndCard
   },
   data: () => ({
@@ -108,11 +135,11 @@ export default {
     ]
   }),
   methods: {
+    ...mapActions({
+      fetchSpreadsheets: "patentes/fetchSpreadsheets"
+    }),
     updateTab(t) {
       this.current_tab = t;
-    },
-    async sheetQuery() {
-      return;
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
@@ -156,10 +183,22 @@ export default {
     }, 500)
   },
   computed: {
+    ...mapGetters({
+      dataStatus: "patentes/dataStatus",
+      patents: "patentes/patents"
+    }),
     filtered_entries: function() {
-      return entries;
+      return this.patents;
     }
   },
-  beforeMount() {}
+  beforeMount() {
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID
+    };
+
+    if (this.dataStatus == "ok" && this.patents.length == 0)
+      this.fetchSpreadsheets(env);
+  }
 };
 </script>
