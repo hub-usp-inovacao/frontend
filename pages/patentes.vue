@@ -50,7 +50,37 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="entries" />
+      <SelectAndCard :items="filtered_entries.map(e => ({ ...e, description: { long: '' }}))">
+        <template #item="{ item }">
+          <v-container>
+            <p>{{ item.classification.primary.cip }}</p>
+            <p>{{ item.classification.primary.subareas }}</p>
+            <p v-if="item.ipcs.length > 0 && item.ipcs[0] != ''">
+              <span class="font-weight-bold">IPCs:</span>
+              {{ item.ipcs.join(', ') }}
+            </p>
+            <p>
+              <span class="font-weight-bold">Titulares:</span>
+              {{ item.owners.join(', ') }}
+            </p>
+            <p>
+              <span class="font-weight-bold">Inventores:</span>
+              {{ item.inventors.join('; ') }}
+            </p>
+            <p>
+              <span class="font-weight-bold">Países com proteção:</span>
+              {{ item.countriesWithProtection.join(', ') }}
+            </p>
+            <p>{{ item.sumary }}</p>
+
+            <v-card-actions>
+              <v-spacer />
+              <v-btn depressed dark color="#64318A" :href="item.url">Saiba Mais</v-btn>
+              <v-spacer />
+            </v-card-actions>
+          </v-container>
+        </template>
+      </SelectAndCard>
     </div>
   </div>
 </template>
