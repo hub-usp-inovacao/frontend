@@ -152,7 +152,6 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                    style="color: #4AD5FF"
                   >Conheça as diversas iniciativas para estímulo à inovação
                   e ao empreendedorismo na Universidade de São Paulo.</p>
                 </v-col>
@@ -178,7 +177,6 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                    style="color: #4AD5FF"
                   >Busque as disciplinas de graduação e pós-graduação
                   relacionadas a Empreendedorismo, Inovação, Propriedade 
                   Intelectual e Negócios.</p>
@@ -205,7 +203,6 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                    style="color: #4AD5FF"
                   >Veja as informações de laboratórios, organizações e
                   programas que atuam no desenvolvimento e inovação na USP.</p>
                 </v-col>
@@ -231,7 +228,6 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                    style="color: #4AD5FF"
                   >Conheça empresas com DNA USP, criadas por iniciativas de
                   alunos, ex-alunos e projetos ligados à Universidade,
                   organizadas por área de atuação e tecnologias aplicáveis.</p>
@@ -258,7 +254,6 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                    style="color: #4AD5FF"
                   >Consulte pesquisadores e grupos de pesquisa da USP por suas
                   áreas de competência e especialidades.</p>
                 </v-col>
@@ -284,7 +279,6 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                    style="color: #4AD5FF"
                   >Consulte as patentes da USP disponíveis para licenciamento
                   e aplicação de empresas e organizações.</p>
                 </v-col>
