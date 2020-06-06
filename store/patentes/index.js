@@ -15,11 +15,12 @@ const rowToObj = (row) => ({
   },
   ipcs: row[7].split(" | "),
   owners: row[9].split(" | "),
-  inventors: row[10]
-    .split(" | ")
-    .map((name) => `${name.split(", ")[1]} ${name.split(", ")[0]}`),
+  inventors: row[10].split(" | ").map((name) => {
+    const [last, first] = name.split(", ");
+    return `${first} ${last}`;
+  }),
   sumary: row[11],
-  countriesWithProtection: row[18].split(";"),
+  countriesWithProtection: row[18] !== undefined ? row[18].split(";") : [],
   status: row[20],
 });
 
