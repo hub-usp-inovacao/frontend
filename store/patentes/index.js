@@ -15,7 +15,9 @@ const rowToObj = (row) => ({
   },
   ipcs: row[7].split(" | "),
   owners: row[9].split(" | "),
-  inventors: row[10].split(" | "),
+  inventors: row[10]
+    .split(" | ")
+    .map((name) => `${name.split(", ")[1]} ${name.split(", ")[0]}`),
   sumary: row[11],
   countriesWithProtection: row[18].split(";"),
   status: row[20],
