@@ -4,6 +4,7 @@
       <Panel
         title="Patentes"
         description="Pesquisadores e unidades da USP desenvolvem patentes e propriedade industrial que estão disponíveis para que empresas e organizações possam licenciar para aplicação e uso. Usando palavras-chave na caixa de busca você terá acesso a breves descrições destas patentes e formas de contato para obter maior detalhamento e informações sobre cada uma delas."
+        @input="search = $event"
       />
 
       <CardButton :tabs="tabs" color="#64318A" active="#2C163D" @tab="updateTab($event)">
@@ -163,7 +164,9 @@ export default {
         description: "",
         entries: []
       }
-    ]
+    ],
+
+    searched_patents: undefined
   }),
   methods: {
     ...mapActions({
@@ -178,7 +181,7 @@ export default {
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
-        this.entries = this.tabs[this.current_tab].entries;
+        this.searched_patents = undefined;
         return;
       }
       this.loading_search = true;
@@ -192,16 +195,19 @@ export default {
         distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 2,
-        keys: ["title", "campus", "description.long", "unity"]
+        keys: [
+          "name",
+          "classification.primary.cip",
+          "classification.primary.subarea",
+          "owners",
+          "inventors",
+          "summary",
+        ]
       };
 
-      await this.$search(
-        this.search.trim(),
-        this.tabs[this.current_tab].entries,
-        options
-      )
+      this.$search(this.search.trim(), this.patents, options)
         .then(results => {
-          this.entries = results;
+          this.searched_patents = results.length > 0 ? results : undefined;
         })
         .finally((this.loading_search = false));
     },
@@ -226,7 +232,12 @@ export default {
       const selectedArea = this.areas[this.current_tab];
       const selectedSubarea = this.current_subarea;
 
-      return this.patents.filter(patent => {
+      let base =
+        this.searched_patents !== undefined
+          ? this.searched_patents
+          : this.patents;
+
+      return base.filter(patent => {
         const primary = patent.classification.primary;
 
         const sameArea = primary.cip === selectedArea;
