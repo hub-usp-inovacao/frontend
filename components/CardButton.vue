@@ -1,9 +1,9 @@
 <template>
   <v-item-group mandatory>
     <v-container>
-      <v-row justify="space-around" class="ma-0">
+      <v-row justify="center" class="ma-0">
         <template v-for="(item,i) in tabs">
-          <v-col :key="item.name">
+          <v-col :cols="row_length < 6 ? 12 / row_length : ''" :key="item.name">
             <v-item>
               <v-card
                 :color="tab === i ? active : color"
@@ -51,8 +51,8 @@ export default {
       }
 
       if (this.tabs.length > length) {
-        length = Math.ceil(this.tabs.length / length);
-        length = this.tabs.length / length;
+        let rows = Math.ceil(this.tabs.length / length);
+        length = Math.ceil(this.tabs.length / rows);
       }
 
       return length;
