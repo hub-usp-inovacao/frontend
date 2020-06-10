@@ -152,8 +152,10 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                  >Conheça as diversas iniciativas para estímulo à inovação
-                  e ao empreendedorismo na Universidade de São Paulo.</p>
+                  >
+                    Conheça as diversas iniciativas para estímulo à inovação
+                    e ao empreendedorismo na Universidade de São Paulo.
+                  </p>
                 </v-col>
               </v-row>
             </v-col>
@@ -177,9 +179,11 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                  >Busque as disciplinas de graduação e pós-graduação
-                  relacionadas a Empreendedorismo, Inovação, Propriedade 
-                  Intelectual e Negócios.</p>
+                  >
+                    Busque as disciplinas de graduação e pós-graduação
+                    relacionadas a Empreendedorismo, Inovação, Propriedade
+                    Intelectual e Negócios.
+                  </p>
                 </v-col>
               </v-row>
             </v-col>
@@ -203,8 +207,10 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                  >Veja as informações de laboratórios, organizações e
-                  programas que atuam no desenvolvimento e inovação na USP.</p>
+                  >
+                    Veja as informações de laboratórios, organizações e
+                    programas que atuam no desenvolvimento e inovação na USP.
+                  </p>
                 </v-col>
               </v-row>
             </v-col>
@@ -228,9 +234,11 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                  >Conheça empresas com DNA USP, criadas por iniciativas de
-                  alunos, ex-alunos e projetos ligados à Universidade,
-                  organizadas por área de atuação e tecnologias aplicáveis.</p>
+                  >
+                    Conheça empresas com DNA USP, criadas por iniciativas de
+                    alunos, ex-alunos e projetos ligados à Universidade,
+                    organizadas por área de atuação e tecnologias aplicáveis.
+                  </p>
                 </v-col>
               </v-row>
             </v-col>
@@ -254,8 +262,10 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                  >Consulte pesquisadores e grupos de pesquisa da USP por suas
-                  áreas de competência e especialidades.</p>
+                  >
+                    Consulte pesquisadores e grupos de pesquisa da USP por suas
+                    áreas de competência e especialidades.
+                  </p>
                 </v-col>
               </v-row>
             </v-col>
@@ -279,8 +289,10 @@
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                     class="ma-0 text-left font-weight-light"
-                  >Consulte as patentes da USP disponíveis para licenciamento
-                  e aplicação de empresas e organizações.</p>
+                  >
+                    Consulte as patentes da USP disponíveis para licenciamento
+                    e aplicação de empresas e organizações.
+                  </p>
                 </v-col>
               </v-row>
             </v-col>
@@ -506,11 +518,13 @@ export default {
       pdiStatus: "pdi/dataStatus",
       skillsStatus: "competencia/dataStatus",
       iniciativesStatus: "iniciativas/dataStatus",
+      patentsStatus: "patentes/dataStatus",
 
       disciplines: "educacao/disciplines",
       pdis: "pdi/pdis",
       skills: "competencia/skills",
-      iniciatives: "iniciativas/iniciatives"
+      iniciatives: "iniciativas/iniciatives",
+      patents: "patentes/patents"
     }),
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
@@ -528,7 +542,8 @@ export default {
       fetchDisciplines: "educacao/fetchSpreadsheets",
       fetchPDIs: "pdi/fetchSpreadsheets",
       fetchSkills: "competencia/fetchSpreadsheets",
-      fetchIniciatives: "iniciativas/fetchSpreadsheets"
+      fetchIniciatives: "iniciativas/fetchSpreadsheets",
+      fetchPatents: "patentes/fetchSpreadsheets"
     }),
     submitSearch() {
       if (!this.search.trim()) {
@@ -560,6 +575,10 @@ export default {
 
     if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
       this.fetchIniciatives(env);
+    }
+
+    if (this.patentsStatus == "ok" && this.patents.length == 0) {
+      this.fetchPatents(env);
     }
   }
 };
