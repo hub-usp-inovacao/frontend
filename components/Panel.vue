@@ -15,7 +15,7 @@
         <v-row class="ma-0">
           <v-col>
             <v-text-field
-              background-color="#88E3FF"
+              :backgroundColor="searchBarColor"
               solo
               flat
               rounded
@@ -39,7 +39,28 @@ export default {
   data: () => ({
     typed: ""
   }),
-  props: ["title", "description", "url", "loading"],
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      default: ""
+    },
+    url: {
+      type: String,
+      default: ""
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    searchBarColor: {
+      type: String,
+      default: "#88E3FF"
+    }
+  },
   watch: {
     typed(p) {
       this.$emit("input", p);
