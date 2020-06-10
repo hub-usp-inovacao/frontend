@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="2">
-        <v-card height="18rem">
+        <v-card min-height="18rem">
           <v-card-title>Filtros:</v-card-title>
           <v-card-text>
             <v-chip-group :column="true" :multiple="true" v-model="selected">
@@ -19,7 +19,7 @@
       </v-col>
       <v-col cols="10">
         <v-card height="35rem" style="overflow-y: auto;">
-          <v-card-title>Resultados:</v-card-title>
+          <v-card-title>Resultados de busca para "{{ searchedTerm }}":</v-card-title>
           <v-card-text>
             <v-list v-if="filtered.length > 0">
               <v-list-item-group>
@@ -55,7 +55,7 @@ export default {
     ],
     selected: []
   }),
-  props: ["items"],
+  props: ["items", "searchedTerm"],
   computed: {
     filtered() {
       if (this.selected.length == 0) {

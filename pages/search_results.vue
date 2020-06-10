@@ -1,14 +1,15 @@
 <template>
   <div>
     <div class="light-orange-bg white--text">
-      <Panel title="Resultados de Busca" searchBarColor="white" />
+      <Panel title="Resultados de Busca" searchBarColor="white" @input="innerSearch = $event" />
     </div>
-    <SearchFiltersAndResult :items="results" />
+    <SearchFiltersAndResult :searchedTerm="search" :items="results" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import SearchFiltersAndResult from "../components/SearchFiltersAndResult.vue";
 
@@ -33,7 +34,9 @@ export default {
     searched_disciplines: undefined,
     searched_pdis: undefined,
     searched_skills: undefined,
-    searched_iniciatives: undefined
+    searched_iniciatives: undefined,
+
+    innerSearch: ""
   }),
   computed: {
     ...mapGetters({
@@ -42,28 +45,36 @@ export default {
       skills: "competencia/skills",
       iniciatives: "iniciativas/iniciatives"
     }),
-    selectedCategoryResults() {
-      return this[`searched_${this.selectedCategory}`];
-    },
     search() {
-      return this.$route.params.search;
+      return this.innerSearch || this.$route.params.search;
     },
     results() {
-      return this.disciplines
+      const [base_disciplines, base_pdis, base_iniciatives, base_skills] = [
+        this.searched_disciplines !== undefined
+          ? this.searched_disciplines
+          : [],
+        this.searched_pdis !== undefined ? this.searched_pdis : [],
+        this.searched_iniciatives !== undefined
+          ? this.searched_iniciatives
+          : [],
+        this.searched_skills !== undefined ? this.searched_skills : []
+      ];
+
+      return base_disciplines
         .map(d => ({
           name: d.name,
           description: d.description.long,
           category: "Educação"
         }))
         .concat(
-          this.pdis.map(p => ({
+          base_pdis.map(p => ({
             name: p.name,
             description: p.description.long,
             category: "P&D&I"
           }))
         )
         .concat(
-          this.skills.map(s => ({
+          base_skills.map(s => ({
             name: s.name,
             description:
               s.descriptions.skills +
@@ -73,7 +84,7 @@ export default {
           }))
         )
         .concat(
-          this.iniciatives.map(i => ({
+          base_iniciatives.map(i => ({
             name: i.name,
             description: i.description.long,
             category: "Iniciativas"
@@ -81,8 +92,15 @@ export default {
         );
     }
   },
+  watch: {
+    innerSearch: debounce(async function() {
+      console.log("roda a busca");
+      await this.fuzzyGlobalSearch();
+    }, 500)
+  },
   methods: {
     fuzzyGlobalSearch() {
+      console.log("rodando a busca");
       const contexts = [
         { key: "disciplines", searchKeys: ["name"] },
         { key: "iniciatives", searchKeys: ["name"] },
