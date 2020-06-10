@@ -15,6 +15,19 @@
           </v-container>
         </template>
       </CardButton>
+
+      <v-container>
+        <v-row class="ma-0">
+          <v-col>
+            <p class="font-weight-medium">Filtros:</p>
+          </v-col>
+        </v-row>
+        <v-row class="ma-0">
+          <v-col cols="6" sm="4" md="3">
+            <Select :items="subareas" label="Subáreas" @select="updateSubarea($event)" />
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
 
     <Background class="absolute" />
@@ -92,6 +105,7 @@ import Background from "../components/Background.vue";
 import CardButton from "../components/CardButton.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
+import Select from "../components/Select.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -100,11 +114,13 @@ export default {
     Background,
     CardButton,
     ListAndDetails,
-    SelectAndCard
+    SelectAndCard,
+    Select
   },
   data: () => ({
     search: "",
     current_tab: 0,
+    current_subarea: undefined,
 
     sheet_name: "",
     sheet_id: "",
@@ -113,52 +129,37 @@ export default {
     entries: [],
     tabs: [
       {
-        name: "Agropecuária",
+        name: "Necessidades Humanas",
         description: "",
         entries: []
       },
       {
-        name: "Alimentos",
+        name: "Operações de Processamento e Transporte",
         description: "",
         entries: []
       },
       {
-        name: "Energia",
+        name: "Química e Metalurgia",
         description: "",
         entries: []
       },
       {
-        name: "Máquinas e equipamentos",
+        name: "Têxteis",
         description: "",
         entries: []
       },
       {
-        name: "Saúde e cuidados pessoais",
+        name: "Construções Fixas",
         description: "",
         entries: []
       },
       {
-        name: "Materiais",
+        name: "Engenharia Mecànica",
         description: "",
         entries: []
       },
       {
-        name: "Tecnologia assistiva",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Tecnologia da Informação e Comunicação",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Tecnologias Ambientais e Sustentáveis",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Outros",
+        name: "Física",
         description: "",
         entries: []
       }
@@ -170,6 +171,10 @@ export default {
     }),
     updateTab(t) {
       this.current_tab = t;
+      this.current_subarea = undefined;
+    },
+    updateSubarea(s) {
+      this.current_subarea = s;
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
@@ -218,7 +223,37 @@ export default {
       patents: "patentes/patents"
     }),
     filtered_entries: function() {
-      return this.patents;
+      const selectedArea = this.areas[this.current_tab];
+      const selectedSubarea = this.current_subarea;
+
+      return this.patents.filter(patent => {
+        const primary = patent.classification.primary;
+
+        const sameArea = primary.cip === selectedArea;
+        const sameSubarea = primary.subareas.trim() === selectedSubarea;
+        console.log(selectedSubarea);
+
+        return sameArea && (sameSubarea || this.current_subarea === undefined);
+      });
+    },
+    areas: function() {
+      return Array.from(
+        this.patents.reduce(
+          (areaSet, patent) => areaSet.add(patent.classification.primary.cip.trim()),
+          new Set()
+        )
+      ).filter(area => area != "")
+        .sort((a,b) => a.localeCompare(b));
+    },
+    subareas: function() {
+      let areas = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+      return Array.from(
+        this.patents.reduce(
+          (subareaSet, patent) => subareaSet.add(patent.classification.primary.subareas.trim()),
+          new Set()
+        )
+      ).filter(subarea => subarea[0] === areas[this.current_tab][0])
+        .sort((a,b) => a.localeCompare(b));
     }
   },
   beforeMount() {
