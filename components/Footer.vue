@@ -63,6 +63,11 @@ export default {
         label: "mdi-instagram",
         url: "http://www.instagram.com/inovacaonausp/",
         color: "#C13584"
+      },
+      {
+        label: "mdi-youtube",
+        url: "https://www.youtube.com/channel/UCD7crX4uDNU-4Hqh-rYgwiQ",
+        color: "#C13584"
       }
     ]
   })
