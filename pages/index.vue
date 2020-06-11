@@ -143,11 +143,13 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                    class="ma-0 text-left font-weight-regular"
-                    style="color: #4AD5FF"
-                  >Iniciativas</p>
+                  <nuxt-link to="iniciativas">
+                    <p
+                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                      class="ma-0 text-left font-weight-regular"
+                      style="color: #4AD5FF"
+                      >Iniciativas</p>
+                  </nuxt-link>
 
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
@@ -170,11 +172,13 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                    class="ma-0 text-left font-weight-regular"
-                    style="color: #4AD5FF"
-                  >Educação</p>
+                  <nuxt-link to="educacao">
+                    <p
+                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                      class="ma-0 text-left font-weight-regular"
+                      style="color: #4AD5FF"
+                    >Educação</p>
+                  </nuxt-link>
 
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
@@ -198,11 +202,13 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                    class="ma-0 text-left font-weight-regular"
-                    style="color: #4AD5FF"
-                  >P &amp; D &amp; I</p>
+                  <nuxt-link to="inovacao">
+                    <p
+                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                      class="ma-0 text-left font-weight-regular"
+                      style="color: #4AD5FF"
+                    >P &amp; D &amp; I</p>
+                  </nuxt-link>
 
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
@@ -225,11 +231,13 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                    class="ma-0 text-left font-weight-regular"
-                    style="color: #4AD5FF"
-                  >Empresas</p>
+                  <nuxt-link to="empresas">
+                    <p
+                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                      class="ma-0 text-left font-weight-regular"
+                      style="color: #4AD5FF"
+                    >Empresas</p>
+                  </nuxt-link>
 
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
@@ -253,11 +261,13 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                    class="ma-0 text-left font-weight-regular"
-                    style="color: #4AD5FF"
-                  >Competências</p>
+                  <nuxt-link to="competencias">
+                    <p
+                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                      class="ma-0 text-left font-weight-regular"
+                      style="color: #4AD5FF"
+                    >Competências</p>
+                  </nuxt-link>
 
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
@@ -280,11 +290,13 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                    class="ma-0 text-left font-weight-regular"
-                    style="color: #4AD5FF"
-                  >Patentes</p>
+                  <nuxt-link to="patentes">
+                    <p
+                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                      class="ma-0 text-left font-weight-regular"
+                      style="color: #4AD5FF"
+                    >Patentes</p>
+                  </nuxt-link>
 
                   <p
                     :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
