@@ -18,14 +18,23 @@
       </CardButton>
 
       <v-container>
-        <v-row class="ma-0">
-          <v-col>
-            <p class="font-weight-medium">Filtros:</p>
-          </v-col>
-        </v-row>
-        <v-row class="ma-0">
-          <v-col cols="6" sm="4" md="3">
-            <Select :items="subareas" label="Subáreas" @select="updateSubarea($event)" />
+        <v-row>
+          <v-col offset="1" cols="10">
+            <v-card>
+              <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
+              <v-card-subtitle>você pode fazer múltiplas seleções</v-card-subtitle>
+              <v-card-text class="d-flex flex-wrap justify-center">
+                <v-chip-group v-model="selected_subareas" multiple :column="true">
+                  <v-chip
+                    outlined
+                    filter
+                    v-for="sub of subareas"
+                    :key="sub"
+                    :value="sub"
+                    >{{ sub.length > 20 ? sub.slice(0, 20) + "..." : sub }}</v-chip>
+                </v-chip-group>
+              </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -121,7 +130,6 @@ export default {
   data: () => ({
     search: "",
     current_tab: 0,
-    current_subarea: undefined,
 
     sheet_name: "",
     sheet_id: "",
@@ -155,7 +163,7 @@ export default {
         entries: []
       },
       {
-        name: "Engenharia Mecànica",
+        name: "Engenharia Mecânica",
         description: "",
         entries: []
       },
@@ -165,7 +173,7 @@ export default {
         entries: []
       }
     ],
-
+    selected_subareas: [],
     searched_patents: undefined
   }),
   methods: {
@@ -174,10 +182,7 @@ export default {
     }),
     updateTab(t) {
       this.current_tab = t;
-      this.current_subarea = undefined;
-    },
-    updateSubarea(s) {
-      this.current_subarea = s;
+      this.selected_subareas = [];
     },
     async fuzzySearch() {
       if (!this.search.trim()) {
@@ -230,7 +235,6 @@ export default {
     }),
     filtered_entries: function() {
       const selectedArea = this.areas[this.current_tab];
-      const selectedSubarea = this.current_subarea;
 
       let base =
         this.searched_patents !== undefined
@@ -241,10 +245,12 @@ export default {
         const primary = patent.classification.primary;
 
         const sameArea = primary.cip === selectedArea;
-        const sameSubarea = primary.subareas.trim() === selectedSubarea;
-        console.log(selectedSubarea);
+        const sameSubarea = 
+          this.selected_subareas !== []
+            ? this.selected_subareas.includes(primary.subareas)
+            : true;
 
-        return sameArea && (sameSubarea || this.current_subarea === undefined);
+        return sameArea && sameSubarea;
       });
     },
     areas: function() {
