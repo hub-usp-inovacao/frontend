@@ -26,7 +26,8 @@ export default {
       { id: 1, title: "Competências", key: "skills" },
       { id: 2, title: "Educação", key: "disciplines" },
       { id: 3, title: "Iniciativas", key: "iniciatives" },
-      { id: 4, title: "P&D&I", key: "pdis" }
+      { id: 4, title: "P&D&I", key: "pdis" },
+      { id: 5, title: "Empresas", key: "companies" }
     ],
     selectedCategory: "skills",
     selectedResult: undefined,
@@ -35,6 +36,7 @@ export default {
     searched_pdis: undefined,
     searched_skills: undefined,
     searched_iniciatives: undefined,
+    searched_companies: undefined,
 
     innerSearch: ""
   }),
@@ -43,13 +45,20 @@ export default {
       disciplines: "educacao/disciplines",
       pdis: "pdi/pdis",
       skills: "competencia/skills",
-      iniciatives: "iniciativas/iniciatives"
+      iniciatives: "iniciativas/iniciatives",
+      companies: "empresas/companies"
     }),
     search() {
       return this.innerSearch || this.$route.params.search;
     },
     results() {
-      const [base_disciplines, base_pdis, base_iniciatives, base_skills] = [
+      const [
+        base_disciplines,
+        base_pdis,
+        base_iniciatives,
+        base_skills,
+        base_companies
+      ] = [
         this.searched_disciplines !== undefined
           ? this.searched_disciplines
           : [],
@@ -57,7 +66,8 @@ export default {
         this.searched_iniciatives !== undefined
           ? this.searched_iniciatives
           : [],
-        this.searched_skills !== undefined ? this.searched_skills : []
+        this.searched_skills !== undefined ? this.searched_skills : [],
+        this.searched_companies !== undefined ? this.searched_companies : []
       ];
 
       return base_disciplines
@@ -89,6 +99,13 @@ export default {
             description: i.description.long,
             category: "Iniciativas"
           }))
+        )
+        .concat(
+          base_companies.map(c => ({
+            name: c.name,
+            description: c.description.long,
+            category: "Empresas"
+          }))
         );
     }
   },
@@ -105,7 +122,8 @@ export default {
         { key: "disciplines", searchKeys: ["name"] },
         { key: "iniciatives", searchKeys: ["name"] },
         { key: "pdis", searchKeys: ["name"] },
-        { key: "skills", searchKeys: ["name"] }
+        { key: "skills", searchKeys: ["name"] },
+        { key: "companies", searchKeys: ["name"] }
       ];
 
       if (!this.search.trim()) {
