@@ -148,7 +148,7 @@
                       :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
                       class="ma-0 text-left font-weight-regular"
                       style="color: #4AD5FF"
-                      >Iniciativas</p>
+                    >Iniciativas</p>
                   </nuxt-link>
 
                   <p
@@ -531,12 +531,14 @@ export default {
       skillsStatus: "competencia/dataStatus",
       iniciativesStatus: "iniciativas/dataStatus",
       patentsStatus: "patentes/dataStatus",
+      companiesStatus: "empresas/dataStatus",
 
       disciplines: "educacao/disciplines",
       pdis: "pdi/pdis",
       skills: "competencia/skills",
       iniciatives: "iniciativas/iniciatives",
-      patents: "patentes/patents"
+      patents: "patentes/patents",
+      companies: "empresas/companies"
     }),
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
@@ -555,7 +557,8 @@ export default {
       fetchPDIs: "pdi/fetchSpreadsheets",
       fetchSkills: "competencia/fetchSpreadsheets",
       fetchIniciatives: "iniciativas/fetchSpreadsheets",
-      fetchPatents: "patentes/fetchSpreadsheets"
+      fetchPatents: "patentes/fetchSpreadsheets",
+      fetchCompanies: "empresas/fetchSpreadsheets"
     }),
     submitSearch() {
       if (!this.search.trim()) {
@@ -591,6 +594,10 @@ export default {
 
     if (this.patentsStatus == "ok" && this.patents.length == 0) {
       this.fetchPatents(env);
+    }
+
+    if (this.companiesStatus == "ok" && this.companies.length == 0) {
+      this.fetchCompanies(env);
     }
   }
 };
