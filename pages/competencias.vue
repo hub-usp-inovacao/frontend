@@ -386,13 +386,11 @@ export default {
             return false;
           }
 
-          // potencialmente isso vai embora porque toda área deve ter subárea
-          if (allMinors.length == 0) {
-            return true;
-          }
-
           return skill.area.minors.reduce(
-            (acc, skillMinor) => acc || currentArea.minors.includes(skillMinor),
+            (acc, skillMinor) =>
+              acc ||
+              currentArea.minors.length == 0 ||
+              currentArea.minors.includes(skillMinor),
             false
           );
         })

@@ -31,7 +31,7 @@ const rowToObj = (row) => ({
     major: row[16],
     minors: row[17] != undefined && row[17] != "" ? row[17].split(/,;/) : [],
   },
-  keywords: row[18].split(";"),
+  keywords: row[18] != undefined && row[18] != "" ? row[18].split(";") : [],
 });
 
 export const state = () => ({
@@ -53,7 +53,7 @@ export const mutations = {
 export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "COMPETENCIAS_Pending";
+    const sheetName = "COMPETENCIAS";
 
     ctx.commit("setLoadingStatus");
 
