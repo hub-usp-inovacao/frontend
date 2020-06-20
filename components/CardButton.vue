@@ -12,15 +12,13 @@
                 height="100%"
                 min-height="100px"
               >
-                <slot name="card" :item="item">
-                  <v-container fill-height>
-                    <v-row class="align-center justify-center ma-0">
-                      <p
-                        class="white--text subtitle-1 font-weight-medium text-center mb-0"
-                      >{{item.name}}</p>
-                    </v-row>
-                  </v-container>
-                </slot>
+                <v-container fill-height>
+                  <v-row class="align-center justify-center ma-0">
+                    <p
+                      class="white--text subtitle-1 font-weight-medium text-center mb-0"
+                    >{{item.name}}</p>
+                  </v-row>
+                </v-container>
               </v-card>
             </v-item>
           </v-col>
@@ -56,7 +54,7 @@ export default {
       }
 
       return length;
-    },
+    }
   },
   methods: {
     updateTab(i) {
