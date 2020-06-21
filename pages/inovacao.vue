@@ -8,11 +8,16 @@
         :loading="loading_search"
         @input="search = $event"
       />
-
-      <CardButton :tabs="tabs" color="#005C59" active="#003836" @tab="updateTab($event)" />
     </div>
 
     <Background class="absolute" />
+
+    <MultipleFilters
+      :items="pdis"
+      :tabs="tabs"
+      :filterFun="filterFun"
+      @filtered="filtered = $event"
+    />
 
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="filtered_entries">
@@ -43,56 +48,50 @@
 <script>
 import { debounce } from "debounce";
 import Panel from "@/components/Panel.vue";
-import Select from "@/components/Select.vue";
 import Background from "@/components/Background.vue";
-import CardButton from "@/components/CardButton.vue";
 import ListAndDetails from "@/components/ListAndDetails.vue";
 import SelectAndCard from "@/components/SelectAndCard.vue";
+import MultipleFilters from "@/components/MultipleFilters.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
     Panel,
-    Select,
     Background,
-    CardButton,
     ListAndDetails,
-    SelectAndCard
+    SelectAndCard,
+    MultipleFilters
   },
   data: () => ({
     search: "",
-    loading_search: false,
 
-    current_tab: 0,
-
-    entries: [],
     tabs: [
       {
-        name: "CEPIDs",
+        name: "CEPID",
         description:
           "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
         entries: []
       },
       {
-        name: "EMBRAPIIs",
+        name: "EMBRAPII",
         description:
           "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
         entries: []
       },
       {
-        name: "INCTs",
+        name: "INCT",
         description:
           "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
         entries: []
       },
       {
-        name: "NAPs",
+        name: "NAP",
         description:
           "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
         entries: []
       },
       {
-        name: "Centrais Multiusuários",
+        name: "Centrais multiusuários",
         description: "",
         entries: []
       },
@@ -101,44 +100,19 @@ export default {
         description: "",
         entries: []
       }
-    ]
+    ],
+
+    filtered: undefined
   }),
   methods: {
-    updateTab(t) {
-      this.current_tab = t;
-    },
-    async fuzzySearch() {
-      if (!this.search.trim()) {
-        this.searched_pdis = undefined;
-        return;
+    filterFun(elm, filterStatus) {
+      const { primary } = filterStatus;
+
+      if (primary.length === 0) {
+        return true;
       }
-      this.loading_search = true;
-      this.item_index = -1;
 
-      var options = {
-        tokenize: true,
-        matchAllTokens: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        keys: ["name", "campus", "description.long", "unity"]
-      };
-
-      this.$search(this.search.trim(), this.pdis, options)
-        .then(results => {
-          this.searched_pdis = results.length > 0 ? results : undefined;
-        })
-        .finally((this.loading_search = false));
-    }
-  },
-  watch: {
-    search: debounce(async function() {
-      await this.fuzzySearch();
-    }, 500),
-    current_tab: async function() {
-      await this.fuzzySearch();
+      return primary.includes(elm.category);
     }
   },
   computed: {
@@ -150,23 +124,7 @@ export default {
       return this.dataStatus == "ok" ? this.storePDIs : [];
     },
     filtered_entries: function() {
-      const tab = this.current_tab;
-
-      const tabCategory = [
-        "CEPID",
-        "EMBRAPII",
-        "INCT",
-        "NAP",
-        "Centrais multiusuários",
-        "Serviços tecnológicos"
-      ];
-
-      const selectedCategory = tabCategory[tab];
-
-      const base =
-        this.searched_pdis !== undefined ? this.searched_pdis : this.pdis;
-
-      return base.filter(pdi => pdi.category == selectedCategory);
+      return this.filtered === undefined ? this.pdis : this.filtered;
     }
   },
   beforeMount() {
