@@ -7,44 +7,16 @@
         url="https://forms.gle/dDooKL5G2sApfjqb6"
         @input="search = $event"
       />
-
-      <!-- Seleção de Área -->
-
-      <CardButton :tabs="tabs" color="#6b1c28" active="#6a0515" @tab="updateTab($event)">
-        <template #card="{item}">
-          <v-container fill-height>
-            <v-row class="align-center justify-center ma-0">
-              <p class="white--text subtitle-1 font-weight-medium text-center mb-0">{{item.name}}</p>
-            </v-row>
-          </v-container>
-        </template>
-      </CardButton>
     </div>
 
     <Background class="absolute" />
 
-    <!-- Seleção de Subárea -->
-    <v-container>
-      <v-row>
-        <v-col offset="1" cols="10">
-          <v-card>
-            <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
-            <v-card-subtitle>você pode fazer múltiplas seleções</v-card-subtitle>
-            <v-card-text class="d-flex flex-wrap justify-center">
-              <v-chip-group v-model="selected_subareas" multiple :column="true">
-                <v-chip
-                  outlined
-                  filter
-                  v-for="sub of selectedTab.subareas"
-                  :key="sub"
-                  :value="sub"
-                >{{ sub }}</v-chip>
-              </v-chip-group>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <MultipleFilters
+      :items="skills"
+      :tabs="tabs"
+      :filterFun="filterFun"
+      @filtered="filtered = $event"
+    />
 
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="filtered_entries">
@@ -99,7 +71,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries.map(e => ({ ...e, description: { long: '' }}))">
+      <SelectAndCard :items="skills.map(e => ({ ...e, description: { long: '' }}))">
         <template #item="{ item }">
           <v-container>
             <p class="title">{{ item.name }}</p>
@@ -149,9 +121,8 @@
 <script>
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
-import Select from "../components/Select.vue";
+import MultipleFilters from "../components/MultipleFilters.vue";
 import Background from "../components/Background.vue";
-import CardButton from "../components/CardButton.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
 import { mapActions, mapGetters } from "vuex";
@@ -159,29 +130,21 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     Panel,
-    Select,
     Background,
-    CardButton,
     ListAndDetails,
-    SelectAndCard
+    SelectAndCard,
+    MultipleFilters
   },
   data: () => ({
     search: "",
-    loading_search: false,
-
-    item_index: -1,
-    current_tab: 0,
-    selected_subareas: [],
-
-    entries: [],
-    searched_skills: undefined,
-    loading_search: false,
 
     itemDescriptions: [
       { key: "skills", title: "Competências" },
       { key: "services", title: "Serviços Tecnológicos" },
       { key: "equipments", title: "Equipamentos" }
     ],
+
+    filtered: undefined,
 
     // http://lattes.cnpq.br/documents/11871/24930/TabeladeAreasdoConhecimento.pdf/d192ff6b-3e0a-4074-a74d-c280521bd5f7
     tabs: [
@@ -308,93 +271,36 @@ export default {
     ]
   }),
   methods: {
+    filterFun: (elm, filterStatus) => {
+      const { primary, secondary } = filterStatus;
+
+      if (primary.length == 0) {
+        return true;
+      }
+
+      const primaryMatch = primary.includes(elm.area.major);
+
+      if (!primaryMatch) {
+        return false;
+      }
+
+      if (secondary.length == 0) {
+        return true;
+      }
+
+      return elm.area.minors.some(minor => secondary.includes(minor));
+    },
     ...mapActions({
       fetchSpreadsheets: "competencia/fetchSpreadsheets"
-    }),
-    updateTab(t) {
-      this.current_tab = t;
-      this.selected_subareas = [];
-    },
-    async fuzzySearch() {
-      if (!this.search.trim()) {
-        this.searched_skills = undefined;
-        return;
-      }
-      this.loading_search = true;
-      this.item_index = -1;
-
-      var options = {
-        tokenize: true,
-        shouldSort: false,
-        matchAllTokens: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 200,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        keys: [
-          "name",
-          "categories",
-          "groupName",
-          "groupInitials",
-          "descriptions.skills",
-          "descriptions.services",
-          "descriptions.equipments",
-          "area.major",
-          "area.minor",
-          "keywords"
-        ]
-      };
-
-      this.$search(this.search.trim(), this.skills, options)
-        .then(results => {
-          this.searched_skills = results.length > 0 ? results : undefined;
-        })
-        .finally((this.loading_search = false));
-    }
-  },
-  watch: {
-    search: debounce(async function() {
-      await this.fuzzySearch();
-    }, 500),
-    current_tab: async function() {
-      await this.fuzzySearch();
-    }
+    })
   },
   computed: {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills"
     }),
-    selectedTab() {
-      return this.tabs[this.current_tab];
-    },
     filtered_entries() {
-      const allMinors = this.tabs[this.current_tab].subareas;
-      const currentArea = {
-        major: this.tabs[this.current_tab].name,
-        minors: this.selected_subareas
-      };
-
-      if (this.searched_skills !== undefined) {
-        return this.searched_skills;
-      }
-
-      return this.skills
-        .filter(skill => {
-          if (skill.area.major != currentArea.major) {
-            return false;
-          }
-
-          return skill.area.minors.reduce(
-            (acc, skillMinor) =>
-              acc ||
-              currentArea.minors.length == 0 ||
-              currentArea.minors.includes(skillMinor),
-            false
-          );
-        })
-        .sort((a, b) => a.name.localeCompare(b.name));
+      return this.filtered === undefined ? this.skills : this.filtered;
     }
   },
   beforeMount() {

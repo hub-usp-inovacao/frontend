@@ -72,6 +72,10 @@ export default {
           )
         );
       }
+    },
+    filterFun: {
+      type: Function,
+      required: true
     }
   },
   data: () => ({
@@ -90,6 +94,20 @@ export default {
     },
     needDropdown() {
       return this.groups !== undefined;
+    },
+    filteredItems() {
+      const current = {
+        primary: this.selectedTabs,
+        secondary: this.selectedSubfilters,
+        terciary: this.selectedDropdownFilters
+      };
+
+      return this.items.filter(item => this.filterFun(item, current));
+    }
+  },
+  watch: {
+    filteredItems(items) {
+      this.$emit("filtered", items);
     }
   }
 };
