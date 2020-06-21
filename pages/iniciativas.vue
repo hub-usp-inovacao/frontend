@@ -6,11 +6,16 @@
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de inicativas e acessar as formas de contatar cada uma delas."
         @input="search = $event"
       />
-
-      <CardButton :tabs="tabs" color="#222c63" active="#111633" @tab="updateTab($event)" />
     </div>
 
     <Background class="absolute" />
+
+    <MultipleFilters
+      :items="iniciatives"
+      :tabs="tabs"
+      :filterFun="filterFun"
+      @filtered="filtered = $event"
+    />
 
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="filtered_entries">
@@ -35,26 +40,22 @@
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
-import CardButton from "../components/CardButton.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
+import MultipleFilters from "../components/MultipleFilters.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     Panel,
     Background,
-    CardButton,
     ListAndDetails,
-    SelectAndCard
+    SelectAndCard,
+    MultipleFilters
   },
   data: () => ({
     search: "",
-    loading_search: false,
 
-    current_tab: 0,
-
-    searched_iniciatives: undefined,
     tabs: [
       {
         name: "Agentes Institucionais",
@@ -81,7 +82,9 @@ export default {
         description:
           "Os chamados “Habitats” de inovação da Universidade, espaços que abrigam empresas nascentes de bases técnológicas oriundas ou não da USP."
       }
-    ]
+    ],
+
+    filtered: undefined
   }),
   computed: {
     ...mapGetters({
@@ -89,63 +92,22 @@ export default {
       dataStatus: "iniciativas/dataStatus"
     }),
     filtered_entries() {
-      const currentCategory = this.tabs[this.current_tab].name;
-
-      const base =
-        this.searched_iniciatives !== undefined
-          ? this.searched_iniciatives
-          : this.iniciatives;
-
-      return base.filter(ini => ini.category == currentCategory);
+      return this.filtered === undefined ? this.iniciatives : this.filtered;
     }
   },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "iniciativas/fetchSpreadsheets"
     }),
-    updateTab(t) {
-      this.current_tab = t;
-    },
-    async fuzzySearch() {
-      if (!this.search.trim()) {
-        this.searched_iniciatives = undefined;
-        return;
+    filterFun(elm, filterStatus) {
+      const { primary } = filterStatus;
+
+      if (primary.length == 0) {
+        return true;
       }
-      this.loading_search = true;
 
-      var options = {
-        tokenize: true,
-        matchAllTokens: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        keys: [
-          "name",
-          "category",
-          "description.long",
-          "keywords",
-          "services",
-          "local",
-          "unity"
-        ]
-      };
-
-      this.$search(this.search.trim(), this.iniciatives, options)
-        .then(results => {
-          this.searched_iniciatives = results.length > 0 ? results : undefined;
-        })
-        .finally((this.loading_search = false));
+      return primary.includes(elm.category);
     }
-  },
-  watch: {
-    search: debounce(async function() {
-      await this.fuzzySearch();
-    }, 500),
-    current_tab: debounce(async function() {
-      await this.fuzzySearch();
-    }, 500)
   },
   beforeMount() {
     const env = {
