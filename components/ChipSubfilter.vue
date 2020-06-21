@@ -7,13 +7,7 @@
           <v-card-subtitle>Você pode fazer múltiplas seleções</v-card-subtitle>
           <v-card-text class="d-flex flex-wrap justify-center">
             <v-chip-group v-model="selected" multiple :column="true">
-              <v-chip
-                outlined
-                filter
-                v-for="(sub, i) of subareas"
-                :key="i"
-                :value="sub"
-              >{{ sub }}</v-chip>
+              <v-chip outlined filter v-for="(sub, i) of subareas" :key="i" :value="sub">{{ sub }}</v-chip>
             </v-chip-group>
           </v-card-text>
         </v-card>
@@ -27,10 +21,10 @@ export default {
   props: {
     subareas: {
       validator(value) {
-        value instanceof Array &&
-        value.reduce(
-          (acc, el) => acc && el instanceof String
-        )
+        return (
+          value instanceof Array &&
+          value.reduce((acc, el) => acc && typeof el === "string", true)
+        );
       }
     }
   },
@@ -39,8 +33,8 @@ export default {
   }),
   watch: {
     selected(s) {
-      this.$emit('subfilter-change', s);
+      this.$emit("subfilter-change", s);
     }
   }
-}
+};
 </script>
