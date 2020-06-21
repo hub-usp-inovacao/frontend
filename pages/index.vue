@@ -429,7 +429,7 @@
               <p
                 :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium mb-8"
-              >AUSPIN: A Agência de Inovação e Empreendedorismo da USP</p>
+              >AUSPIN: Agência USP de Inovação</p>
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
