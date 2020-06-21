@@ -6,9 +6,8 @@
           <v-col :cols="row_length < 6 ? 12 / row_length : ''" :key="item.name">
             <v-item>
               <v-card
-                :color="tab === i ? active : color"
-                @click="updateTab(i)"
-                :raised="tab === i"
+                :color="selected.includes(item.name) ? active : color"
+                @click="toggleTab(item.name)"
                 height="100%"
                 min-height="100px"
               >
@@ -32,7 +31,7 @@
 <script>
 export default {
   data: () => ({
-    tab: 0
+    selected: []
   }),
   computed: {
     row_length: function() {
@@ -57,8 +56,14 @@ export default {
     }
   },
   methods: {
-    updateTab(i) {
-      this.tab = i;
+    toggleTab(tab) {
+      const i = this.selected.findIndex(el => el === tab);
+
+      if (i === -1) {
+        this.selected.push(tab);
+      } else {
+        this.selected = this.selected.filter((el, index) => index !== i);
+      }
     },
     wrap(i) {
       return (i + 1) % this.row_length == 0;
@@ -66,8 +71,8 @@ export default {
   },
   props: ["tabs", "color", "active"],
   watch: {
-    tab(t) {
-      this.$emit("tab", t);
+    selected(newList) {
+      this.$emit("select", newList);
     }
   }
 };
