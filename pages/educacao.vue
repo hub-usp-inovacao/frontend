@@ -7,27 +7,17 @@
         url="https://forms.gle/tAuVq5oAYiGo52u46"
         @input="search = $event"
       />
-
-      <CardButton :tabs="tabs" color="#db8337" active="#bf6213" @tab="updateTab($event)" />
-
-      <v-container>
-        <v-row class="ma-0">
-          <v-col>
-            <p class="font-weight-medium">Filtros:</p>
-          </v-col>
-        </v-row>
-        <v-row class="ma-0">
-          <v-col cols="6" sm="4" md="3">
-            <Select :items="campi_list" label="Campi" @select="updateCampus" />
-          </v-col>
-          <v-col cols="6" sm="4" md="3">
-            <Select :items="levels" label="Categoria" @select="updateLevel" />
-          </v-col>
-        </v-row>
-      </v-container>
     </div>
 
     <Background class="absolute" />
+
+    <MultipleFilters
+      :items="disciplines"
+      :tabs="tabs"
+      :groups="groups"
+      :filterFun="filterFun"
+      @filtered="filtered = $event"
+    />
 
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="filtered_entries">
@@ -80,20 +70,18 @@
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
-import Select from "../components/Select.vue";
-import CardButton from "../components/CardButton.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
+import MultipleFilters from "../components/MultipleFilters.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
     Panel,
     Background,
-    Select,
-    CardButton,
     ListAndDetails,
-    SelectAndCard
+    SelectAndCard,
+    MultipleFilters
   },
   data: () => ({
     search: "",
@@ -119,57 +107,34 @@ export default {
         description: "Cursos e disciplinas relacionados à área de Negócios."
       }
     ],
-
-    searched_disciplines: undefined,
-
-    curr: {
-      tab: 0,
-      campus: undefined,
-      level: undefined
-    }
+    filtered: undefined
   }),
   methods: {
-    async fuzzySearch() {
-      if (!this.search.trim()) {
-        this.searched_disciplines = undefined;
-        return;
+    filterFun(elm, filterStatus) {
+      const { primary, terciary } = filterStatus;
+
+      const categories = [];
+
+      if (elm.category.business) categories.push("Negócios");
+      if (elm.category.innovation) categories.push("Inovação");
+      if (elm.category.entrepreneurship) categories.push("Empreendedorismo");
+      if (elm.category.intellectualProperty)
+        categories.push("Propriedade Intelectual");
+
+      const primaryMatch =
+        primary.length == 0 || categories.some(cat => primary.includes(cat));
+
+      const [campus, level] = terciary;
+
+      if (campus && elm.campus !== campus) {
+        return false;
       }
-      this.loading_search = true;
-      this.item_index = -1;
 
-      var options = {
-        tokenize: true,
-        matchAllTokens: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        keys: ["title", "campus", "description.long", "unity"]
-      };
+      if (level && elm.level !== level) {
+        return false;
+      }
 
-      this.$search(this.search.trim(), this.disciplines, options)
-        .then(results => {
-          this.searched_disciplines = results.length > 0 ? results : undefined;
-        })
-        .finally((this.loading_search = false));
-    },
-    updateCampus(new_campus) {
-      this.curr.campus = new_campus;
-    },
-    updateLevel(new_level) {
-      this.curr.level = new_level;
-    },
-    updateTab(t) {
-      this.curr.tab = t;
-    }
-  },
-  watch: {
-    search: debounce(async function() {
-      await this.fuzzySearch();
-    }, 500),
-    current_tab: async function() {
-      await this.fuzzySearch();
+      return primaryMatch;
     }
   },
   computed: {
@@ -185,58 +150,13 @@ export default {
       return this.dataStatus == "ok" ? this.campi : [];
     },
     filtered_entries: function() {
-      const { tab, campus, level } = this.curr;
-
-      const tabCategory = [
-        "innovation",
-        "entrepreneurship",
-        "intellectualProperty",
-        "business"
+      return this.filtered === undefined ? this.disciplines : this.filtered;
+    },
+    groups() {
+      return [
+        { label: "Campus", items: this.campi_list },
+        { label: "Nível", items: ["Graduação", "Pós-Graduação"] }
       ];
-
-      const selectedCategory = tabCategory[tab];
-
-      let base =
-        this.searched_disciplines !== undefined
-          ? this.searched_disciplines
-          : this.disciplines;
-
-      base = base.map(disc => {
-        const kw = [];
-
-        if (disc.category.innovation) {
-          kw.push("inovação");
-        }
-
-        if (disc.category.entrepreneurship) {
-          kw.push("empreendedorismo");
-        }
-
-        if (disc.category.intellectualProperty) {
-          kw.push("propriedade intelectual");
-        }
-
-        if (disc.category.business) {
-          kw.push("negócios");
-        }
-
-        disc.keywords = kw;
-
-        return disc;
-      });
-
-      return base.filter(disc => {
-        const sameCategory = disc.category[selectedCategory];
-
-        const sameCampus =
-          campus !== undefined
-            ? campus === "Todos" || disc.campus === campus
-            : true;
-
-        const sameLevel = level !== undefined ? disc.level === level : true;
-
-        return sameCategory && sameCampus && sameLevel;
-      });
     }
   },
   beforeMount() {
