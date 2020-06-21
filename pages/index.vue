@@ -132,183 +132,161 @@
             >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
           </v-container>
 
-          <v-row align="center">
-            <v-col cols="12" lg="6">
-              <v-row align="center">
-                <v-col cols="4">
-                  <img
-                    :src="require('@/vectors/home_iniciatives_icon.svg')"
-                    style="max-width: 100%; max-height: 100%;"
-                  />
-                </v-col>
+          <v-container>
+            <v-row align="center">
+              <v-col cols="12" lg="6">
+                <v-card flat tile nuxt color="transparent" to="iniciativas">
+                  <v-row align="center">
+                    <v-col cols="3">
+                      <img :src="require('@/vectors/home_iniciatives_icon.svg')"/>
+                    </v-col>
 
-                <v-col cols="8">
-                  <nuxt-link to="iniciativas">
-                    <p
-                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                      class="ma-0 text-left font-weight-regular"
-                      style="color: #4AD5FF"
-                    >Iniciativas</p>
-                  </nuxt-link>
+                    <v-col cols="8">
+                      <v-card-title
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                        class="text-left font-weight-regular"
+                        style="color: #4AD5FF"
+                      >Iniciativas</v-card-title>
+                      <v-card-text
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                        class="text-left font-weight-light"
+                      >
+                        Conheça as diversas iniciativas para estímulo à inovação
+                        e ao empreendedorismo na Universidade de São Paulo.
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
 
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                    class="ma-0 text-left font-weight-light"
-                  >
-                    Conheça as diversas iniciativas para estímulo à inovação
-                    e ao empreendedorismo na Universidade de São Paulo.
-                  </p>
-                </v-col>
-              </v-row>
-            </v-col>
+              <v-col cols="12" lg="6">
+                <v-card flat line nuxt color="transparent" to="educacao">
+                  <v-row align="center">
+                    <v-col cols="3">
+                      <img :src="require('@/vectors/home_teaching_icon.svg')"/>
+                    </v-col>
 
-            <v-col cols="12" lg="6">
-              <v-row justify="center">
-                <v-col cols="4">
-                  <img
-                    :src="require('@/vectors/home_teaching_icon.svg')"
-                    style="max-width: 100%; max-height: 100%;"
-                  />
-                </v-col>
+                    <v-col cols="8">
+                      <v-card-title
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                        class="text-left font-weight-regular"
+                        style="color: #4AD5FF"
+                      >Educação</v-card-title>
+                      <v-card-text
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                        class="text-left font-weight-light"
+                      >
+                        Busque as disciplinas de graduação e pós-graduação 
+                        relacionadas a Empreendedorismo, Inovação, 
+                        Propriedade Intelectual e Negócios. 
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
 
-                <v-col cols="8">
-                  <nuxt-link to="educacao">
-                    <p
-                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                      class="ma-0 text-left font-weight-regular"
-                      style="color: #4AD5FF"
-                    >Educação</p>
-                  </nuxt-link>
+              <v-col cols="12" lg="6">
+                <v-card flat tile nuxt color="transparent" to="inovacao" >
+                  <v-row align="center">
+                    <v-col cols="3">
+                      <img :src="require('@/vectors/home_pdi_icon.svg')"/>
+                    </v-col>
 
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                    class="ma-0 text-left font-weight-light"
-                  >
-                    Busque as disciplinas de graduação e pós-graduação
-                    relacionadas a Empreendedorismo, Inovação, Propriedade
-                    Intelectual e Negócios.
-                  </p>
-                </v-col>
-              </v-row>
-            </v-col>
+                    <v-col cols="8">
+                      <v-card-title
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                        class="text-left font-weight-regular"
+                        style="color: #4AD5FF"
+                      >P&amp;D&amp;I</v-card-title>
+                      <v-card-text
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                        class="text-left font-weight-light"
+                      >
+                        Veja as informações de laboratórios, organizações e 
+                        programas que atuam no desenvolvimento e inovação na USP. 
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
 
-            <v-col cols="12" lg="6">
-              <v-row justify="center">
-                <v-col cols="4">
-                  <img
-                    :src="require('@/vectors/home_pdi_icon.svg')"
-                    style="max-width: 100%; max-height: 100%;"
-                  />
-                </v-col>
+              <v-col cols="12" lg="6">
+                <v-card flat tile nuxt color="transparent" to="empresas">
+                  <v-row align="center">
+                    <v-col cols="3">
+                      <img :src="require('@/vectors/home_partnership_icon.svg')"/>
+                    </v-col>
 
-                <v-col cols="8">
-                  <nuxt-link to="inovacao">
-                    <p
-                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                      class="ma-0 text-left font-weight-regular"
-                      style="color: #4AD5FF"
-                    >P &amp; D &amp; I</p>
-                  </nuxt-link>
+                    <v-col cols="8">
+                      <v-card-title
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                        class="text-left font-weight-regular"
+                        style="color: #4AD5FF"
+                      >Empresas</v-card-title>
+                      <v-card-text
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                        class="text-left font-weight-light"
+                      >
+                        Conheça empresas com DNA USP, criadas por iniciativas de 
+                        alunos, ex-alunos e projetos ligados à Universidade, 
+                        organizadas por área de atuação e tecnologias aplicáveis. 
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
 
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                    class="ma-0 text-left font-weight-light"
-                  >
-                    Veja as informações de laboratórios, organizações e
-                    programas que atuam no desenvolvimento e inovação na USP.
-                  </p>
-                </v-col>
-              </v-row>
-            </v-col>
+              <v-col cols="12" lg="6">
+                <v-card flat tile nuxt color="transparent" to="competencias" >
+                  <v-row align="center">
+                    <v-col cols="3">
+                      <img :src="require('@/vectors/home_competencies_icon.svg')"/>
+                    </v-col>
 
-            <v-col cols="12" lg="6">
-              <v-row justify="center">
-                <v-col cols="4">
-                  <img
-                    :src="require('@/vectors/home_partnership_icon.svg')"
-                    style="max-width: 100%; max-height: 100%;"
-                  />
-                </v-col>
+                    <v-col cols="8">
+                      <v-card-title
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                        class="text-left font-weight-regular"
+                        style="color: #4AD5FF"
+                      >Competências</v-card-title>
+                      <v-card-text
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                        class="text-left font-weight-light"
+                      >
+                         Consulte pesquisadores e grupos de pesquisa da USP por 
+                         suas áreas de competência e especialidades. 
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
 
-                <v-col cols="8">
-                  <nuxt-link to="empresas">
-                    <p
-                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                      class="ma-0 text-left font-weight-regular"
-                      style="color: #4AD5FF"
-                    >Empresas</p>
-                  </nuxt-link>
+              <v-col cols="12" lg="6">
+                <v-card flat tile nuxt color="transparent" to="patentes">
+                  <v-row align="center">
+                    <v-col cols="3">
+                      <img :src="require('@/vectors/home_patents_icon.svg')"/>
+                    </v-col>
 
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                    class="ma-0 text-left font-weight-light"
-                  >
-                    Conheça empresas com DNA USP, criadas por iniciativas de
-                    alunos, ex-alunos e projetos ligados à Universidade,
-                    organizadas por área de atuação e tecnologias aplicáveis.
-                  </p>
-                </v-col>
-              </v-row>
-            </v-col>
-
-            <v-col cols="12" lg="6">
-              <v-row justify="center">
-                <v-col cols="4">
-                  <img
-                    :src="require('@/vectors/home_competencies_icon.svg')"
-                    style="max-width: 100%; max-height: 100%;"
-                  />
-                </v-col>
-
-                <v-col cols="8">
-                  <nuxt-link to="competencias">
-                    <p
-                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                      class="ma-0 text-left font-weight-regular"
-                      style="color: #4AD5FF"
-                    >Competências</p>
-                  </nuxt-link>
-
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                    class="ma-0 text-left font-weight-light"
-                  >
-                    Consulte pesquisadores e grupos de pesquisa da USP por suas
-                    áreas de competência e especialidades.
-                  </p>
-                </v-col>
-              </v-row>
-            </v-col>
-
-            <v-col cols="12" lg="6">
-              <v-row justify="center">
-                <v-col cols="4">
-                  <img
-                    :src="require('@/vectors/home_patents_icon.svg')"
-                    style="max-width: 100%; max-height: 100%;"
-                  />
-                </v-col>
-
-                <v-col cols="8">
-                  <nuxt-link to="patentes">
-                    <p
-                      :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
-                      class="ma-0 text-left font-weight-regular"
-                      style="color: #4AD5FF"
-                    >Patentes</p>
-                  </nuxt-link>
-
-                  <p
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                    class="ma-0 text-left font-weight-light"
-                  >
-                    Consulte as patentes da USP disponíveis para licenciamento
-                    e aplicação de empresas e organizações.
-                  </p>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
+                    <v-col cols="8">
+                      <v-card-title
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                        class="text-left font-weight-regular"
+                        style="color: #4AD5FF"
+                      >Patentes</v-card-title>
+                      <v-card-text
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                        class="text-left font-weight-light"
+                      >
+                         Consulte as patentes da USP disponíveis para licenciamento 
+                         e aplicação de empresas e organizações. 
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-container>
       </v-container>
     </v-app>
