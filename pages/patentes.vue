@@ -31,7 +31,7 @@
                     v-for="sub of subareas"
                     :key="sub"
                     :value="sub"
-                    >{{ sub.length > 20 ? sub.slice(0, 20) + "..." : sub }}</v-chip>
+                  >{{ sub.length > 20 ? sub.slice(0, 20) + "..." : sub }}</v-chip>
                 </v-chip-group>
               </v-card-text>
             </v-card>
@@ -47,22 +47,16 @@
         <template #content="{ item }">
           <p>{{ item.classification.primary.cip }}</p>
           <p>{{ item.classification.primary.subareas }}</p>
-          <p v-if="item.ipcs.length > 0 && item.ipcs[0] != ''">
-            <span class="font-weight-bold">IPCs:</span>
-            {{ item.ipcs.join(', ') }}
-          </p>
-          <p>
-            <span class="font-weight-bold">Titulares:</span>
-            {{ item.owners.join(', ') }}
-          </p>
-          <p>
-            <span class="font-weight-bold">Inventores:</span>
-            {{ item.inventors.join('; ') }}
-          </p>
-          <p>
-            <span class="font-weight-bold">Países com proteção:</span>
-            {{ item.countriesWithProtection.join(', ') }}
-          </p>
+
+          <BulletList
+            v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
+            title="IPCs"
+            :items="item.ipcs"
+          />
+          <BulletList title="Titulares" :items="item.owners" />
+          <BulletList title="Inventores" :items="item.inventors" />
+          <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
+
           <p>{{ item.sumary }}</p>
         </template>
 
@@ -78,22 +72,16 @@
           <v-container>
             <p>{{ item.classification.primary.cip }}</p>
             <p>{{ item.classification.primary.subareas }}</p>
-            <p v-if="item.ipcs.length > 0 && item.ipcs[0] != ''">
-              <span class="font-weight-bold">IPCs:</span>
-              {{ item.ipcs.join(', ') }}
-            </p>
-            <p>
-              <span class="font-weight-bold">Titulares:</span>
-              {{ item.owners.join(', ') }}
-            </p>
-            <p>
-              <span class="font-weight-bold">Inventores:</span>
-              {{ item.inventors.join('; ') }}
-            </p>
-            <p>
-              <span class="font-weight-bold">Países com proteção:</span>
-              {{ item.countriesWithProtection.join(', ') }}
-            </p>
+
+            <BulletList
+              v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
+              title="IPCs"
+              :items="item.ipcs"
+            />
+            <BulletList title="Titulares" :items="item.owners" />
+            <BulletList title="Inventores" :items="item.inventors" />
+            <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
+
             <p>{{ item.sumary }}</p>
 
             <v-card-actions>
@@ -116,6 +104,7 @@ import CardButton from "../components/CardButton.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
 import Select from "../components/Select.vue";
+import BulletList from "../components/BulletList.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -125,7 +114,8 @@ export default {
     CardButton,
     ListAndDetails,
     SelectAndCard,
-    Select
+    Select,
+    BulletList
   },
   data: () => ({
     search: "",
@@ -206,7 +196,7 @@ export default {
           "classification.primary.subarea",
           "owners",
           "inventors",
-          "summary",
+          "summary"
         ]
       };
 
@@ -245,7 +235,7 @@ export default {
         const primary = patent.classification.primary;
 
         const sameArea = primary.cip === selectedArea;
-        const sameSubarea = 
+        const sameSubarea =
           this.selected_subareas !== []
             ? this.selected_subareas.includes(primary.subareas)
             : true;
@@ -256,21 +246,25 @@ export default {
     areas: function() {
       return Array.from(
         this.patents.reduce(
-          (areaSet, patent) => areaSet.add(patent.classification.primary.cip.trim()),
+          (areaSet, patent) =>
+            areaSet.add(patent.classification.primary.cip.trim()),
           new Set()
         )
-      ).filter(area => area != "")
-        .sort((a,b) => a.localeCompare(b));
+      )
+        .filter(area => area != "")
+        .sort((a, b) => a.localeCompare(b));
     },
     subareas: function() {
-      let areas = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+      let areas = ["A", "B", "C", "D", "E", "F", "G"];
       return Array.from(
         this.patents.reduce(
-          (subareaSet, patent) => subareaSet.add(patent.classification.primary.subareas.trim()),
+          (subareaSet, patent) =>
+            subareaSet.add(patent.classification.primary.subareas.trim()),
           new Set()
         )
-      ).filter(subarea => subarea[0] === areas[this.current_tab][0])
-        .sort((a,b) => a.localeCompare(b));
+      )
+        .filter(subarea => subarea[0] === areas[this.current_tab][0])
+        .sort((a, b) => a.localeCompare(b));
     }
   },
   beforeMount() {
