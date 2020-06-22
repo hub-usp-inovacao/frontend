@@ -1,4 +1,4 @@
-import { formatURL } from "../../lib";
+import { formatURL, fixPersonName, capitalizeName } from "../../lib";
 
 const rowToObj = (row) => ({
   name: row[5].split(" | ")[0],
@@ -15,10 +15,10 @@ const rowToObj = (row) => ({
   },
   ipcs: row[7].split(" | "),
   owners: row[9].split(" | "),
-  inventors: row[10].split(" | ").map((name) => {
-    const [last, first] = name.split(", ");
-    return `${first} ${last}`;
-  }),
+  inventors:
+    row[10] !== undefined && row[10] !== ""
+      ? row[10].split(" | ").map(fixPersonName)
+      : [],
   sumary: row[11],
   countriesWithProtection: row[18] !== undefined ? row[18].split(";") : [],
   status: row[20],
@@ -54,7 +54,7 @@ export const actions = {
 
       const { values } = await resp.json();
 
-      ctx.commit("setPatents", values.slice(2).map(rowToObj));
+      ctx.commit("setPatents", values.slice(1).map(rowToObj));
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
