@@ -22,6 +22,7 @@
         <template #content="{ item }">
           <p class="body-2">{{ item.unity }}</p>
           <p class="body-2 mb-4">{{ item.local }}</p>
+          <p class="body-2 mb-4">{{ item.contact.info }}</p>
           <p>{{ item.description.long }}</p>
         </template>
         <template #buttons="{ item }">
@@ -31,7 +32,23 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries" />
+      <SelectAndCard :items="filtered_entries">
+        <template #item="{ item }">
+          <v-container>
+            <p class="title">{{item.name}}</p>
+            <p class="body-2">{{ item.unity }}</p>
+            <p class="body-2 mb-4">{{ item.local }}</p>
+            <p class="body-2 mb-4">{{ item.contact.info }}</p>
+            <p>{{ item.description.long }}</p>
+          </v-container>
+
+          <v-card-actions>
+            <v-spacer />
+            <v-btn depressed dark color="#222c63" :href="item.url">Saiba Mais</v-btn>
+            <v-spacer />
+          </v-card-actions>
+        </template>
+      </SelectAndCard>
     </div>
   </div>
 </template>
