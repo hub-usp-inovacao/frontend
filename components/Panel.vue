@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { debounce } from "debounce";
+
 export default {
   data: () => ({
     typed: ""
@@ -59,11 +61,14 @@ export default {
     searchBarColor: {
       type: String,
       default: "#88E3FF"
-    }
-  },
-  watch: {
-    typed(p) {
-      this.$emit("input", p);
+    },
+    items: {
+      type: Array,
+      required: false
+    },
+    searchKeys: {
+      type: Array,
+      default: []
     }
   },
   computed: {
@@ -76,6 +81,38 @@ export default {
         default:
           return { width: "70%" };
       }
+    }
+  },
+  watch: {
+    typed: debounce(async function() {
+      await this.fuzzySearch();
+    }, 500)
+  },
+  methods: {
+    async fuzzySearch() {
+      if (!this.typed.trim()) {
+        return;
+      }
+
+      const options = {
+        ignoreLocation: true,
+        findAllMatches: true,
+        shouldSort: true,
+        tokenize: true,
+        matchAllTokens: true,
+        maxPatternLength: 32,
+        minMatchCharLength: 2,
+        threshold: 0.4,
+        keys: this.searchKeys
+      };
+
+      const results = await this.$search(
+        this.typed.trim(),
+        this.items,
+        options
+      );
+
+      this.$emit("search", results);
     }
   }
 };

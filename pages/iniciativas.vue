@@ -4,7 +4,9 @@
       <Panel
         title="Iniciativas"
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de inicativas e acessar as formas de contatar cada uma delas."
-        @input="search = $event"
+        :items="filtered_entries"
+        :searchKeys="keys"
+        @search="searched = $event"
       />
     </div>
 
@@ -19,7 +21,7 @@
     />
 
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="filtered_entries">
+      <ListAndDetails :items="display_entries">
         <template #content="{ item }">
           <p class="body-2">{{ item.unity }}</p>
           <p class="body-2 mb-4">{{ item.local }}</p>
@@ -33,7 +35,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries">
+      <SelectAndCard :items="display_entries">
         <template #item="{ item }">
           <v-container>
             <p class="title">{{item.name}}</p>
@@ -72,8 +74,6 @@ export default {
     MultipleFilters
   },
   data: () => ({
-    search: "",
-
     tabs: [
       {
         name: "Agentes Institucionais",
@@ -102,7 +102,16 @@ export default {
       }
     ],
 
-    filtered: undefined
+    keys: [
+      "name",
+      "description.short",
+      "description.long",
+      "keywords",
+      "services"
+    ],
+
+    filtered: undefined,
+    searched: undefined
   }),
   computed: {
     ...mapGetters({
@@ -111,6 +120,11 @@ export default {
     }),
     filtered_entries() {
       return this.filtered === undefined ? this.iniciatives : this.filtered;
+    },
+    display_entries() {
+      return this.searched !== undefined
+        ? this.searched
+        : this.filtered_entries;
     }
   },
   methods: {
