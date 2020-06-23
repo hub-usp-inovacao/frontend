@@ -15,6 +15,7 @@
       :items="skills"
       :tabs="tabs"
       :filterFun="filterFun"
+      :colors="{ active: '#9b4c68', base: '#6b1c28' }"
       @filtered="filtered = $event"
     />
 

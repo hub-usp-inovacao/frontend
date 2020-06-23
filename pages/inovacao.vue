@@ -16,6 +16,7 @@
       :items="pdis"
       :tabs="tabs"
       :filterFun="filterFun"
+      :colors="{ active: '#308C89', base: '#005C59' }"
       @filtered="filtered = $event"
     />
 

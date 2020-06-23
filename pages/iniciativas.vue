@@ -14,6 +14,7 @@
       :items="iniciatives"
       :tabs="tabs"
       :filterFun="filterFun"
+      :colors="{ base: '#222c63', active: '#525c93' }"
       @filtered="filtered = $event"
     />
 

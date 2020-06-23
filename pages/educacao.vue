@@ -16,6 +16,7 @@
       :tabs="tabs"
       :groups="groups"
       :filterFun="filterFun"
+      :colors="{ base: '#db8337', active: '#ab5307' }"
       @filtered="filtered = $event"
     />
 

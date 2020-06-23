@@ -2,7 +2,12 @@
   <v-container>
     <v-row>
       <v-col>
-        <CardButton :tabs="tabs" color="#aa5555" active="#ff9999" @select="selectedTabs = $event" />
+        <CardButton
+          :tabs="tabs"
+          :color="colors.base"
+          :active="colors.active"
+          @select="selectedTabs = $event"
+        />
       </v-col>
     </v-row>
     <v-row v-if="needSubfilters">
@@ -76,6 +81,17 @@ export default {
     filterFun: {
       type: Function,
       required: true
+    },
+    colors: {
+      validator(colors) {
+        const { base, active } = colors;
+        return (
+          base !== undefined &&
+          typeof base === "string" &&
+          active !== undefined &&
+          typeof active === "string"
+        );
+      }
     }
   },
   data: () => ({
