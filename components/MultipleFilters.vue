@@ -6,7 +6,7 @@
           :tabs="tabs"
           :color="colors.base"
           :active="colors.active"
-          @select="selectedTabs = $event"
+          @select="selected.tabs = $event"
         />
       </v-col>
     </v-row>
@@ -14,13 +14,13 @@
       <v-col>
         <ChipSubfilter
           :subareas="availableSubareas"
-          @subfilter-change="selectedSubfilters = $event"
+          @subfilter-change="selected.subfilters = $event"
         />
       </v-col>
     </v-row>
     <v-row v-if="needDropdown">
       <v-col>
-        <DropdownFilter :groups="groups" @select="selectedDropdownFilters = $event" />
+        <DropdownFilter :groups="groups" @select="selected.dropdownFilters = $event" />
       </v-col>
     </v-row>
   </v-container>
@@ -38,10 +38,6 @@ export default {
     DropdownFilter
   },
   props: {
-    items: {
-      type: Array,
-      required: true
-    },
     tabs: {
       validator(givenTabs) {
         return (
@@ -78,10 +74,6 @@ export default {
         );
       }
     },
-    filterFun: {
-      type: Function,
-      required: true
-    },
     colors: {
       validator(colors) {
         const { base, active } = colors;
@@ -95,14 +87,16 @@ export default {
     }
   },
   data: () => ({
-    selectedTabs: [],
-    selectedSubfilters: [],
-    selectedDropdownFilters: []
+    selected: {
+      tabs: [],
+      subfilters: [],
+      dropdownFilters: []
+    }
   }),
   computed: {
     availableSubareas() {
       return this.tabs
-        .filter(({ name }) => this.selectedTabs.includes(name))
+        .filter(({ name }) => this.selected.tabs.includes(name))
         .reduce((acc, { subareas }) => acc.concat(subareas), []);
     },
     needSubfilters() {
@@ -111,19 +105,32 @@ export default {
     needDropdown() {
       return this.groups !== undefined;
     },
-    filteredItems() {
-      const current = {
-        primary: this.selectedTabs,
-        secondary: this.selectedSubfilters,
-        terciary: this.selectedDropdownFilters
+    sTabs() {
+      return this.selected.tabs;
+    },
+    sSubfilters() {
+      return this.selected.subfilters;
+    },
+    sDropdownFilters() {
+      return this.selected.dropdownFilters;
+    },
+    context() {
+      return {
+        primary: this.selected.tabs,
+        secondary: this.selected.subfilters,
+        terciary: this.selected.dropdownFilters
       };
-
-      return this.items.filter(item => this.filterFun(item, current));
     }
   },
   watch: {
-    filteredItems(items) {
-      this.$emit("filtered", items);
+    sTabs() {
+      this.$emit("select", this.context);
+    },
+    sSubfilters() {
+      this.$emit("select", this.context);
+    },
+    sDropdownFilters() {
+      this.$emit("select", this.context);
     }
   }
 };

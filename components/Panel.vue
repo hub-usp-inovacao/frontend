@@ -22,7 +22,7 @@
               color="tertiary"
               label="Buscar"
               counter="32"
-              v-model="typed"
+              v-model="value"
               append-outer-icon="search"
               :style="setSearchBarWidth"
               :loading="loading"
@@ -38,9 +38,6 @@
 import { debounce } from "debounce";
 
 export default {
-  data: () => ({
-    typed: ""
-  }),
   props: {
     title: {
       type: String,
@@ -62,13 +59,10 @@ export default {
       type: String,
       default: "#88E3FF"
     },
-    items: {
-      type: Array,
-      required: false
-    },
-    searchKeys: {
-      type: Array,
-      default: []
+    value: {
+      type: String,
+      required: true,
+      default: ""
     }
   },
   computed: {
@@ -84,36 +78,9 @@ export default {
     }
   },
   watch: {
-    typed: debounce(async function() {
-      await this.fuzzySearch();
+    value: debounce(function() {
+      this.$emit("input", this.value);
     }, 500)
-  },
-  methods: {
-    async fuzzySearch() {
-      if (!this.typed.trim()) {
-        return;
-      }
-
-      const options = {
-        ignoreLocation: true,
-        findAllMatches: true,
-        shouldSort: true,
-        tokenize: true,
-        matchAllTokens: true,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        threshold: 0.4,
-        keys: this.searchKeys
-      };
-
-      const results = await this.$search(
-        this.typed.trim(),
-        this.items,
-        options
-      );
-
-      this.$emit("search", results);
-    }
   }
 };
 </script>

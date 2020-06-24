@@ -4,22 +4,20 @@
       <Panel
         title="Patentes"
         description="Pesquisadores e unidades da USP desenvolvem patentes e propriedade industrial que estão disponíveis para que empresas e organizações possam licenciar para aplicação e uso. Usando palavras-chave na caixa de busca você terá acesso a breves descrições destas patentes e formas de contato para obter maior detalhamento e informações sobre cada uma delas."
-        @input="search = $event"
+        v-model="search.term"
       />
     </div>
 
     <Background class="absolute" />
 
     <MultipleFilters
-      :items="patents"
       :tabs="tabs"
       :colors="{ base: '#5B2C7D', active: '#9247C9' }"
-      :filterFun="filterFun"
-      @filtered="filtered = $event"
+      @select="filterData($event)"
     />
 
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="filtered">
+      <ListAndDetails :items="displayItems">
         <template #content="{ item }">
           <p>{{ item.classification.primary.cip }}</p>
           <p>{{ item.classification.primary.subareas }}</p>
@@ -43,7 +41,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered.map(e => ({ ...e, description: { long: '' }}))">
+      <SelectAndCard :items="displayItems.map(e => ({ ...e, description: { long: '' }}))">
         <template #item="{ item }">
           <v-container>
             <p>{{ item.classification.primary.cip }}</p>
@@ -94,59 +92,49 @@ export default {
     BulletList
   },
   data: () => ({
-    search: "",
-    current_tab: 0,
-
-    sheet_name: "",
-    sheet_id: "",
-    api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    search: {
+      term: "",
+      patents: undefined,
+      keys: [
+        "name",
+        "classification.primary.cip",
+        "classification.primary.subarea",
+        "owners",
+        "inventors",
+        "summary"
+      ]
+    },
 
     selected_subareas: [],
-    searched_patents: undefined,
-    filtered: []
+    filtered: undefined
   }),
   methods: {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets"
     }),
-    updateTab(t) {
-      this.current_tab = t;
-      this.selected_subareas = [];
-    },
     async fuzzySearch() {
-      if (!this.search.trim()) {
-        this.searched_patents = undefined;
+      if (!this.search.term.trim()) {
         return;
       }
-      this.loading_search = true;
-      this.item_index = -1;
 
-      var options = {
+      const options = {
+        ignoreLocation: true,
+        findAllMatches: true,
+        shouldSort: true,
         tokenize: true,
         matchAllTokens: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 2,
-        keys: [
-          "name",
-          "classification.primary.cip",
-          "classification.primary.subarea",
-          "owners",
-          "inventors",
-          "summary"
-        ]
+        threshold: 0.4,
+        keys: this.search.keys
       };
 
-      this.$search(this.search.trim(), this.patents, options)
-        .then(results => {
-          this.searched_patents = results.length > 0 ? results : undefined;
-        })
-        .finally((this.loading_search = false));
-    },
-    compare_string(a, b) {
-      return a.localeCompare(b);
+      const results = await this.$search(
+        this.search.term.trim(),
+        this.baseItems,
+        options
+      );
+      this.search.patents = results.length > 0 ? results : undefined;
     },
     filterFun: (elm, filterStatus) => {
       const { primary, secondary } = filterStatus;
@@ -178,21 +166,26 @@ export default {
           return name.slice(name.indexOf(c));
         }
       }
+    },
+    filterData(context) {
+      this.filtered = this.patents.filter(item =>
+        this.filterFun(item, context)
+      );
     }
   },
   watch: {
-    search: debounce(async function() {
+    searchTerm: debounce(async function() {
       await this.fuzzySearch();
-    }, 500),
-    current_tab: debounce(async function() {
-      await this.fuzzySearch();
-    }, 500)
+    }, 250)
   },
   computed: {
     ...mapGetters({
       dataStatus: "patentes/dataStatus",
       patents: "patentes/patents"
     }),
+    searchTerm() {
+      return this.search.term;
+    },
     areas: function() {
       return Array.from(
         this.patents.reduce(
@@ -218,6 +211,14 @@ export default {
           .map(sub => (sub.length > 4 ? this.removeCode(sub) : sub))
           .map(sub => (sub.length > 20 ? sub.slice(0, 20) + "..." : sub))
       }));
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.patents;
+    },
+    displayItems() {
+      return this.search.patents !== undefined
+        ? this.search.patents
+        : this.baseItems;
     }
   },
   beforeMount() {
@@ -226,8 +227,9 @@ export default {
       sheetID: process.env.sheetID
     };
 
-    if (this.dataStatus == "ok" && this.patents.length == 0)
+    if (this.dataStatus == "ok" && this.patents.length == 0) {
       this.fetchSpreadsheets(env);
+    }
   }
 };
 </script>
