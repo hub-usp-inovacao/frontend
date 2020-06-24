@@ -6,44 +6,19 @@
         description="Pesquisadores e unidades da USP desenvolvem patentes e propriedade industrial que estão disponíveis para que empresas e organizações possam licenciar para aplicação e uso. Usando palavras-chave na caixa de busca você terá acesso a breves descrições destas patentes e formas de contato para obter maior detalhamento e informações sobre cada uma delas."
         @input="search = $event"
       />
-
-      <CardButton :tabs="tabs" color="#64318A" active="#2C163D" @tab="updateTab($event)">
-        <template #card="{item}">
-          <v-container fill-height>
-            <v-row class="align-center justify-center ma-0">
-              <p class="white--text subtitle-1 font-weight-medium text-center mb-0">{{item.name}}</p>
-            </v-row>
-          </v-container>
-        </template>
-      </CardButton>
-
-      <v-container>
-        <v-row>
-          <v-col offset="1" cols="10">
-            <v-card>
-              <v-card-title class="title font-weight-bold mb-0">Subáreas:</v-card-title>
-              <v-card-subtitle>você pode fazer múltiplas seleções</v-card-subtitle>
-              <v-card-text class="d-flex flex-wrap justify-center">
-                <v-chip-group v-model="selected_subareas" multiple :column="true">
-                  <v-chip
-                    outlined
-                    filter
-                    v-for="sub of subareas"
-                    :key="sub"
-                    :value="sub"
-                  >{{ sub.length > 20 ? sub.slice(0, 20) + "..." : sub }}</v-chip>
-                </v-chip-group>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
     </div>
+
+    <MultipleFilters
+      :items="patents"
+      :tabs="tabs"
+      :filterFun="filterFun"
+      @filtered="filtered = $event"
+    />
 
     <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="filtered_entries">
+      <ListAndDetails :items="filtered">
         <template #content="{ item }">
           <p>{{ item.classification.primary.cip }}</p>
           <p>{{ item.classification.primary.subareas }}</p>
@@ -67,7 +42,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries.map(e => ({ ...e, description: { long: '' }}))">
+      <SelectAndCard :items="filtered.map(e => ({ ...e, description: { long: '' }}))">
         <template #item="{ item }">
           <v-container>
             <p>{{ item.classification.primary.cip }}</p>
@@ -100,7 +75,7 @@
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import Background from "../components/Background.vue";
-import CardButton from "../components/CardButton.vue";
+import MultipleFilters from "../components/MultipleFilters.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
 import Select from "../components/Select.vue";
@@ -111,7 +86,7 @@ export default {
   components: {
     Panel,
     Background,
-    CardButton,
+    MultipleFilters,
     ListAndDetails,
     SelectAndCard,
     Select,
@@ -125,46 +100,9 @@ export default {
     sheet_id: "",
     api_key: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
 
-    entries: [],
-    tabs: [
-      {
-        name: "Necessidades Humanas",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Operações de Processamento e Transporte",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Química e Metalurgia",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Têxteis",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Construções Fixas",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Engenharia Mecânica",
-        description: "",
-        entries: []
-      },
-      {
-        name: "Física",
-        description: "",
-        entries: []
-      }
-    ],
     selected_subareas: [],
-    searched_patents: undefined
+    searched_patents: undefined,
+    filtered: []
   }),
   methods: {
     ...mapActions({
@@ -208,6 +146,37 @@ export default {
     },
     compare_string(a, b) {
       return a.localeCompare(b);
+    },
+    filterFun: (elm, filterStatus) => {
+      const { primary, secondary } = filterStatus;
+
+      if (primary.length == 0) {
+        return true;
+      }
+
+      const { cip, subareas } = elm.classification.primary;
+
+      const primaryMatch = primary.some(area => cip.includes(area));
+
+      if (!primaryMatch) {
+        return false;
+      }
+
+      if (secondary.length == 0) {
+        return true;
+      }
+
+      return secondary.some(
+        sub => subareas.includes(
+          sub.length > 20 ? sub.slice(0, sub.length - 3) : sub)
+      );
+    },
+    removeCode(name) {
+      for (let c of name.slice(1)) {
+        if ('A' <= c && c <= 'Z' || 'a' <= c && c <= 'z') {
+          return name.slice(name.indexOf(c));
+        }
+      }
     }
   },
   watch: {
@@ -223,31 +192,11 @@ export default {
       dataStatus: "patentes/dataStatus",
       patents: "patentes/patents"
     }),
-    filtered_entries: function() {
-      const selectedArea = this.areas[this.current_tab];
-
-      let base =
-        this.searched_patents !== undefined
-          ? this.searched_patents
-          : this.patents;
-
-      return base.filter(patent => {
-        const primary = patent.classification.primary;
-
-        const sameArea = primary.cip === selectedArea;
-        const sameSubarea =
-          this.selected_subareas !== []
-            ? this.selected_subareas.includes(primary.subareas)
-            : true;
-
-        return sameArea && sameSubarea;
-      });
-    },
     areas: function() {
       return Array.from(
         this.patents.reduce(
           (areaSet, patent) =>
-            areaSet.add(patent.classification.primary.cip.trim()),
+            areaSet.add(patent.classification.primary.cip),
           new Set()
         )
       )
@@ -255,16 +204,25 @@ export default {
         .sort((a, b) => a.localeCompare(b));
     },
     subareas: function() {
-      let areas = ["A", "B", "C", "D", "E", "F", "G"];
       return Array.from(
-        this.patents.reduce(
-          (subareaSet, patent) =>
-            subareaSet.add(patent.classification.primary.subareas.trim()),
-          new Set()
-        )
+        this.patents
+          .map(patent => patent.classification.primary.subareas)
+          .reduce(
+            (subareaSet, subarea) =>
+              subareaSet.add(subarea),
+            new Set()
+          )
       )
-        .filter(subarea => subarea[0] === areas[this.current_tab][0])
         .sort((a, b) => a.localeCompare(b));
+    },
+    tabs: function(){
+      return this.areas.map(
+        (area) => ({
+          name: this.removeCode(area),
+          subareas: this.subareas.filter(subarea => area[0] == subarea[0])
+            .map(sub => sub.length > 20 ? sub.slice(0,20) + "..." : sub)
+        })
+      );
     }
   },
   beforeMount() {

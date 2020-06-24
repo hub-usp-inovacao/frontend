@@ -5,12 +5,12 @@ const rowToObj = (row) => ({
   url: row[4], // formatURL(row[4]),
   classification: {
     primary: {
-      cip: row[0],
-      subareas: row[1],
+      cip: row[0].trim(),
+      subareas: row[1].trim(),
     },
     secondary: {
-      cip: row[2],
-      subareas: row[3],
+      cip: row[2].trim(),
+      subareas: row[3].trim(),
     },
   },
   ipcs: row[7].split(" | "),
