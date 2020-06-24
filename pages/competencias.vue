@@ -4,23 +4,20 @@
       <Panel
         title="Competências"
         description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua sub-área (ex.: Matemática)."
-        url="https://forms.gle/dDooKL5G2sApfjqb6"
-        @input="search = $event"
+        v-model="search.term"
       />
     </div>
 
     <Background class="absolute" />
 
     <MultipleFilters
-      :items="skills"
       :tabs="tabs"
-      :filterFun="filterFun"
       :colors="{ active: '#9b4c68', base: '#6b1c28' }"
-      @filtered="filtered = $event"
+      @select="filterData($event)"
     />
 
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="filtered_entries">
+      <ListAndDetails :items="displayItems">
         <template #content="sProps">
           <p class="body-2 mb-2">{{ sProps.item.email }}</p>
           <p class="body-2 mb-2">{{ sProps.item.unity }}</p>
@@ -72,7 +69,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="skills.map(e => ({ ...e, description: { long: '' }}))">
+      <SelectAndCard :items="displayItems.map(e => ({ ...e, description: { long: '' }}))">
         <template #item="{ item }">
           <v-container>
             <p class="title">{{ item.name }}</p>
@@ -137,7 +134,11 @@ export default {
     MultipleFilters
   },
   data: () => ({
-    search: "",
+    search: {
+      term: "",
+      skills: undefined,
+      keys: ["name"]
+    },
 
     itemDescriptions: [
       { key: "skills", title: "Competências" },
@@ -293,15 +294,55 @@ export default {
     },
     ...mapActions({
       fetchSpreadsheets: "competencia/fetchSpreadsheets"
-    })
+    }),
+    async fuzzySearch() {
+      if (!this.search.term.trim()) {
+        this.search.skills = undefined;
+        return;
+      }
+
+      const options = {
+        ignoreLocation: true,
+        findAllMatches: true,
+        shouldSort: true,
+        tokenize: true,
+        matchAllTokens: true,
+        maxPatternLength: 32,
+        minMatchCharLength: 2,
+        threshold: 0.4,
+        keys: this.search.keys
+      };
+
+      this.search.skills = await this.$search(
+        this.search.term.trim(),
+        this.baseItems,
+        options
+      );
+    },
+    filterData(context) {
+      this.filtered = this.skills.filter(item => this.filterFun(item, context));
+    }
+  },
+  watch: {
+    searchTerm: debounce(async function() {
+      await this.fuzzySearch();
+    }, 1000)
   },
   computed: {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills"
     }),
-    filtered_entries() {
-      return this.filtered === undefined ? this.skills : this.filtered;
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.skills;
+    },
+    displayItems() {
+      return this.search.skills !== undefined
+        ? this.search.skills
+        : this.baseItems;
+    },
+    searchTerm() {
+      return this.search.term;
     }
   },
   beforeMount() {

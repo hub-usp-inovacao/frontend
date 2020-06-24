@@ -4,24 +4,21 @@
       <Panel
         title="Educação"
         description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento e códigos e links para acesso às ementas no sistema institucional da Universidade, o Júpiter."
-        url="https://forms.gle/tAuVq5oAYiGo52u46"
-        @input="search = $event"
+        v-model="search.term"
       />
     </div>
 
     <Background class="absolute" />
 
     <MultipleFilters
-      :items="disciplines"
       :tabs="tabs"
       :groups="groups"
-      :filterFun="filterFun"
       :colors="{ base: '#db8337', active: '#ab5307' }"
-      @filtered="filtered = $event"
+      @select="filterData($event)"
     />
 
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="filtered_entries">
+      <ListAndDetails :items="displayItems">
         <template #content="sProps">
           <p>{{ sProps.item.unity }}</p>
           <p>{{ sProps.item.campus }}</p>
@@ -39,7 +36,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries">
+      <SelectAndCard :items="displayItems">
         <template #item="{item}">
           <v-container px-6>
             <p class="title">{{item.name}}</p>
@@ -85,7 +82,11 @@ export default {
     MultipleFilters
   },
   data: () => ({
-    search: "",
+    search: {
+      term: "",
+      disciplines: undefined,
+      keys: ["name"]
+    },
 
     levels: ["Graduação", "Pós-Graduação"],
     tabs: [
@@ -136,7 +137,41 @@ export default {
       }
 
       return primaryMatch;
+    },
+    async fuzzySearch() {
+      if (!this.search.term.trim()) {
+        this.search.disciplines = undefined;
+        return;
+      }
+
+      const options = {
+        ignoreLocation: true,
+        findAllMatches: true,
+        shouldSort: true,
+        tokenize: true,
+        matchAllTokens: true,
+        maxPatternLength: 32,
+        minMatchCharLength: 2,
+        threshold: 0.4,
+        keys: this.search.keys
+      };
+
+      this.search.disciplines = await this.$search(
+        this.search.term.trim(),
+        this.baseItems,
+        options
+      );
+    },
+    filterData(context) {
+      this.filtered = this.disciplines.filter(item =>
+        this.filterFun(item, context)
+      );
     }
+  },
+  watch: {
+    searchTerm: debounce(async function() {
+      await this.fuzzySearch();
+    }, 1250)
   },
   computed: {
     ...mapGetters({
@@ -150,14 +185,22 @@ export default {
     campi_list: function() {
       return this.dataStatus == "ok" ? this.campi : [];
     },
-    filtered_entries: function() {
-      return this.filtered === undefined ? this.disciplines : this.filtered;
-    },
     groups() {
       return [
         { label: "Campus", items: this.campi_list },
         { label: "Nível", items: ["Graduação", "Pós-Graduação"] }
       ];
+    },
+    searchTerm() {
+      return this.search.term;
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.disciplines;
+    },
+    displayItems() {
+      return this.search.disciplines !== undefined
+        ? this.search.disciplines
+        : this.baseItems;
     }
   },
   beforeMount() {
