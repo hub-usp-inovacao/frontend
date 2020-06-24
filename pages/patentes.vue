@@ -8,14 +8,15 @@
       />
     </div>
 
+    <Background class="absolute" />
+
     <MultipleFilters
       :items="patents"
       :tabs="tabs"
+      :colors="{ base: '#5B2C7D', active: '#9247C9' }"
       :filterFun="filterFun"
       @filtered="filtered = $event"
     />
-
-    <Background class="absolute" />
 
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="filtered">
@@ -166,15 +167,14 @@ export default {
         return true;
       }
 
-      return secondary.some(
-        sub => subareas.includes(
-          sub.length > 20 ? sub.slice(0, sub.length - 3) : sub)
+      return secondary.some(sub =>
+        subareas.includes(sub.length > 20 ? sub.slice(0, sub.length - 3) : sub)
       );
     },
     removeCode(name) {
       name = name.slice(1);
       for (let c of name) {
-        if ('A' <= c && c <= 'Z' || 'a' <= c && c <= 'z') {
+        if (("A" <= c && c <= "Z") || ("a" <= c && c <= "z")) {
           return name.slice(name.indexOf(c));
         }
       }
@@ -196,8 +196,7 @@ export default {
     areas: function() {
       return Array.from(
         this.patents.reduce(
-          (areaSet, patent) =>
-            areaSet.add(patent.classification.primary.cip),
+          (areaSet, patent) => areaSet.add(patent.classification.primary.cip),
           new Set()
         )
       )
@@ -208,23 +207,17 @@ export default {
       return Array.from(
         this.patents
           .map(patent => patent.classification.primary.subareas)
-          .reduce(
-            (subareaSet, subarea) =>
-              subareaSet.add(subarea),
-            new Set()
-          )
-      )
-        .sort((a, b) => a.localeCompare(b));
+          .reduce((subareaSet, subarea) => subareaSet.add(subarea), new Set())
+      ).sort((a, b) => a.localeCompare(b));
     },
-    tabs: function(){
-      return this.areas.map(
-        (area) => ({
-          name: this.removeCode(area),
-          subareas: this.subareas.filter(subarea => area[0] == subarea[0])
-            .map(sub => sub.length > 4 ? this.removeCode(sub) : sub)
-            .map(sub => sub.length > 20 ? sub.slice(0,20) + "..." : sub)
-        })
-      );
+    tabs: function() {
+      return this.areas.map(area => ({
+        name: this.removeCode(area),
+        subareas: this.subareas
+          .filter(subarea => area[0] == subarea[0])
+          .map(sub => (sub.length > 4 ? this.removeCode(sub) : sub))
+          .map(sub => (sub.length > 20 ? sub.slice(0, 20) + "..." : sub))
+      }));
     }
   },
   beforeMount() {
