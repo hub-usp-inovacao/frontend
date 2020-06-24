@@ -172,7 +172,8 @@ export default {
       );
     },
     removeCode(name) {
-      for (let c of name.slice(1)) {
+      name = name.slice(1);
+      for (let c of name) {
         if ('A' <= c && c <= 'Z' || 'a' <= c && c <= 'z') {
           return name.slice(name.indexOf(c));
         }
@@ -220,6 +221,7 @@ export default {
         (area) => ({
           name: this.removeCode(area),
           subareas: this.subareas.filter(subarea => area[0] == subarea[0])
+            .map(sub => sub.length > 4 ? this.removeCode(sub) : sub)
             .map(sub => sub.length > 20 ? sub.slice(0,20) + "..." : sub)
         })
       );
