@@ -85,7 +85,7 @@ export default {
     search: {
       term: "",
       disciplines: undefined,
-      keys: ["name"]
+      keys: ["name", "description.short", "description.long"]
     },
 
     levels: ["Graduação", "Pós-Graduação"],

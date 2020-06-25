@@ -97,11 +97,13 @@ export default {
       patents: undefined,
       keys: [
         "name",
+        "summary",
         "classification.primary.cip",
         "classification.primary.subarea",
+        "classification.secondary.cip",
+        "classification.secondary.subarea",
         "owners",
-        "inventors",
-        "summary"
+        "inventors"
       ]
     },
 

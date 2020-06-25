@@ -137,7 +137,16 @@ export default {
     search: {
       term: "",
       skills: undefined,
-      keys: ["name"]
+      keys: [
+        "name",
+        "bond",
+        "groupName",
+        "groupInitials",
+        "descriptions.skills",
+        "descriptions.services",
+        "descriptions.equipments",
+        "keywords"
+      ]
     },
 
     itemDescriptions: [

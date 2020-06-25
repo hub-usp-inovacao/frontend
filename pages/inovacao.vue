@@ -64,37 +64,43 @@ export default {
     search: {
       term: "",
       pdis: undefined,
-      keys: ["name"]
+      keys: [
+        "name",
+        "description.short",
+        "description.long",
+        "knowledge",
+        "keywords"
+      ]
     },
 
     tabs: [
       {
         name: "CEPID",
         description:
-          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
+          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. "
       },
       {
         name: "EMBRAPII",
         description:
-          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
+          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial."
       },
       {
         name: "INCT",
         description:
-          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
+          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor."
       },
       {
         name: "NAP",
         description:
-          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
+          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa."
       },
       {
         name: "Centrais multiusuários",
-        description: "",
+        description: ""
       },
       {
         name: "Serviços Tecnológicos",
-        description: "",
+        description: ""
       }
     ],
 
@@ -158,9 +164,7 @@ export default {
       return this.filtered !== undefined ? this.filtered : this.pdis;
     },
     displayItems() {
-      return this.search.pdis !== undefined
-        ? this.search.pdis
-        : this.baseItems;
+      return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
     }
   },
   beforeMount() {

@@ -101,10 +101,16 @@ export default {
     search: {
       term: "",
       iniciatives: undefined,
-      keys: ["name"]
+      keys: [
+        "name",
+        "description.short",
+        "description.long",
+        "keywords",
+        "services"
+      ]
     },
 
-    filtered: undefined,
+    filtered: undefined
   }),
   methods: {
     ...mapActions({
