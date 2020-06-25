@@ -37,15 +37,11 @@
                         <v-icon v-text="'mdi-circle-small'"></v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
-                        <v-list-item-title>{{ description }}</v-list-item-title>
+                        <p>{{ description }}</p>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list-item-group>
                 </v-list>
-                <!-- <p
-                  v-for="description in sProps.item.descriptions[desc.key]"
-                  :key="description"
-                >{{ description }}</p>-->
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -92,15 +88,11 @@
                         <v-icon v-text="'mdi-circle-small'"></v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
-                        <v-list-item-title>{{ description }}</v-list-item-title>
+                        <p>{{ description }}</p>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list-item-group>
                 </v-list>
-                <!-- <p
-                  v-for="description in sProps.item.descriptions[desc.key]"
-                  :key="description"
-                >{{ description }}</p>-->
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
