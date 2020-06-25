@@ -32,8 +32,8 @@ export const getters = {
 };
 
 export const mutations = {
-  setLoadingState: (s) => (s.isLoading = true),
-  unsetLoadingState: (s) => (s.isLoading = false),
+  setLoadingStatus: (s) => (s.isLoading = true),
+  unsetLoadingStatus: (s) => (s.isLoading = false),
   setIniciatives: (s, newIniciatives) => (s.iniciatives = newIniciatives),
 };
 

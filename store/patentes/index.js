@@ -2,7 +2,7 @@ import { formatURL, fixPersonName, capitalizeName } from "../../lib";
 
 const rowToObj = (row) => ({
   name: row[5].split(" | ")[0],
-  url: row[4], // formatURL(row[4]),
+  url: formatURL(row[4]),
   classification: {
     primary: {
       cip: row[0].trim(),
