@@ -4,20 +4,16 @@
       <Panel
         title="Iniciativas"
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de inicativas e acessar as formas de contatar cada uma delas."
-        :items="filtered_entries"
-        :searchKeys="keys"
-        @search="searched = $event"
+        v-model="search.term"
       />
     </div>
 
     <Background class="absolute" />
 
     <MultipleFilters
-      :items="iniciatives"
       :tabs="tabs"
-      :filterFun="filterFun"
       :colors="{ base: '#222c63', active: '#525c93' }"
-      @filtered="filtered = $event"
+      @select="filterData($event)"
     />
 
     <div class="hidden-sm-and-down">
@@ -102,35 +98,43 @@ export default {
       }
     ],
 
-    keys: [
-      "name",
-      "description.short",
-      "description.long",
-      "keywords",
-      "services"
-    ],
+    search: {
+      term: "",
+      iniciatives: undefined,
+      keys: ["name"]
+    },
 
     filtered: undefined,
-    searched: undefined
   }),
-  computed: {
-    ...mapGetters({
-      iniciatives: "iniciativas/iniciatives",
-      dataStatus: "iniciativas/dataStatus"
-    }),
-    filtered_entries() {
-      return this.filtered === undefined ? this.iniciatives : this.filtered;
-    },
-    display_entries() {
-      return this.searched !== undefined
-        ? this.searched
-        : this.filtered_entries;
-    }
-  },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "iniciativas/fetchSpreadsheets"
     }),
+    async fuzzySearch() {
+      if (!this.search.term.trim()) {
+        this.search.iniciatives = undefined;
+        return;
+      }
+
+      const options = {
+        ignoreLocation: true,
+        findAllMatches: true,
+        shouldSort: true,
+        tokenize: true,
+        matchAllTokens: true,
+        maxPatternLength: 32,
+        minMatchCharLength: 2,
+        threshold: 0.4,
+        keys: this.search.keys
+      };
+
+      const results = await this.$search(
+        this.search.term.trim(),
+        this.baseItems,
+        options
+      );
+      this.search.iniciatives = results.length > 0 ? results : undefined;
+    },
     filterFun(elm, filterStatus) {
       const { primary } = filterStatus;
 
@@ -139,6 +143,33 @@ export default {
       }
 
       return primary.includes(elm.category);
+    },
+    filterData(context) {
+      this.filtered = this.iniciatives.filter(item =>
+        this.filterFun(item, context)
+      );
+    }
+  },
+  watch: {
+    searchTerm: debounce(async function() {
+      await this.fuzzySearch();
+    }, 250)
+  },
+  computed: {
+    ...mapGetters({
+      iniciatives: "iniciativas/iniciatives",
+      dataStatus: "iniciativas/dataStatus"
+    }),
+    searchTerm() {
+      return this.search.term;
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.iniciatives;
+    },
+    display_entries() {
+      return this.search.iniciatives !== undefined
+        ? this.search.iniciatives
+        : this.baseItems;
     }
   },
   beforeMount() {
