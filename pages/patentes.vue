@@ -21,6 +21,7 @@
         <template #content="{ item }">
           <p>{{ item.classification.primary.cip }}</p>
           <p>{{ item.classification.primary.subareas }}</p>
+          <p v-for="sub of getSecondarySubarea(item)">{{ sub }}</p>
 
           <BulletList
             v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
@@ -114,6 +115,18 @@ export default {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets"
     }),
+    getSecondarySubarea(patent) {
+      let subareaCode = patent.classification.secondary.subareas.slice(0,3);
+
+      if (!subareaCode) {
+        return [];
+      }
+
+      let subareaList = this.subareas.filter(subarea => 
+        subarea.includes(subareaCode));
+
+      return subareaList.length > 0 ? subareaList : [];
+    },
     async fuzzySearch() {
       if (!this.search.term.trim()) {
         return;
