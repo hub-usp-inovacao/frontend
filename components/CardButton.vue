@@ -38,13 +38,17 @@ export default {
       let length;
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          length = 2;
+          length = 1;
+          break;
         case "sm":
-          length = 3;
+          length = 2;
+          break;
         case "md":
           length = 4;
+          break;
         default:
           length = 6;
+          break;
       }
 
       if (this.tabs.length > length) {
