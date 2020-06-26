@@ -7,7 +7,7 @@ const rowToObj = (row) => ({
   email: row[4],
   url: formatURL(row[5]),
   category: {
-    code: row[6].split(" ")[0],
+    code: row[6].substr(0, 2),
     name: row[6]
       .split(" ")
       .slice(1)
@@ -25,7 +25,7 @@ const rowToObj = (row) => ({
   address: {
     venue: row[14],
     neightborhood: row[15],
-    city: row[16],
+    city: row[16].includes(";") ? row[16].split(";") : [].concat(row[16]),
     state: row[17],
     cep: row[18],
   },

@@ -8,13 +8,13 @@
 
     <v-row class="hidden-sm-and-down">
       <v-col v-for="({ label, items }, i) of groups" :key="i" :cols="colSize">
-        <v-select outlined :label="label" :items="items" v-model="selected[i]"></v-select>
+        <v-select outlined menu-props="auto" :label="label" :items="items" v-model="selected[i]"></v-select>
       </v-col>
     </v-row>
 
     <v-row class="hidden-md-and-up" v-for="({ label, items }, i ) of groups" :key="i">
       <v-col cols="12">
-        <v-select outlined :label="label" :items="items" v-model="selected[i]"></v-select>
+        <v-select outlined menu-props="auto" :label="label" :items="items" v-model="selected[i]"></v-select>
       </v-col>
     </v-row>
   </v-container>

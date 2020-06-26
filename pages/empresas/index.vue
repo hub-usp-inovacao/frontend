@@ -6,14 +6,19 @@
         description="Incubadoras e outras estruturas da Universidade facilitam a criação de empresas e negócios por parte de estudantes e pesquisadores.  Estas são as empresas com DNA USP que estão organizadas, no Portal Solus, por áreas de atuação e tecnologias aplicáveis. Com o nosso mecanismo de busca, é possível consultar as empresas por palavras-chave ou CNAEs (Classificação Nacional de Atividades Econômicas)."
         url="https://forms.gle/LjSkgb46xqcQdkkv6"
       />
-
-      <CardButton :tabs="tabs" color="#2bc570" active="#82e3ae" @tab="updateTab($event)" />
     </div>
 
     <Background class="absolute" />
 
+    <MultipleFilters
+      :tabs="tabs"
+      :groups="groups"
+      :colors="{ base: 'green', active: 'lightgreen' }"
+      @select="filterData($event)"
+    />
+
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="filtered_entries">
+      <ListAndDetails :items="displayItems">
         <template #content="{ item }">
           <p>{{ item.phone }}</p>
           <p>{{ item.email }}</p>
@@ -35,8 +40,8 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="filtered_entries">
-        <template#item="{ item }">
+      <SelectAndCard :items="displayItems">
+        <template #item="{ item }">
           <v-container px-6>
             <p class="title">{{ item.name }}</p>
             <p>{{ item.phone }}</p>
@@ -69,22 +74,126 @@ import Panel from "@/components/Panel.vue";
 import Background from "@/components/Background.vue";
 import SelectAndCard from "@/components/SelectAndCard.vue";
 import ListAndDetails from "@/components/ListAndDetails.vue";
-import CardButton from "@/components/CardButton.vue";
+import MultipleFilters from "@/components/MultipleFilters.vue";
 import { mapActions, mapGetters } from "vuex";
+import { capitalizeName } from "../../lib";
 
 export default {
   components: {
     Panel,
-    CardButton,
+    MultipleFilters,
     Background,
     ListAndDetails,
     SelectAndCard
   },
   data: () => ({
+    baseTabs: [
+      {
+        name: "Agricultura, Pecuária, Pesca e Extrativismo",
+        CNAECodes: ["01", "02", "03", "04", "05", "06", "07", "08", "09"]
+      },
+      {
+        name: "Indústria de Transformação",
+        CNAECodes: [
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31",
+          "32",
+          "33"
+        ]
+      },
+      {
+        name: "Infraestrutura e Construção",
+        CNAECodes: ["35", "36", "37", "38", "39", "40", "41", "42", "43"]
+      },
+      {
+        name: "Comércio e Serviços",
+        CNAECodes: [
+          "45",
+          "46",
+          "47",
+          "48",
+          "49",
+          "50",
+          "51",
+          "52",
+          "53",
+          "54",
+          "55",
+          "56",
+          "57",
+          "58",
+          "59",
+          "60",
+          "61",
+          "62",
+          "63",
+          "64",
+          "65",
+          "66",
+          "67",
+          "68",
+          "94",
+          "95",
+          "96",
+          "97"
+        ]
+      },
+      {
+        name: "Atividades Profissionais, Científicas e Técnicas",
+        CNAECodes: [
+          "69",
+          "70",
+          "71",
+          "72",
+          "73",
+          "74",
+          "75",
+          "76",
+          "77",
+          "78",
+          "79",
+          "80",
+          "81",
+          "82",
+          "83",
+          "84",
+          "99"
+        ]
+      },
+      {
+        name: "Educação, Artes e Esportes",
+        CNAECodes: ["85", "90", "91", "92", "93"]
+      },
+      {
+        name: "Saúde e Serviços Sociais",
+        CNAECodes: ["86", "87", "88"]
+      }
+    ],
     cnae: {
       "01": "Agricultura, Pecuária, Produção Florestal, Pesca e Aquicultura",
       "02": "Agricultura, Pecuária, Produção Florestal, Pesca e Aquicultura",
       "03": "Agricultura, Pecuária, Produção Florestal, Pesca e Aquicultura",
+      "04": "Agricultura, Pecuária, Produção Florestal, Pesca e Aquicultura",
       "05": "Indústrias Extrativas",
       "06": "Extração de Petróleo e Gás Natural",
       "07": "Indústrias Extrativas",
@@ -181,14 +290,73 @@ export default {
       "98": "Serviços Domésticos",
       "99": "Organismos Internacionais e outras Instituições Extraterritoriais"
     },
-    selectedCNAEs: []
+    filtered: undefined,
+    search: {
+      term: "",
+      companies: undefined,
+      keys: ["name"]
+    }
   }),
   methods: {
     ...mapActions({
       fetchSpreadsheets: "empresas/fetchSpreadsheets"
     }),
-    updateTab(tab) {
-      this.selectedCNAEs = Array.from(this.tabs[tab].codes);
+    filterFun(item, { primary, secondary, terciary }) {
+      if (primary.length == 0) return true;
+
+      const primaryMatch = primary
+        .reduce(
+          (codes, p) =>
+            codes.concat(
+              this.baseTabs.find(({ name }) => name === p).CNAECodes
+            ),
+          []
+        )
+        .includes(item.category.code);
+
+      if (!primaryMatch) return false;
+
+      if (secondary.length === 0) return true;
+
+      const secondaryMatch = secondary
+        .reduce((codes, s) => codes.concat(this.reverseCNAEmap[s]), [])
+        .includes(item.category.code);
+
+      if (!secondaryMatch) return false;
+
+      const [city, incubated] = terciary;
+
+      console.log(`[${city}, ${incubated}]`);
+
+      let valid = true;
+
+      if (incubated) {
+        valid =
+          (incubated === "Sim" && ![".", "Não"].includes(item.ecosystem)) ||
+          (incubated === "Não" && [".", "Não"].includes(item.ecosystem));
+      }
+
+      if (city) {
+        valid =
+          valid &&
+          item.address.city
+            .map(c =>
+              c
+                .toLocaleLowerCase()
+                .replace(/\(.+\)/, "")
+                .replace(/^sao /, "são")
+                .replace(/\ +/, " ")
+                .trim()
+            )
+            .includes(city);
+      }
+
+      return valid;
+    },
+    filterData(context) {
+      this.filtered = this.companies.filter(item =>
+        this.filterFun(item, context)
+      );
     }
   },
   computed: {
@@ -197,32 +365,67 @@ export default {
       companies: "empresas/companies"
     }),
     tabs() {
-      const dict = this.companies.reduce((dict, c) => {
-        const code = c.category.code.substr(0, 2);
+      return this.baseTabs.map(tab => ({
+        ...tab,
+        subareas: tab.CNAECodes.map(code => this.cnae[code])
+          .filter((name, i, all) => {
+            const index = all
+              .sort((a, b) => b.localeCompare(a))
+              .findIndex(n => n === name);
 
-        if (!dict[this.cnae[code]]) {
-          dict[this.cnae[code]] = {
-            name: this.cnae[code],
-            codes: new Set([c.category.code])
-          };
-        } else {
-          dict[this.cnae[code]].codes.add(c.category.code);
+            return i === index;
+          })
+          .sort((a, b) => a.localeCompare(b))
+      }));
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.companies;
+    },
+    displayItems() {
+      return this.search.companies !== undefined
+        ? this.search.companies
+        : this.baseItems;
+    },
+    reverseCNAEmap() {
+      return Object.keys(this.cnae).reduce((rev, code) => {
+        const name = this.cnae[code];
+
+        if (rev[name] === undefined) {
+          rev[name] = [];
         }
 
-        return dict;
-      }, {});
+        rev[name].push(code);
 
-      return Object.values(dict);
+        return rev;
+      }, {});
     },
-    filtered_entries() {
-      return this.companies.filter(c =>
-        this.selectedCNAEs.includes(c.category.code)
-      );
+    cities() {
+      return this.companies
+        .map(({ address: { city } }) => city)
+        .reduce((all, citites) => all.concat(citites), [])
+        .map(city =>
+          city
+            .toLocaleLowerCase()
+            .replace(/\(.+\)/, "")
+            .replace(/^sao /, "são")
+            .replace(/\ +/, " ")
+            .trim()
+        )
+        .filter(city => city.length >= 0)
+        .filter((city, i, cities) => {
+          const index = cities
+            .sort((a, b) => b.localeCompare(a))
+            .findIndex(c => c === city);
+
+          return index === i;
+        })
+        .sort();
     },
-    selectedCNAECode() {
-      const tabName = this.tabs[this.current_tab_index].name;
-      console.log(tabName);
-      return tabName;
+    groups() {
+      return [
+        { label: "Cidade", items: this.cities },
+        { label: "Incubadora?", items: ["Sim", "Não"] }
+      ];
     }
   },
   beforeMount() {
