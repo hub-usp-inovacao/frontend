@@ -71,28 +71,28 @@
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; As diversas iniciativas e estruturas da USP.</p>
+                >&bull; As diversas iniciativas e estruturas da USP;</p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; Os pesquisadores e suas competências.</p>
+                >&bull; Os pesquisadores e suas competências;</p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; Todas as patentes que a USP detém e disponibiliza para parceria com empresas e outras instituições interessadas.</p>
+                >&bull; Todas as patentes que a USP detém e disponibiliza para parceria com empresas e outras instituições interessadas;</p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; As disciplinas de graduação e pós-graduação sobre empreendedorismo e inovação.</p>
+                >&bull; As disciplinas de graduação e pós-graduação sobre empreendedorismo e inovação;</p>
               </v-col>
 
               <v-col cols="12">
@@ -129,7 +129,7 @@
             <p
               :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="font-weight-light"
-            >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio do:</p>
+            >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio de:</p>
           </v-container>
 
           <v-container>
@@ -138,7 +138,7 @@
                 <v-card flat tile nuxt color="transparent" to="iniciativas">
                   <v-row align="center">
                     <v-col cols="3">
-                      <img :src="require('@/vectors/home_iniciatives_icon.svg')"/>
+                      <img :src="require('@/vectors/home_iniciatives_icon.svg')" />
                     </v-col>
 
                     <v-col cols="8">
@@ -163,7 +163,7 @@
                 <v-card flat line nuxt color="transparent" to="educacao">
                   <v-row align="center">
                     <v-col cols="3">
-                      <img :src="require('@/vectors/home_teaching_icon.svg')"/>
+                      <img :src="require('@/vectors/home_teaching_icon.svg')" />
                     </v-col>
 
                     <v-col cols="8">
@@ -176,9 +176,9 @@
                         :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                         class="text-left font-weight-light"
                       >
-                        Busque as disciplinas de graduação e pós-graduação 
-                        relacionadas a Empreendedorismo, Inovação, 
-                        Propriedade Intelectual e Negócios. 
+                        Busque as disciplinas de graduação e pós-graduação
+                        relacionadas a Empreendedorismo, Inovação,
+                        Propriedade Intelectual e Negócios.
                       </v-card-text>
                     </v-col>
                   </v-row>
@@ -186,10 +186,10 @@
               </v-col>
 
               <v-col cols="12" lg="6">
-                <v-card flat tile nuxt color="transparent" to="inovacao" >
+                <v-card flat tile nuxt color="transparent" to="inovacao">
                   <v-row align="center">
                     <v-col cols="3">
-                      <img :src="require('@/vectors/home_pdi_icon.svg')"/>
+                      <img :src="require('@/vectors/home_pdi_icon.svg')" />
                     </v-col>
 
                     <v-col cols="8">
@@ -202,8 +202,8 @@
                         :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                         class="text-left font-weight-light"
                       >
-                        Veja as informações de laboratórios, organizações e 
-                        programas que atuam no desenvolvimento e inovação na USP. 
+                        Veja as informações de laboratórios, organizações e
+                        programas que atuam no desenvolvimento e inovação na USP.
                       </v-card-text>
                     </v-col>
                   </v-row>
@@ -214,7 +214,7 @@
                 <v-card flat tile nuxt color="transparent" to="empresas">
                   <v-row align="center">
                     <v-col cols="3">
-                      <img :src="require('@/vectors/home_partnership_icon.svg')"/>
+                      <img :src="require('@/vectors/home_partnership_icon.svg')" />
                     </v-col>
 
                     <v-col cols="8">
@@ -227,9 +227,9 @@
                         :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                         class="text-left font-weight-light"
                       >
-                        Conheça empresas com DNA USP, criadas por iniciativas de 
-                        alunos, ex-alunos e projetos ligados à Universidade, 
-                        organizadas por área de atuação e tecnologias aplicáveis. 
+                        Conheça empresas com DNA USP, criadas por iniciativas de
+                        alunos, ex-alunos e projetos ligados à Universidade,
+                        organizadas por área de atuação e tecnologias aplicáveis.
                       </v-card-text>
                     </v-col>
                   </v-row>
@@ -237,10 +237,10 @@
               </v-col>
 
               <v-col cols="12" lg="6">
-                <v-card flat tile nuxt color="transparent" to="competencias" >
+                <v-card flat tile nuxt color="transparent" to="competencias">
                   <v-row align="center">
                     <v-col cols="3">
-                      <img :src="require('@/vectors/home_competencies_icon.svg')"/>
+                      <img :src="require('@/vectors/home_competencies_icon.svg')" />
                     </v-col>
 
                     <v-col cols="8">
@@ -253,8 +253,8 @@
                         :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                         class="text-left font-weight-light"
                       >
-                         Consulte pesquisadores e grupos de pesquisa da USP por 
-                         suas áreas de competência e especialidades. 
+                        Consulte pesquisadores e grupos de pesquisa da USP por
+                        suas áreas de competência e especialidades.
                       </v-card-text>
                     </v-col>
                   </v-row>
@@ -265,7 +265,7 @@
                 <v-card flat tile nuxt color="transparent" to="patentes">
                   <v-row align="center">
                     <v-col cols="3">
-                      <img :src="require('@/vectors/home_patents_icon.svg')"/>
+                      <img :src="require('@/vectors/home_patents_icon.svg')" />
                     </v-col>
 
                     <v-col cols="8">
@@ -278,8 +278,8 @@
                         :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                         class="text-left font-weight-light"
                       >
-                         Consulte as patentes da USP disponíveis para licenciamento 
-                         e aplicação de empresas e organizações. 
+                        Consulte as patentes da USP disponíveis para licenciamento
+                        e aplicação de empresas e organizações.
                       </v-card-text>
                     </v-col>
                   </v-row>
@@ -309,7 +309,7 @@
                 O Portal Solus facilita a conexão entre a sociedade e a USP.
                 Simples e intuitivo, basta digitar palavras-chave na ferramenta de
                 busca para obter os contatos de instituições, estruturas, empresas
-                e pesquisadores especialistas nos assuntos buscados.
+                e pesquisadores especialistas nos assuntos seu interesse.
               </p>
             </v-col>
 
