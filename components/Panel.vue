@@ -20,12 +20,14 @@
               flat
               rounded
               color="tertiary"
-              label="Buscar"
+              :label="'Buscar - ' + title"
               counter="32"
               v-model="value"
               append-outer-icon="search"
               :style="setSearchBarWidth"
               :loading="loading"
+              hint="Resultados de busca na caixa abaixo"
+              persistent-hint
             ></v-text-field>
           </v-col>
         </v-row>
