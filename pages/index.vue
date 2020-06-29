@@ -368,31 +368,8 @@
         </v-row>
 
         <v-row justify="center" class="mx-0">
-          <v-col cols="4" sm="3">
-            <v-row justify="center" align="center" class="fill-height">
-              <img
-                :src="require('@/vectors/logo_gympass.svg')"
-                style="max-width: 100%; max-height: 100%; object-fit: contain;"
-              />
-            </v-row>
-          </v-col>
-
-          <v-col cols="4" sm="3">
-            <v-row justify="center" align="center" class="fill-height">
-              <img
-                :src="require('@/vectors/logo_ifood.svg')"
-                style="max-width: 100%; max-height: 100%; object-fit: contain;"
-              />
-            </v-row>
-          </v-col>
-
-          <v-col cols="4" sm="3">
-            <v-row justify="center" align="center" class="fill-height">
-              <img
-                :src="require('@/vectors/logo_99.svg')"
-                style="max-width: 100%; max-height: 100%; object-fit: contain;"
-              />
-            </v-row>
+          <v-col>
+            <CompaniesCarousel />
           </v-col>
         </v-row>
       </v-container>
@@ -471,11 +448,13 @@
 
 <script>
 import { debounce } from "debounce";
+import CompaniesCarousel from "@/components/CompaniesCarousel.vue";
 import BottomCurves from "../components/BottomCurves.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
+    CompaniesCarousel,
     BottomCurves
   },
   head: {
