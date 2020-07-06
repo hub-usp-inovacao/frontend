@@ -21,7 +21,7 @@ const rowToObj = (row) => ({
       : [],
   sumary: row[11],
   countriesWithProtection: row[18] !== undefined ? row[18].split(";") : [],
-  status: row[20],
+  status: "ativa",
 });
 
 export const state = () => ({

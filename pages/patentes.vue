@@ -12,6 +12,7 @@
 
     <MultipleFilters
       :tabs="tabs"
+      :groups="groups"
       :colors="{ base: '#5B2C7D', active: '#9247C9' }"
       @select="filterData($event)"
     />
@@ -109,7 +110,10 @@ export default {
     },
 
     selected_subareas: [],
-    filtered: undefined
+    filtered: undefined,
+    groups: [
+      { label: "Status", items: ["ativa", "domínio público"] }
+    ]
   }),
   methods: {
     ...mapActions({
@@ -152,7 +156,7 @@ export default {
       this.search.patents = results.length > 0 ? results : undefined;
     },
     filterFun: (elm, filterStatus) => {
-      const { primary, secondary } = filterStatus;
+      const { primary, secondary, terciary } = filterStatus;
 
       if (primary.length == 0) {
         return true;
@@ -166,13 +170,25 @@ export default {
         return false;
       }
 
-      if (secondary.length == 0) {
+      if (secondary.length === 0) {
         return true;
       }
 
-      return secondary.some(sub =>
+      const secondaryMatch = secondary.some(sub =>
         subareas.includes(sub.length > 20 ? sub.slice(0, sub.length - 3) : sub)
       );
+
+      if (!secondaryMatch) {
+        return false;
+      }
+
+      if (terciary.length === 0) {
+        return true;
+      }
+
+      console.log(terciary);
+      console.log(elm.status);
+      return terciary[0] == elm.status;
     },
     removeCode(name) {
       name = name.slice(1);
