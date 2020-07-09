@@ -13,7 +13,7 @@
     <MultipleFilters
       :tabs="tabs"
       :groups="groups"
-      :colors="{ base: 'green', active: 'lightgreen' }"
+      :colors="{ base: '#074744', active: '#0A8680' }"
       @select="filterData($event)"
     />
 
