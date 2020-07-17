@@ -82,6 +82,7 @@ import SelectAndCard from "../components/SelectAndCard.vue";
 import Select from "../components/Select.vue";
 import BulletList from "../components/BulletList.vue";
 import { mapActions, mapGetters } from "vuex";
+import { capitalizeName } from "../lib";
 
 export default {
   components: {
@@ -111,23 +112,22 @@ export default {
 
     selected_subareas: [],
     filtered: undefined,
-    groups: [
-      { label: "Status", items: ["ativa", "domínio público"] }
-    ]
+    groups: [{ label: "Status", items: ["ativa", "domínio público"] }]
   }),
   methods: {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets"
     }),
     getSecondarySubarea(patent) {
-      let subareaCode = patent.classification.secondary.subareas.slice(0,3);
+      let subareaCode = patent.classification.secondary.subareas.slice(0, 3);
 
       if (!subareaCode) {
         return [];
       }
 
-      let subareaList = this.subareas.filter(subarea => 
-        subarea.includes(subareaCode));
+      let subareaList = this.subareas.filter(subarea =>
+        subarea.includes(subareaCode)
+      );
 
       return subareaList.length > 0 ? subareaList : [];
     },
@@ -236,7 +236,7 @@ export default {
     },
     tabs: function() {
       return this.areas.map(area => ({
-        name: this.removeCode(area),
+        name: capitalizeName(this.removeCode(area)),
         subareas: this.subareas
           .filter(subarea => area[0] == subarea[0])
           .map(sub => (sub.length > 4 ? this.removeCode(sub) : sub))
