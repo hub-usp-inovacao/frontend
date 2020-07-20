@@ -89,6 +89,16 @@ export default {
     },
 
     levels: ["Graduação", "Pós-Graduação"],
+    campi: [
+      "Lorena",
+      "Piracicaba",
+      "Pirassununga",
+      "Ribeirão Preto",
+      "São Carlos",
+      "São Paulo",
+      "Todos",
+      "USP Leste"
+    ],
     tabs: [
       {
         name: "Inovação",
@@ -182,12 +192,9 @@ export default {
     disciplines: function() {
       return this.dataStatus == "ok" ? this.storeDisciplines : [];
     },
-    campi_list: function() {
-      return this.dataStatus == "ok" ? this.campi : [];
-    },
     groups() {
       return [
-        { label: "Campus", items: this.campi_list },
+        { label: "Campus", items: this.campi },
         { label: "Nível", items: ["Graduação", "Pós-Graduação"] }
       ];
     },

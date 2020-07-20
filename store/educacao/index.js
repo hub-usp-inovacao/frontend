@@ -3,21 +3,20 @@ import { formatURL } from "../../lib";
 const rowToObj = (row, id) => ({
   id,
   name: row[0],
+  campus: row[1],
+  unity: row[2],
+  url: formatURL(row[3]),
   description: {
     short: row[4],
     long: row[5],
   },
-  campus: row[1],
-  unity: row[2],
+  startDate: row[6],
   category: {
     business: row[8].length > 0,
     entrepreneurship: row[9].length > 0,
     innovation: row[10].length > 0,
     intellectualProperty: row[11].length > 0,
   },
-  url: formatURL(row[3]),
-  area: "dado perdido",
-  startDate: row[6],
   level: row[12],
 });
 
