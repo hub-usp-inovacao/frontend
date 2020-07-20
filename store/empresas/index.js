@@ -1,35 +1,35 @@
-import { formatURL } from "../../lib";
+import { formatURL, columnValue } from "../../lib";
 
 const rowToObj = (row) => ({
-  name: row[1],
-  year: row[2],
-  phone: row[3],
-  email: row[4],
-  url: formatURL(row[5]),
+  name: columnValue(row, "AC"),
+  year: columnValue(row, "AE"),
+  phone: columnValue(row, "AH"),
+  email: columnValue(row, "AI"),
+  url: formatURL(columnValue(row, "AJ")),
   category: {
-    code: row[6].substr(0, 2),
-    name: row[6]
+    code: columnValue(row, "AL").substr(0, 2),
+    name: columnValue(row, "AL")
       .split(" ")
       .slice(1)
       .join(" "),
   },
-  technologies: row[7],
-  ecosystem: row[8],
+  technologies: columnValue(row, "AM"),
+  ecosystem: columnValue(row, "AN"),
   description: {
-    long: row[9],
+    long: columnValue(row, "AR"),
   },
-  services: row[10],
-  logo: row[11],
-  socialMedia: row[12],
-  allowed: row[13] == "Sim",
+  services: columnValue(row, "AS"),
+  logo: columnValue(row, "AT"),
+  socialMedia: columnValue(row, "AU"),
+  allowed: columnValue(row, "AV") == "Sim",
   address: {
-    venue: row[14],
-    neightborhood: row[15],
-    city: row[16].includes(";") ? row[16].split(";") : [].concat(row[16]),
-    state: row[17],
-    cep: row[18],
+    venue: columnValue(row, "BF"),
+    neightborhood: columnValue(row, "BG"),
+    city: columnValue(row, "BH"),
+    state: columnValue(row, "BI"),
+    cep: columnValue(row, "BJ"),
   },
-  active: row[19] == "ATIVA",
+  active: columnValue(row, "BK") == "ATIVA",
 });
 
 export const state = () => ({

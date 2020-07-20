@@ -5,6 +5,7 @@
         title="Empresas"
         description="Incubadoras e outras estruturas da Universidade facilitam a criação de empresas e negócios por parte de estudantes e pesquisadores. Estas são as empresas com DNA USP que estão organizadas, no Portal Solus, por áreas de atuação e tecnologias aplicáveis. Com o nosso mecanismo de busca, é possível consultar as empresas por palavras-chave ou CNAEs (Classificação Nacional de Atividades Econômicas)."
         url="https://forms.gle/LjSkgb46xqcQdkkv6"
+        v-model="search.term"
       />
     </div>
 
@@ -32,6 +33,11 @@
             <span class="font-weight-bold">Produtos e Serviços</span>
             {{ item.services }}
           </p>
+
+          <p>
+            <span class="font-weight-bold">Tecnologias</span>
+            {{ item.technologies }}
+          </p>
         </template>
         <template #buttons="{ item }">
           <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
@@ -55,6 +61,11 @@
             <p>
               <span class="font-weight-bold">Produtos e Serviços</span>
               {{ item.services }}
+            </p>
+
+            <p>
+              <span class="font-weight-bold">Tecnologias</span>
+              {{ item.technologies }}
             </p>
 
             <v-card-actions>
