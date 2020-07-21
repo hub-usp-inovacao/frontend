@@ -7,9 +7,10 @@
         url="https://forms.gle/LjSkgb46xqcQdkkv6"
         v-model="search.term"
       />
+      <USPDNA />
     </div>
 
-    <Background class="absolute" />
+    <Background />
 
     <MultipleFilters
       :tabs="tabs"
@@ -86,6 +87,7 @@ import Background from "@/components/Background.vue";
 import SelectAndCard from "@/components/SelectAndCard.vue";
 import ListAndDetails from "@/components/ListAndDetails.vue";
 import MultipleFilters from "@/components/MultipleFilters.vue";
+import USPDNA from "@/components/USPDNA.vue";
 import { mapActions, mapGetters } from "vuex";
 import { capitalizeName } from "../../lib";
 
@@ -95,7 +97,8 @@ export default {
     MultipleFilters,
     Background,
     ListAndDetails,
-    SelectAndCard
+    SelectAndCard,
+    USPDNA
   },
   data: () => ({
     baseTabs: [
