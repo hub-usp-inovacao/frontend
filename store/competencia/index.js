@@ -1,37 +1,44 @@
-import { capitalizeName, formatURL } from "../../lib";
+import { capitalizeName, formatURL, columnValue } from "../../lib";
 
 const descRgxSplitter = /;/;
 
 const rowToObj = (row) => ({
-  name: capitalizeName(row[1]),
-  email: row[2],
-  phone: row[3],
-  unity: row[4],
-  campus: row[5],
-  bond: row[6],
-  categories: row[7] != undefined && row[7] != "" ? row[7].split(",") : [],
-  groupName: row[8],
-  groupInitials: row[9],
-  url: formatURL(row[12]),
+  name: capitalizeName(columnValue(row, "B")),
+  email: columnValue(row, "C"),
+  phone: columnValue(row, "W"),
+  unity: columnValue(row, "E"),
+  campus: columnValue(row, "F"),
+  bond: columnValue(row, "G"),
+  categories: columnValue(row, "H"),
+  groupName: columnValue(row, "I"),
+  groupInitials: columnValue(row, "J"),
+  url: formatURL(columnValue(row, "K")),
   descriptions: {
     skills:
-      row[13] != undefined && row[13] != ""
-        ? row[13].split(descRgxSplitter)
+      columnValue(row, "L") != undefined && columnValue(row, "L") != ""
+        ? columnValue(row, "L").split(descRgxSplitter)
         : [],
     services:
-      row[14] != undefined && row[14] != ""
-        ? row[14].split(descRgxSplitter)
+      columnValue(row, "M") != undefined && columnValue(row, "M") != ""
+        ? columnValue(row, "M").split(descRgxSplitter)
         : [],
     equipments:
-      row[15] != undefined && row[15] != ""
-        ? row[15].split(descRgxSplitter)
+      columnValue(row, "N") != undefined && columnValue(row, "N") != ""
+        ? columnValue(row, "N").split(descRgxSplitter)
         : [],
   },
   area: {
-    major: row[16],
-    minors: row[17] != undefined && row[17] != "" ? row[17].split(/,;/) : [],
+    major: columnValue(row, "O"),
+    minors:
+      columnValue(row, "P") != undefined && columnValue(row, "P") != ""
+        ? columnValue(row, "P").split(/,;/)
+        : [],
   },
-  keywords: row[18] != undefined && row[18] != "" ? row[18].split(";") : [],
+  keywords:
+    columnValue(row, "Q") != undefined && columnValue(row, "Q") != ""
+      ? columnValue(row, "Q").split(";")
+      : [],
+  lattes: columnValue(row, "V"),
 });
 
 export const state = () => ({
@@ -64,7 +71,13 @@ export const actions = {
 
       const { values } = await resp.json();
 
-      ctx.commit("setSkills", values.slice(1).map(rowToObj));
+      ctx.commit(
+        "setSkills",
+        values
+          .slice(1)
+          .map(rowToObj)
+          .sort((a, b) => (a.name == b.name ? 0 : a.name < b.name ? -1 : 1))
+      );
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);

@@ -100,6 +100,13 @@
           <v-card-actions>
             <v-spacer />
             <v-btn depressed dark color="#6b1c28" :href="item.url">Saiba Mais</v-btn>
+            <v-btn
+              class="white--text"
+              color="#6b1c28"
+              target="_blank"
+              :disabled="!item.lattes"
+              :href="item.lattes"
+            >lattes</v-btn>
             <v-spacer />
           </v-card-actions>
         </template>
