@@ -15,7 +15,8 @@
             :key="i"
             :to="item.to"
             class="white--text mx-2 secondary py-4 px-6 subtitle-1"
-          >{{ item.title }}</v-chip>
+            >{{ item.title }}</v-chip
+          >
         </v-chip-group>
       </v-toolbar-items>
     </v-toolbar>
@@ -35,9 +36,11 @@
     </v-navigation-drawer>
 
     <v-content :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
-      <v-snackbar :multi-line="true" :value="true" :timeout="0">
+      <v-snackbar :multi-line="true" :value="true" :timeout="-1">
         Página de uso exclusivamente interno - encontrou um problema?
-        <v-btn href="https://forms.gle/TiEe6zYq9GsYgDww5" target="_blank">Reporte aqui</v-btn>
+        <v-btn href="https://forms.gle/TiEe6zYq9GsYgDww5" target="_blank"
+          >Reporte aqui</v-btn
+        >
       </v-snackbar>
       <nuxt />
     </v-content>
@@ -50,16 +53,16 @@ import Footer from "../components/Footer.vue";
 
 export default {
   components: {
-    Footer
+    Footer,
   },
   head() {
     return {
       link: [
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css?family=Monda&display=swap"
-        }
-      ]
+          href: "https://fonts.googleapis.com/css?family=Monda&display=swap",
+        },
+      ],
     };
   },
   data: () => ({
@@ -67,40 +70,40 @@ export default {
     items: [
       {
         title: "Home",
-        to: "/"
+        to: "/",
       },
       {
         title: "Iniciativas",
-        to: "/iniciativas"
+        to: "/iniciativas",
       },
       {
         title: "P&D&I",
-        to: "/inovacao"
+        to: "/inovacao",
       },
       {
         title: "Competências",
-        to: "/competencias"
+        to: "/competencias",
       },
       {
         title: "Educação",
-        to: "/educacao"
+        to: "/educacao",
       },
       {
         title: "Empresas",
-        to: "/empresas"
+        to: "/empresas",
       },
       {
         title: "Patentes",
-        to: "/patentes"
+        to: "/patentes",
       },
       {
         title: "Contato",
-        to: "/contato"
-      }
+        to: "/contato",
+      },
     ],
     drawer: false,
-    group: ""
-  })
+    group: "",
+  }),
 };
 </script>
 

@@ -12,16 +12,16 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "fibers": "^4.0.2",
-    "nuxt": "^2.10.0",
-    "vue-fuse": "^2.2.0",
+    "fibers": "^4.0.3",
+    "nuxt": "^2.13.3",
+    "vue-fuse": "^2.2.1",
     "vue-typer": "^1.2.0"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.9.0",
+    "@nuxtjs/vuetify": "^1.11.2",
     "aos": "^3.0.0-beta.6",
     "debounce": "^1.2.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.0",
     "vue-masonry-css": "^1.0.3"
   }
