@@ -22,7 +22,6 @@
         <template #content="{ item }">
           <p>{{ item.classification.primary.cip }}</p>
           <p>{{ item.classification.primary.subareas }}</p>
-          <p v-for="sub of getSecondarySubarea(item)">{{ sub }}</p>
 
           <BulletList
             v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
@@ -112,25 +111,29 @@ export default {
 
     selected_subareas: [],
     filtered: undefined,
-    groups: [{ label: "Status", items: ["ativa", "domínio público"] }]
+    groups: [
+      {
+        label: "Status",
+        items: ["Concedida", "Em Análise", "Domínio Público"]
+      }
+    ],
+    rawTabs: [
+      { name: "Necessidades Humanas", code: "A" },
+      { name: "Operações de Processamento; Transporte", code: "B" },
+      { name: "Química; Metalurgia", code: "C" },
+      { name: "Têxteis; Papel", code: "D" },
+      { name: "Construções Fixas", code: "E" },
+      {
+        name: "Engenharia Mecânica; Iluminação; Aquecimento; Armas; Explosão",
+        code: "F"
+      },
+      { name: "Física", code: "G" }
+    ]
   }),
   methods: {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets"
     }),
-    getSecondarySubarea(patent) {
-      let subareaCode = patent.classification.secondary.subareas.slice(0, 3);
-
-      if (!subareaCode) {
-        return [];
-      }
-
-      let subareaList = this.subareas.filter(subarea =>
-        subarea.includes(subareaCode)
-      );
-
-      return subareaList.length > 0 ? subareaList : [];
-    },
     async fuzzySearch() {
       if (!this.search.term.trim()) {
         return;
@@ -155,48 +158,49 @@ export default {
       );
       this.search.patents = results.length > 0 ? results : undefined;
     },
-    filterFun: (elm, filterStatus) => {
+    primaryAreaNameToCode(name) {
+      return this.tabs.find(t => t.name == name).code;
+    },
+    filterFun: function(elm, filterStatus) {
       const { primary, secondary, terciary } = filterStatus;
 
-      if (primary.length == 0) {
+      const primaryCodes = primary.map(this.primaryAreaNameToCode);
+
+      if (primaryCodes.length == 0) {
         return true;
       }
 
-      const { cip, subareas } = elm.classification.primary;
-
-      const primaryMatch = primary.some(area => cip.includes(area));
+      const primaryMatch =
+        primaryCodes.includes(elm.classification.primary.cip.substr(0, 1)) ||
+        primaryCodes.includes(elm.classification.secondary.cip.substr(0, 1));
 
       if (!primaryMatch) {
         return false;
       }
 
-      if (secondary.length === 0) {
+      if (secondary.length == 0 && terciary.length == 0) {
         return true;
       }
 
-      const secondaryMatch = secondary.some(sub =>
-        subareas.includes(sub.length > 20 ? sub.slice(0, sub.length - 3) : sub)
-      );
+      if (secondary.length != 0) {
+        const secMatch =
+          secondary.includes(elm.classification.primary.subarea) ||
+          secondary.includes(elm.classification.secondary.subarea);
 
-      if (!secondaryMatch) {
-        return false;
-      }
-
-      if (terciary.length === 0) {
-        return true;
-      }
-
-      console.log(terciary);
-      console.log(elm.status);
-      return terciary[0] == elm.status;
-    },
-    removeCode(name) {
-      name = name.slice(1);
-      for (let c of name) {
-        if (("A" <= c && c <= "Z") || ("a" <= c && c <= "z")) {
-          return name.slice(name.indexOf(c));
+        if (!secMatch) {
+          return false;
         }
       }
+
+      if (terciary.length != 0) {
+        const terMatch = terciary.includes(elm.status);
+
+        if (!terMatch) {
+          return false;
+        }
+      }
+
+      return true;
     },
     filterData(context) {
       this.filtered = this.patents.filter(item =>
@@ -217,31 +221,25 @@ export default {
     searchTerm() {
       return this.search.term;
     },
-    areas: function() {
-      return Array.from(
-        this.patents.reduce(
-          (areaSet, patent) => areaSet.add(patent.classification.primary.cip),
-          new Set()
-        )
-      )
-        .filter(area => area != "")
-        .sort((a, b) => a.localeCompare(b));
-    },
-    subareas: function() {
-      return Array.from(
-        this.patents
-          .map(patent => patent.classification.primary.subareas)
-          .reduce((subareaSet, subarea) => subareaSet.add(subarea), new Set())
-      ).sort((a, b) => a.localeCompare(b));
-    },
-    tabs: function() {
-      return this.areas.map(area => ({
-        name: capitalizeName(this.removeCode(area)),
-        subareas: this.subareas
-          .filter(subarea => area[0] == subarea[0])
-          .map(sub => (sub.length > 4 ? this.removeCode(sub) : sub))
-          .map(sub => (sub.length > 20 ? sub.slice(0, 20) + "..." : sub))
-      }));
+    tabs() {
+      return this.rawTabs.map(tab => {
+        const subareas = this.patents.reduce((acc, pat) => {
+          if (pat.classification.primary.cip.substr(0, 1) == tab.code) {
+            acc.add(pat.classification.primary.subarea);
+          }
+
+          if (pat.classification.secondary.cip.substr(0, 1) == tab.code) {
+            acc.add(pat.classification.secondary.subarea);
+          }
+
+          return acc;
+        }, new Set());
+
+        return {
+          ...tab,
+          subareas: Array.from(subareas)
+        };
+      });
     },
     baseItems() {
       return this.filtered !== undefined ? this.filtered : this.patents;

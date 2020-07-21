@@ -1,16 +1,16 @@
-import { formatURL, fixPersonName, capitalizeName } from "../../lib";
+import { fixPersonName, columnValue } from "../../lib";
 
 const rowToObj = (row) => ({
   name: row[5].split(" | ")[0],
-  url: formatURL(row[4]),
+  url: "",
   classification: {
     primary: {
       cip: row[0].trim(),
-      subareas: row[1].trim(),
+      subarea: row[1].trim(),
     },
     secondary: {
       cip: row[2].trim(),
-      subareas: row[3].trim(),
+      subarea: row[3].trim(),
     },
   },
   ipcs: row[7].split(" | "),
@@ -21,7 +21,7 @@ const rowToObj = (row) => ({
       : [],
   sumary: row[11],
   countriesWithProtection: row[18] !== undefined ? row[18].split(";") : [],
-  status: "ativa",
+  status: columnValue(row, "U"),
 });
 
 export const state = () => ({
@@ -43,7 +43,7 @@ export const mutations = {
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "PATENTES";
+    const sheetName = "PATENTES_NO_PUBLIC";
 
     ctx.commit("setLoadingStatus");
 
