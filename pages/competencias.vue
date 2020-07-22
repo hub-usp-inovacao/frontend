@@ -41,7 +41,7 @@
                 </v-container>
               </v-col>
               <v-col cols="4">
-                <img :src="require('@/static/alfredo_goldman.jpg')" width="100%" height="auto" />
+                <v-img eager :src="rawPhoto"></v-img>
               </v-col>
             </v-row>
           </v-container>
@@ -92,7 +92,7 @@
         <template #item="{ item }">
           <v-container>
             <p class="title">{{ item.name }}</p>
-            <img :src="require('@/static/alfredo_goldman.jpg')" width="100%" height="auto" />
+            <v-img eager :src="rawPhoto"></v-img>
             <p class="body-2 my">{{ item.email }}</p>
             <p class="body-2 my">{{ item.unity }}</p>
             <p class="body-2 my">{{ item.campus }}</p>
@@ -157,6 +157,9 @@ export default {
     MultipleFilters
   },
   data: () => ({
+    rawPhoto:
+      "https://drive.google.com/uc?export=view&id=1dpEb89DyT0NlvvUPpaJS9NwtS-gUzvvi",
+
     search: {
       term: "",
       skills: undefined,
