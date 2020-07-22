@@ -12,6 +12,7 @@ import { mapGetters } from "vuex";
 import { debounce } from "debounce";
 import Panel from "../components/Panel.vue";
 import SearchFiltersAndResult from "../components/SearchFiltersAndResult.vue";
+import { genFuzzyOptions } from "../lib";
 
 export default {
   components: {
@@ -131,22 +132,12 @@ export default {
         return;
       }
 
-      const baseOptions = {
-        tokenize: true,
-        matchAllTokens: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 2
-      };
-
       contexts.forEach(ctx => {
-        const opts = {
-          ...baseOptions,
-          keys: ctx.searchKeys
-        };
-        this.$search(this.search.trim(), this[ctx.key], opts).then(results => {
+        this.$search(
+          this.search.trim(),
+          this[ctx.key],
+          genFuzzyOptions(ctx.searchKeys)
+        ).then(results => {
           this[`searched_${ctx.key}`] =
             results.length > 0 ? results : undefined;
         });

@@ -147,6 +147,7 @@ import Background from "../components/Background.vue";
 import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
 import { mapActions, mapGetters } from "vuex";
+import { genFuzzyOptions } from "../lib";
 
 export default {
   components: {
@@ -183,7 +184,6 @@ export default {
 
     filtered: undefined,
 
-    // http://lattes.cnpq.br/documents/11871/24930/TabeladeAreasdoConhecimento.pdf/d192ff6b-3e0a-4074-a74d-c280521bd5f7
     tabs: [
       {
         name: "Ciências Agrárias",
@@ -336,22 +336,10 @@ export default {
         return;
       }
 
-      const options = {
-        ignoreLocation: true,
-        findAllMatches: true,
-        shouldSort: true,
-        tokenize: true,
-        matchAllTokens: true,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        threshold: 0.4,
-        keys: this.search.keys
-      };
-
       this.search.skills = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        options
+        genFuzzyOptions(this.search.keys)
       );
     },
     filterData(context) {

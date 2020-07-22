@@ -60,6 +60,7 @@ import ListAndDetails from "../components/ListAndDetails.vue";
 import SelectAndCard from "../components/SelectAndCard.vue";
 import MultipleFilters from "../components/MultipleFilters.vue";
 import { mapActions, mapGetters } from "vuex";
+import { genFuzzyOptions } from "../lib";
 
 export default {
   components: {
@@ -122,22 +123,10 @@ export default {
         return;
       }
 
-      const options = {
-        ignoreLocation: true,
-        findAllMatches: true,
-        shouldSort: true,
-        tokenize: true,
-        matchAllTokens: true,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        threshold: 0.4,
-        keys: this.search.keys
-      };
-
       const results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        options
+        genFuzzyOptions(this.search.keys)
       );
       this.search.iniciatives = results.length > 0 ? results : undefined;
     },

@@ -81,7 +81,7 @@ import SelectAndCard from "../components/SelectAndCard.vue";
 import Select from "../components/Select.vue";
 import BulletList from "../components/BulletList.vue";
 import { mapActions, mapGetters } from "vuex";
-import { capitalizeName } from "../lib";
+import { capitalizeName, genFuzzyOptions } from "../lib";
 
 export default {
   components: {
@@ -139,22 +139,10 @@ export default {
         return;
       }
 
-      const options = {
-        ignoreLocation: true,
-        findAllMatches: true,
-        shouldSort: true,
-        tokenize: true,
-        matchAllTokens: true,
-        maxPatternLength: 32,
-        minMatchCharLength: 2,
-        threshold: 0.4,
-        keys: this.search.keys
-      };
-
       const results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        options
+        genFuzzyOptions(this.search.keys)
       );
       this.search.patents = results.length > 0 ? results : undefined;
     },
