@@ -19,9 +19,32 @@
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="displayItems">
         <template #content="sProps">
-          <p class="body-2 mb-2">{{ sProps.item.email }}</p>
-          <p class="body-2 mb-2">{{ sProps.item.unity }}</p>
-          <p class="body-2 mb-2">{{ sProps.item.campus }}</p>
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-container>
+                  <v-row>
+                    <v-col>
+                      <p class="body-2 mb-2">{{ sProps.item.email }}</p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <p class="body-2 mb-2">{{ sProps.item.unity }}</p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <p class="body-2 mb-2">{{ sProps.item.campus }}</p>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+              <v-col cols="4">
+                <img :src="require('@/static/alfredo_goldman.jpg')" width="100%" height="auto" />
+              </v-col>
+            </v-row>
+          </v-container>
 
           <v-expansion-panels>
             <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
@@ -69,6 +92,7 @@
         <template #item="{ item }">
           <v-container>
             <p class="title">{{ item.name }}</p>
+            <img :src="require('@/static/alfredo_goldman.jpg')" width="100%" height="auto" />
             <p class="body-2 my">{{ item.email }}</p>
             <p class="body-2 my">{{ item.unity }}</p>
             <p class="body-2 my">{{ item.campus }}</p>
