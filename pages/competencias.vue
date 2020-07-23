@@ -41,7 +41,7 @@
                 </v-container>
               </v-col>
               <v-col cols="4">
-                <v-img eager :src="rawPhoto"></v-img>
+                <v-img eager v-if="sProps.item.picture" :src="sProps.item.picture"></v-img>
               </v-col>
             </v-row>
           </v-container>
@@ -92,7 +92,7 @@
         <template #item="{ item }">
           <v-container>
             <p class="title">{{ item.name }}</p>
-            <v-img eager :src="rawPhoto"></v-img>
+            <v-img eager v-if="item.picture" :src="item.picture"></v-img>
             <p class="body-2 my">{{ item.email }}</p>
             <p class="body-2 my">{{ item.unity }}</p>
             <p class="body-2 my">{{ item.campus }}</p>
@@ -159,9 +159,6 @@ export default {
     MultipleFilters,
   },
   data: () => ({
-    rawPhoto:
-      "https://drive.google.com/uc?export=view&id=1dpEb89DyT0NlvvUPpaJS9NwtS-gUzvvi",
-
     search: {
       term: "",
       skills: undefined,

@@ -39,6 +39,7 @@ const rowToObj = (row) => ({
       ? columnValue(row, "Q").split(";")
       : [],
   lattes: columnValue(row, "V"),
+  picture: columnValue(row, "X"),
 });
 
 export const state = () => ({
