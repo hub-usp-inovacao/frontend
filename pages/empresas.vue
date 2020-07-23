@@ -83,7 +83,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { capitalizeName } from "../../lib";
+import { capitalizeName } from "@/lib";
 
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
