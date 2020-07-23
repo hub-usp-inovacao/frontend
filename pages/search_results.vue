@@ -10,14 +10,15 @@
 <script>
 import { mapGetters } from "vuex";
 import { debounce } from "debounce";
-import Panel from "../components/Panel.vue";
-import SearchFiltersAndResult from "../components/SearchFiltersAndResult.vue";
 import { genFuzzyOptions } from "../lib";
+
+import Panel from "@/components/first_level/Panel.vue";
+import SearchFiltersAndResult from "@/components/first_level/SearchFiltersAndResult.vue";
 
 export default {
   components: {
     Panel,
-    SearchFiltersAndResult
+    SearchFiltersAndResult,
   },
   data: () => ({
     title: "Respostas",
@@ -28,7 +29,7 @@ export default {
       { id: 2, title: "Educação", key: "disciplines" },
       { id: 3, title: "Iniciativas", key: "iniciatives" },
       { id: 4, title: "P&D&I", key: "pdis" },
-      { id: 5, title: "Empresas", key: "companies" }
+      { id: 5, title: "Empresas", key: "companies" },
     ],
     selectedCategory: "skills",
     selectedResult: undefined,
@@ -39,7 +40,7 @@ export default {
     searched_iniciatives: undefined,
     searched_companies: undefined,
 
-    innerSearch: ""
+    innerSearch: "",
   }),
   computed: {
     ...mapGetters({
@@ -47,7 +48,7 @@ export default {
       pdis: "pdi/pdis",
       skills: "competencia/skills",
       iniciatives: "iniciativas/iniciatives",
-      companies: "empresas/companies"
+      companies: "empresas/companies",
     }),
     search() {
       return this.innerSearch || this.$route.params.search;
@@ -58,7 +59,7 @@ export default {
         base_pdis,
         base_iniciatives,
         base_skills,
-        base_companies
+        base_companies,
       ] = [
         this.searched_disciplines !== undefined
           ? this.searched_disciplines
@@ -68,53 +69,53 @@ export default {
           ? this.searched_iniciatives
           : [],
         this.searched_skills !== undefined ? this.searched_skills : [],
-        this.searched_companies !== undefined ? this.searched_companies : []
+        this.searched_companies !== undefined ? this.searched_companies : [],
       ];
 
       return base_disciplines
-        .map(d => ({
+        .map((d) => ({
           name: d.name,
           description: d.description.long,
-          category: "Educação"
+          category: "Educação",
         }))
         .concat(
-          base_pdis.map(p => ({
+          base_pdis.map((p) => ({
             name: p.name,
             description: p.description.long,
-            category: "P&D&I"
+            category: "P&D&I",
           }))
         )
         .concat(
-          base_skills.map(s => ({
+          base_skills.map((s) => ({
             name: s.name,
             description:
               s.descriptions.skills +
               s.descriptions.services +
               s.descriptions.equipments,
-            category: "Competências"
+            category: "Competências",
           }))
         )
         .concat(
-          base_iniciatives.map(i => ({
+          base_iniciatives.map((i) => ({
             name: i.name,
             description: i.description.long,
-            category: "Iniciativas"
+            category: "Iniciativas",
           }))
         )
         .concat(
-          base_companies.map(c => ({
+          base_companies.map((c) => ({
             name: c.name,
             description: c.description.long,
-            category: "Empresas"
+            category: "Empresas",
           }))
         );
-    }
+    },
   },
   watch: {
-    innerSearch: debounce(async function() {
+    innerSearch: debounce(async function () {
       console.log("roda a busca");
       await this.fuzzyGlobalSearch();
-    }, 500)
+    }, 500),
   },
   methods: {
     fuzzyGlobalSearch() {
@@ -124,7 +125,7 @@ export default {
         { key: "iniciatives", searchKeys: ["name"] },
         { key: "pdis", searchKeys: ["name"] },
         { key: "skills", searchKeys: ["name"] },
-        { key: "companies", searchKeys: ["name"] }
+        { key: "companies", searchKeys: ["name"] },
       ];
 
       if (!this.search.trim()) {
@@ -132,17 +133,17 @@ export default {
         return;
       }
 
-      contexts.forEach(ctx => {
+      contexts.forEach((ctx) => {
         this.$search(
           this.search.trim(),
           this[ctx.key],
           genFuzzyOptions(ctx.searchKeys)
-        ).then(results => {
+        ).then((results) => {
           this[`searched_${ctx.key}`] =
             results.length > 0 ? results : undefined;
         });
       });
-    }
+    },
   },
   beforeMount() {
     if (!this.$route.params.search || this.$route.params.search.length == 0) {
@@ -150,7 +151,7 @@ export default {
     }
 
     this.fuzzyGlobalSearch();
-  }
+  },
 };
 </script>
 

@@ -66,13 +66,14 @@
 
 <script>
 import { debounce } from "debounce";
-import Panel from "../components/Panel.vue";
-import Background from "../components/Background.vue";
-import SelectAndCard from "../components/SelectAndCard.vue";
-import ListAndDetails from "../components/ListAndDetails.vue";
-import MultipleFilters from "../components/MultipleFilters.vue";
 import { mapGetters } from "vuex";
 import { genFuzzyOptions } from "../lib";
+
+import Background from "@/components/first_level/Background.vue";
+import Panel from "@/components/first_level/Panel.vue";
+import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
+import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
 export default {
   components: {
@@ -80,13 +81,13 @@ export default {
     Background,
     ListAndDetails,
     SelectAndCard,
-    MultipleFilters
+    MultipleFilters,
   },
   data: () => ({
     search: {
       term: "",
       disciplines: undefined,
-      keys: ["name", "description.short", "description.long"]
+      keys: ["name", "description.short", "description.long"],
     },
 
     levels: ["Graduação", "Pós-Graduação"],
@@ -98,29 +99,29 @@ export default {
       "São Carlos",
       "São Paulo",
       "Todos",
-      "USP Leste"
+      "USP Leste",
     ],
     tabs: [
       {
         name: "Inovação",
-        description: "Cursos e disciplinas relacionados à área de Inovação."
+        description: "Cursos e disciplinas relacionados à área de Inovação.",
       },
       {
         name: "Empreendedorismo",
         description:
-          "Cursos e disciplinas relacionados à área de Empreendedorismo."
+          "Cursos e disciplinas relacionados à área de Empreendedorismo.",
       },
       {
         name: "Propriedade Intelectual",
         description:
-          "Cursos e disciplinas relacionados à área de Propriedade Intelectual."
+          "Cursos e disciplinas relacionados à área de Propriedade Intelectual.",
       },
       {
         name: "Negócios",
-        description: "Cursos e disciplinas relacionados à área de Negócios."
-      }
+        description: "Cursos e disciplinas relacionados à área de Negócios.",
+      },
     ],
-    filtered: undefined
+    filtered: undefined,
   }),
   methods: {
     filterFun(elm, filterStatus) {
@@ -135,7 +136,7 @@ export default {
         categories.push("Propriedade Intelectual");
 
       const primaryMatch =
-        primary.length == 0 || categories.some(cat => primary.includes(cat));
+        primary.length == 0 || categories.some((cat) => primary.includes(cat));
 
       const [campus, level] = terciary;
 
@@ -162,29 +163,29 @@ export default {
       );
     },
     filterData(context) {
-      this.filtered = this.disciplines.filter(item =>
+      this.filtered = this.disciplines.filter((item) =>
         this.filterFun(item, context)
       );
-    }
+    },
   },
   watch: {
-    searchTerm: debounce(async function() {
+    searchTerm: debounce(async function () {
       await this.fuzzySearch();
-    }, 1250)
+    }, 1250),
   },
   computed: {
     ...mapGetters({
       dataStatus: "educacao/dataStatus",
       storeDisciplines: "educacao/disciplines",
-      campi: "educacao/campi"
+      campi: "educacao/campi",
     }),
-    disciplines: function() {
+    disciplines: function () {
       return this.dataStatus == "ok" ? this.storeDisciplines : [];
     },
     groups() {
       return [
         { label: "Campus", items: this.campi },
-        { label: "Nível", items: ["Graduação", "Pós-Graduação"] }
+        { label: "Nível", items: ["Graduação", "Pós-Graduação"] },
       ];
     },
     searchTerm() {
@@ -197,17 +198,17 @@ export default {
       return this.search.disciplines !== undefined
         ? this.search.disciplines
         : this.baseItems;
-    }
+    },
   },
   beforeMount() {
     const payload = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID
+      sheetID: process.env.sheetID,
     };
 
     if (this.dataStatus == "ok" && this.disciplines.length == 0)
       this.$store.dispatch("educacao/fetchSpreadsheets", payload);
-  }
+  },
 };
 </script>
 

@@ -27,15 +27,15 @@
 </template>
 
 <script>
-import CardButton from "@/components/CardButton.vue";
-import ChipSubfilter from "@/components/ChipSubfilter.vue";
-import DropdownFilter from "@/components/DropdownFilter.vue";
+import CardButton from "@/components/second_level/CardButton.vue";
+import ChipSubfilter from "@/components/second_level/ChipSubfilter.vue";
+import DropdownFilter from "@/components/second_level/DropdownFilter.vue";
 
 export default {
   components: {
     CardButton,
     ChipSubfilter,
-    DropdownFilter
+    DropdownFilter,
   },
   props: {
     tabs: {
@@ -57,7 +57,7 @@ export default {
             );
           }, true)
         );
-      }
+      },
     },
     groups: {
       validator(givenGroups) {
@@ -68,11 +68,11 @@ export default {
               label &&
               typeof label === "string" &&
               items instanceof Array &&
-              items.every(item => typeof item === "string"),
+              items.every((item) => typeof item === "string"),
             true
           )
         );
-      }
+      },
     },
     colors: {
       validator(colors) {
@@ -83,15 +83,15 @@ export default {
           active !== undefined &&
           typeof active === "string"
         );
-      }
-    }
+      },
+    },
   },
   data: () => ({
     selected: {
       tabs: [],
       subfilters: [],
-      dropdownFilters: []
-    }
+      dropdownFilters: [],
+    },
   }),
   computed: {
     availableSubareas() {
@@ -100,7 +100,7 @@ export default {
         .reduce((acc, { subareas }) => acc.concat(subareas), []);
     },
     needSubfilters() {
-      return this.tabs.some(tab => tab.subareas !== undefined);
+      return this.tabs.some((tab) => tab.subareas !== undefined);
     },
     needDropdown() {
       return this.groups !== undefined;
@@ -118,9 +118,9 @@ export default {
       return {
         primary: this.selected.tabs,
         secondary: this.selected.subfilters,
-        terciary: this.selected.dropdownFilters
+        terciary: this.selected.dropdownFilters,
       };
-    }
+    },
   },
   watch: {
     sTabs() {
@@ -131,7 +131,7 @@ export default {
     },
     sDropdownFilters() {
       this.$emit("select", this.context);
-    }
-  }
+    },
+  },
 };
 </script>

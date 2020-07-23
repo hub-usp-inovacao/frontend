@@ -54,13 +54,14 @@
 
 <script>
 import { debounce } from "debounce";
-import Panel from "../components/Panel.vue";
-import Background from "../components/Background.vue";
-import ListAndDetails from "../components/ListAndDetails.vue";
-import SelectAndCard from "../components/SelectAndCard.vue";
-import MultipleFilters from "../components/MultipleFilters.vue";
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "../lib";
+
+import Background from "@/components/first_level/Background.vue";
+import Panel from "@/components/first_level/Panel.vue";
+import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
+import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
 export default {
   components: {
@@ -68,35 +69,35 @@ export default {
     Background,
     ListAndDetails,
     SelectAndCard,
-    MultipleFilters
+    MultipleFilters,
   },
   data: () => ({
     tabs: [
       {
         name: "Agentes Institucionais",
         description:
-          "Órgãos institucionais da USP que atuam no fomento e estímulo ao empreendedorismo."
+          "Órgãos institucionais da USP que atuam no fomento e estímulo ao empreendedorismo.",
       },
       {
         name: "Entidades Estudantis",
         description:
-          "Organizações estudantis que estimulam o empreendedorismo na comunidade de alunos e também que propiciam experiências empreendedoras."
+          "Organizações estudantis que estimulam o empreendedorismo na comunidade de alunos e também que propiciam experiências empreendedoras.",
       },
       {
         name: "Espaços de Coworking",
         description:
-          "Espaços da USP que recebem e interagem com projetos de inovação e empreendedorismo."
+          "Espaços da USP que recebem e interagem com projetos de inovação e empreendedorismo.",
       },
       {
         name: "Ideação e Viabilidade",
         description:
-          "Programas que atuam nas fases iniciais do desenvolvimento de projetos e de startups."
+          "Programas que atuam nas fases iniciais do desenvolvimento de projetos e de startups.",
       },
       {
         name: "Incubadoras e Parques Tecnológicos",
         description:
-          "Os chamados “Habitats” de inovação da Universidade, espaços que abrigam empresas nascentes de bases técnológicas oriundas ou não da USP."
-      }
+          "Os chamados “Habitats” de inovação da Universidade, espaços que abrigam empresas nascentes de bases técnológicas oriundas ou não da USP.",
+      },
     ],
 
     search: {
@@ -107,15 +108,15 @@ export default {
         "description.short",
         "description.long",
         "keywords",
-        "services"
-      ]
+        "services",
+      ],
     },
 
-    filtered: undefined
+    filtered: undefined,
   }),
   methods: {
     ...mapActions({
-      fetchSpreadsheets: "iniciativas/fetchSpreadsheets"
+      fetchSpreadsheets: "iniciativas/fetchSpreadsheets",
     }),
     async fuzzySearch() {
       if (!this.search.term.trim()) {
@@ -140,20 +141,20 @@ export default {
       return primary.includes(elm.category);
     },
     filterData(context) {
-      this.filtered = this.iniciatives.filter(item =>
+      this.filtered = this.iniciatives.filter((item) =>
         this.filterFun(item, context)
       );
-    }
+    },
   },
   watch: {
-    searchTerm: debounce(async function() {
+    searchTerm: debounce(async function () {
       await this.fuzzySearch();
-    }, 250)
+    }, 250),
   },
   computed: {
     ...mapGetters({
       iniciatives: "iniciativas/iniciatives",
-      dataStatus: "iniciativas/dataStatus"
+      dataStatus: "iniciativas/dataStatus",
     }),
     searchTerm() {
       return this.search.term;
@@ -165,18 +166,18 @@ export default {
       return this.search.iniciatives !== undefined
         ? this.search.iniciatives
         : this.baseItems;
-    }
+    },
   },
   beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID
+      sheetID: process.env.sheetID,
     };
 
     if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
       this.fetchSpreadsheets(env);
     }
-  }
+  },
 };
 </script>
 

@@ -45,13 +45,14 @@
 
 <script>
 import { debounce } from "debounce";
-import Panel from "@/components/Panel.vue";
-import Background from "@/components/Background.vue";
-import ListAndDetails from "@/components/ListAndDetails.vue";
-import SelectAndCard from "@/components/SelectAndCard.vue";
-import MultipleFilters from "@/components/MultipleFilters.vue";
 import { mapGetters } from "vuex";
 import { genFuzzyOptions } from "../lib";
+
+import Background from "@/components/first_level/Background.vue";
+import Panel from "@/components/first_level/Panel.vue";
+import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
+import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
 export default {
   components: {
@@ -59,7 +60,7 @@ export default {
     Background,
     ListAndDetails,
     SelectAndCard,
-    MultipleFilters
+    MultipleFilters,
   },
   data: () => ({
     search: {
@@ -70,42 +71,42 @@ export default {
         "description.short",
         "description.long",
         "knowledge",
-        "keywords"
-      ]
+        "keywords",
+      ],
     },
 
     tabs: [
       {
         name: "CEPID",
         description:
-          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. "
+          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
       },
       {
         name: "EMBRAPII",
         description:
-          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial."
+          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
       },
       {
         name: "INCT",
         description:
-          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor."
+          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
       },
       {
         name: "NAP",
         description:
-          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa."
+          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
       },
       {
         name: "Centrais multiusuários",
-        description: ""
+        description: "",
       },
       {
         name: "Serviços Tecnológicos",
-        description: ""
-      }
+        description: "",
+      },
     ],
 
-    filtered: undefined
+    filtered: undefined,
   }),
   methods: {
     async fuzzySearch() {
@@ -130,41 +131,41 @@ export default {
       return primary.includes(elm.category);
     },
     filterData(context) {
-      this.filtered = this.pdis.filter(item => this.filterFun(item, context));
-    }
+      this.filtered = this.pdis.filter((item) => this.filterFun(item, context));
+    },
   },
   watch: {
-    searchTerm: debounce(async function() {
+    searchTerm: debounce(async function () {
       await this.fuzzySearch();
-    }, 250)
+    }, 250),
   },
   computed: {
     ...mapGetters({
       dataStatus: "pdi/dataStatus",
-      storePDIs: "pdi/pdis"
+      storePDIs: "pdi/pdis",
     }),
     searchTerm() {
       return this.search.term;
     },
-    pdis: function() {
+    pdis: function () {
       return this.dataStatus == "ok" ? this.storePDIs : [];
     },
-    baseItems: function() {
+    baseItems: function () {
       return this.filtered !== undefined ? this.filtered : this.pdis;
     },
     displayItems() {
       return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
-    }
+    },
   },
   beforeMount() {
     const payload = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID
+      sheetID: process.env.sheetID,
     };
 
     if (this.dataStatus == "ok" && this.pdis.length == 0)
       this.$store.dispatch("pdi/fetchSpreadsheets", payload);
-  }
+  },
 };
 </script>
 

@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import SearchFilterCard from "../components/SearchFilterCard.vue";
-import SearchDetailsCard from "../components/SearchDetailsCard.vue";
+import SearchFilterCard from "@/components/second_level/SearchFilterCard.vue";
+import SearchDetailsCard from "@/components/second_level/SearchDetailsCard.vue";
 
 export default {
   components: {
     SearchFilterCard,
-    SearchDetailsCard
+    SearchDetailsCard,
   },
   data: () => ({
     categories: [
@@ -37,9 +37,9 @@ export default {
       "P&D&I",
       "Patentes",
       "Empresas",
-      "Competências"
+      "Competências",
     ],
-    selected: []
+    selected: [],
   }),
   props: ["items", "searchedTerm"],
   computed: {
@@ -48,9 +48,9 @@ export default {
         return this.items;
       }
 
-      return this.items.filter(i => this.selected.includes(i.category));
-    }
-  }
+      return this.items.filter((i) => this.selected.includes(i.category));
+    },
+  },
 };
 </script>
 

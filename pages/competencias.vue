@@ -141,13 +141,14 @@
 
 <script>
 import { debounce } from "debounce";
-import Panel from "../components/Panel.vue";
-import MultipleFilters from "../components/MultipleFilters.vue";
-import Background from "../components/Background.vue";
-import ListAndDetails from "../components/ListAndDetails.vue";
-import SelectAndCard from "../components/SelectAndCard.vue";
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "../lib";
+
+import Background from "@/components/first_level/Background.vue";
+import Panel from "@/components/first_level/Panel.vue";
+import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
+import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
 export default {
   components: {
@@ -155,7 +156,7 @@ export default {
     Background,
     ListAndDetails,
     SelectAndCard,
-    MultipleFilters
+    MultipleFilters,
   },
   data: () => ({
     rawPhoto:
@@ -172,14 +173,14 @@ export default {
         "descriptions.skills",
         "descriptions.services",
         "descriptions.equipments",
-        "keywords"
-      ]
+        "keywords",
+      ],
     },
 
     itemDescriptions: [
       { key: "skills", title: "Competências" },
       { key: "services", title: "Serviços Tecnológicos" },
-      { key: "equipments", title: "Equipamentos" }
+      { key: "equipments", title: "Equipamentos" },
     ],
 
     filtered: undefined,
@@ -195,8 +196,8 @@ export default {
           "Zootecnia",
           "Medicina Veterinária",
           "Recursos Pesqueiros e Engenharia de Pesca",
-          "Ciência e Tecnologia de Alimentos"
-        ]
+          "Ciência e Tecnologia de Alimentos",
+        ],
       },
       {
         name: "Ciências Biológicas",
@@ -214,8 +215,8 @@ export default {
           "Farmacologia",
           "Imunologia",
           "Microbiologia",
-          "Parasitologia"
-        ]
+          "Parasitologia",
+        ],
       },
       {
         name: "Ciências da Saúde",
@@ -229,8 +230,8 @@ export default {
           "Saúde Coletiva",
           "Fonoaudiologia",
           "Fisioterapia e Terapia Ocupacional",
-          "Educação Física"
-        ]
+          "Educação Física",
+        ],
       },
       {
         name: "Ciências Exatas e da Terra",
@@ -243,8 +244,8 @@ export default {
           "Física",
           "Química",
           "GeoCiências",
-          "Oceanografia"
-        ]
+          "Oceanografia",
+        ],
       },
       {
         name: "Engenharias",
@@ -262,8 +263,8 @@ export default {
           "Engenharia de Transportes",
           "Engenharia Naval e Oceânica",
           "Engenharia Aeroespacial",
-          "Engenharia Biomédica"
-        ]
+          "Engenharia Biomédica",
+        ],
       },
       {
         name: "Ciências Humanas",
@@ -278,8 +279,8 @@ export default {
           "Psicologia",
           "Educação",
           "Ciência Política",
-          "Teologia"
-        ]
+          "Teologia",
+        ],
       },
       {
         name: "Ciências Sociais Aplicadas",
@@ -297,15 +298,15 @@ export default {
           "Serviço Social",
           "Economia Doméstica",
           "Desenho Industrial",
-          "Turismo"
-        ]
+          "Turismo",
+        ],
       },
       {
         name: "Linguística, Letras e Artes",
         description: "",
-        subareas: ["Linguística", "Letras", "Artes"]
-      }
-    ]
+        subareas: ["Linguística", "Letras", "Artes"],
+      },
+    ],
   }),
   methods: {
     filterFun: (elm, filterStatus) => {
@@ -325,10 +326,10 @@ export default {
         return true;
       }
 
-      return elm.area.minors.some(minor => secondary.includes(minor));
+      return elm.area.minors.some((minor) => secondary.includes(minor));
     },
     ...mapActions({
-      fetchSpreadsheets: "competencia/fetchSpreadsheets"
+      fetchSpreadsheets: "competencia/fetchSpreadsheets",
     }),
     async fuzzySearch() {
       if (!this.search.term.trim()) {
@@ -343,18 +344,20 @@ export default {
       );
     },
     filterData(context) {
-      this.filtered = this.skills.filter(item => this.filterFun(item, context));
-    }
+      this.filtered = this.skills.filter((item) =>
+        this.filterFun(item, context)
+      );
+    },
   },
   watch: {
-    searchTerm: debounce(async function() {
+    searchTerm: debounce(async function () {
       await this.fuzzySearch();
-    }, 1000)
+    }, 1000),
   },
   computed: {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
-      skills: "competencia/skills"
+      skills: "competencia/skills",
     }),
     baseItems() {
       return this.filtered !== undefined ? this.filtered : this.skills;
@@ -366,17 +369,17 @@ export default {
     },
     searchTerm() {
       return this.search.term;
-    }
+    },
   },
   beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID
+      sheetID: process.env.sheetID,
     };
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
       this.fetchSpreadsheets(env);
-  }
+  },
 };
 </script>
 

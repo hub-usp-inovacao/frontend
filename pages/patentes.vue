@@ -73,15 +73,15 @@
 
 <script>
 import { debounce } from "debounce";
-import Panel from "../components/Panel.vue";
-import Background from "../components/Background.vue";
-import MultipleFilters from "../components/MultipleFilters.vue";
-import ListAndDetails from "../components/ListAndDetails.vue";
-import SelectAndCard from "../components/SelectAndCard.vue";
-import Select from "../components/Select.vue";
-import BulletList from "../components/BulletList.vue";
 import { mapActions, mapGetters } from "vuex";
 import { capitalizeName, genFuzzyOptions } from "../lib";
+
+import Background from "@/components/first_level/Background.vue";
+import Panel from "@/components/first_level/Panel.vue";
+import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
+import BulletList from "@/components/first_level/BulletList.vue";
+import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
 export default {
   components: {
@@ -91,7 +91,7 @@ export default {
     ListAndDetails,
     SelectAndCard,
     Select,
-    BulletList
+    BulletList,
   },
   data: () => ({
     search: {
@@ -105,8 +105,8 @@ export default {
         "classification.secondary.cip",
         "classification.secondary.subarea",
         "owners",
-        "inventors"
-      ]
+        "inventors",
+      ],
     },
 
     selected_subareas: [],
@@ -114,8 +114,8 @@ export default {
     groups: [
       {
         label: "Status",
-        items: ["Concedida", "Em Análise", "Domínio Público"]
-      }
+        items: ["Concedida", "Em Análise", "Domínio Público"],
+      },
     ],
     rawTabs: [
       { name: "Necessidades Humanas", code: "A" },
@@ -125,14 +125,14 @@ export default {
       { name: "Construções Fixas", code: "E" },
       {
         name: "Engenharia Mecânica; Iluminação; Aquecimento; Armas; Explosão",
-        code: "F"
+        code: "F",
       },
-      { name: "Física", code: "G" }
-    ]
+      { name: "Física", code: "G" },
+    ],
   }),
   methods: {
     ...mapActions({
-      fetchSpreadsheets: "patentes/fetchSpreadsheets"
+      fetchSpreadsheets: "patentes/fetchSpreadsheets",
     }),
     async fuzzySearch() {
       if (!this.search.term.trim()) {
@@ -147,9 +147,9 @@ export default {
       this.search.patents = results.length > 0 ? results : undefined;
     },
     primaryAreaNameToCode(name) {
-      return this.tabs.find(t => t.name == name).code;
+      return this.tabs.find((t) => t.name == name).code;
     },
-    filterFun: function(elm, filterStatus) {
+    filterFun: function (elm, filterStatus) {
       const { primary, secondary, terciary } = filterStatus;
 
       const primaryCodes = primary.map(this.primaryAreaNameToCode);
@@ -191,26 +191,26 @@ export default {
       return true;
     },
     filterData(context) {
-      this.filtered = this.patents.filter(item =>
+      this.filtered = this.patents.filter((item) =>
         this.filterFun(item, context)
       );
-    }
+    },
   },
   watch: {
-    searchTerm: debounce(async function() {
+    searchTerm: debounce(async function () {
       await this.fuzzySearch();
-    }, 250)
+    }, 250),
   },
   computed: {
     ...mapGetters({
       dataStatus: "patentes/dataStatus",
-      patents: "patentes/patents"
+      patents: "patentes/patents",
     }),
     searchTerm() {
       return this.search.term;
     },
     tabs() {
-      return this.rawTabs.map(tab => {
+      return this.rawTabs.map((tab) => {
         const subareas = this.patents.reduce((acc, pat) => {
           if (pat.classification.primary.cip.substr(0, 1) == tab.code) {
             acc.add(pat.classification.primary.subarea);
@@ -225,7 +225,7 @@ export default {
 
         return {
           ...tab,
-          subareas: Array.from(subareas)
+          subareas: Array.from(subareas),
         };
       });
     },
@@ -236,17 +236,17 @@ export default {
       return this.search.patents !== undefined
         ? this.search.patents
         : this.baseItems;
-    }
+    },
   },
   beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID
+      sheetID: process.env.sheetID,
     };
 
     if (this.dataStatus == "ok" && this.patents.length == 0) {
       this.fetchSpreadsheets(env);
     }
-  }
+  },
 };
 </script>

@@ -448,38 +448,39 @@
 
 <script>
 import { debounce } from "debounce";
-import CompaniesCarousel from "@/components/CompaniesCarousel.vue";
-import BottomCurves from "../components/BottomCurves.vue";
 import { mapActions, mapGetters } from "vuex";
+
+import CompaniesCarousel from "@/components/first_level/CompaniesCarousel.vue";
+import BottomCurves from "@/components/first_level/BottomCurves.vue";
 
 export default {
   components: {
     CompaniesCarousel,
-    BottomCurves
+    BottomCurves,
   },
   head: {
     title: "Solus",
     meta: [
       {
         name: "google-site-verification",
-        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE"
-      }
-    ]
+        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE",
+      },
+    ],
   },
   data: () => ({
     search_bar: [
       "Buscar",
       "Biotecnologia",
       "Laboratórios",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
     ],
     search: "",
     photos: [
       "http://www.imagens.usp.br/wp-content/uploads/Pra%C3%A7a_Relogio_106-17_Foto-Cec%C3%ADlia-Bastos-09.jpg",
       "http://imagens.usp.br/wp-content/uploads/Nova-Vers%C3%A3o-do-Chip-Sampa-Foto-Marcos-Santos-USP-Imagens-12.jpg",
       "http://imagens.usp.br/wp-content/uploads/Centro-de-Pesquisa-e-Inova%C3%A7%C3%A3o-Inova-USP_U0Y8422.jpg",
-      "http://imagens.usp.br/wp-content/uploads/27112013simuladorpolitpnfotomarcossantos004.jpg"
-    ]
+      "http://imagens.usp.br/wp-content/uploads/27112013simuladorpolitpnfotomarcossantos004.jpg",
+    ],
   }),
   computed: {
     ...mapGetters({
@@ -495,7 +496,7 @@ export default {
       skills: "competencia/skills",
       iniciatives: "iniciativas/iniciatives",
       patents: "patentes/patents",
-      companies: "empresas/companies"
+      companies: "empresas/companies",
     }),
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
@@ -506,7 +507,7 @@ export default {
         default:
           return { width: "60%" };
       }
-    }
+    },
   },
   methods: {
     ...mapActions({
@@ -515,7 +516,7 @@ export default {
       fetchSkills: "competencia/fetchSpreadsheets",
       fetchIniciatives: "iniciativas/fetchSpreadsheets",
       fetchPatents: "patentes/fetchSpreadsheets",
-      fetchCompanies: "empresas/fetchSpreadsheets"
+      fetchCompanies: "empresas/fetchSpreadsheets",
     }),
     submitSearch() {
       if (!this.search.trim()) {
@@ -523,14 +524,14 @@ export default {
       }
       this.$router.push({
         name: "search_results",
-        params: { search: this.search }
+        params: { search: this.search },
       });
-    }
+    },
   },
   beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID
+      sheetID: process.env.sheetID,
     };
 
     if (this.eduStatus == "ok" && this.disciplines.length == 0) {
@@ -556,7 +557,7 @@ export default {
     if (this.companiesStatus == "ok" && this.companies.length == 0) {
       this.fetchCompanies(env);
     }
-  }
+  },
 };
 </script>
 

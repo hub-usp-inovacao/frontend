@@ -82,14 +82,15 @@
 </template>
 
 <script>
-import Panel from "@/components/Panel.vue";
-import Background from "@/components/Background.vue";
-import SelectAndCard from "@/components/SelectAndCard.vue";
-import ListAndDetails from "@/components/ListAndDetails.vue";
-import MultipleFilters from "@/components/MultipleFilters.vue";
-import USPDNA from "@/components/USPDNA.vue";
 import { mapActions, mapGetters } from "vuex";
 import { capitalizeName } from "../../lib";
+
+import Background from "@/components/first_level/Background.vue";
+import USPDNA from "@/components/first_level/USPDNA.vue";
+import Panel from "@/components/first_level/Panel.vue";
+import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
+import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
 export default {
   components: {
@@ -98,13 +99,13 @@ export default {
     Background,
     ListAndDetails,
     SelectAndCard,
-    USPDNA
+    USPDNA,
   },
   data: () => ({
     baseTabs: [
       {
         name: "Agricultura, Pecuária, Pesca e Extrativismo",
-        CNAECodes: ["01", "02", "03", "04", "05", "06", "07", "08", "09"]
+        CNAECodes: ["01", "02", "03", "04", "05", "06", "07", "08", "09"],
       },
       {
         name: "Indústria de Transformação",
@@ -132,12 +133,12 @@ export default {
           "30",
           "31",
           "32",
-          "33"
-        ]
+          "33",
+        ],
       },
       {
         name: "Infraestrutura e Construção",
-        CNAECodes: ["35", "36", "37", "38", "39", "40", "41", "42", "43"]
+        CNAECodes: ["35", "36", "37", "38", "39", "40", "41", "42", "43"],
       },
       {
         name: "Comércio e Serviços",
@@ -169,8 +170,8 @@ export default {
           "94",
           "95",
           "96",
-          "97"
-        ]
+          "97",
+        ],
       },
       {
         name: "Atividades Profissionais, Científicas e Técnicas",
@@ -191,17 +192,17 @@ export default {
           "82",
           "83",
           "84",
-          "99"
-        ]
+          "99",
+        ],
       },
       {
         name: "Educação, Artes e Esportes",
-        CNAECodes: ["85", "90", "91", "92", "93"]
+        CNAECodes: ["85", "90", "91", "92", "93"],
       },
       {
         name: "Saúde e Serviços Sociais",
-        CNAECodes: ["86", "87", "88"]
-      }
+        CNAECodes: ["86", "87", "88"],
+      },
     ],
     cnae: {
       "01": "Agricultura, Pecuária, Produção Florestal, Pesca e Aquicultura",
@@ -302,18 +303,18 @@ export default {
       "96": "Outras Atividades de Serviços",
       "97": "Serviços Domésticos",
       "98": "Serviços Domésticos",
-      "99": "Organismos Internacionais e outras Instituições Extraterritoriais"
+      "99": "Organismos Internacionais e outras Instituições Extraterritoriais",
     },
     filtered: undefined,
     search: {
       term: "",
       companies: undefined,
-      keys: ["name"]
-    }
+      keys: ["name"],
+    },
   }),
   methods: {
     ...mapActions({
-      fetchSpreadsheets: "empresas/fetchSpreadsheets"
+      fetchSpreadsheets: "empresas/fetchSpreadsheets",
     }),
     filterFun(item, { primary, secondary, terciary }) {
       if (primary.length == 0) return true;
@@ -354,7 +355,7 @@ export default {
         valid =
           valid &&
           item.address.city
-            .map(c =>
+            .map((c) =>
               c
                 .toLocaleLowerCase()
                 .replace(/\(.+\)/, "")
@@ -368,28 +369,28 @@ export default {
       return valid;
     },
     filterData(context) {
-      this.filtered = this.companies.filter(item =>
+      this.filtered = this.companies.filter((item) =>
         this.filterFun(item, context)
       );
-    }
+    },
   },
   computed: {
     ...mapGetters({
       dataStatus: "empresas/dataStatus",
-      companies: "empresas/companies"
+      companies: "empresas/companies",
     }),
     tabs() {
-      return this.baseTabs.map(tab => ({
+      return this.baseTabs.map((tab) => ({
         ...tab,
-        subareas: tab.CNAECodes.map(code => this.cnae[code])
+        subareas: tab.CNAECodes.map((code) => this.cnae[code])
           .filter((name, i, all) => {
             const index = all
               .sort((a, b) => b.localeCompare(a))
-              .findIndex(n => n === name);
+              .findIndex((n) => n === name);
 
             return i === index;
           })
-          .sort((a, b) => a.localeCompare(b))
+          .sort((a, b) => a.localeCompare(b)),
       }));
     },
     baseItems() {
@@ -417,7 +418,7 @@ export default {
       return this.companies
         .map(({ address: { city } }) => city)
         .reduce((all, citites) => all.concat(citites), [])
-        .map(city =>
+        .map((city) =>
           city
             .toLocaleLowerCase()
             .replace(/\(.+\)/, "")
@@ -425,11 +426,11 @@ export default {
             .replace(/\ +/, " ")
             .trim()
         )
-        .filter(city => city.length >= 0)
+        .filter((city) => city.length >= 0)
         .filter((city, i, cities) => {
           const index = cities
             .sort((a, b) => b.localeCompare(a))
-            .findIndex(c => c === city);
+            .findIndex((c) => c === city);
 
           return index === i;
         })
@@ -438,17 +439,17 @@ export default {
     groups() {
       return [
         { label: "Cidade", items: this.cities },
-        { label: "Incubadora?", items: ["Sim", "Não"] }
+        { label: "Incubadora?", items: ["Sim", "Não"] },
       ];
-    }
+    },
   },
   beforeMount() {
     if (this.dataStatus == "ok" && this.companies.length == 0) {
       this.fetchSpreadsheets({
         sheetsAPIKey: process.env.sheetsAPIKey,
-        sheetID: process.env.sheetID
+        sheetID: process.env.sheetID,
       });
     }
-  }
+  },
 };
 </script>

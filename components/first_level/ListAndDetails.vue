@@ -19,17 +19,17 @@
 </template>
 
 <script>
-import List from "./List.vue";
-import DetailsCard from "./DetailsCard.vue";
+import List from "@/components/second_level/List.vue";
+import DetailsCard from "@/components/second_level/DetailsCard.vue";
 
 export default {
   components: {
     List,
-    DetailsCard
+    DetailsCard,
   },
   props: ["items"],
   data: () => ({
-    selectedItem: null
-  })
+    selectedItem: null,
+  }),
 };
 </script>

@@ -21,17 +21,17 @@
 </template>
 
 <script>
-import NotFound from "./NotFound.vue";
+import NotFound from "@/components/deeper_levels/NotFound.vue";
 
 export default {
   components: {
-    NotFound
+    NotFound,
   },
   props: ["item"],
   computed: {
     hasItem() {
       return this.item !== null && this.item !== undefined;
-    }
-  }
+    },
+  },
 };
 </script>

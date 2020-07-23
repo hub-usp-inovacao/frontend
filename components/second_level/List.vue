@@ -26,21 +26,21 @@
 </template>
 
 <script>
-import NotFound from "./NotFound.vue";
+import NotFound from "@/components/deeper_levels/NotFound.vue";
 
 export default {
   components: {
-    NotFound
+    NotFound,
   },
   props: ["items", "value"],
   data: () => ({
-    selectedItem: null
+    selectedItem: null,
   }),
   watch: {
     selectedItem() {
       this.$emit("input", this.selectedItem);
-    }
-  }
+    },
+  },
 };
 </script>
 

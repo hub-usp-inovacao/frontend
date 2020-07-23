@@ -63,11 +63,11 @@
 </template>
 
 <script>
-import Panel from "../components/Panel.vue";
+import Panel from "@/components/first_level/Panel.vue";
 
 export default {
   components: {
-    Panel
+    Panel,
   },
   data: () => ({
     icons: [
@@ -75,40 +75,40 @@ export default {
         label: "mdi-facebook",
         description: "/inovacaousp",
         url: "https://www.facebook.com/inovacaonausp/",
-        color: "rgba(59,89,153 ,1 )"
+        color: "rgba(59,89,153 ,1 )",
       },
       {
         label: "mdi-instagram",
         description: "@inovacaousp",
         url: "http://www.instagram.com/inovacaonausp/",
-        color: "#C13584"
+        color: "#C13584",
       },
       {
         label: "mdi-phone",
         description: "(11) 3091-4166",
         url: "http://www.instagram.com/inovacaonausp/",
-        color: "#C13584"
+        color: "#C13584",
       },
       {
         label: "mdi-twitter",
         description: "/inovacaousp",
         url: "https://twitter.com/inovacaonausp",
-        color: "#00aced"
+        color: "#00aced",
       },
       {
         label: "mdi-linkedin",
         description: "/inovacaousp",
         url: "https://www.linkedin.com/in/inovacaonausp/",
-        color: "#0e76a8"
+        color: "#0e76a8",
       },
 
       {
         label: "mdi-email",
         description: "empreende.auspin@usp.br",
         url: "http://www.instagram.com/inovacaonausp/",
-        color: "#C13584"
-      }
-    ]
-  })
+        color: "#C13584",
+      },
+    ],
+  }),
 };
 </script>
