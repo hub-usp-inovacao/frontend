@@ -1,4 +1,4 @@
-import { capitalizeName, formatURL } from "../../lib";
+import { capitalizeName, formatURL, columnValue, formatPhone } from "../../lib";
 
 const rowToObj = (row) => ({
   name: row[1],
@@ -16,7 +16,9 @@ const rowToObj = (row) => ({
   startDate: row[10],
   contact: {
     person: row[11],
-    info: row[12],
+    info: columnValue(row, "M")
+      .split(";")
+      .map((phone) => formatPhone(phone)),
   },
   services: row[13],
 });

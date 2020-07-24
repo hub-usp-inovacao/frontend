@@ -28,7 +28,7 @@
                 <v-container>
                   <v-row>
                     <v-col>
-                      <p class="body-2 mb-2">{{ item.phone }}</p>
+                      <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -71,7 +71,7 @@
           <v-container px-6>
             <p class="title">{{ item.name }}</p>
             <v-img eager v-if="item.logo" :src="item.logo"></v-img>
-            <p>{{ item.phone }}</p>
+            <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
             <p>{{ item.email }}</p>
             <p class="body-2 my-2"></p>
             <p>

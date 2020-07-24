@@ -1,9 +1,11 @@
-import { formatURL, columnValue } from "../../lib";
+import { formatURL, columnValue, formatPhone } from "../../lib";
 
 const rowToObj = (row) => ({
   name: columnValue(row, "AC"),
   year: columnValue(row, "AE"),
-  phone: columnValue(row, "AH"),
+  phones: columnValue(row, "AH")
+    .split(";")
+    .map((phone) => formatPhone(phone)),
   email: columnValue(row, "AI"),
   url: formatURL(columnValue(row, "AJ")),
   category: {

@@ -1,11 +1,11 @@
-import { capitalizeName, formatURL, columnValue } from "../../lib";
+import { capitalizeName, formatURL, columnValue, formatPhone } from "../../lib";
 
 const descRgxSplitter = /;/;
 
 const rowToObj = (row) => ({
   name: capitalizeName(columnValue(row, "B")),
   email: columnValue(row, "C"),
-  phone: columnValue(row, "W"),
+  phone: formatPhone(columnValue(row, "W")),
   unity: columnValue(row, "E"),
   campus: columnValue(row, "F"),
   bond: columnValue(row, "G"),

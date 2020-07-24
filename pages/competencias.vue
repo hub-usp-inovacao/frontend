@@ -28,6 +28,11 @@
                       <p class="body-2 mb-2">{{ sProps.item.email }}</p>
                     </v-col>
                   </v-row>
+                  <v-row v-if="sProps.item.phone">
+                    <v-col>
+                      <p class="body-2 mb-2">{{ sProps.item.phone }}</p>
+                    </v-col>
+                  </v-row>
                   <v-row>
                     <v-col>
                       <p class="body-2 mb-2">{{ sProps.item.unity }}</p>
@@ -94,6 +99,7 @@
             <p class="title">{{ item.name }}</p>
             <v-img eager v-if="item.picture" :src="item.picture"></v-img>
             <p class="body-2 my">{{ item.email }}</p>
+            <p v-if="item.phone" class="body-2 my">{{ item.phone }}</p>
             <p class="body-2 my">{{ item.unity }}</p>
             <p class="body-2 my">{{ item.campus }}</p>
           </v-container>
