@@ -22,8 +22,27 @@
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="displayItems">
         <template #content="{ item }">
-          <p>{{ item.phone }}</p>
-          <p>{{ item.email }}</p>
+          <v-container>
+            <v-row>
+              <v-col cols="8">
+                <v-container>
+                  <v-row>
+                    <v-col>
+                      <p class="body-2 mb-2">{{ item.phone }}</p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <p class="body-2 mb-2">{{ item.email }}</p>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+              <v-col cols="4">
+                <v-img eager v-if="item.logo" :src="item.logo"></v-img>
+              </v-col>
+            </v-row>
+          </v-container>
 
           <p>
             <span class="font-weight-bold">Descrição</span>
@@ -51,6 +70,7 @@
         <template #item="{ item }">
           <v-container px-6>
             <p class="title">{{ item.name }}</p>
+            <v-img eager v-if="item.logo" :src="item.logo"></v-img>
             <p>{{ item.phone }}</p>
             <p>{{ item.email }}</p>
             <p class="body-2 my-2"></p>
