@@ -42,7 +42,7 @@ export const mutations = {
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "INICIATIVAS_UPDATE";
+    const sheetName = "INICIATIVAS";
 
     ctx.commit("setLoadingStatus");
 
