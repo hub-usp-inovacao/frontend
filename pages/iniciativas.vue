@@ -74,7 +74,7 @@ export default {
   data: () => ({
     tabs: [
       {
-        name: "Agentes Institucionais",
+        name: "Agente Institucional",
         description:
           "Órgãos institucionais da USP que atuam no fomento e estímulo ao empreendedorismo.",
       },
@@ -84,7 +84,7 @@ export default {
           "Organizações estudantis que estimulam o empreendedorismo na comunidade de alunos e também que propiciam experiências empreendedoras.",
       },
       {
-        name: "Espaços de Coworking",
+        name: "Espaços e Coworking",
         description:
           "Espaços da USP que recebem e interagem com projetos de inovação e empreendedorismo.",
       },

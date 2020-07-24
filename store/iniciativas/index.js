@@ -1,8 +1,8 @@
-import { capitalizeName, formatURL, columnValue, formatPhone } from "../../lib";
+import { formatURL, columnValue, formatPhone } from "../../lib";
 
 const rowToObj = (row) => ({
   name: row[1],
-  category: row[14],
+  category: columnValue(row, "O"),
   description: {
     short: row[2],
     long: row[7],
@@ -42,7 +42,7 @@ export const mutations = {
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "INICIATIVAS";
+    const sheetName = "INICIATIVAS_UPDATE";
 
     ctx.commit("setLoadingStatus");
 
