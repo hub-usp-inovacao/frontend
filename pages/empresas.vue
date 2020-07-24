@@ -463,7 +463,7 @@ export default {
     },
     groups() {
       return [
-        { label: "Cidade", items: this.cities },
+        { label: "Cidade", items: [] },
         { label: "Incubadora?", items: ["Sim", "Não"] },
       ];
     },
