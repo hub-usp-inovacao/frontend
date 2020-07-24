@@ -90,7 +90,6 @@ export default {
     MultipleFilters,
     ListAndDetails,
     SelectAndCard,
-    Select,
     BulletList,
   },
   data: () => ({
