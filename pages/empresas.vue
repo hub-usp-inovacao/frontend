@@ -83,7 +83,8 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { capitalizeName } from "@/lib";
+import { capitalizeName, genFuzzyOptions } from "@/lib";
+import { debounce } from "debounce";
 
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
@@ -373,12 +374,33 @@ export default {
         this.filterFun(item, context)
       );
     },
+    async fuzzySearch() {
+      if (!this.search.term.trim()) {
+        this.search.companies = undefined;
+        return;
+      }
+
+      this.search.companies = await this.$search(
+        this.search.term.trim(),
+        this.baseItems,
+        genFuzzyOptions(this.search.keys)
+      );
+    },
+  },
+  watch: {
+    searchTerm: debounce(async function () {
+      console.log("running search");
+      await this.fuzzySearch();
+    }, 1250),
   },
   computed: {
     ...mapGetters({
       dataStatus: "empresas/dataStatus",
       companies: "empresas/companies",
     }),
+    searchTerm() {
+      return this.search.term;
+    },
     tabs() {
       return this.baseTabs.map((tab) => ({
         ...tab,
