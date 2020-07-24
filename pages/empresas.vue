@@ -338,56 +338,39 @@ export default {
       fetchSpreadsheets: "empresas/fetchSpreadsheets",
     }),
     filterFun(item, { primary, secondary, terciary }) {
-      if (primary.length == 0) return true;
+      let primaryMatch, secondaryMatch, terciaryMatch;
 
-      const primaryMatch = primary
-        .reduce(
-          (codes, p) =>
-            codes.concat(
-              this.baseTabs.find(({ name }) => name === p).CNAECodes
-            ),
-          []
-        )
-        .includes(item.category.code);
+      if (primary.length == 0) {
+        primaryMatch = true;
+      } else {
+        primaryMatch = primary
+          .reduce(
+            (codes, p) =>
+              codes.concat(
+                this.baseTabs.find(({ name }) => name === p).CNAECodes
+              ),
+            []
+          )
+          .includes(item.category.code);
+      }
 
-      if (!primaryMatch) return false;
-
-      if (secondary.length === 0) return true;
-
-      const secondaryMatch = secondary
-        .reduce((codes, s) => codes.concat(this.reverseCNAEmap[s]), [])
-        .includes(item.category.code);
-
-      if (!secondaryMatch) return false;
+      if (secondary.length == 0) {
+        secondaryMatch = true;
+      } else {
+        secondaryMatch = secondary
+          .reduce((codes, s) => codes.concat(this.reverseCNAEmap[s]), [])
+          .includes(item.category.code);
+      }
 
       const [city, incubated] = terciary;
 
-      console.log(`[${city}, ${incubated}]`);
-
-      let valid = true;
+      terciaryMatch = true;
 
       if (incubated) {
-        valid =
-          (incubated === "Sim" && ![".", "Não"].includes(item.ecosystem)) ||
-          (incubated === "Não" && [".", "Não"].includes(item.ecosystem));
+        terciaryMatch = terciaryMatch && incubated == item.incubated;
       }
 
-      if (city) {
-        valid =
-          valid &&
-          item.address.city
-            .map((c) =>
-              c
-                .toLocaleLowerCase()
-                .replace(/\(.+\)/, "")
-                .replace(/^sao /, "são")
-                .replace(/\ +/, " ")
-                .trim()
-            )
-            .includes(city);
-      }
-
-      return valid;
+      return primaryMatch && secondaryMatch && terciaryMatch;
     },
     filterData(context) {
       this.filtered = this.companies.filter((item) =>

@@ -16,6 +16,10 @@ const rowToObj = (row) => ({
       .join(" "),
   },
   technologies: columnValue(row, "AM"),
+  incubated:
+    columnValue(row, "AN") == "Não" || columnValue(row, "AN") == "."
+      ? "Não"
+      : "Sim",
   ecosystem: columnValue(row, "AN"),
   description: {
     long: columnValue(row, "AR"),
@@ -23,15 +27,17 @@ const rowToObj = (row) => ({
   services: columnValue(row, "AS"),
   logo: columnValue(row, "AT"),
   socialMedia: columnValue(row, "AU"),
-  allowed: columnValue(row, "AV") == "Sim",
+  allowed: columnValue(row, "AV") != "Não",
   address: {
     venue: columnValue(row, "BF"),
     neightborhood: columnValue(row, "BG"),
-    city: columnValue(row, "BH"),
+    city: columnValue(row, "BH").split(";"),
     state: columnValue(row, "BI"),
     cep: columnValue(row, "BJ"),
   },
-  active: columnValue(row, "BK") == "ATIVA",
+  active: ["ATIVA", "ATIVA - EMPRESA DOMICILIADA NO EXTERIOR"].includes(
+    columnValue(row, "BK")
+  ),
 });
 
 export const state = () => ({
