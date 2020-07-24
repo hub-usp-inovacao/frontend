@@ -21,7 +21,7 @@
         <template #content="{ item }">
           <p class="body-2">{{ item.unity }}</p>
           <p class="body-2 mb-4">{{ item.local }}</p>
-          <p class="body-2 mb-4">{{ item.contact.info }}</p>
+          <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">{{ phone }}</p>
           <p>{{ item.description.long }}</p>
         </template>
         <template #buttons="{ item }">
@@ -37,7 +37,11 @@
             <p class="title">{{item.name}}</p>
             <p class="body-2">{{ item.unity }}</p>
             <p class="body-2 mb-4">{{ item.local }}</p>
-            <p class="body-2 mb-4">{{ item.contact.info }}</p>
+            <p
+              v-for="phone in item.contact.info"
+              :key="phone"
+              class="body-2 mb-4"
+            >{{ item.contact.info }}</p>
             <p>{{ item.description.long }}</p>
           </v-container>
 
