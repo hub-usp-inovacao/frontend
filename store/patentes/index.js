@@ -2,7 +2,7 @@ import { fixPersonName, columnValue } from "../../lib";
 
 const rowToObj = (row) => ({
   name: row[5].split(" | ")[0],
-  url: "",
+  url: columnValue(row, "X"),
   classification: {
     primary: {
       cip: row[0].trim(),

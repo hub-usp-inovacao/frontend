@@ -36,7 +36,13 @@
         </template>
 
         <template #buttons="{ item }">
-          <v-btn color="#64318A" :href="item.url" class="white--text">Saiba Mais</v-btn>
+          <v-btn
+            color="#64318A"
+            :href="item.url"
+            target="_blank"
+            class="white--text"
+            :disabled="!item.url"
+          >Saiba Mais</v-btn>
         </template>
       </ListAndDetails>
     </div>
@@ -61,7 +67,14 @@
 
             <v-card-actions>
               <v-spacer />
-              <v-btn depressed dark color="#64318A" :href="item.url">Saiba Mais</v-btn>
+              <v-btn
+                depressed
+                dark
+                color="#64318A"
+                target="_blank"
+                :href="item.url"
+                :disabled="!item.url"
+              >Saiba Mais</v-btn>
               <v-spacer />
             </v-card-actions>
           </v-container>
