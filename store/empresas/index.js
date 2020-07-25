@@ -7,7 +7,7 @@ const rowToObj = (row) => ({
   phones: columnValue(row, "AH")
     .split(";")
     .map((phone) => formatPhone(phone)),
-  email: columnValue(row, "AI"),
+  emails: columnValue(row, "AI").split(";"),
   url: formatURL(columnValue(row, "AJ")),
   category: {
     code: columnValue(row, "AL").substr(0, 2),

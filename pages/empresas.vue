@@ -24,7 +24,7 @@
         <template #content="{ item }">
           <v-container>
             <v-row>
-              <v-col cols="8">
+              <v-col cols="6">
                 <v-container>
                   <v-row>
                     <v-col>
@@ -33,16 +33,21 @@
                   </v-row>
                   <v-row>
                     <v-col>
-                      <p class="body-2 mb-2">{{ item.email }}</p>
+                      <p v-for="email in item.emails" :key="email" class="body-2 mb-2">{{ email }}</p>
                     </v-col>
                   </v-row>
                 </v-container>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="5">
                 <v-img eager v-if="item.logo" :src="item.logo"></v-img>
               </v-col>
             </v-row>
           </v-container>
+
+          <p v-if="item.incubated == 'Sim'">
+            <span class="font-weight-bold">Incubadora</span>
+            {{ item.ecosystem }}
+          </p>
 
           <p>
             <span class="font-weight-bold">Descrição</span>
@@ -72,8 +77,14 @@
             <p class="title">{{ item.name }}</p>
             <v-img eager v-if="item.logo" :src="item.logo"></v-img>
             <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
-            <p>{{ item.email }}</p>
+            <p v-for="email in item.emails" :key="email">{{ email }}</p>
             <p class="body-2 my-2"></p>
+
+            <p v-if="item.incubated == 'Sim'">
+              <span class="font-weight-bold">Incubadora</span>
+              {{ item.ecosystem }}
+            </p>
+
             <p>
               <span class="font-weight-bold">Descrição</span>
               {{ item.description.long }}
