@@ -27,11 +27,21 @@ const rowToObj = (row) => ({
 export const state = () => ({
   isLoading: false,
   patents: [],
+  keys: [
+    "name",
+    "summary",
+    "owners",
+    "inventors",
+    "ipcs",
+    "classification.primary.subarea",
+    "classification.secondary.subarea",
+  ],
 });
 
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   patents: (s) => s.patents,
+  searchKeys: (s) => s.keys,
 };
 
 export const mutations = {

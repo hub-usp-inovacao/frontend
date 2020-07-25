@@ -23,6 +23,7 @@ const rowToObj = (row, id) => ({
 export const state = () => ({
   disciplines: [],
   isLoading: false,
+  keys: ["name", "description.short", "description.long"],
 });
 
 export const getters = {
@@ -36,6 +37,7 @@ export const getters = {
       )
     ).sort((a, b) => a.localeCompare(b));
   },
+  searchKeys: (s) => s.keys,
 };
 
 export const mutations = {

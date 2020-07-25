@@ -87,7 +87,6 @@ export default {
     search: {
       term: "",
       disciplines: undefined,
-      keys: ["name", "description.short", "description.long"],
     },
 
     levels: ["Graduação", "Pós-Graduação"],
@@ -159,7 +158,7 @@ export default {
       this.search.disciplines = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.search.keys)
+        genFuzzyOptions(this.searchKeys)
       );
     },
     filterData(context) {
@@ -178,6 +177,7 @@ export default {
       dataStatus: "educacao/dataStatus",
       storeDisciplines: "educacao/disciplines",
       campi: "educacao/campi",
+      searchKeys: "educacao/searchKeys",
     }),
     disciplines: function () {
       return this.dataStatus == "ok" ? this.storeDisciplines : [];

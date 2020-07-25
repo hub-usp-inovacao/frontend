@@ -109,16 +109,6 @@ export default {
     search: {
       term: "",
       patents: undefined,
-      keys: [
-        "name",
-        "summary",
-        "classification.primary.cip",
-        "classification.primary.subarea",
-        "classification.secondary.cip",
-        "classification.secondary.subarea",
-        "owners",
-        "inventors",
-      ],
     },
 
     selected_subareas: [],
@@ -154,8 +144,11 @@ export default {
       const results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.search.keys)
+        genFuzzyOptions(this.searchKeys)
       );
+
+      console.log(results);
+
       this.search.patents = results.length > 0 ? results : undefined;
     },
     primaryAreaNameToCode(name) {
@@ -217,6 +210,7 @@ export default {
     ...mapGetters({
       dataStatus: "patentes/dataStatus",
       patents: "patentes/patents",
+      searchKeys: "patentes/searchKeys",
     }),
     searchTerm() {
       return this.search.term;

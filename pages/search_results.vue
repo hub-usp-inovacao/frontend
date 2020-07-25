@@ -30,6 +30,7 @@ export default {
       { id: 3, title: "Iniciativas", key: "iniciatives" },
       { id: 4, title: "P&D&I", key: "pdis" },
       { id: 5, title: "Empresas", key: "companies" },
+      { id: 6, title: "Patentes", key: "patents" },
     ],
     selectedCategory: "skills",
     selectedResult: undefined,
@@ -39,6 +40,7 @@ export default {
     searched_skills: undefined,
     searched_iniciatives: undefined,
     searched_companies: undefined,
+    searched_patents: undefined,
 
     innerSearch: "",
   }),
@@ -49,6 +51,14 @@ export default {
       skills: "competencia/skills",
       iniciatives: "iniciativas/iniciatives",
       companies: "empresas/companies",
+      patents: "patentes/patents",
+
+      skillsSearchKeys: "competencia/searchKeys",
+      disciplinesSearchKeys: "educacao/searchKeys",
+      companiesSearchKeys: "empresas/searchKeys",
+      iniciativesSearchKeys: "iniciativas/searchKeys",
+      pdisSearchKeys: "pdi/searchKeys",
+      patentsSearchKeys: "patentes/searchKeys",
     }),
     search() {
       return this.innerSearch || this.$route.params.search;
@@ -60,6 +70,7 @@ export default {
         base_iniciatives,
         base_skills,
         base_companies,
+        base_patents,
       ] = [
         this.searched_disciplines !== undefined
           ? this.searched_disciplines
@@ -70,6 +81,7 @@ export default {
           : [],
         this.searched_skills !== undefined ? this.searched_skills : [],
         this.searched_companies !== undefined ? this.searched_companies : [],
+        this.searched_patents !== undefined ? this.searched_patents : [],
       ];
 
       return base_disciplines
@@ -108,6 +120,13 @@ export default {
             description: c.description.long,
             category: "Empresas",
           }))
+        )
+        .concat(
+          base_patents.map((p) => ({
+            name: p.name,
+            description: p.summary,
+            category: "Patentes",
+          }))
         );
     },
   },
@@ -119,13 +138,13 @@ export default {
   },
   methods: {
     fuzzyGlobalSearch() {
-      console.log("rodando a busca");
       const contexts = [
-        { key: "disciplines", searchKeys: ["name"] },
-        { key: "iniciatives", searchKeys: ["name"] },
-        { key: "pdis", searchKeys: ["name"] },
-        { key: "skills", searchKeys: ["name"] },
-        { key: "companies", searchKeys: ["name"] },
+        { key: "disciplines", searchKeys: this.disciplinesSearchKeys },
+        { key: "iniciatives", searchKeys: this.iniciativesSearchKeys },
+        { key: "pdis", searchKeys: this.pdisSearchKeys },
+        { key: "skills", searchKeys: this.skillsSearchKeys },
+        { key: "companies", searchKeys: this.companiesSearchKeys },
+        { key: "patents", searchKeys: this.patentsSearchKeys },
       ];
 
       if (!this.search.trim()) {

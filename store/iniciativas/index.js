@@ -26,11 +26,19 @@ const rowToObj = (row) => ({
 export const state = () => ({
   iniciatives: [],
   isLoading: false,
+  keys: [
+    "name",
+    "description.short",
+    "description.long",
+    "keywords",
+    "services",
+  ],
 });
 
 export const getters = {
   iniciatives: (s) => s.iniciatives,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
+  searchKeys: (s) => s.keys,
 };
 
 export const mutations = {

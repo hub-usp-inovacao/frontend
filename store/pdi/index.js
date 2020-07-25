@@ -18,11 +18,19 @@ const rowToObj = (row) => ({
 export const state = () => ({
   pdis: [],
   isLoading: false,
+  keys: [
+    "name",
+    "description.short",
+    "description.long",
+    "knowledge",
+    "keywords",
+  ],
 });
 
 export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   pdis: (state) => state.pdis,
+  searchKeys: (state) => state.keys,
 };
 
 export const mutations = {

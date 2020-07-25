@@ -107,13 +107,6 @@ export default {
     search: {
       term: "",
       iniciatives: undefined,
-      keys: [
-        "name",
-        "description.short",
-        "description.long",
-        "keywords",
-        "services",
-      ],
     },
 
     filtered: undefined,
@@ -131,7 +124,7 @@ export default {
       const results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.search.keys)
+        genFuzzyOptions(this.searchKeys)
       );
       this.search.iniciatives = results.length > 0 ? results : undefined;
     },
@@ -159,6 +152,7 @@ export default {
     ...mapGetters({
       iniciatives: "iniciativas/iniciatives",
       dataStatus: "iniciativas/dataStatus",
+      searchKeys: "iniciativas/searchKeys",
     }),
     searchTerm() {
       return this.search.term;

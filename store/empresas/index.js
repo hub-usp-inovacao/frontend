@@ -43,11 +43,21 @@ const rowToObj = (row) => ({
 export const state = () => ({
   companies: [],
   isLoading: false,
+  keys: [
+    "name",
+    "technologies",
+    "ecosystem",
+    "description.long",
+    "services",
+    "address.state",
+    "address.neightborhood",
+  ],
 });
 
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   companies: (s) => s.companies,
+  searchKeys: (s) => s.keys,
 };
 
 export const mutations = {

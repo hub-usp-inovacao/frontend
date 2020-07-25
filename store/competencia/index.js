@@ -45,11 +45,22 @@ const rowToObj = (row) => ({
 export const state = () => ({
   isLoading: false,
   skills: [],
+  keys: [
+    "name",
+    "bond",
+    "groupName",
+    "groupInitials",
+    "descriptions.skills",
+    "descriptions.services",
+    "descriptions.equipments",
+    "keywords",
+  ],
 });
 
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   skills: (s) => s.skills,
+  searchKeys: (s) => s.keys,
 };
 
 export const mutations = {

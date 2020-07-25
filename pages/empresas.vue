@@ -330,7 +330,6 @@ export default {
     search: {
       term: "",
       companies: undefined,
-      keys: ["name"],
     },
   }),
   methods: {
@@ -386,7 +385,7 @@ export default {
       this.search.companies = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.search.keys)
+        genFuzzyOptions(this.searchKeys)
       );
     },
   },
@@ -400,6 +399,7 @@ export default {
     ...mapGetters({
       dataStatus: "empresas/dataStatus",
       companies: "empresas/companies",
+      searchKeys: "empresas/searchKeys",
     }),
     searchTerm() {
       return this.search.term;

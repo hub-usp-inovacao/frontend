@@ -168,16 +168,6 @@ export default {
     search: {
       term: "",
       skills: undefined,
-      keys: [
-        "name",
-        "bond",
-        "groupName",
-        "groupInitials",
-        "descriptions.skills",
-        "descriptions.services",
-        "descriptions.equipments",
-        "keywords",
-      ],
     },
 
     itemDescriptions: [
@@ -343,7 +333,7 @@ export default {
       this.search.skills = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.search.keys)
+        genFuzzyOptions(this.searchKeys)
       );
     },
     filterData(context) {
@@ -361,6 +351,7 @@ export default {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills",
+      searchKeys: "competencia/searchKeys",
     }),
     baseItems() {
       return this.filtered !== undefined ? this.filtered : this.skills;

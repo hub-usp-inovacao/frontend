@@ -66,13 +66,6 @@ export default {
     search: {
       term: "",
       pdis: undefined,
-      keys: [
-        "name",
-        "description.short",
-        "description.long",
-        "knowledge",
-        "keywords",
-      ],
     },
 
     tabs: [
@@ -118,7 +111,7 @@ export default {
       this.search.pdis = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.search.keys)
+        genFuzzyOptions(this.searchKeys)
       );
     },
     filterFun(elm, filterStatus) {
@@ -143,6 +136,7 @@ export default {
     ...mapGetters({
       dataStatus: "pdi/dataStatus",
       storePDIs: "pdi/pdis",
+      searchKeys: "pdi/searchKeys",
     }),
     searchTerm() {
       return this.search.term;
