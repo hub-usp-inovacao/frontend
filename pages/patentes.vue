@@ -48,7 +48,10 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="displayItems.map(e => ({ ...e, description: { long: '' }}))">
+      <SelectAndCard
+        group_name="Patentes"
+        :items="displayItems.map(e => ({ ...e, description: { long: '' }}))"
+      >
         <template #item="{ item }">
           <v-container>
             <p>{{ item.classification.primary.cip }}</p>

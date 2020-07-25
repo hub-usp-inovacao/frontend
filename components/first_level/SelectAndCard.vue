@@ -13,7 +13,7 @@
             color="#37474F"
             :items="items.map((item,i) => ({text: item.name, value: i}))"
             no-data-text="Não encontramos nada"
-            label="Escolha uma disciplina"
+            :label="`Selecione ${group_name}`"
           >
             <template v-slot:selection="{ item, index }">
               <slot name="selection" :item="item" :index="index"></slot>
@@ -47,20 +47,20 @@
 
 <script>
 export default {
+  props: ["items", "group_name"],
   data: () => ({
-    current_item: -1
+    current_item: -1,
   }),
   computed: {
-    item: function() {
+    item: function () {
       if (this.current_item < 0) return null;
       return this.items[this.current_item];
-    }
+    },
   },
   watch: {
     items(v) {
       this.current_item = -1;
-    }
+    },
   },
-  props: ["items"]
 };
 </script>

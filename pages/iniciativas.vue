@@ -31,7 +31,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="display_entries">
+      <SelectAndCard group_name="Iniciativas" :items="display_entries">
         <template #item="{ item }">
           <v-container>
             <p class="title">{{item.name}}</p>

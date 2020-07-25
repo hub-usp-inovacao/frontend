@@ -38,7 +38,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="displayItems" />
+      <SelectAndCard group_name="P&D&I" :items="displayItems" />
     </div>
   </div>
 </template>

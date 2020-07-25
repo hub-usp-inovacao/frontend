@@ -71,7 +71,7 @@
     </div>
 
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="displayItems">
+      <SelectAndCard group_name="Empresas" :items="displayItems">
         <template #item="{ item }">
           <v-container px-6>
             <p class="title">{{ item.name }}</p>
