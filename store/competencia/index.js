@@ -1,4 +1,5 @@
-import { capitalizeName, formatURL, columnValue, formatPhone } from "../../lib";
+import { capitalizeName, formatURL, formatPhone } from "@/lib/format";
+import { columnValue } from "@/lib/sheets";
 
 const descRgxSplitter = /;/;
 

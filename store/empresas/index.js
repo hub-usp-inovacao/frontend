@@ -1,4 +1,5 @@
-import { formatURL, columnValue, formatPhone } from "../../lib";
+import { formatURL, formatPhone } from "@/lib/format";
+import { columnValue } from "@/lib/sheets";
 
 const rowToObj = (row) => ({
   name: columnValue(row, "AC"),

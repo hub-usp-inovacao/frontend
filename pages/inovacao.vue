@@ -46,7 +46,7 @@
 <script>
 import { debounce } from "debounce";
 import { mapGetters } from "vuex";
-import { genFuzzyOptions } from "@/lib";
+import { genFuzzyOptions } from "@/lib/search";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";

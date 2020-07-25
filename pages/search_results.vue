@@ -10,7 +10,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { debounce } from "debounce";
-import { genFuzzyOptions } from "@/lib";
+import { genFuzzyOptions } from "@/lib/search";
 
 import Panel from "@/components/first_level/Panel.vue";
 import SearchFiltersAndResult from "@/components/first_level/SearchFiltersAndResult.vue";

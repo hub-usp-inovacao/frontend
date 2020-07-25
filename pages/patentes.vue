@@ -87,7 +87,8 @@
 <script>
 import { debounce } from "debounce";
 import { mapActions, mapGetters } from "vuex";
-import { capitalizeName, genFuzzyOptions } from "@/lib";
+import { capitalizeName } from "@/lib/format";
+import { genFuzzyOptions } from "@/lib/search";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";

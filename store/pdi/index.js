@@ -1,4 +1,4 @@
-import { formatURL } from "../../lib";
+import { formatURL } from "@/lib/format";
 
 const rowToObj = (row) => ({
   category: row[0],

@@ -1,4 +1,5 @@
-import { fixPersonName, columnValue } from "../../lib";
+import { fixPersonName } from "@/lib/format";
+import { columnValue } from "@/lib/sheets";
 
 const rowToObj = (row) => ({
   name: row[5].split(" | ")[0],
