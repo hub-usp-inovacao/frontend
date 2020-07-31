@@ -81,8 +81,8 @@
             <p class="body-2 my-2"></p>
 
             <p v-if="item.incubated == 'Sim'">
-              <span class="font-weight-bold">Incubadora</span>
-              {{ item.ecosystem }}
+              <span class="font-weight-bold">Incubadora(s)</span>
+              <span v-for="incub of item.ecosystems" :key="incub">incub;&nbsp;</span>
             </p>
 
             <p>
@@ -373,12 +373,12 @@ export default {
           .includes(item.category.code);
       }
 
-      const [city, incubated] = terciary;
+      const [city, incubator] = terciary;
 
       terciaryMatch = true;
 
-      if (incubated) {
-        terciaryMatch = terciaryMatch && incubated == item.incubated;
+      if (incubator) {
+        terciaryMatch = terciaryMatch && item.ecosystems.includes(incubator);
       }
 
       return primaryMatch && secondaryMatch && terciaryMatch;
@@ -412,6 +412,7 @@ export default {
       dataStatus: "empresas/dataStatus",
       companies: "empresas/companies",
       searchKeys: "empresas/searchKeys",
+      incubators: "empresas/incubators",
     }),
     searchTerm() {
       return this.search.term;
@@ -476,7 +477,7 @@ export default {
     groups() {
       return [
         { label: "Cidade", items: [] },
-        { label: "Incubadora?", items: ["Sim", "Não"] },
+        { label: "Incubadora?", items: this.incubators },
       ];
     },
   },
