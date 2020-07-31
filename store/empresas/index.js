@@ -17,10 +17,7 @@ const rowToObj = (row) => ({
       .join(" "),
   },
   technologies: columnValue(row, "AM"),
-  incubated:
-    columnValue(row, "AN") == "Não" || columnValue(row, "AN") == "."
-      ? "Não"
-      : "Sim",
+  incubated: columnValue(row, "AN") != "Não" && columnValue(row, "AN") != ".",
   ecosystems: columnValue(row, "AN").split(";"),
   description: {
     long: columnValue(row, "AR"),

@@ -44,9 +44,9 @@
             </v-row>
           </v-container>
 
-          <p v-if="item.incubated == 'Sim'">
-            <span class="font-weight-bold">Incubadora</span>
-            {{ item.ecosystem }}
+          <p v-if="item.incubated">
+            <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
+            <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
           </p>
 
           <p>
@@ -80,9 +80,9 @@
             <p v-for="email in item.emails" :key="email">{{ email }}</p>
             <p class="body-2 my-2"></p>
 
-            <p v-if="item.incubated == 'Sim'">
-              <span class="font-weight-bold">Incubadora(s)</span>
-              <span v-for="incub of item.ecosystems" :key="incub">incub;&nbsp;</span>
+            <p v-if="item.incubated">
+              <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
+              <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
             </p>
 
             <p>
