@@ -1,43 +1,27 @@
 <template>
-  <v-footer dark padless>
-    <v-card class="flex" dark flat tile>
-      <v-card-title>
-        <v-container>
-          <div
-            class="font-weight-light"
-            style="font-size: 18px"
-            align="center"
-          >Conheça também nossas páginas nas Redes Socias!</div>
-        </v-container>
+	<footer class="text-h6 bg-black d-flex flex-column align-center">
+		<p class="text-center my-8">Conheça também nossas redes sociais!</p>
+		
+		<div class="d-flex justify-center">
+			<v-btn
+		 		dark
+		 		icon
+		 		class="mx-4 mb-4"
+				v-for="({ label, url }) in icons"
+				:key="label"
+				:href="url"
+				target="_blank">
+				<v-icon size="35px">{{ label }}</v-icon>
+			</v-btn>
+		</div>
+		
+		<div class="d-flex flex-column flex-md-row justify-center align-center">
+			<div class="my-4 mx-2">(11) 3091-1234</div>
+			<div class="my-4 mx-2">inovacao@usp.br</div>
+		</div>
 
-        <v-container>
-          <div align="center">
-            <!-- <v-hover v-slot:default="{ hover }"> -->
-            <v-btn
-              target="_blank"
-              :href="icon.url"
-              v-for="icon in icons"
-              :key="icon.label"
-              class="mx-4 zoom"
-              dark
-              icon
-              fab
-            >
-              <v-icon size="35px">{{ icon.label }}</v-icon>
-            </v-btn>
-            <!-- </v-hover> -->
-          </div>
-        </v-container>
-      </v-card-title>
-
-      <v-container>
-        <v-card-text class="py-2 white--text text-center">
-          {{ new Date().getFullYear() }} —
-          <strong>AUSPIN</strong>
-        </v-card-text>
-      </v-container>
-    </v-card>
-  </v-footer>
+		<p>AUSPIN - {{ new Date().getFullYear() }}</p>
+	</footer>
 </template>
 
 <script>
@@ -73,3 +57,17 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+footer {
+	margin: 0;
+	padding: 2rem;
+	width: 100%;
+	min-height: 20vh;
+}
+
+.bg-black {
+	background-color: #212121;
+	color: #f9f9f9;
+}
+</style>
