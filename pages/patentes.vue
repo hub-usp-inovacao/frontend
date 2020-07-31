@@ -20,19 +20,23 @@
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="displayItems">
         <template #content="{ item }">
-          <p>{{ item.classification.primary.cip }}</p>
+          <p>
+            <span>Classificação:</span>
+            {{ item.classification.primary.cip }}
+          </p>
           <p>{{ item.classification.primary.subareas }}</p>
+          <p>{{ item.sumary }}</p>
 
-          <BulletList
+          <HorizontalList title="Países com Proteção" :items="item.countriesWithProtection" />
+
+          <HorizontalList
             v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
             title="IPCs"
             :items="item.ipcs"
           />
+
           <BulletList title="Titulares" :items="item.owners" />
           <BulletList title="Inventores" :items="item.inventors" />
-          <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
-
-          <p>{{ item.sumary }}</p>
         </template>
 
         <template #buttons="{ item }">
@@ -54,8 +58,14 @@
       >
         <template #item="{ item }">
           <v-container>
-            <p>{{ item.classification.primary.cip }}</p>
+            <p>
+              <span>Classificação:</span>
+              {{ item.classification.primary.cip }}
+            </p>
             <p>{{ item.classification.primary.subareas }}</p>
+            <p>{{ item.sumary }}</p>
+
+            <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
 
             <BulletList
               v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
@@ -64,10 +74,6 @@
             />
             <BulletList title="Titulares" :items="item.owners" />
             <BulletList title="Inventores" :items="item.inventors" />
-            <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
-
-            <p>{{ item.sumary }}</p>
-
             <v-card-actions>
               <v-spacer />
               <v-btn
@@ -97,6 +103,7 @@ import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
+import HorizontalList from "@/components/first_level/HorizontalList.vue";
 import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
 import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
 
@@ -108,6 +115,7 @@ export default {
     ListAndDetails,
     SelectAndCard,
     BulletList,
+    HorizontalList,
   },
   data: () => ({
     search: {
