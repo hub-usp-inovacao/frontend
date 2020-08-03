@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="light-orange-bg white--text">
-      <Panel title="Resultados de Busca" searchBarColor="white" @input="innerSearch = $event" />
+      <Panel title="Resultados de Busca" searchBarColor="white" v-model="innerSearch"/>
     </div>
     <SearchFiltersAndResult :searchedTerm="search" :items="results" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { debounce } from "debounce";
 import { genFuzzyOptions } from "@/lib/search";
 
@@ -46,6 +46,13 @@ export default {
   }),
   computed: {
     ...mapGetters({
+      eduStatus: "educacao/dataStatus",
+      pdiStatus: "pdi/dataStatus",
+      skillsStatus: "competencia/dataStatus",
+      iniciativesStatus: "iniciativas/dataStatus",
+      patentsStatus: "patentes/dataStatus",
+      companiesStatus: "empresas/dataStatus",
+
       disciplines: "educacao/disciplines",
       pdis: "pdi/pdis",
       skills: "competencia/skills",
@@ -61,7 +68,7 @@ export default {
       patentsSearchKeys: "patentes/searchKeys",
     }),
     search() {
-      return this.innerSearch || this.$route.params.search;
+      return this.innerSearch;
     },
     results() {
       const [
@@ -137,6 +144,14 @@ export default {
     }, 500),
   },
   methods: {
+    ...mapActions({
+      fetchDisciplines: "educacao/fetchSpreadsheets",
+      fetchPDIs: "pdi/fetchSpreadsheets",
+      fetchSkills: "competencia/fetchSpreadsheets",
+      fetchIniciatives: "iniciativas/fetchSpreadsheets",
+      fetchPatents: "patentes/fetchSpreadsheets",
+      fetchCompanies: "empresas/fetchSpreadsheets",
+    }),
     fuzzyGlobalSearch() {
       const contexts = [
         { key: "disciplines", searchKeys: this.disciplinesSearchKeys },
@@ -148,7 +163,7 @@ export default {
       ];
 
       if (!this.search.trim()) {
-        context.forEach(({ key }) => (this[`searched_${key}`] = undefined));
+        contexts.forEach(({ key }) => (this[`searched_${key}`] = undefined));
         return;
       }
 
@@ -165,11 +180,40 @@ export default {
     },
   },
   beforeMount() {
-    if (!this.$route.params.search || this.$route.params.search.length == 0) {
-      this.$router.replace("/");
+    if (this.$route.params.search) {
+      this.innerSearch = this.$route.params.search
+      this.fuzzyGlobalSearch();
     }
+    else{
+      const env = {
+        sheetsAPIKey: process.env.sheetsAPIKey,
+        sheetID: process.env.sheetID,
+      };
 
-    this.fuzzyGlobalSearch();
+      if (this.eduStatus == "ok" && this.disciplines.length == 0) {
+        this.fetchDisciplines(env);
+      }
+
+      if (this.pdiStatus == "ok" && this.pdis.length == 0) {
+        this.fetchPDIs(env);
+      }
+
+      if (this.skillsStatus == "ok" && this.skills.length == 0) {
+        this.fetchSkills(env);
+      }
+
+      if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
+        this.fetchIniciatives(env);
+      }
+
+      if (this.patentsStatus == "ok" && this.patents.length == 0) {
+        this.fetchPatents(env);
+      }
+
+      if (this.companiesStatus == "ok" && this.companies.length == 0) {
+        this.fetchCompanies(env);
+      }
+    }
   },
 };
 </script>
