@@ -4,9 +4,9 @@
       <v-col>
         <v-row class="ma-0" justify="center">
           <v-col cols="12" sm="9">
-            <p class="display-2 font-weight-regular">{{title}}</p>
+            <p class="display-2 font-weight-regular">{{ title }}</p>
 
-            <p class="title font-weight-light" style="line-height: normal;">{{description}}</p>
+            <p class="title font-weight-light" style="line-height: normal;">{{ description }}</p>
           </v-col>
         </v-row>
       </v-col>
