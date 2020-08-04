@@ -3,14 +3,14 @@ import { columnValue } from "@/lib/sheets";
 
 const rowToObj = (row) => ({
   name: row[1],
-  category: columnValue(row, "O"),
+  category: columnValue(row, "A"),
   description: {
     short: row[2],
     long: row[7],
   },
   local: row[3],
   unity: row[4],
-  keywords: row[5] != undefined && row[5] != "" ? row[5].split(",") : [],
+  keywords: columnValue(row, "F") != undefined && columnValue(row, "F") != "" ? columnValue(row, "F").split(/[;,]/) : [],
   url: row[6] != undefined && row[6] != "" ? formatURL(row[6]) : "",
   email: row[8],
   socialMedia: row[9],

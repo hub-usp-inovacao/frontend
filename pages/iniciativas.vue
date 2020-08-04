@@ -79,28 +79,27 @@ export default {
     tabs: [
       {
         name: "Agente Institucional",
-        description:
-          "Órgãos institucionais da USP que atuam no fomento e estímulo ao empreendedorismo.",
       },
       {
-        name: "Entidades Estudantis",
-        description:
-          "Organizações estudantis que estimulam o empreendedorismo na comunidade de alunos e também que propiciam experiências empreendedoras.",
+        name: "Empresa Jr.",
       },
       {
-        name: "Espaços e Coworking",
-        description:
-          "Espaços da USP que recebem e interagem com projetos de inovação e empreendedorismo.",
+        name: "Entidade Associada",
       },
       {
-        name: "Ideação e Viabilidade",
-        description:
-          "Programas que atuam nas fases iniciais do desenvolvimento de projetos e de startups.",
+        name: "Entidade Estudantil",
       },
       {
-        name: "Incubadoras e Parques Tecnológicos",
-        description:
-          "Os chamados “Habitats” de inovação da Universidade, espaços que abrigam empresas nascentes de bases técnológicas oriundas ou não da USP.",
+        name: "Espaço/Coworking",
+      },
+      {
+        name: "Grupos e Iniciativas Estudantis"
+      },
+      {
+        name: "Ideação"
+      },
+      {
+        name: "Incubadora e Parque Tecnológico"
       },
     ],
 
