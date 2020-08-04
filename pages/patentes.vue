@@ -14,7 +14,7 @@
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#5B2C7D', active: '#9247C9' }"
-      @select="filterData($event)"
+      @select="filters = $event"
     />
 
     <div class="hidden-sm-and-down">
@@ -124,6 +124,7 @@ export default {
     },
 
     selected_subareas: [],
+    filters: undefined,
     filtered: undefined,
     groups: [
       {
@@ -153,15 +154,11 @@ export default {
         return;
       }
 
-      const results = await this.$search(
+      this.search.patents = await this.$search(
         this.search.term.trim(),
         this.baseItems,
         genFuzzyOptions(this.searchKeys)
       );
-
-      console.log(results);
-
-      this.search.patents = results.length > 0 ? results : undefined;
     },
     primaryAreaNameToCode(name) {
       return this.tabs.find((t) => t.name == name).code;
@@ -212,11 +209,19 @@ export default {
         this.filterFun(item, context)
       );
     },
+    async pipeline() {
+      if (this.filters)
+        await this.filterData(this.filters);
+      await this.fuzzySearch();
+    }
   },
   watch: {
-    searchTerm: debounce(async function () {
-      await this.fuzzySearch();
-    }, 250),
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    }
   },
   computed: {
     ...mapGetters({

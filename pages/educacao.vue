@@ -14,7 +14,7 @@
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#db8337', active: '#ab5307' }"
-      @select="filterData($event)"
+      @select="filters = $event"
     />
 
     <div class="hidden-sm-and-down">
@@ -120,6 +120,7 @@ export default {
         description: "Cursos e disciplinas relacionados à área de Negócios.",
       },
     ],
+    filters: undefined,
     filtered: undefined,
   }),
   methods: {
@@ -166,11 +167,11 @@ export default {
         this.filterFun(item, context)
       );
     },
-  },
-  watch: {
-    searchTerm: debounce(async function () {
+    async pipeline() {
+      if (this.filters)
+        await this.filterData(this.filters);
       await this.fuzzySearch();
-    }, 1250),
+    }
   },
   computed: {
     ...mapGetters({
@@ -188,9 +189,6 @@ export default {
         { label: "Nível", items: ["Graduação", "Pós-Graduação"] },
       ];
     },
-    searchTerm() {
-      return this.search.term;
-    },
     baseItems() {
       return this.filtered !== undefined ? this.filtered : this.disciplines;
     },
@@ -199,6 +197,17 @@ export default {
         ? this.search.disciplines
         : this.baseItems;
     },
+    searchTerm() {
+      return this.search.term;
+    }
+  },
+  watch: {
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    }
   },
   beforeMount() {
     const payload = {

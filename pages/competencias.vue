@@ -13,7 +13,7 @@
     <MultipleFilters
       :tabs="tabs"
       :colors="{ active: '#9b4c68', base: '#6b1c28' }"
-      @select="filterData($event)"
+      @select="filters = $event"
     />
 
     <div class="hidden-sm-and-down">
@@ -179,6 +179,7 @@ export default {
       { key: "equipments", title: "Equipamentos" },
     ],
 
+    filters: undefined,
     filtered: undefined,
 
     tabs: [
@@ -344,11 +345,19 @@ export default {
         this.filterFun(item, context)
       );
     },
+    async pipeline() {
+      if (this.filters)
+        await this.filterData(this.filters);
+      await this.fuzzySearch();
+    }
   },
   watch: {
-    searchTerm: debounce(async function () {
-      await this.fuzzySearch();
-    }, 1000),
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    }
   },
   computed: {
     ...mapGetters({

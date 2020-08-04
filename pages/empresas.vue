@@ -16,7 +16,7 @@
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#074744', active: '#0A8680' }"
-      @select="filterData($event)"
+      @select="filters = $event"
     />
 
     <div class="hidden-sm-and-down">
@@ -338,6 +338,7 @@ export default {
       "98": "Serviços Domésticos",
       "99": "Organismos Internacionais e outras Instituições Extraterritoriais",
     },
+    filters: undefined,
     filtered: undefined,
     search: {
       term: "",
@@ -400,12 +401,19 @@ export default {
         genFuzzyOptions(this.searchKeys)
       );
     },
+    async pipeline() {
+      if (this.filters)
+        await this.filterData(this.filters)
+      await this.fuzzySearch();
+    }
   },
   watch: {
-    searchTerm: debounce(async function () {
-      console.log("running search");
-      await this.fuzzySearch();
-    }, 1250),
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    },
   },
   computed: {
     ...mapGetters({

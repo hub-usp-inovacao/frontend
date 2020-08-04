@@ -13,7 +13,7 @@
     <MultipleFilters
       :tabs="tabs"
       :colors="{ base: '#222c63', active: '#525c93' }"
-      @select="filterData($event)"
+      @select="filters = $event"
     />
 
     <div class="hidden-sm-and-down">
@@ -109,6 +109,7 @@ export default {
       iniciatives: undefined,
     },
 
+    filters: undefined,
     filtered: undefined,
   }),
   methods: {
@@ -121,12 +122,11 @@ export default {
         return;
       }
 
-      const results = await this.$search(
+      this.search.iniciatives = await this.$search(
         this.search.term.trim(),
         this.baseItems,
         genFuzzyOptions(this.searchKeys)
       );
-      this.search.iniciatives = results.length > 0 ? results : undefined;
     },
     filterFun(elm, filterStatus) {
       const { primary } = filterStatus;
@@ -142,11 +142,19 @@ export default {
         this.filterFun(item, context)
       );
     },
+    async pipeline() {
+      if (this.filters)
+        await this.filterData(this.filters);
+      await this.fuzzySearch();
+    }
   },
   watch: {
-    searchTerm: debounce(async function () {
-      await this.fuzzySearch();
-    }, 250),
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    }
   },
   computed: {
     ...mapGetters({
