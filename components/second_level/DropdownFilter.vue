@@ -13,6 +13,7 @@
           menu-props="auto"
           :label="label"
           :items="items"
+          clearable
           v-model="selected[i]"
         ></v-select>
       </v-col>
@@ -25,6 +26,7 @@
           menu-props="auto"
           :label="label"
           :items="items"
+          clearable
           v-model="selected[i]"
         ></v-select>
       </v-col>
