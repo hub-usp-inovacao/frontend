@@ -16,43 +16,25 @@
       @select="filters = $event"
     />
 
-    <div class="hidden-sm-and-down">
-      <ListAndDetails :items="display_entries">
-        <template #content="{ item }">
-          <p class="body-2">{{ item.unity }}</p>
-          <p class="body-2 mb-4">{{ item.local }}</p>
-          <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">{{ phone }}</p>
-          <p>{{ item.description.long }}</p>
-        </template>
-        <template #buttons="{ item }">
-          <v-btn :href="item.url" color="#222c63" class="white--text" target="_blank">Saiba Mais</v-btn>
-        </template>
-      </ListAndDetails>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <SelectAndCard group_name="Iniciativas" :items="display_entries">
-        <template #item="{ item }">
-          <v-container>
-            <p class="title">{{item.name}}</p>
-            <p class="body-2">{{ item.unity }}</p>
-            <p class="body-2 mb-4">{{ item.local }}</p>
-            <p
-              v-for="phone in item.contact.info"
-              :key="phone"
-              class="body-2 mb-4"
-            >{{ item.contact.info }}</p>
-            <p>{{ item.description.long }}</p>
-          </v-container>
-
-          <v-card-actions>
-            <v-spacer />
-            <v-btn depressed dark color="#222c63" :href="item.url">Saiba Mais</v-btn>
-            <v-spacer />
-          </v-card-actions>
-        </template>
-      </SelectAndCard>
-    </div>
+    <DisplayData :items="display_entries">
+      <template #title="{ item }">{{ item.name }}</template>
+      <template #detailsText="{ item }">
+        <p class="body-2">{{ item.unity }}</p>
+        <p class="body-2 mb-4">{{ item.local }}</p>
+        <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">{{ phone }}</p>
+      </template>
+      <template #content="{ item }">
+        {{ item.description.long }}
+      </template>
+      <template #actions="{ item }">
+        <v-btn
+          :href="item.url"
+          target="_blank"
+          color="#222c63"
+          class="white--text"
+          >Saiba Mais</v-btn>
+      </template>
+    </DisplayData>
   </div>
 </template>
 
@@ -64,16 +46,14 @@ import { genFuzzyOptions } from "@/lib/search";
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
-import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
-import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
+import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
     Background,
-    ListAndDetails,
-    SelectAndCard,
     MultipleFilters,
+    DisplayData
   },
   data: () => ({
     tabs: [

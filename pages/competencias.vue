@@ -16,98 +16,37 @@
       @select="filters = $event"
     />
 
-    <div class="hidden-sm-and-down">
-      <ListAndDetails :items="displayItems">
-        <template #content="sProps">
-          <v-container>
-            <v-row>
-              <v-col>
-                <v-container>
-                  <v-row>
-                    <v-col>
-                      <p class="body-2 mb-2">{{ sProps.item.email }}</p>
-                    </v-col>
-                  </v-row>
-                  <v-row v-if="sProps.item.phone">
-                    <v-col>
-                      <p class="body-2 mb-2">{{ sProps.item.phone }}</p>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <p class="body-2 mb-2">{{ sProps.item.unity }}</p>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <p class="body-2 mb-2">{{ sProps.item.campus }}</p>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-              <v-col cols="4">
-                <v-img eager v-if="sProps.item.picture" :src="sProps.item.picture"></v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-
-          <v-expansion-panels>
-            <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
-              <v-expansion-panel-header class="font-weight-bold">{{ desc.title }}</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-list>
-                  <v-list-item-group>
-                    <v-list-item
-                      v-for="description in sProps.item.descriptions[desc.key]"
-                      :key="description"
-                    >
-                      <v-list-item-icon>
-                        <v-icon v-text="'mdi-circle-small'"></v-icon>
-                      </v-list-item-icon>
-                      <v-list-item-content>
-                        <p>{{ description }}</p>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list-item-group>
-                </v-list>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </template>
-        <template #buttons="sProps">
-          <v-btn
-            class="white--text"
-            color="#6b1c28"
-            target="_blank"
-            :href="sProps.item.url"
-          >saiba mais</v-btn>
-          <v-btn
-            class="white--text"
-            color="#6b1c28"
-            target="_blank"
-            :disabled="!sProps.item.lattes"
-            :href="sProps.item.lattes"
-          >lattes</v-btn>
-        </template>
-      </ListAndDetails>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <SelectAndCard
-        group_name="Competências"
-        :items="displayItems.map(e => ({ ...e, description: { long: '' }}))"
-      >
-        <template #item="{ item }">
-          <v-container>
-            <p class="title">{{ item.name }}</p>
-            <v-img eager v-if="item.picture" :src="item.picture"></v-img>
-            <p class="body-2 my">{{ item.email }}</p>
-            <p v-if="item.phone" class="body-2 my">{{ item.phone }}</p>
-            <p class="body-2 my">{{ item.unity }}</p>
-            <p class="body-2 my">{{ item.campus }}</p>
-          </v-container>
-
-          <v-expansion-panels>
+    <DisplayData :items="displayItems">
+      <template #title="{ item }">{{ item.name }}</template>
+      <template #detailsText="{ item }">
+        <v-container>
+          <v-row>
+            <v-col>
+              <p>{{ item.email }}</p>
+            </v-col>
+          </v-row>
+          <v-row v-if="item.phone">
+            <v-col>
+              <p>{{ item.phone }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <p>{{ item.unity }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <p>{{ item.campus }}</p>
+            </v-col>
+          </v-row>
+        </v-container>
+      </template>
+      <template #detailsImg="{ item }">
+        <v-img eager v-if="item.picture" :src="item.picture"></v-img>
+      </template>
+      <template #content="{ item }">
+        <v-expansion-panels>
             <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
               <v-expansion-panel-header class="font-weight-bold">{{ desc.title }}</v-expansion-panel-header>
               <v-expansion-panel-content>
@@ -129,22 +68,23 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
-
-          <v-card-actions>
-            <v-spacer />
-            <v-btn depressed dark color="#6b1c28" :href="item.url">Saiba Mais</v-btn>
-            <v-btn
-              class="white--text"
-              color="#6b1c28"
-              target="_blank"
-              :disabled="!item.lattes"
-              :href="item.lattes"
-            >lattes</v-btn>
-            <v-spacer />
-          </v-card-actions>
-        </template>
-      </SelectAndCard>
-    </div>
+      </template>
+      <template #actions="{ item }">
+        <v-btn
+            class="white--text"
+            color="#6b1c28"
+            target="_blank"
+            :href="item.url"
+          >saiba mais</v-btn>
+          <v-btn
+            class="white--text"
+            color="#6b1c28"
+            target="_blank"
+            :disabled="!item.lattes"
+            :href="item.lattes"
+          >lattes</v-btn>
+      </template>
+    </DisplayData>
   </div>
 </template>
 
@@ -156,16 +96,14 @@ import { genFuzzyOptions } from "@/lib/search";
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
-import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
-import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
+import DisplayData from '@/components/first_level/DisplayData.vue';
 
 export default {
   components: {
     Panel,
     Background,
-    ListAndDetails,
-    SelectAndCard,
     MultipleFilters,
+    DisplayData
   },
   data: () => ({
     search: {
