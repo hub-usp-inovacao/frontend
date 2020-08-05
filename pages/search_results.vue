@@ -3,7 +3,18 @@
     <div class="light-orange-bg white--text">
       <Panel title="Resultados de Busca" searchBarColor="white" v-model="innerSearch"/>
     </div>
-    <SearchFiltersAndResult :searchedTerm="search" :items="results" />
+    <v-container v-if="loading">
+      <v-row style="height: 20vh;" align="center" justify="center">
+        <v-col align="center">
+          <v-progress-circular
+          :size="100"
+          :width="8"
+          color="secondary"
+          indeterminate></v-progress-circular>
+        </v-col>
+      </v-row>
+    </v-container>
+    <SearchFiltersAndResult v-else :searchedTerm="search" :items="results" />
   </div>
 </template>
 
@@ -43,6 +54,7 @@ export default {
     searched_patents: undefined,
 
     innerSearch: "",
+    loading: false
   }),
   computed: {
     ...mapGetters({
@@ -138,10 +150,10 @@ export default {
     },
   },
   watch: {
-    innerSearch: debounce(async function () {
-      console.log("roda a busca");
-      await this.fuzzyGlobalSearch();
-    }, 500),
+    innerSearch(){
+      this.loading = true;
+      this.dispatchSearch();
+    },
   },
   methods: {
     ...mapActions({
@@ -178,6 +190,11 @@ export default {
         });
       });
     },
+    dispatchSearch: debounce(async function () {
+      console.log("roda a busca");
+      await this.fuzzyGlobalSearch();
+      this.loading = false;
+    }, 500)
   },
   beforeMount() {
     if (this.$route.params.search) {
