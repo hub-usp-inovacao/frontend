@@ -19,96 +19,42 @@
       @select="filters = $event"
     />
 
-    <div class="hidden-sm-and-down">
-      <ListAndDetails :items="displayItems">
-        <template #content="{ item }">
-          <v-container>
-            <v-row>
-              <v-col cols="6">
-                <v-container>
-                  <v-row>
-                    <v-col>
-                      <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <p v-for="email in item.emails" :key="email" class="body-2 mb-2">{{ email }}</p>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-              <v-col cols="5">
-                <v-img eager v-if="item.logo" :src="item.logo"></v-img>
-              </v-col>
-            </v-row>
-          </v-container>
+    <DisplayData :items="displayItems" group_name="Empresas">
+      <template #title="{ item }">{{ item.name }}</template>
+      <template #detailsText="{ item }">
+        <v-container>
+          <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
+          <p v-for="email in item.emails" :key="email">{{ email }}</p>
+        </v-container>
+      </template>
+      <template #detailsImg="{ item }">
+        <v-img eager v-if="item.logo" :src="item.logo"></v-img>
+      </template>
+      <template #content="{ item }">
+        <p v-if="item.incubated">
+          <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
+          <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
+        </p>
 
-          <p v-if="item.incubated">
-            <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
-            <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
-          </p>
+        <p>
+          <span class="font-weight-bold">Descrição</span>
+          {{ item.description.long }}
+        </p>
 
-          <p>
-            <span class="font-weight-bold">Descrição</span>
-            {{ item.description.long }}
-          </p>
+        <p>
+          <span class="font-weight-bold">Produtos e Serviços</span>
+          {{ item.services }}
+        </p>
 
-          <p>
-            <span class="font-weight-bold">Produtos e Serviços</span>
-            {{ item.services }}
-          </p>
-
-          <p>
-            <span class="font-weight-bold">Tecnologias</span>
-            {{ item.technologies }}
-          </p>
-        </template>
-        <template #buttons="{ item }">
-          <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
-        </template>
-      </ListAndDetails>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <SelectAndCard group_name="Empresas" :items="displayItems">
-        <template #item="{ item }">
-          <v-container px-6>
-            <p class="title">{{ item.name }}</p>
-            <v-img eager v-if="item.logo" :src="item.logo"></v-img>
-            <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
-            <p v-for="email in item.emails" :key="email">{{ email }}</p>
-            <p class="body-2 my-2"></p>
-
-            <p v-if="item.incubated">
-              <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
-              <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
-            </p>
-
-            <p>
-              <span class="font-weight-bold">Descrição</span>
-              {{ item.description.long }}
-            </p>
-
-            <p>
-              <span class="font-weight-bold">Produtos e Serviços</span>
-              {{ item.services }}
-            </p>
-
-            <p>
-              <span class="font-weight-bold">Tecnologias</span>
-              {{ item.technologies }}
-            </p>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn depressed dark color="#2bc570" target="_blank" :href="item.url">Saiba Mais</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-container>
-        </template>
-      </SelectAndCard>
-    </div>
+        <p>
+          <span class="font-weight-bold">Tecnologias</span>
+          {{ item.technologies }}
+        </p>
+      </template>
+      <template #actions="{ item }">
+        <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
+      </template>
+    </DisplayData>
   </div>
 </template>
 
@@ -122,16 +68,14 @@ import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
-import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
-import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
+import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
     MultipleFilters,
     Background,
-    ListAndDetails,
-    SelectAndCard,
+    DisplayData,
     USPDNA,
   },
   data: () => ({

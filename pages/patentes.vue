@@ -17,79 +17,38 @@
       @select="filters = $event"
     />
 
-    <div class="hidden-sm-and-down">
-      <ListAndDetails :items="displayItems">
-        <template #content="{ item }">
-          <p>
-            <span>Classificação:</span>
-            {{ item.classification.primary.cip }}
-          </p>
-          <p>{{ item.classification.primary.subareas }}</p>
-          <p>{{ item.sumary }}</p>
+    <DisplayData :items="displayItems" group_name="Patentes">
+      <template #title="{ item }">{{ item.name }}</template>
+      <template #detailsText="{ item }">
+        <p>
+          <span>Classificação:</span>
+          {{ item.classification.primary.cip }}
+        </p>
+      </template>
+      <template #content="{ item }">
+        <p>{{ item.classification.primary.subareas }}</p>
+        <p>{{ item.sumary }}</p>
 
-          <HorizontalList title="Países com Proteção" :items="item.countriesWithProtection" />
+        <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
 
-          <HorizontalList
-            v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
-            title="IPCs"
-            :items="item.ipcs"
-          />
-
-          <BulletList title="Titulares" :items="item.owners" />
-          <BulletList title="Inventores" :items="item.inventors" />
-        </template>
-
-        <template #buttons="{ item }">
-          <v-btn
+        <BulletList
+          v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
+          title="IPCs"
+          :items="item.ipcs"
+        />
+        <BulletList title="Titulares" :items="item.owners" />
+        <BulletList title="Inventores" :items="item.inventors" />
+      </template>
+      <template #actions="{ item }">
+        <v-btn
             color="#64318A"
             :href="item.url"
             target="_blank"
             class="white--text"
             :disabled="!item.url"
           >Saiba Mais</v-btn>
-        </template>
-      </ListAndDetails>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <SelectAndCard
-        group_name="Patentes"
-        :items="displayItems.map(e => ({ ...e, description: { long: '' }}))"
-      >
-        <template #item="{ item }">
-          <v-container>
-            <p>
-              <span>Classificação:</span>
-              {{ item.classification.primary.cip }}
-            </p>
-            <p>{{ item.classification.primary.subareas }}</p>
-            <p>{{ item.sumary }}</p>
-
-            <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
-
-            <BulletList
-              v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
-              title="IPCs"
-              :items="item.ipcs"
-            />
-            <BulletList title="Titulares" :items="item.owners" />
-            <BulletList title="Inventores" :items="item.inventors" />
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                depressed
-                dark
-                color="#64318A"
-                target="_blank"
-                :href="item.url"
-                :disabled="!item.url"
-              >Saiba Mais</v-btn>
-              <v-spacer />
-            </v-card-actions>
-          </v-container>
-        </template>
-      </SelectAndCard>
-    </div>
+      </template>
+    </DisplayData>
   </div>
 </template>
 
@@ -104,18 +63,16 @@ import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 import HorizontalList from "@/components/first_level/HorizontalList.vue";
-import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
-import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
+import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
     Background,
     MultipleFilters,
-    ListAndDetails,
-    SelectAndCard,
     BulletList,
     HorizontalList,
+    DisplayData
   },
   data: () => ({
     search: {

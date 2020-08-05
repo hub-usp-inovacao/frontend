@@ -16,7 +16,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="display_entries">
+    <DisplayData :items="display_entries" group_name="Iniciativas">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>

@@ -17,50 +17,32 @@
       @select="filters = $event"
     />
 
-    <div class="hidden-sm-and-down">
-      <ListAndDetails :items="displayItems">
-        <template #content="sProps">
-          <p>{{ sProps.item.unity }}</p>
-          <p>{{ sProps.item.campus }}</p>
-          <p>{{ sProps.item.description.long }}</p>
-        </template>
-        <template #buttons="sProps">
-          <v-btn
-            class="white--text"
-            color="#db8337"
-            :href="sProps.item.url"
-            target="_blank"
-          >Saiba Mais</v-btn>
-        </template>
-      </ListAndDetails>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <SelectAndCard group_name="Disciplinas" :items="displayItems">
-        <template #item="{item}">
-          <v-container px-6>
-            <p class="title">{{item.name}}</p>
-            <p class="body-2 my-2">
-              <v-chip v-if="item.category.business">Negócios</v-chip>
-              <v-chip v-if="item.category.innovation">Inovação</v-chip>
-              <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
-              <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
-            </p>
-            <p class="body-2">{{item.campus}} - {{item.unity}}</p>
-          </v-container>
-
-          <v-container px-6>
-            <p class="body-1">{{item.description.long}}</p>
-          </v-container>
-
-          <v-card-actions>
-            <v-spacer />
-            <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
-            <v-spacer />
-          </v-card-actions>
-        </template>
-      </SelectAndCard>
-    </div>
+    <DisplayData :items="displayItems" group_name="Disciplinas">
+      <template #title="{ item }">{{ item.name }}</template>
+      <template #detailsText="{ item }">
+        <v-container>
+          <p class="body-2">
+            <v-chip v-if="item.category.business">Negócios</v-chip>
+            <v-chip v-if="item.category.innovation">Inovação</v-chip>
+            <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
+            <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
+          </p>
+          <p class="body-2">{{item.campus}}</p>
+          <p class="body-2">{{item.unity}}</p>
+        </v-container>
+      </template>
+      <template #content="{ item }">
+        <p>{{ item.description.long }}</p>
+      </template>
+      <template #actions="{ item }">
+        <v-btn
+          class="white--text"
+          color="#db8337"
+          :href="item.url"
+          target="_blank"
+        >Saiba Mais</v-btn>
+      </template>
+    </DisplayData>
   </div>
 </template>
 
@@ -72,16 +54,14 @@ import { genFuzzyOptions } from "@/lib/search";
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
-import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
-import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
+import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
     Background,
-    ListAndDetails,
-    SelectAndCard,
     MultipleFilters,
+    DisplayData,
   },
   data: () => ({
     search: {

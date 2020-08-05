@@ -30,7 +30,7 @@
       </ListAndDetails>
     </div>
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="items" group_name="Playground">
+      <SelectAndCard :items="items" :group_name="group_name">
         <template #item="{ item }">
           <v-container>
             <v-row>
@@ -68,6 +68,6 @@ export default {
     SelectAndCard,
     ListAndDetails
   },
-  props: ['items']
+  props: ['items', 'group_name']
 }
 </script>

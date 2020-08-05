@@ -17,29 +17,26 @@
       @select="filters = $event"
     />
 
-    <div class="hidden-sm-and-down">
-      <ListAndDetails :items="displayItems">
-        <template #content="sProps">
-          <p class="body-2">{{ sProps.item.unity }}</p>
-          <p class="body-2 mb-10">{{ sProps.item.campus }}</p>
-
-          <p class="body-2">{{ sProps.item.description.long }}</p>
-        </template>
-
-        <template #buttons="sProps">
-          <v-btn
-            class="white--text"
-            target="_blank"
-            :href="sProps.item.url"
-            color="#005C59"
-          >Saiba Mais</v-btn>
-        </template>
-      </ListAndDetails>
-    </div>
-
-    <div class="hidden-md-and-up">
-      <SelectAndCard group_name="P&D&I" :items="displayItems" />
-    </div>
+    <DisplayData :items="displayItems" group_name="P&D&I">
+      <template #title="{ item }">{{ item.name }}</template>
+      <template #detailsText="{ item }">
+        <p class="body-2 font-italic">{{item.category}}</p>
+        <p class="body-2">{{ item.unity }}</p>
+        <p class="body-2">{{ item.campus }}</p>
+      </template>
+      <template #content="{ item }">
+        {{ item.description.long }}
+      </template>
+      <template #actions="{ item }">
+        <v-btn
+          class="white--text"
+          target="_blank"
+          :href="item.url"
+          color="#005C59">
+          Saiba Mais
+        </v-btn>
+      </template>
+    </DisplayData>
   </div>
 </template>
 
@@ -51,16 +48,14 @@ import { genFuzzyOptions } from "@/lib/search";
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
-import ListAndDetails from "@/components/first_level/ListAndDetails.vue";
-import SelectAndCard from "@/components/first_level/SelectAndCard.vue";
+import DisplayData from '@/components/first_level/DisplayData.vue';
 
 export default {
   components: {
     Panel,
     Background,
-    ListAndDetails,
-    SelectAndCard,
     MultipleFilters,
+    DisplayData
   },
   data: () => ({
     search: {

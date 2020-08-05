@@ -16,7 +16,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems">
+    <DisplayData :items="displayItems" group_name="Competências">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
