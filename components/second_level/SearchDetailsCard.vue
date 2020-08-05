@@ -5,14 +5,14 @@
       <v-card-text>
         <v-list v-if="filtered.length > 0">
           <v-list-item-group>
-            <v-list-item three-line v-for="item in filtered" :key="item.name">
+            <v-list-item three-line v-for="(item, index) in filtered" :key="index">
               <v-list-item-content class="ml-2">
                 <v-list-item-title class="font-weight-bold">{{ item.name }}</v-list-item-title>
                 <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-list-action>
+              <v-list-item-action>
                 <v-chip>{{ item.category }}</v-chip>
-              </v-list-action>
+              </v-list-item-action>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -24,14 +24,14 @@
       <v-card-text>
         <v-list v-if="filtered.length > 0">
           <v-list-item-group>
-            <v-list-item three-line v-for="item in filtered" :key="item.name">
+            <v-list-item three-line v-for="(item, index) in filtered" :key="index">
               <v-list-item-content class="ml-2">
                 <v-list-item-title class="font-weight-bold">{{ item.name }}</v-list-item-title>
                 <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-list-action>
+              <v-list-item-action>
                 <v-chip>{{ item.category }}</v-chip>
-              </v-list-action>
+              </v-list-item-action>
             </v-list-item>
           </v-list-item-group>
         </v-list>

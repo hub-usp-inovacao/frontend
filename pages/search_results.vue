@@ -182,7 +182,6 @@ export default {
   beforeMount() {
     if (this.$route.params.search) {
       this.innerSearch = this.$route.params.search
-      this.fuzzyGlobalSearch();
     }
     else{
       const env = {
