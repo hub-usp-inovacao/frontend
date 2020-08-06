@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="light-orange-bg white--text">
-      <Panel title="Resultados de Busca" searchBarColor="white" v-model="innerSearch"/>
+      <Panel title="Resultados de Busca" searchBarColor="white" @search="changeSearchTerm"/>
     </div>
     <v-container v-if="loading">
       <v-row style="height: 20vh;" align="center" justify="center">
@@ -20,7 +20,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { debounce } from "debounce";
 import { genFuzzyOptions } from "@/lib/search";
 
 import Panel from "@/components/first_level/Panel.vue";
@@ -151,8 +150,7 @@ export default {
   },
   watch: {
     innerSearch(){
-      this.loading = true;
-      this.dispatchSearch();
+      setTimeout(this.dispatchSearch);
     },
   },
   methods: {
@@ -190,15 +188,19 @@ export default {
         });
       });
     },
-    dispatchSearch: debounce(async function () {
+    dispatchSearch: async function () {
       console.log("roda a busca");
       await this.fuzzyGlobalSearch();
       this.loading = false;
-    }, 500)
+    },
+    changeSearchTerm(searchTerm){
+      this.loading = true;
+      this.innerSearch = searchTerm;
+    }
   },
   beforeMount() {
     if (this.$route.params.search) {
-      this.innerSearch = this.$route.params.search
+      this.changeSearchTerm(this.$route.params.search);
     }
     else{
       const env = {

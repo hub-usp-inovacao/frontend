@@ -21,8 +21,8 @@
               rounded
               color="tertiary"
               :label="'Buscar - ' + title"
-              counter="32"
               v-model="value"
+              @keydown.enter="submitSearch"
               append-outer-icon="search"
               :style="setSearchBarWidth"
               :loading="loading"
@@ -63,8 +63,15 @@ export default {
     },
     value: {
       type: String,
-      required: true,
+      required: false,
       default: ""
+    }
+  },
+  methods: {
+    submitSearch(){
+      if (!this.value.trim())
+        return;
+      this.$emit("search", this.value);
     }
   },
   computed: {
