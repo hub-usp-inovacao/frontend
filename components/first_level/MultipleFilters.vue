@@ -45,6 +45,9 @@ export default {
           givenTabs.reduce((acc, tab) => {
             const tabKeys = Object.keys(tab);
 
+            if (!tabKeys.includes("subareas"))
+              return acc && tabKeys.includes("name");
+
             return (
               acc &&
               tabKeys.includes("name") &&
