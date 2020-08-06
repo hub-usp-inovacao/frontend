@@ -20,6 +20,20 @@
 			<div class="my-4 mx-2">inovacao@usp.br</div>
 		</div>
 
+    <v-container>
+      <v-row justify="center">
+        <v-col cols="4" md="1">
+          <v-img :src="require('@/vectors/codelab-ccsl.svg')"></v-img>
+        </v-col>
+        <v-col cols="4" md="1" offset-md="1">
+          <v-img :src="require('@/vectors/auspin-white.svg')"></v-img>
+        </v-col>
+        <v-col cols="4" md="1" offset-md="1">
+          <v-img :src="require('@/vectors/usp-white.svg')"></v-img>
+        </v-col>
+      </v-row>
+    </v-container>
+
 		<p>AUSPIN - {{ new Date().getFullYear() }}</p>
 	</footer>
 </template>
