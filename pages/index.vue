@@ -18,32 +18,51 @@
             <v-row class="fill-height" justify="center">
               <v-col align-self="center" cols="11" sm="10" class="pa-0">
                 <v-container>
-                  <p
-                    class="white--text font-weight-medium"
-                    :class="$breakpoint.smAndDown ? 'display-1' : 'display-2'"
-                  >Portal Solus</p>
+                  <v-row>
+                    <v-col cols="8" offset="1">
+                      <p
+                        class="white--text font-weight-medium"
+                        :class="$breakpoint.smAndDown ? 'display-1' : 'display-2'"
+                      >Portal Solus</p>
+                      <p
+                        class="white--text font-weight-medium ma-0"
+                        :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
+                      >Aqui você encontra as mais diversas informações sobre empreendedorismo e inovação na Universidade de São Paulo</p>
+                    </v-col>
+                  </v-row>
 
-                  <p
-                    class="white--text font-weight-medium ma-0"
-                    :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                  >Aqui você encontra as mais diversas informações sobre empreendedorismo e inovação na Universidade de São Paulo</p>
+                  <v-row class="mt-10">
+                    <v-col offset="1" cols="10">
+                      <p
+                        class="white--text font-weight-light"
+                        :class="$breakpoint.smAndDown ? 'body-2' : 'body-1'"
+                      >Você pode navegar usando as páginas específicas ou fazer uma busca geral utilizando palavras-chave.</p>
 
-                  <p
-                    class="white--text font-weight-light"
-                    :class="$breakpoint.smAndDown ? 'body-2' : 'body-1'"
-                  >Você pode navegar usando as páginas específicas ou fazer uma busca geral utilizando palavras-chave.</p>
+                      <v-text-field
+                        solo
+                        flat
+                        rounded
+                        label="Buscar"
+                        v-model="search"
+                        @keydown.enter="submitSearch"
+                        append-outer-icon="search"
+                        :dense="$breakpoint.smAndDown"
+                        :style="setSearchBarWidth"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
 
-                  <v-text-field
-                    solo
-                    flat
-                    rounded
-                    label="Buscar"
-                    v-model="search"
-                    @keydown.enter="submitSearch"
-                    append-outer-icon="search"
-                    :dense="$breakpoint.smAndDown"
-                    :style="setSearchBarWidth"
-                  ></v-text-field>
+                  <v-row style="height: 30vh" align="center" md-align="end">
+                    <v-col cols="4" md="2" offset-md="1">
+                      <v-img :src="require('@/vectors/codelab-ccsl.svg')"></v-img>
+                    </v-col>
+                    <v-col cols="4" md="2" offset-md="1">
+                      <v-img :src="require('@/vectors/auspin-white.svg')"></v-img>
+                    </v-col>
+                    <v-col cols="4" md="2" offset-md="1">
+                      <v-img :src="require('@/vectors/usp-white.svg')"></v-img>
+                    </v-col>
+                  </v-row>
                 </v-container>
               </v-col>
             </v-row>
