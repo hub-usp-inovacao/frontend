@@ -1,7 +1,9 @@
 <template>
   <div>
     <v-card v-if="hasItem" height="35rem" class="d-flex flex-column">
-      <v-card-title>{{ item.name }}</v-card-title>
+      <v-card-title>
+        <slot name="itemTitle"></slot>
+      </v-card-title>
       <v-card-subtitle>
         <v-chip-group :column="true" v-if="item.keywords && item.keywords.length > 0">
           <v-chip v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>

@@ -2,13 +2,11 @@
   <div>
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="items">
+        <template #itemTitle="{ item }">
+          <slot name="title" :item="item"></slot>
+        </template>
         <template #content="{ item }">
           <v-container>
-            <v-row>
-              <v-col>
-                <slot name="title" :item="item"></slot>
-              </v-col>
-            </v-row>
             <v-row>
               <v-col cols="5">
                 <slot name="detailsText" :item="item"></slot>

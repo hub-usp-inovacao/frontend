@@ -6,6 +6,9 @@
       </v-col>
       <v-col cols="7">
         <DetailsCard :item="selectedItem">
+          <template v-slot:itemTitle>
+            <slot name="itemTitle" v-bind:item="selectedItem"></slot>
+          </template>
           <template v-slot:content>
             <slot name="content" v-bind:item="selectedItem"></slot>
           </template>
