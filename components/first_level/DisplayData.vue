@@ -6,7 +6,7 @@
           <slot name="title" :item="item"></slot>
         </template>
         <template #content="{ item }">
-          <v-container>
+          <v-container :class="containerClass">
             <v-row>
               <v-col cols="5">
                 <slot name="detailsText" :item="item"></slot>
@@ -66,6 +66,11 @@ export default {
     SelectAndCard,
     ListAndDetails
   },
-  props: ['items', 'group_name']
+  props: ['items', 'group_name', "reverse"],
+  computed: {
+    containerClass() {
+      return this.reverse && ['d-flex', 'flex-column-reverse'];
+    }
+  }
 }
 </script>
