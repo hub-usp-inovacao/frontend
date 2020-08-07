@@ -189,12 +189,13 @@ export default {
       });
     },
     dispatchSearch: async function () {
-      console.log("roda a busca");
       await this.fuzzyGlobalSearch();
       this.loading = false;
     },
     changeSearchTerm(searchTerm){
-      this.loading = true;
+      if (searchTerm !== this.innerSearch){
+        this.loading = true;
+      }
       this.innerSearch = searchTerm;
     }
   },
