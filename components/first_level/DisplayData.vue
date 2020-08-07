@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import ListAndDetails from '@/components/first_level/ListAndDetails.vue';
-import SelectAndCard from '@/components/first_level/SelectAndCard.vue';
+import ListAndDetails from '@/components/second_level/ListAndDetails.vue';
+import SelectAndCard from '@/components/second_level/SelectAndCard.vue';
 
 export default {
   components: {

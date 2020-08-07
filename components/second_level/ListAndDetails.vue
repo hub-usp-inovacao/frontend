@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import List from "@/components/second_level/List.vue";
-import DetailsCard from "@/components/second_level/DetailsCard.vue";
+import List from "@/components/deeper_levels/List.vue";
+import DetailsCard from "@/components/deeper_levels/DetailsCard.vue";
 
 export default {
   components: {
