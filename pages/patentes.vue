@@ -17,17 +17,15 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group_name="Patentes">
+    <DisplayData :reverse="true" :items="displayItems" group_name="Patentes">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p>
           <span>Classificação:</span>
           {{ item.classification.primary.cip }}
         </p>
-      </template>
-      <template #content="{ item }">
+
         <p>{{ item.classification.primary.subareas }}</p>
-        <p>{{ item.sumary }}</p>
 
         <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
 
@@ -38,6 +36,9 @@
         />
         <BulletList title="Titulares" :items="item.owners" />
         <BulletList title="Inventores" :items="item.inventors" />
+      </template>
+      <template #content="{ item }">
+        <p>{{ item.sumary }}</p>
       </template>
       <template #actions="{ item }">
         <v-btn
