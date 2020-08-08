@@ -1,9 +1,9 @@
 <template>
   <v-item-group mandatory>
     <v-container>
-      <v-row justify="center" class="ma-0">
+      <v-row justify="center">
         <template v-for="(item,i) in tabs">
-          <v-col :cols="row_length < 6 ? 12 / row_length : ''" :key="item.name">
+          <v-col class="px-1 py-1" :cols="row_length < 6 ? 12 / row_length : ''" :key="item.name">
             <v-item>
               <v-card
                 :color="selected.includes(item.name) ? active : color"
@@ -38,7 +38,7 @@ export default {
       let length;
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          length = 1;
+          length = 2;
           break;
         case "sm":
           length = 2;
