@@ -16,8 +16,8 @@
 		</div>
 		
 		<div class="d-flex flex-column flex-md-row justify-center align-center">
-			<div class="my-4 mx-2">(11) 3091-1234</div>
-			<div class="my-4 mx-2">inovacao@usp.br</div>
+			<div class="my-4 mx-2">(11) 3091-4166</div>
+			<div class="my-4 mx-2">empreende.auspin@usp.br</div>
 		</div>
 
     <v-container>
