@@ -2,9 +2,9 @@
   <div>
     <div class="background">
       <Panel
+        v-model="search.term"
         title="Patentes"
         description="Pesquisadores e unidades da USP desenvolvem patentes e propriedade industrial que estão disponíveis para que empresas e organizações possam licenciar para aplicação e uso. Usando palavras-chave na caixa de busca você terá acesso a breves descrições destas patentes e formas de contato para obter maior detalhamento e informações sobre cada uma delas."
-        v-model="search.term"
       />
     </div>
 
@@ -17,7 +17,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :reverse="true" :items="displayItems" group_name="Patentes">
+    <DisplayData :reverse="true" :items="displayItems" group-name="Patentes">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p>
@@ -27,7 +27,10 @@
 
         <p>{{ item.classification.primary.subareas }}</p>
 
-        <BulletList title="Países com Proteção" :items="item.countriesWithProtection" />
+        <BulletList
+          title="Países com Proteção"
+          :items="item.countriesWithProtection"
+        />
 
         <BulletList
           v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
@@ -42,28 +45,26 @@
       </template>
       <template #actions="{ item }">
         <v-btn
-            color="#64318A"
-            :href="item.url"
-            target="_blank"
-            class="white--text"
-            :disabled="!item.url"
-          >Saiba Mais</v-btn>
+          color="#64318A"
+          :href="item.url"
+          target="_blank"
+          class="white--text"
+          :disabled="!item.url"
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
 </template>
 
 <script>
-import { debounce } from "debounce";
 import { mapActions, mapGetters } from "vuex";
-import { capitalizeName } from "@/lib/format";
 import { genFuzzyOptions } from "@/lib/search";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
-import HorizontalList from "@/components/first_level/HorizontalList.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
@@ -72,8 +73,7 @@ export default {
     Background,
     MultipleFilters,
     BulletList,
-    HorizontalList,
-    DisplayData
+    DisplayData,
   },
   data: () => ({
     search: {
@@ -103,6 +103,62 @@ export default {
       { name: "Física", code: "G" },
     ],
   }),
+  computed: {
+    ...mapGetters({
+      dataStatus: "patentes/dataStatus",
+      patents: "patentes/patents",
+      searchKeys: "patentes/searchKeys",
+    }),
+    searchTerm() {
+      return this.search.term;
+    },
+    tabs() {
+      return this.rawTabs.map((tab) => {
+        const subareas = this.patents.reduce((acc, pat) => {
+          if (pat.classification.primary.cip.substr(0, 1) == tab.code) {
+            acc.add(pat.classification.primary.subarea);
+          }
+
+          if (pat.classification.secondary.cip.substr(0, 1) == tab.code) {
+            acc.add(pat.classification.secondary.subarea);
+          }
+
+          return acc;
+        }, new Set());
+
+        return {
+          ...tab,
+          subareas: Array.from(subareas),
+        };
+      });
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.patents;
+    },
+    displayItems() {
+      return this.search.patents !== undefined
+        ? this.search.patents
+        : this.baseItems;
+    },
+  },
+  watch: {
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    },
+  },
+  beforeMount() {
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID,
+    };
+
+    if (this.dataStatus == "ok" && this.patents.length == 0) {
+      this.fetchSpreadsheets(env);
+    }
+  },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets",
@@ -168,66 +224,9 @@ export default {
       );
     },
     async pipeline() {
-      if (this.filters)
-        await this.filterData(this.filters);
+      if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
-    }
-  },
-  watch: {
-    searchTerm() {
-      this.pipeline();
     },
-    filters() {
-      this.pipeline();
-    }
-  },
-  computed: {
-    ...mapGetters({
-      dataStatus: "patentes/dataStatus",
-      patents: "patentes/patents",
-      searchKeys: "patentes/searchKeys",
-    }),
-    searchTerm() {
-      return this.search.term;
-    },
-    tabs() {
-      return this.rawTabs.map((tab) => {
-        const subareas = this.patents.reduce((acc, pat) => {
-          if (pat.classification.primary.cip.substr(0, 1) == tab.code) {
-            acc.add(pat.classification.primary.subarea);
-          }
-
-          if (pat.classification.secondary.cip.substr(0, 1) == tab.code) {
-            acc.add(pat.classification.secondary.subarea);
-          }
-
-          return acc;
-        }, new Set());
-
-        return {
-          ...tab,
-          subareas: Array.from(subareas),
-        };
-      });
-    },
-    baseItems() {
-      return this.filtered !== undefined ? this.filtered : this.patents;
-    },
-    displayItems() {
-      return this.search.patents !== undefined
-        ? this.search.patents
-        : this.baseItems;
-    },
-  },
-  beforeMount() {
-    const env = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
-
-    if (this.dataStatus == "ok" && this.patents.length == 0) {
-      this.fetchSpreadsheets(env);
-    }
   },
 };
 </script>

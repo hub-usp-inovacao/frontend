@@ -7,11 +7,24 @@
     :show-arrows="false"
     :height="carouselHeight"
   >
-    <v-carousel-item v-for="(nowDisplaying, i) in displayCompanies.nowDisplaying" :key="i">
+    <v-carousel-item
+      v-for="(nowDisplaying, i) in displayCompanies.nowDisplaying"
+      :key="i"
+    >
       <v-container>
         <v-row>
-          <v-col :cols="displayCompanies.cols" v-for="({ name, src }) in nowDisplaying" :key="name">
-            <v-img eager class="mx-auto" width="20rem" height="auto" :src="src"></v-img>
+          <v-col
+            v-for="{ name, src } in nowDisplaying"
+            :key="name"
+            :cols="displayCompanies.cols"
+          >
+            <v-img
+              eager
+              class="mx-auto"
+              width="20rem"
+              height="auto"
+              :src="src"
+            ></v-img>
           </v-col>
         </v-row>
       </v-container>
@@ -89,18 +102,26 @@ export default {
       };
     },
     carouselHeight() {
+      let val;
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          return "20rem";
+          val = "20rem";
+          break;
         case "sm":
-          return "20rem";
+          val = "20rem";
+          break;
         case "md":
-          return "25rem";
+          val = "25rem";
+          break;
         case "lg":
-          return "30rem";
+          val = "30rem";
+          break;
         case "xl":
-          return "30rem";
+          val = "30rem";
+          break;
       }
+
+      return val;
     },
   },
 };

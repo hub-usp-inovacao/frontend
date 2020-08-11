@@ -3,19 +3,28 @@
     <v-container class="hidden-sm-and-down">
       <v-row>
         <v-col cols="2">
-          <SearchFilterCard :categories="categories" @select="selected = $event" />
+          <SearchFilterCard
+            :categories="categories"
+            @select="selected = $event"
+          />
         </v-col>
         <v-col cols="10">
-          <SearchDetailsCard :searchedTerm="searchedTerm" :filtered="filtered" />
+          <SearchDetailsCard
+            :searched-term="searchedTerm"
+            :filtered="filtered"
+          />
         </v-col>
       </v-row>
     </v-container>
     <v-container class="hidden-md-and-up">
       <v-row>
-        <SearchFilterCard :categories="categories" @select="selected = $event" />
+        <SearchFilterCard
+          :categories="categories"
+          @select="selected = $event"
+        />
       </v-row>
       <v-row>
-        <SearchDetailsCard :searchedTerm="searchedTerm" :filtered="filtered" />
+        <SearchDetailsCard :searched-term="searchedTerm" :filtered="filtered" />
       </v-row>
     </v-container>
   </div>
@@ -30,6 +39,16 @@ export default {
     SearchFilterCard,
     SearchDetailsCard,
   },
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+    searchedTerm: {
+      type: String,
+      default: () => "",
+    },
+  },
   data: () => ({
     categories: [
       "Educação",
@@ -41,7 +60,6 @@ export default {
     ],
     selected: [],
   }),
-  props: ["items", "searchedTerm"],
   computed: {
     filtered() {
       if (this.selected.length == 0) {
@@ -54,5 +72,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

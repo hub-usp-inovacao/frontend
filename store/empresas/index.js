@@ -11,10 +11,7 @@ const rowToObj = (row) => ({
   url: formatURL(columnValue(row, "AJ")),
   category: {
     code: columnValue(row, "AL").substr(0, 2),
-    name: columnValue(row, "AL")
-      .split(" ")
-      .slice(1)
-      .join(" "),
+    name: columnValue(row, "AL").split(" ").slice(1).join(" "),
   },
   technologies: columnValue(row, "AM"),
   incubated: columnValue(row, "AN") != "Não" && columnValue(row, "AN") != ".",

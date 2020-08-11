@@ -4,7 +4,7 @@
       <v-col cols="2">
         <span>{{ title }}</span>
       </v-col>
-      <v-col cols="2" v-for="item in items" :key="item">
+      <v-col v-for="item in items" :key="item" cols="2">
         <span class="black--text">{{ item }}</span>
       </v-col>
     </v-row>
@@ -13,6 +13,15 @@
 
 <script>
 export default {
-  props: ["items", "title"],
+  props: {
+    items: {
+      type: Array,
+      default: () => [],
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>

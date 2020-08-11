@@ -2,7 +2,12 @@
   <div>
     <v-app>
       <v-container fluid mt-12>
-        <v-row class="ma-0 mt-12" align="center" justify="space-around" no-gutters>
+        <v-row
+          class="ma-0 mt-12"
+          align="center"
+          justify="space-around"
+          no-gutters
+        >
           <v-col>
             <v-row class="ma-0" justify="center">
               <v-col cols="12" sm="9">
@@ -16,7 +21,7 @@
 
       <v-container>
         <v-row class="center">
-          <template v-for="(icon,i) in icons">
+          <template v-for="(icon, i) in icons">
             <v-col :key="icon.label">
               <v-container>
                 <v-row align="center">
@@ -24,12 +29,18 @@
                     <v-icon size="60px">{{ icon.label }}</v-icon>
                   </v-btn>
 
-                  <p class="mb-0 title font-weight-regular">{{icon.description}}</p>
+                  <p class="mb-0 title font-weight-regular">
+                    {{ icon.description }}
+                  </p>
                 </v-row>
               </v-container>
             </v-col>
 
-            <v-responsive v-if="i == 2" :key="`width-${i}`" width="100%"></v-responsive>
+            <v-responsive
+              v-if="i == 2"
+              :key="`width-${i}`"
+              width="100%"
+            ></v-responsive>
           </template>
         </v-row>
       </v-container>
@@ -37,24 +48,34 @@
       <v-container>
         <v-row justify="center">
           <v-col cols="5">
-            <p
-              class="mb-0 title font-weight-light"
-            >Caso você tenha interesse de ter a sua inovação, estrutura, competência, empresa ou patente dentro do portal, basta clicar no botão ao lado:</p>
+            <p class="mb-0 title font-weight-light">
+              Caso você tenha interesse de ter a sua inovação, estrutura,
+              competência, empresa ou patente dentro do portal, basta clicar no
+              botão ao lado:
+            </p>
           </v-col>
 
           <v-col cols="5">
             <v-card height="10rem" color="secondary">
               <v-container fill-height>
                 <v-row justify="center" align="center">
-                  <v-btn x-large rounded depressed color="rgba(175, 236, 255, 0.4)">
-                    <span class="white--text font-weight-black">CLIQUE AQUI</span>
+                  <v-btn
+                    x-large
+                    rounded
+                    depressed
+                    color="rgba(175, 236, 255, 0.4)"
+                  >
+                    <span class="white--text font-weight-black"
+                      >CLIQUE AQUI</span
+                    >
                   </v-btn>
                 </v-row>
               </v-container>
             </v-card>
-            <p
-              class="caption font-italic font-weight-light"
-            >A AUSPIN analisará sua solicitação e tomará as providências adequadas no menor tempo possível.</p>
+            <p class="caption font-italic font-weight-light">
+              A AUSPIN analisará sua solicitação e tomará as providências
+              adequadas no menor tempo possível.
+            </p>
           </v-col>
         </v-row>
       </v-container>
@@ -63,12 +84,7 @@
 </template>
 
 <script>
-import Panel from "@/components/first_level/Panel.vue";
-
 export default {
-  components: {
-    Panel,
-  },
   data: () => ({
     icons: [
       {

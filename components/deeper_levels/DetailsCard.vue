@@ -5,7 +5,10 @@
         <slot name="itemTitle"></slot>
       </v-card-title>
       <v-card-subtitle>
-        <v-chip-group :column="true" v-if="item.keywords && item.keywords.length > 0">
+        <v-chip-group
+          v-if="item.keywords && item.keywords.length > 0"
+          :column="true"
+        >
           <v-chip v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
         </v-chip-group>
       </v-card-subtitle>
@@ -17,7 +20,7 @@
       </v-card-actions>
     </v-card>
     <v-card v-else height="35rem" class="d-flex flex-column justify-center">
-      <not-found></not-found>
+      <NotFound></NotFound>
     </v-card>
   </div>
 </template>
@@ -29,7 +32,12 @@ export default {
   components: {
     NotFound,
   },
-  props: ["item"],
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
     hasItem() {
       return this.item !== null && this.item !== undefined;

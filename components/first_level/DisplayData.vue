@@ -28,7 +28,7 @@
       </ListAndDetails>
     </div>
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="items" :group_name="group_name">
+      <SelectAndCard :items="items" :group-name="groupName">
         <template #item="{ item }">
           <v-container>
             <v-row>
@@ -58,19 +58,32 @@
 </template>
 
 <script>
-import ListAndDetails from '@/components/second_level/ListAndDetails.vue';
-import SelectAndCard from '@/components/second_level/SelectAndCard.vue';
+import ListAndDetails from "@/components/second_level/ListAndDetails.vue";
+import SelectAndCard from "@/components/second_level/SelectAndCard.vue";
 
 export default {
   components: {
     SelectAndCard,
-    ListAndDetails
+    ListAndDetails,
   },
-  props: ['items', 'group_name', "reverse"],
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+    groupName: {
+      type: String,
+      required: true,
+    },
+    reverse: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
   computed: {
     containerClass() {
-      return this.reverse && ['d-flex', 'flex-column-reverse'];
-    }
-  }
-}
+      return this.reverse && ["d-flex", "flex-column-reverse"];
+    },
+  },
+};
 </script>

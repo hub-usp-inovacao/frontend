@@ -2,9 +2,9 @@
   <div>
     <div class="background">
       <Panel
+        v-model="search.term"
         title="Iniciativas"
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de inicativas e acessar as formas de contatar cada uma delas."
-        v-model="search.term"
       />
     </div>
 
@@ -16,12 +16,14 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="display_entries" group_name="Iniciativas">
+    <DisplayData :items="display_entries" group-name="Iniciativas">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2 mb-4">{{ item.local }}</p>
-        <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">{{ phone }}</p>
+        <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">
+          {{ phone }}
+        </p>
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
@@ -32,14 +34,14 @@
           target="_blank"
           color="#222c63"
           class="white--text"
-          >Saiba Mais</v-btn>
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
 </template>
 
 <script>
-import { debounce } from "debounce";
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 
@@ -53,7 +55,7 @@ export default {
     Panel,
     Background,
     MultipleFilters,
-    DisplayData
+    DisplayData,
   },
   data: () => ({
     tabs: [
@@ -73,13 +75,13 @@ export default {
         name: "Espaço/Coworking",
       },
       {
-        name: "Grupos e Iniciativas Estudantis"
+        name: "Grupos e Iniciativas Estudantis",
       },
       {
-        name: "Ideação"
+        name: "Ideação",
       },
       {
-        name: "Incubadora e Parque Tecnológico"
+        name: "Incubadora e Parque Tecnológico",
       },
     ],
 
@@ -91,6 +93,42 @@ export default {
     filters: undefined,
     filtered: undefined,
   }),
+  computed: {
+    ...mapGetters({
+      iniciatives: "iniciativas/iniciatives",
+      dataStatus: "iniciativas/dataStatus",
+      searchKeys: "iniciativas/searchKeys",
+    }),
+    searchTerm() {
+      return this.search.term;
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.iniciatives;
+    },
+    display_entries() {
+      return this.search.iniciatives !== undefined
+        ? this.search.iniciatives
+        : this.baseItems;
+    },
+  },
+  watch: {
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    },
+  },
+  beforeMount() {
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID,
+    };
+
+    if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
+      this.fetchSpreadsheets(env);
+    }
+  },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "iniciativas/fetchSpreadsheets",
@@ -122,47 +160,9 @@ export default {
       );
     },
     async pipeline() {
-      if (this.filters)
-        await this.filterData(this.filters);
+      if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
-    }
-  },
-  watch: {
-    searchTerm() {
-      this.pipeline();
     },
-    filters() {
-      this.pipeline();
-    }
-  },
-  computed: {
-    ...mapGetters({
-      iniciatives: "iniciativas/iniciatives",
-      dataStatus: "iniciativas/dataStatus",
-      searchKeys: "iniciativas/searchKeys",
-    }),
-    searchTerm() {
-      return this.search.term;
-    },
-    baseItems() {
-      return this.filtered !== undefined ? this.filtered : this.iniciatives;
-    },
-    display_entries() {
-      return this.search.iniciatives !== undefined
-        ? this.search.iniciatives
-        : this.baseItems;
-    },
-  },
-  beforeMount() {
-    const env = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
-
-    if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
-      this.fetchSpreadsheets(env);
-    }
   },
 };
 </script>
-

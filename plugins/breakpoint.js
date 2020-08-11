@@ -17,28 +17,29 @@ const defaults = {
   lgAndDown: true,
   lgAndUp: false,
   xl: false,
-  xlOnly: false
-}
+  xlOnly: false,
+};
 
 let breakpoint = new Vue({
-  data: () => ({ ...defaults })
-})
+  data: () => ({ ...defaults }),
+});
 
 //create a property on the prototype of all instances that holds the breakpoint state
-Vue.prototype.$breakpoint = breakpoint
+Vue.prototype.$breakpoint = breakpoint;
 
+// eslint-disable-next-line no-unused-vars
 export default async function ({ app }, inject) {
   //init mixins and the watchers if they don't exist yet
-  app.mixins = app.mixins || []
-  app.watch = app.watch || {}
+  app.mixins = app.mixins || [];
+  app.watch = app.watch || {};
 
   //create a watcher for each breakpoint
   for (const prop in defaults) {
     //the watcher sets the breakpoint prop to cause an update
     app.watch[`$vuetify.breakpoint.${prop}`] = function (value) {
       //update our mirrored value properly
-      this.$breakpoint[prop] = value
-    }
+      this.$breakpoint[prop] = value;
+    };
   }
 
   //add a mixin that does the client prop setting
@@ -48,8 +49,8 @@ export default async function ({ app }, inject) {
       //for all props that we are processing
       for (const prop in defaults) {
         //set the initial value from vuetify
-        this.$breakpoint[prop] = this.$vuetify.breakpoint[prop]
+        this.$breakpoint[prop] = this.$vuetify.breakpoint[prop];
       }
-    }
-  })
-} 
+    },
+  });
+}

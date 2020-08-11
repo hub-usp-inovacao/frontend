@@ -1,20 +1,25 @@
 <template>
   <div>
     <div class="light-orange-bg white--text">
-      <Panel title="Resultados de Busca" searchBarColor="white" @search="changeSearchTerm"/>
+      <Panel
+        title="Resultados de Busca"
+        search-bar-color="white"
+        @search="changeSearchTerm"
+      />
     </div>
     <v-container v-if="loading">
       <v-row style="height: 20vh;" align="center" justify="center">
         <v-col align="center">
           <v-progress-circular
-          :size="100"
-          :width="8"
-          color="secondary"
-          indeterminate></v-progress-circular>
+            :size="100"
+            :width="8"
+            color="secondary"
+            indeterminate
+          ></v-progress-circular>
         </v-col>
       </v-row>
     </v-container>
-    <SearchFiltersAndResult v-else :searchedTerm="search" :items="results" />
+    <SearchFiltersAndResult v-else :searched-term="search" :items="results" />
   </div>
 </template>
 
@@ -53,7 +58,7 @@ export default {
     searched_patents: undefined,
 
     innerSearch: "",
-    loading: false
+    loading: false,
   }),
   computed: {
     ...mapGetters({
@@ -149,9 +154,43 @@ export default {
     },
   },
   watch: {
-    innerSearch(){
+    innerSearch() {
       setTimeout(this.dispatchSearch);
     },
+  },
+  beforeMount() {
+    if (this.$route.params.search) {
+      this.changeSearchTerm(this.$route.params.search);
+    } else {
+      const env = {
+        sheetsAPIKey: process.env.sheetsAPIKey,
+        sheetID: process.env.sheetID,
+      };
+
+      if (this.eduStatus == "ok" && this.disciplines.length == 0) {
+        this.fetchDisciplines(env);
+      }
+
+      if (this.pdiStatus == "ok" && this.pdis.length == 0) {
+        this.fetchPDIs(env);
+      }
+
+      if (this.skillsStatus == "ok" && this.skills.length == 0) {
+        this.fetchSkills(env);
+      }
+
+      if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
+        this.fetchIniciatives(env);
+      }
+
+      if (this.patentsStatus == "ok" && this.patents.length == 0) {
+        this.fetchPatents(env);
+      }
+
+      if (this.companiesStatus == "ok" && this.companies.length == 0) {
+        this.fetchCompanies(env);
+      }
+    }
   },
   methods: {
     ...mapActions({
@@ -192,47 +231,12 @@ export default {
       await this.fuzzyGlobalSearch();
       this.loading = false;
     },
-    changeSearchTerm(searchTerm){
-      if (searchTerm !== this.innerSearch){
+    changeSearchTerm(searchTerm) {
+      if (searchTerm !== this.innerSearch) {
         this.loading = true;
       }
       this.innerSearch = searchTerm;
-    }
-  },
-  beforeMount() {
-    if (this.$route.params.search) {
-      this.changeSearchTerm(this.$route.params.search);
-    }
-    else{
-      const env = {
-        sheetsAPIKey: process.env.sheetsAPIKey,
-        sheetID: process.env.sheetID,
-      };
-
-      if (this.eduStatus == "ok" && this.disciplines.length == 0) {
-        this.fetchDisciplines(env);
-      }
-
-      if (this.pdiStatus == "ok" && this.pdis.length == 0) {
-        this.fetchPDIs(env);
-      }
-
-      if (this.skillsStatus == "ok" && this.skills.length == 0) {
-        this.fetchSkills(env);
-      }
-
-      if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
-        this.fetchIniciatives(env);
-      }
-
-      if (this.patentsStatus == "ok" && this.patents.length == 0) {
-        this.fetchPatents(env);
-      }
-
-      if (this.companiesStatus == "ok" && this.companies.length == 0) {
-        this.fetchCompanies(env);
-      }
-    }
+    },
   },
 };
 </script>

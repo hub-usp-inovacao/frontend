@@ -2,10 +2,10 @@
   <div>
     <div class="background">
       <Panel
+        v-model="search.term"
         title="Empresas"
         description="Incubadoras e outras estruturas da Universidade facilitam a criação de empresas e negócios por parte de estudantes e pesquisadores. Estas são as empresas com DNA USP que estão organizadas, no Portal Solus, por áreas de atuação e tecnologias aplicáveis. Com o nosso mecanismo de busca, é possível consultar as empresas por palavras-chave ou CNAEs (Classificação Nacional de Atividades Econômicas)."
         url="https://forms.gle/LjSkgb46xqcQdkkv6"
-        v-model="search.term"
       />
       <USPDNA />
     </div>
@@ -19,7 +19,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group_name="Empresas">
+    <DisplayData :items="displayItems" group-name="Empresas">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
@@ -28,12 +28,16 @@
         </v-container>
       </template>
       <template #detailsImg="{ item }">
-        <v-img eager v-if="item.logo" :src="item.logo"></v-img>
+        <v-img v-if="item.logo" eager :src="item.logo"></v-img>
       </template>
       <template #content="{ item }">
         <p v-if="item.incubated">
-          <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
-          <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
+          <span class="font-weight-bold"
+            >Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span
+          >
+          <span v-for="incub of item.ecosystems" :key="incub"
+            >{{ incub }};&nbsp;</span
+          >
         </p>
 
         <p>
@@ -52,7 +56,13 @@
         </p>
       </template>
       <template #actions="{ item }">
-        <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
+        <v-btn
+          class="white--text"
+          color="#2bc570"
+          :href="item.url"
+          target="_blank"
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
@@ -60,8 +70,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { debounce } from "debounce";
-import { capitalizeName } from "@/lib/format";
 import { genFuzzyOptions } from "@/lib/search";
 
 import Background from "@/components/first_level/Background.vue";
@@ -289,76 +297,6 @@ export default {
       companies: undefined,
     },
   }),
-  methods: {
-    ...mapActions({
-      fetchSpreadsheets: "empresas/fetchSpreadsheets",
-    }),
-    filterFun(item, { primary, secondary, terciary }) {
-      let primaryMatch, secondaryMatch, terciaryMatch;
-
-      if (primary.length == 0) {
-        primaryMatch = true;
-      } else {
-        primaryMatch = primary
-          .reduce(
-            (codes, p) =>
-              codes.concat(
-                this.baseTabs.find(({ name }) => name === p).CNAECodes
-              ),
-            []
-          )
-          .includes(item.category.code);
-      }
-
-      if (secondary.length == 0) {
-        secondaryMatch = true;
-      } else {
-        secondaryMatch = secondary
-          .reduce((codes, s) => codes.concat(this.reverseCNAEmap[s]), [])
-          .includes(item.category.code);
-      }
-
-      const [city, incubator] = terciary;
-
-      terciaryMatch = true;
-
-      if (incubator) {
-        terciaryMatch = terciaryMatch && item.ecosystems.includes(incubator);
-      }
-
-      return primaryMatch && secondaryMatch && terciaryMatch;
-    },
-    filterData(context) {
-      this.filtered = this.companies.filter((item) =>
-        this.filterFun(item, context)
-      );
-    },
-    async fuzzySearch() {
-      if (!this.search.term.trim()) {
-        this.search.companies = undefined;
-        return;
-      }
-
-      this.search.companies = await this.$search(
-        this.search.term.trim(),
-        this.baseItems,
-        genFuzzyOptions(this.searchKeys)
-      );
-    },
-    async pipeline() {
-      if (this.filters)
-        await this.filterData(this.filters)
-      await this.fuzzySearch();
-    }
-  },
-  watch: {
-    searchTerm() {
-      this.pipeline();
-    },
-    filters() {
-      this.pipeline();
-    },
-  },
   computed: {
     ...mapGetters({
       dataStatus: "empresas/dataStatus",
@@ -413,7 +351,7 @@ export default {
             .toLocaleLowerCase()
             .replace(/\(.+\)/, "")
             .replace(/^sao /, "são")
-            .replace(/\ +/, " ")
+            .replace(/ +/, " ")
             .trim()
         )
         .filter((city) => city.length >= 0)
@@ -433,6 +371,14 @@ export default {
       ];
     },
   },
+  watch: {
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    },
+  },
   beforeMount() {
     if (this.dataStatus == "ok" && this.companies.length == 0) {
       this.fetchSpreadsheets({
@@ -440,6 +386,67 @@ export default {
         sheetID: process.env.sheetID,
       });
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchSpreadsheets: "empresas/fetchSpreadsheets",
+    }),
+    filterFun(item, { primary, secondary, terciary }) {
+      let primaryMatch, secondaryMatch, terciaryMatch;
+
+      if (primary.length == 0) {
+        primaryMatch = true;
+      } else {
+        primaryMatch = primary
+          .reduce(
+            (codes, p) =>
+              codes.concat(
+                this.baseTabs.find(({ name }) => name === p).CNAECodes
+              ),
+            []
+          )
+          .includes(item.category.code);
+      }
+
+      if (secondary.length == 0) {
+        secondaryMatch = true;
+      } else {
+        secondaryMatch = secondary
+          .reduce((codes, s) => codes.concat(this.reverseCNAEmap[s]), [])
+          .includes(item.category.code);
+      }
+
+      const incubator = terciary[1];
+
+      terciaryMatch = true;
+
+      if (incubator) {
+        terciaryMatch = terciaryMatch && item.ecosystems.includes(incubator);
+      }
+
+      return primaryMatch && secondaryMatch && terciaryMatch;
+    },
+    filterData(context) {
+      this.filtered = this.companies.filter((item) =>
+        this.filterFun(item, context)
+      );
+    },
+    async fuzzySearch() {
+      if (!this.search.term.trim()) {
+        this.search.companies = undefined;
+        return;
+      }
+
+      this.search.companies = await this.$search(
+        this.search.term.trim(),
+        this.baseItems,
+        genFuzzyOptions(this.searchKeys)
+      );
+    },
+    async pipeline() {
+      if (this.filters) await this.filterData(this.filters);
+      await this.fuzzySearch();
+    },
   },
 };
 </script>

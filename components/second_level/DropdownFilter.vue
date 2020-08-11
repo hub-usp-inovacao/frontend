@@ -9,25 +9,29 @@
     <v-row class="hidden-sm-and-down">
       <v-col v-for="({ label, items }, i) of groups" :key="i" :cols="colSize">
         <v-select
+          v-model="selected[i]"
           :no-data-text="noData"
           menu-props="auto"
           :label="label"
           :items="items"
           clearable
-          v-model="selected[i]"
         ></v-select>
       </v-col>
     </v-row>
 
-    <v-row class="hidden-md-and-up" v-for="({ label, items }, i ) of groups" :key="i">
+    <v-row
+      v-for="({ label, items }, i) of groups"
+      :key="i"
+      class="hidden-md-and-up"
+    >
       <v-col cols="12">
         <v-select
+          v-model="selected[i]"
           :no-data-text="noData"
           menu-props="auto"
           :label="label"
           :items="items"
           clearable
-          v-model="selected[i]"
         ></v-select>
       </v-col>
     </v-row>
@@ -36,12 +40,10 @@
 
 <script>
 export default {
-  data: () => ({
-    selected: [],
-    noData: "em construção",
-  }),
   props: {
     groups: {
+      type: Array,
+      required: true,
       validator(value) {
         return (
           value instanceof Array &&
@@ -54,6 +56,10 @@ export default {
       },
     },
   },
+  data: () => ({
+    selected: [],
+    noData: "em construção",
+  }),
   computed: {
     colSize() {
       const nGroups = this.groups.length;

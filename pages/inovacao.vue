@@ -2,10 +2,10 @@
   <div>
     <div class="background">
       <Panel
+        v-model="search.term"
         title="P&amp;D&amp;I"
         description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
         url="https://forms.gle/3z4Vn3ewgP6UKJey6"
-        v-model="search.term"
       />
     </div>
 
@@ -17,10 +17,10 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group_name="P&D&I">
+    <DisplayData :items="displayItems" group-name="P&D&I">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
-        <p class="body-2 font-italic">{{item.category}}</p>
+        <p class="body-2 font-italic">{{ item.category }}</p>
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2">{{ item.campus }}</p>
       </template>
@@ -32,7 +32,8 @@
           class="white--text"
           target="_blank"
           :href="item.url"
-          color="#005C59">
+          color="#005C59"
+        >
           Saiba Mais
         </v-btn>
       </template>
@@ -41,21 +42,20 @@
 </template>
 
 <script>
-import { debounce } from "debounce";
 import { mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
-import DisplayData from '@/components/first_level/DisplayData.vue';
+import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
     Background,
     MultipleFilters,
-    DisplayData
+    DisplayData,
   },
   data: () => ({
     search: {
@@ -97,6 +97,42 @@ export default {
     filters: undefined,
     filtered: undefined,
   }),
+  computed: {
+    ...mapGetters({
+      dataStatus: "pdi/dataStatus",
+      storePDIs: "pdi/pdis",
+      searchKeys: "pdi/searchKeys",
+    }),
+    searchTerm() {
+      return this.search.term;
+    },
+    pdis: function () {
+      return this.dataStatus == "ok" ? this.storePDIs : [];
+    },
+    baseItems: function () {
+      return this.filtered !== undefined ? this.filtered : this.pdis;
+    },
+    displayItems() {
+      return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
+    },
+  },
+  watch: {
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    },
+  },
+  beforeMount() {
+    const payload = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID,
+    };
+
+    if (this.dataStatus == "ok" && this.pdis.length == 0)
+      this.$store.dispatch("pdi/fetchSpreadsheets", payload);
+  },
   methods: {
     async fuzzySearch() {
       if (!this.search.term.trim()) {
@@ -123,49 +159,11 @@ export default {
       this.filtered = this.pdis.filter((item) => this.filterFun(item, context));
     },
     async pipeline() {
-      if (this.filters)
-        await this.filterData(this.filters);
+      if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
-    }
-  },
-  watch: {
-    searchTerm() {
-      this.pipeline();
     },
-    filters() {
-      this.pipeline();
-    }
-  },
-  computed: {
-    ...mapGetters({
-      dataStatus: "pdi/dataStatus",
-      storePDIs: "pdi/pdis",
-      searchKeys: "pdi/searchKeys",
-    }),
-    searchTerm() {
-      return this.search.term;
-    },
-    pdis: function () {
-      return this.dataStatus == "ok" ? this.storePDIs : [];
-    },
-    baseItems: function () {
-      return this.filtered !== undefined ? this.filtered : this.pdis;
-    },
-    displayItems() {
-      return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
-    },
-  },
-  beforeMount() {
-    const payload = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
-
-    if (this.dataStatus == "ok" && this.pdis.length == 0)
-      this.$store.dispatch("pdi/fetchSpreadsheets", payload);
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

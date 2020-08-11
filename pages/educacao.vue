@@ -2,9 +2,9 @@
   <div>
     <div class="background">
       <Panel
+        v-model="search.term"
         title="Educação"
         description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento e códigos e links para acesso às ementas no sistema institucional da Universidade, o Júpiter."
-        v-model="search.term"
       />
     </div>
 
@@ -17,18 +17,22 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group_name="Disciplinas">
+    <DisplayData :items="displayItems" group-name="Disciplinas">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
           <p class="body-2">
             <v-chip v-if="item.category.business">Negócios</v-chip>
             <v-chip v-if="item.category.innovation">Inovação</v-chip>
-            <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
-            <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
+            <v-chip v-if="item.category.intelectual_property"
+              >Propriedade Intelectual</v-chip
+            >
+            <v-chip v-if="item.category.enterpreneuship"
+              >Empreendedorismo</v-chip
+            >
           </p>
-          <p class="body-2">{{item.campus}}</p>
-          <p class="body-2">{{item.unity}}</p>
+          <p class="body-2">{{ item.campus }}</p>
+          <p class="body-2">{{ item.unity }}</p>
         </v-container>
       </template>
       <template #content="{ item }">
@@ -40,14 +44,14 @@
           color="#db8337"
           :href="item.url"
           target="_blank"
-        >Saiba Mais</v-btn>
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
 </template>
 
 <script>
-import { debounce } from "debounce";
 import { mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 
@@ -103,6 +107,51 @@ export default {
     filters: undefined,
     filtered: undefined,
   }),
+  computed: {
+    ...mapGetters({
+      dataStatus: "educacao/dataStatus",
+      storeDisciplines: "educacao/disciplines",
+      campi: "educacao/campi",
+      searchKeys: "educacao/searchKeys",
+    }),
+    disciplines: function () {
+      return this.dataStatus == "ok" ? this.storeDisciplines : [];
+    },
+    groups() {
+      return [
+        { label: "Campus", items: this.campi },
+        { label: "Nível", items: ["Graduação", "Pós-Graduação"] },
+      ];
+    },
+    baseItems() {
+      return this.filtered !== undefined ? this.filtered : this.disciplines;
+    },
+    displayItems() {
+      return this.search.disciplines !== undefined
+        ? this.search.disciplines
+        : this.baseItems;
+    },
+    searchTerm() {
+      return this.search.term;
+    },
+  },
+  watch: {
+    searchTerm() {
+      this.pipeline();
+    },
+    filters() {
+      this.pipeline();
+    },
+  },
+  beforeMount() {
+    const payload = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      sheetID: process.env.sheetID,
+    };
+
+    if (this.dataStatus == "ok" && this.disciplines.length == 0)
+      this.$store.dispatch("educacao/fetchSpreadsheets", payload);
+  },
   methods: {
     filterFun(elm, filterStatus) {
       const { primary, terciary } = filterStatus;
@@ -148,55 +197,9 @@ export default {
       );
     },
     async pipeline() {
-      if (this.filters)
-        await this.filterData(this.filters);
+      if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
-    }
-  },
-  computed: {
-    ...mapGetters({
-      dataStatus: "educacao/dataStatus",
-      storeDisciplines: "educacao/disciplines",
-      campi: "educacao/campi",
-      searchKeys: "educacao/searchKeys",
-    }),
-    disciplines: function () {
-      return this.dataStatus == "ok" ? this.storeDisciplines : [];
     },
-    groups() {
-      return [
-        { label: "Campus", items: this.campi },
-        { label: "Nível", items: ["Graduação", "Pós-Graduação"] },
-      ];
-    },
-    baseItems() {
-      return this.filtered !== undefined ? this.filtered : this.disciplines;
-    },
-    displayItems() {
-      return this.search.disciplines !== undefined
-        ? this.search.disciplines
-        : this.baseItems;
-    },
-    searchTerm() {
-      return this.search.term;
-    }
-  },
-  watch: {
-    searchTerm() {
-      this.pipeline();
-    },
-    filters() {
-      this.pipeline();
-    }
-  },
-  beforeMount() {
-    const payload = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
-
-    if (this.dataStatus == "ok" && this.disciplines.length == 0)
-      this.$store.dispatch("educacao/fetchSpreadsheets", payload);
   },
 };
 </script>

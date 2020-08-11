@@ -3,28 +3,30 @@
     <v-card class="hidden-sm-and-down" min-height="18rem">
       <v-card-title>Filtros:</v-card-title>
       <v-card-text>
-        <v-chip-group :column="true" :multiple="true" v-model="selected">
+        <v-chip-group v-model="selected" :column="true" :multiple="true">
           <v-chip
             v-for="category in categories"
             :key="category"
             :value="category"
             filter
             outlined
-          >{{ category }}</v-chip>
+            >{{ category }}</v-chip
+          >
         </v-chip-group>
       </v-card-text>
     </v-card>
     <v-card class="hidden-md-and-up mb-4">
       <v-card-title>Filtros:</v-card-title>
       <v-card-text>
-        <v-chip-group :column="true" :multiple="true" v-model="selected">
+        <v-chip-group v-model="selected" :column="true" :multiple="true">
           <v-chip
             v-for="category in categories"
             :key="category"
             :value="category"
             filter
             outlined
-          >{{ category }}</v-chip>
+            >{{ category }}</v-chip
+          >
         </v-chip-group>
       </v-card-text>
     </v-card>
@@ -33,14 +35,19 @@
 
 <script>
 export default {
-  props: ["categories"],
+  props: {
+    categories: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data: () => ({
-    selected: []
+    selected: [],
   }),
   watch: {
     selected() {
       this.$emit("select", this.selected);
-    }
-  }
+    },
+  },
 };
 </script>

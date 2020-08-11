@@ -1,5 +1,5 @@
-import axios from 'axios'
-import fs from 'fs'
+import axios from "axios";
+import fs from "fs";
 
 let campi_list = [];
 let unity_list = [];
@@ -11,12 +11,12 @@ let entries = [];
 let tabs = [
   {
     name: "Competências",
-    entries: []
+    entries: [],
   },
   {
     name: "Inovação",
-    entries: []
-  }
+    entries: [],
+  },
 ];
 
 const sheet_name = "RESPOSTAS";
@@ -27,18 +27,21 @@ function compare_string(a, b) {
   return a.localeCompare(b);
 }
 
-export default function() {
+export default function () {
   let campi = new Set();
   let unity = new Set();
   let association = new Set();
   let known = new Set();
 
-  let regex_url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+  let regex_url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
-  axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${sheet_id}/values/'${sheet_name}'?key=${api_key}`)
-    .then(response => response.data)
-    .then(data => {
-      data.values.slice(1).forEach(row => {
+  axios
+    .get(
+      `https://sheets.googleapis.com/v4/spreadsheets/${sheet_id}/values/'${sheet_name}'?key=${api_key}`
+    )
+    .then((response) => response.data)
+    .then((data) => {
+      data.values.slice(1).forEach((row) => {
         let di = {
           association: row[1],
           name: row[2],
@@ -55,15 +58,15 @@ export default function() {
           services: row[14].split(/[\s\n]*[;][\s\n]*/),
           equipment: row[15].split(/[\s\n]*[;][\s\n]*/),
           knownledge: row[16].split(/,/),
-          key_words: row[17].split(/[\s\n]*[;][\s\n]*/)
+          key_words: row[17].split(/[\s\n]*[;][\s\n]*/),
         };
 
         if (di.campus) campi.add(di.campus);
         if (di.unity) unity.add(di.unity);
         if (di.association) association.add(di.association);
-        di.knownledge.forEach(item => known.add(item));
+        di.knownledge.forEach((item) => known.add(item));
         entries.push(di);
-      })
+      });
     })
     .then(() => {
       campi_list = Array.from(campi).sort(compare_string);
@@ -82,12 +85,17 @@ export default function() {
         tabs,
       };
 
-      fs.writeFile('./data/competencias.json', JSON.stringify(data), 'utf-8', (err) => {
-        if (err) {
-          console.log(err);
-          return;
+      fs.writeFile(
+        "./data/competencias.json",
+        JSON.stringify(data),
+        "utf-8",
+        (err) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log("competencias.json criado com sucesso");
         }
-        console.log('competencias.json criado com sucesso');
-      });
+      );
     });
-};
+}

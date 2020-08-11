@@ -1,12 +1,14 @@
 <template>
-  <v-container fill-height fluid style="position: relative; min-height: 20rem">
+  <v-container fill-height fluid style="position: relative; min-height: 20rem;">
     <v-row class="ma-0 mt-12" align="center" justify="space-around" no-gutters>
       <v-col>
         <v-row class="ma-0" justify="center">
           <v-col cols="12" sm="9">
             <p class="display-2 font-weight-regular">{{ title }}</p>
 
-            <p class="title font-weight-light" style="line-height: normal;">{{ description }}</p>
+            <p class="title font-weight-light" style="line-height: normal;">
+              {{ description }}
+            </p>
           </v-col>
         </v-row>
       </v-col>
@@ -15,19 +17,19 @@
         <v-row class="ma-0">
           <v-col>
             <v-text-field
-              :backgroundColor="searchBarColor"
+              v-model="value"
+              :background-color="searchBarColor"
               solo
               flat
               rounded
               color="tertiary"
               :label="'Buscar - ' + title"
-              v-model="value"
-              @keydown.enter="submitSearch"
               append-outer-icon="search"
               :style="setSearchBarWidth"
               :loading="loading"
               hint="Resultados de busca na caixa abaixo"
               persistent-hint
+              @keydown.enter="submitSearch"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -43,36 +45,29 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
       type: String,
-      default: ""
+      default: "",
     },
     url: {
       type: String,
-      default: ""
+      default: "",
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     searchBarColor: {
       type: String,
-      default: "#88E3FF"
+      default: "#88E3FF",
     },
     value: {
       type: String,
       required: false,
-      default: ""
-    }
-  },
-  methods: {
-    submitSearch(){
-      if (!this.value.trim())
-        return;
-      this.$emit("search", this.value);
-    }
+      default: "",
+    },
   },
   computed: {
     setSearchBarWidth() {
@@ -84,15 +79,20 @@ export default {
         default:
           return { width: "70%" };
       }
-    }
+    },
   },
   watch: {
-    value: debounce(function() {
+    value: debounce(function () {
       this.$emit("input", this.value);
-    }, 500)
-  }
+    }, 500),
+  },
+  methods: {
+    submitSearch() {
+      if (!this.value.trim()) return;
+      this.$emit("search", this.value);
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

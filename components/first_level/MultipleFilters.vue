@@ -20,7 +20,10 @@
     </v-row>
     <v-row v-if="needDropdown">
       <v-col>
-        <DropdownFilter :groups="groups" @select="selected.dropdownFilters = $event" />
+        <DropdownFilter
+          :groups="groups"
+          @select="selected.dropdownFilters = $event"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -39,6 +42,8 @@ export default {
   },
   props: {
     tabs: {
+      type: Array,
+      required: true,
       validator(givenTabs) {
         return (
           givenTabs instanceof Array &&
@@ -63,6 +68,8 @@ export default {
       },
     },
     groups: {
+      type: Array,
+      default: () => [],
       validator(givenGroups) {
         return (
           givenGroups instanceof Array &&
@@ -78,6 +85,8 @@ export default {
       },
     },
     colors: {
+      type: Object,
+      required: true,
       validator(colors) {
         const { base, active } = colors;
         return (

@@ -4,14 +4,14 @@
       <v-card>
         <v-container>
           <v-select
+            v-model="current_item"
             flat
             rounded
             filled
             hide-details
-            v-model="current_item"
             menu-props="auto"
             color="#37474F"
-            :items="items.map((item,i) => ({text: item.name, value: i}))"
+            :items="items.map((it, i) => ({ text: it.name, value: i }))"
             no-data-text="Não encontramos nada"
             :label="`Selecione ${group_name}`"
           >
@@ -22,12 +22,18 @@
         </v-container>
 
         <div v-if="current_item >= 0">
-          <slot name="item" :item="item"></slot>
-  
+          <slot name="item" :item="selectedItem"></slot>
+
           <v-card-actions>
-            <slot name="buttons" :item="item">
+            <slot name="buttons" :item="selectedItem">
               <v-spacer />
-              <v-btn depressed dark color="rgb(255, 167, 38)" :href="item.url">Saiba mais</v-btn>
+              <v-btn
+                depressed
+                dark
+                color="rgb(255, 167, 38)"
+                :href="selectedItem.url"
+                >Saiba mais</v-btn
+              >
               <v-spacer />
             </slot>
           </v-card-actions>
@@ -39,18 +45,27 @@
 
 <script>
 export default {
-  props: ["items", "group_name"],
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+    groupName: {
+      type: String,
+      default: () => "",
+    },
+  },
   data: () => ({
     current_item: -1,
   }),
   computed: {
-    item: function () {
+    selectedItem: function () {
       if (this.current_item < 0) return null;
       return this.items[this.current_item];
     },
   },
   watch: {
-    items(v) {
+    items() {
       this.current_item = -1;
     },
   },

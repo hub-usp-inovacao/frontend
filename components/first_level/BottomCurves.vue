@@ -21,30 +21,33 @@
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M427 102L0 0V234H1180L843 177L603 66L427 102Z" :fill="darkColor" />
+      <path
+        d="M427 102L0 0V234H1180L843 177L603 66L427 102Z"
+        :fill="darkColor"
+      />
     </svg>
   </div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    windowWidth: 0
-  }),
   props: {
     tone: {
       type: String,
-      default: "blue"
-    }
+      default: "blue",
+    },
   },
+  data: () => ({
+    windowWidth: 0,
+  }),
   computed: {
-    width: function() {
+    width: function () {
       return this.windowWidth;
     },
-    lightHeight: function() {
+    lightHeight: function () {
       return (388 / 1276) * this.width;
     },
-    darkHeight: function() {
+    darkHeight: function () {
       return (234 / 1180) * this.width;
     },
     lightColor() {
@@ -52,14 +55,14 @@ export default {
     },
     darkColor() {
       return this.tone == "blue" ? "#108CB3" : "#B37210";
-    }
+    },
   },
   mounted() {
     this.windowWidth = window.innerWidth;
     window.addEventListener("resize", () => {
       this.windowWidth = window.innerWidth;
     });
-  }
+  },
 };
 </script>
 

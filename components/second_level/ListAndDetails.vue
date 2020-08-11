@@ -2,18 +2,18 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="5">
-        <List :items="items" v-model="selectedItem" />
+        <List v-model="selectedItem" :items="items" />
       </v-col>
       <v-col cols="7">
         <DetailsCard :item="selectedItem">
           <template v-slot:itemTitle>
-            <slot name="itemTitle" v-bind:item="selectedItem"></slot>
+            <slot name="itemTitle" :item="selectedItem"></slot>
           </template>
           <template v-slot:content>
-            <slot name="content" v-bind:item="selectedItem"></slot>
+            <slot name="content" :item="selectedItem"></slot>
           </template>
           <template v-slot:buttons>
-            <slot name="buttons" v-bind:item="selectedItem"></slot>
+            <slot name="buttons" :item="selectedItem"></slot>
           </template>
         </DetailsCard>
       </v-col>
@@ -30,7 +30,12 @@ export default {
     List,
     DetailsCard,
   },
-  props: ["items"],
+  props: {
+    items: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data: () => ({
     selectedItem: null,
   }),

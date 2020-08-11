@@ -16,6 +16,15 @@
 
 <script>
 export default {
-  props: ["title", "items"]
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    items: {
+      type: Array,
+      default: () => [],
+    },
+  },
 };
 </script>

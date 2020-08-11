@@ -3,13 +3,25 @@
     <!-- Land -->
     <v-app style="max-height: 100vh;">
       <v-carousel cycle height="100%" hide-delimiters :show-arrows="false">
-        <v-carousel-item v-for="(photo,i) in photos" :key="i" :src="photo"></v-carousel-item>
+        <v-carousel-item
+          v-for="(photo, i) in photos"
+          :key="i"
+          :src="photo"
+        ></v-carousel-item>
       </v-carousel>
 
-      <div style="position: absolute; top: 0; height: 100%; width: 100%; overflow: auto;">
+      <div
+        style="
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          overflow: auto;
+        "
+      >
         <v-row class="fill-height fit-page ma-0">
           <v-col
-            style="background-color: rgba(255, 177, 99, .9)"
+            style="background-color: rgba(255, 177, 99, 0.9);"
             align-self="stretch"
             cols="12"
             sm="10"
@@ -22,12 +34,19 @@
                     <v-col cols="8" offset="1">
                       <p
                         class="white--text font-weight-medium"
-                        :class="$breakpoint.smAndDown ? 'display-1' : 'display-2'"
-                      >Portal Solus</p>
+                        :class="
+                          $breakpoint.smAndDown ? 'display-1' : 'display-2'
+                        "
+                      >
+                        Portal Solus
+                      </p>
                       <p
                         class="white--text font-weight-medium ma-0"
                         :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                      >Aqui você encontra as mais diversas informações sobre empreendedorismo e inovação na Universidade de São Paulo</p>
+                      >
+                        Aqui você encontra as mais diversas informações sobre
+                        empreendedorismo e inovação na Universidade de São Paulo
+                      </p>
                     </v-col>
                   </v-row>
 
@@ -36,28 +55,35 @@
                       <p
                         class="white--text font-weight-light"
                         :class="$breakpoint.smAndDown ? 'body-2' : 'body-1'"
-                      >Você pode navegar usando as páginas específicas ou fazer uma busca geral utilizando palavras-chave.</p>
+                      >
+                        Você pode navegar usando as páginas específicas ou fazer
+                        uma busca geral utilizando palavras-chave.
+                      </p>
 
                       <v-text-field
+                        v-model="search"
                         solo
                         flat
                         rounded
                         label="Buscar"
-                        v-model="search"
-                        @keydown.enter="submitSearch"
                         append-outer-icon="search"
                         :dense="$breakpoint.smAndDown"
                         :style="setSearchBarWidth"
+                        @keydown.enter="submitSearch"
                       ></v-text-field>
                     </v-col>
                   </v-row>
 
-                  <v-row style="height: 30vh" align="center" md-align="end">
+                  <v-row style="height: 30vh;" align="center" md-align="end">
                     <v-col cols="4" md="2" offset-md="1">
-                      <v-img :src="require('@/vectors/codelab-ccsl.svg')"></v-img>
+                      <v-img
+                        :src="require('@/vectors/codelab-ccsl.svg')"
+                      ></v-img>
                     </v-col>
                     <v-col cols="4" md="2" offset-md="1">
-                      <v-img :src="require('@/vectors/auspin-white.svg')"></v-img>
+                      <v-img
+                        :src="require('@/vectors/auspin-white.svg')"
+                      ></v-img>
                     </v-col>
                     <v-col cols="4" md="2" offset-md="1">
                       <v-img :src="require('@/vectors/usp-white.svg')"></v-img>
@@ -79,7 +105,9 @@
             <p
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium"
-            >Um lugar só com:</p>
+            >
+              Um lugar só com:
+            </p>
 
             <v-row
               class="fill-height"
@@ -90,35 +118,49 @@
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; As diversas iniciativas e estruturas da USP;</p>
+                >
+                  &bull; As diversas iniciativas e estruturas da USP;
+                </p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; Os pesquisadores e suas competências;</p>
+                >
+                  &bull; Os pesquisadores e suas competências;
+                </p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; Todas as patentes que a USP detém e disponibiliza para parceria com empresas e outras instituições interessadas;</p>
+                >
+                  &bull; Todas as patentes que a USP detém e disponibiliza para
+                  parceria com empresas e outras instituições interessadas;
+                </p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; As disciplinas de graduação e pós-graduação sobre empreendedorismo e inovação;</p>
+                >
+                  &bull; As disciplinas de graduação e pós-graduação sobre
+                  empreendedorismo e inovação;
+                </p>
               </v-col>
 
               <v-col cols="12">
                 <p
                   :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                   class="font-weight-light"
-                >&bull; As empresas com DNA USP, criadas a partir de iniciativas incubadas na USP ou que seus fundadores e criadores foram alunos ou pesquisadores da USP.</p>
+                >
+                  &bull; As empresas com DNA USP, criadas a partir de
+                  iniciativas incubadas na USP ou que seus fundadores e
+                  criadores foram alunos ou pesquisadores da USP.
+                </p>
               </v-col>
             </v-row>
           </v-col>
@@ -126,7 +168,7 @@
           <v-col align-self="end">
             <img
               :src="require('@/vectors/home_globo.svg')"
-              style="max-height: 80vh; max-width: 100%; content-fit: contain"
+              style="max-height: 80vh; max-width: 100%; content-fit: contain;"
             />
           </v-col>
         </v-row>
@@ -141,37 +183,52 @@
             <p
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium"
-            >USP: Um lugar para empreender e inovar</p>
+            >
+              USP: Um lugar para empreender e inovar
+            </p>
           </v-container>
 
           <v-container>
             <p
               :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="font-weight-light"
-            >A Universidade de São Paulo é, de acordo com diversos rankings nacionais e internacionais, a melhor universidade latino-americana e uma das melhores universidades do mundo. São mais de 5.000 professores e 70.000 alunos de graduação e pós, cuja significativa produção intelectual, está disponível para empresas e organizações por meio de:</p>
+            >
+              A Universidade de São Paulo é, de acordo com diversos rankings
+              nacionais e internacionais, a melhor universidade latino-americana
+              e uma das melhores universidades do mundo. São mais de 5.000
+              professores e 70.000 alunos de graduação e pós, cuja significativa
+              produção intelectual, está disponível para empresas e organizações
+              por meio de:
+            </p>
           </v-container>
 
           <v-container>
             <v-row align="center">
               <v-col
+                v-for="{ title, description, iconSrc, dest } in subpages"
+                :key="title"
                 cols="12"
                 lg="6"
-                v-for="({ title, description, iconSrc, dest }) in subpages"
-                :key="title">
+              >
                 <v-card flat tile nuxt color="transparent" :to="dest">
-
                   <v-container>
                     <v-row align="center">
                       <v-col cols="4" md="2">
-                        <img width="100%" :src="require(`@/vectors/${iconSrc}`)" />
+                        <img
+                          width="100%"
+                          :src="require(`@/vectors/${iconSrc}`)"
+                        />
                       </v-col>
 
                       <v-col cols="8" md="9">
                         <v-card-title
-                          :class="$breakpoint.smAndDown ? 'body-1' : 'display-1'"
+                          :class="
+                            $breakpoint.smAndDown ? 'body-1' : 'display-1'
+                          "
                           class="text-left font-weight-regular"
-                          style="color: #4AD5FF"
-                          >{{ title }}</v-card-title>
+                          style="color: #4ad5ff;"
+                          >{{ title }}</v-card-title
+                        >
                         <v-card-text
                           :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
                           class="text-left font-weight-light"
@@ -180,7 +237,6 @@
                       </v-col>
                     </v-row>
                   </v-container>
-
                 </v-card>
               </v-col>
             </v-row>
@@ -191,23 +247,26 @@
 
     <!-- Solus: Encontre o que voce... -->
     <v-app>
-      <v-container fill-height fluid style="background-color: #3890E8 ">
+      <v-container fill-height fluid style="background-color: #3890e8;">
         <v-container fill-height>
           <v-row class="ma-0 fill-height" align="center">
             <v-col cols="12" sm="7">
               <p
                 :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium white--text mb-8"
-              >Solus: Encontre o que você procura</p>
+              >
+                Solus: Encontre o que você procura
+              </p>
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                 class="white--text font-weight-light"
               >
                 O Portal Solus facilita a conexão entre a sociedade e a USP.
-                Simples e intuitivo, basta digitar palavras-chave na ferramenta de
-                busca para obter os contatos de instituições, estruturas, empresas
-                e pesquisadores especialistas nos assuntos seu interesse.
+                Simples e intuitivo, basta digitar palavras-chave na ferramenta
+                de busca para obter os contatos de instituições, estruturas,
+                empresas e pesquisadores especialistas nos assuntos seu
+                interesse.
               </p>
             </v-col>
 
@@ -216,7 +275,13 @@
                 <v-container fill-height>
                   <v-row justify="center" class="ma-0">
                     <v-col cols="12">
-                      <v-text-field solo flat rounded readonly append-outer-icon="search">
+                      <v-text-field
+                        solo
+                        flat
+                        rounded
+                        readonly
+                        append-outer-icon="search"
+                      >
                         <template v-slot:label>
                           <vue-typer :text="search_bar"></vue-typer>
                         </template>
@@ -248,19 +313,26 @@
             <p
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium mb-0"
-            >Empresas com DNA USP:</p>
+            >
+              Empresas com DNA USP:
+            </p>
 
             <p
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium mb-8"
-            >Resultados de uma Universidade Inovadora e Empreendora</p>
+            >
+              Resultados de uma Universidade Inovadora e Empreendora
+            </p>
 
-            <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
-              A marca DNA USP foi criada para identificar empresas constituídas por
-              alunos, ex-alunos e pesquisadores que passaram pela Universidade de
-              São Paulo ao longo dos anos, bem como empresas resultantes de
-              processos de incubação ou de aceleração em alguma das incubadoras
-              associadas à USP.
+            <p
+              :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
+              class="font-weight-light"
+            >
+              A marca DNA USP foi criada para identificar empresas constituídas
+              por alunos, ex-alunos e pesquisadores que passaram pela
+              Universidade de São Paulo ao longo dos anos, bem como empresas
+              resultantes de processos de incubação ou de aceleração em alguma
+              das incubadoras associadas à USP.
             </p>
           </v-col>
         </v-row>
@@ -282,19 +354,35 @@
               <p
                 :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium mb-8"
-              >AUSPIN: Agência USP de Inovação</p>
+              >
+                AUSPIN: Agência USP de Inovação
+              </p>
 
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                 class="font-weight-light"
-              >É responsável pelo registro e licenciamento de propriedade intelectual, pela transferência de tecnologias desenvolvidas na USP para empresas e organizações, e pelo fomento ao empreendedorismo junto a todas as unidades - faculdades, institutos, laboratórios - da USP. Com escritórios e representações que atendem todos os campi da USP, a AUSPIN está à sua disposição para facilitar seu contato com pesquisadores, laboratórios, empresas e estruturas relacionadas à inovação e ao empreendedorismo na Universidade de São Paulo.</p>
+              >
+                É responsável pelo registro e licenciamento de propriedade
+                intelectual, pela transferência de tecnologias desenvolvidas na
+                USP para empresas e organizações, e pelo fomento ao
+                empreendedorismo junto a todas as unidades - faculdades,
+                institutos, laboratórios - da USP. Com escritórios e
+                representações que atendem todos os campi da USP, a AUSPIN está
+                à sua disposição para facilitar seu contato com pesquisadores,
+                laboratórios, empresas e estruturas relacionadas à inovação e ao
+                empreendedorismo na Universidade de São Paulo.
+              </p>
             </v-col>
 
             <v-col cols="12" md="5">
               <v-row justify="center">
                 <img
                   :src="require('@/vectors/logo_auspin.svg')"
-                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                  style="
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                  "
                 />
               </v-row>
             </v-col>
@@ -305,35 +393,49 @@
 
     <!-- Conecte-se -->
     <v-app>
-      <BottomCurves class="absolute" style="bottom: 0" />
+      <BottomCurves class="absolute" style="bottom: 0;" />
 
-      <v-container fill-height style="position: relative">
+      <v-container fill-height style="position: relative;">
         <v-row class="ma-0 mb-12" align="center">
           <v-col cols="12" md="7" align-self="start">
             <p
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium mb-8"
-            >Conecte-se</p>
+            >
+              Conecte-se
+            </p>
 
             <p
               :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="font-weight-light"
-            >Cadastre a sua inovação, estrutura, competência, empresa ou patente no portal e a promova no mundo da inovação e do empreendedorismo na USP :</p>
+            >
+              Cadastre a sua inovação, estrutura, competência, empresa ou
+              patente no portal e a promova no mundo da inovação e do
+              empreendedorismo na USP :
+            </p>
           </v-col>
 
           <v-col cols="12" md="5">
             <v-card height="10rem" color="secondary">
               <v-container fill-height>
                 <v-row justify="center" align="center">
-                  <v-btn x-large rounded depressed color="rgba(175, 236, 255, 0.4)">
-                    <span class="white--text font-weight-black">CLIQUE AQUI</span>
+                  <v-btn
+                    x-large
+                    rounded
+                    depressed
+                    color="rgba(175, 236, 255, 0.4)"
+                  >
+                    <span class="white--text font-weight-black"
+                      >CLIQUE AQUI</span
+                    >
                   </v-btn>
                 </v-row>
               </v-container>
             </v-card>
-            <p
-              class="caption font-italic font-weight-light"
-            >A AUSPIN analisará sua solicitação e tomará as providências adequadas no menor tempo possível.</p>
+            <p class="caption font-italic font-weight-light">
+              A AUSPIN analisará sua solicitação e tomará as providências
+              adequadas no menor tempo possível.
+            </p>
           </v-col>
         </v-row>
       </v-container>
@@ -345,7 +447,6 @@
 </template>
 
 <script>
-import { debounce } from "debounce";
 import { mapActions, mapGetters } from "vuex";
 
 import CompaniesCarousel from "@/components/first_level/CompaniesCarousel.vue";
@@ -355,15 +456,6 @@ export default {
   components: {
     CompaniesCarousel,
     BottomCurves,
-  },
-  head: {
-    title: "Solus",
-    meta: [
-      {
-        name: "google-site-verification",
-        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE",
-      },
-    ],
   },
   data: () => ({
     search_bar: [
@@ -381,42 +473,48 @@ export default {
     ],
     subpages: [
       {
-        title: 'Iniciativas',
-        description: 'Conheça as diversas iniciativas para estímulo à inovação e ao empreendedorismo na Universidade de São Paulo',
-        iconSrc: 'home_iniciatives_icon.svg',
-        dest: 'iniciativas'
+        title: "Iniciativas",
+        description:
+          "Conheça as diversas iniciativas para estímulo à inovação e ao empreendedorismo na Universidade de São Paulo",
+        iconSrc: "home_iniciatives_icon.svg",
+        dest: "iniciativas",
       },
       {
-        title: 'Educação',
-        description: 'Busque as disciplinas de graduação e pós-graduação relacionadas a Empreendedorismo, Inovação, Propriedade Intelectual e Negócios',
-        iconSrc: 'home_teaching_icon.svg',
-        dest: 'educacao'
+        title: "Educação",
+        description:
+          "Busque as disciplinas de graduação e pós-graduação relacionadas a Empreendedorismo, Inovação, Propriedade Intelectual e Negócios",
+        iconSrc: "home_teaching_icon.svg",
+        dest: "educacao",
       },
       {
-        title: 'P&D&I',
-        description: 'Veja as informações de laboratórios, organizações e programas que atuam no desenvolvimento e inovação na USP',
-        iconSrc: 'home_pdi_icon.svg',
-        dest: 'inovacao'
+        title: "P&D&I",
+        description:
+          "Veja as informações de laboratórios, organizações e programas que atuam no desenvolvimento e inovação na USP",
+        iconSrc: "home_pdi_icon.svg",
+        dest: "inovacao",
       },
       {
-        title: 'Empresas',
-        description: 'Conheça as empresas com DNA USP, criadas por iniciativas de alunos, ex-alunos e projetos ligados à Universidade, organizadas por área de atuação e tecnologias aplicáveis',
-        iconSrc: 'home_partnership_icon.svg',
-        dest: 'empresas'
+        title: "Empresas",
+        description:
+          "Conheça as empresas com DNA USP, criadas por iniciativas de alunos, ex-alunos e projetos ligados à Universidade, organizadas por área de atuação e tecnologias aplicáveis",
+        iconSrc: "home_partnership_icon.svg",
+        dest: "empresas",
       },
       {
-        title: 'Competências',
-        description: 'Consulte pesquisadores e grupos de pesquisa da USP por suas áreas de competência e especialidades',
-        iconSrc: 'home_competencies_icon.svg',
-        dest: 'competencias'
+        title: "Competências",
+        description:
+          "Consulte pesquisadores e grupos de pesquisa da USP por suas áreas de competência e especialidades",
+        iconSrc: "home_competencies_icon.svg",
+        dest: "competencias",
       },
       {
-        title: 'Patentes',
-        description: 'Consulte as patentes da USP disponíveis para licenciamento e aplicação de empresas e organizações',
-        iconSrc: 'home_patents_icon.svg',
-        dest: 'patentes'
+        title: "Patentes",
+        description:
+          "Consulte as patentes da USP disponíveis para licenciamento e aplicação de empresas e organizações",
+        iconSrc: "home_patents_icon.svg",
+        dest: "patentes",
       },
-    ]
+    ],
   }),
   computed: {
     ...mapGetters({
@@ -443,25 +541,6 @@ export default {
         default:
           return { width: "60%" };
       }
-    },
-  },
-  methods: {
-    ...mapActions({
-      fetchDisciplines: "educacao/fetchSpreadsheets",
-      fetchPDIs: "pdi/fetchSpreadsheets",
-      fetchSkills: "competencia/fetchSpreadsheets",
-      fetchIniciatives: "iniciativas/fetchSpreadsheets",
-      fetchPatents: "patentes/fetchSpreadsheets",
-      fetchCompanies: "empresas/fetchSpreadsheets",
-    }),
-    submitSearch() {
-      if (!this.search.trim()) {
-        return;
-      }
-      this.$router.push({
-        name: "search_results",
-        params: { search: this.search },
-      });
     },
   },
   beforeMount() {
@@ -494,10 +573,38 @@ export default {
       this.fetchCompanies(env);
     }
   },
+  methods: {
+    ...mapActions({
+      fetchDisciplines: "educacao/fetchSpreadsheets",
+      fetchPDIs: "pdi/fetchSpreadsheets",
+      fetchSkills: "competencia/fetchSpreadsheets",
+      fetchIniciatives: "iniciativas/fetchSpreadsheets",
+      fetchPatents: "patentes/fetchSpreadsheets",
+      fetchCompanies: "empresas/fetchSpreadsheets",
+    }),
+    submitSearch() {
+      if (!this.search.trim()) {
+        return;
+      }
+      this.$router.push({
+        name: "search_results",
+        params: { search: this.search },
+      });
+    },
+  },
+  head: {
+    title: "Solus",
+    meta: [
+      {
+        name: "google-site-verification",
+        content: "6_EEYtY0wjahRpeFmJZ7qcVSuABHdi4mV5wa8Y1FmlE",
+      },
+    ],
+  },
 };
 </script>
 
-<style >
+<style>
 .fit-page {
   max-width: 100%;
   max-height: 100%;
