@@ -20,6 +20,11 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
+          <v-row v-if="item.groupName && item.groupInitials">
+            <v-col>
+              <p>{{ item.groupName }} - {{ item.groupInitials }}</p>
+            </v-col>
+          </v-row>
           <v-row>
             <v-col>
               <p>{{ item.email }}</p>
