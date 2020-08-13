@@ -1,11 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="2">
+      <v-col cols="12">
         <span>{{ title }}</span>
       </v-col>
-      <v-col v-for="item in items" :key="item" cols="2">
-        <span class="black--text">{{ item }}</span>
+    </v-row>
+    <v-row>
+      <v-col v-for="item in items" :key="item" cols="4" md="6">
+        <span class="black--text text-caption">{{ item }}</span>
       </v-col>
     </v-row>
   </v-container>

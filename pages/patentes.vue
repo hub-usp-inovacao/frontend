@@ -27,16 +27,17 @@
 
         <p>{{ item.classification.primary.subareas }}</p>
 
-        <BulletList
+        <HorizontalList
           title="Países com Proteção"
           :items="item.countriesWithProtection"
         />
 
-        <BulletList
+        <HorizontalList
           v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
           title="IPCs"
           :items="item.ipcs"
         />
+
         <BulletList title="Titulares" :items="item.owners" />
         <BulletList title="Inventores" :items="item.inventors" />
       </template>
@@ -66,6 +67,7 @@ import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
+import HorizontalList from "@/components/first_level/HorizontalList.vue";
 
 export default {
   components: {
@@ -74,6 +76,7 @@ export default {
     MultipleFilters,
     BulletList,
     DisplayData,
+    HorizontalList,
   },
   data: () => ({
     search: {
