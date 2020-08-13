@@ -22,27 +22,27 @@
         <v-container>
           <v-row v-if="item.groupName && item.groupInitials">
             <v-col>
-              <p>{{ item.groupName }} - {{ item.groupInitials }}</p>
+              <span>{{ item.groupName }} - {{ item.groupInitials }}</span>
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <p>{{ item.email }}</p>
+              <span>{{ item.email }}</span>
             </v-col>
           </v-row>
           <v-row v-if="item.phone">
             <v-col>
-              <p>{{ item.phone }}</p>
+              <span>{{ item.phone }}</span>
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <p>{{ item.unity }}</p>
+              <span>{{ item.unity }}</span>
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <p>{{ item.campus }}</p>
+              <span>{{ item.campus }}</span>
             </v-col>
           </v-row>
         </v-container>
