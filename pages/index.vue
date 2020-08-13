@@ -77,11 +77,6 @@
                   <v-row style="height: 30vh;" align="center" md-align="end">
                     <v-col cols="4" md="2" offset-md="1">
                       <v-img
-                        :src="require('@/vectors/codelab-ccsl.svg')"
-                      ></v-img>
-                    </v-col>
-                    <v-col cols="4" md="2" offset-md="1">
-                      <v-img
                         :src="require('@/vectors/auspin-white.svg')"
                       ></v-img>
                     </v-col>
