@@ -1,5 +1,6 @@
 import { capitalizeName, formatURL, formatPhone } from "@/lib/format";
 import { columnValue } from "@/lib/sheets";
+import { findErrors } from "@/lib/errors/competencias";
 
 const descRgxSplitter = /;/;
 
@@ -84,12 +85,15 @@ export const actions = {
 
       const { values } = await resp.json();
 
+      const objects = values.slice(1).map(rowToObj);
+
+      findErrors(Object.assign([], objects));
+
       ctx.commit(
         "setSkills",
-        values
-          .slice(1)
-          .map(rowToObj)
-          .sort((a, b) => (a.name == b.name ? 0 : a.name < b.name ? -1 : 1))
+        objects.sort((a, b) =>
+          a.name == b.name ? 0 : a.name < b.name ? -1 : 1
+        )
       );
     } catch (error) {
       console.log("error occuried while fetching...");
