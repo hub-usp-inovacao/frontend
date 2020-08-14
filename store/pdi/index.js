@@ -19,6 +19,7 @@ const rowToObj = (row) => ({
 export const state = () => ({
   pdis: [],
   isLoading: false,
+  errors: undefined,
   keys: [
     "name",
     "description.short",
@@ -32,6 +33,7 @@ export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   pdis: (state) => state.pdis,
   searchKeys: (state) => state.keys,
+  errors: (s) => s.errors
 };
 
 export const mutations = {
@@ -44,6 +46,9 @@ export const mutations = {
   setPDIs(state, pdis) {
     state.pdis = pdis;
   },
+  setErrors(s, errors) {
+    s.errors = errors;
+  }
 };
 
 export const actions = {
@@ -62,8 +67,9 @@ export const actions = {
 
       const objects = data.values.slice(1).map(rowToObj);
 
-      findErrors(Object.assign([], objects));
+      const errors = findErrors(Object.assign([], objects));
 
+      ctx.commit("setErrors", errors);
       ctx.commit("setPDIs", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
