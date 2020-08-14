@@ -31,6 +31,7 @@ const rowToObj = (row) => ({
 export const state = () => ({
   iniciatives: [],
   isLoading: false,
+  errors: undefined,
   keys: [
     "name",
     "description.short",
@@ -44,12 +45,14 @@ export const getters = {
   iniciatives: (s) => s.iniciatives,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   searchKeys: (s) => s.keys,
+  errors: (s) => s.errors
 };
 
 export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setIniciatives: (s, newIniciatives) => (s.iniciatives = newIniciatives),
+  setErrors: (s, errors) => s.errors = errors
 };
 
 export const actions = {
@@ -66,8 +69,9 @@ export const actions = {
 
       const { values } = await resp.json();
       const objects = values.slice(1).map(rowToObj);
+      const errors = findErrors(Object.assign([], objects));
 
-      findErrors(Object.assign([], objects));
+      ctx.commit("setErrors", errors);
 
       ctx.commit("setIniciatives", objects);
     } catch (error) {
