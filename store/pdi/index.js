@@ -1,5 +1,5 @@
 import { formatURL } from "@/lib/format";
-import { findErrors } from '@/lib/errors/pdi';
+import { findErrors } from "@/lib/errors/pdi";
 
 const rowToObj = (row) => ({
   category: row[0],
@@ -33,7 +33,7 @@ export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   pdis: (state) => state.pdis,
   searchKeys: (state) => state.keys,
-  errors: (s) => s.errors
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
@@ -48,7 +48,7 @@ export const mutations = {
   },
   setErrors(s, errors) {
     s.errors = errors;
-  }
+  },
 };
 
 export const actions = {

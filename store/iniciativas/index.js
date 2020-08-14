@@ -45,14 +45,14 @@ export const getters = {
   iniciatives: (s) => s.iniciatives,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   searchKeys: (s) => s.keys,
-  errors: (s) => s.errors
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setIniciatives: (s, newIniciatives) => (s.iniciatives = newIniciatives),
-  setErrors: (s, errors) => s.errors = errors
+  setErrors: (s, errors) => (s.errors = errors),
 };
 
 export const actions = {

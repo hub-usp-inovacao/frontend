@@ -9,8 +9,9 @@
       <v-row
         v-for="({ id, line, errors }, i) in errors"
         :key="id"
-        :style="rowStyle(i)">
-        <v-col cols="1">{{line}}</v-col>
+        :style="rowStyle(i)"
+      >
+        <v-col cols="1">{{ line }}</v-col>
         <v-col cols="3">{{ id }}</v-col>
         <v-col cols="3">
           <ul>
@@ -27,17 +28,17 @@ export default {
   props: {
     errors: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
   },
   methods: {
     rowStyle(index) {
       return index % 2 == 0
         ? { backgroundColor: "#e0e0e0" }
-        : { backgroundColor: "#fafafa" }
-    }
+        : { backgroundColor: "#fafafa" };
+    },
   },
-}
+};
 </script>
 
 <style scoped>

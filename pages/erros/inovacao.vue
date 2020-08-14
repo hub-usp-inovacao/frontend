@@ -9,11 +9,11 @@ import ErrorsTable from "@/components/temporary/ErrorsTable.vue";
 
 export default {
   components: {
-    ErrorsTable
+    ErrorsTable,
   },
   computed: {
     ...mapGetters({
-      errors: "pdi/errors"
+      errors: "pdi/errors",
     }),
   },
   beforeMount() {
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getData: "pdi/fetchSpreadsheets"
+      getData: "pdi/fetchSpreadsheets",
     }),
     bootstrap() {
       const ctx = {
@@ -32,7 +32,7 @@ export default {
       if (this.errors == undefined) {
         this.getData(ctx);
       }
-    }
+    },
   },
-}
+};
 </script>

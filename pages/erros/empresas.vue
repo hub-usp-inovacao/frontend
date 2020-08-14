@@ -9,14 +9,14 @@ import ErrorsTable from "@/components/temporary/ErrorsTable.vue";
 
 export default {
   components: {
-    ErrorsTable
+    ErrorsTable,
   },
   fetch() {
     this.bootstrap();
   },
   computed: {
     ...mapGetters({
-      errors: "empresas/errors"
+      errors: "empresas/errors",
     }),
   },
   beforeMount() {
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getData: "empresas/fetchSpreadsheets"
+      getData: "empresas/fetchSpreadsheets",
     }),
     bootstrap() {
       const ctx = {
@@ -35,7 +35,7 @@ export default {
       if (this.errors == undefined) {
         this.getData(ctx);
       }
-    }
+    },
   },
-}
+};
 </script>

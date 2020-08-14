@@ -40,7 +40,7 @@ export const getters = {
     ).sort((a, b) => a.localeCompare(b));
   },
   searchKeys: (s) => s.keys,
-  errors: (s) => s.errors
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
@@ -55,7 +55,7 @@ export const mutations = {
   },
   setErrors(s, errors) {
     s.errors = errors;
-  }
+  },
 };
 
 export const actions = {
