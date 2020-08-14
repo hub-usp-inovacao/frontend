@@ -24,6 +24,7 @@ const rowToObj = (row, id) => ({
 export const state = () => ({
   disciplines: [],
   isLoading: false,
+  errors: undefined,
   keys: ["name", "description.short", "description.long"],
 });
 
@@ -39,6 +40,7 @@ export const getters = {
     ).sort((a, b) => a.localeCompare(b));
   },
   searchKeys: (s) => s.keys,
+  errors: (s) => s.errors
 };
 
 export const mutations = {
@@ -51,6 +53,9 @@ export const mutations = {
   setDisciplines(state, disciplines) {
     state.disciplines = disciplines;
   },
+  setErrors(s, errors) {
+    s.errors = errors;
+  }
 };
 
 export const actions = {
@@ -68,8 +73,9 @@ export const actions = {
       const data = await resp.json();
       const objects = data.values.slice(1).map(rowToObj);
 
-      findErrors(Object.assign([], objects));
+      const errors = findErrors(Object.assign([], objects));
 
+      ctx.commit("setErrors", errors);
       ctx.commit("setDisciplines", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
