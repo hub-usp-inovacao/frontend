@@ -1,5 +1,6 @@
 import { formatURL, formatPhone } from "@/lib/format";
 import { columnValue } from "@/lib/sheets";
+import { findErrors } from "../../lib/errors/empresas";
 
 const rowToObj = (row) => ({
   name: columnValue(row, "AC"),
@@ -13,13 +14,13 @@ const rowToObj = (row) => ({
     code: columnValue(row, "AL").substr(0, 2),
     name: columnValue(row, "AL").split(" ").slice(1).join(" "),
   },
-  technologies: columnValue(row, "AM"),
+  technologies: columnValue(row, "AM") == "." ? "" : columnValue(row, "AM"),
   incubated: columnValue(row, "AN") != "Não" && columnValue(row, "AN") != ".",
   ecosystems: columnValue(row, "AN").split(";"),
   description: {
-    long: columnValue(row, "AR"),
+    long: columnValue(row, "AR") == "." ? "" : columnValue(row, "AR"),
   },
-  services: columnValue(row, "AS"),
+  services: columnValue(row, "AS") == "." ? "" : columnValue(row, "AS"),
   logo: columnValue(row, "AT"),
   socialMedia: columnValue(row, "AU"),
   allowed: columnValue(row, "AV") != "Não",
@@ -93,11 +94,13 @@ export const actions = {
 
       const { values } = await resp.json();
 
+      const objects = values.slice(1).map(rowToObj);
+
+      findErrors(Object.assign([], objects));
+
       ctx.commit(
         "setCompanies",
-        values
-          .slice(1)
-          .map(rowToObj)
+        objects
           .filter((c) => c.allowed && c.active)
           .sort((a, b) => a.name.localeCompare(b.name))
       );
