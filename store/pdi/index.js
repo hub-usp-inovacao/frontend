@@ -1,4 +1,5 @@
 import { formatURL } from "@/lib/format";
+import { findErrors } from '@/lib/errors/pdi';
 
 const rowToObj = (row) => ({
   category: row[0],
@@ -59,7 +60,11 @@ export const actions = {
 
       const data = await resp.json();
 
-      ctx.commit("setPDIs", data.values.slice(1).map(rowToObj));
+      const objects = data.values.slice(1).map(rowToObj);
+
+      findErrors(Object.assign([], objects));
+
+      ctx.commit("setPDIs", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
