@@ -1,5 +1,6 @@
 import { formatURL, formatPhone } from "@/lib/format";
 import { columnValue } from "@/lib/sheets";
+import { findErrors } from "@/lib/errors/iniciativas";
 
 const rowToObj = (row) => ({
   name: row[1],
@@ -64,8 +65,11 @@ export const actions = {
       );
 
       const { values } = await resp.json();
+      const objects = values.slice(1).map(rowToObj);
 
-      ctx.commit("setIniciatives", values.slice(1).map(rowToObj));
+      findErrors(Object.assign([], objects));
+
+      ctx.commit("setIniciatives", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
