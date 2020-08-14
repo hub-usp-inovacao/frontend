@@ -1,4 +1,5 @@
 import { formatURL } from "@/lib/format";
+import { findErrors } from "@/lib/errors/disciplinas";
 
 const rowToObj = (row, id) => ({
   id,
@@ -65,8 +66,11 @@ export const actions = {
       );
 
       const data = await resp.json();
+      const objects = data.values.slice(1).map(rowToObj);
 
-      ctx.commit("setDisciplines", data.values.slice(1).map(rowToObj));
+      findErrors(Object.assign([], objects));
+
+      ctx.commit("setDisciplines", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
