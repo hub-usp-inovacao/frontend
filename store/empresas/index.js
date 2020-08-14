@@ -39,6 +39,7 @@ const rowToObj = (row) => ({
 export const state = () => ({
   companies: [],
   isLoading: false,
+  errors: undefined,
   keys: [
     "name",
     "technologies",
@@ -72,12 +73,17 @@ export const getters = {
 
       return a < b ? -1 : 1;
     }),
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setCompanies: (s, newCompanies) => (s.companies = newCompanies),
+  setErrors: (s, errors) => {
+    s.errors = errors;
+    console.log(s.errors);
+  },
 };
 
 export const actions = {
@@ -96,7 +102,9 @@ export const actions = {
 
       const objects = values.slice(1).map(rowToObj);
 
-      findErrors(Object.assign([], objects));
+      const errors = findErrors(Object.assign([], objects));
+
+      ctx.commit("setErrors", errors);
 
       ctx.commit(
         "setCompanies",
