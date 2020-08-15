@@ -47,6 +47,7 @@ const rowToObj = (row) => ({
 export const state = () => ({
   isLoading: false,
   skills: [],
+  errors: undefined,
   keys: [
     "name",
     "bond",
@@ -63,12 +64,14 @@ export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   skills: (s) => s.skills,
   searchKeys: (s) => s.keys,
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setSkills: (s, newSkills) => (s.skills = newSkills),
+  setErrors: (s, errors) => (s.errors = errors),
 };
 
 export const actions = {
@@ -84,10 +87,10 @@ export const actions = {
       );
 
       const { values } = await resp.json();
-
       const objects = values.slice(1).map(rowToObj);
+      const errors = findErrors(Object.assign([], objects));
 
-      findErrors(Object.assign([], objects));
+      ctx.commit("setErrors", errors);
 
       ctx.commit(
         "setSkills",
