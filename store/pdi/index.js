@@ -16,6 +16,24 @@ const rowToObj = (row) => ({
   keywords: row[14] != undefined && row[14] != "" ? row[14].split(",") : [],
 });
 
+const napsToObj = (row) => ({
+  category: "NAP",
+  name: `${row[0]} - ${row[1]}`,
+  campus: undefined,
+  unity: row[8],
+  url: formatURL(row[7]),
+  description: {
+    short: "",
+    long: "",
+  },
+  knowledge: [],
+  keywords: [],
+  kind: row[2],
+  coordinator: row[5],
+  year: row[3],
+  email: row[6],
+});
+
 export const state = () => ({
   pdis: [],
   isLoading: false,
@@ -54,23 +72,32 @@ export const mutations = {
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "PDI";
+    const sheetsName = ["PDI", "NAPS"];
 
     ctx.commit("setLoadingStatus");
 
     try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
+      const data = [];
 
-      const data = await resp.json();
+      for (const sheetName of sheetsName) {
+        const resp = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
+        );
 
-      const objects = data.values.slice(1).map(rowToObj);
+        const d = await resp.json();
+        const objects = d.values
+          .slice(1)
+          .map(sheetName === "PDI" ? rowToObj : napsToObj);
 
-      const errors = findErrors(Object.assign([], objects));
+        data.push(...objects);
 
-      ctx.commit("setErrors", errors);
-      ctx.commit("setPDIs", objects);
+        if (sheetName === "PDI") {
+          const errors = findErrors(Object.assign([], objects));
+          ctx.commit("setErrors", errors);
+        }
+      }
+
+      ctx.commit("setPDIs", data);
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
