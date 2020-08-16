@@ -34,8 +34,8 @@ export default {
   },
   props: {
     item: {
-      type: Object || null,
-      required: true,
+      type: Object,
+      default: () => undefined,
     },
   },
   computed: {
