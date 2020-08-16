@@ -145,18 +145,9 @@ export default {
         genFuzzyOptions(this.searchKeys)
       );
     },
-    filterFun(elm, filterStatus) {
-      const { primary } = filterStatus;
-
-      if (primary.length == 0) {
-        return true;
-      }
-
-      return primary.includes(elm.category);
-    },
     filterData(context) {
-      this.filtered = this.iniciatives.filter((item) =>
-        this.filterFun(item, context)
+      this.filtered = this.iniciatives.filter((iniciative) =>
+        iniciative.matchesFilter(context)
       );
     },
     async pipeline() {

@@ -1,32 +1,5 @@
-import { formatURL, formatPhone } from "@/lib/format";
-import { columnValue } from "@/lib/sheets";
+import { IniciativeGenerator } from "@/lib/classes/iniciative";
 import { findErrors } from "@/lib/errors/iniciativas";
-
-const rowToObj = (row) => ({
-  name: row[1],
-  category: columnValue(row, "A"),
-  description: {
-    short: row[2],
-    long: row[7],
-  },
-  local: row[3],
-  unity: row[4],
-  keywords:
-    columnValue(row, "F") != undefined && columnValue(row, "F") != ""
-      ? columnValue(row, "F").split(/[;,]/)
-      : [],
-  url: row[6] != undefined && row[6] != "" ? formatURL(row[6]) : "",
-  email: row[8],
-  socialMedia: row[9],
-  startDate: row[10],
-  contact: {
-    person: row[11],
-    info: columnValue(row, "M")
-      .split(";")
-      .map((phone) => formatPhone(phone)),
-  },
-  services: row[13],
-});
 
 export const state = () => ({
   iniciatives: [],
@@ -68,7 +41,10 @@ export const actions = {
       );
 
       const { values } = await resp.json();
-      const objects = values.slice(1).map(rowToObj);
+      const objects = values
+        .slice(1)
+        .map((row) => IniciativeGenerator.run(row));
+
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
