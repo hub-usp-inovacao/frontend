@@ -35,7 +35,7 @@
       </v-row>
     </v-container>
 
-    <p>AUSPIN - {{ new Date().getFullYear() }}</p>
+    <p>{{ new Date().getFullYear() }}</p>
   </footer>
 </template>
 
