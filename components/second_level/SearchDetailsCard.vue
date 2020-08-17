@@ -6,7 +6,7 @@
       >
       <v-card-text>
         <v-list v-if="filtered.length > 0">
-          <v-list-item-group>
+          <v-list-item-group v-model="selected">
             <v-list-item
               v-for="(item, index) in filtered"
               :key="index"
@@ -44,6 +44,9 @@ export default {
       default: () => [],
     },
   },
+  data: () => ({
+    selected: null,
+  }),
   computed: {
     contentMarginStyle() {
       switch (this.$vuetify.breakpoint.name) {
@@ -65,6 +68,28 @@ export default {
             height: "35rem",
           };
       }
+    },
+    routeName() {
+      const item = this.filtered[this.selected];
+      switch (item.category) {
+        case "Educação":
+          return "educacao";
+        case "P&D&I":
+          return "inovacao";
+        case "Competências":
+          return "competencias";
+        default:
+          return item.category.toLowerCase();
+      }
+    },
+  },
+  watch: {
+    selected() {
+      const item = this.filtered[this.selected];
+      this.$router.push({
+        name: this.routeName,
+        params: { id: item.id },
+      });
     },
   },
 };

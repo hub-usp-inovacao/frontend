@@ -112,12 +112,14 @@ export default {
           name: d.name,
           description: d.description.long,
           category: "Educação",
+          id: d.id,
         }))
         .concat(
           base_pdis.map((p) => ({
             name: p.name,
             description: p.description.long,
             category: "P&D&I",
+            id: p.id,
           }))
         )
         .concat(
@@ -128,6 +130,7 @@ export default {
               s.descriptions.services +
               s.descriptions.equipments,
             category: "Competências",
+            id: s.id,
           }))
         )
         .concat(
@@ -135,6 +138,7 @@ export default {
             name: i.name,
             description: i.description.long,
             category: "Iniciativas",
+            id: i.id,
           }))
         )
         .concat(
@@ -142,6 +146,7 @@ export default {
             name: c.name,
             description: c.description.long,
             category: "Empresas",
+            id: c.id,
           }))
         )
         .concat(
@@ -149,6 +154,7 @@ export default {
             name: p.name,
             description: p.summary,
             category: "Patentes",
+            id: p.id,
           }))
         );
     },

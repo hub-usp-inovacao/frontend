@@ -59,6 +59,10 @@ export default {
       this.$emit("input", this.selectedItem);
     },
   },
+  beforeMount() {
+    if (this.$route.params.id)
+      this.selectedItem = this.items[this.$route.params.id - 1];
+  },
 };
 </script>
 
