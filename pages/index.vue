@@ -341,7 +341,7 @@
     </v-app>
 
     <!-- AUSPIN -->
-    <div>
+    <div class="mb-16 pb-16">
       <v-container fill-height>
         <v-container>
           <v-row class="ma-0 fill-height" align="center">
@@ -386,58 +386,12 @@
       </v-container>
     </div>
 
-    <!-- Conecte-se -->
-    <v-app>
+    <div class="mt-16 pt-16">
+      <div class="hidden-md-and-up" style="height: 5vh"></div>
+      <div class="hidden-sm-and-down" style="height: 30vh"></div>
       <BottomCurves class="absolute" style="bottom: 0;" />
+    </div>
 
-      <v-container fill-height style="position: relative;">
-        <v-row class="ma-0 mb-12" align="center">
-          <v-col cols="12" md="7" align-self="start">
-            <p
-              :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
-              class="font-weight-medium mb-8"
-            >
-              Conecte-se
-            </p>
-
-            <p
-              :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-              class="font-weight-light"
-            >
-              Cadastre a sua inovação, estrutura, competência, empresa ou
-              patente no portal e a promova no mundo da inovação e do
-              empreendedorismo na USP :
-            </p>
-          </v-col>
-
-          <v-col cols="12" md="5">
-            <v-card height="10rem" color="secondary">
-              <v-container fill-height>
-                <v-row justify="center" align="center">
-                  <v-btn
-                    x-large
-                    rounded
-                    depressed
-                    color="rgba(175, 236, 255, 0.4)"
-                  >
-                    <span class="white--text font-weight-black"
-                      >CLIQUE AQUI</span
-                    >
-                  </v-btn>
-                </v-row>
-              </v-container>
-            </v-card>
-            <p class="caption font-italic font-weight-light">
-              A AUSPIN analisará sua solicitação e tomará as providências
-              adequadas no menor tempo possível.
-            </p>
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <!-- <div class="light-blue-layer"></div>
-      <div class="dark-blue-layer"></div>-->
-    </v-app>
   </div>
 </template>
 
