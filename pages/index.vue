@@ -200,54 +200,12 @@
           <v-container>
             <v-row align="center">
               <v-col
-                v-for="{ title, description, iconSrc, dest, formsURL, formsCall } in subpages"
-                :key="title"
+                v-for="subpage in subpages"
+                :key="subpage.title"
                 cols="12"
                 lg="6"
               >
-                <v-card flat tile nuxt color="transparent" height="325" :to="dest">
-                  <v-container>
-                    <v-row align="center">
-                      <v-col cols="4" md="2">
-                        <img
-                          width="100%"
-                          :src="require(`@/vectors/${iconSrc}`)"
-                        />
-                      </v-col>
-
-                      <v-col cols="8" md="9">
-                        <v-card-title
-                          :class="
-                            $breakpoint.smAndDown ? 'body-1' : 'display-1'
-                          "
-                          class="text-left font-weight-regular"
-                          style="color: #4ad5ff;"
-                          >{{ title }}</v-card-title
-                        >
-
-                        <div style="height: 12rem">
-                          <v-card-text
-                            :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                            class="text-left font-weight-light"
-                            >{{ description }}
-                          </v-card-text>
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <v-row class="align-self-end" justify="center">
-                      <v-card-actions v-if="formsURL != undefined">
-                        <v-btn
-                          rounded
-                          class="px-6 py-6"
-                          color="secondary"
-                          target="_blank"
-                          :href="formsURL">
-                          {{ formsCall }}
-                        </v-btn>
-                      </v-card-actions>
-                    </v-row>
-                  </v-container>
-                </v-card>
+                <BlueIconCard :item="subpage"/>
               </v-col>
             </v-row>
           </v-container>
@@ -415,11 +373,13 @@ import { mapActions, mapGetters } from "vuex";
 
 import CompaniesCarousel from "@/components/first_level/CompaniesCarousel.vue";
 import BottomCurves from "@/components/first_level/BottomCurves.vue";
+import BlueIconCard from "@/components/first_level/BlueIconCard.vue";
 
 export default {
   components: {
     CompaniesCarousel,
     BottomCurves,
+    BlueIconCard,
   },
   data: () => ({
     search_bar: [
@@ -470,7 +430,7 @@ export default {
           "Conheça as empresas com DNA USP, criadas por iniciativas de alunos, ex-alunos e projetos ligados à Universidade, organizadas por área de atuação e tecnologias aplicáveis",
         iconSrc: "home_partnership_icon.svg",
         dest: "empresas",
-        formsURL: "",
+        formsURL: "https://google.com",
         formsCall: "Cadastre sua empresa"
       },
       {
@@ -479,7 +439,7 @@ export default {
           "Consulte pesquisadores e grupos de pesquisa da USP por suas áreas de competência e especialidades",
         iconSrc: "home_competencies_icon.svg",
         dest: "competencias",
-        formsURL: "",
+        formsURL: "https://google.com",
         formsCall: "Cadastre sua competência"
       },
     ],
