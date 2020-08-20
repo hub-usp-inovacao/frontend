@@ -5,7 +5,8 @@
         v-model="search.term"
         title="P&amp;D&amp;I"
         description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
-        url="https://forms.gle/3z4Vn3ewgP6UKJey6"
+        url="http://uspmulti.prp.usp.br/"
+        forms-call="Confira centrais multiusuários"
       />
     </div>
 
@@ -86,10 +87,6 @@ export default {
         name: "NAP",
         description:
           "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
-      },
-      {
-        name: "Centrais multiusuários",
-        description: "",
       },
       {
         name: "Serviços Tecnológicos",
