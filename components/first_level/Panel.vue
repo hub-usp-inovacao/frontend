@@ -12,13 +12,24 @@
 
             <p v-if="hasCallToAction">
               <v-btn
-                text
+                rounded
                 :small="$vuetify.breakpoint.name == 'sm'"
-                color="primary"
+                color="secondary"
                 :href="url"
                 target="_blank"
-                width="90%">
+                width="60%">
                 {{ formsCall }}
+              </v-btn>
+            </p>
+            <p v-if="hasSecondCallToAction">
+              <v-btn
+                rounded
+                :small="$vuetify.breakpoint.name == 'sm'"
+                color="secondary"
+                :href="secondUrl"
+                target="_blank"
+                width="60%">
+                {{ secondCall }}
               </v-btn>
             </p>
           </v-col>
@@ -71,6 +82,14 @@ export default {
       type: String,
       default: ""
     },
+    secondUrl: {
+      type: String,
+      default: ""
+    },
+    secondCall: {
+      type: String,
+      default: ""
+    },
     loading: {
       type: Boolean,
       default: false,
@@ -99,6 +118,9 @@ export default {
     hasCallToAction() {
       return this.url !== "" && this.formsCall != "";
     },
+    hasSecondCallToAction() {
+      return this.secondUrl !== "" && this.secondCall != "";
+    }
   },
   watch: {
     value: debounce(function () {

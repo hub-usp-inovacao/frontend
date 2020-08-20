@@ -480,7 +480,7 @@ export default {
         iconSrc: "home_competencies_icon.svg",
         dest: "competencias",
         formsURL: "",
-        formsCall: "Cadastre-se como professor"
+        formsCall: "Cadastre sua competência"
       },
     ],
   }),
