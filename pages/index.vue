@@ -224,15 +224,18 @@
                           style="color: #4ad5ff;"
                           >{{ title }}</v-card-title
                         >
-                        <v-card-text
-                          :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
-                          class="text-left font-weight-light"
-                          >{{ description }}
-                        </v-card-text>
+
+                        <div style="height: 12rem">
+                          <v-card-text
+                            :class="$breakpoint.smAndDown ? 'body-2' : 'title'"
+                            class="text-left font-weight-light"
+                            >{{ description }}
+                          </v-card-text>
+                        </div>
                       </v-col>
                     </v-row>
                     <v-row class="align-self-end" justify="center">
-                      <v-card-actions v-if="formsURL">
+                      <v-card-actions v-if="formsURL != undefined">
                         <v-btn
                           rounded
                           class="px-6 py-6"
