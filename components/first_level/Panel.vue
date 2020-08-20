@@ -9,6 +9,18 @@
             <p class="title font-weight-light" style="line-height: normal;">
               {{ description }}
             </p>
+
+            <p v-if="hasCallToAction">
+              <v-btn
+                text
+                :small="$vuetify.breakpoint.name == 'sm'"
+                color="primary"
+                :href="url"
+                target="_blank"
+                width="90%">
+                {{ formsCall }}
+              </v-btn>
+            </p>
           </v-col>
         </v-row>
       </v-col>
@@ -55,6 +67,10 @@ export default {
       type: String,
       default: "",
     },
+    formsCall: {
+      type: String,
+      default: ""
+    },
     loading: {
       type: Boolean,
       default: false,
@@ -79,6 +95,9 @@ export default {
         default:
           return { width: "70%" };
       }
+    },
+    hasCallToAction() {
+      return this.url !== "" && this.formsCall != "";
     },
   },
   watch: {
