@@ -17,9 +17,9 @@
                 color="secondary"
                 :href="url"
                 target="_blank"
-                width="60%">
-                {{ formsCall }}
-              </v-btn>
+                width="60%"
+                >{{ formsCall }}</v-btn
+              >
             </p>
             <p v-if="hasSecondCallToAction">
               <v-btn
@@ -28,9 +28,9 @@
                 color="secondary"
                 :href="secondUrl"
                 target="_blank"
-                width="60%">
-                {{ secondCall }}
-              </v-btn>
+                width="60%"
+                >{{ secondCall }}</v-btn
+              >
             </p>
           </v-col>
         </v-row>
@@ -80,15 +80,15 @@ export default {
     },
     formsCall: {
       type: String,
-      default: ""
+      default: "",
     },
     secondUrl: {
       type: String,
-      default: ""
+      default: "",
     },
     secondCall: {
       type: String,
-      default: ""
+      default: "",
     },
     loading: {
       type: Boolean,
@@ -120,7 +120,7 @@ export default {
     },
     hasSecondCallToAction() {
       return this.secondUrl !== "" && this.secondCall != "";
-    }
+    },
   },
   watch: {
     value: debounce(function () {

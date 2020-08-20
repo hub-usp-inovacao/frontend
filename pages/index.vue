@@ -74,13 +74,13 @@
                     </v-col>
                   </v-row>
 
-                  <v-row style="height: 30vh;" align="center" md-align="end">
-                    <v-col cols="4" md="2" offset-md="1">
+                  <v-row style="height: 30vh;" align="end" md-align="end">
+                    <v-col cols="4" offset="1" md="2" offset-md="1">
                       <v-img
                         :src="require('@/vectors/auspin-white.svg')"
                       ></v-img>
                     </v-col>
-                    <v-col cols="4" md="2" offset-md="1">
+                    <v-col cols="4" offset="1" md="2" offset-md="1">
                       <v-img :src="require('@/vectors/usp-white.svg')"></v-img>
                     </v-col>
                   </v-row>
@@ -205,7 +205,7 @@
                 cols="12"
                 lg="6"
               >
-                <BlueIconCard :item="subpage"/>
+                <BlueIconCard :item="subpage" />
               </v-col>
             </v-row>
           </v-container>
@@ -360,11 +360,10 @@
     </div>
 
     <div class="mt-16 pt-16">
-      <div class="hidden-md-and-up" style="height: 5vh"></div>
-      <div class="hidden-sm-and-down" style="height: 30vh"></div>
+      <div class="hidden-md-and-up" style="height: 5vh;"></div>
+      <div class="hidden-sm-and-down" style="height: 30vh;"></div>
       <BottomCurves class="absolute" style="bottom: 0;" />
     </div>
-
   </div>
 </template>
 
@@ -431,7 +430,7 @@ export default {
         iconSrc: "home_partnership_icon.svg",
         dest: "empresas",
         formsURL: "https://google.com",
-        formsCall: "Cadastre sua empresa"
+        formsCall: "Cadastre sua empresa",
       },
       {
         title: "Competências",
@@ -440,7 +439,7 @@ export default {
         iconSrc: "home_competencies_icon.svg",
         dest: "competencias",
         formsURL: "https://google.com",
-        formsCall: "Cadastre sua competência"
+        formsCall: "Cadastre sua competência",
       },
     ],
   }),
