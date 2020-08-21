@@ -10,26 +10,14 @@
               {{ description }}
             </p>
 
-            <p v-if="hasCallToAction">
+            <p v-for="{ cURL, text } of callsToAction" :key="cURL">
               <v-btn
                 rounded
-                :small="$vuetify.breakpoint.name == 'sm'"
                 color="secondary"
-                :href="url"
+                :href="cURL"
                 target="_blank"
-                width="60%"
-                >{{ formsCall }}</v-btn
-              >
-            </p>
-            <p v-if="hasSecondCallToAction">
-              <v-btn
-                rounded
-                :small="$vuetify.breakpoint.name == 'sm'"
-                color="secondary"
-                :href="secondUrl"
-                target="_blank"
-                width="60%"
-                >{{ secondCall }}</v-btn
+                :width="callToActionWidth"
+                >{{ text }}</v-btn
               >
             </p>
           </v-col>
@@ -120,6 +108,28 @@ export default {
     },
     hasSecondCallToAction() {
       return this.secondUrl !== "" && this.secondCall != "";
+    },
+    callToActionWidth() {
+      return this.$breakpoint.smAndDown ? "100%" : "60%";
+    },
+    callsToAction() {
+      const base = [];
+
+      if (this.hasCallToAction) {
+        base.push({
+          url: this.url,
+          text: this.formsCall,
+        });
+      }
+
+      if (this.hasSecondCallToAction) {
+        base.push({
+          url: this.secondUrl,
+          text: this.secondCall,
+        });
+      }
+
+      return base;
     },
   },
   watch: {

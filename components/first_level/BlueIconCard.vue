@@ -1,8 +1,9 @@
 <template>
   <v-card tile flat>
     <v-container
-      style="height: 100%"
-      class="d-flex flex-column justify-space-around">
+      style="height: 100%;"
+      class="d-flex flex-column justify-space-around"
+    >
       <nuxt-link :to="item.dest">
         <v-row align="center" class="pb-0">
           <v-col cols="4" lg="3" offset-lg="1">
@@ -20,7 +21,9 @@
             </v-row>
             <v-row>
               <v-col>
-                <v-card-text class="text-left font-weight-light black--text py-0">
+                <v-card-text
+                  class="text-left font-weight-light black--text py-0"
+                >
                   {{ item.description }}
                 </v-card-text>
               </v-col>
