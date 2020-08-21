@@ -426,7 +426,7 @@ export default {
       {
         title: "Empresas",
         description:
-          "Conheça as empresas com DNA USP, criadas por iniciativas de alunos, ex-alunos e projetos ligados à Universidade, organizadas por área de atuação e tecnologias aplicáveis",
+          "Conheça as empresas com DNA USP, criadas por iniciativas de alunos, ex-alunos e projetos ligados à Universidade",
         iconSrc: "home_partnership_icon.svg",
         dest: "empresas",
         formsURL: "https://google.com",
