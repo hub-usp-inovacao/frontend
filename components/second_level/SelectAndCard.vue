@@ -27,13 +27,7 @@
           <v-card-actions>
             <slot name="buttons" :item="selectedItem">
               <v-spacer />
-              <v-btn
-                depressed
-                dark
-                color="rgb(255, 167, 38)"
-                :href="selectedItem.url"
-                >Saiba mais</v-btn
-              >
+              <v-btn depressed dark color="rgb(255, 167, 38)" :href="selectedItem.url">Saiba mais</v-btn>
               <v-spacer />
             </slot>
           </v-card-actions>
@@ -74,9 +68,11 @@ export default {
     },
   },
   beforeMount() {
-    this.current_item = this.items.findIndex(
-      (item) => item.id === this.selected.id
-    );
+    if (this.selected) {
+      this.current_item = this.items.findIndex(
+        (item) => item.id === this.selected.id
+      );
+    }
   },
 };
 </script>
