@@ -62,17 +62,19 @@ export const getters = {
 
         return set;
       }, new Set())
-    ).sort((a, b) => {
-      if (a == "Não" || b == "Não") {
-        return a == "Não" ? -1 : 1;
-      }
+    )
+      .concat(["INOVA-HC"])
+      .sort((a, b) => {
+        if (a == "Não" || b == "Não") {
+          return a == "Não" ? -1 : 1;
+        }
 
-      if (a == b) {
-        return 0;
-      }
+        if (a == b) {
+          return 0;
+        }
 
-      return a < b ? -1 : 1;
-    }),
+        return a < b ? -1 : 1;
+      }),
   errors: (s) => s.errors,
 };
 
