@@ -20,28 +20,16 @@
       @select="filters = $event"
     />
 
-    <DisplayData
-      :items="display_entries"
-      group-name="Iniciativas"
-      :selected="globalSearchSelected"
-    >
+    <DisplayData :items="display_entries" group-name="Iniciativas" :selected="globalSearchSelected">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2 mb-4">{{ item.local }}</p>
-        <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">
-          {{ phone }}
-        </p>
+        <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">{{ phone }}</p>
       </template>
       <template #content="{ item }">{{ item.description.long }}</template>
       <template #actions="{ item }">
-        <v-btn
-          :href="item.url"
-          target="_blank"
-          color="#222c63"
-          class="white--text"
-          >Saiba Mais</v-btn
-        >
+        <v-btn :href="item.url" target="_blank" color="#222c63" class="white--text">Saiba Mais</v-btn>
       </template>
     </DisplayData>
   </div>
@@ -159,9 +147,13 @@ export default {
       );
     },
     filterData(context) {
-      this.filtered = this.iniciatives.filter((iniciative) =>
-        iniciative.matchesFilter(context)
-      );
+      if (context.primary.length > 0) {
+        this.filtered = this.iniciatives.filter((iniciative) =>
+          iniciative.matchesFilter(context)
+        );
+      } else {
+        this.filtered = undefined;
+      }
     },
     async pipeline() {
       if (this.filters) await this.filterData(this.filters);
