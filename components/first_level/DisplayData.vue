@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="items">
+      <ListAndDetails :items="items" :selected="selected">
         <template #itemTitle="{ item }">
           <slot name="title" :item="item"></slot>
         </template>
@@ -28,20 +28,32 @@
       </ListAndDetails>
     </div>
     <div class="hidden-md-and-up">
-      <SelectAndCard :items="items" :group-name="groupName">
+      <SelectAndCard
+        :items="items"
+        :group-name="groupName"
+        :selected="selected"
+      >
         <template #item="{ item }">
           <v-container>
             <v-row>
-              <v-col><slot name="title" :item="item"></slot></v-col>
+              <v-col>
+                <slot name="title" :item="item"></slot>
+              </v-col>
             </v-row>
             <v-row>
-              <v-col><slot name="detailsImg" :item="item"></slot></v-col>
+              <v-col>
+                <slot name="detailsImg" :item="item"></slot>
+              </v-col>
             </v-row>
             <v-row>
-              <v-col><slot name="detailsText" :item="item"></slot></v-col>
+              <v-col>
+                <slot name="detailsText" :item="item"></slot>
+              </v-col>
             </v-row>
             <v-row>
-              <v-col><slot name="content" :item="item"></slot></v-col>
+              <v-col>
+                <slot name="content" :item="item"></slot>
+              </v-col>
             </v-row>
           </v-container>
         </template>
@@ -78,6 +90,10 @@ export default {
     reverse: {
       type: Boolean,
       default: () => false,
+    },
+    selected: {
+      type: Object,
+      default: undefined,
     },
   },
   computed: {

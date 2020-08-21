@@ -35,9 +35,16 @@ export default {
       type: Array,
       default: () => [],
     },
+    selected: {
+      type: Object,
+      default: undefined,
+    },
   },
   data: () => ({
     selectedItem: null,
   }),
+  beforeMount() {
+    this.selectedItem = this.selected;
+  },
 };
 </script>

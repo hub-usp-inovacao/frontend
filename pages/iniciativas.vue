@@ -20,7 +20,11 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="display_entries" group-name="Iniciativas">
+    <DisplayData
+      :items="display_entries"
+      group-name="Iniciativas"
+      :selected="globalSearchSelected"
+    >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>
@@ -29,9 +33,7 @@
           {{ phone }}
         </p>
       </template>
-      <template #content="{ item }">
-        {{ item.description.long }}
-      </template>
+      <template #content="{ item }">{{ item.description.long }}</template>
       <template #actions="{ item }">
         <v-btn
           :href="item.url"
@@ -113,6 +115,13 @@ export default {
       return this.search.iniciatives !== undefined
         ? this.search.iniciatives
         : this.baseItems;
+    },
+    globalSearchSelected() {
+      if (this.$route.params.id)
+        return this.display_entries.find(
+          (item) => item.id === this.$route.params.id
+        );
+      return undefined;
     },
   },
   watch: {

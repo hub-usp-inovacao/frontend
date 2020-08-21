@@ -54,6 +54,10 @@ export default {
       type: String,
       default: () => "",
     },
+    selected: {
+      type: Object,
+      default: undefined,
+    },
   },
   data: () => ({
     current_item: -1,
@@ -68,6 +72,11 @@ export default {
     items() {
       this.current_item = -1;
     },
+  },
+  beforeMount() {
+    this.current_item = this.items.findIndex(
+      (item) => item.id === this.selected.id
+    );
   },
 };
 </script>
