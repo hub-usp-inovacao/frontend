@@ -115,7 +115,7 @@ export default {
       return this.tabs.some((tab) => tab.subareas !== undefined);
     },
     needDropdown() {
-      return this.groups !== undefined;
+      return this.groups !== undefined && this.groups.length > 0;
     },
     sTabs() {
       return this.selected.tabs;
