@@ -15,6 +15,7 @@
     <MultipleFilters
       :tabs="tabs"
       :colors="{ active: '#9b4c68', base: '#6b1c28' }"
+      :groups="groups"
       @select="filters = $event"
     />
 
@@ -258,7 +259,15 @@ export default {
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
+      unities: "competencia/unities",
+      campi: "competencia/campi",
     }),
+    groups() {
+      return [
+        { label: "Campus", items: this.campi },
+        { label: "Unidade", items: this.unities },
+      ];
+    },
     baseItems() {
       return this.filtered !== undefined ? this.filtered : this.skills;
     },
@@ -290,23 +299,32 @@ export default {
   },
   methods: {
     filterFun: (elm, filterStatus) => {
-      const { primary, secondary } = filterStatus;
+      const { primary, secondary, terciary } = filterStatus;
 
-      if (primary.length == 0) {
-        return true;
+      let primaryMatch = true,
+          secondaryMatch = true,
+          terciaryMatch = true;
+
+      if (primary.length > 0) {
+        primaryMatch = primary.includes(elm.area.major);
       }
 
-      const primaryMatch = primary.includes(elm.area.major);
-
-      if (!primaryMatch) {
-        return false;
+      if (secondary.length > 0) {
+        secondaryMatch = elm.area.minors
+          .some((minor) => secondary.includes(minor));
       }
 
-      if (secondary.length == 0) {
-        return true;
+      const [campus, unity] = terciary;
+
+      if (campus) {
+        terciaryMatch = elm.campus === campus;
       }
 
-      return elm.area.minors.some((minor) => secondary.includes(minor));
+      if (unity) {
+        terciaryMatch = terciaryMatch && elm.unity === unity;
+      }
+
+      return primaryMatch && secondaryMatch && terciaryMatch;
     },
     ...mapActions({
       fetchSpreadsheets: "competencia/fetchSpreadsheets",

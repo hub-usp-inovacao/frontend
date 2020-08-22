@@ -65,6 +65,20 @@ export const getters = {
   skills: (s) => s.skills,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
+  campi: (s) =>
+    s.skills
+      .map((s) => s.campus)
+      .filter(
+        (campus, index, campi) =>
+          index === campi.findIndex((other) => other === campus)
+      ),
+  unities: (s) =>
+    s.skills
+      .map((s) => s.unity)
+      .filter(
+        (unity, index, unities) =>
+          index === unities.findIndex((other) => other == unity)
+      ),
 };
 
 export const mutations = {
