@@ -117,14 +117,14 @@ export default {
 
       if (this.hasCallToAction) {
         base.push({
-          url: this.url,
+          cURL: this.url,
           text: this.formsCall,
         });
       }
 
       if (this.hasSecondCallToAction) {
         base.push({
-          url: this.secondUrl,
+          cURL: this.secondUrl,
           text: this.secondCall,
         });
       }
