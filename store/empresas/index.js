@@ -6,33 +6,35 @@ const rowToObj = (row) => ({
   name: columnValue(row, "AC"),
   year: columnValue(row, "AE"),
   phones: columnValue(row, "AH")
-    .split(";")
+    .split(/[;\/]/)
     .map((phone) => formatPhone(phone)),
   emails: columnValue(row, "AI").split(";"),
   url: formatURL(columnValue(row, "AJ")),
   category: {
-    code: columnValue(row, "AL").substr(0, 2),
-    name: columnValue(row, "AL").split(" ").slice(1).join(" "),
+    code: columnValue(row, "AK").substr(0, 2),
+    name: columnValue(row, "AK").split(" ").slice(1).join(" "),
   },
-  technologies: columnValue(row, "AM") == "." ? "" : columnValue(row, "AM"),
-  incubated: columnValue(row, "AN") != "Não" && columnValue(row, "AN") != ".",
-  ecosystems: columnValue(row, "AN").split(";"),
+  technologies: "-.!?".split("").includes(columnValue(row, "AM"))
+    ? []
+    : columnValue(row, "AM").split(";"),
+  incubated: ". Nenhum Nenhuma".split(" ").includes(columnValue(row, "BL")),
+  ecosystems: columnValue(row, "BL").split(";"),
   description: {
     long: columnValue(row, "AR") == "." ? "" : columnValue(row, "AR"),
   },
   services: columnValue(row, "AS") == "." ? "" : columnValue(row, "AS"),
   logo: columnValue(row, "AT"),
   socialMedia: columnValue(row, "AU"),
-  allowed: columnValue(row, "AV") != "Não",
+  allowed: columnValue(row, "BM") != "Não",
   address: {
-    venue: columnValue(row, "BF"),
-    neightborhood: columnValue(row, "BG"),
-    city: columnValue(row, "BH").split(";"),
-    state: columnValue(row, "BI"),
-    cep: columnValue(row, "BJ"),
+    venue: columnValue(row, "BG"),
+    neightborhood: columnValue(row, "BH"),
+    city: columnValue(row, "BI").split(";"),
+    state: columnValue(row, "BJ"),
+    cep: columnValue(row, "BK"),
   },
   active: ["ATIVA", "ATIVA - EMPRESA DOMICILIADA NO EXTERIOR"].includes(
-    columnValue(row, "BK")
+    columnValue(row, "BR")
   ),
 });
 
@@ -91,7 +93,7 @@ export const mutations = {
 export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "EMPRESAS";
+    const sheetName = "EMPRESAS_UPDATE";
 
     ctx.commit("setLoadingStatus");
 
