@@ -5,9 +5,9 @@
         v-model="search.term"
         title="Iniciativas"
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de inicativas e acessar as formas de contatar cada uma delas."
-        url="https://www.google.com"
+        url="http://www.inovacao.usp.br/editais/"
         forms-call="Confira os Editais"
-        second-url="https://www.google.com"
+        second-url="http://www.inovacao.usp.br/programas/"
         second-call="confira os Programas"
       />
     </div>
