@@ -101,9 +101,6 @@ export default {
       ],
     };
   },
-  beforeMount() {
-    console.log("Process Env:", process.env);
-  },
 };
 </script>
 
