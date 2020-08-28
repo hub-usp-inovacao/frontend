@@ -153,32 +153,6 @@ export default {
       this.$store.dispatch("educacao/fetchSpreadsheets", payload);
   },
   methods: {
-    filterFun(elm, filterStatus) {
-      const { primary, terciary } = filterStatus;
-
-      const categories = [];
-
-      if (elm.category.business) categories.push("Negócios");
-      if (elm.category.innovation) categories.push("Inovação");
-      if (elm.category.entrepreneurship) categories.push("Empreendedorismo");
-      if (elm.category.intellectualProperty)
-        categories.push("Propriedade Intelectual");
-
-      const primaryMatch =
-        primary.length == 0 || categories.some((cat) => primary.includes(cat));
-
-      const [campus, level] = terciary;
-
-      if (campus && elm.campus !== campus) {
-        return false;
-      }
-
-      if (level && elm.level !== level) {
-        return false;
-      }
-
-      return primaryMatch;
-    },
     async fuzzySearch() {
       if (!this.search.term.trim()) {
         this.search.disciplines = undefined;
@@ -192,9 +166,13 @@ export default {
       );
     },
     filterData(context) {
-      this.filtered = this.disciplines.filter((item) =>
-        this.filterFun(item, context)
-      );
+      if (context.primary.length > 0) {
+        this.filtered = this.disciplines.filter((discipline) =>
+          discipline.matchesFilter(context)
+        );
+      } else {
+        this.filtered = undefined;
+      }
     },
     async pipeline() {
       if (this.filters) await this.filterData(this.filters);
