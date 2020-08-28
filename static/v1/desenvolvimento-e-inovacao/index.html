@@ -1,0 +1,1389 @@
+ 		 	<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/v1/wp-content/themes/portalsolus/style/jquery.bxslider.css">
+    <link rel="stylesheet" href="/v1/wp-content/themes/portalsolus/style/jquery.scrollbar.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,500" rel="stylesheet">
+
+    <link rel="stylesheet" href="/v1/wp-content/themes/portalsolus/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/v1/wp-content/themes/portalsolus/js/jquery.bxslider.js"></script>
+
+    <script src="/v1/wp-content/themes/portalsolus/js/jquery.scrollbar.js"></script>
+    <!-- <script src="/v1/wp-content/themes/portalsolus/js/masonry.pkgd.min.js"></script> -->
+    <script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+
+    <!-- <script src="/v1/wp-content/themes/portalsolus/js/main.js"></script> -->
+    <script src="/v1/wp-content/themes/portalsolus/js/main-dev.js"></script>
+
+    <title>Solus</title>
+  </head>
+  <body>
+    <div class="container-fluid no-margin no-padding">
+      <header class="header header-desktop">
+        <div class="row center">
+        <div class="logo col-md-5 col-sm-6 no-padding">
+          <a href="/v1">
+            <span style="font-size:2.5em; font-weight: bold;">PORTAL SOLUS</span><br />
+            <span style="font-size: 0.9em; font-weight: light;">Inovação e Empreendedorismo na Universidade de São Paulo</span>
+          </a>
+        </div>
+
+        <nav class="nav col-md-7 col-sm-3 no-padding">
+          <ul class="menu no-margin no-padding d-sm-none d-md-block">
+            <li><a class="item-sobre" href="/v1">HOME</a></li>
+            <li><a class="item-iniciativas" href="/v1/iniciativas/">INICIATIVAS</a></li>
+            <li><a class="item-DI" href="/v1/desenvolvimento-e-inovacao/">D&I</a></li>
+            <li><a class="item-educacao" href="/v1/educacao/">EDUCAÇÃO</a></li>
+            <li><a class="item-empresas" href="/v1/empresas/">EMPRESAS</a></li>
+            <li><a class="item-contato" href="/v1/contato/">CONTATO</a></li>
+          </ul>
+
+          <!--
+          <div class="menu-mobile d-sm-block d-md-none" style="text-align: right; float: right;">
+            <img style="width: 60px;" src="images/menu.png" />
+          </div> -->
+
+        </nav>
+
+      </div>
+      </header>
+
+      <header class="header header-mobile">
+        <div class='row center'>
+          <div class="logo col-md-5 col-sm-6 no-padding">
+            <a href="/v1">
+              <span style="font-size:2em; font-weight: bold;">PORTAL SOLUS</span><br />
+              <span style="font-size: 0.5em; font-weight: light;">Inovação e Empreendedorismo na Universidade de São Paulo</span>
+            </a>
+          </div>
+
+          <!-- <img class="menu-icon" src="/v1/wp-content/themes/portalsolus/images/menu-icon.png" /> -->
+          <div class="menu-icon"></div>
+        </div>
+
+        <ul class="menu-mobile-nav">
+          <li><a class="item-sobre" href="/v1">HOME</a></li>
+          <li><a class="item-iniciativas" href="/v1/iniciativas/">INICIATIVAS</a></li>
+          <li><a class="item-DI" href="/v1/desenvolvimento-e-inovacao/">D&I</a></li>
+          <li><a class="item-educacao" href="/v1/educacao/">EDUCAÇÃO</a></li>
+          <li><a class="item-empresas" href="/v1/empresas/">EMPRESAS</a></li>
+          <li><a class="item-contato" href="/v1/contato/">CONTATO</a></li>
+      </header>
+      <style>
+       .header a.item-DI{
+         /* color: #f7af21!important; */
+         color: #f7af21!important;
+         font-weight: bold;
+       }
+
+
+      </style>
+
+
+      <main class="main">
+
+        <div class="filtro">
+          <div class="center">
+            <h1>Desenvolvimento e Inovação na USP</h1>
+
+            Laboratórios, organizações e programas que atuam com desenvolvimento & inovação
+
+            <br /><br />
+
+            <span class="procureoucadastre">Procure entre as atividades cadastradas ou <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform">cadastre a sua</a>.</span>
+
+
+            <form class="row search">
+              <div class="col-md-10">
+                <input type="text" name="search" placeholder="Digite o que você procura" />
+              </div>
+
+              <div class="col-md-2 no-padding text-center">
+                <input type="submit" value="PESQUISAR" />
+              </div>
+            </form>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="open-box-filtros">Categoria</div>
+
+                <div class="box-filtros box-filtros-categoria" data-busca="categoria">
+                  <strong>Atores em D&I na USP</strong>
+                  <br />
+                  <input type="checkbox" name="categoria" value="CEPID" /> <span>CEPID</span><br />
+                  <input type="checkbox" name="categoria" value="EMBRAPII" /> <span>EMBRAPII</span><br />
+                  <input type="checkbox" name="categoria" value="INCT" /> <span>INCT</span>
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="open-box-filtros">Campus</div>
+
+                <div class="box-filtros box-filtros-campus" data-busca="campus">
+                  <strong>Escolha o campus desejado</strong>
+                  <br />
+                  <input type="checkbox" name="campus" value="Bauru" /><span>Bauru</span> <br />
+                  <input type="checkbox" name="campus" value="Butantã" /><span>Butantã</span> <br />
+                  <input type="checkbox" name="campus" value="Lorena" /><span>Lorena</span> <br />
+                  <input type="checkbox" name="campus" value="Piracicaba" /><span>Piracicaba</span> <br />
+                  <input type="checkbox" name="campus" value="Pirassununga" /><span>Pirassununga</span> <br />
+                  <input type="checkbox" name="campus" value="Ribeirão Preto" /><span>Ribeirão Preto</span><br />
+                  <input type="checkbox" name="campus" value="São Carlos" /><span>São Carlos</span><br />
+                  <input type="checkbox" name="campus" value="USP Leste" /><span>USP Leste</span><br />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="open-box-filtros">Unidade</div>
+
+                <div class="box-filtros box-filtros-unidade" data-busca="unidade">
+                  <strong>Escolha a unidade de ensino e pesquisa desejada</strong>
+                  <br />
+                  <div class="box-filtros-scroll scrollbar-inner">
+                    <!-- <input type="checkbox" name="unidade" value="SAOPAULO" selected="selected" data-i="0"><span>Todos as unidades de São Paulo</span><br />
+                    <input type="checkbox" name="unidade" value="BAURU"><span>Todos as unidades de Bauru</span><br />
+                    <input type="checkbox" name="unidade" value="SAOCARLOS"><span>Todos os campi São Carlos</span><br />
+                    <input type="checkbox" name="unidade" value="LORENA"><span>Todos as unidades de Lorena</span><br />
+                    <input type="checkbox" name="unidade" value="EEL"><span>Escola de Engenharia de Lorena (EEL)</span><br />
+                    <input type="checkbox" name="unidade" value="PIRACICABA"><span>Todos as unidades de Piracicaba</span><br />
+                    <input type="checkbox" name="unidade" value="PIRASSUNUNGA"><span>Todos as unidades de Pirassununga</span><br />
+                    <input type="checkbox" name="unidade" value="RIBEIRAOPRETO"><span>Todos as unidades de Ribeirão Preto</span><br /> -->
+
+
+                    <input type="checkbox" name="unidade" value="Administração Central"><span>Administração Central</span><br />
+                    <input type="checkbox" name="unidade" value="Centro de Biologia Marinha - CEBIMAR"><span>Centro de Biologia Marinha (CEBIMar)</span><br />
+
+
+                    <input type="checkbox" name="unidade" value="Centro de Energia Nuclear na Agricultura - CENA"><span>Centro de Energia Nuclear na Agricultura (CENA)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Escola de Artes, Ciências e Humanidades - EACH"><span>Escola de Artes, Ciências e Humanidades (EACH)</span><br />
+                    <input type="checkbox" name="unidade" value="Escola de Comunicações e Artes - ECA"><span>Escola de Comunicações e Artes (ECA)</span><br />
+                    <input type="checkbox" name="unidade" value="Escola de Educação Física e Esporte - EEFE"><span>Escola de Educação Física e Esporte (EEFE)</span><br />
+                    <input type="checkbox" name="unidade" value="Escola de Educação Física e Esporte de Ribeirão Preto - EEFERP"><span>Escola de Educação Física e Esporte de Ribeirão Preto (EEFERP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Escola de Enfermagem - EE"><span>Escola de Enfermagem (EE)</span><br />
+                    <input type="checkbox" name="unidade" value="Escola de Enfermagem de Ribeirão Preto - EERP"><span>Escola de Enfermagem de Ribeirão Preto (EERP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Escola de Engenharia de São Carlos - EESC"><span>Escola de Engenharia de São Carlos (EESC)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Escola Politécnica - Poli"><span>Escola Politécnica (Poli)</span><br />
+                    <input type="checkbox" name="unidade" value="Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ"><span>Escola Superior de Agricultura “Luiz de Queiroz” (ESALQ)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Arquitetura e Urbanismo - FAU"><span>Faculdade de Arquitetura e Urbanismo (FAU)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Ciências Farmacêuticas - FCF"><span>Faculdade de Ciências Farmacêuticas (FCF)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Ciências Farmacêuticas de Ribeirão Preto - FCFRP"><span>Faculdade de Ciências Farmacêuticas de Ribeirão Preto (FCFRP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Direito - FD"><span>Faculdade de Direito (FD)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Direito de Ribeirão Preto - FDRP"><span>Faculdade de Direito de Ribeirão Preto (FDRP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Economia, Administração e Contabilidade - FEA"><span>Faculdade de Economia, Administração e Contabilidade (FEA)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Economia, Administração e Contabilidade de Ribeirão Preto - FEARP"><span>Faculdade de Economia, Administração e Contabilidade de Ribeirão Preto (FEARP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Educação - FE"><span>Faculdade de Educação (FE)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Filosofia, Letras e Ciências Humanas - FFLCH"><span>Faculdade de Filosofia, Letras e Ciências Humanas (FFLCH)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto - FFCLRP"><span>Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto (FFCLRP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Medicina - FM"><span>Faculdade de Medicina (FM)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Medicina de Ribeirão Preto - FMRP"><span>Faculdade de Medicina de Ribeirão Preto (FMRP)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Medicina Veterinária e Zootecnia - FMVZ"><span>Faculdade de Medicina Veterinária e Zootecnia (FMVZ)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Odontologia - FO"><span>Faculdade de Odontologia (FO)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Odontologia de Bauru - FOB"><span>Faculdade de Odontologia de Bauru (FOB)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Odontologia de Ribeirão Preto - FORP"><span>Faculdade de Odontologia de Ribeirão Preto (FORP)</span><br />
+
+
+                    <input type="checkbox" name="unidade" value="Faculdade de Saúde Pública - FSP"><span>Faculdade de Saúde Pública (FSP)</span><br />
+                    <input type="checkbox" name="unidade" value="Faculdade de Zootecnia e Engenharia de Alimentos - FZEA"><span>Faculdade de Zootecnia e Engenharia de Alimentos (FZEA)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Instituto de Arquitetura e Urbanismo - IAU"><span>Instituto de Arquitetura e Urbanismo (IAU)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Instituto de Astronomia, Geofísica e Ciências Atmosféricas - IAG"><span>Instituto de Astronomia, Geofísica e Ciências Atmosféricas (IAG)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Biociências - IB"><span>Instituto de Biociências (IB)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Ciências Biomédicas - ICB"><span>Instituto de Ciências Biomédicas (ICB)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Ciências Matemáticas e de Computação - ICMC"><span>Instituto de Ciências Matemáticas e de Computação (ICMC)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Instituto de Energia e Ambiente - IEE"><span>Instituto de Energia e Ambiente (IEE)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Estudos Avançados - IEA"><span>Instituto de Estudos Avançados (IEA)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Estudos Brasileiros"><span>Instituto de Estudos Brasileiros (IEB)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Física - IF"><span>Instituto de Física (IF)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Física de São Carlos - IFSC"><span>Instituto de Física de São Carlos (IFSC)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Instituto de Geociências - IGC"><span>Instituto de Geociências (IGc)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Matemática e Estatística - IME"><span>Instituto de Matemática e Estatística (IME)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Medicina Tropical de São Paulo - IMT"><span>Instituto de Medicina Tropical de São Paulo (IMT)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Psicologia - IP"><span>Instituto de Psicologia (IP)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Química - IQ"><span>Instituto de Química (IQ)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto de Química de São Carlos - IQSC"><span>Instituto de Química de São Carlos (IQSC)</span><br />
+
+                    <input type="checkbox" name="unidade" value="Instituto de Relações Internacionais - IRI"><span>Instituto de Relações Internacionais (IRI)</span><br />
+                    <input type="checkbox" name="unidade" value="Instituto Oceanográfico - IO"><span>Instituto Oceanográfico (IO)</span><br />
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="open-box-filtros">Área de Conhecimento</div>
+
+                <div class="box-filtros box-filtros-areadeconhecimento" data-busca="areadeconhecimento">
+                  <strong>Busque por áreas de interesse</strong>
+                  <br />
+                  <div class="box-filtros-scroll scrollbar-inner">
+                    <input type="checkbox" name="areadeconhecimento" value="Administração" /><span>Administração</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Agronomia" /><span>Agronomia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Antropologia" /><span>Antropologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Arqueologia" /><span>Arqueologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Arquitetura e Urbanismo" /><span>Arquitetura e Urbanismo</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Astronomia" /><span>Astronomia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Biofísica" /><span>Biofísica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Biologia Geral" /><span>Biologia Geral</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Bioquímica" /><span>Bioquímica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Botânica" /><span>Botânica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Ciência da Informação" /><span>Ciência da Informação</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Ciência e Tecnologia de Alimentos" /><span>Ciência e Tecnologia de Alimentos</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Ciência Política" /><span>Ciência Política</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Ciências da Computação" /><span>Ciências da Computação</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Comunicação" /><span>Comunicação</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Demografia" /><span>Demografia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Desenho Industrial" /><span>Desenho Industrial</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Direito" /><span>Direito</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Ecologia" /><span>Ecologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Economia" /><span>Economia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Educação" /><span>Educação</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Educação Física" /><span>Educação Física</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Enfermagem" /><span>Enfermagem</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Aeroespacial" /><span>Engenharia Aeroespacial</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Agrícola" /><span>Engenharia Agrícola</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Biomédica" /><span>Engenharia Biomédica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Civil" /><span>Engenharia Civil</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia de Metais e Metalúrgic" /><span>Engenharia de Metais e Metalúrgica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia de Minas" /><span>Engenharia de Minas</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia de Produção" /><span>Engenharia de Produção</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia de Transportes" /><span>Engenharia de Transportes</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Elétrica" /><span>Engenharia Elétrica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Mecânica" /><span>Engenharia Mecânica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Naval e Oceânica" /><span>Engenharia Naval e Oceânica</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Nuclear" /><span>Engenharia Nuclear</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Química" /><span>Engenharia Química</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Engenharia Sanitária" /><span>Engenharia Sanitária</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Farmácia" /><span>Farmácia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Farmacologia" /><span>Farmacologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Filosofia" /><span>Filosofia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Física" /><span>Física</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Fisiologia" /><span>Fisiologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Fisioterapia e Terapia Ocupacional" /><span>Fisioterapia e Terapia Ocupacional</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Fonoaudiologia" /><span>Fonoaudiologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Administração" /><span>Genética</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="GeoCiências" /><span>GeoCiências</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Geografia" /><span>Geografia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="História" /><span>História</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Imunologia" /><span>Imunologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Matemática" /><span>Matemática</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Medicina" /><span>Medicina</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Medicina Veterinária" /><span>Medicina Veterinária</span></span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Microbiologia" /><span>Microbiologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Morfologia" /><span>Morfologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Museologia" /><span>Museologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Nutrição" /><span>Nutrição</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Oceanografia" /><span>Oceanografia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Odontologia" /><span>Odontologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Parasitologia" /><span>Parasitologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Planejamento Urbano e Regional" /><span>Planejamento Urbano e Regional</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Probabilidade e Estatística" /><span>Probabilidade e Estatística</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Psicologia" /><span>Psicologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Química" /><span>Química</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Recursos Florestais e Engenharia Florestal" /><span>Recursos Florestais e Engenharia Florestal</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Recursos Pesqueiros e Engenharia de Pesca" /><span>Recursos Pesqueiros e Engenharia de Pesca</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Saúde Coletiva" /><span>Saúde Coletiva</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Serviço Social" /><span>Serviço Social</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Sociologia" /><span>Sociologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Turismo" /><span>Turismo</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Zoologia" /><span>Zoologia</span> <br />
+                    <input type="checkbox" name="areadeconhecimento" value="Zootecnia" /><span>Zootecnia</span> <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="limpar-filtros"><span>Limpar filtros</span></div>
+
+
+          </div>
+        </div>
+
+
+        <div id="iniciativas" class="iniciativas center">
+          <div class="list">
+            <div class="loading">
+              <img src="images/loading.gif" />
+            </div>
+
+
+            <!-- <div class="cadastre"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform">Cadastre sua atividade de Desenvolvimento e Inovação</a></div> -->
+
+                        <div class="semresultados">Nenhum resultado foi encontrado, tem certeza que sua busca está em iniciativas? <br /><a href="/v1#eixos">Veja novamente nossos eixos</a></div>
+
+
+                          <div class="categoria categoria-cepid" data-categoria="cepid">
+              <span class="categoria-titulo">CEPID</span>
+              <br />
+              <span class="categoria-descricao">São os Centros de Pesquisa, Inovação e Difusão (Cepids), apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante.</span>
+              <div class="grid">
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Instituto de Biociências - IB" data-tags="doenças genéticas, células-tronco, genética de populações, envelhecimento." data-titulo="CEGH-CEL" data-areadeconhecimento="Biologia Geral,Farmacologia,Genética,Medicina,Saúde Coletiva" data-descricaocurta="Centro de Pesquisa sobre o Genoma Humano e Células-Tronco" data-descricaolonga="Busca ampliar a compreensão a respeito da função e controle da expressão gênica, através do estudo de doenças genéticas com foco no desenvolvimento neuromuscular, neurológico, comportamental e desenvolvimento humano. Suas principais pesquisas estão relacionadas a doenças genéticas e células-tronco.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.genoma.ib.usp.br/" target="_blank">CEGH-CEL</a>
+                        <span class="unidade">
+                          Instituto de Biociências - IB                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa sobre o Genoma Humano e Células-Tronco                        </span>
+                        <br />
+
+                        <div class="tags">
+                          doenças genéticas, células-tronco, genética de populações, envelhecimento.                        </div>
+
+                        <span class="desc">
+                          Busca ampliar a compreensão a respeito da função e controle da expressão gênica, através do estudo de doenças genéticas com foco no desenvolvimento neuromuscular, neurológico, comportamental e desenvolvimento humano. Suas principais pesquisas estão relacionadas a doenças genéticas e células-tronco.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Todas as unidades de São Paulo" data-tags="Desigualdade Social, Políticas Públicas, Pobreza, Bem-Estar Social" data-titulo="CEM" data-areadeconhecimento="Antropologia,Arquitetura e Urbanismo,Ciência Política,Demografia,Direito,Economia,Educação,Filosofia,Geografia,História,Planejamento Urbano e Regional,Probabilidade e Estatística,Saúde Coletiva,Serviço Social,Sociologia" data-descricaocurta=" Centro de Estudos da Metrópole" data-descricaolonga="Instituição de pesquisa avançada em ciências sociais, que investiga temáticas relacionadas a desigualdades e à formulação de políticas públicas nas metrópoles contemporâneas. Constituído por um grupo multidisciplinar de profissionais, sua agenda de pesquisa está voltada basicamente ao estudo de dimensões relacionadas ao acesso dos cidadãos ao bem-estar. 
+">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://web.fflch.usp.br/centrodametropole/" target="_blank">CEM</a>
+                        <span class="unidade">
+                          Todas as unidades de São Paulo                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                           Centro de Estudos da Metrópole                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Desigualdade Social, Políticas Públicas, Pobreza, Bem-Estar Social                        </div>
+
+                        <span class="desc">
+                          Instituição de pesquisa avançada em ciências sociais, que investiga temáticas relacionadas a desigualdades e à formulação de políticas públicas nas metrópoles contemporâneas. Constituído por um grupo multidisciplinar de profissionais, sua agenda de pesquisa está voltada basicamente ao estudo de dimensões relacionadas ao acesso dos cidadãos ao bem-estar. 
+                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="São Carlos" data-unidade="Instituto de Ciências Matemáticas e de Computação - ICMC" data-tags="Análise de Risco, Inteligência Computacional e Otimização" data-titulo="CeMEAI" data-areadeconhecimento="Administração,Ciência da Informação,Ciências da Computação,Matemática,Probabilidade e Estatística" data-descricaocurta="Centro de Pesquisa em Matemática Aplicada à Indústria " data-descricaolonga="Seu objetivo é ser um centro irradiador de informação em aplicações das ciências matemáticas, identificando problemas e áreas que possam beneficiar-se de novas pesquisas e colocando-as em contato com pesquisadores de alta qualidade. O centro promove o contato de especialistas em ciências matemáticas com empresários, agentes de inovação, etc. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.cemeai.icmc.usp.br/" target="_blank">CeMEAI</a>
+                        <span class="unidade">
+                          Instituto de Ciências Matemáticas e de Computação - ICMC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa em Matemática Aplicada à Indústria                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Análise de Risco, Inteligência Computacional e Otimização                        </div>
+
+                        <span class="desc">
+                          Seu objetivo é ser um centro irradiador de informação em aplicações das ciências matemáticas, identificando problemas e áreas que possam beneficiar-se de novas pesquisas e colocando-as em contato com pesquisadores de alta qualidade. O centro promove o contato de especialistas em ciências matemáticas com empresários, agentes de inovação, etc.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="São Carlos" data-unidade="Instituto de Física de São Carlos - IFSC" data-tags="Física Atômica e Molecular, Biofotônica, Plasmônica" data-titulo="CEPOF" data-areadeconhecimento="Biofísica,Engenharia Elétrica,Engenharia Mecânica,Engenharia Nuclear,Física" data-descricaocurta="Centro de Pesquisa em Óptica e Fotônica" data-descricaolonga="Seu objetivo é desenvover ciência báscia, aplicada e promover avanços tecnológicos na área de óptica bem como promover uma ampla e profunda colaboração interdisciplinar entre o Centro, empresas privadas, e parceiros internacionais. Suas principais linhas de pesquisa são física atômica e molecular, biofotônica e plasmônica. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://cepof.ifsc.usp.br/" target="_blank">CEPOF</a>
+                        <span class="unidade">
+                          Instituto de Física de São Carlos - IFSC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa em Óptica e Fotônica                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Física Atômica e Molecular, Biofotônica, Plasmônica                        </div>
+
+                        <span class="desc">
+                          Seu objetivo é desenvover ciência báscia, aplicada e promover avanços tecnológicos na área de óptica bem como promover uma ampla e profunda colaboração interdisciplinar entre o Centro, empresas privadas, e parceiros internacionais. Suas principais linhas de pesquisa são física atômica e molecular, biofotônica e plasmônica.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="São Carlos" data-unidade="Instituto de Física de São Carlos - IFSC" data-tags="Química Medicinal, Planejamento de Fármacos, Ensaios Farmacológicos" data-titulo="CIBFar" data-areadeconhecimento="Biologia Geral,Bioquímica,Farmácia,Farmacologia,Genética,Química" data-descricaocurta="Centro de Pesquisa e Inovação em Biodiversidade e Fármacos " data-descricaolonga="Busca a realização de ciência básica e aplicada, bem como o desenvolvimento tecnológico em todas as áreas de biodiversidade e de descoberta de fármacos com base em pesquisas em química de produtos naturais, química orgânica sintética, biologia molecular e estrutural, bioquímica, química medicinal, planejamento de fármacos e ensaios farmacológicos.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://cibfar.ifsc.usp.br/" target="_blank">CIBFar</a>
+                        <span class="unidade">
+                          Instituto de Física de São Carlos - IFSC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa e Inovação em Biodiversidade e Fármacos                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Química Medicinal, Planejamento de Fármacos, Ensaios Farmacológicos                        </div>
+
+                        <span class="desc">
+                          Busca a realização de ciência básica e aplicada, bem como o desenvolvimento tecnológico em todas as áreas de biodiversidade e de descoberta de fármacos com base em pesquisas em química de produtos naturais, química orgânica sintética, biologia molecular e estrutural, bioquímica, química medicinal, planejamento de fármacos e ensaios farmacológicos.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Instituto de Psicologia - IP" data-tags="Bem-Estar, Comportamento Humano" data-titulo="CPBEC" data-areadeconhecimento="Antropologia,Demografia,Psicologia" data-descricaocurta="Centro de Pesquisa em Bem-Estar e Comportamento Humano" data-descricaolonga="Seu principal objetivo é promover pesquisas sobre o bem-estar psicológico, abordando aspectos como emoçoes positivas, intervenções comportamentais, e a base neural de processos sociais e afetivos. Os estudos são desenvolvidos no contexto interdisciplinar, integrando psicologia, neurociência e ciências da saúde, tendo também interseções com outras áreas como Ciências Sociais e Humanas Aplicadas.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="https://cpbec.org.br" target="_blank">CPBEC</a>
+                        <span class="unidade">
+                          Instituto de Psicologia - IP                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa em Bem-Estar e Comportamento Humano                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Bem-Estar, Comportamento Humano                        </div>
+
+                        <span class="desc">
+                          Seu principal objetivo é promover pesquisas sobre o bem-estar psicológico, abordando aspectos como emoçoes positivas, intervenções comportamentais, e a base neural de processos sociais e afetivos. Os estudos são desenvolvidos no contexto interdisciplinar, integrando psicologia, neurociência e ciências da saúde, tendo também interseções com outras áreas como Ciências Sociais e Humanas Aplicadas.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Ribeirão Preto" data-unidade="Faculdade de Medicina de Ribeirão Preto - FMRP" data-tags="Doenças Inflamatórias,  Mecanismos moleculares, imunológicos, patológicos e farmacológicos " data-titulo="CRID" data-areadeconhecimento="Biologia Geral,Farmácia,Farmacologia,Genética,Imunologia" data-descricaocurta="Centro de Pesquisa em Doenças Inflamatórias " data-descricaolonga="Criado com o objetivo de produzir conhecimento científico e identificar novos alvos terapêuticos. Realiza investigação integrativa e translacional para identificar e validar novas rotas biológicas envolvidas na indução e na resolução da inflamação. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://crid.fmrp.usp.br/" target="_blank">CRID</a>
+                        <span class="unidade">
+                          Faculdade de Medicina de Ribeirão Preto - FMRP                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa em Doenças Inflamatórias                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Doenças Inflamatórias,  Mecanismos moleculares, imunológicos, patológicos e farmacológicos                         </div>
+
+                        <span class="desc">
+                          Criado com o objetivo de produzir conhecimento científico e identificar novos alvos terapêuticos. Realiza investigação integrativa e translacional para identificar e validar novas rotas biológicas envolvidas na indução e na resolução da inflamação.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Ribeirão Preto" data-unidade="Faculdade de Medicina de Ribeirão Preto - FMRP" data-tags="Célula-Tronco, Ensaios Clínicos" data-titulo="CTC" data-areadeconhecimento="Biologia Geral,Bioquímica,Farmácia,Farmacologia,Fisiologia,Genética,Imunologia,Medicina,Medicina Veterinária" data-descricaocurta="Centro de Terapia Celular" data-descricaolonga="Seu objetivo é desenvolver pesquisas para entender a biologia das células-tronco, bem como em desenvolver novas tecnologias para seu uso no tratamento de doenças. O grupo de pesquisadores envolve médicos, biólogos, profissionais biomédicos, farmacêuticos e veterinários, entre outros. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://ctcusp.org/" target="_blank">CTC</a>
+                        <span class="unidade">
+                          Faculdade de Medicina de Ribeirão Preto - FMRP                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Terapia Celular                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Célula-Tronco, Ensaios Clínicos                        </div>
+
+                        <span class="desc">
+                          Seu objetivo é desenvolver pesquisas para entender a biologia das células-tronco, bem como em desenvolver novas tecnologias para seu uso no tratamento de doenças. O grupo de pesquisadores envolve médicos, biólogos, profissionais biomédicos, farmacêuticos e veterinários, entre outros.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Todas as unidades de São Paulo" data-tags=" Sistemas Biológicos em Alimentos, Alimentos, Nutrição e Saúde, Qualidade e Segurança dos Alimentos" data-titulo="FoRC &#8211; Food Research Center" data-areadeconhecimento="Bioquímica,Ciência e Tecnologia de Alimentos,Farmácia,Nutrição,Química,Saúde Coletiva" data-descricaocurta="Centro de Pesquisa em Alimentos e Nutrição" data-descricaolonga="A missão do Centro de Pesquisa de Alimentos é melhorar e promover a saúde e o bem-estar através da pesquisa, educação e inovação em ciência dos alimentos. As principais linhas de pesquisa do FoRC estão assentadas sobre 4 grandes "pilares de pesquisa": 
+
+">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.usp.br/forc/index.php" target="_blank">FoRC &#8211; Food Research Center</a>
+                        <span class="unidade">
+                          Todas as unidades de São Paulo                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa em Alimentos e Nutrição                        </span>
+                        <br />
+
+                        <div class="tags">
+                           Sistemas Biológicos em Alimentos, Alimentos, Nutrição e Saúde, Qualidade e Segurança dos Alimentos                        </div>
+
+                        <span class="desc">
+                          A missão do Centro de Pesquisa de Alimentos é melhorar e promover a saúde e o bem-estar através da pesquisa, educação e inovação em ciência dos alimentos. As principais linhas de pesquisa do FoRC estão assentadas sobre 4 grandes "pilares de pesquisa": 
+
+                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Todas as unidades de São Paulo" data-tags="Neuro-Reabilitação e Diagnóstico, Ferramentas computacionais" data-titulo="NeuroMat" data-areadeconhecimento="Biologia Geral,Ciência da Informação,Ciências da Computação,Comunicação,Matemática,Probabilidade e Estatística" data-descricaocurta="Centro de Pesquisa, Inovação e Difusão em Neuromatemática " data-descricaolonga="Com uma equipe interdisciplinar que reúne pesquisadores de matemática, ciências da computação, estatísticos, neurocientistas, biológos, físicos e jornalistas, dentre outras áreas, o centro tem como objetivo o desenvolvimento da nova matemática necessária para construir uma Teoria do Cérebro, tendo em vista os dados experimentais produzidos pela neurociência.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://neuromat.numec.prp.usp.br/pt-br" target="_blank">NeuroMat</a>
+                        <span class="unidade">
+                          Todas as unidades de São Paulo                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa, Inovação e Difusão em Neuromatemática                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Neuro-Reabilitação e Diagnóstico, Ferramentas computacionais                        </div>
+
+                        <span class="desc">
+                          Com uma equipe interdisciplinar que reúne pesquisadores de matemática, ciências da computação, estatísticos, neurocientistas, biológos, físicos e jornalistas, dentre outras áreas, o centro tem como objetivo o desenvolvimento da nova matemática necessária para construir uma Teoria do Cérebro, tendo em vista os dados experimentais produzidos pela neurociência.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Todas as unidades de São Paulo" data-tags="violência, democracia, diretos humanos" data-titulo="NEV-USP" data-areadeconhecimento="Antropologia,Ciência Política,Demografia,Filosofia,História,Probabilidade e Estatística,Psicologia,Saúde Coletiva,Serviço Social,Sociologia" data-descricaocurta="Núcleo de Estudos da Violência da USP " data-descricaolonga="Seu objetivo principal é realizar pesquisas sobre a violação de direitos humanos no Brasil e a construção da democracia. Para isso, é composto por um grupo interdisciplinar de pesquisadores e docentes que desenvolvam trabalhos e reflexões sobre as diversas violações de direitos humanos no país. 
+">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://nevusp.org/" target="_blank">NEV-USP</a>
+                        <span class="unidade">
+                          Todas as unidades de São Paulo                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Núcleo de Estudos da Violência da USP                         </span>
+                        <br />
+
+                        <div class="tags">
+                          violência, democracia, diretos humanos                        </div>
+
+                        <span class="desc">
+                          Seu objetivo principal é realizar pesquisas sobre a violação de direitos humanos no Brasil e a construção da democracia. Para isso, é composto por um grupo interdisciplinar de pesquisadores e docentes que desenvolvam trabalhos e reflexões sobre as diversas violações de direitos humanos no país. 
+                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Escola Politécnica - Poli" data-tags="Matriz Energética, Novos Combustíveis, Conversão de Gás Natural, Políticas de Energia e Economia, Abatimento de CO2" data-titulo="RCGI" data-areadeconhecimento="Biofísica,Bioquímica,Ciência Política,Economia,Engenharia de Minas,Engenharia de Transportes,Engenharia Química,GeoCiências,Planejamento Urbano e Regional,Química" data-descricaocurta="Centro de Pesquisa para Inovação em Gás Natural " data-descricaolonga="Este é um centro mundial para estudos avançados no uso sustentável do gás natural, biogás, hidrogénio e gestão, transporte, armazenamento e uso de CO2 para o desenvolvimento do setor de energia. Suas atividades estão fundamentadas nos três pilares: pesquisa, inovação e disseminação do conhecimento.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://usp.br/rcgi/" target="_blank">RCGI</a>
+                        <span class="unidade">
+                          Escola Politécnica - Poli                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa para Inovação em Gás Natural                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Matriz Energética, Novos Combustíveis, Conversão de Gás Natural, Políticas de Energia e Economia, Abatimento de CO2                        </div>
+
+                        <span class="desc">
+                          Este é um centro mundial para estudos avançados no uso sustentável do gás natural, biogás, hidrogénio e gestão, transporte, armazenamento e uso de CO2 para o desenvolvimento do setor de energia. Suas atividades estão fundamentadas nos três pilares: pesquisa, inovação e disseminação do conhecimento.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="CEPID" data-campus="Butantã" data-unidade="Instituto de Química - IQ" data-tags="Mecanismo redox, doenças crônico-degenerativas" data-titulo="Redoxoma" data-areadeconhecimento="Biologia Geral,Bioquímica,Farmácia,Farmacologia,Genética,Medicina" data-descricaocurta="Centro de Pesquisa em Processos Redox em Biomedicina" data-descricaolonga="Busca desenvolver pesquisa de alta qualidade sobre mecanismos redox relevantes na homeostase celular e em patologias, com ênfase em doenças crônico-degenerativas (doenças cardiovasculares, metabólicas, inflamatórias e agregação de proteínas e ambientais). Os resultados de suas pesquisas são transferidos para atividades educacionais, de treinamento, e atividades de disseminação.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://redoxoma.iq.usp.br/" target="_blank">Redoxoma</a>
+                        <span class="unidade">
+                          Instituto de Química - IQ                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Centro de Pesquisa em Processos Redox em Biomedicina                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Mecanismo redox, doenças crônico-degenerativas                        </div>
+
+                        <span class="desc">
+                          Busca desenvolver pesquisa de alta qualidade sobre mecanismos redox relevantes na homeostase celular e em patologias, com ênfase em doenças crônico-degenerativas (doenças cardiovasculares, metabólicas, inflamatórias e agregação de proteínas e ambientais). Os resultados de suas pesquisas são transferidos para atividades educacionais, de treinamento, e atividades de disseminação.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                              </div>
+
+            </div>
+
+                              <div class="categoria categoria-embrapii" data-categoria="embrapii">
+                  <span class="categoria-titulo">EMBRAPII</span>
+                  <br />
+                  <span class="categoria-descricao">A Associação Brasileira de Pesquisa e Inovação Industrial é uma organização que apoia instituições de pesquisa tecnológica, em selecionadas áreas de competência, para que executem projetos de desenvolvimento de pesquisa tecnológica para inovação, em cooperação com empresas do setor industrial.</span><br /><br />
+                  <div class="grid">
+
+                                        <div class="grid-item cards cards-1" data-categoria="EMBRAPII" data-campus="Piracicaba" data-unidade="Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ" data-tags="Biopesticida, biotecnologia, manejo de pragas" data-titulo="EMBRAPII ESALQ" data-areadeconhecimento="Agronomia,Engenharia Agrícola" data-descricaocurta="Unidade EMBRAPII localizada na Escola Superior de Agricultura “Luiz de Queiroz” (ESALQ)" data-descricaolonga="Esta Unidade integra diferentes áreas de conhecimento para o desenvolvimento de produtos inovadores, tecnologias e soluções para o manejo sustentável de pragas, com destaque para agentes de controle biológico e microbianos, feromônios e outros defensivos agrícolas naturais.">
+                      <div class="grid-item-content">
+
+                        <div class="card cat-5">
+                            <a class="card-title " href="https://embrapii.org.br/unidades/esalq-escola-superior-de-agricultura-luiz-de-queiroz/" target="_blank">EMBRAPII ESALQ</a>
+                            <span class="unidade">
+                              Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ                            </span>
+                            <br />
+
+                            <span class="short-desc ">
+                              Unidade EMBRAPII localizada na Escola Superior de Agricultura “Luiz de Queiroz” (ESALQ)                            </span>
+                            <br />
+
+                            <div class="tags">
+                              Biopesticida, biotecnologia, manejo de pragas                            </div>
+
+                            <span class="desc">
+                              Esta Unidade integra diferentes áreas de conhecimento para o desenvolvimento de produtos inovadores, tecnologias e soluções para o manejo sustentável de pragas, com destaque para agentes de controle biológico e microbianos, feromônios e outros defensivos agrícolas naturais.                            </span>
+                            <br />
+                            <span class="vermais"></span>
+                         </div>
+
+                        </div>
+                      </div>
+
+                                        <div class="grid-item cards cards-1" data-categoria="EMBRAPII" data-campus="São Carlos" data-unidade="Instituto de Física de São Carlos - IFSC" data-tags="Biofotônica, instrumentação" data-titulo="EMBRAPII IFSC" data-areadeconhecimento="Física" data-descricaocurta="Unidade EMBRAPII localizada no Instituto de Física de São Carlos (IFSC)" data-descricaolonga="Desde sua origem, o IFSC mostrou vocação em pesquisa em diversas áreas da física, sobretudo na área de Estado Sólido, e, hoje, abriga projetos de pesquisa que transpõem as fronteiras da física. Credenciado como Unidade EMBRAPII, possui competências nas áreas de biofotônica e instrumentação.">
+                      <div class="grid-item-content">
+
+                        <div class="card cat-5">
+                            <a class="card-title " href="https://embrapii.org.br/unidades/unidade-embrapii-de-biofotonica-e-instrumentacao-ifsc-usp-instituto-de-fisica-de-sao-carlos-da-universidade-de-sao-paulo/" target="_blank">EMBRAPII IFSC</a>
+                            <span class="unidade">
+                              Instituto de Física de São Carlos - IFSC                            </span>
+                            <br />
+
+                            <span class="short-desc ">
+                              Unidade EMBRAPII localizada no Instituto de Física de São Carlos (IFSC)                            </span>
+                            <br />
+
+                            <div class="tags">
+                              Biofotônica, instrumentação                            </div>
+
+                            <span class="desc">
+                              Desde sua origem, o IFSC mostrou vocação em pesquisa em diversas áreas da física, sobretudo na área de Estado Sólido, e, hoje, abriga projetos de pesquisa que transpõem as fronteiras da física. Credenciado como Unidade EMBRAPII, possui competências nas áreas de biofotônica e instrumentação.                            </span>
+                            <br />
+                            <span class="vermais"></span>
+                         </div>
+
+                        </div>
+                      </div>
+
+                                        <div class="grid-item cards cards-1" data-categoria="EMBRAPII" data-campus="Butantã" data-unidade="Escola Politécnica - Poli" data-tags="Materiais, construção eficiente" data-titulo="EMBRAPII POLI" data-areadeconhecimento="Arquitetura e Urbanismo,Engenharia Civil,Química" data-descricaocurta="Unidade EMBRAPII localizada na Escola Politécnica da Universidade de São Paulo (Poli/USP)" data-descricaolonga="Credenciada em 2015 como Unidade EMBRAPII para desenvolver projetos de inovação em parceria com empresas na área de Materiais para Construção Ecoeficiente.">
+                      <div class="grid-item-content">
+
+                        <div class="card cat-5">
+                            <a class="card-title " href="https://embrapii.org.br/unidades/unidade-embrapii-de-materiais-para-construcao-ecoeficiente-poli-escola-politecnica-da-universidade-de-sao-paulo/" target="_blank">EMBRAPII POLI</a>
+                            <span class="unidade">
+                              Escola Politécnica - Poli                            </span>
+                            <br />
+
+                            <span class="short-desc ">
+                              Unidade EMBRAPII localizada na Escola Politécnica da Universidade de São Paulo (Poli/USP)                            </span>
+                            <br />
+
+                            <div class="tags">
+                              Materiais, construção eficiente                            </div>
+
+                            <span class="desc">
+                              Credenciada em 2015 como Unidade EMBRAPII para desenvolver projetos de inovação em parceria com empresas na área de Materiais para Construção Ecoeficiente.                            </span>
+                            <br />
+                            <span class="vermais"></span>
+                         </div>
+
+                        </div>
+                      </div>
+
+                                        <div class="grid-item cards cards-1" data-categoria="EMBRAPII" data-campus="Butantã" data-unidade="Escola Politécnica - Poli" data-tags="Química verde, bioprocessos, rejeitos industriais" data-titulo="EMBRAPII TECNOGREEN (POLI)" data-areadeconhecimento="Engenharia Civil,Engenharia de Metais e Metalúrgica,Engenharia de Minas,Engenharia Naval e Oceânica,Engenharia Química,Química" data-descricaocurta="Unidade EMBRAPII localizada na Escola Politécnica da Universidade de São Paulo (Poli/USP)" data-descricaolonga="A unidade é resultado da união de pesquisadores da Escola Politécnica da USP nas áreas de Engenharia Química, Minas, Petróleo, Metalurgia, Materiais e Civil. Atua com projetos de tratamento de resíduos, tratamento de efluentes, biossorção, biorremediação, biolixiviação e processos químicos extrativos de alta temperatura ou em meio aquoso.">
+                      <div class="grid-item-content">
+
+                        <div class="card cat-5">
+                            <a class="card-title " href="https://embrapii.org.br/unidades/unidade-embrapii-de-quimica-verde-tecnogreen-poli-usp/" target="_blank">EMBRAPII TECNOGREEN (POLI)</a>
+                            <span class="unidade">
+                              Escola Politécnica - Poli                            </span>
+                            <br />
+
+                            <span class="short-desc ">
+                              Unidade EMBRAPII localizada na Escola Politécnica da Universidade de São Paulo (Poli/USP)                            </span>
+                            <br />
+
+                            <div class="tags">
+                              Química verde, bioprocessos, rejeitos industriais                            </div>
+
+                            <span class="desc">
+                              A unidade é resultado da união de pesquisadores da Escola Politécnica da USP nas áreas de Engenharia Química, Minas, Petróleo, Metalurgia, Materiais e Civil. Atua com projetos de tratamento de resíduos, tratamento de efluentes, biossorção, biorremediação, biolixiviação e processos químicos extrativos de alta temperatura ou em meio aquoso.                            </span>
+                            <br />
+                            <span class="vermais"></span>
+                         </div>
+
+                        </div>
+                      </div>
+
+                                      </div>
+
+              </div>
+
+
+                            <div class="categoria categoria-inct" data-categoria="inct">
+              <span class="categoria-titulo">INCT</span>
+              <br />
+              <span class="categoria-descricao">Os Institutos Nacionais de Ciência e Tecnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.</span>
+              <div class="grid">
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Instituto de Astronomia, Geofísica e Ciências Atmosféricas - IAG" data-tags="Telescópios, Astronomia" data-titulo="Astro" data-areadeconhecimento="Astronomia,Física" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Astrofísica" data-descricaolonga="Com o objetivo de inserir a astronomia brasileira no futuro da astronomia mundial, o instituto atua na operação ddos telescópios Gemini e SOAR e desenvolve pesquisas sobre a natureza da energia e matéria escuras, céu transiente, a estrutura da galáxia e a estrutura do sistema solar.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.astro.iag.usp.br/~incta/apresentacao.htm" target="_blank">Astro</a>
+                        <span class="unidade">
+                          Instituto de Astronomia, Geofísica e Ciências Atmosféricas - IAG                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Astrofísica                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Telescópios, Astronomia                        </div>
+
+                        <span class="desc">
+                          Com o objetivo de inserir a astronomia brasileira no futuro da astronomia mundial, o instituto atua na operação ddos telescópios Gemini e SOAR e desenvolve pesquisas sobre a natureza da energia e matéria escuras, céu transiente, a estrutura da galáxia e a estrutura do sistema solar.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Instituto de Biociências - IB" data-tags="Bioetanol, Energia, Combustíveis" data-titulo="Bioetanol" data-areadeconhecimento="Bioquímica,Engenharia Agrícola,Engenharia Química" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia do Bioetanol" data-descricaolonga="Rede de 31 laboratórios distribuídos por 5 estados brasileiros para desenvolver as bases tecnológicas nacessárias para viabilizar a produção de cana-de-açúcar no Brasil.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.inctdobioetanol.com.br/" target="_blank">Bioetanol</a>
+                        <span class="unidade">
+                          Instituto de Biociências - IB                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia do Bioetanol                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Bioetanol, Energia, Combustíveis                        </div>
+
+                        <span class="desc">
+                          Rede de 31 laboratórios distribuídos por 5 estados brasileiros para desenvolver as bases tecnológicas nacessárias para viabilizar a produção de cana-de-açúcar no Brasil.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Instituto de Biociências - IB" data-tags="Genoma Humano, Células-Tronco, Doenças Genéticas" data-titulo="CETGEN" data-areadeconhecimento="Biologia Geral,Engenharia Biomédica,Genética,Medicina" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Células-Tronco em Doenças Genéticas Humanas" data-descricaolonga="Desenvolve pesquisa básica e aplicada ligada ao estudo do genoma humano, doenças genéticas e pesquisas com células-tronco. O grupo tem experiência notória em pesquisas de localização de genes que produzem doenças genéticas, utilizando técnicas clássicas, cromossômicas e moleculares, incluindo sequenciamento de última geração (next generation sequencing).">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inct.cnpq.br/web/inct-cetgen/home/" target="_blank">CETGEN</a>
+                        <span class="unidade">
+                          Instituto de Biociências - IB                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Células-Tronco em Doenças Genéticas Humanas                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Genoma Humano, Células-Tronco, Doenças Genéticas                        </div>
+
+                        <span class="desc">
+                          Desenvolve pesquisa básica e aplicada ligada ao estudo do genoma humano, doenças genéticas e pesquisas com células-tronco. O grupo tem experiência notória em pesquisas de localização de genes que produzem doenças genéticas, utilizando técnicas clássicas, cromossômicas e moleculares, incluindo sequenciamento de última geração (next generation sequencing).                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Escola Politécnica - Poli" data-tags="Educação ambiental, reuso da água, química limpa" data-titulo="EMA" data-areadeconhecimento="Agronomia,Engenharia Agrícola,Recursos Florestais e Engenharia Florestal" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Estudos do Meio Ambiente" data-descricaolonga="As iniciativas de pesquisa do INCT envolvem a simulação e otimização de processos de interesse para a indústria química; reuso da água, com a integração de tecnologias; (foto)-remediação de efluentes e resíduos; novos catalizadores para processos oxidativos avançados; educação ambiental; cursos de especialização para profissionais.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inct.cnpq.br/web/inct-ema" target="_blank">EMA</a>
+                        <span class="unidade">
+                          Escola Politécnica - Poli                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Estudos do Meio Ambiente                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Educação ambiental, reuso da água, química limpa                        </div>
+
+                        <span class="desc">
+                          As iniciativas de pesquisa do INCT envolvem a simulação e otimização de processos de interesse para a indústria química; reuso da água, com a integração de tecnologias; (foto)-remediação de efluentes e resíduos; novos catalizadores para processos oxidativos avançados; educação ambiental; cursos de especialização para profissionais.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Instituto de Física - IF" data-tags="Cristais Líquidos, Fluidos Magnéticos, Fluidos de Interesse Biológico" data-titulo="Fcx" data-areadeconhecimento="Física" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Fluidos Complexos" data-descricaolonga="Atua em projetos de natureza essencialmente multidisciplinar, com ênfase na pesquisa, ensino, aplicações tecnológicas e terapêuticas de fluidos complexos. As atividades de pesquisa do IMFCx estavam concentradas em três grandes famílias dos fluidos complexos: os cristais líquidos, os fluidos magnéticos e os fluidos de interesse biológico.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inctfcx.vitis.uspnet.usp.br/?q=pt-br" target="_blank">Fcx</a>
+                        <span class="unidade">
+                          Instituto de Física - IF                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Fluidos Complexos                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Cristais Líquidos, Fluidos Magnéticos, Fluidos de Interesse Biológico                        </div>
+
+                        <span class="desc">
+                          Atua em projetos de natureza essencialmente multidisciplinar, com ênfase na pesquisa, ensino, aplicações tecnológicas e terapêuticas de fluidos complexos. As atividades de pesquisa do IMFCx estavam concentradas em três grandes famílias dos fluidos complexos: os cristais líquidos, os fluidos magnéticos e os fluidos de interesse biológico.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Faculdade de Medicina - FM" data-tags="Saúde Ambiental, Saúde e Poluição" data-titulo="INAIRA" data-areadeconhecimento="Biologia Geral,Bioquímica,Ecologia,Economia,Medicina,Planejamento Urbano e Regional" data-descricaocurta="Laboratório de Análise Integrada do Risco Ambiental " data-descricaolonga="O principal objetivo deste laboratório é desenvolver projetos de pesquisa para compreender um dos elos mais fracos da cadeia de eventos do desenvolvimento econômico que é o impacto na saúde de algumas decisões econômicas em termos de alternativas de energia e de sua sustentabilidade. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inct.cnpq.br/web/inct-inaira" target="_blank">INAIRA</a>
+                        <span class="unidade">
+                          Faculdade de Medicina - FM                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Laboratório de Análise Integrada do Risco Ambiental                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Saúde Ambiental, Saúde e Poluição                        </div>
+
+                        <span class="desc">
+                          O principal objetivo deste laboratório é desenvolver projetos de pesquisa para compreender um dos elos mais fracos da cadeia de eventos do desenvolvimento econômico que é o impacto na saúde de algumas decisões econômicas em termos de alternativas de energia e de sua sustentabilidade.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="São Carlos" data-unidade="Instituto de Física de São Carlos - IFSC" data-tags="Doenças Endêmicas" data-titulo="INBEQMeDI" data-areadeconhecimento="Biologia Geral,Farmácia,Farmacologia,Medicina,Medicina Veterinária" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Biotecnologia Estrutural e Química Medicinal em Doenças Infecciosas " data-descricaolonga="Uma iniciativa conjunta resultante de projetos de colaboração existentes focados no desenvolvimento de estudos estruturais e biológicos em alvos moleculares específicos em microorganismos associados com doenças tropicais negligenciadas, tendo como objetivo o desenvolvimento de novas drogas candidatas para o tratamento das doenças endêmicas.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inct.cnpq.br/web/inct-inbeqmedi/home/" target="_blank">INBEQMeDI</a>
+                        <span class="unidade">
+                          Instituto de Física de São Carlos - IFSC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Biotecnologia Estrutural e Química Medicinal em Doenças Infecciosas                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Doenças Endêmicas                        </div>
+
+                        <span class="desc">
+                          Uma iniciativa conjunta resultante de projetos de colaboração existentes focados no desenvolvimento de estudos estruturais e biológicos em alvos moleculares específicos em microorganismos associados com doenças tropicais negligenciadas, tendo como objetivo o desenvolvimento de novas drogas candidatas para o tratamento das doenças endêmicas.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Piracicaba" data-unidade="Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ" data-tags="Recursos Hídricos, Recursos Energéticos, Produção Agrícola" data-titulo="INCIT-EI" data-areadeconhecimento="Agronomia,Biologia Geral,Ecologia,Engenharia Agrícola,Recursos Florestais e Engenharia Florestal" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia em Engenharia da Irrigação" data-descricaolonga="Sua missão é contribuir com o aprimoramento do setor de irrigação no país, estimular as pesquisas aplicadas, acelerar o processo de difusão da tecnologia aos agricultores de pequeno porte e oferecer serviços de alta qualidade a empresas e clientes que queiram avaliar seus sistemas e produtos. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.esalq.usp.br/inctei/index.html" target="_blank">INCIT-EI</a>
+                        <span class="unidade">
+                          Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia em Engenharia da Irrigação                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Recursos Hídricos, Recursos Energéticos, Produção Agrícola                        </div>
+
+                        <span class="desc">
+                          Sua missão é contribuir com o aprimoramento do setor de irrigação no país, estimular as pesquisas aplicadas, acelerar o processo de difusão da tecnologia aos agricultores de pequeno porte e oferecer serviços de alta qualidade a empresas e clientes que queiram avaliar seus sistemas e produtos.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Escola Politécnica - Poli" data-tags="Terras raras" data-titulo="INCT &#8211; Terras Raras" data-areadeconhecimento="Engenharia de Metais e Metalúrgica" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia sobre Terras  Raras" data-descricaolonga="Cria e desenvolve competências científicas, tecnológicas e de recursos humanos, com o intuito contribuir para superar os desafios que cerceiam a competitividade da cadeia produtiva nacional de ímãs de terras-raras (TRs), da mineração até a aplicação industrial.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="https://inct-terras-raras.prp.usp.br/" target="_blank">INCT &#8211; Terras Raras</a>
+                        <span class="unidade">
+                          Escola Politécnica - Poli                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia sobre Terras  Raras                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Terras raras                        </div>
+
+                        <span class="desc">
+                          Cria e desenvolve competências científicas, tecnológicas e de recursos humanos, com o intuito contribuir para superar os desafios que cerceiam a competitividade da cadeia produtiva nacional de ímãs de terras-raras (TRs), da mineração até a aplicação industrial.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Ribeirão Preto" data-unidade="Faculdade de Medicina de Ribeirão Preto - FMRP" data-tags="Terapias Celulares, Células-Tronco, Estudos Clínicos" data-titulo="INCT-C" data-areadeconhecimento="Biologia Geral,Farmácia,Farmacologia,Genética,Imunologia,Medicina,Medicina Veterinária" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia em Células-Tronco e Terapia Celular" data-descricaolonga="Focado no desenvolvimento de terapias celulares para compreender os mecanismos envolvidos na manutenção do estado indiferenciado, no estabelecimento de linhagens de células tronco depositadas em bancos encarregados da guarda, na produção de células-tronco em larga escala para uso nos estudos clínico e por fim na realização de estudos pré-clínicos e clínicos.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inct.cnpq.br/web/inct-c/home/" target="_blank">INCT-C</a>
+                        <span class="unidade">
+                          Faculdade de Medicina de Ribeirão Preto - FMRP                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia em Células-Tronco e Terapia Celular                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Terapias Celulares, Células-Tronco, Estudos Clínicos                        </div>
+
+                        <span class="desc">
+                          Focado no desenvolvimento de terapias celulares para compreender os mecanismos envolvidos na manutenção do estado indiferenciado, no estabelecimento de linhagens de células tronco depositadas em bancos encarregados da guarda, na produção de células-tronco em larga escala para uso nos estudos clínico e por fim na realização de estudos pré-clínicos e clínicos.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Faculdade de Medicina - FM" data-tags="Alergias, Autoimunidade, Câncer, Doenças Infecciosas-Leishmaniose, HIV/Aids,Imunodeficiência, Transplante & Imunorregulação." data-titulo="INCT-Iii" data-areadeconhecimento="Biologia Geral,Bioquímica,Medicina" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Investigação em Imunologia" data-descricaolonga="Uma rede virtual multidisciplinar de cientistas, compromissada com a pesquisa científica de excelência em Imunologia Médica. Atua como um sistema matricial em Linhas Temáticas de Pesquisa e Plataformas.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://iii.org.br/" target="_blank">INCT-Iii</a>
+                        <span class="unidade">
+                          Faculdade de Medicina - FM                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Investigação em Imunologia                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Alergias, Autoimunidade, Câncer, Doenças Infecciosas-Leishmaniose, HIV/Aids,Imunodeficiência, Transplante & Imunorregulação.                        </div>
+
+                        <span class="desc">
+                          Uma rede virtual multidisciplinar de cientistas, compromissada com a pesquisa científica de excelência em Imunologia Médica. Atua como um sistema matricial em Linhas Temáticas de Pesquisa e Plataformas.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="São Carlos" data-unidade="Instituto de Física de São Carlos - IFSC" data-tags="Elétrica, Teoria de Transporte, Estrutura Eletrônica" data-titulo="INEO" data-areadeconhecimento="Biologia Geral,Ciência da Informação,Ciências da Computação,Física" data-descricaocurta="Instituto Nacional de Eletrônica Orgânica" data-descricaolonga="Busca o desenvolvimento de ciência e tecnologia em eletrônica orgânica, sua difusão, bem como a busca de colaborações sinérgicas com os setores industriais afins. O INEO está concentrado em pesquisas envolvendo diferentes classes de materiais orgânicos, foto- e/ou eletroativos, nas áreas de síntese orgânica, estudo de propriedades estruturais, ópticas e elétricas, teoria de transporte em dispositivos e em estrutura eletrônica em nível molecular, entre outros.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.ifsc.usp.br/~ineo/ineo/" target="_blank">INEO</a>
+                        <span class="unidade">
+                          Instituto de Física de São Carlos - IFSC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Eletrônica Orgânica                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Elétrica, Teoria de Transporte, Estrutura Eletrônica                        </div>
+
+                        <span class="desc">
+                          Busca o desenvolvimento de ciência e tecnologia em eletrônica orgânica, sua difusão, bem como a busca de colaborações sinérgicas com os setores industriais afins. O INEO está concentrado em pesquisas envolvendo diferentes classes de materiais orgânicos, foto- e/ou eletroativos, nas áreas de síntese orgânica, estudo de propriedades estruturais, ópticas e elétricas, teoria de transporte em dispositivos e em estrutura eletrônica em nível molecular, entre outros.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="São Carlos" data-unidade="Instituto de Física de São Carlos - IFSC" data-tags="Óptica, Fotônica" data-titulo="INOF" data-areadeconhecimento="Física" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Óptica e Fotônica" data-descricaolonga="Seu objetivo é desenvolver a pesquisa fundamental e aplicada multidisciplinar, integrando especialistas de diferentes áreas (física, química, ciências médicas e de engenharia) para explorar novas aplicações de Óptica e Fotônica.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inct.cnpq.br/web/inct-inof" target="_blank">INOF</a>
+                        <span class="unidade">
+                          Instituto de Física de São Carlos - IFSC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Óptica e Fotônica                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Óptica, Fotônica                        </div>
+
+                        <span class="desc">
+                          Seu objetivo é desenvolver a pesquisa fundamental e aplicada multidisciplinar, integrando especialistas de diferentes áreas (física, química, ciências médicas e de engenharia) para explorar novas aplicações de Óptica e Fotônica.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Faculdade de Medicina - FM" data-tags="Saúde Mental, Transtornos Mentais, Infância e Adolescência" data-titulo="INPD" data-areadeconhecimento="Medicina,Psicologia,Saúde Coletiva,Serviço Social" data-descricaocurta="Instituto Nacional de Psiquiatria do Desenvolvimento para Crianças e Adolescentes" data-descricaolonga="Aplicado ao desenvolvimento de conhecimento em saúde mental na infância e adolescência no Brasil a partir de evidências que relacionam os transtornos mentais com alterações no desenvolvimento cerebral e mostram que eles podem ser revertidos com intervenções precoces.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://inpd.org.br/" target="_blank">INPD</a>
+                        <span class="unidade">
+                          Faculdade de Medicina - FM                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Psiquiatria do Desenvolvimento para Crianças e Adolescentes                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Saúde Mental, Transtornos Mentais, Infância e Adolescência                        </div>
+
+                        <span class="desc">
+                          Aplicado ao desenvolvimento de conhecimento em saúde mental na infância e adolescência no Brasil a partir de evidências que relacionam os transtornos mentais com alterações no desenvolvimento cerebral e mostram que eles podem ser revertidos com intervenções precoces.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="São Carlos" data-unidade="Escola de Engenharia de São Carlos - EESC" data-tags="robôs, veículos, navegação autônoma, inct, preservação ambiental" data-titulo="InSAC" data-areadeconhecimento="Engenharia Aeroespacial" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia para Sistemas Autônomos Cooperativos" data-descricaolonga="O INCT trará avanços na teoria de sistemas e tecnologia da informação emergente para permitir a concepção e implementação de redes distribuídas para observação, mobilidade e manipulação, fornecendo escopo fundamental para resolver problemas reais.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www2.eesc.usp.br/insac/o-programa-inct/" target="_blank">InSAC</a>
+                        <span class="unidade">
+                          Escola de Engenharia de São Carlos - EESC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia para Sistemas Autônomos Cooperativos                        </span>
+                        <br />
+
+                        <div class="tags">
+                          robôs, veículos, navegação autônoma, inct, preservação ambiental                        </div>
+
+                        <span class="desc">
+                          O INCT trará avanços na teoria de sistemas e tecnologia da informação emergente para permitir a concepção e implementação de redes distribuídas para observação, mobilidade e manipulação, fornecendo escopo fundamental para resolver problemas reais.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Instituto de Energia e Ambiente - IEE" data-tags="Geologia Isotópica, Geoquímica Inorgânica, Evolução Termocronológica, Geoquímica de Gases Nobres" data-titulo="PETROTEC" data-areadeconhecimento="Engenharia de Minas,Engenharia Química" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Técnicas Analíticas Aplicadas a Exploração de Petróleo e Gás" data-descricaolonga="Tem como missão o aprimoramento e desenvolvimento inovador de técnicas analíticas na área de geoquímica inorgânica (análises elementais e isotópicas) que possam contribuir na análise de riscos exploratórios e nos estudos de reservatórios de óleo e gás.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.fapesp.br/4886" target="_blank">PETROTEC</a>
+                        <span class="unidade">
+                          Instituto de Energia e Ambiente - IEE                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Técnicas Analíticas Aplicadas a Exploração de Petróleo e Gás                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Geologia Isotópica, Geoquímica Inorgânica, Evolução Termocronológica, Geoquímica de Gases Nobres                        </div>
+
+                        <span class="desc">
+                          Tem como missão o aprimoramento e desenvolvimento inovador de técnicas analíticas na área de geoquímica inorgânica (análises elementais e isotópicas) que possam contribuir na análise de riscos exploratórios e nos estudos de reservatórios de óleo e gás.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Instituto de Química - IQ" data-tags="Novos Biomarcadores, Estratégias Antioxidantes, Radicais Livres" data-titulo="Redoxoma" data-areadeconhecimento="Biofísica,Biologia Geral,Bioquímica,Engenharia Biomédica,Farmacologia,Química" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Processos Redox em Biomedicina" data-descricaolonga="Seu objetivo é contribuir para o desenvolvimento de novos biomarcadores e estratégias antioxidantes para otimizar a monitoração e controle de processos biológicos mediados por radicais livres.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.iq.usp.br/redoxoma/" target="_blank">Redoxoma</a>
+                        <span class="unidade">
+                          Instituto de Química - IQ                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Processos Redox em Biomedicina                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Novos Biomarcadores, Estratégias Antioxidantes, Radicais Livres                        </div>
+
+                        <span class="desc">
+                          Seu objetivo é contribuir para o desenvolvimento de novos biomarcadores e estratégias antioxidantes para otimizar a monitoração e controle de processos biológicos mediados por radicais livres.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="São Carlos" data-unidade="Instituto de Ciências Matemáticas e de Computação - ICMC" data-tags="Veículos Terrestres Autônomos,Veículos Aéreos Autônomos" data-titulo="SEC" data-areadeconhecimento="Ciência da Informação,Ciências da Computação,Engenharia de Transportes,Engenharia Mecânica" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia em Sistemas Embarcados Críticos " data-descricaolonga="Visa a desenvolver tecnologias, produtos e formação de pessoal qualificado na área de sistemas embarcados críticos, com forte orientação ao desenvolvimento de sistemas robóticos autônomos. ">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.labes.icmc.usp.br/site/content/inct-sec-instituto-nacional-de-ci%C3%AAncia-e-tecnologia-em-sistemas-embarcados-cr%C3%ADticos" target="_blank">SEC</a>
+                        <span class="unidade">
+                          Instituto de Ciências Matemáticas e de Computação - ICMC                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia em Sistemas Embarcados Críticos                         </span>
+                        <br />
+
+                        <div class="tags">
+                          Veículos Terrestres Autônomos,Veículos Aéreos Autônomos                        </div>
+
+                        <span class="desc">
+                          Visa a desenvolver tecnologias, produtos e formação de pessoal qualificado na área de sistemas embarcados críticos, com forte orientação ao desenvolvimento de sistemas robóticos autônomos.                         </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Piracicaba" data-unidade="Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ" data-tags="Semioquímicos, Ferômonios, Ecologia Química" data-titulo="Semioquímicos" data-areadeconhecimento="Agronomia,Ciência e Tecnologia de Alimentos,Engenharia Agrícola" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia de Semioquímicos na Agricultura" data-descricaolonga="Atua para a reduzir a utilização de agroquímicos, preservando o meio ambiente para uma agricultura sustentável. Suas pesquisas são estudos de química de voláteis de insetos e de plantas, criação artificial e estudo de biologia e comportamento de insetos e integração com outros métodos de controle de pragas agrícola.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title " href="http://www.esalq.usp.br/inctsa/index.php" target="_blank">Semioquímicos</a>
+                        <span class="unidade">
+                          Escola Superior de Agricultura “Luiz de Queiroz” - ESALQ                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia de Semioquímicos na Agricultura                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Semioquímicos, Ferômonios, Ecologia Química                        </div>
+
+                        <span class="desc">
+                          Atua para a reduzir a utilização de agroquímicos, preservando o meio ambiente para uma agricultura sustentável. Suas pesquisas são estudos de química de voláteis de insetos e de plantas, criação artificial e estudo de biologia e comportamento de insetos e integração com outros métodos de controle de pragas agrícola.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                
+                <div class="grid-item cards cards-1" data-categoria="INCT" data-campus="Butantã" data-unidade="Faculdade de Filosofia, Letras e Ciências Humanas - FFLCH" data-tags="Direito Democrático, Direitos Humanos, Segurança Pública" data-titulo="Violência, Democracia e Segurança Cidadã" data-areadeconhecimento="Antropologia,Ciência Política,História,Sociologia" data-descricaocurta="Instituto Nacional de Ciência e Tecnologia sobre Violência, Democracia e Segurança Cidadã" data-descricaolonga="Dedicado ao estudo da democracia sob a perspectiva do Estado de Direito Democrático, entendido como acesso universal à proteção da lei e às garantias aos direitos humanos, livre da violência, especialmente daquela resultante das ações dos agentes do Estado e do crime organizado.">
+                  <div class="grid-item-content">
+
+
+                    <div class="card cat-1">
+                        <a class="card-title small-title-font" href="http://inct.cnpq.br/web/inct-vdsc/home/" target="_blank">Violência, Democracia e Segurança Cidadã</a>
+                        <span class="unidade">
+                          Faculdade de Filosofia, Letras e Ciências Humanas - FFLCH                        </span>
+                        <br />
+
+                        <span class="short-desc ">
+                          Instituto Nacional de Ciência e Tecnologia sobre Violência, Democracia e Segurança Cidadã                        </span>
+                        <br />
+
+                        <div class="tags">
+                          Direito Democrático, Direitos Humanos, Segurança Pública                        </div>
+
+                        <span class="desc">
+                          Dedicado ao estudo da democracia sob a perspectiva do Estado de Direito Democrático, entendido como acesso universal à proteção da lei e às garantias aos direitos humanos, livre da violência, especialmente daquela resultante das ações dos agentes do Estado e do crime organizado.                        </span>
+                        <br />
+                        <span class="vermais"></span>
+                     </div>
+
+                    </div>
+                  </div>
+
+                              </div>
+
+            </div>
+
+
+
+            </div>
+              </div>
+          </div>
+
+
+        </div>
+
+        <!-- <div style="width: 50px; height: 50px; position: fixed; top: 50px; right: 5%; background: red;" class="botao-red"></div> -->
+
+      </main>
+
+      <footer class="footer text-right">
+    <div class="center">
+     <a href="http://www5.usp.br/" target="_blank"><img src="/v1/wp-content/themes/portalsolus/images/logo-usp-azul.png" /></a>
+
+     <a href="http://www.inovacao.usp.br/" target="_blank"><img src="/v1/wp-content/themes/portalsolus/images/logo-auspin-azul.png" /></a>
+  </div>
+</footer>
+
+
+</div>
+</body>
+</html>

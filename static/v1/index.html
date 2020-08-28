@@ -1,0 +1,227 @@
+ 		 	<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/v1/wp-content/themes/portalsolus/style/jquery.bxslider.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,500" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/v1/wp-content/themes/portalsolus/style.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/v1/wp-content/themes/portalsolus/js/jquery.bxslider.js"></script>
+
+    <script src="/v1/wp-content/themes/portalsolus/js/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+    <!-- <script src="/v1/wp-content/themes/portalsolus/js/main.js"></script> -->
+    <script src="/v1/wp-content/themes/portalsolus/js/main-dev.js"></script>
+
+    <script>
+        $(window).scroll(function(){
+          var windowHeight = $(window).height();
+
+          if($(window).scrollTop() > windowHeight){
+            $('.header').css('position', 'fixed');
+          }
+          else{
+            $('.header').css('position', 'relative');
+          }
+        })
+    </script>
+    <title>Solus</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="page page-home">
+        <div class="center">
+          <div class="logo">
+            <a href="index.php" style=" color: white!important;">
+              <span class="title" style="">PORTAL SOLUS</span><br>
+              <span class="sub-title" style="">Inovação e Empreendedorismo na Universidade de São Paulo</span>
+            </a>
+          </div>
+
+          <div class="home-text">
+            Conheça a inovação e empreendedorismo na Universidade de São Paulo.
+
+
+            <div class="home-nav">
+              <a href="/v1/iniciativas/">Iniciativas</a>
+
+              <a href="/v1/desenvolvimento-e-inovacao/" style="font-size: 14px;">Desenvolvimento & Inovação</a>
+
+              <a href="/v1/educacao/">Educação</a>
+
+              <a href="/v1/empresas/">Empresas</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <header class="header header-home header-desktop">
+        <div class="row center">
+        <div class="logo col-md-5 col-sm-6 no-padding">
+          <a href="/v1">
+            <span style="font-size:2.5em; font-weight: bold;">PORTAL SOLUS</span><br />
+            <span style="font-size: 0.9em; font-weight: light;">Inovação e Empreendedorismo na Universidade de São Paulo</span>
+          </a>
+        </div>
+
+        <nav class="nav col-md-7 col-sm-3 no-padding">
+          <ul class="menu no-margin no-padding d-sm-none d-md-block">
+            <li><a class="item-sobre" href="/v1">HOME</a></li>
+            <li><a class="item-iniciativas" href="/v1/iniciativas/">INICIATIVAS</a></li>
+            <li><a class="item-DI" href="/v1/desenvolvimento-e-inovacao/">D&I</a></li>
+            <li><a class="item-educacao" href="/v1/educacao/">EDUCAÇÃO</a></li>
+            <li><a class="item-empresas" href="/v1/empresas/">EMPRESAS</a></li>
+            <li><a class="item-contato" href="/v1/contato/">CONTATO</a></li>
+          </ul>
+
+          <!-- <div class="menu-mobile d-sm-block d-md-none" style="text-align: right; float: right;">
+            <img style="width: 60px;" src="images/menu.png" />
+          </div> -->
+
+        </nav>
+
+      </div>
+      </header>
+
+      <header class="header header-mobile">
+        <div class='row center'>
+          <div class="logo col-md-5 col-sm-6 no-padding">
+            <a href="/v1">
+              <span style="font-size:2em; font-weight: bold;">PORTAL SOLUS</span><br />
+              <span style="font-size: 0.5em; font-weight: light;">Inovação e Empreendedorismo na Universidade de São Paulo</span>
+            </a>
+          </div>
+
+          <!-- <img class="menu-icon" src="/v1/wp-content/themes/portalsolus/images/menu-icon.png" /> -->
+          <div class="menu-icon"></div>
+        </div>
+
+        <ul class="menu-mobile-nav">
+          <li><a class="item-sobre" href="/v1">HOME</a></li>
+          <li><a class="item-iniciativas" href="/v1/iniciativas/">INICIATIVAS</a></li>
+          <li><a class="item-DI" href="/v1/desenvolvimento-e-inovacao/">D&I</a></li>
+          <li><a class="item-educacao" href="/v1/educacao/">EDUCAÇÃO</a></li>
+          <li><a class="item-empresas" href="/v1/empresas/">EMPRESAS</a></li>
+          <li><a class="item-contato" href="/v1/contato/">CONTATO</a></li>
+        </ul>
+      </header>
+
+      <div class="page first">
+        <div class="center">
+        <h1 class="page-title">
+          Uma plataforma que reúne iniciativas de inovação e empreendedorismo nos diversos campi da USP
+        </h1>
+
+        <br>
+        <p>Criado pela pela AUSPIN (Agência USP de Inovação), o Portal Solus é um diretório de organizações e programas atuantes no campo de inovação e empreendedorismo nos diversos campi USP, de transferência de tecnologia e empresas criadas pela comunidade USP, entre outras informações estratégicas.</p>
+        </div>
+      </div>
+
+      <div class="page" id="eixos">
+        <div class="center">
+          <h1 class="page-title">
+            Busca dividida por eixos
+          </h1>
+
+          <div class="row text-center center">
+            <div class="col-md-6 box-eixos-wrap" style="padding-right: 40px;">
+              <div class="box-eixos">
+                <h1>Iniciativas</h1>
+
+                <p>Organizações e programas para o estímulo e suporte da inovação e empreendedorismo na Universidade.</p>
+
+                <a href="/v1/iniciativas/" >Veja mais</a>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 box-eixos-wrap" style="padding-left: 40px;">
+              <div class="box-eixos">
+                <h1 style="font-size: 30px;">Desenvolvimento & Inovação</h1>
+
+                <p>Laboratórios e grupos de pesquisa que atuam em projetos de inovação e empreendedorismo.</p>
+
+                <a href="/v1/desenvolvimento-e-inovacao/" >Veja mais</a>
+              </div>
+            </div>
+
+            <div class="col-md-6 box-eixos-wrap" style="padding-right: 40px;">
+              <div class="box-eixos">
+                <h1>Educação</h1>
+
+                <p>Cursos e disciplinas para ensino de inovação e empreendedorismo na Universidade de São Paulo. </p>
+
+                <a href="/v1/educacao/" >Veja mais</a>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 box-eixos-wrap" style="padding-left: 40px;">
+              <div class="box-eixos">
+                <h1>Empresas</h1>
+
+                <p>Diretório de empresas criadas por alunos e ex-alunos USP ao longo dos anos.</p>
+
+                <a href="/v1/empresas/" >Veja mais</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="center">
+          <h1 class="page-title">
+            Conheça os campi da USP
+          </h1>
+
+          <div class="row">
+            <div class="col-md-3">
+              <a href="http://www.bauru.usp.br/" target="_blank" class="box-campus box-campus-bauru">Bauru</a>
+            </div>
+            <div class="col-md-3">
+              <a href="https://www5.usp.br/" target="_blank" class="box-campus box-campus-butanta">Butantã</a>
+            </div>
+            <div class="col-md-3">
+              <a href="https://site.eel.usp.br/index.php/home-eel-4" target="_blank" class="box-campus box-campus-lorena">Lorena</a>
+            </div>
+            <div class="col-md-3">
+              <a href="http://www4.esalq.usp.br/" target="_blank" class="box-campus box-campus-piracicaba">Piracicaba</a>
+            </div>
+            <div class="col-md-3">
+              <a href="http://www.fzea.usp.br/" target="_blank" class="box-campus box-campus-pirassununga">Pirassununga</a>
+            </div>
+
+            <div class="col-md-3">
+              <a href="http://www.ribeirao.usp.br/" target="_blank" class="box-campus box-campus-ribeirao-preto">Ribeirão Preto</a>
+            </div>
+            <div class="col-md-3">
+              <a href="http://www.saocarlos.usp.br/" target="_blank" class="box-campus box-campus-sao-carlos">São Carlos</a>
+            </div>
+            <div class="col-md-3">
+              <a href="http://www.uspleste.usp.br/" target="_blank" class="box-campus box-campus-usp-leste">USP Leste</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer text-right">
+        <div class="center">
+         <a href="http://www5.usp.br/" target="_blank"><img src="/v1/wp-content/themes/portalsolus/images/logo-usp-azul.png" /></a>
+
+         <a href="http://www.inovacao.usp.br/" target="_blank"><img src="/v1/wp-content/themes/portalsolus/images/logo-auspin-azul.png" /></a>
+      </div>
+    </footer>
+    </div>
+  </body>
+</html>
