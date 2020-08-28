@@ -2,6 +2,10 @@ import colors from "vuetify/es5/util/colors";
 import get_data from "./hooks";
 
 export default {
+  env: {
+    sheetsAPIKey: "AIzaSyCztTmPhvMVj7L_ZBxF4hEPv974x8UcJOY",
+    sheetID: "1U_SQMkSDU-FGc5tCLjbAet5p9ECHDCBIUiOaBo9VeYc",
+  },
   mode: "universal",
   /*
    ** Headers of the page

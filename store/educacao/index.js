@@ -1,25 +1,5 @@
-import { formatURL } from "@/lib/format";
+import { DisciplineGenerator } from "@/lib/classes/discipline";
 import { findErrors } from "@/lib/errors/disciplinas";
-
-const rowToObj = (row, id) => ({
-  id,
-  name: row[0],
-  campus: row[1],
-  unity: row[2],
-  url: formatURL(row[3]),
-  description: {
-    short: row[4],
-    long: row[5],
-  },
-  startDate: row[6],
-  category: {
-    business: row[8].length > 0,
-    entrepreneurship: row[9].length > 0,
-    innovation: row[10].length > 0,
-    intellectualProperty: row[11].length > 0,
-  },
-  level: row[12],
-});
 
 export const state = () => ({
   disciplines: [],
@@ -71,7 +51,9 @@ export const actions = {
       );
 
       const data = await resp.json();
-      const objects = data.values.slice(1).map(rowToObj);
+      const objects = data.values
+        .slice(1)
+        .map((row) => DisciplineGenerator.run(row));
 
       const errors = findErrors(Object.assign([], objects));
 
