@@ -1,48 +1,5 @@
-import { capitalizeName, formatURL, formatPhone } from "@/lib/format";
-import { columnValue } from "@/lib/sheets";
+import { SkillGenerator } from "@/lib/classes/skill";
 import { findErrors } from "@/lib/errors/competencias";
-
-const descRgxSplitter = /;/;
-
-const rowToObj = (row) => ({
-  name: capitalizeName(columnValue(row, "B")),
-  email: columnValue(row, "C"),
-  phone: formatPhone(columnValue(row, "W")),
-  unity: columnValue(row, "E"),
-  campus: columnValue(row, "F"),
-  bond: columnValue(row, "G"),
-  categories: columnValue(row, "H"),
-  groupName: columnValue(row, "I"),
-  groupInitials: columnValue(row, "J"),
-  url: formatURL(columnValue(row, "K")),
-  descriptions: {
-    skills:
-      columnValue(row, "L") != undefined && columnValue(row, "L") != ""
-        ? columnValue(row, "L").split(descRgxSplitter)
-        : [],
-    services:
-      columnValue(row, "M") != undefined && columnValue(row, "M") != ""
-        ? columnValue(row, "M").split(descRgxSplitter)
-        : [],
-    equipments:
-      columnValue(row, "N") != undefined && columnValue(row, "N") != ""
-        ? columnValue(row, "N").split(descRgxSplitter)
-        : [],
-  },
-  area: {
-    major: columnValue(row, "O"),
-    minors:
-      columnValue(row, "P") != undefined && columnValue(row, "P") != ""
-        ? columnValue(row, "P").split(/,;/)
-        : [],
-  },
-  keywords:
-    columnValue(row, "Q") != undefined && columnValue(row, "Q") != ""
-      ? columnValue(row, "Q").split(";")
-      : [],
-  lattes: columnValue(row, "V"),
-  picture: columnValue(row, "X"),
-});
 
 export const state = () => ({
   isLoading: false,
@@ -101,7 +58,7 @@ export const actions = {
       );
 
       const { values } = await resp.json();
-      const objects = values.slice(1).map(rowToObj);
+      const objects = values.slice(1).map((row) => SkillGenerator.run(row));
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);

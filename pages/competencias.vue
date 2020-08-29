@@ -298,34 +298,6 @@ export default {
       this.fetchSpreadsheets(env);
   },
   methods: {
-    filterFun: (elm, filterStatus) => {
-      const { primary, secondary, terciary } = filterStatus;
-
-      let primaryMatch = true,
-          secondaryMatch = true,
-          terciaryMatch = true;
-
-      if (primary.length > 0) {
-        primaryMatch = primary.includes(elm.area.major);
-      }
-
-      if (secondary.length > 0) {
-        secondaryMatch = elm.area.minors
-          .some((minor) => secondary.includes(minor));
-      }
-
-      const [campus, unity] = terciary;
-
-      if (campus) {
-        terciaryMatch = elm.campus === campus;
-      }
-
-      if (unity) {
-        terciaryMatch = terciaryMatch && elm.unity === unity;
-      }
-
-      return primaryMatch && secondaryMatch && terciaryMatch;
-    },
     ...mapActions({
       fetchSpreadsheets: "competencia/fetchSpreadsheets",
     }),
@@ -342,8 +314,8 @@ export default {
       );
     },
     filterData(context) {
-      this.filtered = this.skills.filter((item) =>
-        this.filterFun(item, context)
+      this.filtered = this.skills.filter((skill) =>
+        skill.matchesFilter(context)
       );
     },
     async pipeline() {
