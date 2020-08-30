@@ -392,44 +392,12 @@ export default {
     ...mapActions({
       fetchSpreadsheets: "empresas/fetchSpreadsheets",
     }),
-    filterFun(item, { primary, secondary, terciary }) {
-      let primaryMatch, secondaryMatch, terciaryMatch;
-
-      if (primary.length == 0) {
-        primaryMatch = true;
-      } else {
-        primaryMatch = primary
-          .reduce(
-            (codes, p) =>
-              codes.concat(
-                this.baseTabs.find(({ name }) => name === p).CNAECodes
-              ),
-            []
-          )
-          .includes(item.category.code);
-      }
-
-      if (secondary.length == 0) {
-        secondaryMatch = true;
-      } else {
-        secondaryMatch = secondary
-          .reduce((codes, s) => codes.concat(this.reverseCNAEmap[s]), [])
-          .includes(item.category.code);
-      }
-
-      const incubator = terciary[1];
-
-      terciaryMatch = true;
-
-      if (incubator) {
-        terciaryMatch = terciaryMatch && item.ecosystems.includes(incubator);
-      }
-
-      return primaryMatch && secondaryMatch && terciaryMatch;
+    filterFun(company, context) {
+      return company.matchesFilter(context, this.baseTabs, this.reverseCNAEmap);
     },
     filterData(context) {
-      this.filtered = this.companies.filter((item) =>
-        this.filterFun(item, context)
+      this.filtered = this.companies.filter((company) =>
+        this.filterFun(company, context)
       );
     },
     async fuzzySearch() {

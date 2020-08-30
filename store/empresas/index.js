@@ -1,42 +1,5 @@
-import { formatURL, formatPhone } from "@/lib/format";
-import { columnValue } from "@/lib/sheets";
+import { CompanyGenerator } from "@/lib/classes/company";
 import { findErrors } from "../../lib/errors/empresas";
-
-const rowToObj = (row) => ({
-  name: columnValue(row, "AC"),
-  year: columnValue(row, "AE"),
-  phones: columnValue(row, "AH")
-    .split(/[;\/]/)
-    .map((phone) => formatPhone(phone)),
-  emails: columnValue(row, "AI").split(";"),
-  url: formatURL(columnValue(row, "AJ")),
-  category: {
-    code: columnValue(row, "AK").substr(0, 2),
-    name: columnValue(row, "AK").split(" ").slice(1).join(" "),
-  },
-  technologies: "-.!?".split("").includes(columnValue(row, "AM"))
-    ? []
-    : columnValue(row, "AM").split(";"),
-  incubated: ". Nenhum Nenhuma".split(" ").includes(columnValue(row, "BL")),
-  ecosystems: columnValue(row, "BL").split(";"),
-  description: {
-    long: columnValue(row, "AR") == "." ? "" : columnValue(row, "AR"),
-  },
-  services: columnValue(row, "AS") == "." ? "" : columnValue(row, "AS"),
-  logo: columnValue(row, "AT"),
-  socialMedia: columnValue(row, "AU"),
-  allowed: columnValue(row, "BM") != "Não",
-  address: {
-    venue: columnValue(row, "BG"),
-    neightborhood: columnValue(row, "BH"),
-    city: columnValue(row, "BI").split(";"),
-    state: columnValue(row, "BJ"),
-    cep: columnValue(row, "BK"),
-  },
-  active: ["ATIVA", "ATIVA - EMPRESA DOMICILIADA NO EXTERIOR"].includes(
-    columnValue(row, "BR")
-  ),
-});
 
 export const state = () => ({
   companies: [],
@@ -104,7 +67,7 @@ export const actions = {
 
       const { values } = await resp.json();
 
-      const objects = values.slice(1).map(rowToObj);
+      const objects = values.slice(1).map((row) => CompanyGenerator.run(row));
 
       const errors = findErrors(Object.assign([], objects));
 
