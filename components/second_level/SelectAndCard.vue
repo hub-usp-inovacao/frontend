@@ -27,7 +27,13 @@
           <v-card-actions>
             <slot name="buttons" :item="selectedItem">
               <v-spacer />
-              <v-btn depressed dark color="rgb(255, 167, 38)" :href="selectedItem.url">Saiba mais</v-btn>
+              <v-btn
+                depressed
+                dark
+                color="rgb(255, 167, 38)"
+                :href="selectedItem.url"
+                >Saiba mais</v-btn
+              >
               <v-spacer />
             </slot>
           </v-card-actions>

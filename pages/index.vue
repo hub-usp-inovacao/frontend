@@ -429,7 +429,8 @@ export default {
           "Conheça as empresas com DNA USP, criadas por iniciativas de alunos, ex-alunos e projetos ligados à Universidade",
         iconSrc: "home_partnership_icon.svg",
         dest: "empresas",
-        formsURL: "https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing",
+        formsURL:
+          "https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing",
         formsCall: "Cadastre sua empresa",
       },
       {
@@ -438,7 +439,8 @@ export default {
           "Consulte pesquisadores e grupos de pesquisa da USP por suas áreas de competência e especialidades",
         iconSrc: "home_competencies_icon.svg",
         dest: "competencias",
-        formsURL: "https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform",
+        formsURL:
+          "https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform",
         formsCall: "Cadastre sua competência",
       },
     ],

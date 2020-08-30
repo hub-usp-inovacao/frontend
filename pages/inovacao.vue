@@ -29,13 +29,18 @@
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
-        <p
-          v-if="item.category == 'NAP'"
-          class="font-italic"
-        >Os dados do NAP foram obtidos do sistema Atena-USP</p>
+        <p v-if="item.category == 'NAP'" class="font-italic">
+          Os dados do NAP foram obtidos do sistema Atena-USP
+        </p>
       </template>
       <template #actions="{ item }">
-        <v-btn class="white--text" target="_blank" :href="item.url" color="#005C59">Saiba Mais</v-btn>
+        <v-btn
+          class="white--text"
+          target="_blank"
+          :href="item.url"
+          color="#005C59"
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
