@@ -1,29 +1,4 @@
-import { fixPersonName } from "@/lib/format";
-import { columnValue } from "@/lib/sheets";
-
-const rowToObj = (row) => ({
-  name: row[5].split(" | ")[0],
-  url: columnValue(row, "X"),
-  classification: {
-    primary: {
-      cip: row[0].trim(),
-      subarea: row[1].trim(),
-    },
-    secondary: {
-      cip: row[2].trim(),
-      subarea: row[3].trim(),
-    },
-  },
-  ipcs: row[7].split(" | "),
-  owners: row[9].split(" | "),
-  inventors:
-    row[10] !== undefined && row[10] !== ""
-      ? row[10].split(" | ").map(fixPersonName)
-      : [],
-  sumary: row[11],
-  countriesWithProtection: row[18] !== undefined ? row[18].split(";") : [],
-  status: columnValue(row, "U"),
-});
+import { PatentGenerator } from "@/lib/classes/patent";
 
 export const state = () => ({
   isLoading: false,
@@ -65,7 +40,10 @@ export const actions = {
 
       const { values } = await resp.json();
 
-      ctx.commit("setPatents", values.slice(1).map(rowToObj));
+      ctx.commit(
+        "setPatents",
+        values.slice(1).map((row) => PatentGenerator.run(row))
+      );
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);

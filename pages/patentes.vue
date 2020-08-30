@@ -180,50 +180,12 @@ export default {
     primaryAreaNameToCode(name) {
       return this.tabs.find((t) => t.name == name).code;
     },
-    filterFun: function (elm, filterStatus) {
-      const { primary, secondary, terciary } = filterStatus;
-
-      const primaryCodes = primary.map(this.primaryAreaNameToCode);
-
-      if (primaryCodes.length == 0) {
-        return true;
-      }
-
-      const primaryMatch =
-        primaryCodes.includes(elm.classification.primary.cip.substr(0, 1)) ||
-        primaryCodes.includes(elm.classification.secondary.cip.substr(0, 1));
-
-      if (!primaryMatch) {
-        return false;
-      }
-
-      if (secondary.length == 0 && terciary.length == 0) {
-        return true;
-      }
-
-      if (secondary.length != 0) {
-        const secMatch =
-          secondary.includes(elm.classification.primary.subarea) ||
-          secondary.includes(elm.classification.secondary.subarea);
-
-        if (!secMatch) {
-          return false;
-        }
-      }
-
-      if (terciary.length != 0) {
-        const terMatch = terciary.includes(elm.status);
-
-        if (!terMatch) {
-          return false;
-        }
-      }
-
-      return true;
+    filterFun(patent, filterStatus) {
+      return patent.matchesFilter(filterStatus, this.primaryAreaNameToCode);
     },
     filterData(context) {
-      this.filtered = this.patents.filter((item) =>
-        this.filterFun(item, context)
+      this.filtered = this.patents.filter((patent) =>
+        this.filterFun(patent, context)
       );
     },
     async pipeline() {
