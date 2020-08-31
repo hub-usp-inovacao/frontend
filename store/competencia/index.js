@@ -32,6 +32,14 @@ export const getters = {
   unities: (s) =>
     s.skills
       .map((s) => s.unity)
+      .concat([
+        "CeBiMar - Centro de Biologia Marinha",
+        "CENA - Centro de Energia Nuclear na Agricultura",
+        "IEA - Instituto de Estudos Avançados",
+        "IEB - Instituto de Estudos Brasileiros",
+        "IEE - Instituto de Energia e Ambiente",
+        "IMT - Instituto de Medicina Tropical",
+      ])
       .filter(
         (unity, index, unities) =>
           index === unities.findIndex((other) => other == unity)
