@@ -14,23 +14,17 @@
         "
     >
       <v-row class="fill-height fit-page ma-0">
-        <v-col
-          style="background-color: rgba(255, 177, 99, 0.9);"
-          align-self="stretch"
-          cols="12"
-          sm="10"
-          md="7"
-        >
-          <v-row class="fill-height" justify="center">
-            <v-col align-self="center" cols="11" sm="10" class="pa-0">
-              <v-container>
+        <v-col style="background-color: rgba(255, 177, 99, 0.9);" cols="12" sm="10" md="7">
+          <v-container class="fill-height">
+            <v-row class="mt-5" justify="center">
+              <v-col cols="11" sm="10">
                 <v-row>
                   <v-col cols="8" offset="1">
                     <p
                       class="white--text font-weight-medium"
                       :class="
-                          $breakpoint.smAndDown ? 'display-1' : 'display-2'
-                        "
+                            $breakpoint.smAndDown ? 'display-1' : 'display-2'
+                          "
                     >Portal Solus</p>
                     <p
                       class="white--text font-weight-medium ma-0"
@@ -42,8 +36,8 @@
                   </v-col>
                 </v-row>
 
-                <v-row class="mt-10">
-                  <v-col offset="1" cols="10">
+                <v-row class="mt-12">
+                  <v-col cols="10" offset="1">
                     <p
                       class="white--text font-weight-light"
                       :class="$breakpoint.smAndDown ? 'body-2' : 'body-1'"
@@ -65,18 +59,22 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
+              </v-col>
+            </v-row>
 
-                <v-row style="height: 30vh;" align="end" md-align="end">
-                  <v-col cols="4" offset="1" md="2" offset-md="1">
+            <v-row>
+              <v-col cols="11" sm="10" offset="1">
+                <v-row>
+                  <v-col cols="4" offset="1" md="2">
                     <v-img :src="require('@/vectors/auspin-white.svg')"></v-img>
                   </v-col>
-                  <v-col cols="4" offset="1" md="2" offset-md="1">
+                  <v-col cols="4" offset="1" md="2">
                     <v-img :src="require('@/vectors/usp-white.svg')"></v-img>
                   </v-col>
                 </v-row>
-              </v-container>
-            </v-col>
-          </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-col>
       </v-row>
     </div>
