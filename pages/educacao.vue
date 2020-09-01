@@ -17,19 +17,15 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="Disciplinas">
+    <DisplayData :items="displayItems" group-name="Disciplinas" :selected="globalSearchSelected">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
           <p class="body-2">
             <v-chip v-if="item.category.business">Negócios</v-chip>
             <v-chip v-if="item.category.innovation">Inovação</v-chip>
-            <v-chip v-if="item.category.intelectual_property"
-              >Propriedade Intelectual</v-chip
-            >
-            <v-chip v-if="item.category.enterpreneuship"
-              >Empreendedorismo</v-chip
-            >
+            <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
+            <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
           </p>
           <p class="body-2">{{ item.campus }}</p>
           <p class="body-2">{{ item.unity }}</p>
@@ -39,13 +35,7 @@
         <p>{{ item.description.long }}</p>
       </template>
       <template #actions="{ item }">
-        <v-btn
-          class="white--text"
-          color="#db8337"
-          :href="item.url"
-          target="_blank"
-          >Saiba Mais</v-btn
-        >
+        <v-btn class="white--text" color="#db8337" :href="item.url" target="_blank">Saiba Mais</v-btn>
       </template>
     </DisplayData>
   </div>
@@ -133,6 +123,13 @@ export default {
     },
     searchTerm() {
       return this.search.term;
+    },
+    globalSearchSelected() {
+      if (this.$route.params.id)
+        return this.displayItems.find(
+          (item) => item.id === this.$route.params.id
+        );
+      return undefined;
     },
   },
   watch: {

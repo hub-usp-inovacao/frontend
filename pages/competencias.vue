@@ -19,7 +19,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="Competências">
+    <DisplayData :items="displayItems" group-name="Competências" :selected="globalSearchSelected">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
@@ -56,9 +56,11 @@
       <template #content="{ item }">
         <v-expansion-panels>
           <v-expansion-panel v-for="desc in itemDescriptions" :key="desc.key">
-            <v-expansion-panel-header class="font-weight-bold">{{
+            <v-expansion-panel-header class="font-weight-bold">
+              {{
               desc.title
-            }}</v-expansion-panel-header>
+              }}
+            </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-list>
                 <v-list-item-group>
@@ -80,21 +82,14 @@
         </v-expansion-panels>
       </template>
       <template #actions="{ item }">
-        <v-btn
-          class="white--text"
-          color="#6b1c28"
-          target="_blank"
-          :href="item.url"
-          >saiba mais</v-btn
-        >
+        <v-btn class="white--text" color="#6b1c28" target="_blank" :href="item.url">saiba mais</v-btn>
         <v-btn
           class="white--text"
           color="#6b1c28"
           target="_blank"
           :disabled="!item.lattes"
           :href="item.lattes"
-          >lattes</v-btn
-        >
+        >lattes</v-btn>
       </template>
     </DisplayData>
   </div>
@@ -278,6 +273,13 @@ export default {
     },
     searchTerm() {
       return this.search.term;
+    },
+    globalSearchSelected() {
+      if (this.$route.params.id)
+        return this.displayItems.find(
+          (item) => item.id === this.$route.params.id
+        );
+      return undefined;
     },
   },
   watch: {

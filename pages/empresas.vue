@@ -20,7 +20,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="Empresas">
+    <DisplayData :items="displayItems" group-name="Empresas" :selected="globalSearchSelected">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
@@ -33,12 +33,8 @@
       </template>
       <template #content="{ item }">
         <p v-if="item.incubated">
-          <span class="font-weight-bold"
-            >Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span
-          >
-          <span v-for="incub of item.ecosystems" :key="incub"
-            >{{ incub }};&nbsp;</span
-          >
+          <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
+          <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
         </p>
 
         <p>
@@ -57,13 +53,7 @@
         </p>
       </template>
       <template #actions="{ item }">
-        <v-btn
-          class="white--text"
-          color="#2bc570"
-          :href="item.url"
-          target="_blank"
-          >Saiba Mais</v-btn
-        >
+        <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
       </template>
     </DisplayData>
   </div>
@@ -370,6 +360,13 @@ export default {
         { label: "Cidade", items: [] },
         { label: "Incubadora?", items: this.incubators },
       ];
+    },
+    globalSearchSelected() {
+      if (this.$route.params.id)
+        return this.displayItems.find(
+          (item) => item.id === this.$route.params.id
+        );
+      return undefined;
     },
   },
   watch: {

@@ -17,7 +17,12 @@
       @select="filters = $event"
     />
 
-    <DisplayData :reverse="true" :items="displayItems" group-name="Patentes">
+    <DisplayData
+      :reverse="true"
+      :items="displayItems"
+      group-name="Patentes"
+      :selected="globalSearchSelected"
+    >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p>
@@ -27,10 +32,7 @@
 
         <p>{{ item.classification.primary.subareas }}</p>
 
-        <HorizontalList
-          title="Países com Proteção"
-          :items="item.countriesWithProtection"
-        />
+        <HorizontalList title="Países com Proteção" :items="item.countriesWithProtection" />
 
         <HorizontalList
           v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
@@ -51,8 +53,7 @@
           target="_blank"
           class="white--text"
           :disabled="!item.url"
-          >Saiba Mais</v-btn
-        >
+        >Saiba Mais</v-btn>
       </template>
     </DisplayData>
   </div>
@@ -142,6 +143,13 @@ export default {
       return this.search.patents !== undefined
         ? this.search.patents
         : this.baseItems;
+    },
+    globalSearchSelected() {
+      if (this.$route.params.id)
+        return this.displayItems.find(
+          (item) => item.id === this.$route.params.id
+        );
+      return undefined;
     },
   },
   watch: {

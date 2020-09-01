@@ -20,7 +20,7 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="P&D&I">
+    <DisplayData :items="displayItems" group-name="P&D&I" :selected="globalSearchSelected">
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2 font-italic">{{ item.category }}</p>
@@ -29,18 +29,13 @@
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
-        <p v-if="item.category == 'NAP'" class="font-italic">
-          Os dados do NAP foram obtidos do sistema Atena-USP
-        </p>
+        <p
+          v-if="item.category == 'NAP'"
+          class="font-italic"
+        >Os dados do NAP foram obtidos do sistema Atena-USP</p>
       </template>
       <template #actions="{ item }">
-        <v-btn
-          class="white--text"
-          target="_blank"
-          :href="item.url"
-          color="#005C59"
-          >Saiba Mais</v-btn
-        >
+        <v-btn class="white--text" target="_blank" :href="item.url" color="#005C59">Saiba Mais</v-btn>
       </template>
     </DisplayData>
   </div>
@@ -111,6 +106,13 @@ export default {
     },
     displayItems() {
       return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
+    },
+    globalSearchSelected() {
+      if (this.$route.params.id)
+        return this.displayItems.find(
+          (item) => item.id === this.$route.params.id
+        );
+      return undefined;
     },
   },
   watch: {
