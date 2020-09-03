@@ -1,8 +1,10 @@
 import { PatentGenerator } from "@/lib/classes/patent";
+import { findErrors } from "@/lib/errors/patentes";
 
 export const state = () => ({
   isLoading: false,
   patents: [],
+  errors: undefined,
   keys: [
     "name",
     "summary",
@@ -18,18 +20,20 @@ export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   patents: (s) => s.patents,
   searchKeys: (s) => s.keys,
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setPatents: (s, newPatents) => (s.patents = newPatents),
+  setErrors: (s, errors) => (s.errors = errors),
 };
 
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "PATENTES";
+    const sheetName = "PATENTES_ERROS";
 
     ctx.commit("setLoadingStatus");
 
@@ -40,10 +44,13 @@ export const actions = {
 
       const { values } = await resp.json();
 
-      ctx.commit(
-        "setPatents",
-        values.slice(1).map((row) => PatentGenerator.run(row))
-      );
+      const objects = values.slice(1).map((row) => PatentGenerator.run(row));
+
+      const errors = findErrors(Object.assign([], objects));
+
+      ctx.commit("setErrors", errors);
+
+      ctx.commit("setPatents", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
