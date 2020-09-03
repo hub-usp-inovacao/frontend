@@ -29,7 +29,7 @@ export const mutations = {
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "PATENTES_NO_PUBLIC";
+    const sheetName = "PATENTES";
 
     ctx.commit("setLoadingStatus");
 
