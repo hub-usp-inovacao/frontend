@@ -31,7 +31,6 @@ export default {
         sheetsAPIKey: process.env.sheetsAPIKey,
         sheetID: process.env.sheetID,
       };
-
       if (this.errors == undefined) {
         this.getData(ctx);
       }
