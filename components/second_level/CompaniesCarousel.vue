@@ -7,24 +7,11 @@
     :show-arrows="false"
     :height="carouselHeight"
   >
-    <v-carousel-item
-      v-for="(nowDisplaying, i) in displayCompanies.nowDisplaying"
-      :key="i"
-    >
+    <v-carousel-item v-for="(nowDisplaying, i) in displayCompanies.nowDisplaying" :key="i">
       <v-container>
         <v-row>
-          <v-col
-            v-for="{ name, src } in nowDisplaying"
-            :key="name"
-            :cols="displayCompanies.cols"
-          >
-            <v-img
-              eager
-              class="mx-auto"
-              width="20rem"
-              height="auto"
-              :src="src"
-            ></v-img>
+          <v-col v-for="{ name, src } in nowDisplaying" :key="name" :cols="displayCompanies.cols">
+            <v-img eager class="mx-auto" width="20rem" height="auto" :src="src"></v-img>
           </v-col>
         </v-row>
       </v-container>
@@ -38,53 +25,148 @@ export default {
     items: [
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1wlVqGF7XrvQWScy_liP3L0sbF3vjUoJi",
+          "https://drive.google.com/uc?export=view&id=1sQ0wMMH0F3r-JoYppcalOfJ4Hw2nMOG8",
         name: "99",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1aQaucjPg_6Ifb4WDCTz_8nbKs_yNDUwp",
+          "https://drive.google.com/uc?export=view&id=1rMAz-9GHSxWDdJ1FEn577YBNqInIh2Xp",
+        name: "adespec",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=11MNH5PD3vd4MVpFZawHHJYAAuiZtjdQZ",
+        name: "agrosmart",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1aPL4QTrg80qQ0cx50nTqhp01dl_eS1dj",
         name: "baumer",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1SUtOmiAlC7H8bZswehIG87lxRipjw1W6",
+          "https://drive.google.com/uc?export=view&id=1Xe1M7Vqw9EJ5oETs2-9zXSI0URTR67yq",
+        name: "biolinker",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=14y1pMY9y1TmiZ00AJweSfdwwYrWimJJF",
+        name: "biópolis",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1GscGYTabeitXwUx3qYuurtNe5NS7O2DR",
+        name: "biopolix",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1cbW8UgjOiWt8D8PUGQKvKScljcavonJ5",
         name: "buscapé",
       },
       {
         src:
-          "https://drive.google.com/uc?export=file&id=1TZjFnwmB_qKXtOKUtULVIREqK1NWIVhW",
+          "https://drive.google.com/uc?export=view&id=1ACxLLpSYb4j7TnXOr5pcjWFwr1aDQPFV",
+        name: "carefy",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1Ag4TH6NgCFsm9VM2iNb3Nx_kNE1LXlBe",
+        name: "cargoBR",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=124p55LN7ED9y_MufTSnPUZvAFCHpOyIH",
         name: "cosan",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1FExBxIvaCwmUERgoBQoqu3K8LLoVMuS5",
-        name: "duratex",
+          "https://drive.google.com/uc?export=view&id=1rIZM2dAbLhScvhZ4dmqcrv-g2zcBZAi7",
+        name: "electrocell",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1iXAS5HXwVO10G5pcL__OACVBXKghSz9_",
-        name: "farmarin",
+          "https://drive.google.com/uc?export=view&id=1hUz5g3P6YPUPGovfagSyxm7WDDj693R6",
+        name: "gaia",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1KBl08tUUxtUG_aT82XPztGG1b8M8GueY",
-        name: "koppert",
+          "https://drive.google.com/uc?export=view&id=1K40b7RTHs-wEy_HJxY7sEFWGXhGqLlst",
+        name: "gympass",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1ocm-CeAaPlSiw5xwW54qCHzYtm9RRCCe",
+          "https://drive.google.com/uc?export=view&id=1uUrpWiXsi8Nv3vEaOT2aUmbdDzlgrVdJ",
+        name: "iclinic",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1SdOdo1bKdWlu7NlU7l0C0AucONuXnsvt",
+        name: "ifood",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1Rgm1G953QSJEZvzF-uOhYbVHIL7b8-CJ",
+        name: "kidopi",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1tIoyAUxhzqRCYUPewFLfOxyd9oxLCRWv",
+        name: "lasertools",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1EepHH_KRRbjCqP_d0tNDA1v8bzWSpVRG",
+        name: "lychnoflora",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1X4jgMi1hz2rj3NVQ1fthtlHs5oYjTY1I",
+        name: "narcissus",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=16KjqRr3Djf28k5Bzt-S8590S3XoXdDJN",
+        name: "nativus",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1sneKf-CAZheW8Zd0AOT1pHyhlabCIVAj",
         name: "nubank",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=19c6TUhcU4hK5o2IwRit_4IumOtlsT9x_",
+          "https://drive.google.com/uc?export=view&id=1RQY8TmO-D0XdII2MWwkqvZXIGqaHCpGt",
+        name: "onkos",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1cMJpjs1QiLMhQDhIbMg2vqupenByho1M",
+        name: "pluricell",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1wI6qq7Ww32KM-q5gu-GK5q_O2UrXahBO",
         name: "scopus",
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1dHEZ6Bgm4p1K3Zo3EypJKFjZ2L5DW9UF",
+          "https://drive.google.com/uc?export=view&id=1zlmrxRA4SuFOgpY_apLJ_d2DeIOh7WEg",
+        name: "sociedade_do_sol",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1x_C7O6TRguGY52YsTDM1ErpU1L71lI9A",
         name: "totvs",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1-OeSNxr5HMyoVo6P47-aOXXi3lTPX7Uw",
+        name: "verdartis",
+      },
+      {
+        src:
+          "https://drive.google.com/uc?export=view&id=1RCHtxEHt36-ARL1Li8dikOHTvnwARzFh",
+        name: "vexpense$",
       },
     ],
   }),
