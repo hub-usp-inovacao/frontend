@@ -69,6 +69,8 @@ import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
+import { Company } from "@/lib/classes/company";
+
 export default {
   components: {
     Panel,
@@ -293,7 +295,6 @@ export default {
       dataStatus: "empresas/dataStatus",
       companies: "empresas/companies",
       searchKeys: "empresas/searchKeys",
-      incubators: "empresas/incubators",
     }),
     searchTerm() {
       return this.search.term;
@@ -358,7 +359,7 @@ export default {
     groups() {
       return [
         { label: "Cidade", items: [] },
-        { label: "Incubadora?", items: this.incubators },
+        { label: "Incubadora?", items: Company.incubators },
       ];
     },
     globalSearchSelected() {

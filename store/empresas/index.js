@@ -20,26 +20,6 @@ export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   companies: (s) => s.companies,
   searchKeys: (s) => s.keys,
-  incubators: (s) =>
-    Array.from(
-      s.companies.reduce((set, comp) => {
-        comp.ecosystems.forEach((eco) => set.add(eco.trim()));
-
-        return set;
-      }, new Set())
-    )
-      .concat(["INOVA-HC"])
-      .sort((a, b) => {
-        if (a == "Não" || b == "Não") {
-          return a == "Não" ? -1 : 1;
-        }
-
-        if (a == b) {
-          return 0;
-        }
-
-        return a < b ? -1 : 1;
-      }),
   errors: (s) => s.errors,
 };
 
