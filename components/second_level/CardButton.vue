@@ -9,22 +9,35 @@
             :cols="row_length < 6 ? 12 / row_length : ''"
           >
             <v-item>
-              <v-card
-                :color="selected.includes(item.name) ? active : color"
-                height="100%"
-                min-height="100px"
-                @click="toggleTab(item.name)"
+              <v-tooltip
+                :bottom="i >= 4"
+                :top="i < 4"
+                :disabled="showHints(item)"
+                :hidden="showHints(item)"
+                max-width="400px"
               >
-                <v-container fill-height>
-                  <v-row class="align-center justify-center ma-0">
-                    <p
-                      class="white--text subtitle-1 font-weight-medium text-center mb-0"
-                    >
-                      {{ item.name }}
-                    </p>
-                  </v-row>
-                </v-container>
-              </v-card>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-card
+                    :color="selected.includes(item.name) ? active : color"
+                    height="100%"
+                    min-height="100px"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="toggleTab(item.name)"
+                  >
+                    <v-container fill-height>
+                      <v-row class="align-center justify-center ma-0">
+                        <p
+                          class="white--text subtitle-1 font-weight-medium text-center mb-0"
+                        >
+                          {{ item.name }}
+                        </p>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </template>
+                <span>{{ item.description }}</span>
+              </v-tooltip>
             </v-item>
           </v-col>
           <v-responsive
@@ -100,6 +113,9 @@ export default {
     },
     wrap(i) {
       return (i + 1) % this.row_length == 0;
+    },
+    showHints: function (item) {
+      return item.description == undefined || item.description == "";
     },
   },
 };

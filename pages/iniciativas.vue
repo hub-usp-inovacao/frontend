@@ -67,27 +67,42 @@ export default {
     tabs: [
       {
         name: "Agente Institucional",
+        description:
+          "Conjunto de agentes designados na estrutura da USP para atender a comunidade interna e externa em temas relacionados à pesquisa, inovação, empreendedorismo e internacionalização.",
       },
       {
         name: "Empresa Jr.",
+        description:
+          "Associações formadas pelos alunos da USP, de caráter empreendedor e sem fins lucrativos, que prestam diferentes tipos de serviços visando a capacitação profissional dos estudantes em suas respectivas carreiras.",
       },
       {
         name: "Entidade Associada",
+        description: "Entidade Associada",
       },
       {
         name: "Entidade Estudantil",
+        description:
+          "Organizações formais de estudantes que incentivam a realização de projetos de inovação e empreendedorismo em diversas áreas de P&D&I.",
       },
       {
         name: "Espaço/Coworking",
+        description:
+          "Ambientes físicos e on-line destinados à troca de experiências relacionadas à inovação, empreendedorismo, desenvolvimento tecnológico e de novos negócios.",
       },
       {
         name: "Grupos e Iniciativas Estudantis",
+        description:
+          "Iniciativas organizadas por estudantes para incentivar a realização de projetos de inovação e empreendedorismo nas mais diversas áreas de P&D&I.",
       },
       {
         name: "Ideação",
+        description:
+          "Grupos voltados à discussão e incentivo ao desenvolvimento de negócios e inovações originários de diferentes áreas do conhecimento.",
       },
       {
         name: "Incubadora e Parque Tecnológico",
+        description:
+          "Habitats de inovação com o propósito de fornecer suporte à transformação do conhecimento em desenvolvimento econômico utilizando inovação tecnológica, social e cultural. Recebem principalmente os empreendedores vindos da USP.",
       },
     ],
 

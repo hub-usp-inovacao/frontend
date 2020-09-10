@@ -20,7 +20,11 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="P&D&I" :selected="globalSearchSelected">
+    <DisplayData
+      :items="displayItems"
+      group-name="P&D&I"
+      :selected="globalSearchSelected"
+    >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2 font-italic">{{ item.category }}</p>
@@ -29,13 +33,18 @@
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
-        <p
-          v-if="item.category == 'NAP'"
-          class="font-italic"
-        >Os dados do NAP foram obtidos do sistema Atena-USP</p>
+        <p v-if="item.category == 'NAP'" class="font-italic">
+          Os dados do NAP foram obtidos do sistema Atena-USP
+        </p>
       </template>
       <template #actions="{ item }">
-        <v-btn class="white--text" target="_blank" :href="item.url" color="#005C59">Saiba Mais</v-btn>
+        <v-btn
+          class="white--text"
+          target="_blank"
+          :href="item.url"
+          color="#005C59"
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
@@ -67,22 +76,22 @@ export default {
       {
         name: "CEPID",
         description:
-          "São Centros de Pesquisa, Inovação e Difusão, apoiados pela FAPESP que atuam com o desenvolvimento de pesquisa básica ou aplicada, com impacto comercial e social relevante. ",
+          "Centros de Pesquisa, Inovação e Difusão fomentados pela FAPESP que atuam na USP desenvolvendo investigações para contribuir à inovação por meio das transferências de tecnologia, além de oferecer atividades de extensão para o público em geral.",
       },
       {
         name: "EMBRAPII",
         description:
-          "A Associação Brasileira de Pesquisa e Inovação Industrial apoia instituições de pesquisa técnológica para que execultem projetos de desenvolvimento e inovação em cooperação com empresas do setor industrial.",
+          "A EMBRAPII (Associação Brasileira de Pesquisa e Inovação Industrial), apoia instituições de pesquisa tecnológica, em determinadas áreas de competência, para executarem projetos de desenvolvimento de pesquisa tecnológica para inovação, em cooperação com empresas do setor industrial.",
       },
       {
         name: "INCT",
         description:
-          "Os Institutos Nacionais de Ciência e Técnologia são laboratórios orientados a estimular o desenvolvimento de pesquisa científica e tecnológica para promover a inovação e o espírito empreendedor.",
+          "Institutos Nacionais de Ciência e Tecnologia, fomentados pelo CNPq  articulam os  grupos de pesquisa na fronteira da ciência e em áreas estratégicas para o desenvolvimento sustentável do país; além de estimular aplicações para promover a inovação e o espírito empreendedor.",
       },
       {
         name: "NAP",
         description:
-          "São os Núcleos de Apoio à Pesquisa, órgãos de integração da USP que promovem a reunião entre especialistas de uma ou mais Unidades USP em torno de programas de pesquisas de caráter interdisciplinar e/ou de apoio instrumental à pesquisa.",
+          "Órgãos de integração que reúnem especialistas de diferentes áreas da universidade para pesquisas de caráter interdisciplinar e transdisciplinar, promovendo maior comunicação e integração entre as Unidades USP e variadas áreas do conhecimento.",
       },
     ],
 
