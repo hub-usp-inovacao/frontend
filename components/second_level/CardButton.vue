@@ -12,8 +12,8 @@
               <v-tooltip
                 :bottom="i >= 4"
                 :top="i < 4"
-                :disabled="showHints(item)"
-                :hidden="showHints(item)"
+                :disabled="disableHints(item)"
+                :hidden="disableHints(item)"
                 max-width="400px"
               >
                 <template v-slot:activator="{ on, attrs }">
@@ -114,8 +114,13 @@ export default {
     wrap(i) {
       return (i + 1) % this.row_length == 0;
     },
-    showHints: function (item) {
-      return item.description == undefined || item.description == "";
+    disableHints: function (item) {
+      return (
+        item.description == undefined ||
+        item.description == "" ||
+        this.$vuetify.breakpoint.name == "sm" ||
+        this.$vuetify.breakpoint.name == "xs"
+      );
     },
   },
 };
