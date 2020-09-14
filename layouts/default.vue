@@ -37,9 +37,9 @@
 
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <v-snackbar :multi-line="true" :value="true" :timeout="-1">
-        Página de uso exclusivamente interno - encontrou um problema?
+        Como está sendo sua experiência com o Solus?
         <v-btn href="https://forms.gle/TiEe6zYq9GsYgDww5" target="_blank"
-          >Reporte aqui</v-btn
+          >Relate aqui</v-btn
         >
       </v-snackbar>
       <nuxt />
