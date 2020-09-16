@@ -38,9 +38,15 @@
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <v-snackbar :multi-line="true" :value="true" :timeout="-1">
         Como está sendo sua experiência com o Solus?
-        <v-btn href="https://forms.gle/TiEe6zYq9GsYgDww5" target="_blank"
+        <v-btn
+          class="ml-2"
+          href="https://forms.gle/TiEe6zYq9GsYgDww5"
+          target="_blank"
           >Relate aqui</v-btn
         >
+        <p class="mt-4 font-weight-bold caption text-center">
+          Em breve: migração para o domínio usp.br
+        </p>
       </v-snackbar>
       <nuxt />
     </v-main>
