@@ -295,6 +295,7 @@ export default {
       dataStatus: "empresas/dataStatus",
       companies: "empresas/companies",
       searchKeys: "empresas/searchKeys",
+      cities: "empresas/cities",
     }),
     searchTerm() {
       return this.search.term;
@@ -334,31 +335,9 @@ export default {
         return rev;
       }, {});
     },
-    cities() {
-      return this.companies
-        .map(({ address: { city } }) => city)
-        .reduce((all, citites) => all.concat(citites), [])
-        .map((city) =>
-          city
-            .toLocaleLowerCase()
-            .replace(/\(.+\)/, "")
-            .replace(/^sao /, "são")
-            .replace(/ +/, " ")
-            .trim()
-        )
-        .filter((city) => city.length >= 0)
-        .filter((city, i, cities) => {
-          const index = cities
-            .sort((a, b) => b.localeCompare(a))
-            .findIndex((c) => c === city);
-
-          return index === i;
-        })
-        .sort();
-    },
     groups() {
       return [
-        { label: "Cidade", items: [] },
+        { label: "Cidade", items: this.cities },
         { label: "Incubadora?", items: Company.incubators },
       ];
     },

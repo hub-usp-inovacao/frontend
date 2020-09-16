@@ -21,6 +21,17 @@ export const getters = {
   companies: (s) => s.companies,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
+  cities: (s) => {
+    const citiesSet = s.companies.reduce((set, comp) => {
+      if (!set[comp.city]) {
+        set[comp.city] = comp.city;
+      }
+
+      return set;
+    }, {});
+
+    return Object.keys(citiesSet).sort();
+  },
 };
 
 export const mutations = {
