@@ -22,13 +22,19 @@ export const getters = {
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
   cities: (s) => {
-    const citiesSet = s.companies.reduce((set, comp) => {
-      if (!set[comp.city]) {
-        set[comp.city] = comp.city;
-      }
+    const cities = s.companies.reduce((all, company) => {
+      return all.concat(company.city);
+    }, []);
 
-      return set;
-    }, {});
+    const citiesSet = cities
+      .filter((city) => city.length >= 0)
+      .reduce((set, city) => {
+        if (!set[city]) {
+          set[city] = city;
+        }
+
+        return set;
+      }, {});
 
     return Object.keys(citiesSet).sort();
   },
