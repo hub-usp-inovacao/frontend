@@ -54,7 +54,7 @@ export const mutations = {
 export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "EMPRESAS_UPDATE";
+    const sheetName = "EMPRESAS";
 
     ctx.commit("setLoadingStatus");
 
