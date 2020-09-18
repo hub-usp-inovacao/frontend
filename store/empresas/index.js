@@ -27,7 +27,8 @@ export const getters = {
     }, []);
 
     const citiesSet = cities
-      .filter((city) => city.length >= 0)
+      .map((city) => city.trim())
+      .filter((city) => city.length > 0)
       .reduce((set, city) => {
         if (!set[city]) {
           set[city] = city;
