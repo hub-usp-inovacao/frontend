@@ -19,6 +19,7 @@ export const state = () => ({
 
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
+  isEmpty: (s) => s.skills.length == 0,
   skills: (s) => s.skills,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,

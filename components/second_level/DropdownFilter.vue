@@ -19,11 +19,7 @@
       </v-col>
     </v-row>
 
-    <v-row
-      v-for="({ label, items }, i) of groups"
-      :key="i"
-      class="hidden-md-and-up"
-    >
+    <v-row v-for="({ label, items }, i) of groups" :key="i" class="hidden-md-and-up">
       <v-col cols="12">
         <v-select
           v-model="selected[i]"
@@ -39,6 +35,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     groups: {
@@ -61,6 +59,9 @@ export default {
     noData: "em construção",
   }),
   computed: {
+    ...mapGetters({
+      isEmpty: "competencia/isEmpty",
+    }),
     colSize() {
       const nGroups = this.groups.length;
 
@@ -70,6 +71,12 @@ export default {
   watch: {
     selected(list) {
       this.$emit("select", list);
+    },
+    isEmpty() {
+      if (!this.isEmpty && this.$route.query.unidade) {
+        this.selected[1] = this.$route.query.unidade;
+        this.$emit("select", this.selected);
+      }
     },
   },
 };
