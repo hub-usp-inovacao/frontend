@@ -47,10 +47,10 @@
           {{ item.services }}
         </p>
 
-        <p>
-          <span class="font-weight-bold">Tecnologias</span>
-          {{ item.technologies }}
-        </p>
+        <BulletList
+          v-if="item.technologies.length > 0"
+          title="Tecnologias"
+          :items="item.technologies"/>
       </template>
       <template #actions="{ item }">
         <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
@@ -68,6 +68,7 @@ import USPDNA from "@/components/first_level/USPDNA.vue";
 import Panel from "@/components/first_level/Panel.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
+import BulletList from "@/components/first_level/BulletList.vue";
 
 import { Company } from "@/lib/classes/company";
 
@@ -78,6 +79,7 @@ export default {
     Background,
     DisplayData,
     USPDNA,
+    BulletList
   },
   data: () => ({
     baseTabs: [
