@@ -8,18 +8,22 @@
 
     <v-row class="hidden-sm-and-down">
       <v-col v-for="({ label, items }, i) of groups" :key="i" :cols="colSize">
-        <v-select
+        <v-autocomplete
           v-model="selected[i]"
           :no-data-text="noData"
           menu-props="auto"
           :label="label"
           :items="items"
           clearable
-        ></v-select>
+        ></v-autocomplete>
       </v-col>
     </v-row>
 
-    <v-row v-for="({ label, items }, i) of groups" :key="i" class="hidden-md-and-up">
+    <v-row
+      v-for="({ label, items }, i) of groups"
+      :key="i"
+      class="hidden-md-and-up"
+    >
       <v-col cols="12">
         <v-select
           v-model="selected[i]"
@@ -56,7 +60,7 @@ export default {
   },
   data: () => ({
     selected: [],
-    noData: "em construção",
+    noData: "Indisponível",
   }),
   computed: {
     ...mapGetters({
