@@ -17,6 +17,7 @@
     <MultipleFilters
       :tabs="tabs"
       :colors="{ base: '#222c63', active: '#525c93' }"
+      :groups="groups"
       @select="filters = $event"
     />
 
@@ -119,7 +120,11 @@ export default {
       iniciatives: "iniciativas/iniciatives",
       dataStatus: "iniciativas/dataStatus",
       searchKeys: "iniciativas/searchKeys",
+      campi: "iniciativas/campi",
     }),
+    groups() {
+      return [{ label: "Campus", items: this.campi }];
+    },
     searchTerm() {
       return this.search.term;
     },
@@ -174,13 +179,9 @@ export default {
       );
     },
     filterData(context) {
-      if (context.primary.length > 0) {
-        this.filtered = this.iniciatives.filter((iniciative) =>
-          iniciative.matchesFilter(context)
-        );
-      } else {
-        this.filtered = undefined;
-      }
+      this.filtered = this.iniciatives.filter((iniciative) =>
+        iniciative.matchesFilter(context)
+      );
     },
     async pipeline() {
       if (this.filters) await this.filterData(this.filters);

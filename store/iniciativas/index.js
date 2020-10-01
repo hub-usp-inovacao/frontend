@@ -18,6 +18,23 @@ export const getters = {
   iniciatives: (s) => s.iniciatives,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   searchKeys: (s) => s.keys,
+  campi: (s) => {
+    const campi = s.iniciatives
+      .reduce(
+        (campi, iniciative) =>
+          campi.concat(
+            iniciative.local.split(",").map((local) => local.trim())
+          ),
+        []
+      )
+      .filter((campi) => campi.trim().length > 0)
+      .filter(
+        (campus, index, campi) =>
+          index === campi.findIndex((other) => other === campus)
+      );
+
+    return campi.sort();
+  },
   errors: (s) => s.errors,
 };
 
