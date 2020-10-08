@@ -32,7 +32,10 @@
 
         <p>{{ item.classification.primary.subareas }}</p>
 
-        <HorizontalList title="Países com Proteção" :items="item.countriesWithProtection" />
+        <HorizontalList
+          title="Países com Proteção"
+          :items="item.countriesWithProtection"
+        />
 
         <HorizontalList
           v-if="item.ipcs.length > 0 && item.ipcs[0] != ''"
@@ -42,6 +45,9 @@
 
         <BulletList title="Titulares" :items="item.owners" />
         <BulletList title="Inventores" :items="item.inventors" />
+      </template>
+      <template #detailsImg="{ item }">
+        <v-img v-if="item.photo" eager :src="item.photo"></v-img>
       </template>
       <template #content="{ item }">
         <p>{{ item.sumary }}</p>
@@ -53,7 +59,8 @@
           target="_blank"
           class="white--text"
           :disabled="!item.url"
-        >Saiba Mais</v-btn>
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>

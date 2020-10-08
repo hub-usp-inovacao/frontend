@@ -46,8 +46,6 @@ export const actions = {
 
       const objects = values.slice(1).map((row) => PatentGenerator.run(row));
 
-      console.log("OBJETOS AI: ", objects);
-
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
