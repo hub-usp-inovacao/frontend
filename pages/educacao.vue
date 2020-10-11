@@ -17,15 +17,23 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="Disciplinas" :selected="globalSearchSelected">
+    <DisplayData
+      :items="displayItems"
+      group-name="Disciplinas"
+      :selected="globalSearchSelected"
+    >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
           <p class="body-2">
             <v-chip v-if="item.category.business">Negócios</v-chip>
             <v-chip v-if="item.category.innovation">Inovação</v-chip>
-            <v-chip v-if="item.category.intelectual_property">Propriedade Intelectual</v-chip>
-            <v-chip v-if="item.category.enterpreneuship">Empreendedorismo</v-chip>
+            <v-chip v-if="item.category.intelectual_property"
+              >Propriedade Intelectual</v-chip
+            >
+            <v-chip v-if="item.category.enterpreneuship"
+              >Empreendedorismo</v-chip
+            >
           </p>
           <p class="body-2">{{ item.campus }}</p>
           <p class="body-2">{{ item.unity }}</p>
@@ -35,7 +43,13 @@
         <p>{{ item.description.long }}</p>
       </template>
       <template #actions="{ item }">
-        <v-btn class="white--text" color="#db8337" :href="item.url" target="_blank">Saiba Mais</v-btn>
+        <v-btn
+          class="white--text"
+          color="#db8337"
+          :href="item.url"
+          target="_blank"
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
@@ -44,6 +58,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
+import allCampi from "@/lib/campi";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -64,16 +79,6 @@ export default {
     },
 
     levels: ["Graduação", "Pós-Graduação"],
-    campi: [
-      "Lorena",
-      "Piracicaba",
-      "Pirassununga",
-      "Ribeirão Preto",
-      "São Carlos",
-      "São Paulo",
-      "Todos",
-      "USP Leste",
-    ],
     tabs: [
       {
         name: "Inovação",
@@ -101,7 +106,6 @@ export default {
     ...mapGetters({
       dataStatus: "educacao/dataStatus",
       storeDisciplines: "educacao/disciplines",
-      campi: "educacao/campi",
       searchKeys: "educacao/searchKeys",
     }),
     disciplines: function () {
@@ -109,7 +113,10 @@ export default {
     },
     groups() {
       return [
-        { label: "Campus", items: this.campi },
+        {
+          label: "Campus",
+          items: allCampi.map((c) => c.name),
+        },
         { label: "Nível", items: ["Graduação", "Pós-Graduação"] },
       ];
     },
@@ -163,13 +170,9 @@ export default {
       );
     },
     filterData(context) {
-      if (context.primary.length > 0) {
-        this.filtered = this.disciplines.filter((discipline) =>
-          discipline.matchesFilter(context)
-        );
-      } else {
-        this.filtered = undefined;
-      }
+      this.filtered = this.disciplines.filter((discipline) =>
+        discipline.matchesFilter(context)
+      );
     },
     async pipeline() {
       if (this.filters) await this.filterData(this.filters);

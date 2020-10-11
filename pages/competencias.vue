@@ -107,6 +107,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
+import allCampi from "@/lib/campi";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -134,6 +135,8 @@ export default {
 
     filters: undefined,
     filtered: undefined,
+
+    unities: undefined,
 
     tabs: [
       {
@@ -263,13 +266,22 @@ export default {
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
-      unities: "competencia/unities",
-      campi: "competencia/campi",
     }),
     groups() {
       return [
-        { label: "Campus", items: this.campi },
-        { label: "Unidade", items: this.unities },
+        {
+          label: "Campus",
+          items: allCampi.map((c) => c.name),
+        },
+        {
+          label: "Unidade",
+          items:
+            this.unities == undefined
+              ? allCampi.reduce((acc, value) => {
+                  return acc.concat(value.unities);
+                }, [])
+              : this.unities,
+        },
       ];
     },
     baseItems() {
@@ -325,6 +337,12 @@ export default {
       );
     },
     filterData(context) {
+      const campi = context.terciary[0];
+      this.unities =
+        campi != undefined
+          ? allCampi.find((c) => c.name == campi).unities
+          : undefined;
+
       this.filtered = this.skills.filter((skill) =>
         skill.matchesFilter(context)
       );

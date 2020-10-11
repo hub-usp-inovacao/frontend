@@ -51,6 +51,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
+import allCampi from "@/lib/campi";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -120,10 +121,14 @@ export default {
       iniciatives: "iniciativas/iniciatives",
       dataStatus: "iniciativas/dataStatus",
       searchKeys: "iniciativas/searchKeys",
-      campi: "iniciativas/campi",
     }),
     groups() {
-      return [{ label: "Campus", items: this.campi }];
+      return [
+        {
+          label: "Campus",
+          items: allCampi.map((c) => c.name),
+        },
+      ];
     },
     searchTerm() {
       return this.search.term;
