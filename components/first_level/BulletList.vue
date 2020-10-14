@@ -2,7 +2,7 @@
   <v-list>
     <v-subheader>{{ title }}</v-subheader>
     <v-list-item-group>
-      <v-list-item v-for="item in items" :key="item">
+      <v-list-item v-for="(item, index) in items" :key="index">
         <v-list-item-icon>
           <v-icon v-text="'mdi-circle-small'"></v-icon>
         </v-list-item-icon>
