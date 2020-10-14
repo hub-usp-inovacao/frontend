@@ -79,7 +79,7 @@ export default {
     Background,
     DisplayData,
     USPDNA,
-    BulletList
+    BulletList,
   },
   data: () => ({
     baseTabs: [
@@ -371,12 +371,9 @@ export default {
     ...mapActions({
       fetchSpreadsheets: "empresas/fetchSpreadsheets",
     }),
-    filterFun(company, context) {
-      return company.matchesFilter(context, this.baseTabs, this.reverseCNAEmap);
-    },
     filterData(context) {
       this.filtered = this.companies.filter((company) =>
-        this.filterFun(company, context)
+        company.matchesFilter(context, this.baseTabs, this.reverseCNAEmap)
       );
     },
     async fuzzySearch() {
