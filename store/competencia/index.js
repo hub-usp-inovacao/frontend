@@ -57,11 +57,16 @@ export const mutations = {
 export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetName = "COMPETENCIAS_UPDATE";
-
     ctx.commit("setLoadingStatus");
 
     try {
+      const meta = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}?key=${sheetsAPIKey}`
+      );
+
+      const { sheets } = await meta.json();
+      const sheetName = sheets[2].properties.title; //sheetName = "COMPETENCIAS_UPDATE"
+
       const resp = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
       );
