@@ -54,13 +54,20 @@ export default {
       iniciatives: "iniciativas/iniciatives",
       patents: "patentes/patents",
       companies: "empresas/companies",
+
+      IniciativasSheetID: "global/IniciativasSheetID",
+      CompetênciasSheetID: "global/CompetênciasSheetID",
+      EmpresasSheetID: "global/EmpresasSheetID",
+      PatentesSheetID: "global/PatentesSheetID",
     }),
   },
-  beforeMount() {
+  async beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
+      metaSheetID: process.env.metaSheetID,
       sheetID: process.env.sheetID,
     };
+    await this.fetchSpreadsheetsID(env);
 
     if (this.eduStatus == "ok" && this.disciplines.length == 0) {
       this.fetchDisciplines(env);
@@ -71,19 +78,31 @@ export default {
     }
 
     if (this.skillsStatus == "ok" && this.skills.length == 0) {
-      this.fetchSkills(env);
+      await this.fetchSkills({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.CompetênciasSheetID,
+      });
     }
 
     if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
-      this.fetchIniciatives(env);
+      await this.fetchIniciatives({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.IniciativasSheetID,
+      });
     }
 
     if (this.patentsStatus == "ok" && this.patents.length == 0) {
-      this.fetchPatents(env);
+      await this.fetchPatents({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.PatentesSheetID,
+      });
     }
 
     if (this.companiesStatus == "ok" && this.companies.length == 0) {
-      this.fetchCompanies(env);
+      await this.fetchCompanies({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.EmpresasSheetID,
+      });
     }
   },
   methods: {
@@ -94,6 +113,7 @@ export default {
       fetchIniciatives: "iniciativas/fetchSpreadsheets",
       fetchPatents: "patentes/fetchSpreadsheets",
       fetchCompanies: "empresas/fetchSpreadsheets",
+      fetchSpreadsheetsID: "global/fetchSpreadsheetsID",
     }),
     submitSearch(searchTerm) {
       if (!searchTerm.trim()) {

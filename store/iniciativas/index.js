@@ -49,14 +49,14 @@ export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
     ctx.commit("setLoadingStatus");
-
+    console.log("Fetching Iniciativas");
     try {
       const meta = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}?key=${sheetsAPIKey}`
       );
 
       const { sheets } = await meta.json();
-      const sheetName = sheets[4].properties.title; //sheetName = "INICIATIVAS"
+      const sheetName = sheets[0].properties.title; //sheetName = "INICIATIVAS"
 
       const resp = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`

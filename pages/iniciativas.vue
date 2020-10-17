@@ -121,6 +121,7 @@ export default {
       iniciatives: "iniciativas/iniciatives",
       dataStatus: "iniciativas/dataStatus",
       searchKeys: "iniciativas/searchKeys",
+      IniciativasSheetID: "global/IniciativasSheetID",
     }),
     groups() {
       return [
@@ -157,19 +158,24 @@ export default {
       this.pipeline();
     },
   },
-  beforeMount() {
+  async beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
+      metaSheetID: process.env.metaSheetID,
     };
+    await this.fetchSpreadsheetsID(env);
 
     if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
-      this.fetchSpreadsheets(env);
+      this.fetchSpreadsheets({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.IniciativasSheetID,
+      });
     }
   },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "iniciativas/fetchSpreadsheets",
+      fetchSpreadsheetsID: "global/fetchSpreadsheetsID",
     }),
     async fuzzySearch() {
       if (!this.search.term.trim()) {

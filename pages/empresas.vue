@@ -24,8 +24,8 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
-          <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
-          <p v-for="email in item.emails" :key="email">{{ email }}</p>
+          <p v-for="(phone, index) in item.phones" :key="index">{{ phone }}</p>
+          <p v-for="(email, index) in item.emails" :key="index">{{ email }}</p>
         </v-container>
       </template>
       <template #detailsImg="{ item }">
@@ -34,7 +34,7 @@
       <template #content="{ item }">
         <p v-if="item.incubated">
           <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
-          <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
+          <span v-for="(incub, index) of item.ecosystems" :key="index">{{ incub }};&nbsp;</span>
         </p>
 
         <p>
@@ -298,6 +298,7 @@ export default {
       companies: "empresas/companies",
       searchKeys: "empresas/searchKeys",
       cities: "empresas/cities",
+      EmpresasSheetID: "global/EmpresasSheetID",
     }),
     searchTerm() {
       return this.search.term;
@@ -359,17 +360,24 @@ export default {
       this.pipeline();
     },
   },
-  beforeMount() {
+  async beforeMount() {
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+      metaSheetID: process.env.metaSheetID,
+    };
+    await this.fetchSpreadsheetsID(env);
+
     if (this.dataStatus == "ok" && this.companies.length == 0) {
       this.fetchSpreadsheets({
-        sheetsAPIKey: process.env.sheetsAPIKey,
-        sheetID: process.env.sheetID,
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.EmpresasSheetID,
       });
     }
   },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "empresas/fetchSpreadsheets",
+      fetchSpreadsheetsID: "global/fetchSpreadsheetsID",
     }),
     filterData(context) {
       this.filtered = this.companies.filter((company) =>

@@ -58,14 +58,14 @@ export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey, sheetID } = env;
     ctx.commit("setLoadingStatus");
-
+    console.log("Fetching Competências");
     try {
       const meta = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}?key=${sheetsAPIKey}`
       );
 
       const { sheets } = await meta.json();
-      const sheetName = sheets[2].properties.title; //sheetName = "COMPETENCIAS_UPDATE"
+      const sheetName = sheets[0].properties.title; //sheetName = "COMPETENCIAS_UPDATE"
 
       const resp = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`

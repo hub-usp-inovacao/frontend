@@ -266,6 +266,7 @@ export default {
       dataStatus: "competencia/dataStatus",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
+      CompetênciasSheetID: "global/CompetênciasSheetID",
     }),
     groups() {
       return [
@@ -311,18 +312,23 @@ export default {
       this.pipeline();
     },
   },
-  beforeMount() {
+  async beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
+      metaSheetID: process.env.metaSheetID,
     };
+    await this.fetchSpreadsheetsID(env);
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
-      this.fetchSpreadsheets(env);
+      this.fetchSpreadsheets({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.CompetênciasSheetID,
+      });
   },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "competencia/fetchSpreadsheets",
+      fetchSpreadsheetsID: "global/fetchSpreadsheetsID",
     }),
     async fuzzySearch() {
       if (!this.search.term.trim()) {

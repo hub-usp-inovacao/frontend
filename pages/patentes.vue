@@ -119,6 +119,7 @@ export default {
       dataStatus: "patentes/dataStatus",
       patents: "patentes/patents",
       searchKeys: "patentes/searchKeys",
+      PatentesSheetID: "global/PatentesSheetID",
     }),
     searchTerm() {
       return this.search.term;
@@ -167,19 +168,24 @@ export default {
       this.pipeline();
     },
   },
-  beforeMount() {
+  async beforeMount() {
     const env = {
       sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
+      metaSheetID: process.env.metaSheetID,
     };
+    await this.fetchSpreadsheetsID(env);
 
     if (this.dataStatus == "ok" && this.patents.length == 0) {
-      this.fetchSpreadsheets(env);
+      this.fetchSpreadsheets({
+        sheetsAPIKey: env.sheetsAPIKey,
+        sheetID: this.PatentesSheetID,
+      });
     }
   },
   methods: {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets",
+      fetchSpreadsheetsID: "global/fetchSpreadsheetsID",
     }),
     async fuzzySearch() {
       if (!this.search.term.trim()) {

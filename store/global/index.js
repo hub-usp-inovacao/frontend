@@ -1,17 +1,17 @@
 import { columnValue } from "@/lib/sheets";
 
 export const state = () => ({
-  iniciativeSheetID: "",
-  skillSheetID: "",
-  companySheetID: "",
-  patentSheetID: "",
+  IniciativasSheetID: "",
+  CompetênciasSheetID: "",
+  EmpresasSheetID: "",
+  PatentesSheetID: "",
 });
 
 export const getters = {
-  iniciativeSheetID: (s) => s.iniciativeSheetID,
-  skillSheetID: (s) => s.skillSheetID,
-  companySheetID: (s) => s.companySheetID,
-  patentSheetID: (s) => s.patentSheetID,
+  IniciativasSheetID: (s) => s.IniciativasSheetID,
+  CompetênciasSheetID: (s) => s.CompetênciasSheetID,
+  EmpresasSheetID: (s) => s.EmpresasSheetID,
+  PatentesSheetID: (s) => s.PatentesSheetID,
 };
 
 export const mutations = {
@@ -45,6 +45,5 @@ export const actions = {
       if (match)
         ctx.commit("setSheetID", { sheet: sheetName, sheetID: match[1] });
     });
-    console.log(values);
-  }
-}
+  },
+};
