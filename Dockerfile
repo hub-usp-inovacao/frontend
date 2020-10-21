@@ -28,3 +28,29 @@ COPY . ./
 EXPOSE ${PORT}
 
 CMD yarn dev
+
+
+
+####################
+# PROD BUILDER IMAGE
+####################
+
+FROM base as builder
+
+ENV NODE_ENV=production
+
+RUN yarn install
+
+COPY . ./
+
+RUN yarn generate
+
+
+
+####################
+# PROD BUILDER IMAGE
+####################
+
+FROM nginx:mainline-alpine as production
+
+COPY --from=builder dist /usr/share/nginx/html
