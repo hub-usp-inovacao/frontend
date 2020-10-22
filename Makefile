@@ -2,6 +2,7 @@ DEVFILE = dev-compose.yaml
 PRODFILE = prod-compose.yaml
 
 DC = docker-compose
+BG_FLAG = -d
 
 BUILD_SUBCMD = build
 RUN_SUBCMD = up
@@ -29,7 +30,7 @@ build_prod:
 	$(DC) -f $(PRODFILE) $(BUILD_SUBCMD)
 
 prod: build_prod
-	$(DC) -f $(PRODFILE) $(RUN_SUBCMD)
+	$(DC) -f $(PRODFILE) $(RUN_SUBCMD) $(BG_FLAG)
 
 stop_prod:
 	$(DC) -f $(PRODFILE) $(STOP_SUBCMD)
