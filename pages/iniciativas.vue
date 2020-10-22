@@ -177,11 +177,21 @@ export default {
         return;
       }
 
-      this.search.iniciatives = await this.$search(
+      let results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.searchKeys)
+        genFuzzyOptions(this.searchKeys, 0.0)
       );
+
+      if (results.length === 0) {
+        results = await this.$search(
+          this.search.term.trim(),
+          this.baseItems,
+          genFuzzyOptions(this.searchKeys)
+        );
+      }
+
+      this.search.iniciatives = results;
     },
     filterData(context) {
       this.filtered = this.iniciatives.filter((iniciative) =>

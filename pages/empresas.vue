@@ -382,11 +382,21 @@ export default {
         return;
       }
 
-      this.search.companies = await this.$search(
+      let results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.searchKeys)
+        genFuzzyOptions(this.searchKeys, 0.0)
       );
+
+      if (results.length === 0) {
+        results = await this.$search(
+          this.search.term.trim(),
+          this.baseItems,
+          genFuzzyOptions(this.searchKeys)
+        );
+      }
+
+      this.search.companies = results;
     },
     async pipeline() {
       if (this.filters) await this.filterData(this.filters);

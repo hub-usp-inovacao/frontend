@@ -226,7 +226,7 @@ export default {
         this.$search(
           this.search.trim(),
           this[ctx.key],
-          genFuzzyOptions(ctx.searchKeys)
+          genFuzzyOptions(ctx.searchKeys, 0.0)
         ).then((results) => {
           this[`searched_${ctx.key}`] =
             results.length > 0 ? results : undefined;

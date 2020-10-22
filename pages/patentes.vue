@@ -186,11 +186,21 @@ export default {
         return;
       }
 
-      this.search.patents = await this.$search(
+      let results = await this.$search(
         this.search.term.trim(),
         this.baseItems,
-        genFuzzyOptions(this.searchKeys)
+        genFuzzyOptions(this.searchKeys, 0.0)
       );
+
+      if (results.length === 0) {
+        results = await this.$search(
+          this.search.term.trim(),
+          this.baseItems,
+          genFuzzyOptions(this.searchKeys)
+        );
+      }
+
+      this.search.patents = results;
     },
     primaryAreaNameToCode(name) {
       return this.tabs.find((t) => t.name == name).code;
