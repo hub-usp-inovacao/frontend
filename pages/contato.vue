@@ -17,9 +17,7 @@
           </v-col>
           <v-col cols="11" sm="5"></v-col>
         </v-row>
-      </v-container>
 
-      <v-container>
         <v-row class="center">
           <template v-for="(icon, i) in icons">
             <v-col :key="icon.label">
@@ -43,39 +41,95 @@
             ></v-responsive>
           </template>
         </v-row>
-      </v-container>
 
-      <v-container>
-        <v-row justify="center">
-          <v-col cols="5">
-            <p class="mb-0 title font-weight-light">
-              Caso você tenha interesse de ter a sua inovação, estrutura,
-              competência, empresa ou patente dentro do portal, basta clicar no
-              botão ao lado:
-            </p>
+        <v-row
+          class="ma-0 mt-12"
+          align="center"
+          justify="space-around"
+          no-gutters
+        >
+          <v-col>
+            <v-row class="ma-0" justify="center">
+              <v-col cols="12" sm="9">
+                <p class="display-2 font-weight-regular">Créditos</p>
+              </v-col>
+            </v-row>
           </v-col>
+          <v-col cols="11" sm="5"></v-col>
+        </v-row>
+        <v-row class="ml-4">
+          <v-col offset="1">UNIVERSIDADE DE SÃO PAULO</v-col>
+        </v-row>
+        <v-row class="ml-4">
+          <v-col offset="1">Reitor: Prof. Dr. Vahan Agopyan</v-col>
+        </v-row>
+        <v-row class="ml-4">
+          <v-col offset="1">Vice-reitor: Prof. Dr. Antonio Carlos Hernandes</v-col>
+        </v-row>
+        
+        <v-row
+          class="ma-0 mt-12"
+          align="center"
+          justify="space-around"
+          no-gutters
+        >
+          <v-col>
+            <v-row class="ma-0" justify="center">
+              <v-col cols="12" sm="9">
+                <p class="display-1 font-weight-regular">AUSPIN - Agência USP de Inovação</p>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
 
-          <v-col cols="5">
-            <v-card height="10rem" color="secondary">
-              <v-container fill-height>
-                <v-row justify="center" align="center">
-                  <v-btn
-                    x-large
-                    rounded
-                    depressed
-                    color="rgba(175, 236, 255, 0.4)"
-                  >
-                    <span class="white--text font-weight-black"
-                      >CLIQUE AQUI</span
-                    >
-                  </v-btn>
-                </v-row>
+        <v-row
+          class="ma-0 mt-12"
+          align="baseline"
+          align-content="center"
+          justify="center"
+          no-gutters
+        >
+          <v-col v-for="{ src, name, role } of auspin" :key="src">
+            <v-card width="200" elevation="0">
+              <v-container>
+                <v-img style="border-radius: 100%" :src="src" width="100%" aspect-ratio="1"></v-img>
+                <v-card-title>{{ name }}</v-card-title>
+                <v-card-subtitle>{{ role }}</v-card-subtitle>
               </v-container>
             </v-card>
-            <p class="caption font-italic font-weight-light">
-              A AUSPIN analisará sua solicitação e tomará as providências
-              adequadas no menor tempo possível.
-            </p>
+          </v-col>
+        </v-row>
+
+        <v-row
+          class="ma-0 mt-12"
+          align="center"
+          justify="space-around"
+          no-gutters
+        >
+          <v-col>
+            <v-row class="ma-0" justify="center">
+              <v-col cols="12" sm="9">
+                <p class="display-1 font-weight-regular">CodeLab - CCSL - IME</p>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+
+        <v-row
+          class="ma-0 mt-12"
+          align="baseline"
+          align-content="center"
+          justify="center"
+          no-gutters
+        >
+          <v-col v-for="{ src, name, role } of codelab" :key="src">
+            <v-card width="200" elevation="0">
+              <v-container>
+                <v-img style="border-radius: 100%" :src="src" width="100%" aspect-ratio="1"></v-img>
+                <v-card-title>{{ name }}</v-card-title>
+                <v-card-subtitle>{{ role }}</v-card-subtitle>
+              </v-container>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -125,6 +179,35 @@ export default {
         color: "#C13584",
       },
     ],
+    auspin: [
+      { src: 'https://drive.google.com/uc?export=view&id=16I5lwNE1rgBGb6clZHxljJ_Y30H8uCOh', name: 'Marcos Martins', role: 'Coordenador' },
+      { src: 'https://drive.google.com/uc?export=view&id=1mJm4BeTMRLkh2fZxRNpqxInw0Oj5jXF8', name: 'Geciane Porto', role: 'Vice-Coordenadora' },
+      { src: 'https://drive.google.com/uc?export=view&id=1eHnS8N448dK0L1Evp9ME3fzgOe7vQDNg', name: 'Josmar Andrade', role: 'Assessor da Coordenação' },
+      { src: 'https://drive.google.com/uc?export=view&id=1HpmDm9kCIO73lWN4HFuRxhFwBUsDgboc', name: 'Ronaldo Nina', role: 'Chefe da Comunicação' },
+      { src: 'https://drive.google.com/uc?export=view&id=1omkFtI5worTLbUivgPm7G5r90vir_OS0', name: 'Marcelo Valverde', role: 'Arte Finalista' },
+      { src: 'https://drive.google.com/uc?export=view&id=1pqpMB5RVTuW9Z8jBFLFQUuCy7mtfRvc4', name: 'Flávia Prado', role: 'Agente de Inovação' },
+      { src: 'https://drive.google.com/uc?export=view&id=1Eqmcp0gb-48XExknI_Ua-APXLlkABPFq', name: 'Rodrigo Olivetti', role: 'Empreendedorismo' },
+      { src: 'https://drive.google.com/uc?export=view&id=186cZid7WcI4S4JFQoyL1vcetqe5siGPS', name: 'Rosemeire Domingos', role: 'Eventos' },
+      { src: 'https://drive.google.com/uc?export=view&id=16zKodkgpLgVUDSmj8U9Rj5XLC85dSuGy', name: 'Mariana Arruda', role: 'Estag. - Comunicação' },
+      { src: 'https://drive.google.com/uc?export=view&id=19n8RxSEtc5-HABvYMOLc7IXTksA0N9yp', name: 'Giovanna Kim', role: 'Estag. - Comunicação' },
+      { src: 'https://drive.google.com/uc?export=view&id=1GAPXXL6AnH_JubxcYUcV1fmUhbUkMlJn', name: 'Heidi Piva', role: 'Audiovisual' },
+      { src: 'https://drive.google.com/uc?export=view&id=1K1AOJ4A-ZDyk3rlfHXUAo83kfQrma8CN', name: 'Davi Bastos', role: 'Estag. - Comunicação' },
+      { src: 'https://drive.google.com/uc?export=view&id=1vbNc3zcZYYqYdTrp4hWCQAu60nUsxJzy', name: 'Fernanda Basso', role: 'Bolsista' },
+      { src: 'https://drive.google.com/uc?export=view&id=1iV8Q_ZpLdkcracVhjcZg0tf8EqTfSb7N', name: 'Liliane Sartorio', role: 'Bolsista' },
+      { src: 'https://drive.google.com/uc?export=view&id=1n4NCqLDF61CA9BVRe30ZYpeLgxlW69Bm', name: 'Felipe Vogler', role: 'Bolsista' },
+      { src: 'https://drive.google.com/uc?export=view&id=1vCA0Q9vJUk9k1K4toUW0ftI1QZK6VC2G', name: 'Giovanni Watanabe', role: 'Estag. - Comunicação' },
+    ],
+
+    codelab: [
+      { src: 'https://drive.google.com/uc?export=view&id=17FI5R3H9lZascX-p67TabXXpayvZHeqk', name: 'Alfredo Goldman', role: 'Coordenador' },
+      { src: 'https://drive.google.com/uc?export=view&id=1EsuupsEr2tpR8ExOVSg6_HXtzUG-i_hC', name: 'João Daniel', role: 'Desenvolvedor' },
+      { src: 'https://drive.google.com/uc?export=view&id=1jgOw_e3tjq8dY7pA8moJ0GDV4uKbO9kk', name: 'Erick Santana', role: 'Desenvolvedor' },
+      { src: 'https://drive.google.com/uc?export=view&id=1pR6n-PoKt0-h4b0O6oQIEUhETnY7IWRx', name: 'Thiago Guerrero', role: 'Desenvolvedor' },
+      { src: 'https://drive.google.com/uc?export=view&id=1G-JivuZjuGOh0hWj0iSRYN28d5DLjkss', name: 'Leonardo Costa', role: 'Desenvolvedor' },
+      { src: 'https://drive.google.com/uc?export=view&id=1BicPXgkm5JRtcxyKS-hPk78P9J4boyFT', name: 'Gabriel Brandão', role: 'Desenvolvedor' },
+      { src: 'https://drive.google.com/uc?export=view&id=1OEbinkI-1gDBsdrOGBqiVQfk-3Azk6tw', name: 'Evandro Nakayama', role: 'Desenvolvedor' },
+      { src: 'https://drive.google.com/uc?export=view&id=1FcC5OZjmlMU7ou7sqYoNwAWbreN_OXBm', name: 'Renato Cordeiro', role: 'Desenvolvedor' },
+    ]
   }),
 };
 </script>
