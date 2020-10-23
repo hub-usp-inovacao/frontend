@@ -55,4 +55,4 @@ RUN yarn generate
 
 FROM nginx:mainline-alpine as production
 
-COPY --from=builder dist /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
