@@ -6,6 +6,8 @@ FROM node:alpine3.10 as base
 
 ENV PATH_TO_APP=/usr/src/app
 
+WORKDIR ${PATH_TO_APP}
+
 COPY package.json yarn.lock ./
 
 RUN apk add --update python3 build-base
