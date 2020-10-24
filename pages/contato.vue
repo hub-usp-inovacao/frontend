@@ -18,28 +18,22 @@
           <v-col cols="11" sm="5"></v-col>
         </v-row>
 
-        <v-row class="center">
-          <template v-for="(icon, i) in icons">
-            <v-col :key="icon.label">
-              <v-container>
-                <v-row align="center">
-                  <v-btn :href="icon.url" class="mx-4" icon dark color="black">
-                    <v-icon size="60px">{{ icon.label }}</v-icon>
-                  </v-btn>
-
-                  <p class="mb-0 title font-weight-regular">
-                    {{ icon.description }}
-                  </p>
-                </v-row>
-              </v-container>
-            </v-col>
-
-            <v-responsive
-              v-if="i == 2"
-              :key="`width-${i}`"
-              width="100%"
-            ></v-responsive>
-          </template>
+        <v-row class="mx-8">
+          <v-col
+            v-for="{ label, url, description } of icons"
+            :key="label"
+            cols="12"
+            md="4"
+          >
+            <v-card
+              :href="url"
+              elevation="0"
+              class="mb-4 d-flex flex-column justify-center align-center flex-lg-row"
+            >
+              <v-icon size="60px" icon dark color="black">{{ label }}</v-icon>
+              <v-card-title>{{ description }}</v-card-title>
+            </v-card>
+          </v-col>
         </v-row>
 
         <v-row
@@ -105,7 +99,7 @@ export default {
       {
         label: "mdi-phone",
         description: "(11) 3091-4166",
-        url: "http://www.instagram.com/inovacaonausp/",
+        url: "https://inovacao.usp.br",
         color: "#C13584",
       },
       {
@@ -124,7 +118,7 @@ export default {
       {
         label: "mdi-email",
         description: "empreende.auspin@usp.br",
-        url: "http://www.instagram.com/inovacaonausp/",
+        url: "mailto:empreende.auspin@usp.br",
         color: "#C13584",
       },
     ],
