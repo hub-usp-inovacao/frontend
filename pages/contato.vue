@@ -87,23 +87,23 @@
         </v-row>
 
         <v-row
-          class="ma-0 mt-12"
+          class="ma-0 mt-12 mx-8"
           align="baseline"
-          align-content="space-around"
+          align-content="space-between"
           justify="center"
           no-gutters
         >
           <v-col
             v-for="{ src, name, role } of auspin"
             :key="src"
-            cols="6"
+            cols="8"
             md="3"
-            lg="2"
-            class="d-flex justify-center"
+            lg="1"
+            class="d-flex justify-center mx-8"
           >
             <v-card
               class="d-flex flex-column align-center justify-start"
-              width="175"
+              width="100%"
               elevation="0"
             >
               <v-img
@@ -112,7 +112,7 @@
                 width="85%"
                 aspect-ratio="1"
               ></v-img>
-              <v-card-title class="body-2 font-weight-medium">
+              <v-card-title class="body-2 font-weight-medium text-center">
                 {{ name }}
               </v-card-title>
               <v-card-subtitle class="text-center caption">
