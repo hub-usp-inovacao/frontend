@@ -44,3 +44,6 @@ build_test:
 
 test:
 	$(DC) -f $(TESTFILE) $(RUN_SUBCMD)
+
+stop_test:
+	$(DC) -f $(TESTFILE) $(STOP_SUBCMD)
