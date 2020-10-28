@@ -1,9 +1,9 @@
 {
-  "baseUrl": "http://localhost:8080",
+  "baseUrl": "http://localhost:3000",
   "fixturesFolder": "test/fixtures",
   "integrationFolder": "test/features",
-  "pluginsFile": "test/plugins",
+  "pluginsFile": false,
   "screenshotsFolder": "test/screenshots",
-  "supportFile": "test/support",
+  "supportFile": false,
   "videosFolder": "test/videos"
 }
