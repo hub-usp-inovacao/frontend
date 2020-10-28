@@ -18,7 +18,7 @@ STOP_SUBCMD = down
 build_dev:
 	$(DC) -f $(DEVFILE) $(BUILD_SUBCMD)
 
-dev: build_dev
+dev:
 	$(DC) -f $(DEVFILE) $(RUN_SUBCMD)
 
 stop_dev:
@@ -30,7 +30,7 @@ stop_dev:
 build_prod:
 	$(DC) -f $(PRODFILE) $(BUILD_SUBCMD)
 
-prod: build_prod
+prod:
 	$(DC) -f $(PRODFILE) $(RUN_SUBCMD) $(BG_FLAG)
 
 stop_prod:
