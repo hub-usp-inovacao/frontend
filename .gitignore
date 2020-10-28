@@ -1,5 +1,11 @@
 correcoes_nas_planilhas.txt
 
+test/screenshots
+test/videos
+
+cypress/screenshots
+cypress/videos
+
 pages/playground.vue
 
 # Created by .ignore support plugin (hsz.mobi)
