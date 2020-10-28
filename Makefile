@@ -1,5 +1,6 @@
 DEVFILE = dev-compose.yaml
 PRODFILE = prod-compose.yaml
+TESTFILE = test-compose.yaml
 
 DC = docker-compose
 BG_FLAG = -d
@@ -9,7 +10,7 @@ RUN_SUBCMD = up
 STOP_SUBCMD = down
 
 
-.PHONY: build_dev build_prod dev prod stop_dev stop_prod
+.PHONY: build_dev build_prod dev prod stop_dev stop_prod test
 
 
 ## DEVELOPMENT TARGETS
@@ -34,3 +35,12 @@ prod: build_prod
 
 stop_prod:
 	$(DC) -f $(PRODFILE) $(STOP_SUBCMD)
+
+
+## TEST TARGETS
+
+build_test:
+	$(DC) -f $(TESTFILE) $(BUILD_SUBCMD)
+
+test:
+	$(DC) -f $(TESTFILE) $(RUN_SUBCMD)
