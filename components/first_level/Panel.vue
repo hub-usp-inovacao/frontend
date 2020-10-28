@@ -28,6 +28,7 @@
         <v-row class="ma-0">
           <v-col>
             <v-text-field
+              id="search-bar"
               v-model="value"
               :background-color="searchBarColor"
               solo
