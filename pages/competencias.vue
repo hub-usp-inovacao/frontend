@@ -29,7 +29,8 @@
         <v-container>
           <v-row v-if="item.groupName && item.groupInitials">
             <v-col>
-              <span>{{ item.groupName }} - {{ item.groupInitials }}</span>
+              <span>{{ item.groupName }}</span>
+              <span v-if="item.groupInitials">- {{ item.groupInitials }}</span>
             </v-col>
           </v-row>
           <v-row>
