@@ -18,6 +18,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-card
+                    :id="item.id"
                     :color="selected.includes(item.name) ? active : color"
                     height="100%"
                     min-height="100px"

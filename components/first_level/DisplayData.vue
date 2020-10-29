@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="display-data">
     <div class="hidden-sm-and-down">
       <ListAndDetails :items="items" :selected="selected">
         <template #itemTitle="{ item }">

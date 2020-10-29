@@ -83,20 +83,24 @@ export default {
       {
         name: "Inovação",
         description: "Cursos e disciplinas relacionados à área de Inovação.",
+        id: "innovation-filter"
       },
       {
         name: "Empreendedorismo",
         description:
           "Cursos e disciplinas relacionados à área de Empreendedorismo.",
+        id: "enterpreneuship-filter"
       },
       {
         name: "Propriedade Intelectual",
         description:
           "Cursos e disciplinas relacionados à área de Propriedade Intelectual.",
+        id: "intelectual-property-filter"
       },
       {
         name: "Negócios",
         description: "Cursos e disciplinas relacionados à área de Negócios.",
+        id: "business-filter"
       },
     ],
     filters: undefined,
