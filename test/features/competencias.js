@@ -4,8 +4,8 @@ describe("Compentências", () => {
   })
 
   it("finds an existent teacher", () => {
-    cy.get("#search-bar").type("Alfredo Goldman");
-
-    cy.get(".hidden-sm-and-down").contains("Alfredo Goldman")
+    const teacher = "Alfredo Goldman";
+    cy.get("#search-bar").type(teacher);
+    cy.get("#display-data").contains(teacher)
   })
 })
