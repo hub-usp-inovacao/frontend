@@ -370,6 +370,8 @@ export default {
   methods: {
     ...mapActions({
       fetchSpreadsheets: "empresas/fetchSpreadsheets",
+      setStrictResults: "global/setStrictResults",
+      setFlexibleResults: "global/setFlexibleResults",
     }),
     filterData(context) {
       this.filtered = this.companies.filter((company) =>
@@ -377,6 +379,8 @@ export default {
       );
     },
     async fuzzySearch() {
+      this.setStrictResults();
+
       if (!this.search.term.trim()) {
         this.search.companies = undefined;
         return;
@@ -389,6 +393,8 @@ export default {
       );
 
       if (results.length === 0) {
+        this.setFlexibleResults();
+
         results = await this.$search(
           this.search.term.trim(),
           this.baseItems,

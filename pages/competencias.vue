@@ -324,8 +324,12 @@ export default {
   methods: {
     ...mapActions({
       fetchSpreadsheets: "competencia/fetchSpreadsheets",
+      setStrictResults: "global/setStrictResults",
+      setFlexibleResults: "global/setFlexibleResults",
     }),
     async fuzzySearch() {
+      this.setStrictResults();
+
       if (!this.search.term.trim()) {
         this.search.skills = undefined;
         return;
@@ -338,6 +342,7 @@ export default {
       );
 
       if (results.length === 0) {
+        this.setFlexibleResults();
         results = await this.$search(
           this.search.term.trim(),
           this.baseItems,

@@ -39,7 +39,7 @@
               append-outer-icon="search"
               :style="setSearchBarWidth"
               :loading="loading"
-              hint="Resultados de busca na caixa abaixo"
+              :hint="hint"
               persistent-hint
               @keydown.enter="submitSearch"
             ></v-text-field>
@@ -52,6 +52,7 @@
 
 <script>
 import { debounce } from "debounce";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -94,6 +95,15 @@ export default {
     },
   },
   computed: {
+    ...mapGetters({
+      strictSearchResults: "global/strictSearchResults"
+    }),
+    hint() {
+      const strict = "Resultados de busca na caixa abaixo";
+      const flexible = "Resultados aproximados de busca na caixa abaixo";
+
+      return this.strictSearchResults ? strict : flexible;
+    },
     setSearchBarWidth() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":

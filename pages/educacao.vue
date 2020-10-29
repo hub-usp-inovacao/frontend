@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 import allCampi from "@/lib/campi";
 
@@ -161,7 +161,13 @@ export default {
       this.$store.dispatch("educacao/fetchSpreadsheets", payload);
   },
   methods: {
+    ...mapActions({
+      setStrictResults: "global/setStrictResults",
+      setFlexibleResults: "global/setFlexibleResults",
+    }),
     async fuzzySearch() {
+      this.setStrictResults();
+
       if (!this.search.term.trim()) {
         this.search.disciplines = undefined;
         return;
@@ -174,6 +180,7 @@ export default {
       );
 
       if (results.length === 0) {
+        this.setFlexibleResults();
         results = await this.$search(
           this.search.term.trim(),
           this.baseItems,

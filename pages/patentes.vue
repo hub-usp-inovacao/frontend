@@ -180,8 +180,12 @@ export default {
   methods: {
     ...mapActions({
       fetchSpreadsheets: "patentes/fetchSpreadsheets",
+      setStrictResults: "global/setStrictResults",
+      setFlexibleResults: "global/setFlexibleResults",
     }),
     async fuzzySearch() {
+      this.setStrictResults();
+
       if (!this.search.term.trim()) {
         return;
       }
@@ -193,6 +197,7 @@ export default {
       );
 
       if (results.length === 0) {
+        this.setFlexibleResults()
         results = await this.$search(
           this.search.term.trim(),
           this.baseItems,
