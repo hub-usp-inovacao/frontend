@@ -21,7 +21,7 @@
                 <v-row>
                   <v-col cols="8" offset="1">
                     <v-img contain eager aspect-ratio="4" max-height="25%" position="left" class="mb-4"
-                    :src="require('@/static/Solus_Branco.png')" alt="Portal Solus"></v-img>
+                    :src="require('@/static/Solus_Branco.png')" alt="Portal Solus" data-cy="solus-logo"></v-img>
                     <p
                       class="white--text font-weight-medium ma-0"
                       :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
