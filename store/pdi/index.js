@@ -39,7 +39,7 @@ export const mutations = {
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
     const { sheetsAPIKey, sheetID } = env;
-    const sheetsName = ["PDI", "NAPS"];
+    const sheetsName = ["PDI_update", "NAPS"];
 
     ctx.commit("setLoadingStatus");
 
@@ -55,11 +55,11 @@ export const actions = {
         const objects = d.values
           .slice(1)
           .map((row) =>
-            sheetName === "PDI" ? PDIGenerator.run(row) : NAPSGenerator.run(row)
+            sheetName === "PDI_update" ? PDIGenerator.run(row) : NAPSGenerator.run(row)
           );
 
         data.push(...objects);
-        if (sheetName === "PDI") {
+        if (sheetName === "PDI_update") {
           const errors = findErrors(Object.assign([], objects));
           ctx.commit("setErrors", errors);
         }

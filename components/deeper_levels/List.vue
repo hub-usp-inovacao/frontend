@@ -28,7 +28,7 @@
         <v-icon large>keyboard_arrow_down</v-icon>
       </div>
     </div>
-    <div v-else>
+    <div data-cy="listEmpty" v-else>
       <NotFound />
     </div>
   </v-card>

@@ -8,7 +8,7 @@ describe("Global Search", () => {
         const unrelatedResults = ["Artesanato", "Sonologia"];
         for (let i = 0; i < 2; i++) {
             cy.get('#search-bar').clear().type(searchTerms[i]).type('{enter}');
-            !cy.get('.v-card__text').should('not.contain', unrelatedResults[i]);
+            cy.get('.v-card__text').should('not.contain', unrelatedResults[i]);
         }
     })
 })
