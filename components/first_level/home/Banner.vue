@@ -20,12 +20,8 @@
               <v-col cols="11" sm="10">
                 <v-row>
                   <v-col cols="8" offset="1">
-                    <p
-                      class="white--text font-weight-medium"
-                      :class="
-                            $breakpoint.smAndDown ? 'display-1' : 'display-2'
-                          "
-                    >Portal Solus</p>
+                    <v-img contain eager aspect-ratio="4" max-height="25%" position="left" class="mb-4"
+                    :src="require('@/static/Solus_Branco.png')" alt="Portal Solus"></v-img>
                     <p
                       class="white--text font-weight-medium ma-0"
                       :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
@@ -36,7 +32,7 @@
                   </v-col>
                 </v-row>
 
-                <v-row class="mt-12">
+                <v-row class="mt-8">
                   <v-col cols="10" offset="1">
                     <p
                       class="white--text font-weight-light"
