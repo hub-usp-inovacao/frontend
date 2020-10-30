@@ -1,12 +1,26 @@
 describe("PDI", ()=> {
     beforeEach(() => {
         cy.visit('/inovacao');
+        cy.wait(1000);
     })
 
     it ("finds any pdi or nap", () => {
-        const emptyMessage = "Não encontramos nada relacionado à sua pesquisa";
         cy.get("#display-data");
-        cy.wait(1000);
+        cy.get("[data-cy=listEmpty]").should("not.exist");
+    })
+
+    it ("should display CEPIDS after filtering", () => {
+        cy.get("#cepids-filter").click();
+        cy.get("[data-cy=listEmpty]").should("not.exist");
+    })
+
+    it ("should display EMBRAPII after filtering", () => {
+        cy.get("#embrapii-filter").click();
+        cy.get("[data-cy=listEmpty]").should("not.exist");
+    })
+
+    it ("should display NAPS after filtering", () => {
+        cy.get("#nap-filter").click();
         cy.get("[data-cy=listEmpty]").should("not.exist");
     })
 })

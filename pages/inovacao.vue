@@ -74,24 +74,28 @@ export default {
 
     tabs: [
       {
-        name: "CEPID",
+        name: "CEPIDS",
         description:
           "Centros de Pesquisa, Inovação e Difusão fomentados pela FAPESP que atuam na USP desenvolvendo investigações para contribuir à inovação por meio das transferências de tecnologia, além de oferecer atividades de extensão para o público em geral.",
+        id: "cepids-filter"
       },
       {
         name: "EMBRAPII",
         description:
           "A EMBRAPII (Associação Brasileira de Pesquisa e Inovação Industrial), apoia instituições de pesquisa tecnológica, em determinadas áreas de competência, para executarem projetos de desenvolvimento de pesquisa tecnológica para inovação, em cooperação com empresas do setor industrial.",
+        id: "embrapii-filter"
       },
       {
-        name: "INCT",
+        name: "INCTs",
         description:
           "Institutos Nacionais de Ciência e Tecnologia, fomentados pelo CNPq  articulam os  grupos de pesquisa na fronteira da ciência e em áreas estratégicas para o desenvolvimento sustentável do país; além de estimular aplicações para promover a inovação e o espírito empreendedor.",
+        id: "incts-filter"
       },
       {
         name: "NAP",
         description:
           "Órgãos de integração que reúnem especialistas de diferentes áreas da universidade para pesquisas de caráter interdisciplinar e transdisciplinar, promovendo maior comunicação e integração entre as Unidades USP e variadas áreas do conhecimento.",
+        id: "nap-filter"
       },
     ],
 
