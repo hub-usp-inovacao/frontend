@@ -45,10 +45,7 @@ export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setCompanies: (s, newCompanies) => (s.companies = newCompanies),
-  setErrors: (s, errors) => {
-    s.errors = errors;
-    console.log(s.errors);
-  },
+  setErrors: (s, errors) => s.errors = errors,
 };
 
 export const actions = {
