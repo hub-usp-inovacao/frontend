@@ -1,19 +1,11 @@
-import { CompanyGenerator } from "@/lib/classes/company";
+import { Company, CompanyGenerator } from "@/lib/classes/company";
 import { findErrors } from "../../lib/errors/empresas";
 
 export const state = () => ({
   companies: [],
   isLoading: false,
   errors: undefined,
-  keys: [
-    "name",
-    "technologies",
-    "ecosystem",
-    "description.long",
-    "services",
-    "address.state",
-    "address.neightborhood",
-  ],
+  keys: Company.keys,
 });
 
 export const getters = {
