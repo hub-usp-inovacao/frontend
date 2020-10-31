@@ -6,7 +6,6 @@ describe("Compentências", () => {
   it("finds an existent teacher", () => {
     const teacher = "Alfredo Goldman";
     cy.get("#search-bar").type(teacher);
-    cy.wait(10000)
-    cy.get("#display-data").contains(teacher)
+    cy.get("[data-cy=listEmpty]").should("not.exist");
   })
 })
