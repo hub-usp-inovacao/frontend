@@ -1,11 +1,11 @@
-import { DisciplineGenerator } from "@/lib/classes/discipline";
+import { Discipline, DisciplineGenerator } from "@/lib/classes/discipline";
 import { findErrors } from "@/lib/errors/disciplinas";
 
 export const state = () => ({
   disciplines: [],
   isLoading: false,
   errors: undefined,
-  keys: ["name", "description.short", "description.long"],
+  keys: Discipline.keys,
 });
 
 export const getters = {

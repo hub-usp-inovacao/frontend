@@ -62,6 +62,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
+import { removeAccent } from "@/lib/format"
 
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
@@ -386,8 +387,10 @@ export default {
         return;
       }
 
+      const term = removeAccent(this.search.term.trim());
+
       let results = await this.$search(
-        this.search.term.trim(),
+        term,
         this.baseItems,
         genFuzzyOptions(this.searchKeys, 0.0)
       );
@@ -396,7 +399,7 @@ export default {
         this.setFlexibleResults();
 
         results = await this.$search(
-          this.search.term.trim(),
+          term,
           this.baseItems,
           genFuzzyOptions(this.searchKeys)
         );
