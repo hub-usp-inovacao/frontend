@@ -53,7 +53,7 @@
           :items="item.technologies"/>
       </template>
       <template #actions="{ item }">
-        <v-btn class="white--text" color="#2bc570" :href="item.url" target="_blank">Saiba Mais</v-btn>
+        <v-btn class="white--text" color="#2bc570" :href="item.url" :disabled="!item.url" target="_blank">Saiba Mais</v-btn>
       </template>
     </DisplayData>
   </div>

@@ -38,6 +38,7 @@
       <template #actions="{ item }">
         <v-btn
           :href="item.url"
+          :disabled="!item.url"
           target="_blank"
           color="#222c63"
           class="white--text"

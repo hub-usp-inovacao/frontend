@@ -41,6 +41,7 @@
         <v-btn
           class="white--text"
           target="_blank"
+          :disabled="!item.url"
           :href="item.url"
           color="#005C59"
           >Saiba Mais</v-btn

@@ -89,6 +89,7 @@
           class="white--text"
           color="#6b1c28"
           target="_blank"
+          :disabled="!item.url"
           :href="item.url"
           >saiba mais</v-btn
         >

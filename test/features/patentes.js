@@ -1,6 +1,7 @@
 describe("Patentes", () => {
   beforeEach(() => {
     cy.visit("/patentes");
+    cy.wait(2000);
   })
 
   it("does not slices long inventors names", () => {
