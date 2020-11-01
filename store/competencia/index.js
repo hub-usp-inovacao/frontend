@@ -1,20 +1,11 @@
-import { SkillGenerator } from "@/lib/classes/skill";
+import { Skill, SkillGenerator } from "@/lib/classes/skill";
 import { findErrors } from "@/lib/errors/competencias";
 
 export const state = () => ({
   isLoading: false,
   skills: [],
   errors: undefined,
-  keys: [
-    "name",
-    "bond",
-    "groupName",
-    "groupInitials",
-    "descriptions.skills",
-    "descriptions.services",
-    "descriptions.equipments",
-    "keywords",
-  ],
+  keys: Skill.keys,
 });
 
 export const getters = {
