@@ -2,20 +2,10 @@
 # TEST IMAGE
 ############
 
-FROM cypress/base
+FROM cypress/included:3.4.0
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock ./
+COPY cypress.json ./
 
-RUN yarn install
-
-COPY . ./
-
-COPY entrypoint.sh /usr/bin
-
-RUN chmod 755 /usr/bin/entrypoint.sh
-
-ENTRYPOINT ["sh", "/usr/bin/entrypoint.sh"]
-
-CMD sleep 30 && yarn test
+COPY ./test ./test
