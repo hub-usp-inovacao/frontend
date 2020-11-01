@@ -3,7 +3,8 @@ describe("Accented search terms", () => {
     "/empresas": "agência",
     "/educacao": "inovação",
     "/iniciativas": "gestão pública",
-    "/competencias": "andré"
+    "/competencias": "andré",
+    "/patentes": "desobstrução"
   };
 
   Object.keys(tests).forEach((page) => {

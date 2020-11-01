@@ -1,19 +1,11 @@
-import { PatentGenerator } from "@/lib/classes/patent";
+import { Patent, PatentGenerator } from "@/lib/classes/patent";
 import { findErrors } from "@/lib/errors/patentes";
 
 export const state = () => ({
   isLoading: false,
   patents: [],
   errors: undefined,
-  keys: [
-    "name",
-    "summary",
-    "owners",
-    "inventors",
-    "ipcs",
-    "classification.primary.subarea",
-    "classification.secondary.subarea",
-  ],
+  keys: Patent.keys,
 });
 
 export const getters = {
