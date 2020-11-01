@@ -1,7 +1,8 @@
 describe("Accented search terms", () => {
   const tests = {
     "/empresas": "agência",
-    "/educacao": "inovação"
+    "/educacao": "inovação",
+    "/iniciativas": "gestão pública"
   };
 
   Object.keys(tests).forEach((page) => {

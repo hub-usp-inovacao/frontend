@@ -1,17 +1,11 @@
-import { IniciativeGenerator } from "@/lib/classes/iniciative";
+import { Iniciative, IniciativeGenerator } from "@/lib/classes/iniciative";
 import { findErrors } from "@/lib/errors/iniciativas";
 
 export const state = () => ({
   iniciatives: [],
   isLoading: false,
   errors: undefined,
-  keys: [
-    "name",
-    "description.short",
-    "description.long",
-    "keywords",
-    "services",
-  ],
+  keys: Iniciative.keys,
 });
 
 export const getters = {
