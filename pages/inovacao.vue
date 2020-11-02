@@ -17,6 +17,7 @@
     <MultipleFilters
       :tabs="tabs"
       :colors="{ active: '#308C89', base: '#005C59' }"
+      :groups="groups"
       @select="filters = $event"
     />
 
@@ -54,6 +55,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
+import campi from "@/lib/campi.js";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -109,6 +111,14 @@ export default {
       storePDIs: "pdi/pdis",
       searchKeys: "pdi/searchKeys",
     }),
+    groups() {
+      return [
+        {
+          label: "Campus",
+          items: campi.map((c) => c.name),
+        },
+      ];
+    },
     searchTerm() {
       return this.search.term;
     },
@@ -178,11 +188,7 @@ export default {
       this.search.pdis = results;
     },
     filterData(context) {
-      if (context.primary.length > 0) {
-        this.filtered = this.pdis.filter((pdi) => pdi.matchesFilter(context));
-      } else {
-        this.filtered = undefined;
-      }
+      this.filtered = this.pdis.filter((pdi) => pdi.matchesFilter(context));
     },
     async pipeline() {
       if (this.filters) await this.filterData(this.filters);
