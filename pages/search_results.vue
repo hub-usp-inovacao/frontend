@@ -206,8 +206,10 @@ export default {
       fetchIniciatives: "iniciativas/fetchSpreadsheets",
       fetchPatents: "patentes/fetchSpreadsheets",
       fetchCompanies: "empresas/fetchSpreadsheets",
+      setStrictResults: "global/setStrictResults",
+      setFlexibleResults: "global/setFlexibleResults",
     }),
-    fuzzyGlobalSearch() {
+    async fuzzyGlobalSearch() {
       const contexts = [
         { key: "disciplines", searchKeys: this.disciplinesSearchKeys },
         { key: "iniciatives", searchKeys: this.iniciativesSearchKeys },
@@ -222,16 +224,35 @@ export default {
         return;
       }
 
-      contexts.forEach((ctx) => {
+      let empty = true;
+      this.setStrictResults();
+      await contexts.forEach((ctx) => {
         this.$search(
           this.search.trim(),
           this[ctx.key],
           genFuzzyOptions(ctx.searchKeys, 0.0)
         ).then((results) => {
+          if (results.length > 0) {
+            empty = false;
+          }
           this[`searched_${ctx.key}`] =
             results.length > 0 ? results : undefined;
         });
       });
+
+      if (empty) {
+        this.setFlexibleResults();
+        contexts.forEach((ctx) => {
+          this.$search(
+            this.search.trim(),
+            this[ctx.key],
+            genFuzzyOptions(ctx.searchKeys)
+          ).then((results) => {
+            this[`searched_${ctx.key}`] =
+              results.length > 0 ? results : undefined;
+          });
+        });
+      }
     },
     dispatchSearch: async function () {
       await this.fuzzyGlobalSearch();
