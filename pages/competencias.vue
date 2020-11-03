@@ -21,7 +21,7 @@
 
     <DisplayData
       :items="displayItems"
-      group-name="Competências"
+      group-name="Pesquisador"
       :selected="globalSearchSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>

@@ -13,7 +13,7 @@
             color="#37474F"
             :items="items.map((it, i) => ({ text: it.name, value: i }))"
             no-data-text="Não encontramos nada"
-            :label="`Selecione ${groupName}`"
+            :label="`Selecione - ${groupName}`"
           >
             <template v-slot:selection="{ item, index }">
               <slot name="selection" :item="item" :index="index"></slot>
