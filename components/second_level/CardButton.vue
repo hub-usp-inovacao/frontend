@@ -18,6 +18,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-card
+                    class="card"
                     :id="item.id"
                     :color="selected.includes(item.name) ? active : color"
                     height="100%"
@@ -126,3 +127,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.card {
+  color: white;
+}
+</style>
