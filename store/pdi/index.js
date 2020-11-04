@@ -1,17 +1,11 @@
-import { PDIGenerator, NAPSGenerator } from "@/lib/classes/pdi";
+import { PDI, PDIGenerator, NAPSGenerator } from "@/lib/classes/pdi";
 import { findErrors } from "@/lib/errors/pdi";
 
 export const state = () => ({
   pdis: [],
   isLoading: false,
   errors: undefined,
-  keys: [
-    "name",
-    "description.short",
-    "description.long",
-    "knowledge",
-    "keywords",
-  ],
+  keys: PDI.keys,
 });
 
 export const getters = {
