@@ -26,6 +26,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
+import { removeAccent } from "@/lib/format";
 
 import Panel from "@/components/first_level/Panel.vue";
 import SearchFiltersAndResult from "@/components/first_level/SearchFiltersAndResult.vue";
@@ -224,11 +225,13 @@ export default {
         return;
       }
 
+      const term = removeAccent(this.search.trim());
+
       let empty = true;
       this.setStrictResults();
       await contexts.forEach((ctx) => {
         this.$search(
-          this.search.trim(),
+          term,
           this[ctx.key],
           genFuzzyOptions(ctx.searchKeys, 0.0)
         ).then((results) => {
@@ -244,7 +247,7 @@ export default {
         this.setFlexibleResults();
         contexts.forEach((ctx) => {
           this.$search(
-            this.search.trim(),
+            term,
             this[ctx.key],
             genFuzzyOptions(ctx.searchKeys)
           ).then((results) => {
