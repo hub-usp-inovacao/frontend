@@ -31,6 +31,8 @@
         <p class="body-2 font-italic">{{ item.category }}</p>
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2">{{ item.campus }}</p>
+        <p class="body-2" v-if="item.coordinator">{{ item.coordinator }}</p>
+        <p class="body-2" v-if="item.email">{{ item.email }}</p>
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
