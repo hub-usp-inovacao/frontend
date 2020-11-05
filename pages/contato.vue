@@ -378,6 +378,30 @@ export default {
             name: "Renato Cordeiro",
             role: "Desenvolvedor",
           },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1q2mzdSwGu_VzqzZA2JCJPwjCwJF7BUFC",
+            name: "Wander Souza",
+            role: "Colaborador",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=106OVZ50TbZ8DSpjD_mFarxys7CE9KFhE",
+            name: "Leandro Rodrigues",
+            role: "Colaborador",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1-aATlbpauRof6f06eJuKjyUZ3cR41k6j",
+            name: "Washington Meireles",
+            role: "Colaborador",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1bV20RK4SxPpELYJ2n1ZMIxO4Tlyf-FKr",
+            name: "Ygor Tavela",
+            role: "Colaborador",
+          },
         ],
       }
     ],
