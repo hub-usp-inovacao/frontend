@@ -41,7 +41,8 @@ export const mutations = {
 
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
-    const { sheetsAPIKey, sheetID } = env;
+    const { sheetsAPIKey } = env;
+    const sheetID = "1MGRBDs-Bb2PGdyUkTN92dM5kqQuw5dtOpFHwAV1FQpA";
     const sheetName = "INICIATIVAS";
 
     ctx.commit("setLoadingStatus");
@@ -59,8 +60,7 @@ export const actions = {
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
-
-      ctx.commit("setIniciatives", objects);
+      ctx.commit("setIniciatives", objects.sort((a, b) => a.name > b.name? 1 : -1));
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);

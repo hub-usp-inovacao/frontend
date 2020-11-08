@@ -160,10 +160,7 @@ export default {
     },
   },
   beforeMount() {
-    const env = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
+    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
       this.fetchSpreadsheets(env);
