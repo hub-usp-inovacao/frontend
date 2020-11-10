@@ -9,8 +9,8 @@ describe("PDI", ()=> {
     cy.get("[data-cy=listEmpty]").should("not.exist");
   })
 
-  it("should display CEPIDS after filtering", () => {
-    cy.get("#cepids-filter").click();
+  it("should display CEPID after filtering", () => {
+    cy.get("#cepid-filter").click();
     cy.get("[data-cy=listEmpty]").should("not.exist");
   })
 
