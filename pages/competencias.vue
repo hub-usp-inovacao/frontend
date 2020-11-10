@@ -282,7 +282,7 @@ export default {
             this.unities == undefined
               ? allCampi.reduce((acc, value) => {
                   return acc.concat(value.unities);
-                }, [])
+                }, []).sort()
               : this.unities,
         },
       ];
