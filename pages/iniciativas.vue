@@ -30,6 +30,7 @@
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2 mb-4">{{ item.local }}</p>
+        <p class="body-2 mb-4">{{ item.email }}</p>
         <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">
           {{ phone }}
         </p>
