@@ -37,9 +37,6 @@
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
-        <p v-if="item.category == 'NAP'" class="font-italic">
-          Os dados do NAP foram obtidos do sistema Atena-USP
-        </p>
       </template>
       <template #actions="{ item }">
         <v-btn
@@ -156,10 +153,7 @@ export default {
     },
   },
   beforeMount() {
-    const payload = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
+    const payload = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.dataStatus == "ok" && this.pdis.length == 0)
       this.$store.dispatch("pdi/fetchSpreadsheets", payload);

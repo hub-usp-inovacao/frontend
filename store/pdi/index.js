@@ -32,34 +32,26 @@ export const mutations = {
 
 export const actions = {
   async fetchSpreadsheets(ctx, env) {
-    const { sheetsAPIKey, sheetID } = env;
-    const sheetsName = ["PDI_update", "NAPS"];
+    const { sheetsAPIKey } = env;
+    const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
+    const sheetName = "PDI";
 
     ctx.commit("setLoadingStatus");
 
     try {
-      const data = [];
+      const resp = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
+      );
 
-      for (const sheetName of sheetsName) {
-        const resp = await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-        );
+      const data = await resp.json();
+      const objects = data.values
+        .slice(1)
+        .map((row) => PDIGenerator.run(row));
 
-        const d = await resp.json();
-        const objects = d.values
-          .slice(1)
-          .map((row) =>
-            sheetName === "PDI_update" ? PDIGenerator.run(row) : NAPSGenerator.run(row)
-          );
+      const errors = findErrors(Object.assign([], objects));
 
-        data.push(...objects);
-        if (sheetName === "PDI_update") {
-          const errors = findErrors(Object.assign([], objects));
-          ctx.commit("setErrors", errors);
-        }
-      }
-
-      ctx.commit("setPDIs", data);
+      ctx.commit("setErrors", errors);
+      ctx.commit("setPDIs", objects);
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
