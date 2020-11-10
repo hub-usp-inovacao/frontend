@@ -31,9 +31,9 @@ describe("PDI", ()=> {
     cy.get("#display-data button.white--text").should('be.disabled')
   });
 
-  it("should display all pdi from butantã campus", () => {
-    cy.get("#input-83").click();
-    cy.get(".v-list-item__title").contains("Butantã").click();
+  it("should display all pdi from São Paulo campus", () => {
+    cy.get("[data-cy=dropdownFilter]").click().type("São Paulo");
+    cy.get(".v-list-item__title").contains("São Paulo").click();
     cy.get("[data-cy=listEmpty]").should("not.exist");
   });
 })

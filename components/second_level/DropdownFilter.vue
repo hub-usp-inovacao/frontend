@@ -9,6 +9,7 @@
     <v-row class="hidden-sm-and-down">
       <v-col v-for="({ label, items }, i) of groups" :key="i" :cols="colSize">
         <v-autocomplete
+          data-cy="dropdownFilter"
           v-model="selected[i]"
           :no-data-text="noData"
           menu-props="auto"
