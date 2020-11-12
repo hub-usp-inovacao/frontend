@@ -223,6 +223,108 @@ export default {
             name: "Giovanni Watanabe",
             role: "Estag. - Comunicação",
           },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1fv6Pd4Vo7ogQnRdEKoufOaWct8gi8kHy",
+            name: "Aline Santos",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1PpRlRt0QID3yFcdsIQ6_N-5YJbdzuE-N",
+            name: "Ana Gambardella",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=12VpH5g2mZb74E8WvC43Rz_Gb__uTb1Bt",
+            name: "André Balico",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1yB2EkXAkqGy4mXY9UGOYVzw6fjd2sgGp",
+            name: "Bárbara Contin",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1-4mibeF6RSOGTi20kbwCzXBHVkgOEOt8",
+            name: "Caroline",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1k37QFGg4HeV6KlFnwS-1Sq1hlPbgijLQ",
+            name: "Renata Lobo",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1AfUI1Db8pm4GylNEnjCxWXM3Wz4Ch5mr",
+            name: "Lara Guimarães",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1kGimqfySLTday-Bp79OAyMBf8voU26Qo",
+            name: "Jardel",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1la0pRvq_QEDUO-0gy-6CN1Ech6WtLbKL",
+            name: "Isabella Ciarrocchi",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1o-MmmyORlrrW6xJ2a_2E0nJVpAQ16APq",
+            name: "Jucelí Andrade",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1TZ-4-5cLeTw5n8fhwDUtc4Kz0w7WJ6O3",
+            name: "Maira Luana",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1F4rgEvjrgsVYDDn45eOcFC3Y8dlep2h2",
+            name: "Miriam Mangueira",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1xuIdti1reVNEUQ_QrkHxSvIUT4OrJ0l9",
+            name: "Pedro Guimarães",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1cnU0t-Lrf0Ngbea1s4m7welGfQfK3kUQ",
+            name: "Raul Canestri",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=14QPURb1zpj0j3B-795zUYiNB6MlvL2_U",
+            name: "Rodolfo Pereira",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1qt4JIF0qREi-PfnpU7oDGuh4NsMlMklN",
+            name: "Samira",
+            role: "Levantamento Competências",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1ilNyFzHDHGPViT4e182auiCqxnOVbSKM",
+            name: "Tailane Santos",
+            role: "Levantamento Competências",
+          },
         ],
       },
       {
