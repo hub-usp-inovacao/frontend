@@ -122,7 +122,7 @@ export default {
           label: "Campus",
           items: allCampi.map((c) => c.name),
         },
-        { label: "Nível", items: ["Graduação", "Pós-Graduação"] },
+        { label: "Natureza", items: ["Graduação", "Pós-Graduação"] },
       ];
     },
     baseItems() {
