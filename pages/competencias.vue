@@ -27,10 +27,15 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
-          <v-row v-if="item.groupName && item.groupInitials">
+          <v-row v-for="(group, index) in item.groups" :key="index">
             <v-col>
-              <span>{{ item.groupName }}</span>
-              <span v-if="item.groupInitials">- {{ item.groupInitials }}</span>
+              <span>{{ group.groupName }}</span>
+              <span v-if="group.groupInitials">- {{ group.groupInitials }}</span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <span v-if="item.bond">{{item.bond}}</span>
             </v-col>
           </v-row>
           <v-row>
