@@ -48,6 +48,7 @@
       </template>
       <template #detailsImg="{ item }">
         <v-img v-if="item.photo" eager :src="item.photo"></v-img>
+        <a v-if="item.photo" target="_blank" :href="item.photo">Veja mais</a>
       </template>
       <template #content="{ item }">
         <p>{{ item.sumary }}</p>
@@ -169,10 +170,7 @@ export default {
     },
   },
   beforeMount() {
-    const env = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
+    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.dataStatus == "ok" && this.patents.length == 0) {
       this.fetchSpreadsheets(env);
