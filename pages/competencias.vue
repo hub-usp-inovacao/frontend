@@ -90,22 +90,24 @@
         </v-expansion-panels>
       </template>
       <template #actions="{ item }">
-        <v-btn
-          class="white--text"
-          color="#6b1c28"
-          target="_blank"
-          :disabled="!item.url"
-          :href="item.url"
-          >saiba mais</v-btn
-        >
-        <v-btn
-          class="white--text"
-          color="#6b1c28"
-          target="_blank"
-          :disabled="!item.lattes"
-          :href="item.lattes"
-          >lattes</v-btn
-        >
+        <div class="d-flex justify-space-around flex-wrap" style="width: 100%">
+          <v-btn
+            class="white--text"
+            color="#6b1c28"
+            target="_blank"
+            :disabled="!item.url"
+            :href="item.url"
+            >saiba mais</v-btn
+          >
+          <v-btn
+            class="white--text"
+            color="#6b1c28"
+            target="_blank"
+            :disabled="!item.lattes"
+            :href="item.lattes"
+            >lattes</v-btn
+          >
+        </div>
       </template>
     </DisplayData>
   </div>
