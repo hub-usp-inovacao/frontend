@@ -8,10 +8,10 @@
         <template #content="{ item }">
           <v-container :class="containerClass">
             <v-row>
-              <v-col cols="5">
+              <v-col :cols="10 - imageColumn">
                 <slot name="detailsText" :item="item"></slot>
               </v-col>
-              <v-col cols="5" offset="1">
+              <v-col :cols="imageColumn" offset="1">
                 <slot name="detailsImg" :item="item"></slot>
               </v-col>
             </v-row>
@@ -95,11 +95,18 @@ export default {
       type: Object,
       default: undefined,
     },
+    hasImage: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   computed: {
     containerClass() {
       return this.reverse && ["d-flex", "flex-column-reverse"];
     },
+    imageColumn() {
+      return this.hasImage ? 5 : 0;
+    }
   },
 };
 </script>
