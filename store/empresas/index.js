@@ -42,7 +42,8 @@ export const mutations = {
 
 export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
-    const { sheetsAPIKey, sheetID } = env;
+    const { sheetsAPIKey } = env;
+    const sheetID = "14uwSMZee-CoIJyIpcEf4t17z6eYN-ElYgw_O7dtU5Ok";
     const sheetName = "EMPRESAS";
 
     ctx.commit("setLoadingStatus");
@@ -52,9 +53,9 @@ export const actions = {
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
       );
 
-      const { values } = await resp.json();
+      const data = await resp.json();
 
-      const objects = values.slice(1).map((row) => CompanyGenerator.run(row));
+      const objects = data.values.slice(1).map((row) => CompanyGenerator.run(row));
 
       const errors = findErrors(Object.assign([], objects));
 
