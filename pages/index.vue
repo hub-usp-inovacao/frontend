@@ -57,10 +57,7 @@ export default {
     }),
   },
   beforeMount() {
-    const env = {
-      sheetsAPIKey: process.env.sheetsAPIKey,
-      sheetID: process.env.sheetID,
-    };
+    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.eduStatus == "ok" && this.disciplines.length == 0) {
       this.fetchDisciplines(env);
