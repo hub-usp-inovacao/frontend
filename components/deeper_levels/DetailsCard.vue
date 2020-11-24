@@ -5,12 +5,11 @@
         <slot name="itemTitle"></slot>
       </v-card-title>
       <v-card-subtitle>
-        <v-chip-group
-          v-if="item.keywords && item.keywords.length > 0"
-          :column="true"
-        >
-          <v-chip v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
-        </v-chip-group>
+        <v-row v-if="item.keywords && item.keywords.length > 0">
+          <v-col>
+            <v-chip class="mr-2" v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
+          </v-col>
+        </v-row>
       </v-card-subtitle>
       <v-card-text style="overflow-y: auto;">
         <slot name="content"></slot>
