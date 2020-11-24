@@ -71,7 +71,6 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-list>
-                <v-list-item-group>
                   <v-list-item
                     v-for="description in item.descriptions[desc.key]"
                     :key="description"
@@ -80,10 +79,9 @@
                       <v-icon v-text="'mdi-circle-small'"></v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                      <p>{{ description }}</p>
+                      <p class="mb-0">{{ description }}</p>
                     </v-list-item-content>
                   </v-list-item>
-                </v-list-item-group>
               </v-list>
             </v-expansion-panel-content>
           </v-expansion-panel>
