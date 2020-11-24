@@ -25,16 +25,6 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
-          <p class="body-2">
-            <v-chip v-if="item.category.business">Negócios</v-chip>
-            <v-chip v-if="item.category.innovation">Inovação</v-chip>
-            <v-chip v-if="item.category.intelectual_property"
-              >Propriedade Intelectual</v-chip
-            >
-            <v-chip v-if="item.category.enterpreneuship"
-              >Empreendedorismo</v-chip
-            >
-          </p>
           <p class="body-2">{{ item.campus }}</p>
           <p class="body-2">{{ item.unity }}</p>
         </v-container>
