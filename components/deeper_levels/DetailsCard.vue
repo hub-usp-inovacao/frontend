@@ -7,7 +7,7 @@
       <v-card-subtitle>
         <v-row v-if="item.keywords && item.keywords.length > 0">
           <v-col>
-            <v-chip class="mr-2" v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
+            <v-chip class="mr-2 mb-2" v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
           </v-col>
         </v-row>
       </v-card-subtitle>

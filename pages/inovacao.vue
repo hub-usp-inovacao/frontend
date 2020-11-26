@@ -32,16 +32,8 @@
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2">{{ item.campus }}</p>
         <p class="body-2" v-if="item.coordinator">{{ item.coordinator }}</p>
-        <v-row>
-          <v-col v-if="item.email">
-            <p class="body-2 mb-4 mr-8">{{ item.email }}</p>
-          </v-col>
-          <v-col>
-            <p class="body-2 mb-4">
-              {{ item.phone }}
-            </p>
-          </v-col>
-        </v-row>
+        <p class="body-2" v-if="item.phone">{{ item.phone }}</p>
+        <p class="body-2" v-if="item.email">{{ item.email }}</p>
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
