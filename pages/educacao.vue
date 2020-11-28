@@ -112,6 +112,15 @@ export default {
           label: "Campus",
           items: allCampi.map((c) => c.name),
         },
+        {
+          label: "Nível",
+          items: [
+            "Quero aprender!",
+            "Tenho uma ideia, e agora?",
+            "Preciso testar minha ideia!",
+            "Tópicos avançados em Empreendedorismo"
+            ]
+        },
         { label: "Natureza", items: ["Graduação", "Pós-Graduação"] },
       ];
     },
