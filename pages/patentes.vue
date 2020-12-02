@@ -100,7 +100,7 @@ export default {
     groups: [
       {
         label: "Status",
-        items: ["Concedida", "Dead", "Em análise"],
+        items: ["Concedida", "Em análise", "Domínio Público"],
       },
     ],
     rawTabs: [
