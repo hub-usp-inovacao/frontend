@@ -370,6 +370,11 @@ export default {
       );
     },
     async pipeline() {
+      this.$ga.event({
+        eventCategory: 'Competências',
+        eventAction: 'Search',
+        eventLabel: this.search.term,
+      });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
     },
