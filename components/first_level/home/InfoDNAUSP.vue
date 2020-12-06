@@ -6,7 +6,7 @@
           <v-row justify="center">
             <img
               :src="require('@/vectors/home_dna_usp.svg')"
-              style="max-width: 100%; max-height: 100%; object-fit: contain;"
+              style="max-width: 100%; max-height: 100%; object-fit: contain"
             />
           </v-row>
         </v-col>
@@ -15,19 +15,26 @@
           <p
             :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
             class="font-weight-medium mb-0"
-          >Empresas com DNA USP:</p>
+          >
+            Empresas com DNA USP:
+          </p>
 
           <p
             :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
             class="font-weight-medium mb-8"
-          >Resultados de uma Universidade Inovadora e Empreendora</p>
+          >
+            Resultados de uma Universidade Inovadora e Empreendora
+          </p>
 
-          <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
+          <p
+            :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
+            class="font-weight-light"
+          >
             A marca DNA USP foi criada para identificar empresas constituídas
-            por alunos, ex-alunos e pesquisadores que passaram pela
-            Universidade de São Paulo ao longo dos anos, bem como empresas
-            resultantes de processos de incubação ou de aceleração em alguma
-            das incubadoras associadas à USP.
+            por alunos, ex-alunos e pesquisadores que passaram pela Universidade
+            de São Paulo ao longo dos anos, bem como empresas resultantes de
+            processos de incubação ou de aceleração em alguma das incubadoras
+            associadas à USP.
           </p>
         </v-col>
       </v-row>
@@ -51,5 +58,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

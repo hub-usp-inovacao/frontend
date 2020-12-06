@@ -6,14 +6,19 @@
           <p
             :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
             class="font-weight-medium"
-          >USP: Um lugar para empreender e inovar</p>
+          >
+            USP: Um lugar para empreender e inovar
+          </p>
         </v-container>
 
         <v-container>
-          <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
+          <p
+            :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
+            class="font-weight-light"
+          >
             A Universidade de São Paulo é, de acordo com diversos rankings
-            nacionais e internacionais, a melhor universidade latino-americana
-            e uma das melhores universidades do mundo. São mais de 5.000
+            nacionais e internacionais, a melhor universidade latino-americana e
+            uma das melhores universidades do mundo. São mais de 5.000
             professores e 70.000 alunos de graduação e pós, cuja significativa
             produção intelectual, está disponível para empresas e organizações
             por meio de:
@@ -22,7 +27,12 @@
 
         <v-container>
           <v-row align="center">
-            <v-col v-for="subpage in subpages" :key="subpage.title" cols="12" lg="6">
+            <v-col
+              v-for="subpage in subpages"
+              :key="subpage.title"
+              cols="12"
+              lg="6"
+            >
               <BlueIconCard :item="subpage" />
             </v-col>
           </v-row>
@@ -94,5 +104,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

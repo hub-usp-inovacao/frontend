@@ -8,9 +8,14 @@
               <p
                 :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
                 class="font-weight-medium mb-8"
-              >AUSPIN: Agência USP de Inovação</p>
+              >
+                AUSPIN: Agência USP de Inovação
+              </p>
 
-              <p :class="$breakpoint.smAndDown ? 'body-1' : 'title'" class="font-weight-light">
+              <p
+                :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
+                class="font-weight-light"
+              >
                 É responsável pelo registro e licenciamento de propriedade
                 intelectual, pela transferência de tecnologias desenvolvidas na
                 USP para empresas e organizações, e pelo fomento ao
@@ -27,11 +32,7 @@
               <v-row justify="center">
                 <img
                   :src="require('@/vectors/logo_auspin.svg')"
-                  style="
-                    max-width: 100%;
-                    max-height: 100%;
-                    object-fit: contain;
-                  "
+                  style="max-width: 100%; max-height: 100%; object-fit: contain"
                 />
               </v-row>
             </v-col>
@@ -41,9 +42,9 @@
     </div>
 
     <div class="mt-16 pt-16">
-      <div class="hidden-md-and-up" style="height: 5vh;"></div>
-      <div class="hidden-sm-and-down" style="height: 30vh;"></div>
-      <BottomCurves class="absolute" style="bottom: 0;" />
+      <div class="hidden-md-and-up" style="height: 5vh"></div>
+      <div class="hidden-sm-and-down" style="height: 30vh"></div>
+      <BottomCurves class="absolute" style="bottom: 0" />
     </div>
   </div>
 </template>
@@ -58,5 +59,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

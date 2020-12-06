@@ -14,6 +14,11 @@
 
 <script>
 export default {
-  props: ['section']
-}
+  props: {
+    section: {
+      type: String,
+      required: true,
+    },
+  },
+};
 </script>

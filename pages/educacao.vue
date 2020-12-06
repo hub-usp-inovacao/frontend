@@ -74,24 +74,24 @@ export default {
       {
         name: "Inovação",
         description: "Cursos e disciplinas relacionados à área de Inovação.",
-        id: "innovation-filter"
+        id: "innovation-filter",
       },
       {
         name: "Empreendedorismo",
         description:
           "Cursos e disciplinas relacionados à área de Empreendedorismo.",
-        id: "enterpreneuship-filter"
+        id: "enterpreneuship-filter",
       },
       {
         name: "Propriedade Intelectual",
         description:
           "Cursos e disciplinas relacionados à área de Propriedade Intelectual.",
-        id: "intelectual-property-filter"
+        id: "intelectual-property-filter",
       },
       {
         name: "Negócios",
         description: "Cursos e disciplinas relacionados à área de Negócios.",
-        id: "business-filter"
+        id: "business-filter",
       },
     ],
     filters: undefined,
@@ -118,8 +118,8 @@ export default {
             "Quero aprender!",
             "Tenho uma ideia, e agora?",
             "Preciso testar minha ideia!",
-            "Tópicos avançados em Empreendedorismo"
-            ]
+            "Tópicos avançados em Empreendedorismo",
+          ],
         },
         { label: "Natureza", items: ["Graduação", "Pós-Graduação"] },
       ];

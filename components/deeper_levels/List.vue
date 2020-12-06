@@ -9,12 +9,7 @@
         <v-icon large>keyboard_arrow_up</v-icon>
       </div>
 
-      <v-list
-        rounded
-        height="30rem"
-        max-height="100%"
-        style="overflow-y: auto;"
-      >
+      <v-list rounded height="30rem" max-height="100%" style="overflow-y: auto">
         <v-list-item-group v-model="selectedItem" model="id">
           <v-list-item v-for="i in items" :key="i.id" :value="i">
             <v-list-item-content>
@@ -28,7 +23,7 @@
         <v-icon large>keyboard_arrow_down</v-icon>
       </div>
     </div>
-    <div data-cy="listEmpty" v-else>
+    <div v-else data-cy="listEmpty">
       <NotFound />
     </div>
   </v-card>

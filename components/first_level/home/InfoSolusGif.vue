@@ -1,23 +1,24 @@
 <template>
   <v-app>
-    <v-container fill-height fluid style="background-color: #3890e8;">
+    <v-container fill-height fluid style="background-color: #3890e8">
       <v-container fill-height>
         <v-row class="ma-0 fill-height" align="center">
           <v-col cols="12" sm="7">
             <p
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium white--text mb-8"
-            >Solus: Encontre o que você procura</p>
+            >
+              Solus: Encontre o que você procura
+            </p>
 
             <p
               :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="white--text font-weight-light"
             >
               O Portal Solus facilita a conexão entre a sociedade e a USP.
-              Simples e intuitivo, basta digitar palavras-chave na ferramenta
-              de busca para obter os contatos de instituições, estruturas,
-              empresas e pesquisadores especialistas nos assuntos seu
-              interesse.
+              Simples e intuitivo, basta digitar palavras-chave na ferramenta de
+              busca para obter os contatos de instituições, estruturas, empresas
+              e pesquisadores especialistas nos assuntos seu interesse.
             </p>
           </v-col>
 
@@ -26,7 +27,13 @@
               <v-container fill-height>
                 <v-row justify="center" class="ma-0">
                   <v-col cols="12">
-                    <v-text-field solo flat rounded readonly append-outer-icon="search">
+                    <v-text-field
+                      solo
+                      flat
+                      rounded
+                      readonly
+                      append-outer-icon="search"
+                    >
                       <template v-slot:label>
                         <vue-typer :text="search_bar"></vue-typer>
                       </template>
@@ -55,5 +62,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -31,9 +31,9 @@
         <p class="body-2 font-italic">{{ item.category }}</p>
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2">{{ item.campus }}</p>
-        <p class="body-2" v-if="item.coordinator">{{ item.coordinator }}</p>
-        <p class="body-2" v-if="item.phone">{{ item.phone }}</p>
-        <p class="body-2" v-if="item.email">{{ item.email }}</p>
+        <p v-if="item.coordinator" class="body-2">{{ item.coordinator }}</p>
+        <p v-if="item.phone" class="body-2">{{ item.phone }}</p>
+        <p v-if="item.email" class="body-2">{{ item.email }}</p>
       </template>
       <template #content="{ item }">
         {{ item.description.long }}
@@ -81,30 +81,30 @@ export default {
         name: "CEPID",
         description:
           "Centros de Pesquisa, Inovação e Difusão fomentados pela FAPESP que atuam na USP desenvolvendo investigações para contribuir à inovação por meio das transferências de tecnologia, além de oferecer atividades de extensão para o público em geral.",
-        id: "cepid-filter"
+        id: "cepid-filter",
       },
       {
         name: "EMBRAPII",
         description:
           "A EMBRAPII (Associação Brasileira de Pesquisa e Inovação Industrial), apoia instituições de pesquisa tecnológica, em determinadas áreas de competência, para executarem projetos de desenvolvimento de pesquisa tecnológica para inovação, em cooperação com empresas do setor industrial.",
-        id: "embrapii-filter"
+        id: "embrapii-filter",
       },
       {
         name: "INCT",
         description:
           "Institutos Nacionais de Ciência e Tecnologia, fomentados pelo CNPq  articulam os  grupos de pesquisa na fronteira da ciência e em áreas estratégicas para o desenvolvimento sustentável do país; além de estimular aplicações para promover a inovação e o espírito empreendedor.",
-        id: "inct-filter"
+        id: "inct-filter",
       },
       {
         name: "NAP",
         description:
           "Órgãos de integração que reúnem especialistas de diferentes áreas da universidade para pesquisas de caráter interdisciplinar e transdisciplinar, promovendo maior comunicação e integração entre as Unidades USP e variadas áreas do conhecimento.",
-        id: "nap-filter"
+        id: "nap-filter",
       },
       {
         name: "Centro de Pesquisa em Engenharia",
-        description: ""
-      }
+        description: "",
+      },
     ],
 
     filters: undefined,

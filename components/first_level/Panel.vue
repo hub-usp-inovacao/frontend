@@ -1,12 +1,12 @@
 <template>
-  <v-container fill-height fluid style="position: relative; min-height: 20rem;">
+  <v-container fill-height fluid style="position: relative; min-height: 20rem">
     <v-row class="ma-0 mt-12" align="center" justify="space-around" no-gutters>
       <v-col>
         <v-row class="ma-0" justify="center">
           <v-col cols="12" sm="9">
             <p class="display-2 font-weight-regular">{{ title }}</p>
 
-            <p class="title font-weight-light" style="line-height: normal;">
+            <p class="title font-weight-light" style="line-height: normal">
               {{ description }}
             </p>
 
@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      strictSearchResults: "global/strictSearchResults"
+      strictSearchResults: "global/strictSearchResults",
     }),
     hint() {
       const strict = "Resultados de busca na caixa abaixo";

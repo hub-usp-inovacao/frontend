@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 100vh;">
+  <div style="min-height: 100vh">
     <div class="background">
       <Panel
         v-model="search.term"
@@ -30,12 +30,14 @@
           <v-row v-for="(group, index) in item.groups" :key="index">
             <v-col>
               <span>{{ group.groupName }}</span>
-              <span v-if="group.groupInitials">- {{ group.groupInitials }}</span>
+              <span v-if="group.groupInitials"
+                >- {{ group.groupInitials }}</span
+              >
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <span v-if="item.bond">{{item.bond}}</span>
+              <span v-if="item.bond">{{ item.bond }}</span>
             </v-col>
           </v-row>
           <v-row>
@@ -71,17 +73,17 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-list>
-                  <v-list-item
-                    v-for="description in item.descriptions[desc.key]"
-                    :key="description"
-                  >
-                    <v-list-item-icon>
-                      <v-icon v-text="'mdi-circle-small'"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <p class="mb-0">{{ description }}</p>
-                    </v-list-item-content>
-                  </v-list-item>
+                <v-list-item
+                  v-for="description in item.descriptions[desc.key]"
+                  :key="description"
+                >
+                  <v-list-item-icon>
+                    <v-icon v-text="'mdi-circle-small'"></v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <p class="mb-0">{{ description }}</p>
+                  </v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -285,9 +287,11 @@ export default {
           label: "Unidade",
           items:
             this.unities == undefined
-              ? allCampi.reduce((acc, value) => {
-                  return acc.concat(value.unities);
-                }, []).sort()
+              ? allCampi
+                  .reduce((acc, value) => {
+                    return acc.concat(value.unities);
+                  }, [])
+                  .sort()
               : this.unities,
         },
       ];
@@ -344,7 +348,7 @@ export default {
       let results = await this.$search(
         term,
         this.baseItems,
-        genFuzzyOptions(this.searchKeys, 0.0),
+        genFuzzyOptions(this.searchKeys, 0.0)
       );
 
       if (results.length === 0) {
@@ -352,7 +356,7 @@ export default {
         results = await this.$search(
           term,
           this.baseItems,
-          genFuzzyOptions(this.searchKeys),
+          genFuzzyOptions(this.searchKeys)
         );
       }
 

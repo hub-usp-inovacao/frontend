@@ -1,7 +1,7 @@
 <template>
   <v-card tile flat>
     <v-container
-      style="height: 100%;"
+      style="height: 100%"
       class="d-flex flex-column justify-space-around"
     >
       <nuxt-link :to="item.dest">

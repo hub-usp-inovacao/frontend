@@ -8,7 +8,7 @@
       />
     </div>
     <v-container v-if="loading">
-      <v-row style="height: 20vh;" align="center" justify="center">
+      <v-row style="height: 20vh" align="center" justify="center">
         <v-col align="center">
           <v-progress-circular
             :size="100"

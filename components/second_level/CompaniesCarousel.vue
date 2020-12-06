@@ -7,11 +7,24 @@
     :show-arrows="false"
     :height="carouselHeight"
   >
-    <v-carousel-item v-for="(nowDisplaying, i) in displayCompanies.nowDisplaying" :key="i">
+    <v-carousel-item
+      v-for="(nowDisplaying, i) in displayCompanies.nowDisplaying"
+      :key="i"
+    >
       <v-container>
         <v-row>
-          <v-col v-for="{ name, src } in nowDisplaying" :key="name" :cols="displayCompanies.cols">
-            <v-img eager class="mx-auto" width="20rem" height="auto" :src="src"></v-img>
+          <v-col
+            v-for="{ name, src } in nowDisplaying"
+            :key="name"
+            :cols="displayCompanies.cols"
+          >
+            <v-img
+              eager
+              class="mx-auto"
+              width="20rem"
+              height="auto"
+              :src="src"
+            ></v-img>
           </v-col>
         </v-row>
       </v-container>

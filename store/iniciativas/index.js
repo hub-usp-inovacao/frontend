@@ -60,7 +60,10 @@ export const actions = {
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
-      ctx.commit("setIniciatives", objects.sort((a, b) => a.name > b.name? 1 : -1));
+      ctx.commit(
+        "setIniciatives",
+        objects.sort((a, b) => (a.name > b.name ? 1 : -1))
+      );
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);

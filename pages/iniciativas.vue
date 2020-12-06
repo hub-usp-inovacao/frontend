@@ -25,7 +25,7 @@
       :items="display_entries"
       group-name="Iniciativas"
       :selected="globalSearchSelected"
-      :hasImage="false"
+      :has-image="false"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -36,7 +36,11 @@
             <p class="body-2 mb-4 mr-8">{{ item.email }}</p>
           </v-col>
           <v-col>
-            <p v-for="phone in item.contact.info" :key="phone" class="body-2 mb-4">
+            <p
+              v-for="phone in item.contact.info"
+              :key="phone"
+              class="body-2 mb-4"
+            >
               {{ phone }}
             </p>
           </v-col>

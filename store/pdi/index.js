@@ -1,4 +1,4 @@
-import { PDI, PDIGenerator, NAPSGenerator } from "@/lib/classes/pdi";
+import { PDI, PDIGenerator } from "@/lib/classes/pdi";
 import { findErrors } from "@/lib/errors/pdi";
 
 export const state = () => ({
@@ -44,9 +44,7 @@ export const actions = {
       );
 
       const data = await resp.json();
-      const objects = data.values
-        .slice(1)
-        .map((row) => PDIGenerator.run(row));
+      const objects = data.values.slice(1).map((row) => PDIGenerator.run(row));
 
       const errors = findErrors(Object.assign([], objects));
 

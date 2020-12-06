@@ -7,11 +7,13 @@
       <v-card-subtitle>
         <v-row v-if="item.keywords && item.keywords.length > 0">
           <v-col>
-            <v-chip class="mr-2 mb-2" v-for="kw in item.keywords" :key="kw">{{ kw }}</v-chip>
+            <v-chip v-for="kw in item.keywords" :key="kw" class="mr-2 mb-2">{{
+              kw
+            }}</v-chip>
           </v-col>
         </v-row>
       </v-card-subtitle>
-      <v-card-text style="overflow-y: auto;">
+      <v-card-text style="overflow-y: auto">
         <slot name="content"></slot>
       </v-card-text>
       <v-card-actions class="d-flex justify-space-around">

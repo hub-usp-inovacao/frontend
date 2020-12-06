@@ -1,27 +1,51 @@
 <template>
-  <v-app style="max-height: 100vh;">
-    <v-carousel cycle interval="3000" height="100%" hide-delimiters :show-arrows="false">
-      <v-carousel-item v-for="(photo, i) in photos" :key="i" :src="photo"></v-carousel-item>
+  <v-app style="max-height: 100vh">
+    <v-carousel
+      cycle
+      interval="3000"
+      height="100%"
+      hide-delimiters
+      :show-arrows="false"
+    >
+      <v-carousel-item
+        v-for="(photo, i) in photos"
+        :key="i"
+        :src="photo"
+      ></v-carousel-item>
     </v-carousel>
 
     <div
       style="
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: 100%;
-          overflow: auto;
-        "
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+      "
     >
       <v-row class="fill-height fit-page ma-0">
-        <v-col style="background-color: rgba(255, 177, 99, 0.9);" cols="12" sm="10" md="7">
+        <v-col
+          style="background-color: rgba(255, 177, 99, 0.9)"
+          cols="12"
+          sm="10"
+          md="7"
+        >
           <v-container class="fill-height">
             <v-row class="mt-5" justify="center">
               <v-col cols="11" sm="10">
                 <v-row>
                   <v-col cols="8" offset="1">
-                    <v-img contain eager aspect-ratio="4" max-height="25%" position="left" class="mb-4"
-                    :src="require('@/static/Solus_Branco.png')" alt="Portal Solus" data-cy="solus-logo"></v-img>
+                    <v-img
+                      contain
+                      eager
+                      aspect-ratio="4"
+                      max-height="25%"
+                      position="left"
+                      class="mb-4"
+                      :src="require('@/static/Solus_Branco.png')"
+                      alt="Portal Solus"
+                      data-cy="solus-logo"
+                    ></v-img>
                     <p
                       class="white--text font-weight-medium ma-0"
                       :class="$breakpoint.smAndDown ? 'body-1' : 'title'"

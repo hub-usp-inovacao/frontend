@@ -409,9 +409,8 @@ export default {
             role: "Colaborador",
           },
         ],
-      }
+      },
     ],
-
   }),
 };
 </script>

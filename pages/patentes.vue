@@ -198,7 +198,7 @@ export default {
       );
 
       if (results.length === 0) {
-        this.setFlexibleResults()
+        this.setFlexibleResults();
         results = await this.$search(
           term,
           this.baseItems,

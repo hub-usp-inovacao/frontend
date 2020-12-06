@@ -20,7 +20,11 @@
       @select="filters = $event"
     />
 
-    <DisplayData :items="displayItems" group-name="Empresas" :selected="globalSearchSelected">
+    <DisplayData
+      :items="displayItems"
+      group-name="Empresas"
+      :selected="globalSearchSelected"
+    >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
@@ -33,8 +37,12 @@
       </template>
       <template #content="{ item }">
         <p v-if="item.incubated">
-          <span class="font-weight-bold">Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span>
-          <span v-for="incub of item.ecosystems" :key="incub">{{ incub }};&nbsp;</span>
+          <span class="font-weight-bold"
+            >Incubadora{{ item.ecosystems.length > 1 ? "(s)" : "" }}</span
+          >
+          <span v-for="incub of item.ecosystems" :key="incub"
+            >{{ incub }};&nbsp;</span
+          >
         </p>
 
         <p>
@@ -50,10 +58,18 @@
         <BulletList
           v-if="item.technologies.length > 0"
           title="Tecnologias"
-          :items="item.technologies"/>
+          :items="item.technologies"
+        />
       </template>
       <template #actions="{ item }">
-        <v-btn class="white--text" color="#2bc570" :href="item.url" :disabled="!item.url" target="_blank">Saiba Mais</v-btn>
+        <v-btn
+          class="white--text"
+          color="#2bc570"
+          :href="item.url"
+          :disabled="!item.url"
+          target="_blank"
+          >Saiba Mais</v-btn
+        >
       </template>
     </DisplayData>
   </div>
@@ -62,7 +78,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
-import { removeAccent } from "@/lib/format"
+import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
@@ -195,96 +211,96 @@ export default {
       "07": "Indústrias Extrativas",
       "08": "Indústrias Extrativas",
       "09": "Indústrias Extrativas",
-      "10": "Alimentos",
-      "11": "Bebidas",
-      "12": "Produtos do Fumo",
-      "13": "Produtos Têxteis",
-      "14": "Vestuário e Acessórios",
-      "15": "Artefatos de Couro, Artigos para Viagem e Calçados",
-      "16": "Produtos de Madeira",
-      "17": "Celulose e Papel",
-      "18": "Impressão e Reprodução de Gravações",
-      "19": "Coque, Derivados de Petróleo e de Biocombustíveis",
-      "20": "Produtos Químicos",
-      "21": "Produtos Farmaquímicos e Farmacêuticos",
-      "22": "Produtos de Borracha e de Material Plástico",
-      "23": "Produtos de Minerais Não-Metálicos",
-      "24": "Metalurgia",
-      "25": "Produtos de Metal, exceto Máquinas e Equipamentos",
-      "26": "Equipamentos de Informática, Produtos Eletrônicos e Ópticos",
-      "27": "Máquinas, Aparelhos e Materiais Elétricos",
-      "28": "Máquinas e Equipamentos",
-      "29": "Automóveis, Reboques e Carrocerias",
-      "30": "Equipamentos de Transporte, exceto Veículos Automotores",
-      "31": "Móveis",
-      "32": "Produtos Diversos",
-      "33": "Manutenção, Reparação e Instalação de Máquinas e Equipamentos",
-      "34": "Eletricidade e Gás",
-      "35": "Eletricidade e Gás",
-      "36": "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
-      "37": "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
-      "38": "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
-      "39": "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
-      "40": "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
-      "41": "Construção",
-      "42": "Construção",
-      "43": "Construção",
-      "44": "Construção",
-      "45": "Comércio e Reparação de Veículos Automotores e Motocicletas",
-      "46": "Comércio por Atacado, exceto Veículos Automotores e Motocicletas",
-      "47": "Comércio Varejista",
-      "48": "Comércio Varejista",
-      "49": "Comércio Varejista",
-      "50": "Comércio Varejista",
-      "51": "Comércio Varejista",
-      "52": "Comércio Varejista",
-      "53": "Comércio Varejista",
-      "54": "Comércio Varejista",
-      "55": "Alojamento e Alimentação",
-      "56": "Alojamento e Alimentação",
-      "57": "Alojamento e Alimentação",
-      "58": "Informação e Comunicação",
-      "59": "Informação e Comunicação",
-      "60": "Informação e Comunicação",
-      "61": "Informação e Comunicação",
-      "62": "Informação e Comunicação",
-      "63": "Informação e Comunicação",
-      "64": "Atividades Financeiras, de Seguros e Serviços Relacionados",
-      "65": "Atividades Financeiras, de Seguros e Serviços Relacionados",
-      "66": "Atividades Financeiras, de Seguros e Serviços Relacionados",
-      "67": "Atividades Financeiras, de Seguros e Serviços Relacionados",
-      "68": "Atividades Imobiliárias",
-      "69": "Atividades Profissionais, Científicas e Técnicas",
-      "70": "Atividades Profissionais, Científicas e Técnicas",
-      "71": "Atividades Profissionais, Científicas e Técnicas",
-      "72": "Atividades Profissionais, Científicas e Técnicas",
-      "73": "Atividades Profissionais, Científicas e Técnicas",
-      "74": "Atividades Profissionais, Científicas e Técnicas",
-      "75": "Atividades Profissionais, Científicas e Técnicas",
-      "76": "Atividades Profissionais, Científicas e Técnicas",
-      "77": "Atividades Administrativas e Serviços Complementares",
-      "78": "Atividades Administrativas e Serviços Complementares",
-      "79": "Atividades Administrativas e Serviços Complementares",
-      "80": "Atividades Administrativas e Serviços Complementares",
-      "81": "Atividades Administrativas e Serviços Complementares",
-      "82": "Atividades Administrativas e Serviços Complementares",
-      "83": "Atividades Administrativas e Serviços Complementares",
-      "84": "Administração Pública, Defesa e Seguridade Social",
-      "85": "Educação",
-      "86": "Saúde Humana e Serviços Sociais",
-      "87": "Saúde Humana e Serviços Sociais",
-      "88": "Saúde Humana e Serviços Sociais",
-      "89": "Saúde Humana e Serviços Sociais",
-      "90": "Artes, Cultura, Esporte e Recreação",
-      "91": "Artes, Cultura, Esporte e Recreação",
-      "92": "Artes, Cultura, Esporte e Recreação",
-      "93": "Artes, Cultura, Esporte e Recreação",
-      "94": "Outras Atividades de Serviços",
-      "95": "Outras Atividades de Serviços",
-      "96": "Outras Atividades de Serviços",
-      "97": "Serviços Domésticos",
-      "98": "Serviços Domésticos",
-      "99": "Organismos Internacionais e outras Instituições Extraterritoriais",
+      10: "Alimentos",
+      11: "Bebidas",
+      12: "Produtos do Fumo",
+      13: "Produtos Têxteis",
+      14: "Vestuário e Acessórios",
+      15: "Artefatos de Couro, Artigos para Viagem e Calçados",
+      16: "Produtos de Madeira",
+      17: "Celulose e Papel",
+      18: "Impressão e Reprodução de Gravações",
+      19: "Coque, Derivados de Petróleo e de Biocombustíveis",
+      20: "Produtos Químicos",
+      21: "Produtos Farmaquímicos e Farmacêuticos",
+      22: "Produtos de Borracha e de Material Plástico",
+      23: "Produtos de Minerais Não-Metálicos",
+      24: "Metalurgia",
+      25: "Produtos de Metal, exceto Máquinas e Equipamentos",
+      26: "Equipamentos de Informática, Produtos Eletrônicos e Ópticos",
+      27: "Máquinas, Aparelhos e Materiais Elétricos",
+      28: "Máquinas e Equipamentos",
+      29: "Automóveis, Reboques e Carrocerias",
+      30: "Equipamentos de Transporte, exceto Veículos Automotores",
+      31: "Móveis",
+      32: "Produtos Diversos",
+      33: "Manutenção, Reparação e Instalação de Máquinas e Equipamentos",
+      34: "Eletricidade e Gás",
+      35: "Eletricidade e Gás",
+      36: "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
+      37: "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
+      38: "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
+      39: "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
+      40: "Água, Esgoto, Atividades de Gestão de Resíduos e Descontaminação",
+      41: "Construção",
+      42: "Construção",
+      43: "Construção",
+      44: "Construção",
+      45: "Comércio e Reparação de Veículos Automotores e Motocicletas",
+      46: "Comércio por Atacado, exceto Veículos Automotores e Motocicletas",
+      47: "Comércio Varejista",
+      48: "Comércio Varejista",
+      49: "Comércio Varejista",
+      50: "Comércio Varejista",
+      51: "Comércio Varejista",
+      52: "Comércio Varejista",
+      53: "Comércio Varejista",
+      54: "Comércio Varejista",
+      55: "Alojamento e Alimentação",
+      56: "Alojamento e Alimentação",
+      57: "Alojamento e Alimentação",
+      58: "Informação e Comunicação",
+      59: "Informação e Comunicação",
+      60: "Informação e Comunicação",
+      61: "Informação e Comunicação",
+      62: "Informação e Comunicação",
+      63: "Informação e Comunicação",
+      64: "Atividades Financeiras, de Seguros e Serviços Relacionados",
+      65: "Atividades Financeiras, de Seguros e Serviços Relacionados",
+      66: "Atividades Financeiras, de Seguros e Serviços Relacionados",
+      67: "Atividades Financeiras, de Seguros e Serviços Relacionados",
+      68: "Atividades Imobiliárias",
+      69: "Atividades Profissionais, Científicas e Técnicas",
+      70: "Atividades Profissionais, Científicas e Técnicas",
+      71: "Atividades Profissionais, Científicas e Técnicas",
+      72: "Atividades Profissionais, Científicas e Técnicas",
+      73: "Atividades Profissionais, Científicas e Técnicas",
+      74: "Atividades Profissionais, Científicas e Técnicas",
+      75: "Atividades Profissionais, Científicas e Técnicas",
+      76: "Atividades Profissionais, Científicas e Técnicas",
+      77: "Atividades Administrativas e Serviços Complementares",
+      78: "Atividades Administrativas e Serviços Complementares",
+      79: "Atividades Administrativas e Serviços Complementares",
+      80: "Atividades Administrativas e Serviços Complementares",
+      81: "Atividades Administrativas e Serviços Complementares",
+      82: "Atividades Administrativas e Serviços Complementares",
+      83: "Atividades Administrativas e Serviços Complementares",
+      84: "Administração Pública, Defesa e Seguridade Social",
+      85: "Educação",
+      86: "Saúde Humana e Serviços Sociais",
+      87: "Saúde Humana e Serviços Sociais",
+      88: "Saúde Humana e Serviços Sociais",
+      89: "Saúde Humana e Serviços Sociais",
+      90: "Artes, Cultura, Esporte e Recreação",
+      91: "Artes, Cultura, Esporte e Recreação",
+      92: "Artes, Cultura, Esporte e Recreação",
+      93: "Artes, Cultura, Esporte e Recreação",
+      94: "Outras Atividades de Serviços",
+      95: "Outras Atividades de Serviços",
+      96: "Outras Atividades de Serviços",
+      97: "Serviços Domésticos",
+      98: "Serviços Domésticos",
+      99: "Organismos Internacionais e outras Instituições Extraterritoriais",
     },
     filters: undefined,
     filtered: undefined,

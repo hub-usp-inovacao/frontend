@@ -1,14 +1,14 @@
 <template>
   <v-list :data-cy="groupDataCY">
     <v-subheader>{{ title }}</v-subheader>
-      <v-list-item v-for="(item, index) in items" :key="index">
-        <v-list-item-icon class="mr-2">
-          <v-icon v-text="'mdi-circle-small'"></v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <p class="mb-0" data-cy="bullet-item">{{ item }}</p>
-        </v-list-item-content>
-      </v-list-item>
+    <v-list-item v-for="(item, index) in items" :key="index">
+      <v-list-item-icon class="mr-2">
+        <v-icon v-text="'mdi-circle-small'"></v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>
+        <p class="mb-0" data-cy="bullet-item">{{ item }}</p>
+      </v-list-item-content>
+    </v-list-item>
   </v-list>
 </template>
 
@@ -26,8 +26,8 @@ export default {
   },
   computed: {
     groupDataCY() {
-      return `${ this.title }-bullet-list`;
-    }
-  }
+      return `${this.title}-bullet-list`;
+    },
+  },
 };
 </script>

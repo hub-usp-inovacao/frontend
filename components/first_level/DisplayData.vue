@@ -106,7 +106,7 @@ export default {
     },
     imageColumn() {
       return this.hasImage ? 5 : 0;
-    }
+    },
   },
 };
 </script>

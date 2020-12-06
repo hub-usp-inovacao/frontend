@@ -38,6 +38,11 @@
 
 <script>
 export default {
-  props: ['people']
-}
+  props: {
+    people: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
