@@ -53,16 +53,27 @@ export const actions = {
       );
 
       const { values } = await resp.json();
-      const objects = values
-        .slice(1)
-        .map((row) => IniciativeGenerator.run(row));
+      const objects = values.slice(1).map((row, i) => {
+        let iniciative;
+
+        try {
+          iniciative = IniciativeGenerator.run(row);
+        } catch (e) {
+          console.log(`[Iniciatives Exception] failed at ${i + 2}`);
+          iniciative = null;
+        }
+
+        return iniciative;
+      });
 
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
       ctx.commit(
         "setIniciatives",
-        objects.sort((a, b) => (a.name > b.name ? 1 : -1))
+        objects
+          .filter((ini) => ini !== null)
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
       );
     } catch (error) {
       console.log("error occuried while fetching...");
