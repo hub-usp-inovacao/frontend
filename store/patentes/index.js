@@ -37,12 +37,26 @@ export const actions = {
 
       const { values } = await resp.json();
 
-      const objects = values.slice(1).map((row) => PatentGenerator.run(row));
+      const objects = values.slice(1).map((row, i) => {
+        let patent;
+        try {
+          patent = PatentGenerator.run(row);
+        } catch (error) {
+          console.log(`[Patents Exception] failed at ${i + 2}`);
+          patent = null;
+        }
+        return patent;
+      });
 
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
-      ctx.commit("setPatents", objects);
+      ctx.commit(
+        "setPatents",
+        objects
+          .filter((patent) => patent !== null)
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+      );
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
