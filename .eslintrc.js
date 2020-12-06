@@ -3,14 +3,12 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    "cypress/globals": true,
   },
   extends: [
     "plugin:vue/recommended",
     "eslint:recommended",
     "prettier/vue",
     "plugin:prettier/recommended",
-    "cypress",
   ],
   rules: {
     "vue/component-name-in-template-casing": ["error", "PascalCase"],
