@@ -98,6 +98,6 @@ export default {
     },
   },
   googleAnalytics: {
-    id: '254299290',
+    id: process.env.GOOGLE_ANALYTICS_ID,
   }
 };
