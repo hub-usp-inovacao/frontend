@@ -5,9 +5,9 @@
         v-model="search.term"
         title="P&amp;D&amp;I"
         description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
-        url="http://uspmulti.prp.usp.br/"
+        url="https://uspmulti.prp.usp.br/busca"
         forms-call="Confira centrais multiusuários"
-        second-url="http://uspmulti.prp.usp.br/pagina_result.php?a=servicos"
+        second-url="https://uspmulti.prp.usp.br/busca"
         second-call="Confira Serviços Tecnológicos"
       />
     </div>
