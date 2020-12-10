@@ -146,7 +146,7 @@ export default {
   watch: {
     value: debounce(function () {
       this.$emit("input", this.value);
-    }, 500),
+    }, 1000),
   },
   methods: {
     submitSearch() {

@@ -23,7 +23,8 @@
     "nuxt": "^2.13.3",
     "vue-fuse": "^2.2.1",
     "vue-masonry-css": "^1.0.3",
-    "vue-typer": "^1.2.0"
+    "vue-typer": "^1.2.0",
+    "@nuxtjs/google-analytics": "^2.4.0"
   },
   "devDependencies": {
     "aos": "^3.0.0-beta.6",
