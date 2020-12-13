@@ -16,6 +16,7 @@
           :label="label"
           :items="items"
           clearable
+          @click="mayNotify(items, label)"
         ></v-autocomplete>
       </v-col>
     </v-row>
@@ -33,6 +34,7 @@
           :label="label"
           :items="items"
           clearable
+          @click="mayNotify(items, label)"
         ></v-select>
       </v-col>
     </v-row>
@@ -81,6 +83,19 @@ export default {
       if (!this.isEmpty && this.$route.query.unidade) {
         this.selected[1] = this.$route.query.unidade;
         this.$emit("select", this.selected);
+      }
+    },
+  },
+  methods: {
+    mayNotify(items, label) {
+      if (items.length === 0) {
+        const event = {
+          eventCategory: this.$route.name,
+          eventAction: "FF",
+          eventLabel: label,
+        };
+
+        this.$ga.event(event);
       }
     },
   },
