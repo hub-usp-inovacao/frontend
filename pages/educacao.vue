@@ -2,9 +2,9 @@
   <div>
     <div class="background">
       <Panel
-        v-model="search.term"
         title="Educação"
         description="A USP oferece a seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento e códigos e links para acesso às ementas nos sistemas institucionais, o Júpiter e o Janus."
+        @search="changeSearchTerm"
       />
     </div>
 
@@ -196,12 +196,15 @@ export default {
     },
     async pipeline() {
       this.$ga.event({
-        eventCategory: 'Educação',
-        eventAction: 'Search',
+        eventCategory: "Educação",
+        eventAction: "Search",
         eventLabel: this.search.term,
       });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
+    },
+    changeSearchTerm(searchTerm) {
+      this.search.term = searchTerm;
     },
   },
 };

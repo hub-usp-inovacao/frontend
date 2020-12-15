@@ -2,11 +2,11 @@
   <div style="min-height: 100vh">
     <div class="background">
       <Panel
-        v-model="search.term"
         title="Competências"
         description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua sub-área (ex.: Matemática)."
         url="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
         forms-call="Cadastre suas competências"
+        @search="changeSearchTerm"
       />
     </div>
 
@@ -375,12 +375,15 @@ export default {
     },
     async pipeline() {
       this.$ga.event({
-        eventCategory: 'Competências',
-        eventAction: 'Search',
+        eventCategory: "Competências",
+        eventAction: "Search",
         eventLabel: this.search.term,
       });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
+    },
+    changeSearchTerm(searchTerm) {
+      this.search.term = searchTerm;
     },
   },
 };

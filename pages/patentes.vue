@@ -2,9 +2,9 @@
   <div>
     <div class="background">
       <Panel
-        v-model="search.term"
         title="Patentes"
         description="Pesquisadores e unidades da USP desenvolvem patentes e propriedade industrial que estão disponíveis para que empresas e organizações possam licenciar para aplicação e uso. Usando palavras-chave na caixa de busca você terá acesso a breves descrições destas patentes e formas de contato para obter maior detalhamento e informações sobre cada uma delas."
+        @search="changeSearchTerm"
       />
     </div>
 
@@ -221,12 +221,15 @@ export default {
     },
     async pipeline() {
       this.$ga.event({
-        eventCategory: 'Patentes',
-        eventAction: 'Search',
+        eventCategory: "Patentes",
+        eventAction: "Search",
         eventLabel: this.search.term,
       });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
+    },
+    changeSearchTerm(searchTerm) {
+      this.search.term = searchTerm;
     },
   },
 };

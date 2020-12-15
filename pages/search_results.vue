@@ -259,8 +259,8 @@ export default {
     },
     dispatchSearch: async function () {
       this.$ga.event({
-        eventCategory: 'GlobalSearch',
-        eventAction: 'Search',
+        eventCategory: "GlobalSearch",
+        eventAction: "Search",
         eventLabel: this.innerSearch,
       });
       await this.fuzzyGlobalSearch();

@@ -2,11 +2,11 @@
   <div>
     <div class="background">
       <Panel
-        v-model="search.term"
         title="Empresas"
         description="Incubadoras e outras estruturas da Universidade facilitam a criação de empresas e negócios por parte de estudantes e pesquisadores. Estas são as empresas com DNA USP que estão organizadas, no Portal Solus, por áreas de atuação e tecnologias aplicáveis. Com o nosso mecanismo de busca, é possível consultar as empresas por palavras-chave ou CNAEs (Classificação Nacional de Atividades Econômicas)."
         url="https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing"
         forms-call="Cadastre sua empresa aqui"
+        @search="changeSearchTerm"
       />
       <USPDNA />
     </div>
@@ -426,12 +426,15 @@ export default {
     },
     async pipeline() {
       this.$ga.event({
-        eventCategory: 'Empresas',
-        eventAction: 'Search',
+        eventCategory: "Empresas",
+        eventAction: "Search",
         eventLabel: this.search.term,
       });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
+    },
+    changeSearchTerm(searchTerm) {
+      this.search.term = searchTerm;
     },
   },
 };
