@@ -15,7 +15,11 @@ export const getters = {
   errors: (s) => s.errors,
   cities: (s) => {
     const cities = s.companies.reduce((all, company) => {
-      return all.concat(company.city);
+      return all.concat(
+        company.city.filter((city) => {
+          return city != "N/D" && city != "n/d";
+        })
+      );
     }, []);
 
     const citiesSet = cities
