@@ -52,7 +52,7 @@
           </v-row>
           <v-row>
             <v-col>
-              <span>{{ item.unity }}</span>
+              <span>{{ item.unities.join(", ") }}</span>
             </v-col>
           </v-row>
           <v-row>
@@ -303,6 +303,10 @@ export default {
       return this.search.skills !== undefined
         ? this.search.skills
         : this.baseItems;
+    },
+    displayMultipleUnities(unities) {
+      console.log(unities);
+      return unities.join(", ");
     },
     searchTerm() {
       return this.search.term;
