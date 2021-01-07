@@ -23,6 +23,7 @@
               class="mx-auto"
               width="20rem"
               height="auto"
+              :alt="name"
               :src="src"
             ></v-img>
           </v-col>
@@ -63,7 +64,7 @@ export default {
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=14y1pMY9y1TmiZ00AJweSfdwwYrWimJJF",
+          "https://drive.google.com/uc?export=view&id=1xetNNTq5sCt1mwfvzU2RbT4qXVYz44Xd",
         name: "biópolis",
       },
       {
