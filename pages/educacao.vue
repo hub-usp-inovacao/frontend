@@ -195,11 +195,12 @@ export default {
       );
     },
     async pipeline() {
-      this.$ga.event({
-        eventCategory: "Educação",
-        eventAction: "Search",
-        eventLabel: this.search.term,
-      });
+      if (this.search.term.trim())
+        this.$ga.event({
+          eventCategory: "Educação",
+          eventAction: "Search",
+          eventLabel: this.search.term,
+        });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
     },

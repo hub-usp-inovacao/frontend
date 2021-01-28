@@ -196,11 +196,12 @@ export default {
       this.filtered = this.pdis.filter((pdi) => pdi.matchesFilter(context));
     },
     async pipeline() {
-      this.$ga.event({
-        eventCategory: "P&D&I",
-        eventAction: "Search",
-        eventLabel: this.search.term,
-      });
+      if (this.search.term.trim())
+        this.$ga.event({
+          eventCategory: "P&D&I",
+          eventAction: "Search",
+          eventLabel: this.search.term,
+        });
       if (this.filters) await this.filterData(this.filters);
       await this.fuzzySearch();
     },

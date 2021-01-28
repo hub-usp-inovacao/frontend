@@ -150,7 +150,6 @@ export default {
   },
   methods: {
     submitSearch() {
-      if (!this.value.trim()) return;
       this.$emit("search", this.value);
     },
   },
