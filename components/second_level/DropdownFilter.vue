@@ -16,6 +16,7 @@
           :label="label"
           :items="items"
           clearable
+          :filter="customFilter"
         ></v-autocomplete>
       </v-col>
     </v-row>
@@ -41,6 +42,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { removeAccent } from "@/lib/format";
 
 export default {
   props: {
@@ -82,6 +84,15 @@ export default {
         this.selected[1] = this.$route.query.unidade;
         this.$emit("select", this.selected);
       }
+    },
+  },
+  methods: {
+    customFilter(_item, queryText, itemText) {
+      if (itemText.indexOf(queryText) > -1) return true;
+
+      const inspectQuery = removeAccent(queryText.toLowerCase());
+      const inspectItem = removeAccent(itemText.toLowerCase());
+      return inspectItem.indexOf(inspectQuery) > -1;
     },
   },
 };
