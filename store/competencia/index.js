@@ -49,7 +49,7 @@ export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey } = env;
     const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
-    const sheetName = "COMPETENCIAS";
+    const sheetName = "Página2";
 
     ctx.commit("setLoadingStatus");
 
@@ -59,7 +59,10 @@ export const actions = {
       );
 
       const { values } = await resp.json();
-      const objects = values.slice(1).map((row) => SkillGenerator.run(row));
+      const objects = values
+        .slice(1)
+        .map((row) => SkillGenerator.run(row))
+        .filter((skill) => !skill.limitDate || skill.limitDate > new Date());
       const errors = findErrors(Object.assign([], objects));
 
       ctx.commit("setErrors", errors);
