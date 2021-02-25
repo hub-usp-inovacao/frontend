@@ -49,7 +49,7 @@ export const actions = {
   fetchSpreadsheets: async (ctx, env) => {
     const { sheetsAPIKey } = env;
     const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
-    const sheetName = "Página2";
+    const sheetName = "COMPETENCIAS";
 
     ctx.commit("setLoadingStatus");
 
