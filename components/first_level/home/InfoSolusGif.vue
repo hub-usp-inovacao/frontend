@@ -18,7 +18,7 @@
               O Portal Solus facilita a conexão entre a sociedade e a USP.
               Simples e intuitivo, basta digitar palavras-chave na ferramenta de
               busca para obter os contatos de instituições, estruturas, empresas
-              e pesquisadores especialistas nos assuntos seu interesse.
+              e pesquisadores especialistas nos assuntos de seu interesse.
             </p>
           </v-col>
 
