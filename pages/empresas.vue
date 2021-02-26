@@ -358,6 +358,7 @@ export default {
       return [
         { label: "Cidade", items: this.cities },
         { label: "Incubadora?", items: Company.incubators },
+        { label: "Porte", items: ["Em Construção"] },
       ];
     },
     globalSearchSelected() {
