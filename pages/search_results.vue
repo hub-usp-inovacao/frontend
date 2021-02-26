@@ -128,7 +128,9 @@ export default {
             name: s.name,
             description:
               s.descriptions.skills +
+              ". " +
               s.descriptions.services +
+              ". " +
               s.descriptions.equipments,
             category: "Competências",
             id: s.id,

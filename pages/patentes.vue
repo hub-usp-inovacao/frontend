@@ -51,7 +51,7 @@
         <a v-if="item.photo" target="_blank" :href="item.photo">Veja mais</a>
       </template>
       <template #content="{ item }">
-        <p>{{ item.sumary }}</p>
+        <p>{{ item.summary }}</p>
       </template>
       <template #actions="{ item }">
         <v-btn
