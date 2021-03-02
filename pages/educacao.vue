@@ -21,8 +21,8 @@
     <DisplayData
       :items="displayItems"
       group-name="Disciplinas"
-      :selected="globalSearchSelected"
       :has-image="false"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -57,6 +57,7 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
+  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -102,6 +103,8 @@ export default {
       dataStatus: "educacao/dataStatus",
       storeDisciplines: "educacao/disciplines",
       searchKeys: "educacao/searchKeys",
+      queryParam: "educacao/queryParam",
+      routeParam: "educacao/routeParam",
     }),
     disciplines: function () {
       return this.dataStatus == "ok" ? this.storeDisciplines : [];
@@ -135,12 +138,8 @@ export default {
     searchTerm() {
       return this.search.term;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
-        return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
-        );
-      return undefined;
+    preSelected() {
+      return this.queryParam ? this.queryParam : this.routeParam;
     },
   },
   watch: {
