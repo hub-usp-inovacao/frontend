@@ -5,6 +5,8 @@ export const state = () => ({
   patents: [],
   errors: undefined,
   keys: Patent.keys,
+  queryParam: undefined,
+  routeParam: undefined,
 });
 
 export const getters = {
@@ -12,6 +14,8 @@ export const getters = {
   patents: (s) => s.patents,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
+  queryParam: (s) => s.patents.find((c) => c.name == s.queryParam),
+  routeParam: (s) => s.patents.find((c) => c.id == s.routeParam),
 };
 
 export const mutations = {
@@ -19,6 +23,8 @@ export const mutations = {
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setPatents: (s, newPatents) => (s.patents = newPatents),
   setErrors: (s, newErrors) => (s.errors = newErrors),
+  setQueryParam: (s, name) => (s.queryParam = name),
+  setRouteParam: (s, id) => (s.routeParam = id),
 };
 
 export const actions = {

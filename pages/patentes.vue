@@ -22,7 +22,7 @@
       :reverse="true"
       :items="displayItems"
       group-name="Patentes"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -80,6 +80,7 @@ import DisplayData from "@/components/first_level/DisplayData.vue";
 import HorizontalList from "@/components/first_level/HorizontalList.vue";
 
 export default {
+  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -121,6 +122,8 @@ export default {
       dataStatus: "patentes/dataStatus",
       patents: "patentes/patents",
       searchKeys: "patentes/searchKeys",
+      queryParam: "patentes/queryParam",
+      routeParam: "patentes/routeParam",
     }),
     searchTerm() {
       return this.search.term;
@@ -153,12 +156,8 @@ export default {
         ? this.search.patents
         : this.baseItems;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
-        return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
-        );
-      return undefined;
+    preSelected() {
+      return this.queryParam ? this.queryParam : this.routeParam;
     },
   },
   watch: {
