@@ -49,6 +49,7 @@ export default {
     { src: "~/plugins/vue-typer.js", mode: "client" },
     { src: "~/plugins/campi.js" },
     { src: "~/plugins/knowledge_areas.js" },
+    { src: "~/plugins/services/fetch_skills.js" },
   ],
 
   /*
