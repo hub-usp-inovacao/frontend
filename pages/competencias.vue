@@ -27,18 +27,13 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <v-container>
-          <v-row v-for="(group, index) in item.groups" :key="index">
-            <v-col>
-              <span>{{ group.groupName }}</span>
-              <span v-if="group.groupInitials"
-                >- {{ group.groupInitials }}</span
-              >
+          <v-row v-for="{ name, label, site } in item.labsOrGroups" :key="name">
+            <v-col v-if="site">
+              <a :href="site" target="_blank">
+                {{ label }}
+              </a>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <span v-if="item.bond">{{ item.bond }}</span>
-            </v-col>
+            <v-col v-else>{{ label }}</v-col>
           </v-row>
           <v-row>
             <v-col>
