@@ -68,7 +68,7 @@ export default {
     }
 
     if (this.skillsStatus == "ok" && this.skills.length == 0) {
-      this.fetchSkills(env);
+      this.fetchSkills({ ...env, areas: this.$knowledgeAreas });
     }
 
     if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
