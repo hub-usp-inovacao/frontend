@@ -117,7 +117,6 @@
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 import { removeAccent } from "@/lib/format";
-import allCampi from "@/lib/campi";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -281,13 +280,13 @@ export default {
       return [
         {
           label: "Campus",
-          items: allCampi.map((c) => c.name),
+          items: this.$campi.map((c) => c.name),
         },
         {
           label: "Unidade",
           items:
             this.unities == undefined
-              ? allCampi
+              ? this.$campi
                   .reduce((acc, value) => {
                     return acc.concat(value.unities);
                   }, [])
@@ -370,7 +369,7 @@ export default {
       const campi = context.terciary[0];
       this.unities =
         campi != undefined
-          ? allCampi.find((c) => c.name == campi).unities
+          ? this.$campi.find((c) => c.name == campi).unities
           : undefined;
 
       this.filtered = this.skills.filter((skill) =>

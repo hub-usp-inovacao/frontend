@@ -49,7 +49,6 @@
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 import { removeAccent } from "@/lib/format";
-import allCampi from "@/lib/campi";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -110,7 +109,7 @@ export default {
       return [
         {
           label: "Campus",
-          items: allCampi.map((c) => c.name),
+          items: this.$campi.map((c) => c.name),
         },
         {
           label: "Nível",

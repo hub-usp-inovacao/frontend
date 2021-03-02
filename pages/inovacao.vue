@@ -56,7 +56,6 @@
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
 import { removeAccent } from "@/lib/format";
-import campi from "@/lib/campi.js";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
@@ -121,7 +120,7 @@ export default {
       return [
         {
           label: "Campus",
-          items: campi.map((c) => c.name),
+          items: this.$campi.map((c) => c.name),
         },
       ];
     },
