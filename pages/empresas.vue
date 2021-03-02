@@ -322,15 +322,11 @@ export default {
     tabs() {
       return this.baseTabs.map((tab) => ({
         ...tab,
-        subareas: tab.CNAECodes.map((code) => this.cnae[code])
-          .filter((name, i, all) => {
-            const index = all
-              .sort((a, b) => b.localeCompare(a))
-              .findIndex((n) => n === name);
-
-            return i === index;
-          })
-          .sort((a, b) => a.localeCompare(b)),
+        subareas: tab.CNAECodes.reduce((acc, code) => {
+          if (!acc.find((item) => item == this.cnae[code]))
+            acc.push(this.cnae[code]);
+          return acc;
+        }, []).sort((a, b) => a.localeCompare(b)),
       }));
     },
     baseItems() {
@@ -391,11 +387,6 @@ export default {
       setStrictResults: "global/setStrictResults",
       setFlexibleResults: "global/setFlexibleResults",
     }),
-    filterData(context) {
-      this.filtered = this.companies.filter((company) =>
-        company.matchesFilter(context, this.baseTabs, this.reverseCNAEmap)
-      );
-    },
     async fuzzySearch() {
       this.setStrictResults();
 
@@ -423,6 +414,11 @@ export default {
       }
 
       this.search.companies = results;
+    },
+    filterData(context) {
+      this.filtered = this.companies.filter((company) =>
+        company.matchesFilter(context, this.baseTabs, this.reverseCNAEmap)
+      );
     },
     async pipeline() {
       if (this.search.term.trim())
