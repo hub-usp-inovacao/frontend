@@ -6,6 +6,8 @@ export const state = () => ({
   isLoading: false,
   errors: undefined,
   keys: PDI.keys,
+  queryParam: undefined,
+  routeParam: undefined,
 });
 
 export const getters = {
@@ -13,6 +15,8 @@ export const getters = {
   pdis: (state) => state.pdis,
   searchKeys: (state) => state.keys,
   errors: (s) => s.errors,
+  queryParam: (s) => s.pdis.find((c) => c.name == s.queryParam),
+  routeParam: (s) => s.pdis.find((c) => c.id == s.routeParam),
 };
 
 export const mutations = {
@@ -28,6 +32,8 @@ export const mutations = {
   setErrors(s, errors) {
     s.errors = errors;
   },
+  setQueryParam: (s, name) => (s.queryParam = name),
+  setRouteParam: (s, id) => (s.routeParam = id),
 };
 
 export const actions = {

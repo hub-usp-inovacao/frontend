@@ -23,7 +23,7 @@
     <DisplayData
       :items="displayItems"
       group-name="P&D&I"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -63,6 +63,7 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
+  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -119,6 +120,8 @@ export default {
       dataStatus: "pdi/dataStatus",
       storePDIs: "pdi/pdis",
       searchKeys: "pdi/searchKeys",
+      queryParam: "pdi/queryParam",
+      routeParam: "pdi/routeParam",
     }),
     groups() {
       return [
@@ -140,12 +143,8 @@ export default {
     displayItems() {
       return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
-        return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
-        );
-      return undefined;
+    preSelected() {
+      return this.queryParam ? this.queryParam : this.routeParam;
     },
   },
   watch: {
