@@ -47,6 +47,7 @@ export default {
     { src: "~/plugins/vue-fuse.js", mode: "client" },
     { src: "~/plugins/vue-masonry.js", mode: "client" },
     { src: "~/plugins/vue-typer.js", mode: "client" },
+    { src: "~/plugins/campi.js" },
   ],
 
   /*
@@ -99,5 +100,5 @@ export default {
   },
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
-  }
+  },
 };
