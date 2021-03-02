@@ -4,6 +4,6 @@ describe("Home", () => {
   });
 
   it("should display the main headline", () => {
-    cy.get("[data-cy=solus-logo]")
-  })
+    cy.get("[data-cy=solus-logo]");
+  });
 });

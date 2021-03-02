@@ -4,7 +4,7 @@ describe("Accented search terms", () => {
     "/educacao": "inovação",
     "/iniciativas": "gestão pública",
     "/competencias": "andré",
-    "/patentes": "desobstrução"
+    "/patentes": "desobstrução",
   };
 
   Object.keys(tests).forEach((page) => {
@@ -13,6 +13,6 @@ describe("Accented search terms", () => {
       cy.wait(1000);
       cy.get("#search-bar").type(tests[page], { delay: 75 });
       cy.get("[data-cy=listEmpty]").should("not.exist");
-    })
-  })
-})
+    });
+  });
+});

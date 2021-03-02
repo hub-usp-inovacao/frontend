@@ -4,7 +4,7 @@
       class="hidden-sm-and-down d-flex justify-end"
       color="transparent"
       width="75%"
-      style="margin-left: 25%;"
+      style="margin-left: 25%"
       absolute
       flat
     >
