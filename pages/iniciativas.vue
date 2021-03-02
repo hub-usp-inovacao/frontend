@@ -25,7 +25,7 @@
     <DisplayData
       :items="display_entries"
       group-name="Iniciativas"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
       :has-image="false"
     >
       <template #title="{ item }">{{ item.name }}</template>
@@ -74,6 +74,7 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
+  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -136,6 +137,8 @@ export default {
       iniciatives: "iniciativas/iniciatives",
       dataStatus: "iniciativas/dataStatus",
       searchKeys: "iniciativas/searchKeys",
+      queryParam: "iniciativas/queryParam",
+      routeParam: "iniciativas/routeParam",
     }),
     groups() {
       return [
@@ -156,12 +159,8 @@ export default {
         ? this.search.iniciatives
         : this.baseItems;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
-        return this.display_entries.find(
-          (item) => item.id === this.$route.params.id
-        );
-      return undefined;
+    preSelected() {
+      return this.queryParam ? this.queryParam : this.routeParam;
     },
   },
   watch: {

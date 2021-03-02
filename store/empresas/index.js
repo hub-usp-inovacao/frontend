@@ -5,6 +5,8 @@ export const state = () => ({
   isLoading: false,
   errors: undefined,
   keys: Company.keys,
+  queryParam: undefined,
+  routeParam: undefined,
 });
 
 export const getters = {
@@ -23,6 +25,8 @@ export const getters = {
       }, [])
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
   },
+  queryParam: (s) => s.companies.find((c) => c.name == s.queryParam),
+  routeParam: (s) => s.companies.find((c) => c.id == s.routeParam),
   cities: (s) => {
     const cities = s.companies.reduce((all, company) => {
       return all.concat(
@@ -52,6 +56,8 @@ export const mutations = {
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setCompanies: (s, newCompanies) => (s.companies = newCompanies),
   setErrors: (s, errors) => (s.errors = errors),
+  setQueryParam: (s, name) => (s.queryParam = name),
+  setRouteParam: (s, id) => (s.routeParam = id),
 };
 
 export const actions = {

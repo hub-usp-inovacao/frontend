@@ -24,7 +24,7 @@
     <DisplayData
       :items="displayItems"
       group-name="Empresas"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -116,6 +116,7 @@ import DisplayData from "@/components/first_level/DisplayData.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 
 export default {
+  middleware: "get_params",
   components: {
     Panel,
     MultipleFilters,
@@ -139,6 +140,8 @@ export default {
       searchKeys: "empresas/searchKeys",
       incubators: "empresas/incubators",
       cities: "empresas/cities",
+      queryParam: "empresas/queryParam",
+      routeParam: "empresas/routeParam",
     }),
     searchTerm() {
       return this.search.term;
@@ -178,12 +181,8 @@ export default {
         { label: "Porte", items: this.$Company.sizes },
       ];
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
-        return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
-        );
-      return undefined;
+    preSelected() {
+      return this.queryParam ? this.queryParam : this.routeParam;
     },
   },
   watch: {
