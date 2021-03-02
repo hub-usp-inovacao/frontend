@@ -26,6 +26,7 @@ export default {
       const ctx = {
         sheetsAPIKey: process.env.sheetsAPIKey,
         sheetID: process.env.sheetID,
+        areas: this.$knowledgeAreas,
       };
 
       if (this.errors == undefined) {

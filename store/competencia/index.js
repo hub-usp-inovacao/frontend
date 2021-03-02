@@ -46,8 +46,8 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchSpreadsheets: async (ctx, env) => {
-    const { sheetsAPIKey } = env;
+  fetchSpreadsheets: async (ctx, payload) => {
+    const { sheetsAPIKey } = payload;
     const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
     const sheetName = "COMPETENCIAS";
 
@@ -63,7 +63,7 @@ export const actions = {
         .slice(1)
         .map((row) => SkillGenerator.run(row))
         .filter((skill) => !skill.limitDate || skill.limitDate > new Date());
-      const errors = findErrors(Object.assign([], objects));
+      const errors = findErrors(Object.assign([], objects), payload.areas);
 
       ctx.commit("setErrors", errors);
 

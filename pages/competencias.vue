@@ -146,129 +146,6 @@ export default {
     filtered: undefined,
 
     unities: undefined,
-
-    tabs: [
-      {
-        name: "Ciências Agrárias",
-        description: "",
-        subareas: [
-          "Agronomia",
-          "Recursos Florestais e Engenharia Florestal",
-          "Engenharia Agrícola",
-          "Zootecnia",
-          "Medicina Veterinária",
-          "Recursos Pesqueiros e Engenharia de Pesca",
-          "Ciência e Tecnologia de Alimentos",
-        ],
-      },
-      {
-        name: "Ciências Biológicas",
-        description: "",
-        subareas: [
-          "Biologia Geral",
-          "Genética",
-          "Botânica",
-          "Zoologia",
-          "Ecologia",
-          "Morfologia",
-          "Fisiologia",
-          "Bioquímica",
-          "Biofísica",
-          "Farmacologia",
-          "Imunologia",
-          "Microbiologia",
-          "Parasitologia",
-        ],
-      },
-      {
-        name: "Ciências da Saúde",
-        description: "",
-        subareas: [
-          "Medicina",
-          "Odontologia",
-          "Farmácia",
-          "Enfermagem",
-          "Nutrição",
-          "Saúde Coletiva",
-          "Fonoaudiologia",
-          "Fisioterapia e Terapia Ocupacional",
-          "Educação Física",
-        ],
-      },
-      {
-        name: "Ciências Exatas e da Terra",
-        description: "",
-        subareas: [
-          "Matemática",
-          "Probabilidade e Estatística",
-          "Ciência da Computação",
-          "Astronomia",
-          "Física",
-          "Química",
-          "GeoCiências",
-          "Oceanografia",
-        ],
-      },
-      {
-        name: "Engenharias",
-        description: "",
-        subareas: [
-          "Engenharia Civil",
-          "Engenharia de Minas",
-          "Engenharia de Materiais e Metalúrgica",
-          "Engenharia Elétrica",
-          "Engenharia Mecânica",
-          "Engenharia Química",
-          "Engenharia Sanitária",
-          "Engenharia de Produção",
-          "Engenharia Nuclear",
-          "Engenharia de Transportes",
-          "Engenharia Naval e Oceânica",
-          "Engenharia Aeroespacial",
-          "Engenharia Biomédica",
-        ],
-      },
-      {
-        name: "Ciências Humanas",
-        description: "",
-        subareas: [
-          "Filosofia",
-          "Sociologia",
-          "Antropologia",
-          "Arqueologia",
-          "História",
-          "Geografia",
-          "Psicologia",
-          "Educação",
-          "Ciência Política",
-          "Teologia",
-        ],
-      },
-      {
-        name: "Ciências Sociais Aplicadas",
-        description: "",
-        subareas: [
-          "Direito",
-          "Administração",
-          "Economia",
-          "Arquitetura e Urbanismo",
-          "Planejamento Urbano e Regional",
-          "Demografia",
-          "Ciência da Informação",
-          "Museologia",
-          "Comunicação",
-          "Serviço Social",
-          "Economia Doméstica",
-          "Desenho Industrial",
-          "Turismo",
-        ],
-      },
-      {
-        name: "Linguística, Letras e Artes",
-        description: "",
-        subareas: ["Linguística", "Letras", "Artes"],
-      },
-    ],
   }),
   computed: {
     ...mapGetters({
@@ -276,6 +153,9 @@ export default {
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
     }),
+    tabs() {
+      return this.$knowledgeAreas.map((area) => ({ ...area, description: "" }));
+    },
     groups() {
       return [
         {
@@ -330,7 +210,7 @@ export default {
     const env = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
-      this.fetchSpreadsheets(env);
+      this.fetchSpreadsheets({ env, areas: this.$knowledgeAreas });
   },
   methods: {
     ...mapActions({
