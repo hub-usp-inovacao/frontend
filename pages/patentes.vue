@@ -208,15 +208,14 @@ export default {
 
       this.search.patents = results;
     },
-    primaryAreaNameToCode(name) {
-      return this.tabs.find((t) => t.name == name).code;
-    },
-    filterFun(patent, filterStatus) {
-      return patent.matchesFilter(filterStatus, this.primaryAreaNameToCode);
-    },
     filterData(context) {
+      const primaryCodes = context.primary.map(
+        (filterTab) => this.tabs.find((tab) => tab.name == filterTab).code
+      );
+      context.primary = primaryCodes;
+
       this.filtered = this.patents.filter((patent) =>
-        this.filterFun(patent, context)
+        patent.matchesFilter(context)
       );
     },
     async pipeline() {
