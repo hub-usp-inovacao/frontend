@@ -2,18 +2,18 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="5">
-        <List v-model="selectedItem" :items="items" />
+        <List v-model="selected" :items="items" />
       </v-col>
       <v-col cols="7">
-        <DetailsCard :item="selectedItem">
+        <DetailsCard :item="selected">
           <template v-slot:itemTitle>
-            <slot name="itemTitle" :item="selectedItem"></slot>
+            <slot name="itemTitle" :item="selected"></slot>
           </template>
           <template v-slot:content>
-            <slot name="content" :item="selectedItem"></slot>
+            <slot name="content" :item="selected"></slot>
           </template>
           <template v-slot:buttons>
-            <slot name="buttons" :item="selectedItem"></slot>
+            <slot name="buttons" :item="selected"></slot>
           </template>
         </DetailsCard>
       </v-col>
@@ -39,12 +39,6 @@ export default {
       type: Object,
       default: undefined,
     },
-  },
-  data: () => ({
-    selectedItem: null,
-  }),
-  beforeMount() {
-    this.selectedItem = this.selected;
   },
 };
 </script>
