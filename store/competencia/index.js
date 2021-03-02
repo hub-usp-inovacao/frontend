@@ -5,12 +5,16 @@ export const state = () => ({
   skills: [],
   errors: undefined,
   keys: Skill.keys,
+  queryParam: undefined,
+  routeParam: undefined,
 });
 
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   isEmpty: (s) => s.skills.length == 0,
   skills: (s) => s.skills,
+  queryParam: (s) => s.skills.find((c) => c.name == s.queryParam),
+  routeParam: (s) => s.skills.find((c) => c.id == s.routeParam),
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
   campi: (s) =>
@@ -42,6 +46,8 @@ export const mutations = {
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setSkills: (s, newSkills) => (s.skills = newSkills),
   setErrors: (s, errors) => (s.errors = errors),
+  setQueryParam: (s, professorName) => (s.queryParam = professorName),
+  setRouteParam: (s, id) => (s.routeParam = id),
 };
 
 export const actions = {
