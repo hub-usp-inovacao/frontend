@@ -210,7 +210,7 @@ export default {
     const env = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
-      this.fetchSpreadsheets({ env, areas: this.$knowledgeAreas });
+      this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
   },
   methods: {
     ...mapActions({

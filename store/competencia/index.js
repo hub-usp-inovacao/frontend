@@ -47,7 +47,7 @@ export const mutations = {
 
 export const actions = {
   fetchSpreadsheets: async (ctx, payload) => {
-    const { sheetsAPIKey } = payload.env;
+    const { sheetsAPIKey } = payload;
     const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
     const sheetName = "COMPETENCIAS";
 
