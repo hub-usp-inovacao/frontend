@@ -60,6 +60,10 @@ export default {
     { src: "~/plugins/services/fetch_skills.js" },
   ],
 
+  router: {
+    middleware: "get_params",
+  },
+
   /*
    ** Nuxt.js dev-modules
    */
