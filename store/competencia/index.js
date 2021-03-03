@@ -71,11 +71,7 @@ export const actions = {
       ctx.commit(
         "setSkills",
         objects.sort((a, b) =>
-          a.name == b.name
-            ? 0
-            : removeAccent(a.name) < removeAccent(b.name)
-            ? -1
-            : 1
+          a.name == b.name ? 0 : a.inspect.name < b.inspect.name ? -1 : 1
         )
       );
     } catch (error) {
