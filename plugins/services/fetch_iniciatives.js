@@ -65,7 +65,7 @@ export default (_, inject) => {
       try {
         iniciative = IniciativeGenerator(row);
       } catch (e) {
-        console.log(`[Iniciatives Exception] failed at ${i + 2}`);
+        console.log(`[Iniciative Exception] failed at ${i + 2}`);
         iniciative = null;
       }
 

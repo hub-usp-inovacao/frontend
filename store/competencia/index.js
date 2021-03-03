@@ -53,7 +53,9 @@ export const actions = {
 
     ctx.commit(
       "setSkills",
-      skills.sort((a, b) => (a.name == b.name ? 0 : a.name < b.name ? -1 : 1))
+      skills
+        .filter((skill) => skill !== null)
+        .sort((a, b) => (a.name == b.name ? 0 : a.name < b.name ? -1 : 1))
     );
 
     ctx.commit("unsetLoadingStatus");

@@ -44,7 +44,10 @@ export const actions = {
     const { disciplines, errors } = await this.$fetchDisciplines(env);
 
     ctx.commit("setErrors", errors);
-    ctx.commit("setDisciplines", disciplines);
+    ctx.commit(
+      "setDisciplines",
+      disciplines.filter((discipline) => discipline !== null)
+    );
 
     ctx.commit("unsetLoadingStatus");
   },

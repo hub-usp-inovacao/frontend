@@ -35,7 +35,10 @@ export const actions = {
 
     const { pdis, errors } = await this.$fetchPdis(env);
     ctx.commit("setErrors", errors);
-    ctx.commit("setPDIs", pdis);
+    ctx.commit(
+      "setPDIs",
+      pdis.filter((pdi) => pdi !== null)
+    );
 
     ctx.commit("unsetLoadingStatus");
   },

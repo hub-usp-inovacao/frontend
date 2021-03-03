@@ -49,7 +49,17 @@ export default (_, inject) => {
     const values = await fetchData(sheetsAPIKey);
     if (values == undefined) return { disciplines: [], errors: [] };
 
-    const disciplines = values.slice(1).map((row) => DisciplineGenerator(row));
+    const disciplines = values.slice(1).map((row, i) => {
+      let discipline;
+      try {
+        discipline = DisciplineGenerator(row);
+      } catch (e) {
+        console.log(`[Discipline Exception] failed for row ${i + 2}`);
+        discipline = null;
+      }
+
+      return discipline;
+    });
 
     const errors = findErrors(Object.assign([], disciplines));
     return { disciplines, errors };

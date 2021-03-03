@@ -86,7 +86,17 @@ export default (_, inject) => {
 
     const skills = values
       .slice(1)
-      .map((row) => SkillGenerator(row))
+      .map((row, i) => {
+        let skill;
+        try {
+          skill = SkillGenerator(row);
+        } catch (e) {
+          console.log(`[Skill Exception] failed for row ${i + 2}`);
+          skill = null;
+        }
+
+        return skill;
+      })
       .filter((skill) => !skill.limitDate || skill.limitDate > new Date());
 
     const errors = findErrors(Object.assign([], skills), areas);

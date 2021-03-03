@@ -58,7 +58,7 @@ export default (_, inject) => {
       try {
         patent = PatentGenerator(row);
       } catch (error) {
-        console.log(`[Patents Exception] failed at ${i + 2}`);
+        console.log(`[Patent Exception] failed at ${i + 2}`);
         patent = null;
       }
       return patent;

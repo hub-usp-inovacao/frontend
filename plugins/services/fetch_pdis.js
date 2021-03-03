@@ -48,7 +48,17 @@ export default (_, inject) => {
     const values = await fetchData(sheetsAPIKey);
     if (values == undefined) return { pdis: [], errors: [] };
 
-    const pdis = values.slice(1).map((row) => PDIGenerator(row));
+    const pdis = values.slice(1).map((row, i) => {
+      let pdi;
+      try {
+        pdi = PDIGenerator(row);
+      } catch (e) {
+        console.log(`[PDI Exception] failed for row ${i + 2}`);
+        pdi = null;
+      }
+
+      return pdi;
+    });
 
     const errors = findErrors(Object.assign([], pdis));
     return { pdis, errors };
