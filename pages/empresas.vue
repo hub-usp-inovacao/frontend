@@ -87,7 +87,7 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 
-import { Company } from "@/lib/classes/company";
+import Company from "@/lib/classes/company";
 
 export default {
   components: {

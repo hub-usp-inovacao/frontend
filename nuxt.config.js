@@ -51,6 +51,7 @@ export default {
     { src: "~/plugins/knowledge_areas.js" },
     { src: "~/plugins/services/fetch_skills.js" },
     { src: "~/plugins/services/fetch_disciplines.js" },
+    { src: "~/plugins/services/fetch_companies.js" },
   ],
 
   /*
