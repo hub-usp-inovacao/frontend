@@ -1,5 +1,6 @@
 import { Skill, SkillGenerator } from "@/lib/classes/skill";
 import { findErrors } from "@/lib/errors/competencias";
+import { removeAccent } from "@/lib/format";
 
 export const state = () => ({
   isLoading: false,
@@ -70,7 +71,11 @@ export const actions = {
       ctx.commit(
         "setSkills",
         objects.sort((a, b) =>
-          a.name == b.name ? 0 : a.name < b.name ? -1 : 1
+          a.name == b.name
+            ? 0
+            : removeAccent(a.name) < removeAccent(b.name)
+            ? -1
+            : 1
         )
       );
     } catch (error) {
