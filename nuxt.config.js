@@ -53,6 +53,7 @@ export default {
     { src: "~/plugins/services/fetch_disciplines.js" },
     { src: "~/plugins/services/fetch_companies.js" },
     { src: "~/plugins/services/fetch_patents.js" },
+    { src: "~/plugins/services/fetch_pdis.js" },
   ],
 
   /*

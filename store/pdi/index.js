@@ -1,5 +1,4 @@
-import { PDI, PDIGenerator } from "@/lib/classes/pdi";
-import { findErrors } from "@/lib/errors/pdi";
+import PDI from "@/lib/classes/pdi";
 
 export const state = () => ({
   pdis: [],
@@ -31,29 +30,12 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchSpreadsheets(ctx, env) {
-    const { sheetsAPIKey } = env;
-    const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
-    const sheetName = "PDI";
-
+  fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
-
-      const data = await resp.json();
-      const objects = data.values.slice(1).map((row) => PDIGenerator.run(row));
-
-      const errors = findErrors(Object.assign([], objects));
-
-      ctx.commit("setErrors", errors);
-      ctx.commit("setPDIs", objects);
-    } catch (error) {
-      console.log("error occuried while fetching...");
-      console.log(error);
-    }
+    const { pdis, errors } = await this.$fetchPdis(env);
+    ctx.commit("setErrors", errors);
+    ctx.commit("setPDIs", pdis);
 
     ctx.commit("unsetLoadingStatus");
   },
