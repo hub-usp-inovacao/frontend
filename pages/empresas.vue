@@ -45,6 +45,11 @@
           >
         </p>
 
+        <p v-if="item.companySize != ''">
+          <span class="font-weight-bold">Classificação</span>
+          {{ item.companySize }}
+        </p>
+
         <p>
           <span class="font-weight-bold">Descrição</span>
           {{ item.description.long }}
@@ -148,7 +153,7 @@ export default {
       return [
         { label: "Cidade", items: this.cities },
         { label: "Incubadora?", items: Company.incubators },
-        { label: "Porte", items: ["Em Construção"] },
+        { label: "Porte", items: Company.sizes },
       ];
     },
     globalSearchSelected() {
