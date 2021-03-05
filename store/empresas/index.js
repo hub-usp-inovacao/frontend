@@ -54,7 +54,7 @@ export const actions = {
     ctx.commit(
       "setCompanies",
       companies
-        .filter((c) => c !== null && c.allowed && c.active)
+        .filter((c) => c !== null)
         .sort((a, b) => a.name.localeCompare(b.name))
     );
 
