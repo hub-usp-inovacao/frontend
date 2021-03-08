@@ -1,5 +1,4 @@
 import colors from "vuetify/es5/util/colors";
-import get_data from "./hooks";
 
 export default {
   env: {
@@ -92,14 +91,6 @@ export default {
      */
     // eslint-disable-next-line no-unused-vars
     extend(config, ctx) {},
-  },
-  hooks: {
-    generate: {
-      // eslint-disable-next-line no-unused-vars
-      before(nuxt, generateOptions) {
-        get_data();
-      },
-    },
   },
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
