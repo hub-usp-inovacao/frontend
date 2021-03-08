@@ -49,6 +49,7 @@ export const actions = {
     const { sheetsAPIKey } = env;
     const sheetID = "14uwSMZee-CoIJyIpcEf4t17z6eYN-ElYgw_O7dtU5Ok";
     const sheetName = "EMPRESAS";
+    const cnae = env.cnae;
 
     ctx.commit("setLoadingStatus");
 
@@ -62,7 +63,7 @@ export const actions = {
       const objects = data.values.slice(1).map((row, i) => {
         let company;
         try {
-          company = CompanyGenerator.run(row);
+          company = CompanyGenerator.run(row, cnae);
         } catch (e) {
           console.log(`[Company Exception] failed for row ${i + 2}`);
           company = null;

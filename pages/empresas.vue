@@ -122,8 +122,8 @@ export default {
       return this.search.term;
     },
     tabs() {
-      return Object.keys(Company.cnae).reduce((acc, code) => {
-        const { major, minor } = Company.cnae[code];
+      return Object.keys(this.$cnae).reduce((acc, code) => {
+        const { major, minor } = this.$cnae[code];
 
         const tab = acc.find(({ name }) => name === major);
 
@@ -177,6 +177,7 @@ export default {
       this.fetchSpreadsheets({
         sheetsAPIKey: process.env.sheetsAPIKey,
         sheetID: process.env.sheetID,
+        cnae: this.$cnae,
       });
     }
   },
