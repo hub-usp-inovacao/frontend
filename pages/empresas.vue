@@ -92,8 +92,6 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 
-import { Company } from "@/lib/classes/company";
-
 export default {
   components: {
     Panel,
@@ -152,8 +150,8 @@ export default {
     groups() {
       return [
         { label: "Cidade", items: this.cities },
-        { label: "Incubadora?", items: Company.incubators },
-        { label: "Porte", items: Company.sizes },
+        { label: "Incubadora?", items: this.$Company.incubators },
+        { label: "Porte", items: this.$Company.sizes },
       ];
     },
     globalSearchSelected() {
