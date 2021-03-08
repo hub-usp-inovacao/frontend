@@ -50,6 +50,7 @@ export default {
     { src: "~/plugins/campi.js" },
     { src: "~/plugins/knowledge_areas.js" },
     { src: "~/plugins/cnae.js" },
+    { src: "~/plugins/company.js" },
   ],
 
   /*
