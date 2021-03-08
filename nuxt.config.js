@@ -55,6 +55,7 @@ export default {
     { src: "~/plugins/services/fetch_patents.js" },
     { src: "~/plugins/services/fetch_pdis.js" },
     { src: "~/plugins/services/fetch_iniciatives.js" },
+    { src: "~/plugins/builders/company_builder.js" },
   ],
 
   /*

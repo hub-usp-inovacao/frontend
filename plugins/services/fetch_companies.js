@@ -1,4 +1,3 @@
-import CompanyBuilder from "@/lib/builders/companyBuilder";
 import { findErrors } from "@/lib/errors/empresas.js";
 
 async function fetchData(sheetsAPIKey) {
@@ -19,14 +18,13 @@ async function fetchData(sheetsAPIKey) {
   }
 }
 
-export default (_, inject) => {
+export default (app, inject) => {
   inject("fetchCompanies", async (payload) => {
     const { sheetsAPIKey } = payload;
 
     const values = await fetchData(sheetsAPIKey);
     if (values == undefined) return { companies: [], errors: [] };
-
-    const builder = new CompanyBuilder();
+    const builder = new app.$companyBuilder();
     const companies = values.slice(1).map((row, i) => {
       let company;
       try {

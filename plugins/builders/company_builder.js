@@ -1,8 +1,8 @@
-import Company from "../classes/company";
+import Company from "@/lib/classes/company";
 import { formatURL, formatPhone, removeAccent } from "@/lib/format";
 import { columnValue } from "@/lib/sheets";
 
-export default class CompanyBuilder {
+class CompanyBuilder {
   build(row) {
     if (!this.check(columnValue(row, "BM"), columnValue(row, "BR")))
       return null;
@@ -147,3 +147,7 @@ export default class CompanyBuilder {
     return isValid;
   }
 }
+
+export default (_, inject) => {
+  inject("companyBuilder", CompanyBuilder);
+};
