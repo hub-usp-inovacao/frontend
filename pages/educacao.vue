@@ -161,32 +161,14 @@ export default {
       setStrictResults: "global/setStrictResults",
       setFlexibleResults: "global/setFlexibleResults",
     }),
-    async fuzzySearch() {
-      this.setStrictResults();
-
-      if (!this.search.term.trim()) {
-        this.search.disciplines = undefined;
-        return;
-      }
-
-      const term = removeAccent(this.search.term.trim());
-
-      let results = await this.$search(
-        term,
+    fuzzySearch() {
+      const searchResult = this.$fuzzySearch(
+        removeAccent(this.search.term.trim()),
         this.baseItems,
-        genFuzzyOptions(this.searchKeys, 0.0)
+        this.searchKeys
       );
 
-      if (results.length === 0) {
-        this.setFlexibleResults();
-        results = await this.$search(
-          term,
-          this.baseItems,
-          genFuzzyOptions(this.searchKeys)
-        );
-      }
-
-      this.search.disciplines = results;
+      this.search.disciplines = searchResult;
     },
     filterData(context) {
       this.filtered = this.disciplines.filter((discipline) =>

@@ -231,31 +231,28 @@ export default {
 
       let empty = true;
       this.setStrictResults();
-      await contexts.forEach((ctx) => {
-        this.$search(
-          term,
-          this[ctx.key],
-          genFuzzyOptions(ctx.searchKeys, 0.0)
-        ).then((results) => {
-          if (results.length > 0) {
-            empty = false;
-          }
-          this[`searched_${ctx.key}`] =
-            results.length > 0 ? results : undefined;
-        });
+      contexts.forEach((ctx) => {
+        const results = this.$fuzzySearch(term, this[ctx.key], ctx.searchKeys);
+
+        if (results.length > 0) {
+          empty = false;
+        }
+
+        this[`searched_${ctx.key}`] = results.length > 0 ? results : undefined;
       });
 
       if (empty) {
         this.setFlexibleResults();
         contexts.forEach((ctx) => {
-          this.$search(
+          const results = this.$fuzzySearch(
             term,
             this[ctx.key],
-            genFuzzyOptions(ctx.searchKeys)
-          ).then((results) => {
-            this[`searched_${ctx.key}`] =
-              results.length > 0 ? results : undefined;
-          });
+            ctx.searchKeys,
+            0.15
+          );
+
+          this[`searched_${ctx.key}`] =
+            results.length > 0 ? results : undefined;
         });
       }
     },

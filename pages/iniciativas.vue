@@ -185,33 +185,14 @@ export default {
       setStrictResults: "global/setStrictResults",
       setFlexibleResults: "global/setFlexibleResults",
     }),
-    async fuzzySearch() {
-      this.setStrictResults();
-
-      if (!this.search.term.trim()) {
-        this.search.iniciatives = undefined;
-        return;
-      }
-
-      const term = removeAccent(this.search.term.trim());
-
-      let results = await this.$search(
-        term,
+    fuzzySearch() {
+      const searchResult = this.$fuzzySearch(
+        removeAccent(this.search.term.trim()),
         this.baseItems,
-        genFuzzyOptions(this.searchKeys, 0.0)
+        this.searchKeys
       );
 
-      if (results.length === 0) {
-        this.setFlexibleResults();
-
-        results = await this.$search(
-          term,
-          this.baseItems,
-          genFuzzyOptions(this.searchKeys)
-        );
-      }
-
-      this.search.iniciatives = results;
+      this.search.iniciatives = searchResult;
     },
     filterData(context) {
       this.filtered = this.iniciatives.filter((iniciative) =>
@@ -226,7 +207,7 @@ export default {
           eventLabel: this.search.term,
         });
       if (this.filters) await this.filterData(this.filters);
-      await this.fuzzySearch();
+      this.fuzzySearch();
     },
     changeSearchTerm(searchTerm) {
       this.search.term = searchTerm;
