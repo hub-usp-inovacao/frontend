@@ -179,7 +179,6 @@ export default {
         : this.baseItems;
     },
     displayMultipleUnities(unities) {
-      console.log(unities);
       return unities.join(", ");
     },
     searchTerm() {
