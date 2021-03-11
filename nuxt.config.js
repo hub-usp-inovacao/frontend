@@ -5,7 +5,8 @@ export default {
     sheetsAPIKey: process.env.sheetsAPIKey,
     sheetID: process.env.sheetID,
   },
-  mode: "universal",
+  ssr: true,
+  target: "server",
   /*
    ** Headers of the page
    */
