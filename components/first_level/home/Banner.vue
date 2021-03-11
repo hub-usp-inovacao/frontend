@@ -44,7 +44,6 @@
                       class="mb-4"
                       :src="require('@/static/Solus_Branco.png')"
                       alt="Portal Solus"
-                      data-cy="solus-logo"
                     ></v-img>
                     <p
                       class="white--text font-weight-medium ma-0"

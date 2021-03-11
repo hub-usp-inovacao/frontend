@@ -10,7 +10,6 @@
       <v-col v-for="({ label, items }, i) of groups" :key="i" :cols="colSize">
         <v-autocomplete
           v-model="selected[i]"
-          data-cy="dropdownFilter"
           :no-data-text="noData"
           menu-props="auto"
           :label="label"
