@@ -44,7 +44,6 @@ export default {
   plugins: [
     { src: "~/plugins/breakpoint.js" },
     { src: "~/plugins/vue-fuse.js", mode: "client" },
-    { src: "~/plugins/vue-masonry.js", mode: "client" },
     { src: "~/plugins/vue-typer.js", mode: "client" },
     { src: "~/plugins/campi.js" },
     { src: "~/plugins/knowledge_areas.js" },
