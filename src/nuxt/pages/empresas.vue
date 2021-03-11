@@ -83,7 +83,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { genFuzzyOptions } from "@/lib/search";
-import { removeAccent } from "@/lib/format";
+import { removeAccent } from "@core/shared/format";
 
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
@@ -120,8 +120,8 @@ export default {
       return this.search.term;
     },
     tabs() {
-      return Object.keys(this.$cnae).reduce((acc, code) => {
-        const { major, minor } = this.$cnae[code];
+      return Object.keys(this.$Company.cnae).reduce((acc, code) => {
+        const { major, minor } = this.$Company.cnae[code];
 
         const tab = acc.find(({ name }) => name === major);
 
@@ -175,7 +175,6 @@ export default {
       this.fetchSpreadsheets({
         sheetsAPIKey: process.env.sheetsAPIKey,
         sheetID: process.env.sheetID,
-        cnae: this.$cnae,
       });
     }
   },

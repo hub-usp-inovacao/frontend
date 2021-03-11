@@ -1,3 +1,4 @@
+import path from "path";
 import colors from "vuetify/es5/util/colors";
 
 export default {
@@ -7,7 +8,6 @@ export default {
     sheetsAPIKey: process.env.sheetsAPIKey,
     sheetID: process.env.sheetID,
   },
-  mode: "universal",
   /*
    ** Headers of the page
    */
@@ -49,9 +49,9 @@ export default {
     { src: "~/plugins/vue-typer.js", mode: "client" },
     { src: "~/plugins/campi.js" },
     { src: "~/plugins/knowledge_areas.js" },
-    { src: "~/plugins/cnae.js" },
-    { src: "~/plugins/company.js" },
     { src: "~/plugins/fuzzySearch.js" },
+    { src: "~/plugins/company.js" },
+    { src: "~/plugins/services/fetch_companies.js" },
   ],
 
   /*
@@ -92,7 +92,13 @@ export default {
      ** You can extend webpack config here
      */
     // eslint-disable-next-line no-unused-vars
-    extend(config, ctx) {},
+    extend(config) {
+      const rootDir = this.buildContext.options.rootDir;
+      const joinSrc = (s) => path.join(rootDir, "src", s);
+
+      config.resolve.alias["@core"] = joinSrc("core");
+      config.resolve.alias["@nuxt"] = joinSrc("nuxt");
+    },
   },
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
