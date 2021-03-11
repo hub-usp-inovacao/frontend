@@ -1,6 +1,8 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  rootDir: ".",
+  srcDir: "src/nuxt",
   env: {
     sheetsAPIKey: process.env.sheetsAPIKey,
     sheetID: process.env.sheetID,
