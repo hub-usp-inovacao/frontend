@@ -39,7 +39,8 @@ export const actions = {
     ctx.commit("setLoadingStatus");
 
     let objectsFromSheets = [];
-    let objectsFromAPI = [];
+    let objectsFromCentraisAPI = [];
+    let objectsFromServicosAPI = [];
 
     try {
       const resp = await fetch(
@@ -67,13 +68,30 @@ export const actions = {
       const resp = await fetch(centraisURL);
       const data = await resp.json();
 
-      objectsFromAPI = data.map((d) => PDIGenerator.runForCentrais(d));
+      objectsFromCentraisAPI = data.map((d) => PDIGenerator.runForCentrais(d));
     } catch (error) {
       console.log("error occuried while fetching from USP Multi...");
       console.log(error);
     }
 
-    const pdis = objectsFromSheets.concat(objectsFromAPI);
+    try {
+      let servicosURL = "http://localhost:3001/servicos";
+      if (process.env.USPMULTI)
+        servicosURL = "https://uspmulti.prp.usp.br/api/public/servicos";
+
+      const resp = await fetch(servicosURL);
+      const data = await resp.json();
+
+      objectsFromServicosAPI = data.map((d) => PDIGenerator.runForServices(d));
+    } catch (error) {
+      console.log("error occuried while fetching from USP Multi...");
+      console.log(error);
+    }
+
+    const pdis = objectsFromSheets
+      .concat(objectsFromCentraisAPI)
+      .concat(objectsFromServicosAPI);
+
     ctx.commit(
       "setPDIs",
       pdis.sort((a, b) =>

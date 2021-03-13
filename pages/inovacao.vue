@@ -107,6 +107,10 @@ export default {
         name: "Centrais Multiusuário",
         description: "",
       },
+      {
+        name: "Serviços Tecnológicos",
+        description: "",
+      },
     ],
 
     filters: undefined,
