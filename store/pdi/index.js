@@ -39,17 +39,35 @@ export const actions = {
     ctx.commit("setLoadingStatus");
 
     try {
-      const resp = await fetch(
+      let resp = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
       );
 
-      const data = await resp.json();
-      const objects = data.values.slice(1).map((row) => PDIGenerator.run(row));
+      let data = await resp.json();
+      const objectsFromSheets = data.values
+        .slice(1)
+        .map((row) => PDIGenerator.runFromRow(row));
 
-      const errors = findErrors(Object.assign([], objects));
+      const errors = findErrors(Object.assign([], objectsFromSheets));
+
+      let centraisURL = "http://localhost:3001/centrais";
+      if (process.env.USPMULTI)
+        centraisURL = "https://uspmulti.prp.usp.br/api/public/centrais";
+
+      resp = await fetch(centraisURL);
+      data = await resp.json();
+
+      const objectsFromAPI = data.map((d) => PDIGenerator.runForCentrais(d));
+
+      const pdis = objectsFromSheets.concat(objectsFromAPI);
 
       ctx.commit("setErrors", errors);
-      ctx.commit("setPDIs", objects);
+      ctx.commit(
+        "setPDIs",
+        pdis.sort((a, b) =>
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        )
+      );
     } catch (error) {
       console.log("error occuried while fetching...");
       console.log(error);
