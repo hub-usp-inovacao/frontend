@@ -38,40 +38,48 @@ export const actions = {
 
     ctx.commit("setLoadingStatus");
 
+    let objectsFromSheets = [];
+    let objectsFromAPI = [];
+
     try {
-      let resp = await fetch(
+      const resp = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
       );
 
-      let data = await resp.json();
-      const objectsFromSheets = data.values
+      const data = await resp.json();
+      objectsFromSheets = data.values
         .slice(1)
         .map((row) => PDIGenerator.runFromRow(row));
 
       const errors = findErrors(Object.assign([], objectsFromSheets));
 
+      ctx.commit("setErrors", errors);
+    } catch (error) {
+      console.log("error occuried while fetching spreadsheets...");
+      console.log(error);
+    }
+
+    try {
       let centraisURL = "http://localhost:3001/centrais";
       if (process.env.USPMULTI)
         centraisURL = "https://uspmulti.prp.usp.br/api/public/centrais";
 
-      resp = await fetch(centraisURL);
-      data = await resp.json();
+      const resp = await fetch(centraisURL);
+      const data = await resp.json();
 
-      const objectsFromAPI = data.map((d) => PDIGenerator.runForCentrais(d));
-
-      const pdis = objectsFromSheets.concat(objectsFromAPI);
-
-      ctx.commit("setErrors", errors);
-      ctx.commit(
-        "setPDIs",
-        pdis.sort((a, b) =>
-          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-        )
-      );
+      objectsFromAPI = data.map((d) => PDIGenerator.runForCentrais(d));
     } catch (error) {
-      console.log("error occuried while fetching...");
+      console.log("error occuried while fetching from USP Multi...");
       console.log(error);
     }
+
+    const pdis = objectsFromSheets.concat(objectsFromAPI);
+    ctx.commit(
+      "setPDIs",
+      pdis.sort((a, b) =>
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+      )
+    );
 
     ctx.commit("unsetLoadingStatus");
   },
