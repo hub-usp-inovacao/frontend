@@ -65,7 +65,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { genFuzzyOptions } from "@/lib/search";
 import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";

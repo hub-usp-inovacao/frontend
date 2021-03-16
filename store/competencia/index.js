@@ -1,6 +1,5 @@
 import { Skill, SkillGenerator } from "@/lib/classes/skill";
 import { findErrors } from "@/lib/errors/competencias";
-import { removeAccent } from "@/lib/format";
 
 export const state = () => ({
   isLoading: false,

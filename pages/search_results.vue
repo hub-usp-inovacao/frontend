@@ -25,7 +25,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { genFuzzyOptions } from "@/lib/search";
 import { removeAccent } from "@/lib/format";
 
 import Panel from "@/components/first_level/Panel.vue";
