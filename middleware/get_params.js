@@ -1,8 +1,8 @@
-function getParams(route, store, entity, key) {
-  if (route.query[`${key}`]) {
-    store.commit(`${entity}/setQueryParam`, route.query[`${key}`]);
-  } else if (route.params.id) {
+function getParams(route, store, entity) {
+  if (route.params.id) {
     store.commit(`${entity}/setRouteParam`, route.params.id);
+  } else {
+    store.commit(`${entity}/setQueryParam`, route.query);
   }
 }
 
@@ -11,22 +11,22 @@ export default function ({ route, store }) {
 
   switch (page) {
     case "iniciativas":
-      getParams(route, store, "iniciativas", "nome");
+      getParams(route, store, "iniciativas");
       break;
     case "inovacao":
       getParams(route, store, "pdi", "pdi");
       break;
     case "competencias":
-      getParams(route, store, "competencia", "professor");
+      getParams(route, store, "competencia");
       break;
     case "educacao":
-      getParams(route, store, "educacao", "disciplina");
+      getParams(route, store, "educacao");
       break;
     case "empresas":
-      getParams(route, store, "empresas", "nome");
+      getParams(route, store, "empresas");
       break;
     case "patentes":
-      getParams(route, store, "patentes", "nome");
+      getParams(route, store, "patentes");
       break;
     default:
       break;

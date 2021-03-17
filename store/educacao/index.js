@@ -12,7 +12,7 @@ export const state = () => ({
 export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   disciplines: (state) => state.disciplines,
-  queryParam: (s) => s.disciplines.find((c) => c.name == s.queryParam),
+  queryParam: (s) => s.queryParam,
   routeParam: (s) => s.disciplines.find((c) => c.id == s.routeParam),
   campi: (state) => {
     return Array.from(
@@ -39,7 +39,7 @@ export const mutations = {
   setErrors(s, errors) {
     s.errors = errors;
   },
-  setQueryParam: (s, name) => (s.queryParam = name),
+  setQueryParam: (s, query) => (s.queryParam = query),
   setRouteParam: (s, id) => (s.routeParam = id),
 };
 

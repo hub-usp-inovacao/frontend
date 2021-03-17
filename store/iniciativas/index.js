@@ -13,7 +13,7 @@ export const getters = {
   iniciatives: (s) => s.iniciatives,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   searchKeys: (s) => s.keys,
-  queryParam: (s) => s.iniciatives.find((c) => c.name == s.queryParam),
+  queryParam: (s) => s.queryParam,
   routeParam: (s) => s.iniciatives.find((c) => c.id == s.routeParam),
   campi: (s) => {
     const campi = s.iniciatives
@@ -40,7 +40,7 @@ export const mutations = {
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setIniciatives: (s, newIniciatives) => (s.iniciatives = newIniciatives),
   setErrors: (s, errors) => (s.errors = errors),
-  setQueryParam: (s, name) => (s.queryParam = name),
+  setQueryParam: (s, query) => (s.queryParam = query),
   setRouteParam: (s, id) => (s.routeParam = id),
 };
 

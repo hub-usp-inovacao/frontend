@@ -25,7 +25,7 @@ export const getters = {
       }, [])
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
   },
-  queryParam: (s) => s.companies.find((c) => c.name == s.queryParam),
+  queryParam: (s) => s.queryParam,
   routeParam: (s) => s.companies.find((c) => c.id == s.routeParam),
   cities: (s) => {
     const cities = s.companies.reduce((all, company) => {
@@ -56,7 +56,7 @@ export const mutations = {
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setCompanies: (s, newCompanies) => (s.companies = newCompanies),
   setErrors: (s, errors) => (s.errors = errors),
-  setQueryParam: (s, name) => (s.queryParam = name),
+  setQueryParam: (s, query) => (s.queryParam = query),
   setRouteParam: (s, id) => (s.routeParam = id),
 };
 

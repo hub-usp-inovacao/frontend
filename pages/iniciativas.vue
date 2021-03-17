@@ -160,7 +160,13 @@ export default {
         : this.baseItems;
     },
     preSelected() {
-      return this.queryParam ? this.queryParam : this.routeParam;
+      if (this.queryParam && this.queryParam.nome) {
+        return this.display_entries.find(
+          (item) => item.name == this.queryParam.nome
+        );
+      }
+
+      return this.routeParam;
     },
   },
   watch: {

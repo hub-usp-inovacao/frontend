@@ -15,7 +15,7 @@ export const getters = {
   pdis: (state) => state.pdis,
   searchKeys: (state) => state.keys,
   errors: (s) => s.errors,
-  queryParam: (s) => s.pdis.find((c) => c.name == s.queryParam),
+  queryParam: (s) => s.queryParam,
   routeParam: (s) => s.pdis.find((c) => c.id == s.routeParam),
 };
 
@@ -32,7 +32,7 @@ export const mutations = {
   setErrors(s, errors) {
     s.errors = errors;
   },
-  setQueryParam: (s, name) => (s.queryParam = name),
+  setQueryParam: (s, query) => (s.queryParam = query),
   setRouteParam: (s, id) => (s.routeParam = id),
 };
 

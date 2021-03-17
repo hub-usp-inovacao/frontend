@@ -75,15 +75,26 @@ export default {
     },
   },
   watch: {
-    selected(list) {
-      this.$emit("select", list);
-    },
     isEmpty() {
-      if (!this.isEmpty && this.$route.query.unidade) {
-        this.selected[1] = this.$route.query.unidade;
+      if (!this.isEmpty) {
         this.$emit("select", this.selected);
       }
     },
+    selected(list) {
+      console.log(list)
+      this.$emit("select", list);
+    },
+  },
+  beforeMount() {
+    this.groups.forEach(({ preSelected }, i) => {
+      if (preSelected) {
+        this.selected[i] = preSelected;
+      } else {
+        this.selected[i] = undefined;
+      }
+    });
+
+    // this.$emit("select", this.selected);
   },
   methods: {
     customFilter(_item, queryText, itemText) {

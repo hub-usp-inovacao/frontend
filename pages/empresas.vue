@@ -176,13 +176,31 @@ export default {
     },
     groups() {
       return [
-        { label: "Cidade", items: this.cities },
-        { label: "Habitat de Inovação", items: this.incubators },
-        { label: "Porte", items: this.$Company.sizes },
+        {
+          label: "Cidade",
+          items: this.cities,
+          preSelected: this.queryParam ? this.queryParam.cidade : undefined,
+        },
+        {
+          label: "Habitat de Inovação",
+          items: this.incubators,
+          preSelected: this.queryParam ? this.queryParam.incubadora : undefined,
+        },
+        {
+          label: "Porte",
+          items: this.$Company.sizes,
+          preSelected: this.queryParam ? this.queryParam.porte : undefined,
+        },
       ];
     },
     preSelected() {
-      return this.queryParam ? this.queryParam : this.routeParam;
+      if (this.queryParam && this.queryParam.nome) {
+        return this.displayItems.find(
+          (item) => item.name == this.queryParam.nome
+        );
+      }
+
+      return this.routeParam;
     },
   },
   watch: {

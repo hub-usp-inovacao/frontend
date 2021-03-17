@@ -139,7 +139,13 @@ export default {
       return this.search.term;
     },
     preSelected() {
-      return this.queryParam ? this.queryParam : this.routeParam;
+      if (this.queryParam && this.queryParam.nome) {
+        return this.displayItems.find(
+          (item) => item.name == this.queryParam.nome
+        );
+      }
+
+      return this.routeParam;
     },
   },
   watch: {
