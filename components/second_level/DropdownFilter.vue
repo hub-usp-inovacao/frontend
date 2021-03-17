@@ -81,7 +81,7 @@ export default {
       }
     },
     selected(list) {
-      console.log(list)
+      console.log(list);
       this.$emit("select", list);
     },
   },
