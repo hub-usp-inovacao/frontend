@@ -1,7 +1,8 @@
 function getParams(route, store, entity) {
+  console.log("Ó os parametros: ", route.query);
   if (route.params.id) {
     store.commit(`${entity}/setRouteParam`, route.params.id);
-  } else {
+  } else if (route.query && Object.keys(route.query).length > 0) {
     store.commit(`${entity}/setQueryParam`, route.query);
   }
 }

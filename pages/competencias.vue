@@ -15,7 +15,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
-      :preSelectedTabs="preSelectedTabs"
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :colors="{ active: '#9b4c68', base: '#6b1c28' }"
       :groups="groups"
@@ -213,12 +213,14 @@ export default {
       return this.queryParam ? this.queryParam.buscar : undefined;
     },
     preSelectedTabs() {
-      return this.queryParam
-        ? this.queryParam.areas
-            .split(";")
-            .map((area) => area.trim())
-            .filter((area) => area.trim().length > 0)
-        : undefined;
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
+      return undefined;
     },
   },
   watch: {
@@ -239,6 +241,8 @@ export default {
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
       this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
+
+    console.log("Query: ", this.queryParam);
 
     if (this.queryParam && this.queryParam.buscar) {
       this.search.term = this.queryParam.buscar;
