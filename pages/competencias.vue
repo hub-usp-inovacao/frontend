@@ -158,6 +158,7 @@ export default {
   computed: {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
+      isEmpty: "competencia/isEmpty",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
       queryParam: "competencia/queryParam",
@@ -212,6 +213,11 @@ export default {
     },
   },
   watch: {
+    isEmpty() {
+      if (!this.isEmpty && this.filters != undefined) {
+        this.pipeline();
+      }
+    },
     searchTerm() {
       this.pipeline();
     },
