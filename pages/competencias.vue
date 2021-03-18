@@ -225,8 +225,10 @@ export default {
   },
   watch: {
     isEmpty() {
-      if (!this.isEmpty && this.filters != undefined) {
-        this.pipeline();
+      if (!this.isEmpty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
       }
     },
     searchTerm() {
