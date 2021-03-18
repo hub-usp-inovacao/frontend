@@ -80,7 +80,7 @@ export default {
     }
 
     if (this.companiesStatus == "ok" && this.companies.length == 0) {
-      this.fetchCompanies(env);
+      this.fetchCompanies({ ...env, cnae: this.$cnae });
     }
   },
   methods: {
