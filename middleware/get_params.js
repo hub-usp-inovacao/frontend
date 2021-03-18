@@ -14,7 +14,7 @@ export default function ({ route, store }) {
       getParams(route, store, "iniciativas");
       break;
     case "inovacao":
-      getParams(route, store, "pdi", "pdi");
+      getParams(route, store, "pdi");
       break;
     case "competencias":
       getParams(route, store, "competencia");
