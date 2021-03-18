@@ -15,6 +15,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
+      :preSelectedTabs="preSelectedTabs"
       :tabs="tabs"
       :colors="{ active: '#9b4c68', base: '#6b1c28' }"
       :groups="groups"
@@ -210,6 +211,14 @@ export default {
     },
     preSearch() {
       return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      return this.queryParam
+        ? this.queryParam.areas
+            .split(";")
+            .map((area) => area.trim())
+            .filter((area) => area.trim().length > 0)
+        : undefined;
     },
   },
   watch: {
