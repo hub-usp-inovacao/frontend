@@ -51,6 +51,12 @@ export default {
     { src: "~/plugins/cnae.js" },
     { src: "~/plugins/company.js" },
     { src: "~/plugins/fuzzySearch.js" },
+    { src: "~/plugins/services/fetch_companies.js" },
+    { src: "~/plugins/services/fetch_disciplines.js" },
+    { src: "~/plugins/services/fetch_iniciatives.js" },
+    { src: "~/plugins/services/fetch_patents.js" },
+    { src: "~/plugins/services/fetch_pdis.js" },
+    { src: "~/plugins/services/fetch_skills.js" },
   ],
 
   /*

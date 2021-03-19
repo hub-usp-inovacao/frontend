@@ -1,5 +1,4 @@
-import { Company, CompanyGenerator } from "@/lib/classes/company";
-import { findErrors } from "../../lib/errors/empresas";
+import Company from "@/lib/classes/company";
 
 export const state = () => ({
   companies: [],
@@ -45,47 +44,16 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchSpreadsheets: async (ctx, env) => {
-    const { sheetsAPIKey } = env;
-    const sheetID = "14uwSMZee-CoIJyIpcEf4t17z6eYN-ElYgw_O7dtU5Ok";
-    const sheetName = "EMPRESAS";
-    const cnae = env.cnae;
-
+  fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
+    const { companies, errors } = await this.$fetchCompanies(env);
+    ctx.commit("setErrors", errors);
 
-      const data = await resp.json();
-
-      const objects = data.values
-        .slice(1)
-        .map((row, i) => {
-          let company;
-          try {
-            company = CompanyGenerator.run(row, cnae);
-          } catch (e) {
-            console.log(`[Company Exception] failed for row ${i + 2}`);
-            company = null;
-          }
-          return company;
-        })
-        .filter((c) => c !== null && c.allowed && c.active);
-
-      const errors = findErrors(Object.assign([], objects));
-
-      ctx.commit("setErrors", errors);
-
-      ctx.commit(
-        "setCompanies",
-        objects.sort((a, b) => a.name.localeCompare(b.name))
-      );
-    } catch (error) {
-      console.log("error occuried while fetching...");
-      console.log(error);
-    }
+    ctx.commit(
+      "setCompanies",
+      companies.sort((a, b) => a.name.localeCompare(b.name))
+    );
 
     ctx.commit("unsetLoadingStatus");
   },
