@@ -31,33 +31,13 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchSpreadsheets(ctx, env) {
-    const { sheetsAPIKey } = env;
-    const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
-    const sheetName = "PDI";
-
+  fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    let objectsFromSheets = [];
     let objectsFromAPI = [];
 
-    try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
-
-      const data = await resp.json();
-      objectsFromSheets = data.values
-        .slice(1)
-        .map((row) => PDIGenerator.runFromRow(row));
-
-      const errors = findErrors(Object.assign([], objectsFromSheets));
-
-      ctx.commit("setErrors", errors);
-    } catch (error) {
-      console.log("error occuried while fetching spreadsheets...");
-      console.log(error);
-    }
+    const { pdis, errors } = await this.$fetchPDIs(env);
+    ctx.commit("setErrors", errors);
 
     try {
       let centraisURL = "http://localhost:3001/centrais";
@@ -73,10 +53,10 @@ export const actions = {
       console.log(error);
     }
 
-    const pdis = objectsFromSheets.concat(objectsFromAPI);
+    const fullData = pdis.concat(objectsFromAPI);
     ctx.commit(
       "setPDIs",
-      pdis.sort((a, b) =>
+      fullData.sort((a, b) =>
         a.name.toLowerCase().localeCompare(b.name.toLowerCase())
       )
     );
