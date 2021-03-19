@@ -1,4 +1,6 @@
+import Discipline from "@/lib/classes/discipline";
 import { findErrors } from "@/lib/errors/disciplinas";
+import { columnValue } from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1AsmtnS5kY1mhXhNJH5QsCyg_WDnkGtARYB4nMdhyFLs";
@@ -18,6 +20,29 @@ async function fetchData(sheetsAPIKey) {
   }
 }
 
+function disciplineGenerator(row) {
+  const base = new Discipline(
+    columnValue(row, "B"),
+    columnValue(row, "C"),
+    columnValue(row, "D"),
+    {
+      short: columnValue(row, "H"),
+      long: columnValue(row, "G"),
+    },
+    columnValue(row, "I"),
+    columnValue(row, "A"),
+    columnValue(row, "F")
+  );
+
+  base.url = columnValue(row, "E");
+  base.categoryBusiness = columnValue(row, "K");
+  base.categoryEntrepreneurship = columnValue(row, "L");
+  base.categoryInnovation = columnValue(row, "M");
+  base.categoryIntellectualProperty = columnValue(row, "N");
+
+  return base;
+}
+
 export default (_, inject) => {
   inject("fetchDisciplines", async (payload) => {
     const { sheetsAPIKey } = payload;
@@ -25,17 +50,20 @@ export default (_, inject) => {
     const values = await fetchData(sheetsAPIKey);
     if (values == undefined) return { disciplines: [], errors: [] };
 
-    const disciplines = values.slice(1).map((row, i) => {
-      let discipline;
-      try {
-        discipline = DisciplineGenerator(row);
-      } catch (e) {
-        console.log(`[Discipline Exception] failed for row ${i + 2}`);
-        discipline = null;
-      }
+    const disciplines = values
+      .slice(1)
+      .map((row, i) => {
+        let discipline;
+        try {
+          discipline = disciplineGenerator(row);
+        } catch (e) {
+          console.log(`[Discipline Exception] failed for row ${i + 2}`);
+          discipline = null;
+        }
 
-      return discipline;
-    });
+        return discipline;
+      })
+      .filter((d) => d !== null);
 
     const errors = findErrors(Object.assign([], disciplines));
     return { disciplines, errors };

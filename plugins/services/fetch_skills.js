@@ -19,7 +19,7 @@ async function fetchData(sheetsAPIKey) {
 }
 
 export default (_, inject) => {
-  inject("fetchDisciplines", async (payload) => {
+  inject("fetchSkills", async (payload) => {
     const { sheetsAPIKey } = payload;
 
     const values = await fetchData(sheetsAPIKey);

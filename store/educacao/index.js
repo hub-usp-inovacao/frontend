@@ -1,5 +1,4 @@
-import { Discipline, DisciplineGenerator } from "@/lib/classes/discipline";
-import { findErrors } from "@/lib/errors/disciplinas";
+import Discipline from "@/lib/classes/discipline";
 
 export const state = () => ({
   disciplines: [],
@@ -39,31 +38,12 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchSpreadsheets(ctx, env) {
-    const { sheetsAPIKey } = env;
-    const sheetID = "1AsmtnS5kY1mhXhNJH5QsCyg_WDnkGtARYB4nMdhyFLs";
-    const sheetName = "DISCIPLINAS";
-
+  fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
-
-      const data = await resp.json();
-      const objects = data.values
-        .slice(1)
-        .map((row) => DisciplineGenerator.run(row));
-
-      const errors = findErrors(Object.assign([], objects));
-
-      ctx.commit("setErrors", errors);
-      ctx.commit("setDisciplines", objects);
-    } catch (error) {
-      console.log("error occuried while fetching...");
-      console.log(error);
-    }
+    const { disciplines, errors } = await this.$fetchDisciplines(env);
+    ctx.commit("setErrors", errors);
+    ctx.commit("setDisciplines", disciplines);
 
     ctx.commit("unsetLoadingStatus");
   },
