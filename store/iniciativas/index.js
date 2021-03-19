@@ -1,5 +1,4 @@
-import { Iniciative, IniciativeGenerator } from "@/lib/classes/iniciative";
-import { findErrors } from "@/lib/errors/iniciativas";
+import Iniciative from "@/lib/classes/iniciative";
 
 export const state = () => ({
   iniciatives: [],
@@ -40,45 +39,15 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchSpreadsheets(ctx, env) {
-    const { sheetsAPIKey } = env;
-    const sheetID = "1MGRBDs-Bb2PGdyUkTN92dM5kqQuw5dtOpFHwAV1FQpA";
-    const sheetName = "INICIATIVAS";
-
+  fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
-
-      const { values } = await resp.json();
-      const objects = values.slice(1).map((row, i) => {
-        let iniciative;
-
-        try {
-          iniciative = IniciativeGenerator.run(row);
-        } catch (e) {
-          console.log(`[Iniciatives Exception] failed at ${i + 2}`);
-          iniciative = null;
-        }
-
-        return iniciative;
-      });
-
-      const errors = findErrors(Object.assign([], objects));
-
-      ctx.commit("setErrors", errors);
-      ctx.commit(
-        "setIniciatives",
-        objects
-          .filter((ini) => ini !== null)
-          .sort((a, b) => (a.name > b.name ? 1 : -1))
-      );
-    } catch (error) {
-      console.log("error occuried while fetching...");
-      console.log(error);
-    }
+    const { iniciatives, errors } = await this.$fetchIniciatives(env);
+    ctx.commit("setErrors", errors);
+    ctx.commit(
+      "setIniciatives",
+      iniciatives.sort((a, b) => (a.name > b.name ? 1 : -1))
+    );
 
     ctx.commit("unsetLoadingStatus");
   },
