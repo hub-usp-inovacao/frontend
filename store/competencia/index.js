@@ -1,5 +1,4 @@
-import { Skill, SkillGenerator } from "@/lib/classes/skill";
-import { findErrors } from "@/lib/errors/competencias";
+import Skill from "@/lib/classes/skill";
 
 export const state = () => ({
   isLoading: false,
@@ -46,37 +45,17 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchSpreadsheets: async (ctx, payload) => {
-    const { sheetsAPIKey } = payload;
-    const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
-    const sheetName = "COMPETENCIAS";
-
+  fetchSpreadsheets: async function (ctx, payload) {
     ctx.commit("setLoadingStatus");
 
-    try {
-      const resp = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-      );
-
-      const { values } = await resp.json();
-      const objects = values
-        .slice(1)
-        .map((row) => SkillGenerator.run(row))
-        .filter((skill) => !skill.limitDate || skill.limitDate > new Date());
-      const errors = findErrors(Object.assign([], objects), payload.areas);
-
-      ctx.commit("setErrors", errors);
-
-      ctx.commit(
-        "setSkills",
-        objects.sort((a, b) =>
-          a.name == b.name ? 0 : a.inspect.name < b.inspect.name ? -1 : 1
-        )
-      );
-    } catch (error) {
-      console.log("error occuried while fetching...");
-      console.log(error);
-    }
+    const { skills, errors } = await this.$fetchSkills(payload);
+    ctx.commit("setErrors", errors);
+    ctx.commit(
+      "setSkills",
+      skills.sort((a, b) =>
+        a.name == b.name ? 0 : a.inspect.name < b.inspect.name ? -1 : 1
+      )
+    );
 
     ctx.commit("unsetLoadingStatus");
   },

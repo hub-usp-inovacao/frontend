@@ -44,10 +44,10 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchSpreadsheets: async function (ctx, env) {
+  fetchSpreadsheets: async function (ctx, payload) {
     ctx.commit("setLoadingStatus");
 
-    const { companies, errors } = await this.$fetchCompanies(env);
+    const { companies, errors } = await this.$fetchCompanies(payload);
     ctx.commit("setErrors", errors);
 
     ctx.commit(
