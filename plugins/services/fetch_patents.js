@@ -1,8 +1,10 @@
+import Patent from "@/lib/classes/patent";
 import { findErrors } from "@/lib/errors/patentes";
+import { columnValue } from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
-  const sheetID = "1AsmtnS5kY1mhXhNJH5QsCyg_WDnkGtARYB4nMdhyFLs";
-  const sheetName = "DISCIPLINAS";
+  const sheetID = "1UgqwWqaL_9l8NwaE9anTwLdkzmK0NI65SdStQ1wACho";
+  const sheetName = "PATENTES";
 
   try {
     const resp = await fetch(
@@ -18,26 +20,55 @@ async function fetchData(sheetsAPIKey) {
   }
 }
 
+function PatentGenerator(row) {
+  const base = new Patent(
+    columnValue(row, "F"),
+    columnValue(row, "K"),
+    {
+      primary: {
+        cip: columnValue(row, "A").trim(),
+        subarea: columnValue(row, "B").trim(),
+      },
+      secondary: {
+        cip: columnValue(row, "C").trim(),
+        subarea: columnValue(row, "D").trim(),
+      },
+    },
+    columnValue(row, "G").split(" | "),
+    columnValue(row, "I").split(" | "),
+    columnValue(row, "M")
+  );
+
+  base.url = columnValue(row, "N");
+  base.inventors = columnValue(row, "J");
+  base.countriesWithProtection = columnValue(row, "L");
+  base.photo = columnValue(row, "O");
+  return base;
+}
+
 export default (_, inject) => {
   inject("fetchPatents", async (payload) => {
     const { sheetsAPIKey } = payload;
 
     const values = await fetchData(sheetsAPIKey);
-    if (values == undefined) return { disciplines: [], errors: [] };
+    if (values == undefined) return { patents: [], errors: [] };
 
-    const disciplines = values.slice(1).map((row, i) => {
-      let discipline;
-      try {
-        discipline = DisciplineGenerator(row);
-      } catch (e) {
-        console.log(`[Discipline Exception] failed for row ${i + 2}`);
-        discipline = null;
-      }
+    const patents = values
+      .slice(1)
+      .map((row, i) => {
+        let patent;
+        try {
+          patent = PatentGenerator(row);
+        } catch (e) {
+          console.log(`[Patent Exception] failed for row ${i + 2}`);
+          patent = null;
+        }
 
-      return discipline;
-    });
+        return patent;
+      })
+      .filter((p) => p !== null);
 
-    const errors = findErrors(Object.assign([], disciplines));
-    return { disciplines, errors };
+    const errors = findErrors(Object.assign([], patents));
+    return { patents, errors };
   });
 };
