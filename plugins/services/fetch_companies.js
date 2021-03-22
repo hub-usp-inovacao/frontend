@@ -23,41 +23,77 @@ async function fetchData(sheetsAPIKey) {
 const NDrgx = /(n\/d)/;
 const spaceRgx = /( )/;
 
-function companyGenerator(row, cnae) {
-  const base = new Company(
-    columnValue(row, "AC"),
-    columnValue(row, "AE"),
-    columnValue(row, "AH").split(";"), //
-    {
-      long: columnValue(row, "BC") == "." ? "" : columnValue(row, "BC"),
-    },
-    ". Nenhum Nenhuma Não".split(" ").includes(columnValue(row, "AR")),
-    columnValue(row, "AR")
-      .split(";")
-      .map((incub) => incub.trim()),
-    columnValue(row, "BD") == "." ? "" : columnValue(row, "BD"),
-    {
-      venue: columnValue(row, "AJ"),
-      neightborhood: columnValue(row, "AK"),
-      city: columnValue(row, "AL").split(";"),
-      state: columnValue(row, "AM"),
-      cep: columnValue(row, "AN"),
-    }
+function beginNewCompany(row) {
+  const name = columnValue(row, "AC");
+  const year = columnValue(row, "AE");
+  const emails = columnValue(row, "AH").split(";");
+  const rawDescription = columnValue(row, "BC");
+  const description = { long: rawDescription == "." ? "" : rawDescription };
+  const incubated = ". Nenhum Nenhuma Não"
+    .split(" ")
+    .includes(columnValue(row, "AR"));
+  const ecosystems = columnValue(row, "AR").split(";");
+  const rawServices = columnValue(row, "BD");
+  const services = rawServices == "." ? "" : rawServices;
+  const address = {
+    venue: columnValue(row, "AJ"),
+    neightborhood: columnValue(row, "AK"),
+    city: columnValue(row, "AL").split(";"),
+    state: columnValue(row, "AM"),
+    cep: columnValue(row, "AN"),
+  };
+
+  return new Company(
+    name,
+    year,
+    emails,
+    description,
+    incubated,
+    ecosystems,
+    services,
+    address
   );
+}
 
+function addPhones(base, row) {
   base.phones = columnValue(row, "AG");
+}
 
-  const companyUrl = columnValue(row, "AI");
+function addURL(base, row) {
+  const rawURL = columnValue(row, "AI");
 
-  if (!companyUrl.match(NDrgx) && !companyUrl.match(spaceRgx))
-    base.url = companyUrl;
+  if (!rawURL.match(NDrgx) && !rawURL.match(spaceRgx)) base.url = rawURL;
+}
 
+function addTechnologies(base, row) {
   base.technologies = columnValue(row, "AP");
-  base.logo = columnValue(row, "BE");
-  base.socialMedia = columnValue(row, "BF");
+}
 
+function addLogo(base, row) {
+  base.logo = columnValue(row, "BE");
+}
+
+function addSocialMedia(base, row) {
+  base.socialMedia = columnValue(row, "BF");
+}
+
+function addClassification(base, row, cnae) {
   base.setClassification(columnValue(row, "BY"), cnae);
+}
+
+function addSize(base, row) {
   base.setCompanySize(columnValue(row, "BU"));
+}
+
+function companyGenerator(row, cnae) {
+  const base = beginNewCompany(row);
+  addPhones(base, row);
+  addURL(base, row);
+  addTechnologies(base, row);
+  addLogo(base, row);
+  addSocialMedia(base, row);
+  addClassification(base, row, cnae);
+  addSize(base, row);
 
   return base;
 }
