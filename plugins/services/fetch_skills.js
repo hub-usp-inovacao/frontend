@@ -26,24 +26,43 @@ const dotRgx = /^.+\..+$/; // match "bsa.legal" which is a valid url
 
 const checkUrl = (url) => !url.match(spaceRgx) && url.match(dotRgx);
 
-function skillGenerator(row) {
-  const base = new Skill(
-    capitalizeName(columnValue(row, "C")),
-    columnValue(row, "D"),
-    columnValue(row, "F"),
-    columnValue(row, "G")
-  );
+function beginNewSkill(row) {
+  const name = capitalizeName(columnValue(row, "C"));
+  const email = columnValue(row, "D");
+  const unities = columnValue(row, "F");
+  const campus = columnValue(row, "G");
 
+  return new Skill(name, email, unities, campus);
+}
+
+function addPhone(base, row) {
   base.phone = columnValue(row, "AE");
+}
+
+function addDescription(base, row) {
   base.descriptionsSkills = columnValue(row, "W");
   base.descriptionsServices = columnValue(row, "X");
   base.descriptionsEquipments = columnValue(row, "Y");
+}
+
+function addArea(base, row) {
   base.areaMajor = columnValue(row, "Z");
   base.areaMinors = columnValue(row, "AA");
-  base.keywords = columnValue(row, "AB");
-  base.lattes = columnValue(row, "AC");
-  base.limitDate = columnValue(row, "AJ");
+}
 
+function addKeywords(base, row) {
+  base.keywords = columnValue(row, "AB");
+}
+
+function addLattes(base, row) {
+  base.lattes = columnValue(row, "AC");
+}
+
+function addLimitDate(base, row) {
+  base.limitDate = columnValue(row, "AJ");
+}
+
+function addLabOrGroup(base, row) {
   base.pushLabOrGroup(
     columnValue(row, "J"),
     columnValue(row, "K"),
@@ -65,15 +84,33 @@ function skillGenerator(row) {
     columnValue(row, "S"),
     columnValue(row, "V")
   );
+}
 
+function addURL(base, row) {
   const skillUrl = columnValue(row, "L");
 
   if (checkUrl(skillUrl)) base.url = skillUrl;
+}
 
+function addPicture(base, row) {
   const picID = columnValue(row, "AD");
 
   if (picID != undefined && picID != "N/D")
     base.picture = `https://drive.google.com/uc?export=view&id=${picID}`;
+}
+
+function skillGenerator(row) {
+  const base = beginNewSkill(row);
+
+  addPhone(base, row);
+  addDescription(base, row);
+  addArea(base, row);
+  addKeywords(base, row);
+  addLattes(base, row);
+  addLimitDate(base, row);
+  addLabOrGroup(base, row);
+  addURL(base, row);
+  addPicture(base, row);
 
   return base;
 }
