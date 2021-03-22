@@ -25,25 +25,47 @@ const dotRgx = /.+\..+/; // match "bsa.legal" which is a valid url
 
 const checkUrl = (url) => !url.match(spaceRgx) && url.match(dotRgx);
 
-function pdiGenerator(row) {
-  const base = new PDI(
-    columnValue(row, "B"),
-    columnValue(row, "A"),
-    columnValue(row, "D"),
-    columnValue(row, "E"),
-    {
-      short: columnValue(row, "K"),
-      long: columnValue(row, "L"),
-    }
-  );
+function beginNewPDI(row) {
+  const name = columnValue(row, "B");
+  const category = columnValue(row, "A");
+  const campus = columnValue(row, "D");
+  const unity = columnValue(row, "E");
+  const description = {
+    short: columnValue(row, "K"),
+    long: columnValue(row, "L"),
+  };
 
+  return new PDI(name, category, campus, unity, description);
+}
+
+function addURL(base, row) {
   if (checkUrl(row[6])) base.url = columnValue(row, "G");
+}
 
-  base._knowledge = columnValue(row, "M");
+function addKeywords(base, row) {
   base.keywords = columnValue(row, "O");
+}
+
+function addCoordinator(base, row) {
   base.coordinator = columnValue(row, "F");
+}
+
+function addEmail(base, row) {
   base.email = columnValue(row, "H");
+}
+
+function addPhone(base, row) {
   base.phone = columnValue(row, "I");
+}
+
+function pdiGenerator(row) {
+  const base = beginNewPDI(row);
+
+  addURL(base, row);
+  addKeywords(base, row);
+  addCoordinator(base, row);
+  addEmail(base, row);
+  addPhone(base, row);
 
   return base;
 }
