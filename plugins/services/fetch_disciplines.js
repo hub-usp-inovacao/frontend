@@ -20,25 +20,44 @@ async function fetchData(sheetsAPIKey) {
   }
 }
 
-function disciplineGenerator(row) {
-  const base = new Discipline(
-    columnValue(row, "B"),
-    columnValue(row, "C"),
-    columnValue(row, "D"),
-    {
-      short: columnValue(row, "H"),
-      long: columnValue(row, "G"),
-    },
-    columnValue(row, "I"),
-    columnValue(row, "A"),
-    columnValue(row, "F")
-  );
+function beginNewDiscipline(row) {
+  const name = columnValue(row, "B");
+  const campus = columnValue(row, "C");
+  const unity = columnValue(row, "D");
+  const description = {
+    short: columnValue(row, "H"),
+    long: columnValue(row, "G"),
+  };
+  const startData = columnValue(row, "I");
+  const nature = columnValue(row, "A");
+  const level = columnValue(row, "F");
 
+  return new Discipline(
+    name,
+    campus,
+    unity,
+    description,
+    startData,
+    nature,
+    level
+  );
+}
+
+function addURL(base, row) {
   base.url = columnValue(row, "E");
+}
+
+function addCategory(base, row) {
   base.categoryBusiness = columnValue(row, "K");
   base.categoryEntrepreneurship = columnValue(row, "L");
   base.categoryInnovation = columnValue(row, "M");
   base.categoryIntellectualProperty = columnValue(row, "N");
+}
+
+function disciplineGenerator(row) {
+  const base = beginNewDiscipline(row);
+  addURL(base, row);
+  addCategory(base, row);
 
   return base;
 }
