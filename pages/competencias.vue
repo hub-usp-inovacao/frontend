@@ -138,6 +138,12 @@ export default {
     MultipleFilters,
     DisplayData,
   },
+  async fetch() {
+    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
+
+    if (this.dataStatus == "ok" && this.skills.length == 0)
+      await this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
+  },
   data: () => ({
     search: {
       term: "",
@@ -153,6 +159,7 @@ export default {
     filters: undefined,
     filtered: undefined,
     queryParam: undefined,
+    routeParam: undefined,
 
     unities: undefined,
   }),
@@ -162,7 +169,6 @@ export default {
       isEmpty: "competencia/isEmpty",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
-      routeParam: "competencia/routeParam",
     }),
     tabs() {
       return this.$knowledgeAreas.map((area) => ({ ...area, description: "" }));
@@ -237,23 +243,22 @@ export default {
       this.pipeline();
     },
   },
-  async fetch() {
-    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
-
-    if (this.dataStatus == "ok" && this.skills.length == 0)
-      await this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
-
-    this.queryParam = this.$route.query;
-
-    console.log("Ó a rota: ", this.$route)
-  },
   beforeMount() {
+    const route = this.$route;
+
+    if (route.params.id) {
+      this.routeParam = this.skills.find(
+        (skill) => skill.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
     console.log("Query: ", this.queryParam);
 
     if (this.queryParam && this.queryParam.buscar) {
       this.search.term = this.queryParam.buscar;
     }
-
   },
   methods: {
     ...mapActions({
@@ -307,9 +312,9 @@ export default {
           ? this.$campi.find((c) => c.name == campi).unities
           : undefined;
 
-      this.filtered = this.skills.filter((skill) => {
-        return this.matchesFilter(skill, context)
-      });
+      this.filtered = this.skills.filter((skill) =>
+        this.matchesFilter(skill, context)
+      );
     },
     async pipeline() {
       if (this.filters) this.filterData(this.filters);
