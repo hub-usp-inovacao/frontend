@@ -32,7 +32,9 @@ function companyGenerator(row, cnae) {
       long: columnValue(row, "BC") == "." ? "" : columnValue(row, "BC"),
     },
     ". Nenhum Nenhuma Não".split(" ").includes(columnValue(row, "AR")),
-    columnValue(row, "AR").split(";"),
+    columnValue(row, "AR")
+      .split(";")
+      .map((incub) => incub.trim()),
     columnValue(row, "BD") == "." ? "" : columnValue(row, "BD"),
     {
       venue: columnValue(row, "AJ"),
