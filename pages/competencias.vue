@@ -132,7 +132,6 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
-  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -153,6 +152,7 @@ export default {
 
     filters: undefined,
     filtered: undefined,
+    queryParam: undefined,
 
     unities: undefined,
   }),
@@ -162,7 +162,6 @@ export default {
       isEmpty: "competencia/isEmpty",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
-      queryParam: "competencia/queryParam",
       routeParam: "competencia/routeParam",
     }),
     tabs() {
@@ -244,9 +243,11 @@ export default {
     if (this.dataStatus == "ok" && this.skills.length == 0)
       await this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
 
-    console.log("Ó as skills: ", this.skills)
+    this.queryParam = this.$route.query;
+
+    console.log("Ó a rota: ", this.$route)
   },
-  created() {
+  beforeMount() {
     console.log("Query: ", this.queryParam);
 
     if (this.queryParam && this.queryParam.buscar) {
