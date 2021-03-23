@@ -238,17 +238,21 @@ export default {
       this.pipeline();
     },
   },
-  beforeMount() {
+  async fetch() {
     const env = { sheetsAPIKey: process.env.sheetsAPIKey };
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
-      this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
+      await this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
 
+    console.log("Ó as skills: ", this.skills)
+  },
+  created() {
     console.log("Query: ", this.queryParam);
 
     if (this.queryParam && this.queryParam.buscar) {
       this.search.term = this.queryParam.buscar;
     }
+
   },
   methods: {
     ...mapActions({
@@ -265,6 +269,36 @@ export default {
 
       this.search.skills = searchResult;
     },
+    matchesFilter(skill, { primary, secondary, terciary }) {
+      let primaryMatch = true;
+      let secondaryMatch = true;
+      let terciaryMatch = true;
+
+      if (primary.length > 0) {
+        primaryMatch = skill.area.major.some((major) =>
+          primary.includes(major)
+        );
+      }
+
+      if (secondary.length > 0) {
+        secondaryMatch = skill.area.minors.some((minor) =>
+          secondary.includes(minor)
+        );
+      }
+
+      const [campus, unity] = terciary;
+
+      if (campus) {
+        terciaryMatch = skill.campus === campus;
+      }
+
+      if (unity) {
+        terciaryMatch = terciaryMatch && skill.unities.includes(unity);
+      }
+
+      return primaryMatch && secondaryMatch && terciaryMatch;
+    },
+
     filterData(context) {
       const campi = context.terciary[0];
       this.unities =
@@ -272,9 +306,9 @@ export default {
           ? this.$campi.find((c) => c.name == campi).unities
           : undefined;
 
-      this.filtered = this.skills.filter((skill) =>
-        skill.matchesFilter(context)
-      );
+      this.filtered = this.skills.filter((skill) => {
+        return this.matchesFilter(skill, context)
+      });
     },
     async pipeline() {
       if (this.filters) this.filterData(this.filters);
