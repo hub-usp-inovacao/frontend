@@ -149,7 +149,7 @@ export default {
     groups() {
       return [
         { label: "Cidade", items: this.cities },
-        { label: "Incubadora?", items: this.$Company.incubators },
+        { label: "Habitat de Inovação", items: this.$Company.incubators },
         { label: "Porte", items: this.$Company.sizes },
       ];
     },
