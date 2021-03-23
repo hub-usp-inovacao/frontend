@@ -12,6 +12,17 @@ export const getters = {
   companies: (s) => s.companies,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
+  incubators: (s) => {
+    return s.companies
+      .reduce((incubators, company) => {
+        const newIncubators = company.ecosystems.filter(
+          (incub) => !incubators.includes(incub)
+        );
+
+        return incubators.concat(newIncubators);
+      }, [])
+      .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+  },
   cities: (s) => {
     const cities = s.companies.reduce((all, company) => {
       return all.concat(

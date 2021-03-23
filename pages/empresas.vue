@@ -113,6 +113,7 @@ export default {
       dataStatus: "empresas/dataStatus",
       companies: "empresas/companies",
       searchKeys: "empresas/searchKeys",
+      incubators: "empresas/incubators",
       cities: "empresas/cities",
     }),
     searchTerm() {
@@ -149,7 +150,7 @@ export default {
     groups() {
       return [
         { label: "Cidade", items: this.cities },
-        { label: "Habitat de Inovação", items: this.$Company.incubators },
+        { label: "Habitat de Inovação", items: this.incubators },
         { label: "Porte", items: this.$Company.sizes },
       ];
     },
