@@ -16,6 +16,7 @@
     <Background />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#074744', active: '#0A8680' }"
@@ -117,7 +118,6 @@ import DisplayData from "@/components/first_level/DisplayData.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 
 export default {
-  middleware: "get_params",
   components: {
     Panel,
     MultipleFilters,
@@ -133,6 +133,8 @@ export default {
       term: "",
       companies: undefined,
     },
+    queryParam: undefined,
+    routeParam: undefined,
   }),
   computed: {
     ...mapGetters({
@@ -142,8 +144,6 @@ export default {
       incubators: "empresas/incubators",
       cities: "empresas/cities",
       isEmpty: "empresas/isEmpty",
-      queryParam: "empresas/queryParam",
-      routeParam: "empresas/routeParam",
     }),
     searchTerm() {
       return this.search.term;
@@ -207,6 +207,16 @@ export default {
     preSearch() {
       return this.queryParam ? this.queryParam.buscar : undefined;
     },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
+      return undefined;
+    },
   },
   watch: {
     isEmpty() {
@@ -224,12 +234,22 @@ export default {
     },
   },
   beforeMount() {
+    const route = this.$route;
+
     if (this.dataStatus == "ok" && this.companies.length == 0) {
       this.fetchSpreadsheets({
         sheetsAPIKey: process.env.sheetsAPIKey,
         sheetID: process.env.sheetID,
         cnae: this.$cnae,
       });
+    }
+
+    if (route.params.id) {
+      this.routeParam = this.companies.find(
+        (company) => company.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
     }
 
     if (this.queryParam && this.queryParam.buscar) {

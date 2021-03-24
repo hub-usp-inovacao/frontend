@@ -138,8 +138,6 @@ export default {
     MultipleFilters,
     DisplayData,
   },
-  async fetch() {
-  },
   data: () => ({
     search: {
       term: "",
