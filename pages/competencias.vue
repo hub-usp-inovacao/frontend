@@ -139,10 +139,6 @@ export default {
     DisplayData,
   },
   async fetch() {
-    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
-
-    if (this.dataStatus == "ok" && this.skills.length == 0)
-      await this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
   },
   data: () => ({
     search: {
@@ -244,7 +240,11 @@ export default {
     },
   },
   beforeMount() {
+    const env = { sheetsAPIKey: process.env.sheetsAPIKey };
     const route = this.$route;
+
+    if (this.dataStatus == "ok" && this.skills.length == 0)
+      this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
 
     if (route.params.id) {
       this.routeParam = this.skills.find(
@@ -253,8 +253,6 @@ export default {
     } else if (route.query && Object.keys(route.query).length > 0) {
       this.queryParam = route.query;
     }
-
-    console.log("Query: ", this.queryParam);
 
     if (this.queryParam && this.queryParam.buscar) {
       this.search.term = this.queryParam.buscar;
@@ -275,36 +273,6 @@ export default {
 
       this.search.skills = searchResult;
     },
-    matchesFilter(skill, { primary, secondary, terciary }) {
-      let primaryMatch = true;
-      let secondaryMatch = true;
-      let terciaryMatch = true;
-
-      if (primary.length > 0) {
-        primaryMatch = skill.area.major.some((major) =>
-          primary.includes(major)
-        );
-      }
-
-      if (secondary.length > 0) {
-        secondaryMatch = skill.area.minors.some((minor) =>
-          secondary.includes(minor)
-        );
-      }
-
-      const [campus, unity] = terciary;
-
-      if (campus) {
-        terciaryMatch = skill.campus === campus;
-      }
-
-      if (unity) {
-        terciaryMatch = terciaryMatch && skill.unities.includes(unity);
-      }
-
-      return primaryMatch && secondaryMatch && terciaryMatch;
-    },
-
     filterData(context) {
       const campi = context.terciary[0];
       this.unities =
@@ -313,7 +281,7 @@ export default {
           : undefined;
 
       this.filtered = this.skills.filter((skill) =>
-        this.matchesFilter(skill, context)
+        skill.matchesFilter(context)
       );
     },
     async pipeline() {
