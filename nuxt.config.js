@@ -4,6 +4,7 @@ export default {
   env: {
     sheetsAPIKey: process.env.sheetsAPIKey,
     sheetID: process.env.sheetID,
+    USPMULTI: process.env.USPMULTI,
   },
   ssr: true,
   target: "server",
