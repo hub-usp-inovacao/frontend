@@ -1,22 +1,18 @@
 import { PDI, PDIGenerator } from "@/lib/classes/pdi";
-import { findErrors } from "@/lib/errors/pdi";
 
 export const state = () => ({
   pdis: [],
   isLoading: false,
   errors: undefined,
   keys: PDI.keys,
-  queryParam: undefined,
-  routeParam: undefined,
 });
 
 export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   pdis: (state) => state.pdis,
+  isEmpty: (state) => state.pdis.length === 0,
   searchKeys: (state) => state.keys,
   errors: (s) => s.errors,
-  queryParam: (s) => s.queryParam,
-  routeParam: (s) => s.pdis.find((c) => c.id == s.routeParam),
 };
 
 export const mutations = {
@@ -32,8 +28,6 @@ export const mutations = {
   setErrors(s, errors) {
     s.errors = errors;
   },
-  setQueryParam: (s, query) => (s.queryParam = query),
-  setRouteParam: (s, id) => (s.routeParam = id),
 };
 
 export const actions = {
