@@ -43,7 +43,14 @@ export const actions = {
 
     const { disciplines, errors } = await this.$fetchDisciplines(env);
     ctx.commit("setErrors", errors);
-    ctx.commit("setDisciplines", disciplines);
+    ctx.commit(
+      "setDisciplines",
+      disciplines.sort((a, b) => {
+        const firstName = a.name.slice(a.name.indexOf("-") + 2);
+        const secondName = b.name.slice(b.name.indexOf("-") + 2);
+        return firstName.localeCompare(secondName);
+      })
+    );
 
     ctx.commit("unsetLoadingStatus");
   },
