@@ -39,10 +39,10 @@ function PatentGenerator(row) {
     columnValue(row, "M")
   );
 
-  base.url = columnValue(row, "N");
+  base.url = columnValue(row, "O");
   base.inventors = columnValue(row, "J");
   base.countriesWithProtection = columnValue(row, "L");
-  base.photo = columnValue(row, "O");
+  base.photo = columnValue(row, "P");
   return base;
 }
 
