@@ -66,10 +66,6 @@ function skillGenerator(row) {
     columnValue(row, "V")
   );
 
-  const skillUrl = columnValue(row, "L");
-
-  if (checkUrl(skillUrl)) base.url = skillUrl;
-
   const picID = columnValue(row, "AD");
 
   if (picID != undefined && picID != "N/D")
