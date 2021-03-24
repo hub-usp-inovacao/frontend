@@ -4,6 +4,7 @@
       <Panel
         title="Patentes"
         description="Os pesquisadores e estudantes da USP desenvolvem invenções que são protegidas por propriedade industrial - PI (patentes e registros de software). Estas PI estão disponíveis para organizações públicas e privadas que tenham interesse em licenciamento para aplicação e comercialização. Nesta plataforma, as PI estão organizadas por áreas tecnológicas e status (concedida, em análise e domínio público)."
+        :value="preSearch"
         @search="search.term = $event"
         @clear="search.patents = undefined"
       />
@@ -12,6 +13,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#5B2C7D', active: '#9247C9' }"
@@ -80,7 +82,6 @@ import DisplayData from "@/components/first_level/DisplayData.vue";
 import HorizontalList from "@/components/first_level/HorizontalList.vue";
 
 export default {
-  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -98,12 +99,8 @@ export default {
     selected_subareas: [],
     filters: undefined,
     filtered: undefined,
-    groups: [
-      {
-        label: "Status",
-        items: ["Concedida", "Em análise", "Domínio Público"],
-      },
-    ],
+    queryParam: undefined,
+    routeParam: undefined,
     rawTabs: [
       { name: "Necessidades Humanas", code: "A" },
       { name: "Operações de Processamento; Transporte", code: "B" },
@@ -121,9 +118,8 @@ export default {
     ...mapGetters({
       dataStatus: "patentes/dataStatus",
       patents: "patentes/patents",
+      isEmpty: "patentes/isEmpty",
       searchKeys: "patentes/searchKeys",
-      queryParam: "patentes/queryParam",
-      routeParam: "patentes/routeParam",
     }),
     searchTerm() {
       return this.search.term;
@@ -148,6 +144,15 @@ export default {
         };
       });
     },
+    groups() {
+      return [
+        {
+          label: "Status",
+          items: ["Concedida", "Em análise", "Domínio Público"],
+          preSelected: this.queryParam ? this.queryParam.status : undefined,
+        },
+      ];
+    },
     baseItems() {
       return this.filtered !== undefined ? this.filtered : this.patents;
     },
@@ -157,10 +162,36 @@ export default {
         : this.baseItems;
     },
     preSelected() {
-      return this.queryParam ? this.queryParam : this.routeParam;
+      if (this.queryParam && this.queryParam.nome) {
+        return this.displayItems.find(
+          (item) => item.name == this.queryParam.nome
+        );
+      }
+
+      return this.routeParam;
+    },
+    preSearch() {
+      return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
+      return undefined;
     },
   },
   watch: {
+    isEmpty() {
+      if (!this.isEmpty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
+      }
+    },
     searchTerm() {
       this.pipeline();
     },
@@ -170,9 +201,22 @@ export default {
   },
   beforeMount() {
     const env = { sheetsAPIKey: process.env.sheetsAPIKey };
+    const route = this.$route;
 
     if (this.dataStatus == "ok" && this.patents.length == 0) {
       this.fetchSpreadsheets(env);
+    }
+
+    if (route.params.id) {
+      this.routeParam = this.patents.find(
+        (patent) => patent.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
+    if (this.queryParam && this.queryParam.buscar) {
+      this.search.term = this.queryParam.buscar;
     }
   },
   methods: {
@@ -194,10 +238,9 @@ export default {
       const primaryCodes = context.primary.map(
         (filterTab) => this.tabs.find((tab) => tab.name == filterTab).code
       );
-      context.primary = primaryCodes;
 
       this.filtered = this.patents.filter((patent) =>
-        patent.matchesFilter(context)
+        patent.matchesFilter({ ...context, primary: primaryCodes })
       );
     },
     async pipeline() {
