@@ -97,7 +97,7 @@ export default {
         dest: "competencias",
         formsURL:
           "https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform",
-        formsCall: "Cadastre sua competência",
+        formsCall: "Cadastre suas competências",
       },
     ],
   }),

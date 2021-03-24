@@ -23,7 +23,7 @@
             :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
             class="font-weight-medium mb-8"
           >
-            Resultados de uma Universidade Inovadora e Empreendora
+            Resultados de uma Universidade Inovadora e Empreendedora
           </p>
 
           <p
