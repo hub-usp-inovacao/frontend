@@ -26,8 +26,8 @@ function disciplineGenerator(row) {
     columnValue(row, "C"),
     columnValue(row, "D"),
     {
-      short: columnValue(row, "H"),
-      long: columnValue(row, "G"),
+      short: columnValue(row, "G"),
+      long: columnValue(row, "H"),
     },
     columnValue(row, "I"),
     columnValue(row, "A"),
