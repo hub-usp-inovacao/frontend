@@ -46,7 +46,7 @@ export const actions = {
     ctx.commit("setErrors", errors);
     ctx.commit(
       "setIniciatives",
-      iniciatives.sort((a, b) => (a.name > b.name ? 1 : -1))
+      iniciatives.sort((a, b) => a.name.localeCompare(b.name))
     );
 
     ctx.commit("unsetLoadingStatus");
