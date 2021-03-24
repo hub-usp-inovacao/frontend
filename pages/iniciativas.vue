@@ -8,6 +8,7 @@
         forms-call="Confira os Editais"
         second-url="http://www.inovacao.usp.br/programas/"
         second-call="confira os Programas"
+        :value="preSearch"
         @search="search.term = $event"
         @clear="search.iniciatives = undefined"
       />
@@ -16,6 +17,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :colors="{ base: '#222c63', active: '#525c93' }"
       :groups="groups"
@@ -74,7 +76,6 @@ import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
-  middleware: "get_params",
   components: {
     Panel,
     Background,
@@ -131,20 +132,22 @@ export default {
 
     filters: undefined,
     filtered: undefined,
+    queryParam: undefined,
+    routeParam: undefined,
   }),
   computed: {
     ...mapGetters({
       iniciatives: "iniciativas/iniciatives",
+      isEmpty: "iniciativas/isEmpty",
       dataStatus: "iniciativas/dataStatus",
       searchKeys: "iniciativas/searchKeys",
-      queryParam: "iniciativas/queryParam",
-      routeParam: "iniciativas/routeParam",
     }),
     groups() {
       return [
         {
           label: "Campus",
           items: this.$campi.map((c) => c.name),
+          preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
       ];
     },
@@ -168,8 +171,28 @@ export default {
 
       return this.routeParam;
     },
+    preSearch() {
+      return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
+      return undefined;
+    },
   },
   watch: {
+    isEmpty() {
+      if (!this.isEmpty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
+      }
+    },
     searchTerm() {
       console.log(this.search.term);
       this.pipeline();
@@ -180,9 +203,22 @@ export default {
   },
   beforeMount() {
     const env = { sheetsAPIKey: process.env.sheetsAPIKey };
+    const route = this.$route;
 
     if (this.dataStatus == "ok" && this.iniciatives.length == 0) {
       this.fetchSpreadsheets(env);
+    }
+
+    if (route.params.id) {
+      this.routeParam = this.iniciatives.find(
+        (iniciative) => iniciative.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
+    if (this.queryParam && this.queryParam.buscar) {
+      this.search.term = this.queryParam.buscar;
     }
   },
   methods: {

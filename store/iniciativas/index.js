@@ -5,16 +5,13 @@ export const state = () => ({
   isLoading: false,
   errors: undefined,
   keys: Iniciative.keys,
-  queryParam: undefined,
-  routeParam: undefined,
 });
 
 export const getters = {
   iniciatives: (s) => s.iniciatives,
+  isEmpty: (s) => s.iniciatives.length === 0,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   searchKeys: (s) => s.keys,
-  queryParam: (s) => s.queryParam,
-  routeParam: (s) => s.iniciatives.find((c) => c.id == s.routeParam),
   campi: (s) => {
     const campi = s.iniciatives
       .reduce(
@@ -40,8 +37,6 @@ export const mutations = {
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setIniciatives: (s, newIniciatives) => (s.iniciatives = newIniciatives),
   setErrors: (s, errors) => (s.errors = errors),
-  setQueryParam: (s, query) => (s.queryParam = query),
-  setRouteParam: (s, id) => (s.routeParam = id),
 };
 
 export const actions = {
