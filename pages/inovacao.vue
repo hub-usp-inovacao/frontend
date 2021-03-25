@@ -29,7 +29,9 @@
         <p class="body-2 font-italic">{{ item.category }}</p>
         <p class="body-2">{{ item.unity }}</p>
         <p class="body-2">{{ item.campus }}</p>
-        <p v-if="item.coordinator" class="body-2">{{ item.coordinator }}</p>
+        <p v-if="item.coordinator" class="body-2">
+          Coordenador: {{ item.coordinator }}
+        </p>
         <p v-if="item.phone" class="body-2">{{ item.phone }}</p>
         <p v-if="item.email" class="body-2">{{ item.email }}</p>
       </template>
