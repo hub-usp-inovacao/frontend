@@ -8,7 +8,8 @@
         forms-call="Confira os Editais"
         second-url="http://www.inovacao.usp.br/programas/"
         second-call="confira os Programas"
-        @search="changeSearchTerm"
+        @search="search.term = $event"
+        @clear="search.iniciatives = undefined"
       />
     </div>
 
@@ -165,6 +166,7 @@ export default {
   },
   watch: {
     searchTerm() {
+      console.log(this.search.term);
       this.pipeline();
     },
     filters() {
@@ -199,17 +201,16 @@ export default {
       );
     },
     async pipeline() {
-      if (this.search.term.trim())
+      if (this.filters) this.filterData(this.filters);
+
+      if (this.search.term && this.search.term.trim()) {
         this.$ga.event({
           eventCategory: "Iniciativas",
           eventAction: "Search",
           eventLabel: this.search.term,
         });
-      if (this.filters) await this.filterData(this.filters);
-      this.fuzzySearch();
-    },
-    changeSearchTerm(searchTerm) {
-      this.search.term = searchTerm;
+        this.fuzzySearch();
+      }
     },
   },
 };

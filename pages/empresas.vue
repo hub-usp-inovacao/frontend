@@ -6,7 +6,8 @@
         description="Incubadoras e outras estruturas da Universidade facilitam a criação de empresas e negócios por parte de estudantes e pesquisadores. Estas são as empresas com DNA USP que estão organizadas, no Portal Hub USP Inovação, por áreas de atuação e tecnologias aplicáveis. Com o nosso mecanismo de busca, é possível consultar as empresas por palavras-chave ou CNAEs (Classificação Nacional de Atividades Econômicas)."
         url="https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing"
         forms-call="Cadastre sua empresa aqui"
-        @search="changeSearchTerm"
+        @search="search.term = $event"
+        @clear="search.companies = undefined"
       />
       <USPDNA />
     </div>
@@ -204,17 +205,16 @@ export default {
       );
     },
     async pipeline() {
-      if (this.search.term.trim())
+      if (this.filters) this.filterData(this.filters);
+
+      if (this.search.term && this.search.term.trim()) {
         this.$ga.event({
           eventCategory: "Empresas",
           eventAction: "Search",
           eventLabel: this.search.term,
         });
-      if (this.filters) await this.filterData(this.filters);
-      await this.fuzzySearch();
-    },
-    changeSearchTerm(searchTerm) {
-      this.search.term = searchTerm;
+        this.fuzzySearch();
+      }
     },
   },
 };
