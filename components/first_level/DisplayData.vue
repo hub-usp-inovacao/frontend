@@ -105,7 +105,7 @@ export default {
       return this.reverse && ["d-flex", "flex-column-reverse"];
     },
     imageColumn() {
-      return this.hasImage ? 4.9 : 0;
+      return this.hasImage ? 4 : 0;
     },
   },
 };
