@@ -34,6 +34,7 @@
               solo
               flat
               rounded
+              clearable
               color="tertiary"
               :label="'Buscar - ' + title"
               append-outer-icon="search"
@@ -41,6 +42,7 @@
               :loading="loading"
               :hint="hint"
               persistent-hint
+              @click:clear="clearSearch"
               @keydown.enter="submitSearch"
             ></v-text-field>
           </v-col>
@@ -151,6 +153,9 @@ export default {
   methods: {
     submitSearch() {
       this.$emit("search", this.value);
+    },
+    clearSearch() {
+      this.$emit("clear");
     },
   },
 };
