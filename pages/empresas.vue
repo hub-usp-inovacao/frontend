@@ -30,6 +30,10 @@
         <v-container>
           <p v-for="phone in item.phones" :key="phone">{{ phone }}</p>
           <p v-for="email in item.emails" :key="email">{{ email }}</p>
+          <p> {{item.address.venue}}</p>
+          <p> {{item.address.neightborhood}}</p>
+          <p> {{item.address.city.join(",")}} - {{item.address.state}}</p>
+          <p> {{item.address.cep}}</p>
         </v-container>
       </template>
       <template #detailsImg="{ item }">
