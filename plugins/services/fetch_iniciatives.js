@@ -1,6 +1,6 @@
 import Iniciative from "@/lib/classes/iniciative";
-import { findErrors } from "@/lib/errors/iniciativas";
-import { columnValue } from "@/lib/sheets";
+import {findErrors} from "@/lib/errors/iniciativas";
+import {columnValue} from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1MGRBDs-Bb2PGdyUkTN92dM5kqQuw5dtOpFHwAV1FQpA";
@@ -11,7 +11,7 @@ async function fetchData(sheetsAPIKey) {
       `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
     );
 
-    const { values } = await resp.json();
+    const {values} = await resp.json();
     return values;
   } catch (error) {
     console.log("error occuried while fetching...");
@@ -25,39 +25,66 @@ const dotRgx = /^.+\..+$/; // match "bsa.legal" which is a valid url
 
 const checkUrl = (url) => !url.match(spaceRgx) && url.match(dotRgx);
 
-function iniciatveGenerator(row) {
-  const base = new Iniciative(
-    columnValue(row, "B"),
-    columnValue(row, "A"),
-    {
-      short: columnValue(row, "C"),
-      long: columnValue(row, "H"),
-    },
-    columnValue(row, "E"),
-    columnValue(row, "I"),
-    columnValue(row, "K")
-  );
+function beginNewIniciative(row) {
+  const name = columnValue(row, "B");
+  const category = columnValue(row, "A");
+  const description = {
+    short: columnValue(row, "C"),
+    long: columnValue(row, "H"),
+  };
+  const unity = columnValue(row, "E");
+  const email = columnValue(row, "I");
+  const startDate = columnValue(row, "K");
 
+  return new Iniciative(name, category, description, unity, email, startDate);
+}
+
+function addLocal(base, row) {
   base.local = columnValue(row, "D");
+}
+
+function addKeywords(base, row) {
   base.keywords = columnValue(row, "F");
+}
+
+function addSocialMedia(base, row) {
   base.socialMedia = columnValue(row, "J");
+}
+
+function addServices(base, row) {
   base.services = columnValue(row, "N");
+}
+
+function addContact(base, row) {
   base.contactPerson = columnValue(row, "L");
   base.contactInfo = columnValue(row, "M");
+}
 
+function addURL(base, row) {
   const iniciativeUrl = columnValue(row, "G");
 
   if (checkUrl(iniciativeUrl)) base.url = iniciativeUrl;
+}
+
+function iniciatveGenerator(row) {
+  const base = beginNewIniciative(row);
+
+  addLocal(base, row);
+  addKeywords(base, row);
+  addSocialMedia(base, row);
+  addServices(base, row);
+  addContact(base, row);
+  addURL(base, row);
 
   return base;
 }
 
 export default (_, inject) => {
   inject("fetchIniciatives", async (payload) => {
-    const { sheetsAPIKey } = payload;
+    const {sheetsAPIKey} = payload;
 
     const values = await fetchData(sheetsAPIKey);
-    if (values == undefined) return { iniciatives: [], errors: [] };
+    if (values == undefined) return {iniciatives: [], errors: []};
 
     const iniciatives = values
       .slice(1)
@@ -75,6 +102,6 @@ export default (_, inject) => {
       .filter((i) => i !== null);
 
     const errors = findErrors(Object.assign([], iniciatives));
-    return { iniciatives, errors };
+    return {iniciatives, errors};
   });
 };
