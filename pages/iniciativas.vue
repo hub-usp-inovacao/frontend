@@ -3,7 +3,7 @@
     <div class="background">
       <Panel
         title="Iniciativas"
-        description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos links para conhecer os tipos de iniciativas e acessar as formas de contatar cada uma delas."
+        description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos ícones para conhecer os tipos de iniciativas e acessar as formas de contatar cada uma delas."
         url="http://www.inovacao.usp.br/editais/"
         forms-call="Confira os Editais"
         second-url="http://www.inovacao.usp.br/programas/"
