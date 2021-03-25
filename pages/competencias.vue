@@ -169,9 +169,6 @@ export default {
         ? this.search.skills
         : this.baseItems;
     },
-    displayMultipleUnities(unities) {
-      return unities.join(", ");
-    },
     searchTerm() {
       return this.search.term;
     },
