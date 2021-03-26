@@ -21,6 +21,7 @@
       :items="displayItems"
       group-name="Disciplinas"
       :selected="globalSearchSelected"
+      :has-image="false"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">

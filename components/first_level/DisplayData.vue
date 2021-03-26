@@ -8,7 +8,7 @@
         <template #content="{ item }">
           <v-container :class="containerClass">
             <v-row>
-              <v-col :cols="10 - imageColumn">
+              <v-col :cols="11 - imageColumn">
                 <slot name="detailsText" :item="item"></slot>
               </v-col>
               <v-col :cols="imageColumn" offset="1">
@@ -105,7 +105,7 @@ export default {
       return this.reverse && ["d-flex", "flex-column-reverse"];
     },
     imageColumn() {
-      return this.hasImage ? 4 : 0;
+      return this.hasImage ? 5 : 0;
     },
   },
 };
