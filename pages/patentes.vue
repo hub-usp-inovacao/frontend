@@ -4,7 +4,8 @@
       <Panel
         title="Patentes"
         description="Os pesquisadores e estudantes da USP desenvolvem invenções que são protegidas por propriedade industrial - PI (patentes e registros de software). Estas PI estão disponíveis para organizações públicas e privadas que tenham interesse em licenciamento para aplicação e comercialização. Nesta plataforma, as PI estão organizadas por áreas tecnológicas e status (concedida, em análise e domínio público)."
-        @search="changeSearchTerm"
+        @search="search.term = $event"
+        @clear="search.patents = undefined"
       />
     </div>
 
@@ -201,17 +202,16 @@ export default {
       );
     },
     async pipeline() {
-      if (this.search.term.trim())
+      if (this.filters) this.filterData(this.filters);
+
+      if (this.search.term && this.search.term.trim()) {
         this.$ga.event({
           eventCategory: "Patentes",
           eventAction: "Search",
           eventLabel: this.search.term,
         });
-      if (this.filters) await this.filterData(this.filters);
-      await this.fuzzySearch();
-    },
-    changeSearchTerm(searchTerm) {
-      this.search.term = searchTerm;
+        this.fuzzySearch();
+      }
     },
   },
 };

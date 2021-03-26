@@ -6,7 +6,8 @@
         description="As Empresas DNA USP estão organizadas nesta plataforma por: CNAEs (Classificação Nacional de Atividades Econômicas), cidade, habitats de inovação e porte."
         url="https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing"
         forms-call="Cadastre sua empresa aqui"
-        @search="changeSearchTerm"
+        @search="search.term = $event"
+        @clear="search.companies = undefined"
       />
       <USPDNA />
     </div>
@@ -204,17 +205,16 @@ export default {
       );
     },
     async pipeline() {
-      if (this.search.term.trim())
+      if (this.filters) this.filterData(this.filters);
+
+      if (this.search.term && this.search.term.trim()) {
         this.$ga.event({
           eventCategory: "Empresas",
           eventAction: "Search",
           eventLabel: this.search.term,
         });
-      if (this.filters) await this.filterData(this.filters);
-      await this.fuzzySearch();
-    },
-    changeSearchTerm(searchTerm) {
-      this.search.term = searchTerm;
+        this.fuzzySearch();
+      }
     },
   },
 };

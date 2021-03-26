@@ -4,7 +4,8 @@
       <Panel
         title="Educação"
         description="A USP oferece aos seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento, códigos e links para acesso às ementas nos sistemas institucionais, o Júpiter e o Janus."
-        @search="changeSearchTerm"
+        @search="search.term = $event"
+        @clear="search.disciplines = undefined"
       />
     </div>
 
@@ -176,17 +177,16 @@ export default {
       );
     },
     async pipeline() {
-      if (this.search.term.trim())
+      if (this.filters) this.filterData(this.filters);
+
+      if (this.search.term && this.search.term.trim()) {
         this.$ga.event({
           eventCategory: "Educação",
           eventAction: "Search",
           eventLabel: this.search.term,
         });
-      if (this.filters) await this.filterData(this.filters);
-      await this.fuzzySearch();
-    },
-    changeSearchTerm(searchTerm) {
-      this.search.term = searchTerm;
+        this.fuzzySearch();
+      }
     },
   },
 };
