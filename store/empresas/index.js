@@ -43,7 +43,7 @@ export const getters = {
         return set;
       }, {});
 
-    return Object.keys(citiesSet).sort();
+    return Object.keys(citiesSet).sort((a, b) => a.localeCompare(b));
   },
 };
 
