@@ -58,7 +58,26 @@
         </v-container>
       </template>
       <template #detailsImg="{ item }">
-        <v-img v-if="item.picture" eager :src="item.picture"></v-img>
+        <v-img
+          v-if="item.picture"
+          :key="item.picture"
+          :lazy-src="require('@/static/base_skill_picture.png')"
+          :src="item.picture"
+        >
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
+        <v-img
+          v-else
+          eager
+          :src="require('@/static/base_skill_picture.png')"
+        ></v-img>
       </template>
       <template #content="{ item }">
         <v-expansion-panels>
