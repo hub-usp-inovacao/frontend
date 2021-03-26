@@ -37,7 +37,26 @@
         </v-container>
       </template>
       <template #detailsImg="{ item }">
-        <v-img v-if="item.logo" eager :src="item.logo"></v-img>
+        <v-img
+          v-if="item.logo"
+          :key="item.logo"
+          :lazy-src="require('@/static/base_company_picture.jpg')"
+          :src="item.logo"
+        >
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
+        <v-img
+          v-else
+          eager
+          :src="require('@/static/base_company_picture.jpg')"
+        ></v-img>
       </template>
       <template #content="{ item }">
         <p v-if="item.incubated">
