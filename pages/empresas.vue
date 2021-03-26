@@ -50,17 +50,17 @@
         </p>
 
         <p v-if="item.companySize != ''">
-          <span class="font-weight-bold">Classificação</span>
+          <span class="font-weight-bold">Porte:</span>
           {{ item.companySize }}
         </p>
 
         <p>
-          <span class="font-weight-bold">Descrição</span>
+          <span class="font-weight-bold">Descrição:</span>
           {{ item.description.long }}
         </p>
 
         <p>
-          <span class="font-weight-bold">Produtos e Serviços</span>
+          <span class="font-weight-bold">Produtos e Serviços:</span>
           {{ item.services }}
         </p>
 
