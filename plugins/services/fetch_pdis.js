@@ -1,6 +1,7 @@
 import { PDI } from "@/lib/classes/pdi";
 import { findErrors } from "@/lib/errors/pdi";
 import { columnValue } from "@/lib/sheets";
+import { fetchCentrals } from "./fetch_centrais";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
@@ -93,6 +94,13 @@ export default (_, inject) => {
       .filter((p) => p !== null);
 
     const errors = findErrors(Object.assign([], pdis));
-    return { pdis, errors };
+
+    const centrais = await fetchCentrals({ USPMULTI: process.env.USPMULTI });
+
+    const all = pdis
+      .concat(centrais)
+      .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+    return { pdis: all, errors };
   });
 };
