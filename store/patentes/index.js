@@ -10,6 +10,7 @@ export const state = () => ({
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   patents: (s) => s.patents,
+  isEmpty: (s) => s.patents.length === 0,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
 };

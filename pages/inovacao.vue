@@ -6,6 +6,7 @@
         description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
         url="https://uspmulti.prp.usp.br/busca"
         forms-call="Confira Serviços Tecnológicos"
+        :value="preSearch"
         @search="search.term = $event"
         @clear="search.pdis = undefined"
       />
@@ -14,6 +15,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :colors="{ active: '#308C89', base: '#005C59' }"
       :groups="groups"
@@ -23,7 +25,7 @@
     <DisplayData
       :items="displayItems"
       group-name="P&D&I"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -113,11 +115,14 @@ export default {
 
     filters: undefined,
     filtered: undefined,
+    queryParam: undefined,
+    routeParam: undefined,
   }),
   computed: {
     ...mapGetters({
       dataStatus: "pdi/dataStatus",
       storePDIs: "pdi/pdis",
+      isEmpty: "pdi/isEmpty",
       searchKeys: "pdi/searchKeys",
     }),
     groups() {
@@ -125,6 +130,7 @@ export default {
         {
           label: "Campus",
           items: this.$campi.map((c) => c.name),
+          preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
       ];
     },
@@ -140,15 +146,37 @@ export default {
     displayItems() {
       return this.search.pdis !== undefined ? this.search.pdis : this.baseItems;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
+    preSelected() {
+      if (this.queryParam && this.queryParam.nome) {
         return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
+          (item) => item.name == this.queryParam.nome
         );
+      }
+
+      return this.routeParam;
+    },
+    preSearch() {
+      return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
       return undefined;
     },
   },
   watch: {
+    isEmpty() {
+      if (!this.isEmpty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
+      }
+    },
     searchTerm() {
       this.pipeline();
     },
@@ -158,9 +186,20 @@ export default {
   },
   beforeMount() {
     const payload = { sheetsAPIKey: process.env.sheetsAPIKey };
+    const route = this.$route;
 
     if (this.dataStatus == "ok" && this.pdis.length == 0)
       this.$store.dispatch("pdi/fetchSpreadsheets", payload);
+
+    if (route.params.id) {
+      this.routeParam = this.pdis.find((pdi) => pdi.id == route.params.id);
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
+    if (this.queryParam && this.queryParam.buscar) {
+      this.search.term = this.queryParam.buscar;
+    }
   },
   methods: {
     ...mapActions({

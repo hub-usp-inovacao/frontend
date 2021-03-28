@@ -10,6 +10,7 @@ export const state = () => ({
 export const getters = {
   dataStatus: (state) => (state.isLoading ? "loading" : "ok"),
   disciplines: (state) => state.disciplines,
+  isEmpty: (state) => state.disciplines.length === 0,
   campi: (state) => {
     return Array.from(
       state.disciplines.reduce(

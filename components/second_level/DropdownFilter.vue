@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import { removeAccent } from "@/lib/format";
 
 export default {
@@ -65,9 +64,6 @@ export default {
     noData: "Indisponível",
   }),
   computed: {
-    ...mapGetters({
-      isEmpty: "competencia/isEmpty",
-    }),
     colSize() {
       const nGroups = this.groups.length;
 
@@ -76,14 +72,20 @@ export default {
   },
   watch: {
     selected(list) {
+      console.log(list);
       this.$emit("select", list);
     },
-    isEmpty() {
-      if (!this.isEmpty && this.$route.query.unidade) {
-        this.selected[1] = this.$route.query.unidade;
-        this.$emit("select", this.selected);
+  },
+  beforeMount() {
+    this.groups.forEach(({ preSelected }, i) => {
+      if (preSelected) {
+        this.selected[i] = preSelected;
       }
-    },
+    });
+
+    if (this.selected.length > 0) {
+      this.$emit("select", this.selected);
+    }
   },
   methods: {
     customFilter(_item, queryText, itemText) {

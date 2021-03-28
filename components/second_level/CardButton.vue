@@ -68,6 +68,11 @@ export default {
       type: String,
       default: () => "#fa1283",
     },
+    preSelectedTabs: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
   },
   data: () => ({
     selected: [],
@@ -102,6 +107,17 @@ export default {
     selected(newList) {
       this.$emit("select", newList);
     },
+  },
+  beforeMount() {
+    if (this.preSelectedTabs) {
+      this.preSelectedTabs.forEach((preTab) => {
+        this.toggleTab(preTab);
+      });
+    }
+
+    if (this.selected.length > 0) {
+      this.$emit("select", this.selected);
+    }
   },
   methods: {
     toggleTab(tab) {

@@ -3,6 +3,7 @@
     <v-row>
       <v-col>
         <CardButton
+          :preSelectedTabs="preSelectedTabs"
           :tabs="tabs"
           :color="colors.base"
           :active="colors.active"
@@ -96,6 +97,11 @@ export default {
           typeof active === "string"
         );
       },
+    },
+    preSelectedTabs: {
+      type: Array,
+      required: false,
+      default: () => [],
     },
   },
   data: () => ({

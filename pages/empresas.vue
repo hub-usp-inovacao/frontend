@@ -6,6 +6,7 @@
         description="As Empresas DNA USP estão organizadas nesta plataforma por: CNAEs (Classificação Nacional de Atividades Econômicas), cidade, habitats de inovação e porte."
         url="https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing"
         forms-call="Cadastre sua empresa aqui"
+        :value="preSearch"
         @search="search.term = $event"
         @clear="search.companies = undefined"
       />
@@ -15,6 +16,7 @@
     <Background />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#074744', active: '#0A8680' }"
@@ -24,7 +26,7 @@
     <DisplayData
       :items="displayItems"
       group-name="Empresas"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -131,6 +133,8 @@ export default {
       term: "",
       companies: undefined,
     },
+    queryParam: undefined,
+    routeParam: undefined,
   }),
   computed: {
     ...mapGetters({
@@ -139,6 +143,7 @@ export default {
       searchKeys: "empresas/searchKeys",
       incubators: "empresas/incubators",
       cities: "empresas/cities",
+      isEmpty: "empresas/isEmpty",
     }),
     searchTerm() {
       return this.search.term;
@@ -173,20 +178,54 @@ export default {
     },
     groups() {
       return [
-        { label: "Cidade", items: this.cities },
-        { label: "Habitat de Inovação", items: this.incubators },
-        { label: "Porte", items: this.$Company.sizes },
+        {
+          label: "Cidade",
+          items: this.cities,
+          preSelected: this.queryParam ? this.queryParam.cidade : undefined,
+        },
+        {
+          label: "Habitat de Inovação",
+          items: this.incubators,
+          preSelected: this.queryParam ? this.queryParam.incubadora : undefined,
+        },
+        {
+          label: "Porte",
+          items: this.$Company.sizes,
+          preSelected: this.queryParam ? this.queryParam.porte : undefined,
+        },
       ];
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
+    preSelected() {
+      if (this.queryParam && this.queryParam.nome) {
         return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
+          (item) => item.name == this.queryParam.nome
         );
+      }
+
+      return this.routeParam;
+    },
+    preSearch() {
+      return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
       return undefined;
     },
   },
   watch: {
+    isEmpty() {
+      if (!this.empty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
+      }
+    },
     searchTerm() {
       this.pipeline();
     },
@@ -195,12 +234,26 @@ export default {
     },
   },
   beforeMount() {
+    const route = this.$route;
+
     if (this.dataStatus == "ok" && this.companies.length == 0) {
       this.fetchSpreadsheets({
         sheetsAPIKey: process.env.sheetsAPIKey,
         sheetID: process.env.sheetID,
         cnae: this.$cnae,
       });
+    }
+
+    if (route.params.id) {
+      this.routeParam = this.companies.find(
+        (company) => company.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
+    if (this.queryParam && this.queryParam.buscar) {
+      this.search.term = this.queryParam.buscar;
     }
   },
   methods: {

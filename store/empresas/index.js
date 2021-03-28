@@ -10,6 +10,7 @@ export const state = () => ({
 export const getters = {
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   companies: (s) => s.companies,
+  isEmpty: (s) => s.companies.length === 0,
   searchKeys: (s) => s.keys,
   errors: (s) => s.errors,
   incubators: (s) => {

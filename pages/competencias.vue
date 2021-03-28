@@ -6,6 +6,7 @@
         description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. O Portal Solus utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua subárea (ex.: Matemática)."
         url="https://docs.google.com/forms/d/e/1FAIpQLSc-OmhsvBSUDBvx6uR6cvI6zq01M-_7JqdX4ktcB9mLE3oWzw/viewform"
         forms-call="Cadastre suas competências"
+        :value="preSearch"
         @search="search.term = $event"
         @clear="search.skills = undefined"
       />
@@ -14,6 +15,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :colors="{ active: '#9b4c68', base: '#6b1c28' }"
       :groups="groups"
@@ -23,7 +25,7 @@
     <DisplayData
       :items="displayItems"
       group-name="Pesquisador"
-      :selected="globalSearchSelected"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -150,12 +152,15 @@ export default {
 
     filters: undefined,
     filtered: undefined,
+    queryParam: undefined,
+    routeParam: undefined,
 
     unities: undefined,
   }),
   computed: {
     ...mapGetters({
       dataStatus: "competencia/dataStatus",
+      isEmpty: "competencia/isEmpty",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
     }),
@@ -167,6 +172,7 @@ export default {
         {
           label: "Campus",
           items: this.$campi.map((c) => c.name),
+          preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
         {
           label: "Unidade",
@@ -178,6 +184,7 @@ export default {
                   }, [])
                   .sort()
               : this.unities,
+          preSelected: this.queryParam ? this.queryParam.unidade : undefined,
         },
       ];
     },
@@ -192,15 +199,37 @@ export default {
     searchTerm() {
       return this.search.term;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
+    preSelected() {
+      if (this.queryParam && this.queryParam.nome) {
         return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
+          (item) => item.name == this.queryParam.nome
         );
+      }
+
+      return this.routeParam;
+    },
+    preSearch() {
+      return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
       return undefined;
     },
   },
   watch: {
+    isEmpty() {
+      if (!this.isEmpty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
+      }
+    },
     searchTerm() {
       this.pipeline();
     },
@@ -210,9 +239,22 @@ export default {
   },
   beforeMount() {
     const env = { sheetsAPIKey: process.env.sheetsAPIKey };
+    const route = this.$route;
 
     if (this.dataStatus == "ok" && this.skills.length == 0)
       this.fetchSpreadsheets({ ...env, areas: this.$knowledgeAreas });
+
+    if (route.params.id) {
+      this.routeParam = this.skills.find(
+        (skill) => skill.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
+    if (this.queryParam && this.queryParam.buscar) {
+      this.search.term = this.queryParam.buscar;
+    }
   },
   methods: {
     ...mapActions({

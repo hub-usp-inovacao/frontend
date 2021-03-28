@@ -4,6 +4,7 @@
       <Panel
         title="Educação"
         description="A USP oferece aos seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento, códigos e links para acesso às ementas nos sistemas institucionais, o Júpiter e o Janus."
+        :value="preSearch"
         @search="search.term = $event"
         @clear="search.disciplines = undefined"
       />
@@ -12,6 +13,7 @@
     <Background class="absolute" />
 
     <MultipleFilters
+      :pre-selected-tabs="preSelectedTabs"
       :tabs="tabs"
       :groups="groups"
       :colors="{ base: '#db8337', active: '#ab5307' }"
@@ -21,8 +23,8 @@
     <DisplayData
       :items="displayItems"
       group-name="Disciplinas"
-      :selected="globalSearchSelected"
       :has-image="false"
+      :selected="preSelected"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -96,11 +98,14 @@ export default {
     ],
     filters: undefined,
     filtered: undefined,
+    queryParam: undefined,
+    routeParam: undefined,
   }),
   computed: {
     ...mapGetters({
       dataStatus: "educacao/dataStatus",
       storeDisciplines: "educacao/disciplines",
+      isEmpty: "educacao/isEmpty",
       searchKeys: "educacao/searchKeys",
     }),
     disciplines: function () {
@@ -111,6 +116,7 @@ export default {
         {
           label: "Campus",
           items: this.$campi.map((c) => c.name),
+          preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
         {
           label: "Nível",
@@ -120,8 +126,13 @@ export default {
             "Preciso testar minha ideia!",
             "Tópicos avançados em Empreendedorismo",
           ],
+          preSelected: this.queryParam ? this.queryParam.nivel : undefined,
         },
-        { label: "Natureza", items: ["Graduação", "Pós-Graduação"] },
+        {
+          label: "Natureza",
+          items: ["Graduação", "Pós-Graduação"],
+          preSelected: this.queryParam ? this.queryParam.natureza : undefined,
+        },
       ];
     },
     baseItems() {
@@ -135,15 +146,37 @@ export default {
     searchTerm() {
       return this.search.term;
     },
-    globalSearchSelected() {
-      if (this.$route.params.id)
+    preSelected() {
+      if (this.queryParam && this.queryParam.nome) {
         return this.displayItems.find(
-          (item) => item.id === this.$route.params.id
+          (item) => item.name == this.queryParam.nome
         );
+      }
+
+      return this.routeParam;
+    },
+    preSearch() {
+      return this.queryParam ? this.queryParam.buscar : undefined;
+    },
+    preSelectedTabs() {
+      if (this.queryParam && this.queryParam.areas) {
+        return this.queryParam.areas
+          .split(";")
+          .map((area) => area.trim())
+          .filter((area) => area.trim().length > 0);
+      }
+
       return undefined;
     },
   },
   watch: {
+    isEmpty() {
+      if (!this.isEmpty) {
+        if (this.filters != undefined || this.searchTerm != "") {
+          this.pipeline();
+        }
+      }
+    },
     searchTerm() {
       this.pipeline();
     },
@@ -153,9 +186,22 @@ export default {
   },
   beforeMount() {
     const payload = { sheetsAPIKey: process.env.sheetsAPIKey };
+    const route = this.$route;
 
     if (this.dataStatus == "ok" && this.disciplines.length == 0)
       this.$store.dispatch("educacao/fetchSpreadsheets", payload);
+
+    if (route.params.id) {
+      this.routeParam = this.disciplines.find(
+        (discipline) => discipline.id == route.params.id
+      );
+    } else if (route.query && Object.keys(route.query).length > 0) {
+      this.queryParam = route.query;
+    }
+
+    if (this.queryParam && this.queryParam.buscar) {
+      this.search.term = this.queryParam.buscar;
+    }
   },
   methods: {
     ...mapActions({

@@ -9,6 +9,7 @@ export const state = () => ({
 
 export const getters = {
   iniciatives: (s) => s.iniciatives,
+  isEmpty: (s) => s.iniciatives.length === 0,
   dataStatus: (s) => (s.isLoading ? "loading" : "ok"),
   searchKeys: (s) => s.keys,
   campi: (s) => {
