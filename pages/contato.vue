@@ -185,7 +185,7 @@ export default {
             role: "Estag. - Comunicação",
           },
           {
-            src: "https://drive.google.com/uc?export=view&id=",
+            src: "https://drive.google.com/uc?export=view&id=1MeME1mU9H0ZVtbyJmHfNsm0fveFRG7F7",
             name: "Thaynná Souza",
             role: "Estag. - Comunicação",
           },
