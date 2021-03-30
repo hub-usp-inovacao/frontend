@@ -103,6 +103,13 @@
         >
       </template>
     </DisplayData>
+    <p
+      align="center"
+      justify="center"
+      class="grey--text font-weight-medium my-5"
+    >
+      As informações nesta seção são de responsabilidade de cada empresa.
+    </p>
   </div>
 </template>
 
