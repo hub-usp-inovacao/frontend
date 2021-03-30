@@ -37,8 +37,8 @@
                       contain
                       eager
                       aspect-ratio="1"
-                      width="30rem"
-                      height="30rem"
+                      width="26rem"
+                      height="26rem"
                       :src="require('@/static/hub_logo.svg')"
                       alt="Hub USP Inovação"
                     ></v-img>
