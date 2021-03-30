@@ -36,12 +36,11 @@
                     <v-img
                       contain
                       eager
-                      aspect-ratio="4"
-                      max-height="25%"
-                      position="left"
-                      class="mb-4"
-                      :src="require('@/static/Solus_Branco.png')"
-                      alt="Portal Solus"
+                      aspect-ratio="1"
+                      width="30rem"
+                      height="30rem"
+                      :src="require('@/static/hub_logo.svg')"
+                      alt="Hub USP Inovação"
                     ></v-img>
                     <p
                       class="white--text font-weight-medium ma-0"

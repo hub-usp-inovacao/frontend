@@ -39,7 +39,7 @@ export default {
   data: () => ({
     title: "Respostas",
     description:
-      "Nessa seção, você encontra resultados de uma busca global dentro de todas as divisões do Portal Solus",
+      "Nessa seção, você encontra resultados de uma busca global dentro de todas as divisões do Portal Hub USP Inovação",
     categories: [
       { id: 1, title: "Competências", key: "skills" },
       { id: 2, title: "Educação", key: "disciplines" },

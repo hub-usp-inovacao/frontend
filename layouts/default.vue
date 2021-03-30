@@ -37,7 +37,7 @@
 
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <v-snackbar :multi-line="true" :value="true" :timeout="-1">
-        Como está sendo sua experiência com o Solus?
+        Como está sendo sua experiência com o Hub?
         <v-btn
           class="ml-2"
           href="https://forms.gle/TiEe6zYq9GsYgDww5"

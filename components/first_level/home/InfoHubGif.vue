@@ -8,14 +8,14 @@
               :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
               class="font-weight-medium white--text mb-8"
             >
-              Solus: Encontre o que você procura
+              Hub USP Inovação: Encontre o que você procura
             </p>
 
             <p
               :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="white--text font-weight-light"
             >
-              O Portal Solus facilita a conexão entre a sociedade e a USP.
+              O Portal Hub USP Inovação facilita a conexão entre a sociedade e a USP.
               Simples e intuitivo, basta digitar palavras-chave na ferramenta de
               busca para obter os contatos de instituições, estruturas, empresas
               e pesquisadores especialistas nos assuntos de seu interesse.
