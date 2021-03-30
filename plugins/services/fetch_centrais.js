@@ -1,8 +1,8 @@
-import { PDI } from "@/lib/classes/pdi";
-import { formatURL } from "@/lib/format";
+import {PDI} from "@/lib/classes/pdi";
+import {formatURL} from "@/lib/format";
 
 function runForCentrais(args) {
-  const { nome, sigla, endereco, unidade, sobre, observacoes } = args;
+  const {nome, sigla, endereco, unidade, sobre, observacoes, id} = args;
 
   const name = `${sigla} - ${nome}`;
 
@@ -11,7 +11,10 @@ function runForCentrais(args) {
     campus = endereco.bairro === "Butantã" ? "Butantã" : "USP Leste";
   }
 
-  const long = `${sobre}${observacoes}`.replace(/^\n+/, "").replace(/\n/, " ");
+  const long =
+    sobre || observacoes
+      ? `${sobre}${observacoes}`.replace(/^\n+/, "").replace(/\n/, " ")
+      : "";
 
   const description = {
     short: "",
@@ -23,7 +26,8 @@ function runForCentrais(args) {
     "Centrais Multiusuário",
     campus,
     unidade.nome,
-    description
+    description,
+    id
   );
 
   base.phone = args.telefone1;
@@ -33,8 +37,14 @@ function runForCentrais(args) {
   return base;
 }
 
+function addServiceToCentral(service, centrals) {
+  const central = centrals.find((c) => c.central_id === service.central_id);
+
+  central.addService(service.nome);
+}
+
 export async function fetchCentrals(payload) {
-  const { USPMULTI } = payload;
+  const {USPMULTI} = payload;
   let objectsFromAPI = [];
 
   try {
@@ -42,10 +52,19 @@ export async function fetchCentrals(payload) {
     if (USPMULTI)
       centraisURL = "https://uspmulti.prp.usp.br/api/public/centrais";
 
-    const resp = await fetch(centraisURL);
-    const data = await resp.json();
+    let servicosURL = "http://localhost:3001/servicos";
+    if (USPMULTI)
+      servicosURL = "https://uspmulti.prp.usp.br/api/public/servicos";
 
-    objectsFromAPI = data.map((d) => runForCentrais(d));
+    let resp = await fetch(centraisURL);
+    const centraisData = await resp.json();
+
+    resp = await fetch(servicosURL);
+    const servicosData = await resp.json();
+
+    objectsFromAPI = centraisData.map((d) => runForCentrais(d));
+
+    servicosData.forEach((svc) => addServiceToCentral(svc, objectsFromAPI));
   } catch (error) {
     console.log("error occuried while fetching from USP Multi...");
     console.log(error);
