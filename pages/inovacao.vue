@@ -112,7 +112,7 @@ export default {
         description: "",
       },
     ],
-
+    unities: undefined,
     filters: undefined,
     filtered: undefined,
     queryParam: undefined,
@@ -132,6 +132,16 @@ export default {
           items: this.$campi.map((c) => c.name),
           preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
+        {
+          label: "Unidade",
+          items:
+          this.unities == undefined 
+            ? this.$campi.reduce((acc,value) => {
+                return acc.concat(value.unities)
+              },[] ).sort()
+            : this.unities,
+          preSelected: this.queryParam ? this.queryParam.unidade : undefined,
+        }
       ];
     },
     searchTerm() {
@@ -216,6 +226,12 @@ export default {
       this.search.pdis = searchResult;
     },
     filterData(context) {
+      const campi = context.terciary[0];
+      this.unities =
+        campi != undefined
+          ? this.$campi.find((c) => c.name == campi).unities
+          : undefined;
+
       this.filtered = this.pdis.filter((pdi) => pdi.matchesFilter(context));
     },
     async pipeline() {
