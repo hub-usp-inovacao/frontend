@@ -62,10 +62,7 @@ export const actions = {
     const { companies, errors } = await this.$fetchCompanies(payload);
     ctx.commit("setErrors", errors);
 
-    ctx.commit(
-      "setCompanies",
-      companies.sort((a, b) => a.name.localeCompare(b.name))
-    );
+    ctx.commit("setCompanies", companies);
 
     ctx.commit("unsetLoadingStatus");
   },

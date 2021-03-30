@@ -1,6 +1,6 @@
 import Iniciative from "@/lib/classes/iniciative";
-import {findErrors} from "@/lib/errors/iniciativas";
-import {columnValue} from "@/lib/sheets";
+import { findErrors } from "@/lib/errors/iniciativas";
+import { columnValue } from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1MGRBDs-Bb2PGdyUkTN92dM5kqQuw5dtOpFHwAV1FQpA";
@@ -11,7 +11,7 @@ async function fetchData(sheetsAPIKey) {
       `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
     );
 
-    const {values} = await resp.json();
+    const { values } = await resp.json();
     return values;
   } catch (error) {
     console.log("error occuried while fetching...");
@@ -81,10 +81,10 @@ function iniciatveGenerator(row) {
 
 export default (_, inject) => {
   inject("fetchIniciatives", async (payload) => {
-    const {sheetsAPIKey} = payload;
+    const { sheetsAPIKey } = payload;
 
     const values = await fetchData(sheetsAPIKey);
-    if (values == undefined) return {iniciatives: [], errors: []};
+    if (values == undefined) return { iniciatives: [], errors: [] };
 
     const iniciatives = values
       .slice(1)
@@ -99,9 +99,10 @@ export default (_, inject) => {
 
         return iniciative;
       })
-      .filter((i) => i !== null);
+      .filter((i) => i !== null)
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     const errors = findErrors(Object.assign([], iniciatives));
-    return {iniciatives, errors};
+    return { iniciatives, errors };
   });
 };

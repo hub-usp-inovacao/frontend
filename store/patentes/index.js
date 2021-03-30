@@ -28,10 +28,7 @@ export const actions = {
 
     const { patents, errors } = await this.$fetchPatents(env);
     ctx.commit("setErrors", errors);
-    ctx.commit(
-      "setPatents",
-      patents.sort((a, b) => (a.name > b.name ? 1 : -1))
-    );
+    ctx.commit("setPatents", patents);
 
     ctx.commit("unsetLoadingStatus");
   },

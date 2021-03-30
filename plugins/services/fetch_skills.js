@@ -135,7 +135,10 @@ export default (_, inject) => {
 
         return skill;
       })
-      .filter((s) => s !== null && (!s.limitDate || s.limitDate > new Date()));
+      .filter((s) => s !== null && (!s.limitDate || s.limitDate > new Date()))
+      .sort((a, b) =>
+        a.name == b.name ? 0 : a.inspect.name < b.inspect.name ? -1 : 1
+      );
 
     const errors = findErrors(Object.assign([], skills), areas);
     return { skills, errors };

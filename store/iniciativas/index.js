@@ -45,10 +45,7 @@ export const actions = {
 
     const { iniciatives, errors } = await this.$fetchIniciatives(env);
     ctx.commit("setErrors", errors);
-    ctx.commit(
-      "setIniciatives",
-      iniciatives.sort((a, b) => a.name.localeCompare(b.name))
-    );
+    ctx.commit("setIniciatives", iniciatives);
 
     ctx.commit("unsetLoadingStatus");
   },

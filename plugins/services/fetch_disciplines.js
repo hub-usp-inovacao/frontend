@@ -1,6 +1,6 @@
 import Discipline from "@/lib/classes/discipline";
-import {findErrors} from "@/lib/errors/disciplinas";
-import {columnValue} from "@/lib/sheets";
+import { findErrors } from "@/lib/errors/disciplinas";
+import { columnValue } from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1AsmtnS5kY1mhXhNJH5QsCyg_WDnkGtARYB4nMdhyFLs";
@@ -11,7 +11,7 @@ async function fetchData(sheetsAPIKey) {
       `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
     );
 
-    const {values} = await resp.json();
+    const { values } = await resp.json();
     return values;
   } catch (error) {
     console.log("error occuried while fetching...");
@@ -64,10 +64,10 @@ function disciplineGenerator(row) {
 
 export default (_, inject) => {
   inject("fetchDisciplines", async (payload) => {
-    const {sheetsAPIKey} = payload;
+    const { sheetsAPIKey } = payload;
 
     const values = await fetchData(sheetsAPIKey);
-    if (values == undefined) return {disciplines: [], errors: []};
+    if (values == undefined) return { disciplines: [], errors: [] };
 
     const disciplines = values
       .slice(1)
@@ -82,9 +82,14 @@ export default (_, inject) => {
 
         return discipline;
       })
-      .filter((d) => d !== null);
+      .filter((d) => d !== null)
+      .sort((a, b) => {
+        const firstName = a.name.slice(a.name.indexOf("-") + 2);
+        const secondName = b.name.slice(b.name.indexOf("-") + 2);
+        return firstName.localeCompare(secondName);
+      });
 
     const errors = findErrors(Object.assign([], disciplines));
-    return {disciplines, errors};
+    return { disciplines, errors };
   });
 };

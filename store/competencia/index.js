@@ -50,12 +50,7 @@ export const actions = {
 
     const { skills, errors } = await this.$fetchSkills(payload);
     ctx.commit("setErrors", errors);
-    ctx.commit(
-      "setSkills",
-      skills.sort((a, b) =>
-        a.name == b.name ? 0 : a.inspect.name < b.inspect.name ? -1 : 1
-      )
-    );
+    ctx.commit("setSkills", skills);
 
     ctx.commit("unsetLoadingStatus");
   },

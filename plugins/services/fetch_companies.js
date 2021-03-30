@@ -118,7 +118,8 @@ export default (_, inject) => {
 
         return company;
       })
-      .filter((c) => c !== null && c.allowed && c.active);
+      .filter((c) => c !== null && c.allowed && c.active)
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     const errors = findErrors(Object.assign([], companies));
     return { companies, errors };

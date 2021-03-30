@@ -87,7 +87,8 @@ export default (_, inject) => {
 
         return patent;
       })
-      .filter((p) => p !== null);
+      .filter((p) => p !== null)
+      .sort((a, b) => (a.name > b.name ? 1 : -1));
 
     const errors = findErrors(Object.assign([], patents));
     return { patents, errors };
