@@ -71,10 +71,12 @@
           >
         </p>
 
-        <p v-if="item.companySize != ''">
-          <span class="font-weight-bold">Porte:</span>
-          {{ item.companySize }}
-        </p>
+        <div v-for="size of item.companySize" :key="size">
+          <p v-if="size != 'Unicórnio'">
+            <span class="font-weight-bold">Porte:</span>
+            {{ size }}
+          </p>
+        </div>
 
         <p>
           <span class="font-weight-bold">Descrição:</span>
