@@ -165,15 +165,29 @@ export default {
           },
           {
             src:
-              "https://drive.google.com/uc?export=view&id=1Eqmcp0gb-48XExknI_Ua-APXLlkABPFq",
-            name: "Rodrigo Olivetti",
-            role: "Empreendedorismo",
-          },
-          {
-            src:
               "https://drive.google.com/uc?export=view&id=186cZid7WcI4S4JFQoyL1vcetqe5siGPS",
             name: "Rosemeire Domingos",
             role: "Eventos",
+          },
+          {
+            src: "https://drive.google.com/uc?export=view&id=12Z_LXg1gl2rNs0pe7hT2HUAyKLHUxr1I",
+            name: "Livia Moraes",
+            role: "Comunicação",
+          },
+          {
+            src: "https://drive.google.com/uc?export=view&id=1WgWIKb8mlOSjXCwQfaAPYH1N9mhzCObm",
+            name: "Lucas Martins",
+            role: "Estag. - Comunicação",
+          },
+          {
+            src: "https://drive.google.com/uc?export=view&id=1T-Mt9NxkdxRULf-D7fk9CeWxvL4nC7Qs",
+            name: "Marcelo Renda",
+            role: "Estag. - Comunicação",
+          },
+          {
+            src: "https://drive.google.com/uc?export=view&id=",
+            name: "Thaynná Souza",
+            role: "Estag. - Comunicação",
           },
           {
             src:
@@ -189,39 +203,33 @@ export default {
           },
           {
             src:
-              "https://drive.google.com/uc?export=view&id=1GAPXXL6AnH_JubxcYUcV1fmUhbUkMlJn",
-            name: "Heidi Piva",
-            role: "Audiovisual",
-          },
-          {
-            src:
               "https://drive.google.com/uc?export=view&id=1K1AOJ4A-ZDyk3rlfHXUAo83kfQrma8CN",
             name: "Davi Bastos",
             role: "Estag. - Comunicação",
           },
           {
             src:
+              "https://drive.google.com/uc?export=view&id=1vCA0Q9vJUk9k1K4toUW0ftI1QZK6VC2G",
+            name: "Giovanni Watanabe",
+            role: "Estag. - Comunicação",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1GAPXXL6AnH_JubxcYUcV1fmUhbUkMlJn",
+            name: "Heidi Piva",
+            role: "Audiovisual",
+          },
+          {
+            src:
               "https://drive.google.com/uc?export=view&id=1vbNc3zcZYYqYdTrp4hWCQAu60nUsxJzy",
             name: "Fernanda Basso",
-            role: "Bolsista",
+            role: "Transferência de tecnologia",
           },
           {
             src:
               "https://drive.google.com/uc?export=view&id=1iV8Q_ZpLdkcracVhjcZg0tf8EqTfSb7N",
             name: "Liliane Sartorio",
             role: "Bolsista",
-          },
-          {
-            src:
-              "https://drive.google.com/uc?export=view&id=1n4NCqLDF61CA9BVRe30ZYpeLgxlW69Bm",
-            name: "Felipe Vogler",
-            role: "Bolsista",
-          },
-          {
-            src:
-              "https://drive.google.com/uc?export=view&id=1vCA0Q9vJUk9k1K4toUW0ftI1QZK6VC2G",
-            name: "Giovanni Watanabe",
-            role: "Estag. - Comunicação",
           },
           {
             src:
@@ -352,6 +360,12 @@ export default {
             src:
               "https://drive.google.com/uc?export=view&id=1pR6n-PoKt0-h4b0O6oQIEUhETnY7IWRx",
             name: "Thiago Guerrero",
+            role: "Desenvolvedor",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1C3tzKiG7_B_CZVKOt8dyPUWrwO3uYcE6",
+            name: "Luiz Carlos",
             role: "Desenvolvedor",
           },
           {
