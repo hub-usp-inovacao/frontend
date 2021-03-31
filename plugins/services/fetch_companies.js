@@ -82,7 +82,7 @@ function addClassification(base, row, cnae) {
 }
 
 function addSize(base, row) {
-  base.setCompanySize(columnValue(row, "BU"));
+  base.setCompanySize(columnValue(row, "BU"), columnValue(row, "BW"));
 }
 
 function companyGenerator(row, cnae) {

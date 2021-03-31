@@ -4,6 +4,7 @@ const companyConsts = {
     "Pequena Empresa",
     "Média Empresa",
     "Grande Empresa",
+    "Unicórnio",
     "Não Informado",
   ],
 };
