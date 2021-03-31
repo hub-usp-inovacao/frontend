@@ -45,22 +45,22 @@ export default {
     icons: [
       {
         label: "mdi-facebook",
-        url: "https://www.facebook.com/inovacaonausp/",
+        url: "https://www.facebook.com/uspinovacao1",
         color: "rgba(59,89,153 ,1 )",
       },
       {
         label: "mdi-twitter",
-        url: "https://twitter.com/inovacaonausp",
+        url: "https://twitter.com/uspinovacao",
         color: "#00aced",
       },
       {
         label: "mdi-linkedin",
-        url: "https://www.linkedin.com/in/inovacaonausp/",
+        url: "https://www.linkedin.com/company/uspinovacao",
         color: "#0e76a8",
       },
       {
         label: "mdi-instagram",
-        url: "http://www.instagram.com/inovacaonausp/",
+        url: "http://www.instagram.com/uspinovacao",
         color: "#C13584",
       },
       {
