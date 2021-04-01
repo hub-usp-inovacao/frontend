@@ -41,7 +41,7 @@
                       max-height="85%"
                       class="mb-4"
                       :src="require('@/static/hub_logo.svg')"
-                      alt="Hub USP Inovação"
+                      alt="Hub USPInovação"
                     ></v-img>
                     <p
                       class="font-weight-medium ma-0"

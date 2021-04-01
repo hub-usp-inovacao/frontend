@@ -37,7 +37,7 @@
 
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <v-snackbar :multi-line="true" :value="true" :timeout="-1">
-        Como está sendo sua experiência com o Hub USP Inovação?
+        Como está sendo sua experiência com o Hub USPInovação?
         <v-btn
           class="ml-2"
           href="https://forms.gle/TiEe6zYq9GsYgDww5"

@@ -9,7 +9,7 @@
     <!-- USP: Um lugar para empreender... -->
     <InfoUSP />
 
-    <!-- Hub USP Inovação: Encontre o que voce... -->
+    <!-- Hub USPInovação: Encontre o que voce... -->
     <InfoHubGif />
 
     <!-- DNA USP -->
@@ -103,7 +103,7 @@ export default {
     },
   },
   head: {
-    title: "Hub USP Inovação",
+    title: "Hub USPInovação",
     meta: [
       {
         name: "google-site-verification",
