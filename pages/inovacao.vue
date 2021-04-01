@@ -4,8 +4,6 @@
       <Panel
         title="P&amp;D&amp;I"
         description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
-        url="https://uspmulti.prp.usp.br/busca"
-        forms-call="Confira Serviços Tecnológicos"
         :value="preSearch"
         @search="search.term = $event"
         @clear="search.pdis = undefined"
@@ -39,7 +37,14 @@
         <p v-if="item.email" class="body-2">{{ item.email }}</p>
       </template>
       <template #content="{ item }">
-        {{ item.description.long }}
+        <div v-if="item.services.length > 0">
+          <p>Serviços Tecnológicos</p>
+          <ul>
+            <li v-for="svc of item.services" :key="svc">{{ svc }}</li>
+          </ul>
+        </div>
+        &nbsp;
+        <p>{{ item.description.long }}</p>
       </template>
       <template #actions="{ item }">
         <v-btn
