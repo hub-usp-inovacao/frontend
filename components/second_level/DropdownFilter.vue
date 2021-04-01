@@ -16,6 +16,7 @@
           :items="items"
           clearable
           :filter="customFilter"
+          autocomplete="disable"
         ></v-autocomplete>
       </v-col>
     </v-row>
