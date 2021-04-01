@@ -4,6 +4,7 @@
       <Panel
         title="Resultados de Busca"
         search-bar-color="white"
+        :value="innerSearch"
         @search="changeSearchTerm"
       />
     </div>
@@ -172,7 +173,6 @@ export default {
     } else {
       const env = {
         sheetsAPIKey: process.env.sheetsAPIKey,
-        sheetID: process.env.sheetID,
       };
 
       if (this.eduStatus == "ok" && this.disciplines.length == 0) {
@@ -184,7 +184,7 @@ export default {
       }
 
       if (this.skillsStatus == "ok" && this.skills.length == 0) {
-        this.fetchSkills(env);
+        this.fetchSkills({ ...env, areas: this.$knowledgeAreas });
       }
 
       if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
@@ -196,7 +196,7 @@ export default {
       }
 
       if (this.companiesStatus == "ok" && this.companies.length == 0) {
-        this.fetchCompanies(env);
+        this.fetchCompanies({ ...env, cnae: this.$cnae });
       }
     }
   },
@@ -265,10 +265,10 @@ export default {
       this.loading = false;
     },
     changeSearchTerm(searchTerm) {
-      if (searchTerm !== this.innerSearch) {
+      if (searchTerm && searchTerm !== this.innerSearch) {
         this.loading = true;
+        this.innerSearch = searchTerm;
       }
-      this.innerSearch = searchTerm;
     },
   },
 };
