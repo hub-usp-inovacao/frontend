@@ -51,9 +51,9 @@
           </v-col>
           <v-col cols="11" sm="5"></v-col>
         </v-row>
-        <v-row class="ml-4">
-          <v-col offset="1">UNIVERSIDADE DE SÃO PAULO</v-col>
-        </v-row>
+        <ContactSectionHeaderRow
+          section="Universidade de São Paulo"
+        ></ContactSectionHeaderRow>
         <v-row class="ml-4">
           <v-col offset="1">Reitor: Prof. Dr. Vahan Agopyan</v-col>
         </v-row>
@@ -170,22 +170,26 @@ export default {
             role: "Eventos",
           },
           {
-            src: "https://drive.google.com/uc?export=view&id=12Z_LXg1gl2rNs0pe7hT2HUAyKLHUxr1I",
+            src:
+              "https://drive.google.com/uc?export=view&id=12Z_LXg1gl2rNs0pe7hT2HUAyKLHUxr1I",
             name: "Livia Moraes",
             role: "Comunicação",
           },
           {
-            src: "https://drive.google.com/uc?export=view&id=1WgWIKb8mlOSjXCwQfaAPYH1N9mhzCObm",
+            src:
+              "https://drive.google.com/uc?export=view&id=1WgWIKb8mlOSjXCwQfaAPYH1N9mhzCObm",
             name: "Lucas Martins",
             role: "Estag. - Comunicação",
           },
           {
-            src: "https://drive.google.com/uc?export=view&id=1T-Mt9NxkdxRULf-D7fk9CeWxvL4nC7Qs",
+            src:
+              "https://drive.google.com/uc?export=view&id=1T-Mt9NxkdxRULf-D7fk9CeWxvL4nC7Qs",
             name: "Marcelo Renda",
             role: "Estag. - Comunicação",
           },
           {
-            src: "https://drive.google.com/uc?export=view&id=1MeME1mU9H0ZVtbyJmHfNsm0fveFRG7F7",
+            src:
+              "https://drive.google.com/uc?export=view&id=1MeME1mU9H0ZVtbyJmHfNsm0fveFRG7F7",
             name: "Thaynná Souza",
             role: "Estag. - Comunicação",
           },
