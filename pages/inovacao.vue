@@ -24,6 +24,7 @@
       :items="displayItems"
       group-name="P&D&I"
       :selected="preSelected"
+      :has-image="false"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
