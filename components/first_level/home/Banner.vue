@@ -40,7 +40,7 @@
                       width="20rem"
                       max-height="85%"
                       class="mb-4"
-                      :src="require('@/static/hub_logo.svg')"
+                      :src="require('@/vectors/hub_logo.svg')"
                       alt="Hub USPInovação"
                     ></v-img>
                     <p
