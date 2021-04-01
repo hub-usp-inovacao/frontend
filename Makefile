@@ -19,6 +19,7 @@ deploy:
 	git pull
 	git checkout $(BRANCH_NAME)
 	make build_prod
+	make stop_prod
 	make prod
 
 ## DEVELOPMENT TARGETS
