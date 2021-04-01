@@ -159,11 +159,6 @@ export default {
       },
       {
         src:
-          "https://drive.google.com/uc?export=view&id=1wI6qq7Ww32KM-q5gu-GK5q_O2UrXahBO",
-        name: "scopus",
-      },
-      {
-        src:
           "https://drive.google.com/uc?export=view&id=1zlmrxRA4SuFOgpY_apLJ_d2DeIOh7WEg",
         name: "sociedade_do_sol",
       },
