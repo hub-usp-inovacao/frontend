@@ -1,6 +1,7 @@
 DEVFILE = dev-compose.yaml
 PRODFILE = prod-compose.yaml
 TESTFILE = test-compose.yaml
+BRANCH_NAME = hub
 
 DC = docker-compose
 BG_FLAG = -d
@@ -12,6 +13,13 @@ STOP_SUBCMD = down
 
 .PHONY: build_dev build_prod dev prod stop_dev stop_prod test
 
+deploy:
+	git checkout master
+	git branch -D $(BRANCH_NAME)
+	git pull
+	git checkout $(BRANCH_NAME)
+	make build_prod
+	make prod
 
 ## DEVELOPMENT TARGETS
 
