@@ -117,8 +117,8 @@ export default {
 
       {
         label: "mdi-email",
-        description: "hub.uspinovacao@usp.br",
-        url: "mailto:hub.uspinovacao@usp.br",
+        description: "hubusp.inovacao@usp.br",
+        url: "mailto:hubusp.inovacao@usp.br",
         color: "#C13584",
       },
     ],

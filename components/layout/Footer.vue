@@ -18,7 +18,7 @@
 
     <div class="d-flex flex-column flex-md-row justify-center align-center">
       <div class="my-4 mx-2">(11) 3091-4166</div>
-      <div class="my-4 mx-2">hub.uspinovacao@usp.br</div>
+      <div class="my-4 mx-2">hubusp.inovacao@usp.br</div>
     </div>
 
     <v-container>
