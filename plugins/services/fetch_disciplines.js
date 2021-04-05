@@ -25,8 +25,8 @@ function beginNewDiscipline(row) {
   const campus = columnValue(row, "C");
   const unity = columnValue(row, "D");
   const description = {
-    short: columnValue(row, "H"),
-    long: columnValue(row, "G"),
+    short: columnValue(row, "G"),
+    long: columnValue(row, "H"),
   };
   const startData = columnValue(row, "I");
   const nature = columnValue(row, "A");
