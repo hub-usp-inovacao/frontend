@@ -96,6 +96,7 @@ export default {
         id: "business-filter",
       },
     ],
+    unities: undefined,
     filters: undefined,
     filtered: undefined,
     queryParam: undefined,
@@ -117,6 +118,16 @@ export default {
           label: "Campus",
           items: this.$campi.map((c) => c.name),
           preSelected: this.queryParam ? this.queryParam.campus : undefined,
+        },
+        {
+          label: "Unidade",
+          items:
+            this.unities == undefined
+              ? this.$campi.reduce((acc, value) => {
+                    return acc.concat(value.unities);
+                  }, []).sort()
+              : this.unities,
+          preSelected: this.queryParam ? this.queryParam.unidade : undefined,
         },
         {
           label: "Nível",
@@ -218,6 +229,13 @@ export default {
       this.search.disciplines = searchResult;
     },
     filterData(context) {
+      const campi = context.terciary[0];
+        this.unities =
+          campi != undefined
+            ? this.$campi.find((c) => c.name == campi).unities
+            : undefined;
+
+
       this.filtered = this.disciplines.filter((discipline) =>
         discipline.matchesFilter(context)
       );
