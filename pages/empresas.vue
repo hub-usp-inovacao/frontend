@@ -13,7 +13,7 @@
       <USPDNA />
     </div>
 
-    <Background />
+    <Background class="absolute" />
 
     <MultipleFilters
       :pre-selected-tabs="preSelectedTabs"

@@ -1,52 +1,45 @@
 <template>
-  <v-container fill-height fluid style="position: relative; min-height: 20rem">
-    <v-row class="ma-0 mt-12" align="center" justify="space-around" no-gutters>
+  <v-container fill-height style="position: relative; min-height: 20rem">
+    <v-row class="mt-12 px-1" align="center" justify="space-between">
       <v-col>
-        <v-row class="ma-0" justify="center">
-          <v-col cols="12" sm="9">
-            <p class="display-2 font-weight-regular">{{ title }}</p>
+        <p class="display-2 font-weight-regular">{{ title }}</p>
 
-            <p class="title font-weight-light" style="line-height: normal">
-              {{ description }}
-            </p>
+        <p class="title font-weight-light" style="line-height: normal">
+          {{ description }}
+        </p>
 
-            <p v-for="{ cURL, text } of callsToAction" :key="cURL">
-              <v-btn
-                rounded
-                color="secondary"
-                :href="cURL"
-                target="_blank"
-                :width="callToActionWidth"
-                >{{ text }}</v-btn
-              >
-            </p>
-          </v-col>
-        </v-row>
+        <p v-for="{ cURL, text } of callsToAction" :key="cURL">
+          <v-btn
+            rounded
+            color="secondary"
+            :href="cURL"
+            target="_blank"
+            :width="callToActionWidth"
+            >{{ text }}</v-btn
+          >
+        </p>
       </v-col>
 
       <v-col cols="11" sm="5" align-self="end">
-        <v-row class="ma-0">
-          <v-col>
-            <v-text-field
-              id="search-bar"
-              v-model="value"
-              :background-color="searchBarColor"
-              solo
-              flat
-              rounded
-              clearable
-              color="tertiary"
-              :label="'Buscar - ' + title"
-              append-outer-icon="search"
-              :style="setSearchBarWidth"
-              :loading="loading"
-              :hint="hint"
-              persistent-hint
-              @click:clear="clearSearch"
-              @keydown.enter="submitSearch"
-            ></v-text-field>
-          </v-col>
-        </v-row>
+        <v-text-field
+          id="search-bar"
+          v-model="value"
+          :background-color="searchBarColor"
+          solo
+          flat
+          rounded
+          clearable
+          full-width
+          color="tertiary"
+          :label="'Buscar - ' + title"
+          append-outer-icon="search"
+          :style="setSearchBarWidth"
+          :loading="loading"
+          :hint="hint"
+          persistent-hint
+          @click:clear="clearSearch"
+          @keydown.enter="submitSearch"
+        ></v-text-field>
       </v-col>
     </v-row>
   </v-container>
@@ -113,7 +106,7 @@ export default {
         case "sm":
           return { width: "80%" };
         default:
-          return { width: "70%" };
+          return { width: "100%" };
       }
     },
     hasCallToAction() {

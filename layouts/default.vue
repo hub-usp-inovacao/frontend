@@ -14,7 +14,7 @@
             v-for="(item, i) in items"
             :key="i"
             :to="item.to"
-            class="white--text mx-2 secondary py-4 px-6 subtitle-1"
+            class="white--text mx-1 my-2 secondary py-4 px-6 subtitle-1"
             >{{ item.title }}</v-chip
           >
         </v-chip-group>
