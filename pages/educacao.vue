@@ -96,6 +96,7 @@ export default {
         id: "business-filter",
       },
     ],
+    unities: undefined,
     filters: undefined,
     filtered: undefined,
     queryParam: undefined,
