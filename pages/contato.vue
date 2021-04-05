@@ -86,14 +86,14 @@ export default {
     icons: [
       {
         label: "mdi-facebook",
-        description: "/inovacaousp",
-        url: "https://www.facebook.com/inovacaonausp/",
+        description: "/uspinovacao1",
+        url: "https://www.facebook.com/uspinovacao1/",
         color: "rgba(59,89,153 ,1 )",
       },
       {
         label: "mdi-instagram",
-        description: "@inovacaousp",
-        url: "http://www.instagram.com/inovacaonausp/",
+        description: "@uspinovacao",
+        url: "http://www.instagram.com/uspinovacao/",
         color: "#C13584",
       },
       {
@@ -104,14 +104,14 @@ export default {
       },
       {
         label: "mdi-twitter",
-        description: "/inovacaousp",
-        url: "https://twitter.com/inovacaonausp",
+        description: "/uspinovacao",
+        url: "https://twitter.com/uspinovacao",
         color: "#00aced",
       },
       {
         label: "mdi-linkedin",
-        description: "/inovacaousp",
-        url: "https://www.linkedin.com/in/inovacaonausp/",
+        description: "/uspinovacao",
+        url: "https://www.linkedin.com/in/uspinovacao/",
         color: "#0e76a8",
       },
 
