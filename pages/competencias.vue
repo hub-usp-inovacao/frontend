@@ -40,6 +40,11 @@
           </v-row>
           <v-row>
             <v-col>
+              <span>{{ item.bond }}</span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <span>{{ item.email }}</span>
             </v-col>
           </v-row>
@@ -163,6 +168,7 @@ export default {
       isEmpty: "competencia/isEmpty",
       skills: "competencia/skills",
       searchKeys: "competencia/searchKeys",
+      bonds: "competencia/bonds",
     }),
     tabs() {
       return this.$knowledgeAreas.map((area) => ({ ...area, description: "" }));
@@ -185,6 +191,11 @@ export default {
                   .sort()
               : this.unities,
           preSelected: this.queryParam ? this.queryParam.unidade : undefined,
+        },
+        {
+          label: "Vínculo do Pesquisador",
+          items: this.bonds,
+          preSelected: this.queryParam ? this.queryParam.vinculo : undefined,
         },
       ];
     },

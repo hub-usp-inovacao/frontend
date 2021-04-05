@@ -86,6 +86,10 @@ function addLabOrGroup(base, row) {
   );
 }
 
+function addBond(base, row) {
+  base.bond = columnValue(row, "B");
+}
+
 function addURL(base, row) {
   const skillUrl = columnValue(row, "L");
 
@@ -111,6 +115,7 @@ function skillGenerator(row) {
   addLabOrGroup(base, row);
   addURL(base, row);
   addPicture(base, row);
+  addBond(base, row);
 
   return base;
 }

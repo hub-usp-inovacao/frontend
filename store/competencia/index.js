@@ -35,6 +35,10 @@ export const getters = {
         (unity, index, unities) =>
           index === unities.findIndex((other) => other == unity)
       ),
+  bonds: (s) =>
+    s.skills.reduce((acc, skill) => {
+      return acc.includes(skill.bond) ? acc : acc.concat(skill.bond);
+    }, []),
 };
 
 export const mutations = {
