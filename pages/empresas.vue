@@ -43,7 +43,7 @@
         <v-img
           v-if="item.logo"
           :key="item.logo"
-          :lazy-src="require('@/static/base_company_picture.jpg')"
+          :lazy-src="require('@/static/base_company_picture.png')"
           :src="item.logo"
         >
           <template v-slot:placeholder>
@@ -58,7 +58,7 @@
         <v-img
           v-else
           eager
-          :src="require('@/static/base_company_picture.jpg')"
+          :src="require('@/static/base_company_picture.png')"
         ></v-img>
       </template>
       <template #content="{ item }">
