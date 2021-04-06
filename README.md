@@ -1,4 +1,4 @@
-# Solus
+# Hub USPInovação
 
 > My hunky-dory Nuxt.js project
 

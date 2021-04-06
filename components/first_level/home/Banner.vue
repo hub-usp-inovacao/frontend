@@ -23,7 +23,7 @@
     >
       <v-row class="fill-height fit-page ma-0">
         <v-col
-          style="background-color: rgba(255, 177, 99, 0.9)"
+          style="background-color: rgba(255, 255, 255, 0.9)"
           cols="12"
           sm="10"
           md="7"
@@ -36,15 +36,15 @@
                     <v-img
                       contain
                       eager
-                      aspect-ratio="4"
-                      max-height="25%"
-                      position="left"
+                      aspect-ratio="1"
+                      width="20rem"
+                      max-height="85%"
                       class="mb-4"
-                      :src="require('@/static/Solus_Branco.png')"
-                      alt="Portal Solus"
+                      :src="require('@/vectors/hub_logo.svg')"
+                      alt="Hub USPInovação"
                     ></v-img>
                     <p
-                      class="white--text font-weight-medium ma-0"
+                      class="font-weight-medium ma-0"
                       :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
                     >
                       Aqui você encontra as mais diversas informações sobre
@@ -56,7 +56,7 @@
                 <v-row class="mt-8">
                   <v-col cols="10" offset="1">
                     <p
-                      class="white--text font-weight-light"
+                      class="font-weight-light"
                       :class="$breakpoint.smAndDown ? 'body-2' : 'body-1'"
                     >
                       Você pode navegar usando as páginas específicas ou fazer
@@ -68,12 +68,16 @@
                       solo
                       flat
                       rounded
-                      label="Buscar"
+                      background-color="#ffcb96"
                       append-outer-icon="search"
                       :dense="$breakpoint.smAndDown"
                       :style="setSearchBarWidth"
                       @keydown.enter="submitSearch"
-                    ></v-text-field>
+                    >
+                      <template v-slot:label>
+                        <p class="white--text font-weight-medium">Buscar</p>
+                      </template>
+                    </v-text-field>
                   </v-col>
                 </v-row>
               </v-col>
@@ -83,10 +87,10 @@
               <v-col cols="11" sm="10" offset="1">
                 <v-row>
                   <v-col cols="4" offset="1" md="2">
-                    <v-img :src="require('@/vectors/auspin-white.svg')"></v-img>
+                    <v-img :src="require('@/vectors/logo_auspin.svg')"></v-img>
                   </v-col>
                   <v-col cols="4" offset="1" md="2">
-                    <v-img :src="require('@/vectors/usp-white.svg')"></v-img>
+                    <v-img :src="require('@/vectors/logo_usp.svg')"></v-img>
                   </v-col>
                 </v-row>
               </v-col>

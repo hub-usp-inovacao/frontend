@@ -4,13 +4,13 @@
     <Banner @search="submitSearch" />
 
     <!-- Um lugar só com... -->
-    <InfoSolusBulletList />
+    <InfoHubBulletList />
 
     <!-- USP: Um lugar para empreender... -->
     <InfoUSP />
 
-    <!-- Solus: Encontre o que voce... -->
-    <InfoSolusGif />
+    <!-- Hub USPInovação: Encontre o que voce... -->
+    <InfoHubGif />
 
     <!-- DNA USP -->
     <InfoDNAUSP />
@@ -24,18 +24,18 @@
 import { mapActions, mapGetters } from "vuex";
 
 import Banner from "@/components/first_level/home/Banner.vue";
-import InfoSolusBulletList from "@/components/first_level/home/InfoSolusBulletList.vue";
+import InfoHubBulletList from "@/components/first_level/home/InfoHubBulletList.vue";
 import InfoUSP from "@/components/first_level/home/InfoUSP.vue";
-import InfoSolusGif from "@/components/first_level/home/InfoSolusGif.vue";
+import InfoHubGif from "@/components/first_level/home/InfoHubGif.vue";
 import InfoDNAUSP from "@/components/first_level/home/InfoDNAUSP.vue";
 import InfoAuspin from "@/components/first_level/home/InfoAuspin.vue";
 
 export default {
   components: {
     Banner,
-    InfoSolusBulletList,
+    InfoHubBulletList,
     InfoUSP,
-    InfoSolusGif,
+    InfoHubGif,
     InfoDNAUSP,
     InfoAuspin,
   },
@@ -103,7 +103,7 @@ export default {
     },
   },
   head: {
-    title: "Solus",
+    title: "Hub USPInovação",
     meta: [
       {
         name: "google-site-verification",

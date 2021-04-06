@@ -1,11 +1,11 @@
 <template>
-  <v-app>
+  <v-app style="background-color: #fcb415">
     <v-container fill-height>
       <v-row class="ma-0" align="center">
         <v-col cols="12" sm="7">
           <p
             :class="$breakpoint.smAndDown ? 'headline' : 'display-1'"
-            class="font-weight-medium"
+            class="white--text font-weight-medium"
           >
             Um lugar só com:
           </p>
@@ -18,7 +18,7 @@
             <v-col cols="12">
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                class="font-weight-light"
+                class="white--text font-weight-light"
               >
                 &bull; As diversas iniciativas e estruturas da USP;
               </p>
@@ -27,7 +27,7 @@
             <v-col cols="12">
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                class="font-weight-light"
+                class="white--text font-weight-light"
               >
                 &bull; Os pesquisadores e suas competências;
               </p>
@@ -36,7 +36,7 @@
             <v-col cols="12">
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                class="font-weight-light"
+                class="white--text font-weight-light"
               >
                 &bull; Todas as patentes que a USP detém e disponibiliza para
                 parceria com empresas e outras instituições interessadas;
@@ -46,7 +46,7 @@
             <v-col cols="12">
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                class="font-weight-light"
+                class="white--text font-weight-light"
               >
                 &bull; As disciplinas de graduação e pós-graduação sobre
                 empreendedorismo e inovação;
@@ -56,7 +56,7 @@
             <v-col cols="12">
               <p
                 :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
-                class="font-weight-light"
+                class="white--text font-weight-light"
               >
                 &bull; As empresas com DNA USP, criadas a partir de iniciativas
                 incubadas na USP ou que seus fundadores e criadores foram alunos

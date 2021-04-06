@@ -11,10 +11,24 @@
       <v-toolbar-items>
         <v-chip-group>
           <v-chip
+            to="/"
+            nuxt
+            class="white--text mx-2 secondary py-4 px-6 subtitle-1"
+          >
+            <v-img
+              contain
+              eager
+              width="30px"
+              height="30px"
+              :src="require('@/vectors/hub_graph_branco.svg')"
+              alt="Hub USPInovação"
+            ></v-img>
+          </v-chip>
+          <v-chip
             v-for="(item, i) in items"
             :key="i"
             :to="item.to"
-            class="white--text mx-1 my-2 secondary py-4 px-6 subtitle-1"
+            class="white--text mx-2 secondary py-4 px-6 subtitle-1"
             >{{ item.title }}</v-chip
           >
         </v-chip-group>
@@ -28,6 +42,9 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list nav dense>
         <v-list-item-group v-model="group">
+          <v-list-item to="/">
+            <v-list-item-title> Home </v-list-item-title>
+          </v-list-item>
           <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
@@ -37,16 +54,13 @@
 
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
       <v-snackbar :multi-line="true" :value="true" :timeout="-1">
-        Como está sendo sua experiência com o Solus?
+        Como está sendo sua experiência com o Hub USPInovação?
         <v-btn
           class="ml-2"
           href="https://forms.gle/TiEe6zYq9GsYgDww5"
           target="_blank"
           >Relate aqui</v-btn
         >
-        <p class="mt-4 font-weight-bold caption text-center">
-          Em breve: migração para o domínio usp.br
-        </p>
       </v-snackbar>
       <nuxt />
     </v-main>
@@ -64,10 +78,6 @@ export default {
   data: () => ({
     activeItem: 0,
     items: [
-      {
-        title: "Home",
-        to: "/",
-      },
       {
         title: "Iniciativas",
         to: "/iniciativas",
