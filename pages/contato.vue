@@ -51,18 +51,6 @@
           </v-col>
           <v-col cols="11" sm="5"></v-col>
         </v-row>
-        <ContactSectionHeaderRow
-          section="Universidade de São Paulo"
-        ></ContactSectionHeaderRow>
-        <v-row class="ml-4">
-          <v-col offset="1">Reitor: Prof. Dr. Vahan Agopyan</v-col>
-        </v-row>
-        <v-row class="ml-4">
-          <v-col offset="1">
-            Vice-reitor: Prof. Dr. Antonio Carlos Hernandes
-          </v-col>
-        </v-row>
-
         <div v-for="{ title, people } of sections" :key="title">
           <ContactSectionHeaderRow :section="title"></ContactSectionHeaderRow>
 
@@ -124,6 +112,23 @@ export default {
     ],
 
     sections: [
+      {
+        title: "Universidade de São Paulo",
+        people: [
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1hAslZXZaoZhT82NqwJfXQdVD46p30bye",
+            name: "Prof. Dr. Vahan Agopyan",
+            role: "Reitor",
+          },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1PEx6qH78PKm10nhX-M4zmTdFsw82fnOD",
+            name: "Prof. Dr. Antonio Carlos Hernandes",
+            role: "Vice-reitor",
+          },
+        ],
+      },
       {
         title: "AUSPIN - Agência USP de Inovação",
         people: [
