@@ -11,20 +11,6 @@
       <v-toolbar-items>
         <v-chip-group>
           <v-chip
-            to="/"
-            nuxt
-            class="white--text mx-2 secondary py-4 px-6 subtitle-1"
-          >
-            <v-img
-              contain
-              eager
-              width="30px"
-              height="30px"
-              :src="require('@/vectors/hub_graph_branco.svg')"
-              alt="Hub USPInovação"
-            ></v-img>
-          </v-chip>
-          <v-chip
             v-for="(item, i) in items"
             :key="i"
             :to="item.to"
