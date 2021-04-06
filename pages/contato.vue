@@ -1,7 +1,8 @@
 <template>
   <div>
+    <HubNavButton :margin="false" />
     <v-app>
-      <v-container fluid mt-12>
+      <v-container fluid>
         <v-row
           class="ma-0 mt-12"
           align="center"
@@ -61,11 +62,13 @@
 </template>
 
 <script>
+import HubNavButton from "@/components/first_level/HubNavButton.vue";
 import PeopleCardsRow from "@/components/first_level/PeopleCardsRow.vue";
 import ContactSectionHeaderRow from "@/components/first_level/ContactSectionHeaderRow.vue";
 
 export default {
   components: {
+    HubNavButton,
     PeopleCardsRow,
     ContactSectionHeaderRow,
   },

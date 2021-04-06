@@ -1,6 +1,7 @@
 <template>
   <div style="min-height: 100vh">
     <div class="background">
+      <HubNavButton />
       <Panel
         title="Competências"
         description="Nesta seção, você pode consultar quais as competências dos pesquisadores da USP, quem são e como contatá-los. A Plataforma Hub USPInovação utiliza como parâmetro de divisão de competências a Tabela das Áreas do Conhecimento apresentada pelo CNPq, e divide-as em dois níveis principais correspondentes, respectivamente, à área do conhecimento (ex.: Ciências Exatas e da Terra) e sua subárea (ex.: Matemática)."
@@ -133,12 +134,14 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
+import HubNavButton from "@/components/first_level/HubNavButton.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
+    HubNavButton,
     Background,
     MultipleFilters,
     DisplayData,

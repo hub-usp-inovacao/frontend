@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="background">
+      <HubNavButton />
       <Panel
         title="Empresas"
         description="As Empresas DNA USP estão organizadas nesta plataforma por: CNAEs (Classificação Nacional de Atividades Econômicas), cidade, habitats de inovação e porte."
@@ -124,6 +125,7 @@ import { removeAccent } from "@/lib/format";
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
 import Panel from "@/components/first_level/Panel.vue";
+import HubNavButton from "@/components/first_level/HubNavButton.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
@@ -131,6 +133,7 @@ import BulletList from "@/components/first_level/BulletList.vue";
 export default {
   components: {
     Panel,
+    HubNavButton,
     MultipleFilters,
     Background,
     DisplayData,

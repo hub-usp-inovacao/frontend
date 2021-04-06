@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="background">
+      <HubNavButton />
       <Panel
         title="Educação"
         description="A USP oferece aos seus estudantes diversas disciplinas em nível de graduação e pós-graduação que se relacionam aos temas de Empreendedorismo e Inovação. Ao fazer uma busca, você encontrará as unidades, as condições de oferecimento, códigos e links para acesso às ementas nos sistemas institucionais, o Júpiter e o Janus."
@@ -55,12 +56,14 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
+import HubNavButton from "@/components/first_level/HubNavButton.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
+    HubNavButton,
     Background,
     MultipleFilters,
     DisplayData,

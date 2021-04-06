@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="background">
+      <HubNavButton />
       <Panel
         title="P&amp;D&amp;I"
         description="Na seção de Pesquisa &amp; Desenvolvimento &amp; Inovação, você encontra laboratórios, organizações e programas que atuam com desenvolvimento e inovação no âmbito da USP. Aqui, você pode consultar informações e contatos de CEPIDs, EMBRAPIIs, INCTs e NAPs, de acordo com as áreas de competência e serviços realizados."
@@ -67,12 +68,14 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
+import HubNavButton from "@/components/first_level/HubNavButton.vue";
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
+    HubNavButton,
     Background,
     MultipleFilters,
     DisplayData,
