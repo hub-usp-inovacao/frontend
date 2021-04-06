@@ -33,6 +33,16 @@
         </v-card-subtitle>
       </v-card>
     </v-col>
+    <v-row v-if="!areNotesEmpty" justify="end" class="mt-4 mx-12">
+      <v-col
+        v-for="note in notes"
+        :key="note"
+        cols="8"
+        class="d-flex justify-end mx-16"
+      >
+        <p class="caption">{{ note }}</p>
+      </v-col>
+    </v-row>
   </v-row>
 </template>
 
@@ -42,6 +52,16 @@ export default {
     people: {
       type: Array,
       required: true,
+    },
+    notes: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+  },
+  computed: {
+    areNotesEmpty() {
+      return this.notes === undefined || this.notes.length === 0;
     },
   },
 };

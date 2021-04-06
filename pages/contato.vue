@@ -51,10 +51,9 @@
           </v-col>
           <v-col cols="11" sm="5"></v-col>
         </v-row>
-        <div v-for="{ title, people } of sections" :key="title">
+        <div v-for="{ title, people, notes } of sections" :key="title">
           <ContactSectionHeaderRow :section="title"></ContactSectionHeaderRow>
-
-          <PeopleCardsRow :people="people"></PeopleCardsRow>
+          <PeopleCardsRow :people="people" :notes="notes"></PeopleCardsRow>
         </div>
       </v-container>
     </v-app>
@@ -342,6 +341,9 @@ export default {
             name: "Tailane Santos",
             role: "Levantamento Competências",
           },
+        ],
+        notes: [
+          "O Levantamento de Competências teve apoio do Santander Universidades",
         ],
       },
       {
