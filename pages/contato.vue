@@ -117,20 +117,20 @@ export default {
         people: [
           {
             src:
-              "https://drive.google.com/uc?export=view&id=1hAslZXZaoZhT82NqwJfXQdVD46p30bye",
+              "https://drive.google.com/uc?export=view&id=1_eafRK7wfb7lss_sVVruYDT7Zcwz3SMk",
             name: "Prof. Dr. Vahan Agopyan",
             role: "Reitor",
           },
           {
             src:
-              "https://drive.google.com/uc?export=view&id=1PEx6qH78PKm10nhX-M4zmTdFsw82fnOD",
+              "https://drive.google.com/uc?export=view&id=1oUcQ0pXSi0zF3_6DS0hv_-QEVJo0_ujF",
             name: "Prof. Dr. Antonio Carlos Hernandes",
             role: "Vice-reitor",
           },
         ],
       },
       {
-        title: "AUSPIN - Agência USP de Inovação",
+        title: "Agência USP de Inovação - Equipe Hub",
         people: [
           {
             src:
@@ -361,7 +361,7 @@ export default {
           },
           {
             src:
-              "https://drive.google.com/uc?export=view&id=1jgOw_e3tjq8dY7pA8moJ0GDV4uKbO9kk",
+              "https://drive.google.com/uc?export=view&id=1kjC07rdhaESqPMQ_XYf1kt9G4PT5Rv9-",
             name: "Erick Santana",
             role: "Desenvolvedor",
           },
