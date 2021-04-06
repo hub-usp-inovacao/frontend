@@ -37,8 +37,7 @@
                       contain
                       eager
                       aspect-ratio="1"
-                      width="20rem"
-                      max-height="85%"
+                      width="16rem"
                       class="mb-4"
                       :src="require('@/vectors/hub_logo.svg')"
                       alt="Hub USPInovação"
