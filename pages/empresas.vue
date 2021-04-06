@@ -6,6 +6,8 @@
         description="As Empresas DNA USP estão organizadas nesta plataforma por: CNAEs (Classificação Nacional de Atividades Econômicas), cidade, habitats de inovação e porte."
         url="https://docs.google.com/forms/d/1q354be1_cPpeSIWVQkU2CXUpjUiyYuC0IU5W1_4W_zA/edit?usp=sharing"
         forms-call="Cadastre sua empresa aqui"
+        second-url="/DNA_manual.jpg"
+        second-call="Manual de uso da marca DNA USP"
         :value="preSearch"
         @search="search.term = $event"
         @clear="search.companies = undefined"
