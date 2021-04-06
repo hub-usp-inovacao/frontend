@@ -7,7 +7,7 @@
     no-gutters
   >
     <v-col
-      v-for="{ src, name, role } of people"
+      v-for="{ src, name, role, specialText } of people"
       :key="src"
       cols="8"
       md="3"
@@ -30,6 +30,7 @@
         </v-card-title>
         <v-card-subtitle class="text-center caption">
           {{ role }}
+          <p style="font-size: 11px">{{ specialText }}</p>
         </v-card-subtitle>
       </v-card>
     </v-col>
