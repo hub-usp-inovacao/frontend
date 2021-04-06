@@ -388,7 +388,7 @@ export default {
             src:
               "https://drive.google.com/uc?export=view&id=1OEbinkI-1gDBsdrOGBqiVQfk-3Azk6tw",
             name: "Evandro Nakayama",
-            role: "Desenvolvedor",
+            role: "Desenvolvedor (In Memoriam)",
           },
           {
             src:
