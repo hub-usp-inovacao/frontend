@@ -76,7 +76,6 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
-
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
@@ -85,7 +84,6 @@ import HorizontalList from "@/components/first_level/HorizontalList.vue";
 export default {
   components: {
     Panel,
-
     Background,
     MultipleFilters,
     BulletList,

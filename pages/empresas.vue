@@ -124,7 +124,6 @@ import { removeAccent } from "@/lib/format";
 import Background from "@/components/first_level/Background.vue";
 import USPDNA from "@/components/first_level/USPDNA.vue";
 import Panel from "@/components/first_level/Panel.vue";
-
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
@@ -132,7 +131,6 @@ import BulletList from "@/components/first_level/BulletList.vue";
 export default {
   components: {
     Panel,
-
     MultipleFilters,
     Background,
     DisplayData,

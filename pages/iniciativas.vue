@@ -72,14 +72,12 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
-
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
-
     Background,
     MultipleFilters,
     DisplayData,
