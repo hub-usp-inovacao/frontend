@@ -8,7 +8,7 @@
       :show-arrows="false"
     >
       <v-carousel-item v-for="(photo, i) in photos" :key="i">
-        <img style="min-width:100%; min-height: 100%" :src="photo" />
+        <img style="min-width: 100%; min-height: 100%" :src="photo" />
       </v-carousel-item>
     </v-carousel>
 
@@ -52,7 +52,7 @@
                   </v-col>
                 </v-row>
 
-                <v-row class="mt-8">
+                <v-row class="mt-4">
                   <v-col cols="10" offset="1">
                     <p
                       class="font-weight-light"
