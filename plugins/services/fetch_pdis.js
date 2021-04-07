@@ -71,7 +71,7 @@ function pdiGenerator(row) {
   return base;
 }
 
-export default (_, inject) => {
+export default ({ isDev }, inject) => {
   inject("fetchPDIs", async (payload) => {
     const { sheetsAPIKey } = payload;
 
@@ -95,7 +95,7 @@ export default (_, inject) => {
 
     const errors = findErrors(Object.assign([], pdis));
 
-    const centrais = await fetchCentrals({ USPMULTI: process.env.USPMULTI });
+    const centrais = await fetchCentrals(isDev);
 
     const all = pdis
       .concat(centrais)

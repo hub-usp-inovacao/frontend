@@ -1,8 +1,8 @@
-import {PDI} from "@/lib/classes/pdi";
-import {formatURL} from "@/lib/format";
+import { PDI } from "@/lib/classes/pdi";
+import { formatURL } from "@/lib/format";
 
 function runForCentrais(args) {
-  const {nome, sigla, endereco, unidade, sobre, observacoes, id} = args;
+  const { nome, sigla, endereco, unidade, sobre, observacoes, id } = args;
 
   const name = `${sigla} - ${nome}`;
 
@@ -43,18 +43,16 @@ function addServiceToCentral(service, centrals) {
   central.addService(service.nome);
 }
 
-export async function fetchCentrals(payload) {
-  const {USPMULTI} = payload;
+export async function fetchCentrals(isDev) {
   let objectsFromAPI = [];
 
   try {
-    let centraisURL = "http://localhost:3001/centrais";
-    if (USPMULTI)
-      centraisURL = "https://uspmulti.prp.usp.br/api/public/centrais";
+    const baseURL = isDev
+      ? "http://localhost:3001"
+      : "https://uspmulti.prp.usp.br/api/public";
 
-    let servicosURL = "http://localhost:3001/servicos";
-    if (USPMULTI)
-      servicosURL = "https://uspmulti.prp.usp.br/api/public/servicos";
+    const centraisURL = baseURL + "/centrais";
+    const servicosURL = baseURL + "/servicos";
 
     let resp = await fetch(centraisURL);
     const centraisData = await resp.json();
