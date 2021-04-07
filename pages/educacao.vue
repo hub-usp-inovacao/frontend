@@ -123,9 +123,11 @@ export default {
           label: "Unidade",
           items:
             this.unities == undefined
-              ? this.$campi.reduce((acc, value) => {
+              ? this.$campi
+                  .reduce((acc, value) => {
                     return acc.concat(value.unities);
-                  }, []).sort()
+                  }, [])
+                  .sort()
               : this.unities,
           preSelected: this.queryParam ? this.queryParam.unidade : undefined,
         },
@@ -230,11 +232,10 @@ export default {
     },
     filterData(context) {
       const campi = context.terciary[0];
-        this.unities =
-          campi != undefined
-            ? this.$campi.find((c) => c.name == campi).unities
-            : undefined;
-
+      this.unities =
+        campi != undefined
+          ? this.$campi.find((c) => c.name == campi).unities
+          : undefined;
 
       this.filtered = this.disciplines.filter((discipline) =>
         discipline.matchesFilter(context)

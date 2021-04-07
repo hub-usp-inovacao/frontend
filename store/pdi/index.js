@@ -1,4 +1,4 @@
-import { PDI, PDIGenerator } from "@/lib/classes/pdi";
+import { PDI } from "@/lib/classes/pdi";
 
 export const state = () => ({
   pdis: [],

@@ -146,7 +146,10 @@ export default {
       return [
         {
           label: "Campus",
-          items: this.$campi.map((c) => c.name).concat(["Toda a USP"]).sort(),
+          items: this.$campi
+            .map((c) => c.name)
+            .concat(["Toda a USP"])
+            .sort(),
           preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
       ];

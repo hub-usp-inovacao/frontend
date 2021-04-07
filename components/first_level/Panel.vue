@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height style="position: relative; min-height: 20rem">
-    <v-row class="mt-12 px-1" align="center" justify="space-between">
+    <v-row class="mt-5 px-1" align="center" justify="space-between">
       <v-col>
         <p class="display-2 font-weight-regular">{{ title }}</p>
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app>
-      <v-container fluid mt-12>
+      <v-container fluid>
         <v-row
           class="ma-0 mt-12"
           align="center"

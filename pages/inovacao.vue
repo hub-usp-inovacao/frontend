@@ -141,13 +141,15 @@ export default {
         {
           label: "Unidade",
           items:
-          this.unities == undefined 
-            ? this.$campi.reduce((acc,value) => {
-                return acc.concat(value.unities)
-              },[] ).sort()
-            : this.unities,
+            this.unities == undefined
+              ? this.$campi
+                  .reduce((acc, value) => {
+                    return acc.concat(value.unities);
+                  }, [])
+                  .sort()
+              : this.unities,
           preSelected: this.queryParam ? this.queryParam.unidade : undefined,
-        }
+        },
       ];
     },
     searchTerm() {

@@ -15,10 +15,11 @@
               :class="$breakpoint.smAndDown ? 'body-1' : 'title'"
               class="white--text font-weight-light"
             >
-              A Plataforma Hub USPInovação facilita a conexão entre a sociedade e a USP.
-              Simples e intuitivo, basta digitar palavras-chave na ferramenta de
-              busca para obter os contatos de instituições, estruturas, empresas
-              e pesquisadores especialistas nos assuntos de seu interesse.
+              A Plataforma Hub USPInovação facilita a conexão entre a sociedade
+              e a USP. Simples e intuitivo, basta digitar palavras-chave na
+              ferramenta de busca para obter os contatos de instituições,
+              estruturas, empresas e pesquisadores especialistas nos assuntos de
+              seu interesse.
             </p>
           </v-col>
 

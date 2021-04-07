@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <CardButton
-          :preSelectedTabs="preSelectedTabs"
+          :pre-selected-tabs="preSelectedTabs"
           :tabs="tabs"
           :color="colors.base"
           :active="colors.active"
