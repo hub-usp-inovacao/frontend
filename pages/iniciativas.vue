@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <HubNavButton />
       <Panel
         title="Iniciativas"
         description="A USP mantém diversas iniciativas e programas para facilitar e estimular a inovação e o empreendedorismo, fazendo a ponte entre o ambiente acadêmico, as organizações e a sociedade. Clique nos ícones para conhecer os tipos de iniciativas e acessar as formas de contatar cada uma delas."
@@ -73,14 +72,14 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
-import HubNavButton from "@/components/first_level/HubNavButton.vue";
+
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
 
 export default {
   components: {
     Panel,
-    HubNavButton,
+
     Background,
     MultipleFilters,
     DisplayData,
@@ -149,7 +148,10 @@ export default {
       return [
         {
           label: "Campus",
-          items: this.$campi.map((c) => c.name).concat(["Toda a USP"]).sort(),
+          items: this.$campi
+            .map((c) => c.name)
+            .concat(["Toda a USP"])
+            .sort(),
           preSelected: this.queryParam ? this.queryParam.campus : undefined,
         },
       ];

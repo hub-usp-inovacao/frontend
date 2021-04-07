@@ -1,5 +1,11 @@
 <template>
   <v-app>
+    <HubNavButton
+      v-if="path != '/'"
+      class="hidden-sm-and-down"
+      :margin="path == '/contato' ? false : true"
+      :background="path == '/contato' ? false : true"
+    />
     <v-toolbar
       class="hidden-sm-and-down d-flex justify-end"
       color="transparent"
@@ -35,6 +41,7 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
+        <HubNavButton :margin="false" :background="false" />
       </v-list>
     </v-navigation-drawer>
 
@@ -55,10 +62,12 @@
 </template>
 
 <script>
+import HubNavButton from "@/components/first_level/HubNavButton.vue";
 import Footer from "@/components/layout/Footer.vue";
 
 export default {
   components: {
+    HubNavButton,
     Footer,
   },
   data: () => ({
@@ -96,6 +105,11 @@ export default {
     drawer: false,
     group: "",
   }),
+  computed: {
+    path() {
+      return this.$route.path;
+    },
+  },
   head() {
     return {
       link: [

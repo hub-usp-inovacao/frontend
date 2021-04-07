@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div :class="backgroundClass">
     <v-container :class="containerClass">
       <v-card
         style="background-color: transparent"
@@ -29,6 +29,11 @@ export default {
       required: false,
       default: true,
     },
+    background: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   computed: {
     containerClass() {
@@ -38,6 +43,10 @@ export default {
       else if ((deviceSize != "lg" && deviceSize != "xl") || !this.margin)
         return "ml-0";
 
+      return "";
+    },
+    backgroundClass() {
+      if (this.background) return "background";
       return "";
     },
   },

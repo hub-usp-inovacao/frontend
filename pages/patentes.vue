@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <HubNavButton />
       <Panel
         title="Patentes"
         description="Os pesquisadores e estudantes da USP desenvolvem invenções que são protegidas por propriedade industrial - PI (patentes e registros de software). Estas PI estão disponíveis para organizações públicas e privadas que tenham interesse em licenciamento para aplicação e comercialização. Nesta plataforma, as PI estão organizadas por áreas tecnológicas e status (concedida, em análise e domínio público)."
@@ -77,7 +76,7 @@ import { removeAccent } from "@/lib/format";
 
 import Background from "@/components/first_level/Background.vue";
 import Panel from "@/components/first_level/Panel.vue";
-import HubNavButton from "@/components/first_level/HubNavButton.vue";
+
 import MultipleFilters from "@/components/first_level/MultipleFilters.vue";
 import BulletList from "@/components/first_level/BulletList.vue";
 import DisplayData from "@/components/first_level/DisplayData.vue";
@@ -86,7 +85,7 @@ import HorizontalList from "@/components/first_level/HorizontalList.vue";
 export default {
   components: {
     Panel,
-    HubNavButton,
+
     Background,
     MultipleFilters,
     BulletList,
