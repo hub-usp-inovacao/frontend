@@ -19,15 +19,15 @@ function readDB() {
 app.use(bodyParser.json());
 
 app.get("/centrais", (req, res) => {
-  const {centrais} = readDB();
+  const { centrais } = readDB();
 
-  res.json({centrais});
+  res.json([...centrais]);
 });
 
 app.get("/servicos", (req, res) => {
-  const {servicos} = readDB();
+  const { servicos } = readDB();
 
-  res.json({servicos});
+  res.json([...servicos]);
 });
 
 module.exports = app;

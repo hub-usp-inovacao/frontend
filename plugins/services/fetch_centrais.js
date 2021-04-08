@@ -47,7 +47,7 @@ export async function fetchCentrals(isDev) {
   let objectsFromAPI = [];
 
   let baseURL = isDev
-    ? "http://localhost:3001"
+    ? "http://localhost:3000"
     : "https://uspmulti.prp.usp.br/api/public";
 
   let centraisURL = baseURL + "/centrais";
