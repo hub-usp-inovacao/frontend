@@ -98,7 +98,7 @@ export default {
       }
       this.$router.push({
         name: "search_results",
-        params: { search: searchTerm },
+        query: { q: searchTerm },
       });
     },
   },
