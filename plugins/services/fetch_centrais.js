@@ -46,26 +46,40 @@ function addServiceToCentral(service, centrals) {
 export async function fetchCentrals(isDev) {
   let objectsFromAPI = [];
 
+  let baseURL = isDev
+    ? "http://localhost:3001"
+    : "https://uspmulti.prp.usp.br/api/public";
+
+  let centraisURL = baseURL + "/centrais";
+  let servicosURL = baseURL + "/servicos";
+
+  let resp, centraisData, servicosData;
+
   try {
-    const baseURL = isDev
-      ? "http://localhost:3001"
-      : "https://uspmulti.prp.usp.br/api/public";
-
-    const centraisURL = baseURL + "/centrais";
-    const servicosURL = baseURL + "/servicos";
-
-    let resp = await fetch(centraisURL);
-    const centraisData = await resp.json();
+    resp = await fetch(centraisURL);
+    centraisData = await resp.json();
 
     resp = await fetch(servicosURL);
-    const servicosData = await resp.json();
+    servicosData = await resp.json();
+  } catch (error) {
+    console.log("Error fetching from USPMulti...");
+    console.log(error);
+    console.log("Running fallback");
 
+    baseURL = "http://hubuspinovacao.if.usp.br";
+
+    centraisURL = baseURL + "/centrais";
+    servicosURL = baseURL + "/servicos";
+
+    resp = await fetch(centraisURL);
+    centraisData = await resp.json();
+
+    resp = await fetch(servicosURL);
+    servicosData = await resp.json();
+  } finally {
     objectsFromAPI = centraisData.map((d) => runForCentrais(d));
 
     servicosData.forEach((svc) => addServiceToCentral(svc, objectsFromAPI));
-  } catch (error) {
-    console.log("error occuried while fetching from USP Multi...");
-    console.log(error);
   }
 
   return objectsFromAPI;
