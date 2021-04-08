@@ -87,6 +87,9 @@ export default {
     search() {
       return this.innerSearch;
     },
+    query() {
+      return this.$route.query.q;
+    },
     results() {
       const [
         base_disciplines,
@@ -164,40 +167,45 @@ export default {
   },
   watch: {
     innerSearch() {
+      this.loading = true;
       setTimeout(this.dispatchSearch);
+    },
+    query() {
+      this.innerSearch = this.query;
     },
   },
   beforeMount() {
-    if (this.$route.params.search) {
-      this.changeSearchTerm(this.$route.params.search);
-    } else {
-      const env = {
-        sheetsAPIKey: process.env.sheetsAPIKey,
-      };
+    if (this.$route.query.q) {
+      this.loading = true;
+      this.innerSearch = this.$route.query.q;
+    }
 
-      if (this.eduStatus == "ok" && this.disciplines.length == 0) {
-        this.fetchDisciplines(env);
-      }
+    const env = {
+      sheetsAPIKey: process.env.sheetsAPIKey,
+    };
 
-      if (this.pdiStatus == "ok" && this.pdis.length == 0) {
-        this.fetchPDIs(env);
-      }
+    if (this.eduStatus == "ok" && this.disciplines.length == 0) {
+      this.fetchDisciplines(env);
+    }
 
-      if (this.skillsStatus == "ok" && this.skills.length == 0) {
-        this.fetchSkills({ ...env, areas: this.$knowledgeAreas });
-      }
+    if (this.pdiStatus == "ok" && this.pdis.length == 0) {
+      this.fetchPDIs(env);
+    }
 
-      if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
-        this.fetchIniciatives(env);
-      }
+    if (this.skillsStatus == "ok" && this.skills.length == 0) {
+      this.fetchSkills({ ...env, areas: this.$knowledgeAreas });
+    }
 
-      if (this.patentsStatus == "ok" && this.patents.length == 0) {
-        this.fetchPatents(env);
-      }
+    if (this.iniciativesStatus == "ok" && this.iniciatives.length == 0) {
+      this.fetchIniciatives(env);
+    }
 
-      if (this.companiesStatus == "ok" && this.companies.length == 0) {
-        this.fetchCompanies({ ...env, cnae: this.$cnae });
-      }
+    if (this.patentsStatus == "ok" && this.patents.length == 0) {
+      this.fetchPatents(env);
+    }
+
+    if (this.companiesStatus == "ok" && this.companies.length == 0) {
+      this.fetchCompanies({ ...env, cnae: this.$cnae });
     }
   },
   methods: {
@@ -266,8 +274,10 @@ export default {
     },
     changeSearchTerm(searchTerm) {
       if (searchTerm && searchTerm !== this.innerSearch) {
-        this.loading = true;
-        this.innerSearch = searchTerm;
+        this.$router.push({
+          name: "search_results",
+          query: { q: searchTerm },
+        });
       }
     },
   },
