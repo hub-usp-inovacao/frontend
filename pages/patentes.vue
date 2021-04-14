@@ -67,6 +67,14 @@
         >
       </template>
     </DisplayData>
+    <p
+      align="center"
+      justify="center"
+      class="grey--text font-weight-medium my-5"
+    >
+      O acesso ao detalhamento das Patentes no Derwent Innovation contou com o
+      apoio da Clarivate.
+    </p>
   </div>
 </template>
 
