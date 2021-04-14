@@ -343,7 +343,7 @@ export default {
           },
         ],
         notes: [
-          "O Levantamento de Competências teve apoio do Santander Universidades",
+          "O Levantamento de Competências contou com o apoio do Santander Universidades.",
         ],
       },
       {
