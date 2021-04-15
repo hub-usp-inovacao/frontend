@@ -341,6 +341,12 @@ export default {
             name: "Tailane Santos",
             role: "Levantamento Competências",
           },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1x15BWOJblJ3W9TcKa4NZgROKmAIyBasj",
+            name: "Filipe Bernardi",
+            role: "Levantamento Competências",
+          },
         ],
         notes: [
           "O Levantamento de Competências contou com o apoio do Santander Universidades.",
