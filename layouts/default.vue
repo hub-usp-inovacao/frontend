@@ -46,19 +46,24 @@
     </v-navigation-drawer>
 
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
-      <v-snackbar :multi-line="true" :value="snackbar" :timeout="-1">
+      <v-snackbar :multi-line="true" :value="snackbar" :timeout="-1" :vertical="true" class="d-flex ">
         Como está sendo sua experiência com o Hub USPInovação?
-        <v-btn
-          class="ml-2"
+        <div class="d-flex justify-center mt-3 ">
+          <v-btn
+          class="mr-8"
           href="https://forms.gle/TiEe6zYq9GsYgDww5"
           target="_blank"
           >Relate aqui</v-btn
         >
         <v-btn 
+          
           @click="snackbar = false"
           >
           Fechar
         </v-btn>
+        </div>
+        
+        
       </v-snackbar>
       <nuxt />
     </v-main>
