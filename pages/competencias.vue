@@ -26,6 +26,7 @@
       :items="displayItems"
       group-name="Pesquisador"
       :selected="preSelected"
+      @input="changeRouteQuery"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -304,6 +305,12 @@ export default {
         });
         this.fuzzySearch();
       }
+    },
+    changeRouteQuery({ name }) {
+      this.$router.replace({
+        name: "competencias",
+        query: { nome: name },
+      });
     },
   },
 };
