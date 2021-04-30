@@ -5,6 +5,7 @@
         title="Resultados de Busca"
         search-bar-color="white"
         :value="innerSearch"
+        :autoscroll="false"
         @search="changeSearchTerm"
       />
     </div>
