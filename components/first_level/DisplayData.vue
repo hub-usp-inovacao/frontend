@@ -1,7 +1,11 @@
 <template>
   <div id="display-data">
     <div class="hidden-sm-and-down">
-      <ListAndDetails :items="items" :selected="selected">
+      <ListAndDetails
+        :items="items"
+        :selected="selectedItem"
+        @input="selectedItem = $event"
+      >
         <template #itemTitle="{ item }">
           <slot name="title" :item="item"></slot>
         </template>
@@ -31,7 +35,7 @@
       <SelectAndCard
         :items="items"
         :group-name="groupName"
-        :selected="selected"
+        :selected="selectedItem"
       >
         <template #item="{ item }">
           <v-container>
@@ -100,12 +104,28 @@ export default {
       default: () => true,
     },
   },
+  data: () => ({
+    item: undefined,
+  }),
   computed: {
+    selectedItem: {
+      get() {
+        return this.item !== undefined ? this.item : this.selected;
+      },
+      set(newValue) {
+        this.item = newValue;
+      },
+    },
     containerClass() {
       return this.reverse && ["d-flex", "flex-column-reverse"];
     },
     imageColumn() {
       return this.hasImage ? 5 : 0;
+    },
+  },
+  watch: {
+    selectedItem() {
+      this.$emit("input", this.selectedItem);
     },
   },
 };

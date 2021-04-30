@@ -2,18 +2,22 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="5">
-        <List v-model="selected" :items="items" />
+        <List
+          v-model="selectedItem"
+          :items="items"
+          @input="selectedItem = $event"
+        />
       </v-col>
       <v-col cols="7">
-        <DetailsCard :item="selected">
+        <DetailsCard :item="selectedItem">
           <template v-slot:itemTitle>
-            <slot name="itemTitle" :item="selected"></slot>
+            <slot name="itemTitle" :item="selectedItem"></slot>
           </template>
           <template v-slot:content>
-            <slot name="content" :item="selected"></slot>
+            <slot name="content" :item="selectedItem"></slot>
           </template>
           <template v-slot:buttons>
-            <slot name="buttons" :item="selected"></slot>
+            <slot name="buttons" :item="selectedItem"></slot>
           </template>
         </DetailsCard>
       </v-col>
@@ -38,6 +42,24 @@ export default {
     selected: {
       type: Object,
       default: undefined,
+    },
+  },
+  data: () => ({
+    item: undefined,
+  }),
+  computed: {
+    selectedItem: {
+      get() {
+        return this.item !== undefined ? this.item : this.selected;
+      },
+      set(newValue) {
+        this.item = newValue;
+      },
+    },
+  },
+  watch: {
+    selectedItem() {
+      this.$emit("input", this.selectedItem);
     },
   },
 };
