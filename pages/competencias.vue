@@ -307,10 +307,14 @@ export default {
       }
     },
     changeRouteQuery({ name }) {
-      this.$router.replace({
-        name: "competencias",
-        query: { nome: name },
-      });
+      const currentName = this.queryParam?.nome;
+
+      if (currentName && currentName !== name) {
+        this.$router.replace({
+          name: "competencias",
+          query: { nome: name },
+        });
+      }
     },
   },
 };
