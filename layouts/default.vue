@@ -51,10 +51,9 @@
         :value="snackbar"
         :timeout="-1"
         :vertical="true"
-        class="d-flex"
       >
         Como está sendo sua experiência com o Hub USPInovação?
-        <div class="d-flex justify-center mt-3">
+        <div align="center" class="mt-3">
           <v-btn
             class="mr-8"
             href="https://forms.gle/TiEe6zYq9GsYgDww5"
