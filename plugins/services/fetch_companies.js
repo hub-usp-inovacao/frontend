@@ -27,14 +27,12 @@ function beginNewCompany(row) {
   const name = columnValue(row, "C");
   const year = columnValue(row, "E");
   const emails = columnValue(row, "H").split(";");
-  const rawDescription = columnValue(row, "N");
-  const description = { long: rawDescription == "." ? "" : rawDescription }; //
-  const incubated = ". Nenhum Nenhuma Não" //
+  const description = { long: columnValue(row, "N") };
+  const incubated = !". Nenhum Nenhuma Não"
     .split(" ")
-    .includes(columnValue(row, "AR"));
+    .includes(columnValue(row, "S"));
   const ecosystems = columnValue(row, "T").split(";");
-  const rawServices = columnValue(row, "O");
-  const services = rawServices == "." ? "" : rawServices; //
+  const services = columnValue(row, "O");
   const address = {
     venue: columnValue(row, "I"),
     neightborhood: columnValue(row, "J"),
