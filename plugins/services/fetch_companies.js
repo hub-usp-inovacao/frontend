@@ -4,7 +4,7 @@ import { columnValue } from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "14uwSMZee-CoIJyIpcEf4t17z6eYN-ElYgw_O7dtU5Ok";
-  const sheetName = "EMPRESAS";
+  const sheetName = "EMPRESAS_NOVO";
 
   try {
     const resp = await fetch(
@@ -24,23 +24,23 @@ const NDrgx = /(n\/d)/;
 const spaceRgx = /( )/;
 
 function beginNewCompany(row) {
-  const name = columnValue(row, "AC");
-  const year = columnValue(row, "AE");
-  const emails = columnValue(row, "AH").split(";");
-  const rawDescription = columnValue(row, "BC");
-  const description = { long: rawDescription == "." ? "" : rawDescription };
-  const incubated = ". Nenhum Nenhuma Não"
+  const name = columnValue(row, "C");
+  const year = columnValue(row, "E");
+  const emails = columnValue(row, "H").split(";");
+  const rawDescription = columnValue(row, "N");
+  const description = { long: rawDescription == "." ? "" : rawDescription }; //
+  const incubated = ". Nenhum Nenhuma Não" //
     .split(" ")
     .includes(columnValue(row, "AR"));
-  const ecosystems = columnValue(row, "AR").split(";");
-  const rawServices = columnValue(row, "BD");
-  const services = rawServices == "." ? "" : rawServices;
+  const ecosystems = columnValue(row, "T").split(";");
+  const rawServices = columnValue(row, "O");
+  const services = rawServices == "." ? "" : rawServices; //
   const address = {
-    venue: columnValue(row, "AJ"),
-    neightborhood: columnValue(row, "AK"),
-    city: columnValue(row, "AL").split(";"),
-    state: columnValue(row, "AM"),
-    cep: columnValue(row, "AN"),
+    venue: columnValue(row, "I"),
+    neightborhood: columnValue(row, "J"),
+    city: columnValue(row, "K").split(";"),
+    state: columnValue(row, "L"),
+    cep: columnValue(row, "M"),
   };
 
   return new Company(
@@ -56,33 +56,29 @@ function beginNewCompany(row) {
 }
 
 function addPhones(base, row) {
-  base.phones = columnValue(row, "AG");
+  base.phones = columnValue(row, "G");
 }
 
 function addURL(base, row) {
-  const rawURL = columnValue(row, "AI");
+  const rawURL = columnValue(row, "R");
 
   if (!rawURL.match(NDrgx) && !rawURL.match(spaceRgx)) base.url = rawURL;
 }
 
 function addTechnologies(base, row) {
-  base.technologies = columnValue(row, "AP");
+  base.technologies = columnValue(row, "P");
 }
 
 function addLogo(base, row) {
-  base.logo = columnValue(row, "BE");
-}
-
-function addSocialMedia(base, row) {
-  base.socialMedia = columnValue(row, "BF");
+  base.logo = columnValue(row, "Q");
 }
 
 function addClassification(base, row, cnae) {
-  base.setClassification(columnValue(row, "BY"), cnae);
+  base.setClassification(columnValue(row, "F"), cnae);
 }
 
 function addSize(base, row) {
-  base.setCompanySize(columnValue(row, "BU"), columnValue(row, "BW"));
+  base.setCompanySize(columnValue(row, "V"), columnValue(row, "U"));
 }
 
 function companyGenerator(row, cnae) {
@@ -91,7 +87,6 @@ function companyGenerator(row, cnae) {
   addURL(base, row);
   addTechnologies(base, row);
   addLogo(base, row);
-  addSocialMedia(base, row);
   addClassification(base, row, cnae);
   addSize(base, row);
 
