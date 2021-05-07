@@ -4,7 +4,7 @@ import { columnValue } from "@/lib/sheets";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "14uwSMZee-CoIJyIpcEf4t17z6eYN-ElYgw_O7dtU5Ok";
-  const sheetName = "EMPRESAS_NOVO";
+  const sheetName = "EMPRESAS";
 
   try {
     const resp = await fetch(
