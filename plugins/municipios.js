@@ -5573,8 +5573,8 @@ const rawMunicipiosBrasil = [
 
 const municipiosBrasil = rawMunicipiosBrasil.reduce((acc, municipio) => {
   const firstLetter = removeAccent(municipio)[0];
-  if (!acc[`${firstLetter}`]) acc[`${firstLetter}`] = [municipio];
-  else acc[`${firstLetter}`].push(municipio);
+  if (!acc[firstLetter]) acc[firstLetter] = [municipio];
+  else acc[firstLetter].push(municipio);
   return acc;
 }, {});
 
