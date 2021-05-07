@@ -101,7 +101,7 @@ function companyGenerator(row, cnae) {
 export default (app, inject) => {
   inject("fetchCompanies", async (payload) => {
     const { sheetsAPIKey, cnae } = payload;
-    const county = app.$municipios;
+    const counties = app.$municipios;
 
     const values = await fetchData(sheetsAPIKey);
     if (values == undefined) return { companies: [], errors: [] };
@@ -122,7 +122,7 @@ export default (app, inject) => {
       .filter((c) => c !== null && c.allowed && c.active)
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    const errors = findErrors(Object.assign([], companies), county);
+    const errors = findErrors(Object.assign([], companies), counties);
     return { companies, errors };
   });
 };

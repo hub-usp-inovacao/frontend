@@ -1,6 +1,6 @@
 import { removeAccent } from "@/lib/format";
 
-const rawMunicipiosBrasil = [
+const rawCounties = [
   "Alta Floresta D'Oeste",
   "Ariquemes",
   "Cabixi",
@@ -5571,13 +5571,13 @@ const rawMunicipiosBrasil = [
   "Brasília",
 ];
 
-const municipiosBrasil = rawMunicipiosBrasil.reduce((acc, municipio) => {
-  const firstLetter = removeAccent(municipio)[0];
-  if (!acc[firstLetter]) acc[firstLetter] = [municipio];
-  else acc[firstLetter].push(municipio);
+const counties = rawCounties.reduce((acc, county) => {
+  const firstLetter = removeAccent(county)[0];
+  if (!acc[firstLetter]) acc[firstLetter] = [county];
+  else acc[firstLetter].push(county);
   return acc;
 }, {});
 
 export default (_, inject) => {
-  inject("municipios", municipiosBrasil);
+  inject("municipios", counties);
 };
