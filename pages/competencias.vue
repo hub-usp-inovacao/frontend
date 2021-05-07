@@ -309,7 +309,7 @@ export default {
     changeRouteQuery({ name }) {
       const currentName = this.queryParam?.nome;
 
-      if (currentName && currentName !== name) {
+      if (currentName !== name) {
         this.$router.replace({
           name: "competencias",
           query: { nome: name },
