@@ -29,6 +29,7 @@
       group-name="Iniciativas"
       :selected="preSelected"
       :has-image="false"
+      @input="changeRouteQuery"
     >
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
@@ -254,6 +255,16 @@ export default {
           eventLabel: this.search.term,
         });
         this.fuzzySearch();
+      }
+    },
+    changeRouteQuery({ name }) {
+      const currentName = this.queryParam?.nome;
+
+      if (currentName !== name) {
+        this.$router.replace({
+          name: "iniciativas",
+          query: { nome: name },
+        });
       }
     },
   },
