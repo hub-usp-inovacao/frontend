@@ -38,7 +38,7 @@
           :hint="hint"
           persistent-hint
           @click:clear="clearSearch"
-          @keydown.enter="submitSearch"
+          @keydown.enter="scroll(submitSearch)"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -87,6 +87,11 @@ export default {
       type: String,
       required: false,
       default: "",
+    },
+    autoscroll: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
   },
   computed: {
@@ -144,6 +149,10 @@ export default {
     }, 1000),
   },
   methods: {
+    scroll(method) {
+      if (this.autoscroll) this.$vuetify.goTo("#display-data").then(method);
+      else method();
+    },
     submitSearch() {
       this.$emit("search", this.value);
     },
