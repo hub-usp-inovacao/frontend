@@ -46,14 +46,22 @@
     </v-navigation-drawer>
 
     <v-main :class="$vuetify.breakpoint.smAndDown ? 'mt-12' : ''">
-      <v-snackbar :multi-line="true" :value="true" :timeout="-1">
+      <v-snackbar
+        :multi-line="true"
+        :value="snackbar"
+        :timeout="-1"
+        :vertical="true"
+      >
         Como está sendo sua experiência com o Hub USPInovação?
-        <v-btn
-          class="ml-2"
-          href="https://forms.gle/TiEe6zYq9GsYgDww5"
-          target="_blank"
-          >Relate aqui</v-btn
-        >
+        <div align="center" class="mt-3">
+          <v-btn
+            class="mr-8"
+            href="https://forms.gle/TiEe6zYq9GsYgDww5"
+            target="_blank"
+            >Relate aqui</v-btn
+          >
+          <v-btn @click="snackbar = false"> Fechar </v-btn>
+        </div>
       </v-snackbar>
       <nuxt />
     </v-main>
@@ -72,6 +80,7 @@ export default {
   },
   data: () => ({
     activeItem: 0,
+    snackbar: true,
     items: [
       {
         title: "Iniciativas",
