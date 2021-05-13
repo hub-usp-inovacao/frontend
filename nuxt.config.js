@@ -72,6 +72,7 @@ export default {
     { src: "~/plugins/vue-fuse.js", mode: "client" },
     { src: "~/plugins/vue-typer.js", mode: "client" },
     { src: "~/plugins/campi.js" },
+    { src: "~/plugins/municipios.js" },
     { src: "~/plugins/knowledge_areas.js" },
     { src: "~/plugins/cnae.js" },
     { src: "~/plugins/company.js" },
