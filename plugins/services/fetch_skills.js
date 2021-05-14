@@ -31,10 +31,10 @@ function beginNewSkill(row, $campi) {
   const email = columnValue(row, "D");
   const unities = columnValue(row, "F");
   let campus = columnValue(row, "G");
-  
-   if(campus == undefined || campus == ''){
-    campus = $campi.find((c) => c.unities.find((u) => u == unity)).name
-   }
+
+  if (campus == undefined || campus == "") {
+    campus = $campi.find((c) => c.unities.find((u) => u == unities)).name;
+  }
 
   return new Skill(name, email, unities, campus);
 }
@@ -124,7 +124,7 @@ function skillGenerator(row, $campi) {
   return base;
 }
 
-export default ({$campi}, inject) => {
+export default ({ $campi }, inject) => {
   inject("fetchSkills", async (payload) => {
     const { sheetsAPIKey, areas } = payload;
 
