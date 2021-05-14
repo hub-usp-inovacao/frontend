@@ -20,9 +20,9 @@ async function fetchData(sheetsAPIKey) {
   }
 }
 
-function beginNewDiscipline(row) {
+function beginNewDiscipline(row,$campi) {
   const name = columnValue(row, "B");
-  const campus = columnValue(row, "C");
+  let campus = columnValue(row, "C");
   const unity = columnValue(row, "D");
   const description = {
     short: columnValue(row, "G"),
@@ -31,6 +31,10 @@ function beginNewDiscipline(row) {
   const startData = columnValue(row, "I");
   const nature = columnValue(row, "A");
   const level = columnValue(row, "F");
+
+  if (campus == undefined || campus == "") {
+    campus = $campi.find((c) => c.unities.find((u) => u == unity)).name;
+  }
 
   return new Discipline(
     name,
@@ -54,15 +58,15 @@ function addCategory(base, row) {
   base.categoryIntellectualProperty = columnValue(row, "N");
 }
 
-function disciplineGenerator(row) {
-  const base = beginNewDiscipline(row);
+function disciplineGenerator(row, $campi) {
+  const base = beginNewDiscipline(row, $campi);
   addURL(base, row);
   addCategory(base, row);
 
   return base;
 }
 
-export default (_, inject) => {
+export default ({$campi}, inject) => {
   inject("fetchDisciplines", async (payload) => {
     const { sheetsAPIKey } = payload;
 
@@ -74,7 +78,7 @@ export default (_, inject) => {
       .map((row, i) => {
         let discipline;
         try {
-          discipline = disciplineGenerator(row);
+          discipline = disciplineGenerator(row, $campi);
         } catch (e) {
           console.log(`[Discipline Exception] failed for row ${i + 2}`);
           discipline = null;
