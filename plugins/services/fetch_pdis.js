@@ -5,7 +5,7 @@ import { fetchCentrals } from "./fetch_centrais";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
-  const sheetName = "PDI_TESTE";
+  const sheetName = "PDI";
 
   try {
     const resp = await fetch(
