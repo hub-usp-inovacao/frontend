@@ -5,7 +5,7 @@ import { fetchCentrals } from "./fetch_centrais";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
-  const sheetName = "PDI";
+  const sheetName = "PDI_TESTE";
 
   try {
     const resp = await fetch(
@@ -26,15 +26,22 @@ const dotRgx = /.+\..+/; // match "bsa.legal" which is a valid url
 
 const checkUrl = (url) => !url.match(spaceRgx) && url.match(dotRgx);
 
-function beginNewPDI(row) {
+function beginNewPDI(row, $campi) {
   const name = columnValue(row, "B");
   const category = columnValue(row, "A");
-  const campus = columnValue(row, "D");
+  let campus = columnValue(row, "D");
   const unity = columnValue(row, "E");
   const description = {
     short: columnValue(row, "K"),
     long: columnValue(row, "L"),
   };
+  
+  if (campus == undefined || campus == "") {
+    if(unity != "N/D"){
+      console.log(campus);
+      campus = $campi.find( (c) => c.unities.find((u) => u == unity)).name;
+    }
+  }
 
   return new PDI(name, category, campus, unity, description);
 }
@@ -59,8 +66,8 @@ function addPhone(base, row) {
   base.phone = columnValue(row, "I");
 }
 
-function pdiGenerator(row) {
-  const base = beginNewPDI(row);
+function pdiGenerator(row, $campi) {
+  const base = beginNewPDI(row, $campi);
 
   addURL(base, row);
   addKeywords(base, row);
@@ -71,7 +78,7 @@ function pdiGenerator(row) {
   return base;
 }
 
-export default ({ isDev }, inject) => {
+export default ({isDev, $campi}, inject) => {
   inject("fetchPDIs", async (payload) => {
     const { sheetsAPIKey } = payload;
 
@@ -83,7 +90,7 @@ export default ({ isDev }, inject) => {
       .map((row, i) => {
         let pdi;
         try {
-          pdi = pdiGenerator(row);
+          pdi = pdiGenerator(row, $campi);
         } catch (e) {
           console.log(`[PDI Exception] failed for row ${i + 2}`);
           pdi = null;
