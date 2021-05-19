@@ -37,8 +37,7 @@ function beginNewPDI(row, $campi) {
   };
   
   if (campus == undefined || campus == "") {
-    if(unity != "N/D"){
-      console.log(campus);
+    if(unity != "N/D" && unity != ""){
       campus = $campi.find( (c) => c.unities.find((u) => u == unity)).name;
     }
   }
