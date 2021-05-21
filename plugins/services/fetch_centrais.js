@@ -27,6 +27,7 @@ function runForCentrais(args) {
     campus,
     unidade.nome,
     description,
+    null,
     id
   );
 
