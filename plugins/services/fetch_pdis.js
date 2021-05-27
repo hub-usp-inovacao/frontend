@@ -5,7 +5,7 @@ import { fetchCentrals } from "./fetch_centrais";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
-  const sheetName = "PDI";
+  const sheetName = "PDI_TESTE";
 
   try {
     const resp = await fetch(
@@ -38,7 +38,13 @@ function beginNewPDI(row, $campi) {
   
   if (campus == undefined || campus == "") {
     if(unity != "N/D" && unity != ""){
-      campus = $campi.find( (c) => c.unities.find((u) => u == unity)).name;
+      campus = $campi.find( (c) => c.unities.find((u) => u == unity));
+      if(campus == undefined){
+        campus = undefined;
+      }
+      else{
+        campus = campus.name;
+      }
     }
   }
 

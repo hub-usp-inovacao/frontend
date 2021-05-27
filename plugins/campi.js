@@ -87,7 +87,6 @@ const rawCampi = [
       "Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto - FFCLRP",
       "Faculdade de Medicina de Ribeirão Preto - FMRP",
       "Faculdade de Odontologia de Ribeirão Preto - FORP",
-      "Fundação Hemocentro de Ribeirão Preto",
     ],
   },
   {
