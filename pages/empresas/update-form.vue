@@ -5,9 +5,7 @@
 <script>
 export default {
   middleware({ redirect }) {
-    return redirect(
-      'https://docs.google.com/forms/d/1jgRwsh8kXhMrGoxlRxKIK-ZcUwuVER62zN2egBRLa9c'
-    );
+    return redirect("https://forms.gle/3dK3bTErPx1zR1dE6");
   },
 };
 </script>
