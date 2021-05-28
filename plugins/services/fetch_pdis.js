@@ -37,12 +37,7 @@ function beginNewPDI(row, $campi) {
   };
   
   if (campus == undefined || campus == "") {
-    if(unity != "N/D" && unity != ""){
-      campus = $campi.find( (c) => c.unities.find((u) => u == unity));
-      if(campus != undefined){
-        campus = campus.name;
-      }
-    }
+    campus = $campi.find( (c) => c.unities.find((u) => u == unity))?.name;
   }
 
   return new PDI(name, category, campus, unity, description);

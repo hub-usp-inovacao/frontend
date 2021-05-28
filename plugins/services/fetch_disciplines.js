@@ -33,7 +33,7 @@ function beginNewDiscipline(row,$campi) {
   const level = columnValue(row, "F");
 
   if (campus == undefined || campus == "") {
-    campus = $campi.find((c) => c.unities.find((u) => u == unity)).name;
+    campus = $campi.find((c) => c.unities.find((u) => u == unity))?.name;
   }
 
   return new Discipline(

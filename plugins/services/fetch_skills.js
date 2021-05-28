@@ -33,7 +33,7 @@ function beginNewSkill(row, $campi) {
   let campus = columnValue(row, "G");
 
   if (campus == undefined || campus == "") {
-    campus = $campi.find((c) => c.unities.find((u) => u == unities)).name;
+    campus = $campi.find((c) => c.unities.find((u) => u == unities))?.name;
   }
 
   return new Skill(name, email, unities, campus);
