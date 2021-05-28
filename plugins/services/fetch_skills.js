@@ -26,11 +26,15 @@ const dotRgx = /^.+\..+$/; // match "bsa.legal" which is a valid url
 
 const checkUrl = (url) => !url.match(spaceRgx) && url.match(dotRgx);
 
-function beginNewSkill(row) {
+function beginNewSkill(row, $campi) {
   const name = capitalizeName(columnValue(row, "C"));
   const email = columnValue(row, "D");
   const unities = columnValue(row, "F");
-  const campus = columnValue(row, "G");
+  let campus = columnValue(row, "G");
+
+  if (campus == undefined || campus == "") {
+    campus = $campi.find((c) => c.unities.find((u) => u == unities))?.name;
+  }
 
   return new Skill(name, email, unities, campus);
 }
@@ -103,8 +107,8 @@ function addPicture(base, row) {
     base.picture = `https://drive.google.com/uc?export=view&id=${picID}`;
 }
 
-function skillGenerator(row) {
-  const base = beginNewSkill(row);
+function skillGenerator(row, $campi) {
+  const base = beginNewSkill(row, $campi);
 
   addPhone(base, row);
   addDescription(base, row);
@@ -120,7 +124,7 @@ function skillGenerator(row) {
   return base;
 }
 
-export default (_, inject) => {
+export default ({ $campi }, inject) => {
   inject("fetchSkills", async (payload) => {
     const { sheetsAPIKey, areas } = payload;
 
@@ -132,7 +136,7 @@ export default (_, inject) => {
       .map((row, i) => {
         let skill;
         try {
-          skill = skillGenerator(row);
+          skill = skillGenerator(row, $campi);
         } catch (e) {
           console.log(`[Skill Exception] failed for row ${i + 2}`);
           skill = null;
