@@ -25,10 +25,9 @@ function beginNewDiscipline(row) {
   const campus = columnValue(row, "C");
   const unity = columnValue(row, "D");
   const description = {
-    short: columnValue(row, "G"),
-    long: columnValue(row, "H"),
+    long: columnValue(row, "G"),
   };
-  const startData = columnValue(row, "I");
+  const startData = columnValue(row, "H");
   const nature = columnValue(row, "A");
   const level = columnValue(row, "F");
 
@@ -48,10 +47,10 @@ function addURL(base, row) {
 }
 
 function addCategory(base, row) {
-  base.categoryBusiness = columnValue(row, "K");
-  base.categoryEntrepreneurship = columnValue(row, "L");
-  base.categoryInnovation = columnValue(row, "M");
-  base.categoryIntellectualProperty = columnValue(row, "N");
+  base.categoryBusiness = columnValue(row, "J");
+  base.categoryEntrepreneurship = columnValue(row, "K");
+  base.categoryInnovation = columnValue(row, "L");
+  base.categoryIntellectualProperty = columnValue(row, "M");
 }
 
 function disciplineGenerator(row) {
