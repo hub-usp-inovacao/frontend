@@ -146,6 +146,18 @@ export default {
           items: ["Graduação", "Pós-Graduação"],
           preSelected: this.queryParam ? this.queryParam.natureza : undefined,
         },
+        {
+          label: "Período de oferecimento",
+          items: Array.from(
+            this.disciplines.reduce((acc, discipline) => {
+              const offeringPeriod = discipline.offeringPeriod;
+              if (offeringPeriod && !acc.has(offeringPeriod))
+                acc.add(offeringPeriod);
+              return acc;
+            }, new Set())
+          ),
+          preSelected: this.queryParam ? this.queryParam.periodo : undefined,
+        },
       ];
     },
     baseItems() {

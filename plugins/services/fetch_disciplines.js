@@ -53,10 +53,15 @@ function addCategory(base, row) {
   base.categoryIntellectualProperty = columnValue(row, "M");
 }
 
+function addOfferingPeriod(base, row) {
+  base.offeringPeriod = columnValue(row, "N");
+}
+
 function disciplineGenerator(row) {
   const base = beginNewDiscipline(row);
   addURL(base, row);
   addCategory(base, row);
+  addOfferingPeriod(base, row);
 
   return base;
 }
