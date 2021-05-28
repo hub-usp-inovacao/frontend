@@ -35,8 +35,9 @@ function beginNewPDI(row) {
     short: columnValue(row, "K"),
     long: columnValue(row, "L"),
   };
+  const coordinator = columnValue(row, "F");
 
-  return new PDI(name, category, campus, unity, description);
+  return new PDI(name, category, campus, unity, description, coordinator);
 }
 
 function addURL(base, row) {
@@ -45,10 +46,6 @@ function addURL(base, row) {
 
 function addKeywords(base, row) {
   base.keywords = columnValue(row, "O");
-}
-
-function addCoordinator(base, row) {
-  base.coordinator = columnValue(row, "F");
 }
 
 function addEmail(base, row) {
@@ -64,7 +61,6 @@ function pdiGenerator(row) {
 
   addURL(base, row);
   addKeywords(base, row);
-  addCoordinator(base, row);
   addEmail(base, row);
   addPhone(base, row);
 
