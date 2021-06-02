@@ -1,10 +1,8 @@
-import Discipline from "@/lib/classes/discipline";
-
 export const state = () => ({
   disciplines: [],
   isLoading: false,
   errors: undefined,
-  keys: Discipline.keys,
+  keys: ["inspect.name", "inspect.descriptionLong", "inspect.descriptionShort"],
 });
 
 export const getters = {
