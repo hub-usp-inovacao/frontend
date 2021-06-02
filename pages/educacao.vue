@@ -250,7 +250,7 @@ export default {
           : undefined;
 
       this.filtered = this.disciplines.filter((discipline) =>
-        discipline.matchesFilter(context)
+        this.$disciplineMatchesFilter(discipline, context)
       );
     },
     async pipeline() {
