@@ -1,3 +1,4 @@
 [[redirects]]
   from = "/*"
   to = "https://hubusp.inovacao.usp.br/:splat"
+  force = true
