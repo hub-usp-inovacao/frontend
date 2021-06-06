@@ -20,7 +20,7 @@
         </p>
       </v-col>
 
-      <v-col cols="11" sm="5" align-self="end">
+      <v-col v-if="!noSearch" cols="11" sm="5" align-self="end">
         <v-text-field
           id="search-bar"
           v-model="value"
@@ -92,6 +92,11 @@ export default {
       type: Boolean,
       required: false,
       default: true,
+    },
+    noSearch: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   computed: {
