@@ -1,5 +1,5 @@
 async function fetchData() {
-  const backendURL = process.env.BACKEND_URL || "http://localhost:3001";
+  const backendURL = process.env.BACKEND_URL;
 
   try {
     const url = backendURL + "/disciplines";
@@ -18,7 +18,7 @@ async function fetchData() {
 export default (_, inject) => {
   inject("fetchDisciplines", async () => {
     const values = await fetchData();
-    if (values == undefined) return {disciplines: [], errors: []};
+    if (values == undefined) return { disciplines: [], errors: [] };
 
     const disciplines = values.sort((a, b) => {
       const aName = a.name.split(" - ")[1];
@@ -27,6 +27,6 @@ export default (_, inject) => {
       return aName.localeCompare(bName);
     });
 
-    return {disciplines};
+    return { disciplines };
   });
 };
