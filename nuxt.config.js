@@ -78,6 +78,8 @@ export default {
     { src: "~/plugins/cnae.js" },
     { src: "~/plugins/company.js" },
     { src: "~/plugins/fuzzySearch.js" },
+    { src: "~/plugins/indexer.js" },
+    { src: "~/plugins/remove_accent.js" },
     { src: "~/plugins/services/fetch_companies.js" },
     { src: "~/plugins/services/fetch_disciplines.js" },
     { src: "~/plugins/services/fetch_iniciatives.js" },
