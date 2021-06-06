@@ -1,8 +1,9 @@
+const indexingKeys = ["name", "descriptionLong", "descriptionShort"];
+
 export const state = () => ({
   disciplines: [],
   isLoading: false,
-  errors: undefined,
-  keys: ["inspect.name", "inspect.descriptionLong", "inspect.descriptionShort"],
+  keys: indexingKeys.map((k) => `inspect.${k}`),
 });
 
 export const getters = {
@@ -18,7 +19,6 @@ export const getters = {
     ).sort((a, b) => a.localeCompare(b));
   },
   searchKeys: (s) => s.keys,
-  errors: (s) => s.errors,
 };
 
 export const mutations = {
@@ -31,18 +31,15 @@ export const mutations = {
   setDisciplines(state, disciplines) {
     state.disciplines = disciplines;
   },
-  setErrors(s, errors) {
-    s.errors = errors;
-  },
 };
 
 export const actions = {
   fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    const { disciplines, errors } = await this.$fetchDisciplines(env);
-    ctx.commit("setErrors", errors);
-    ctx.commit("setDisciplines", disciplines);
+    const { disciplines } = await this.$fetchDisciplines(env);
+    const indexed = this.$indexer(disciplines, indexingKeys);
+    ctx.commit("setDisciplines", indexed);
 
     ctx.commit("unsetLoadingStatus");
   },
