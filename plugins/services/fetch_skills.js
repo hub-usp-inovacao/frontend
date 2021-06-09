@@ -49,9 +49,18 @@ function addDescription(base, row) {
   base.descriptionsEquipments = columnValue(row, "Y");
 }
 
-function addArea(base, row) {
-  base.areaMajor = columnValue(row, "Z");
-  base.areaMinors = columnValue(row, "AA");
+function addArea(base, row, $knowledgeAreas) {
+  const minor = columnValue(row, "AA");
+  let major = columnValue(row, "Z");
+  base.areaMinors = minor;
+
+  if(major == undefined || major == ""){
+   major = $knowledgeAreas.find((c) => c.subareas.find((u) => u == minor))?.name;
+   base.areaMajor = major;
+  }
+  else{
+    base.areaMajor = columnValue(row, "Z");
+  }
 }
 
 function addKeywords(base, row) {
@@ -107,12 +116,12 @@ function addPicture(base, row) {
     base.picture = `https://drive.google.com/uc?export=view&id=${picID}`;
 }
 
-function skillGenerator(row, $campi) {
-  const base = beginNewSkill(row, $campi);
+function skillGenerator(row, $campi, $knowledgeAreas) {
+  const base = beginNewSkill(row, $campi, $knowledgeAreas);
 
   addPhone(base, row);
   addDescription(base, row);
-  addArea(base, row);
+  addArea(base, row, $knowledgeAreas);
   addKeywords(base, row);
   addLattes(base, row);
   addLimitDate(base, row);
@@ -124,7 +133,7 @@ function skillGenerator(row, $campi) {
   return base;
 }
 
-export default ({ $campi }, inject) => {
+export default ({ $campi, $knowledgeAreas}, inject) => {
   inject("fetchSkills", async (payload) => {
     const { sheetsAPIKey, areas } = payload;
 
@@ -136,7 +145,7 @@ export default ({ $campi }, inject) => {
       .map((row, i) => {
         let skill;
         try {
-          skill = skillGenerator(row, $campi);
+          skill = skillGenerator(row, $campi, $knowledgeAreas);
         } catch (e) {
           console.log(`[Skill Exception] failed for row ${i + 2}`);
           skill = null;
