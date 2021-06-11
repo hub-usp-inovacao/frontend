@@ -5,7 +5,7 @@
         <List v-model="selected" :items="items" />
       </v-col>
       <v-col cols="7">
-        <DetailsCard :item="selected">
+        <DetailsCard :selected="selected" :items="items">
           <template v-slot:itemTitle>
             <slot name="itemTitle" :item="selected"></slot>
           </template>

@@ -23,27 +23,15 @@
         <v-icon large>keyboard_arrow_down</v-icon>
       </div>
     </div>
-    <div v-else>
-      <NotFound />
-    </div>
   </v-card>
 </template>
 
 <script>
-import NotFound from "@/components/deeper_levels/NotFound.vue";
-
 export default {
-  components: {
-    NotFound,
-  },
   props: {
     items: {
       type: Array,
       default: () => [],
-    },
-    value: {
-      type: Object,
-      default: () => ({}),
     },
   },
   data: () => ({
