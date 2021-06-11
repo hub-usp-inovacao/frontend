@@ -1,5 +1,9 @@
 const rawCampi = [
   {
+    name: "On-line",
+    unities: ["Pró-Reitoria de Graduação"],
+  },
+  {
     name: "Bauru",
     unities: [
       "Faculdade de Odontologia de Bauru - FOB",
@@ -106,7 +110,7 @@ const rawCampi = [
 ];
 
 const campi = rawCampi
-  .map((c) => ({ name: c.name, unities: c.unities.sort() }))
+  .map((c) => ({name: c.name, unities: c.unities.sort()}))
   .sort((a, b) => (a.name == b.name ? 0 : a.name < b.name ? -1 : 1));
 
 export default (_, inject) => {
