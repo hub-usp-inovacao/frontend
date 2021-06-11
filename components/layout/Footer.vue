@@ -16,7 +16,7 @@
               cols="2"
               class="d-flex justify-center"
             >
-              <v-btn dark icon :href="url" target="_blank">
+              <v-btn dark icon :href="url" rel=noopener target="_blank">
                 <v-icon size="35px">{{ label }}</v-icon>
               </v-btn>
             </v-col>

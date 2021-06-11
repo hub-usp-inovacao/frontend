@@ -57,6 +57,7 @@
           <v-btn
             class="mr-8"
             href="https://forms.gle/TiEe6zYq9GsYgDww5"
+            rel=noopener
             target="_blank"
             >Relate aqui</v-btn
           >
