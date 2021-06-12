@@ -10,7 +10,7 @@
       </div>
 
       <v-list rounded height="30rem" max-height="100%" style="overflow-y: auto">
-        <v-list-item-group v-model="selectedItem" model="id">
+        <v-list-item-group v-model="selected" model="id">
           <v-list-item v-for="i in items" :key="i.id" :value="i">
             <v-list-item-content>
               <v-list-item-title v-text="i.name" />
@@ -33,13 +33,14 @@ export default {
       type: Array,
       default: () => [],
     },
+    selected: {
+      type: Object,
+      default: undefined,
+    },
   },
-  data: () => ({
-    selectedItem: null,
-  }),
   watch: {
-    selectedItem() {
-      this.$emit("input", this.selectedItem);
+    selected() {
+      this.$emit("input", this.selected);
     },
   },
 };
