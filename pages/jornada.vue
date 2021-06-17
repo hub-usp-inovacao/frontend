@@ -6,7 +6,7 @@
           <ColorfulCard :title="title" :color="color" :index="i + 1" />
         </v-col>
         <v-col cols="6" :offset="i % 2 ? 0 : 2">
-          <div class="graybox">{{ caption }}</div>
+          <CallToAction :color="color" :caption="caption" />
         </v-col>
       </v-row>
     </v-container>
@@ -15,10 +15,12 @@
 
 <script>
 import ColorfulCard from "@/components/journey/ColorfulCard.vue";
+import CallToAction from "@/components/journey/CallToAction.vue";
 
 export default {
   components: {
     ColorfulCard,
+    CallToAction,
   },
   data: () => ({
     rows: [
@@ -69,15 +71,5 @@ export default {
 <style scoped>
 main {
   background-color: #ececec;
-}
-
-.graybox {
-  width: 100%;
-  min-height: 50%;
-
-  margin-top: 2em;
-  padding: 1em;
-
-  background-color: lightgray;
 }
 </style>
