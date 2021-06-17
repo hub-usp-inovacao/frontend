@@ -1,10 +1,22 @@
 <template>
-  <div>
-    <div class="circle colored" :style="colorStyle">{{ index }}</div>
-    <v-card class="pt-6 colored three-lines" :style="colorStyle">
-      <v-card-title class="full-width">
-        <p class="text-center">
-          {{ titleUpper }}
+  <div class="ma-8">
+    <div
+      class="circle rounded-circle white--text font-weight-black d-flex justify-center align-center ma-n4"
+      :style="colorStyle"
+    >
+      {{ index }}
+    </div>
+    <v-card
+      class="pt-6 d-flex justify-center align-center"
+      elevation="10"
+      height="8em"
+      :style="colorStyle"
+    >
+      <v-card-title>
+        <p
+          class="font-weight-black text-h6 text-uppercase white--text text-center"
+        >
+          {{ title }}
         </p>
       </v-card-title>
     </v-card>
@@ -28,9 +40,6 @@ export default {
     },
   },
   computed: {
-    titleUpper() {
-      return this.title.toUpperCase();
-    },
     colorStyle() {
       return { backgroundColor: this.color };
     },
@@ -39,42 +48,14 @@ export default {
 </script>
 
 <style scoped>
-.full-width {
-  width: 100%;
-}
-
-p {
-  width: 100%;
-}
-
-.three-lines {
-  height: 10em;
-
-  display: flex;
-  justify-items: center;
-  align-items: center;
-}
-
-.colored {
-  color: white;
-}
-
 .circle {
-  font-weight: bold;
-
   border: 0.25em solid white;
-  border-radius: 1.5em;
 
   width: 3em;
   height: 3em;
 
-  margin: -1em -1em;
   z-index: 999;
 
   position: absolute;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>
