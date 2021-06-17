@@ -1,6 +1,6 @@
 <template>
   <main>
-    <v-container class="hidden-sm-and-down">
+    <v-container class="hidden-sm-and-down roadmap">
       <v-row v-for="({ title, color, caption }, i) in rows" :key="i">
         <v-col cols="4" :offset="i % 2 ? 2 : 0">
           <ColorfulCard :title="title" :color="color" :index="i + 1" />
@@ -87,5 +87,9 @@ export default {
 <style scoped>
 main {
   background-color: #ececec;
+}
+
+.roadmap {
+  background-image: url("/road.png");
 }
 </style>
