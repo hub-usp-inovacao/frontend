@@ -101,12 +101,6 @@ export default {
     },
   }),
 
-  computed: {
-    updatingFields() {
-      return this.update.new_values.length;
-    },
-  },
-
   methods: {
     addField() {
       this.update.new_values.push({ attribute: "", value: "" });
