@@ -10,7 +10,7 @@
       </div>
 
       <v-list rounded height="30rem" max-height="100%" style="overflow-y: auto">
-        <v-list-item-group v-model="selectedItem" model="id">
+        <v-list-item-group v-model="selected" model="id">
           <v-list-item v-for="i in items" :key="i.id" :value="i">
             <v-list-item-content>
               <v-list-item-title v-text="i.name" />
@@ -23,35 +23,24 @@
         <v-icon large>keyboard_arrow_down</v-icon>
       </div>
     </div>
-    <div v-else>
-      <NotFound />
-    </div>
   </v-card>
 </template>
 
 <script>
-import NotFound from "@/components/deeper_levels/NotFound.vue";
-
 export default {
-  components: {
-    NotFound,
-  },
   props: {
     items: {
       type: Array,
       default: () => [],
     },
-    value: {
+    selected: {
       type: Object,
-      default: () => ({}),
+      default: undefined,
     },
   },
-  data: () => ({
-    selectedItem: null,
-  }),
   watch: {
-    selectedItem() {
-      this.$emit("input", this.selectedItem);
+    selected() {
+      this.$emit("input", this.selected);
     },
   },
 };

@@ -2,10 +2,10 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="5">
-        <List v-model="selected" :items="items" />
+        <List v-model="selected" :selected="selected" :items="items" />
       </v-col>
       <v-col cols="7">
-        <DetailsCard :item="selected">
+        <DetailsCard :selected="selected" :items="items">
           <template v-slot:itemTitle>
             <slot name="itemTitle" :item="selected"></slot>
           </template>
@@ -38,6 +38,11 @@ export default {
     selected: {
       type: Object,
       default: undefined,
+    },
+  },
+  watch: {
+    items() {
+      if (this.items.length == 1) this.selected = this.items[0];
     },
   },
 };
