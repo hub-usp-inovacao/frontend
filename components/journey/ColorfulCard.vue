@@ -54,7 +54,7 @@ export default {
   width: 3em;
   height: 3em;
 
-  z-index: 999;
+  z-index: 2;
 
   position: absolute;
 }
