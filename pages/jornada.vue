@@ -67,6 +67,10 @@ export default {
 </script>
 
 <style scoped>
+main {
+  background-color: #ececec;
+}
+
 .graybox {
   width: 100%;
   min-height: 50%;
