@@ -1,6 +1,6 @@
 <template>
   <main>
-    <v-container>
+    <v-container class="hidden-sm-and-down">
       <v-row v-for="({ title, color, caption }, i) in rows" :key="i">
         <v-col cols="4" :offset="i % 2 ? 2 : 0">
           <ColorfulCard :title="title" :color="color" :index="i + 1" />
@@ -9,6 +9,22 @@
           <CallToAction :color="color" :caption="caption" />
         </v-col>
       </v-row>
+    </v-container>
+
+    <v-container>
+      <div
+        v-for="({ title, color, caption }, i) in rows"
+        :key="i"
+        class="mb-12"
+      >
+        <ColorfulCard
+          class="mb-n4"
+          :title="title"
+          :color="color"
+          :index="i + 1"
+        />
+        <CallToAction :color="color" :caption="caption" />
+      </div>
     </v-container>
   </main>
 </template>
