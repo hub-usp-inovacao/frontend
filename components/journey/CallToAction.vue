@@ -1,7 +1,7 @@
 <template>
-  <div class="grayscale py-8 px-4 d-flex align-center">
+  <div :class="wrapperClasses">
     <div>{{ caption }}</div>
-    <v-btn elevation="0" color="transparent" height="100%">
+    <v-btn class="mt-4 mt-lg-0" elevation="0" color="transparent" height="100%">
       <svg
         width="5em"
         height="2em"
@@ -30,11 +30,33 @@ export default {
       required: true,
     },
   },
+
+  computed: {
+    wrapperClasses() {
+      const bpName = this.$vuetify.breakpoint.name;
+      const base = [
+        "py-8",
+        "px-4",
+        "d-flex",
+        "align-center",
+        "flex-column",
+        "flex-lg-row",
+      ];
+
+      return bpName === "sm" || bpName === "xs"
+        ? base.concat(["grayscale-vert"])
+        : base.concat(["grayscale-hor"]);
+    },
+  },
 };
 </script>
 
 <style scoped>
-.grayscale {
+.grayscale-vert {
+  background-image: linear-gradient(to bottom, #ececec, #fcfcfc);
+}
+
+.grayscale-hor {
   background-image: linear-gradient(to right, #ececec, #fcfcfc);
 }
 </style>

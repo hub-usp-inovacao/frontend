@@ -11,7 +11,7 @@
       </v-row>
     </v-container>
 
-    <v-container>
+    <v-container class="hidden-md-and-up">
       <div
         v-for="({ title, color, caption }, i) in rows"
         :key="i"
