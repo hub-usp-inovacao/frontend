@@ -110,6 +110,10 @@ export default {
         title: "Contato",
         to: "/contato",
       },
+      {
+        title: "Jornada",
+        to: "/jornada",
+      },
     ],
     drawer: false,
     group: "",
