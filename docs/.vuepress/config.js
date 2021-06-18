@@ -10,7 +10,8 @@ module.exports = {
     logo: '/hub_logo.svg',
     nav: [
       { text: 'Front End', link: '/frontend/'},
-      { text: 'Back End', link: '/backend/'}
+      { text: 'Back End', link: '/backend/'},
+      { text: 'Deployment', link: '/deployment/'}
     ]
   }
 }
