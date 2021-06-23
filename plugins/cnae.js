@@ -381,6 +381,17 @@ const cnae = {
   },
 };
 
+const reverse = Object.keys(cnae).reduce((acc, code) => {
+  const { major, minor } = cnae[code];
+
+  if (!acc[major]) acc[major] = [];
+
+  acc[major].push({ minor, code });
+
+  return acc;
+}, {});
+
 export default (_, inject) => {
   inject("cnae", cnae);
+  inject("reverseCNAE", reverse);
 };
