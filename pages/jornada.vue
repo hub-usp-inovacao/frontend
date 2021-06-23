@@ -1,32 +1,40 @@
 <template>
-  <main>
-    <v-container class="hidden-sm-and-down roadmap">
-      <v-row v-for="({ title, color, caption }, i) in rows" :key="i">
-        <v-col cols="4" :offset="i % 2 ? 2 : 0">
-          <ColorfulCard :title="title" :color="color" :index="i + 1" />
-        </v-col>
-        <v-col cols="6" :offset="i % 2 ? 0 : 2">
-          <CallToAction :color="color" :caption="caption" />
-        </v-col>
-      </v-row>
+  <div class="bg-gray">
+    <v-container>
+      <header>
+        <h1>Jornada do Empreendedorismo USP</h1>
+        <p v-for="p in headers" :key="p">{{ p }}</p>
+      </header>
     </v-container>
+    <main>
+      <v-container class="hidden-sm-and-down roadmap">
+        <v-row v-for="({ title, color, caption }, i) in rows" :key="i">
+          <v-col cols="4" :offset="i % 2 ? 2 : 0">
+            <ColorfulCard :title="title" :color="color" :index="i + 1" />
+          </v-col>
+          <v-col cols="6" :offset="i % 2 ? 0 : 2">
+            <CallToAction :color="color" :caption="caption" />
+          </v-col>
+        </v-row>
+      </v-container>
 
-    <v-container class="hidden-md-and-up">
-      <div
-        v-for="({ title, color, caption }, i) in rows"
-        :key="i"
-        class="mb-12"
-      >
-        <ColorfulCard
-          class="mb-n4"
-          :title="title"
-          :color="color"
-          :index="i + 1"
-        />
-        <CallToAction :color="color" :caption="caption" />
-      </div>
-    </v-container>
-  </main>
+      <v-container class="hidden-md-and-up">
+        <div
+          v-for="({ title, color, caption }, i) in rows"
+          :key="i"
+          class="mb-12"
+        >
+          <ColorfulCard
+            class="mb-n4"
+            :title="title"
+            :color="color"
+            :index="i + 1"
+          />
+          <CallToAction :color="color" :caption="caption" />
+        </div>
+      </v-container>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -39,6 +47,10 @@ export default {
     CallToAction,
   },
   data: () => ({
+    headers: [
+      `Na jornada do empreendedorismo há diversos desafios. Se você está no início dela, é importante começar com o aprendizado sobre inovação e empreendedorismo, acessando o tópico “Processo de aprendizagem”. Porém, se você se sente pronto para exercitar o empreendedorismo, pode acessar o tópico “Engajamento e começando a exercitar o empreendedorismo”.`,
+      `Se você já está empreendendo e precisa de uma rede de apoio, consulte o tópico “Processo de Incubação, criando minha própria empresa”, onde você poderá se conectar com outras startups, além de encontrar um local para instalar sua equipe. Para quem já está estabelecido, é interessante acessar o tópico “Aprimorando tecnologias, fortalecendo a empresa”, onde você poderá fortalecer sua empresa e melhorar seu produto. Por fim, para aqueles que buscam maneiras de captação de recursos, o tópico ideal é o “Busca de financiamento”.`,
+    ],
     rows: [
       {
         title: "Processo de Aprendizagem",
@@ -85,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-main {
+.bg-gray {
   background-color: #ececec;
 }
 
