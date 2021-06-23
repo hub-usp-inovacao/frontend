@@ -23,6 +23,7 @@
               class="mr-md-4"
               label="Campo"
               :items="validFields"
+              :rules="rules.name"
             />
 
             <v-text-field
@@ -31,15 +32,19 @@
               label="Novo valor do Campo"
               :rules="rules.value"
             />
+
             <div v-else-if="ithFieldSelected(i)">
               <v-select
                 label="Primária"
                 :items="cnaeMajors"
+                :rules="rules.value"
                 @input="setIthMajor(i, $event)"
               />
               <v-select
                 label="Secundária"
                 :items="cnaeMinors(ithMajor(i))"
+                no-data-text="Selecione uma área primária antes"
+                :rules="rules.value"
                 @input="setIthMinor(i, $event)"
               />
             </div>
@@ -148,9 +153,6 @@ export default {
     cnaeMinors(major) {
       if (!major) return undefined;
       return this.$reverseCNAE[major].map(({ minor }) => minor);
-    },
-    cnaeCode(major, minor) {
-      return this.$reverseCNAE[major].find((el) => el.minor === minor)?.code;
     },
     ithField(i) {
       return this.update.new_values[i].attribute;
