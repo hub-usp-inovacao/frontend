@@ -7,7 +7,7 @@
     <v-form ref="form">
       <v-container>
         <v-row>
-          <v-col sm="10" offset-sm="1" cols="8" offset="2">
+          <v-col cols="10">
             <v-text-field
               v-model="update.cnpj"
               label="CNPJ da Empresa:"
@@ -17,28 +17,41 @@
         </v-row>
 
         <v-row v-for="(field, i) of update.new_values" :key="i">
-          <v-col cols="5" sm="4">
-            <v-text-field
+          <v-col cols="8" class="d-flex flex-column flex-md-row">
+            <v-select
               v-model="field.attribute"
-              label="Nome do Campo"
-              :rules="rules.name"
+              class="mr-md-4"
+              label="Campo"
+              :items="validFields"
             />
-          </v-col>
-          <v-col cols="5" offset="1" sm="4" offset-sm="1">
+
             <v-text-field
+              v-if="ithFieldSelected(i) && ithField(i) !== 'Área'"
               v-model="field.value"
               label="Novo valor do Campo"
               :rules="rules.value"
             />
+            <div v-else-if="ithFieldSelected(i)">
+              <v-select
+                label="Primária"
+                :items="cnaeMajors"
+                @input="setIthMajor(i, $event)"
+              />
+              <v-select
+                label="Secundária"
+                :items="cnaeMinors(ithMajor(i))"
+                @input="setIthMinor(i, $event)"
+              />
+            </div>
           </v-col>
-          <v-col cols="1" sm="2">
+          <v-col cols="1" offset="1">
             <v-btn
               class="mx-2"
               fab
               dark
               small
               color="primary"
-              @click="removeField(field)"
+              @click="removeField(i)"
             >
               <v-icon dark>mdi-minus</v-icon>
             </v-btn>
@@ -82,6 +95,21 @@ export default {
 
     loading: false,
 
+    validFields: [
+      "Ano",
+      "Área",
+      "Descrição",
+      "Ecossistema",
+      "Emails",
+      "Endereço",
+      "Nome",
+      "Porte",
+      "Serviços",
+      "Site",
+      "Tecnologias",
+      "Telefones",
+    ],
+
     update: {
       cnpj: "",
       new_values: [{ attribute: "", value: "" }],
@@ -101,13 +129,41 @@ export default {
     },
   }),
 
+  computed: {
+    cnaeMajors() {
+      return Object.keys(this.$reverseCNAE);
+    },
+  },
+
   methods: {
+    setIthMajor(i, e) {
+      this.update.new_values[i].value = { major: e };
+    },
+    setIthMinor(i, e) {
+      this.update.new_values[i].value.minor = e;
+    },
+    ithMajor(i) {
+      return this.update.new_values[i].value.major;
+    },
+    cnaeMinors(major) {
+      if (!major) return undefined;
+      return this.$reverseCNAE[major].map(({ minor }) => minor);
+    },
+    cnaeCode(major, minor) {
+      return this.$reverseCNAE[major].find((el) => el.minor === minor)?.code;
+    },
+    ithField(i) {
+      return this.update.new_values[i].attribute;
+    },
+    ithFieldSelected(i) {
+      return this.ithField(i).length > 0;
+    },
     addField() {
       this.update.new_values.push({ attribute: "", value: "" });
     },
-    removeField({ attribute, value }) {
+    removeField(i) {
       this.update.new_values = this.update.new_values.filter(
-        (one) => one.attribute !== attribute && one.value !== value
+        (_, index) => index !== i
       );
     },
     async submit() {
