@@ -14,10 +14,10 @@ STOP_SUBCMD = down
 .PHONY: build_dev build_prod dev prod stop_dev stop_prod test
 
 deploy:
-	git checkout master
-	git branch -D $(BRANCH_NAME)
+	git checkout embaixo-do-capo
+	git stash
 	git pull
-	git checkout $(BRANCH_NAME)
+	git stash pop
 	make build_prod
 	make stop_prod
 	make prod
