@@ -1,10 +1,9 @@
-import Company from "@/lib/classes/company";
+const indexingKeys = ["name", "descriptionLong", "services", "technologies"];
 
 export const state = () => ({
   companies: [],
   isLoading: false,
-  errors: undefined,
-  keys: Company.keys,
+  keys: indexingKeys.map((k) => `inspect.${k}`),
 });
 
 export const getters = {
@@ -12,7 +11,6 @@ export const getters = {
   companies: (s) => s.companies,
   isEmpty: (s) => s.companies.length === 0,
   searchKeys: (s) => s.keys,
-  errors: (s) => s.errors,
   incubators: (s) => {
     return s.companies
       .reduce((incubators, company) => {
@@ -27,7 +25,7 @@ export const getters = {
   cities: (s) => {
     const cities = s.companies.reduce((all, company) => {
       return all.concat(
-        company.city.filter((city) => {
+        company.address.city.filter((city) => {
           return city != "N/D" && city != "n/d";
         })
       );
@@ -52,17 +50,15 @@ export const mutations = {
   setLoadingStatus: (s) => (s.isLoading = true),
   unsetLoadingStatus: (s) => (s.isLoading = false),
   setCompanies: (s, newCompanies) => (s.companies = newCompanies),
-  setErrors: (s, errors) => (s.errors = errors),
 };
 
 export const actions = {
-  fetchSpreadsheets: async function (ctx, payload) {
+  fetchSpreadsheets: async function (ctx) {
     ctx.commit("setLoadingStatus");
 
-    const { companies, errors } = await this.$fetchCompanies(payload);
-    ctx.commit("setErrors", errors);
-
-    ctx.commit("setCompanies", companies);
+    const {companies} = await this.$fetchCompanies();
+    const indexed = this.$indexer(companies, indexingKeys);
+    ctx.commit("setCompanies", indexed);
 
     ctx.commit("unsetLoadingStatus");
   },

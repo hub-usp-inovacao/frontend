@@ -4,7 +4,7 @@ export default {
   env: {
     sheetsAPIKey: process.env.sheetsAPIKey,
     sheetID: process.env.sheetID,
-    BACKEND_URL: "https://hubuspinovacao.if.usp.br/api",
+    BACKEND_URL: process.env.BACKEND_URL,
   },
   ssr: true,
   target: "server",
@@ -87,6 +87,7 @@ export default {
     { src: "~/plugins/services/fetch_pdis.js" },
     { src: "~/plugins/services/fetch_skills.js" },
     { src: "~/plugins/matching/disciplines.js" },
+    { src: "~/plugins/matching/company.js" },
   ],
 
   serverMiddleware: [{ path: "/", handler: "~/api/index.js" }],
