@@ -284,7 +284,7 @@ export default {
     },
     filterData(context) {
       this.filtered = this.companies.filter((company) =>
-        company.matchesFilter(context)
+        this.$companyMatchesFilter(company, context)
       );
     },
     async pipeline() {
