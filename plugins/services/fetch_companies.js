@@ -6,8 +6,6 @@ async function fetchData() {
 
     const resp = await fetch(url);
 
-    console.log(resp);
-
     return await resp.json();
   } catch (error) {
     console.log("error occuried while fetching...");

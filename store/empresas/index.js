@@ -56,7 +56,7 @@ export const actions = {
   fetchSpreadsheets: async function (ctx) {
     ctx.commit("setLoadingStatus");
 
-    const {companies} = await this.$fetchCompanies();
+    const { companies } = await this.$fetchCompanies();
     const indexed = this.$indexer(companies, indexingKeys);
     ctx.commit("setCompanies", indexed);
 
