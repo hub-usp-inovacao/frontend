@@ -91,7 +91,7 @@
             hint="Máximo 200 palavras"
           ></v-textarea>
           <v-radio-group
-            label="Indique sua principla expectativa em relação a solução da
+            label="Indique sua principal expectativa em relação a solução da
                 demanda:"
           >
             <v-radio
