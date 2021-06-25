@@ -75,6 +75,7 @@
               width="100"
               text
               :loading="loading"
+              :disabled="!formValid"
               @click="submit"
             >
               Enviar
@@ -138,6 +139,9 @@ export default {
     cnaeMajors() {
       return Object.keys(this.$reverseCNAE);
     },
+    formValid() {
+      return this.update.new_values.length > 0 && this.$refs.form?.validate();
+    },
   },
 
   methods: {
@@ -171,9 +175,7 @@ export default {
     async submit() {
       this.loading = true;
 
-      const valid = this.$refs.form.validate();
-
-      if (valid) {
+      if (this.formValid) {
         const url = process.env.BACKEND_URL + "/companies";
         const opts = { method: "PATCH" };
 
