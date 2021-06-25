@@ -248,11 +248,7 @@ export default {
     const route = this.$route;
 
     if (this.dataStatus == "ok" && this.companies.length == 0) {
-      this.fetchSpreadsheets({
-        sheetsAPIKey: process.env.sheetsAPIKey,
-        sheetID: process.env.sheetID,
-        cnae: this.$cnae,
-      });
+      this.fetchSpreadsheets({});
     }
 
     if (route.params.id) {
