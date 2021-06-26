@@ -34,30 +34,32 @@
             placeholder="Seu e-mail"
           />
           <v-text-field v-model="values.personal.name" label="Nome Completo" />
-          <v-radio-group
-            v-model="values.personal.represent"
-            label="Você representa uma:"
-            @change="enableOtherOption('personal', 'represent')"
-          >
-            <v-radio
-              v-for="(option, i) of radioButtonData[0]"
-              :key="i"
-              :value="option"
-              :label="option"
-            />
-            <v-radio label="Outro, qual?" value="Outro" />
-          </v-radio-group>
-          <v-row>
-            <v-col cols="6">
-              <v-text-field
-                v-if="values.personal.hasOwnProperty('representOther')"
-                v-model="values.personal.representOther"
-                class="mt-n5 pt-0"
-                placeholder="Outro, qual?"
-                autofocus
+          <div>
+            <v-radio-group
+              v-model="values.personal.represent"
+              label="Você representa uma:"
+              @change="enableOtherOption('personal', 'represent')"
+            >
+              <v-radio
+                v-for="(option, i) of radioButtonData[0]"
+                :key="i"
+                :value="option"
+                :label="option"
               />
-            </v-col>
-          </v-row>
+              <v-radio label="Outro, qual?" value="Outro" />
+            </v-radio-group>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="values.personal.hasOwnProperty('representOther')"
+                  v-model="values.personal.representOther"
+                  class="mt-n5 pt-0"
+                  placeholder="Outro, qual?"
+                  autofocus
+                />
+              </v-col>
+            </v-row>
+          </div>
         </v-container>
 
         <div class="my-2 text-h5 font-weight-regular">
@@ -103,53 +105,142 @@
           <v-divider />
         </div>
         <v-container>
-          <v-radio-group
-            label="Em qual das atividades econômicas sua demanda se encaixa?"
-          >
-          </v-radio-group>
           <div>
-            Faça um breve resumo de sua demanda (Descrever o seu desafio e/ou
-            problema para o qual busca uma solução)
+            <legend text class="legendColor">
+              Em qual das atividades econômicas sua demanda se encaixa?
+            </legend>
+            <v-row>
+              <v-col>
+                <v-select
+                  v-model="values.demand.cnae.major"
+                  label="Área Primária"
+                  :items="cnaeMajors"
+                  clearable
+                />
+              </v-col>
+              <v-col>
+                <v-select
+                  v-model="values.demand.cnae.minor"
+                  label="Área Secundária"
+                  :items="cnaeMinors(values.demand.cnae.major)"
+                  no-data-text="Selecione uma área primária antes"
+                  clearable
+                />
+              </v-col>
+            </v-row>
           </div>
-          <v-textarea
-            clearable
-            dense
-            filled
-            auto-grow
-            autofocus
-            :rows="textAreaSize"
-            hint="Máximo 200 palavras"
-          ></v-textarea>
-          <v-radio-group
-            label="Indique sua principal expectativa em relação a solução da
+
+          <div>
+            <legend class="legendColor">
+              Faça um breve resumo de sua demanda (Descrever o seu desafio e/ou
+              problema para o qual busca uma solução)
+            </legend>
+            <v-textarea
+              clearable
+              dense
+              filled
+              auto-grow
+              autofocus
+              :rows="textAreaSize"
+              hint="Máximo 200 palavras"
+            ></v-textarea>
+          </div>
+
+          <div>
+            <v-radio-group
+              v-model="values.demand.expectation"
+              label="Indique sua principal expectativa em relação a solução da
                 demanda:"
-          >
-            <v-radio
-              v-for="(option, i) of radioButtonData[2]"
-              :key="i"
-              :value="option"
-              :label="option"
-            />
-            <v-radio label="Outro, qual?"> </v-radio>
-          </v-radio-group>
-          <v-radio-group
-            label="Qual o perfil do pesquisador o(a) senhor(a) acredita poder sanar suas necessidades? Ou seja, qual deveria ser sua especialização, em sua opinião?"
-          >
-          </v-radio-group>
-          <v-radio-group
-            label="Qual a sua necessidade em relação a esses pesquisadores?"
-          >
-            <v-radio
-              v-for="(option, i) of radioButtonData[3]"
-              :key="i"
-              :value="option"
-              :label="option"
-            />
-            <v-radio label="Outro, qual?"> </v-radio>
-          </v-radio-group>
+              @change="enableOtherOption('demand', 'expectation')"
+            >
+              <v-radio
+                v-for="(option, i) of radioButtonData[2]"
+                :key="i"
+                :value="option"
+                :label="option"
+              />
+              <v-radio label="Outro, qual?" value="Outro" />
+            </v-radio-group>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="values.demand.hasOwnProperty('expectationOther')"
+                  v-model="values.demand.expectationOther"
+                  class="mt-n5 pt-0"
+                  placeholder="Outro, qual?"
+                  autofocus
+                />
+              </v-col>
+            </v-row>
+          </div>
+
+          <v-row>
+            <v-col sm="12" md="6">
+              <legend class="legendColor">
+                Qual o perfil do pesquisador o(a) senhor(a) acredita poder sanar
+                suas necessidades? Ou seja, qual deveria ser sua especialização,
+                em sua opinião?
+              </legend>
+              <v-select
+                v-model="values.demand.wantedProfile"
+                :items="cnpqAreas"
+                label="Escolha um perfil"
+                clearable
+              >
+                <template v-slot:label> </template>
+              </v-select>
+            </v-col>
+          </v-row>
+
+          <div>
+            <v-radio-group
+              v-model="values.demand.necessity"
+              label="Qual a sua necessidade em relação a esses pesquisadores?"
+              @change="enableOtherOption('demand', 'necessity')"
+            >
+              <v-radio
+                v-for="(option, i) of radioButtonData[3]"
+                :key="i"
+                :value="option"
+                :label="option"
+              />
+              <v-radio
+                value="Identificação de especialista para assessoria técnica"
+              >
+                <template v-slot:label>
+                  <p class="my-auto">
+                    Identificação de especialista para assessoria técnica na
+                    área de
+                  </p>
+                  <div class="mb-n3 ml-2">
+                    <v-select
+                      v-model="selectedArea"
+                      :items="cnpqAreas"
+                      label="Escolha uma área"
+                      clearable
+                      dense
+                    />
+                  </div>
+                </template>
+              </v-radio>
+              <v-radio label="Outro, qual?" value="Outro" />
+            </v-radio-group>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="values.demand.hasOwnProperty('necessityOther')"
+                  v-model="values.demand.necessityOther"
+                  class="mt-n5 pt-0"
+                  placeholder="Outro, qual?"
+                  autofocus
+                />
+              </v-col>
+            </v-row>
+          </div>
         </v-container>
 
         <v-checkbox
+          v-model="confirmation"
           label="Concordo com todas as normas e funcionamento do Programa Conexão USP"
         />
 
@@ -195,7 +286,15 @@ export default {
         address: "",
         city: "",
       },
-      demand: {},
+      demand: {
+        cnae: {
+          major: "",
+          minor: "",
+        },
+        expectation: "",
+        wantedProfile: "",
+        necessity: "",
+      },
     },
     loading: false,
     radioButtonData: [
@@ -218,22 +317,28 @@ export default {
         "Auxílio técnico para validação de equipamentos e produtos",
         "Utilização de laboratórios para ensaios e testes",
         "Desenvolvimento de P&D em parceria",
-        "Identificação de especialista para assessoria técnica na área de: SELECT COM SUBÁREA",
         "Identificação de startup para investimento ou contratação de serviços",
       ],
     ],
+    selectedArea: "",
+    confirmation: false,
   }),
   computed: {
     textAreaSize() {
       return this.$breakpoint.smAndDown ? 16 : 5;
     },
+    cnaeMajors() {
+      return Object.keys(this.$reverseCNAE);
+    },
+    cnpqAreas() {
+      return this.$knowledgeAreas.map((area) => {
+        let { name } = area;
+        name = name.replace(/Ciências (da )?/, "");
+        return name;
+      });
+    },
   },
   methods: {
-    submit() {
-      this.loading = true;
-      console.log(this.values);
-      this.loading = false;
-    },
     enableOtherOption(model, value) {
       if (this.values[model][value] == "Outro") {
         this.values[model][`${value}Other`] = "";
@@ -241,6 +346,44 @@ export default {
         delete this.values[model][`${value}Other`];
       }
     },
+    cnaeMinors(major) {
+      if (!major) return undefined;
+      return this.$reverseCNAE[major].map(({ minor }) => minor);
+    },
+    dataChecking() {
+      if (this.values.personal.represent == "Outro") {
+        this.values.personal.represent = this.values.personal.representOther;
+        delete this.values.personal.representOther;
+      }
+
+      if (this.values.demand.expectation == "Outro") {
+        this.values.demand.expectation = this.values.demand.expectationOther;
+        delete this.values.demand.expectationOther;
+      }
+
+      if (this.values.demand.necessity == "Outro") {
+        this.values.demand.necessity = this.values.demand.necessityOther;
+        delete this.values.demand.necessityOther;
+      }
+
+      if (
+        this.values.demand.necessity ==
+        "Identificação de especialista para assessoria técnica"
+      )
+        this.values.demand.necessity += " na área de " + this.selectedArea;
+    },
+    submit() {
+      this.loading = true;
+      this.dataChecking();
+      console.log(this.values);
+      this.loading = false;
+    },
   },
 };
 </script>
+
+<style scoped>
+.legendColor {
+  color: rgba(0, 0, 0, 0.6);
+}
+</style>
