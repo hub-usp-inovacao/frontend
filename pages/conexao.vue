@@ -65,15 +65,19 @@
           <v-divider />
         </div>
         <v-container>
-          <v-text-field label="Nome" />
-          <v-text-field label="CNPJ" />
+          <v-text-field v-model="values.org.name" label="Nome" />
+          <v-text-field v-model="values.org.cnpj" label="CNPJ" />
           <v-radio-group
+            v-model="values.org.sensitiveData"
             label="Você deseja manter sigilo em relação ao nome da organização?"
           >
-            <v-radio value="Sim" label="Sim" />
-            <v-radio value="Não" label="Não" />
+            <v-radio :value="true" label="Sim" />
+            <v-radio :value="false" label="Não" />
           </v-radio-group>
-          <v-radio-group label="Qual o porte da organização:">
+          <v-radio-group
+            v-model="values.org.size"
+            label="Qual o porte da organização:"
+          >
             <v-radio
               v-for="(option, i) of radioButtonData[1]"
               :key="i"
@@ -81,10 +85,17 @@
               :label="option"
             />
           </v-radio-group>
-          <v-text-field label="E-mail" placeholder="E-mail da organização" />
-          <v-text-field label="Telefone de Contato" />
-          <v-text-field label="Endereço" />
-          <v-text-field label="Cidade" />
+          <v-text-field
+            v-model="values.org.email"
+            label="E-mail"
+            placeholder="E-mail da organização"
+          />
+          <v-text-field
+            v-model="values.org.phone"
+            label="Telefone de Contato"
+          />
+          <v-text-field v-model="values.org.address" label="Endereço" />
+          <v-text-field v-model="values.org.city" label="Cidade" />
         </v-container>
 
         <div class="my-2 text-h5 font-weight-regular">
@@ -174,7 +185,16 @@ export default {
         name: "",
         represent: "",
       },
-      org: {},
+      org: {
+        email: "",
+        name: "",
+        cnpj: "",
+        sensitiveData: "",
+        size: "",
+        phone: "",
+        address: "",
+        city: "",
+      },
       demand: {},
     },
     loading: false,
