@@ -28,17 +28,36 @@
           <v-divider />
         </div>
         <v-container>
-          <v-text-field label="E-mail" placeholder="Seu e-mail" />
-          <v-text-field label="Nome Completo" />
-          <v-radio-group label="Você representa uma:">
+          <v-text-field
+            v-model="values.personal.email"
+            label="E-mail"
+            placeholder="Seu e-mail"
+          />
+          <v-text-field v-model="values.personal.name" label="Nome Completo" />
+          <v-radio-group
+            v-model="values.personal.represent"
+            label="Você representa uma:"
+            @change="enableOtherOption('personal', 'represent')"
+          >
             <v-radio
               v-for="(option, i) of radioButtonData[0]"
               :key="i"
               :value="option"
               :label="option"
             />
-            <v-radio label="Outro"> </v-radio>
+            <v-radio label="Outro, qual?" value="Outro" />
           </v-radio-group>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-if="values.personal.hasOwnProperty('representOther')"
+                v-model="values.personal.representOther"
+                class="mt-n5 pt-0"
+                placeholder="Outro, qual?"
+                autofocus
+              />
+            </v-col>
+          </v-row>
         </v-container>
 
         <div class="my-2 text-h5 font-weight-regular">
@@ -149,6 +168,15 @@ export default {
     Panel,
   },
   data: () => ({
+    values: {
+      personal: {
+        email: "",
+        name: "",
+        represent: "",
+      },
+      org: {},
+      demand: {},
+    },
     loading: false,
     radioButtonData: [
       ["Empresa", "Organização sem fins lucatrivos", "Governo", "Consultoria"],
@@ -183,7 +211,15 @@ export default {
   methods: {
     submit() {
       this.loading = true;
+      console.log(this.values);
       this.loading = false;
+    },
+    enableOtherOption(model, value) {
+      if (this.values[model][value] == "Outro") {
+        this.values[model][`${value}Other`] = "";
+      } else {
+        delete this.values[model][`${value}Other`];
+      }
     },
   },
 };
