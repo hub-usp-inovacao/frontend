@@ -6,8 +6,8 @@
           <v-row>
             <v-col cols="6">
               <div
-                style="margin-left: -10vw"
-                class="py-4 red text-center white--text font-weight-bold text-h2 rounded-lg"
+                :style="headerStyle"
+                class="py-4 text-center white--text font-weight-bold text-h2 rounded-lg"
               >
                 {{ title }}
               </div>
@@ -42,8 +42,8 @@
       <v-row>
         <v-col cols="12">
           <div
-            style="margin-left: -10vw"
-            class="py-4 red text-center white--text font-weight-bold text-h2 rounded-lg"
+            :style="headerStyle"
+            class="py-4 text-center white--text font-weight-bold text-h4 rounded-lg"
           >
             {{ title }}
           </div>
@@ -84,6 +84,10 @@ export default {
       type: String,
       required: true,
     },
+    color: {
+      type: String,
+      required: true,
+    },
     next: {
       type: String,
       required: true,
@@ -109,6 +113,13 @@ export default {
       }
 
       return { label: "Voltar ao menu", to: "/jornada" };
+    },
+
+    headerStyle() {
+      return {
+        marginLeft: "-10vw",
+        backgroundColor: this.color,
+      };
     },
   },
 };
