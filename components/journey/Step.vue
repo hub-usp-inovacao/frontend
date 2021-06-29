@@ -33,7 +33,7 @@
           </v-row>
         </v-col>
         <v-col offset="1" cols="7">
-          <slot></slot>
+          <Buttons></Buttons>
         </v-col>
       </v-row>
     </v-container>
@@ -56,7 +56,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <slot></slot>
+          <Buttons></Buttons>
         </v-col>
       </v-row>
       <v-row>
@@ -70,10 +70,12 @@
 
 <script>
 import JourneyNav from "@/components/journey/JourneyNav.vue";
+import Buttons from "@/components/journey/Buttons.vue";
 
 export default {
   components: {
     JourneyNav,
+    Buttons,
   },
   props: {
     title: {
