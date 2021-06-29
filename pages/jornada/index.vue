@@ -8,19 +8,19 @@
     </v-container>
     <main>
       <v-container class="hidden-sm-and-down roadmap">
-        <v-row v-for="({ title, color, caption }, i) in rows" :key="i">
+        <v-row v-for="({ title, color, caption, to }, i) in rows" :key="i">
           <v-col cols="4" :offset="i % 2 ? 2 : 0">
             <ColorfulCard :title="title" :color="color" :index="i + 1" />
           </v-col>
           <v-col cols="6" :offset="i % 2 ? 0 : 2">
-            <CallToAction :color="color" :caption="caption" />
+            <CallToAction :color="color" :caption="caption" :to="to" />
           </v-col>
         </v-row>
       </v-container>
 
       <v-container class="hidden-md-and-up">
         <div
-          v-for="({ title, color, caption }, i) in rows"
+          v-for="({ title, color, caption, to }, i) in rows"
           :key="i"
           class="mb-12"
         >
@@ -30,7 +30,7 @@
             :color="color"
             :index="i + 1"
           />
-          <CallToAction :color="color" :caption="caption" />
+          <CallToAction :color="color" :caption="caption" :to="to" />
         </div>
       </v-container>
     </main>
@@ -59,6 +59,7 @@ export default {
                   e empreendedorismo, cursando
                   as disciplinas oferecidas pela USP.`,
         color: "rgba(192, 22, 27, 1)",
+        to: "/jornada/aprenda",
       },
       {
         title: "Engajamento e começando a exercitar o empreendedorismo",
@@ -67,6 +68,7 @@ export default {
                   de convivência: aproveite ao máximo 
                   o que a comunidade USP oferece.`,
         color: "rgba(228, 105, 38, 1)",
+        to: "/jornada/pratica",
       },
       {
         title: "Processo de incubação, criando minha própria empresa",
@@ -75,6 +77,7 @@ export default {
                   tanto dentro quanto fora da USP.
                   Saiba mais sobre as incubadoras!`,
         color: "rgba(244, 196, 30, 1)",
+        to: "/jornada/criar",
       },
       {
         title: "Aprimorando tecnologias, fortalecendo a empresa",
@@ -82,6 +85,7 @@ export default {
                   da USP para formar parcerias, fortalecer sua empresa
                   e desenvolver o seu produto.`,
         color: "rgba(51, 140, 33, 1)",
+        to: "/jornada/aprimorar",
       },
       {
         title: "Buscando financiamento",
@@ -90,6 +94,7 @@ export default {
                   como se preparar para as principais
                   maneiras de captação de recursos.`,
         color: "rgba(33, 78, 140, 1)",
+        to: "/jornada/financiamento",
       },
     ],
   }),

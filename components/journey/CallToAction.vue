@@ -1,7 +1,13 @@
 <template>
   <div :class="wrapperClasses">
     <div>{{ caption }}</div>
-    <v-btn class="mt-4 mt-lg-0" elevation="0" color="transparent" height="100%">
+    <v-btn
+      class="mt-4 mt-lg-0"
+      elevation="0"
+      color="transparent"
+      height="100%"
+      :to="to"
+    >
       <svg
         width="5em"
         height="2em"
@@ -26,6 +32,10 @@ export default {
       required: true,
     },
     color: {
+      type: String,
+      required: true,
+    },
+    to: {
       type: String,
       required: true,
     },
