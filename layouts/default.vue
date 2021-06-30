@@ -40,7 +40,9 @@
             <v-list-item-title> Home </v-list-item-title>
           </v-list-item>
           <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>
+              {{ item.title }}
+              <v-icon v-if="item.new" right>mdi-star</v-icon></v-list-item-title>
           </v-list-item>
         </v-list-item-group>
         <HubNavButton :margin="false" :background="false" />
