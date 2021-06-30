@@ -21,8 +21,10 @@
             :key="i"
             :to="item.to"
             class="white--text mx-2 secondary py-4 px-6 subtitle-1"
-            >{{ item.title }}</v-chip
           >
+            {{ item.title }}
+            <v-icon v-if="item.new" right>mdi-star</v-icon>
+          </v-chip>
         </v-chip-group>
       </v-toolbar-items>
     </v-toolbar>
@@ -113,6 +115,7 @@ export default {
       {
         title: "Jornada",
         to: "/jornada",
+        new: true,
       },
     ],
     drawer: false,
