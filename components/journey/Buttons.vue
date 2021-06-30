@@ -3,16 +3,20 @@
     <div class="d-flex flex-column">
       <div id="buttons" class="d-flex flex-wrap justify-space-around">
         <v-btn
-          v-for="b in buttons"
-          :key="b"
-          class="white px-10 py-10 ma-1 flex-grow-1"
+          v-for="{ label } in buttons"
+          :key="label"
+          class="white px-6 py-8 ma-1 flex-grow-1 button"
+          max-width="100%"
           @click="select"
         >
-          {{ b }}
+          {{ label }}
         </v-btn>
       </div>
-      <v-card class="mt-4 rounded-lg">
-        <v-card-text>
+      <v-card
+        class="mt-4 rounded-lg d-flex justify-center align-center"
+        height="30vh"
+      >
+        <v-card-text class="text-center">
           {{ selectedText }}
         </v-card-text>
       </v-card>
@@ -22,9 +26,15 @@
 
 <script>
 export default {
+  props: {
+    buttons: {
+      type: Array,
+      required: true,
+    },
+  },
+
   data: () => ({
     selectedButton: undefined,
-    buttons: "CIETEC ESALQTEC HABITS SUPERA".split(" "),
   }),
 
   computed: {

@@ -32,8 +32,8 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col offset="1" cols="7">
-          <Buttons></Buttons>
+        <v-col cols="8">
+          <Buttons :buttons="buttons"></Buttons>
         </v-col>
       </v-row>
     </v-container>
@@ -56,7 +56,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <Buttons></Buttons>
+          <Buttons :buttons="buttons"></Buttons>
         </v-col>
       </v-row>
       <v-row>
@@ -88,6 +88,10 @@ export default {
     },
     color: {
       type: String,
+      required: true,
+    },
+    buttons: {
+      type: Array,
       required: true,
     },
     next: {

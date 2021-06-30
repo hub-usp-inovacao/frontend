@@ -3,8 +3,9 @@
     <Step
       :title="title"
       :description="description"
-      :next="next"
       :color="color"
+      :buttons="buttons"
+      :next="next"
       :previous="previous"
     >
     </Step>
@@ -31,6 +32,14 @@ export default {
         route: "aprenda",
         title: "Aprenda",
         color: "#C0161B",
+        buttons: [
+          { label: "Graduação" },
+          { label: "Pós-Graduação" },
+          { label: "Quero aprender!" },
+          { label: "Tenho uma ideia, e agora?" },
+          { label: "Preciso testar minha ideia!" },
+          { label: "Tópicos avançados em empreendedorismo" },
+        ],
         description: `Processo de aprendizagem e disciplinas
 
 Para aprender um pouco mais sobre inovação e empreendedorismo, curse as disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas de pós-graduação voltadas para os temas de inovação e empreendedorismo, que podem ser encontradas em: 
@@ -44,6 +53,16 @@ Você pode navegar pelas disciplinas de acordo com o nível de maturidade que vo
         route: "pratica",
         title: "A Ideia na Prática",
         color: "#E46926",
+        buttons: [
+          { label: "Agente Institucional" },
+          { label: "Empresa Jr." },
+          { label: "Ideação" },
+          { label: "Entidade Associada" },
+          { label: "Entidade Estudantil" },
+          { label: "Espaço/coworking" },
+          { label: "Grupos e Iniciativas Estudantis" },
+          { label: "Incubadora e Parque Tecnológico" },
+        ],
         description: `Engajamento e exercitando o empreendedorismo
 
 Entidades estudantis: quer encontrar uma galera que esteja a fim de apoiar e trabalhar nas mesmas causas que você? Busque a entidade estudantil com a qual você mais se identifica e junte-se a essa turma.
@@ -58,6 +77,12 @@ Espaços de convivência e coworking: precisando de um lugar para colocar a sua 
         route: "criar",
         title: "Criar a Empresa",
         color: "#F4C41E",
+        buttons: [
+          { label: "CIETEC" },
+          { label: "ESALQTEC" },
+          { label: "HABITS" },
+          { label: "SUPERA" },
+        ],
         description: `Processo de incubação, criando minha própria empresa
 
 Incubadoras e Parques Tecnológicos: encontre uma rede de apoio para se conectar com outras startups e um local para instalar sua equipe. Atualmente são diferentes espaços, a USP possui 4 incubadoras conveniadas (CIETEC, ESALQTEC, HABITS e SUPERA), além de uma rede de ambientes de inovação no estado de São Paulo que podem abrigar o seu negócio.`,
@@ -66,6 +91,14 @@ Incubadoras e Parques Tecnológicos: encontre uma rede de apoio para se conectar
         route: "aprimorar",
         title: "Aprimorar o Negócio",
         color: "#338C21",
+        buttons: [
+          { label: "CEPID" },
+          { label: "EMBRAPII" },
+          { label: "INCT" },
+          { label: "NAP" },
+          { label: "Centro de Pesquisa em Engenharia" },
+          { label: "Centrais Multiusuário" },
+        ],
         description: `Fortalecer a empresa e aprimorar tecnologias
 
 Se você está em processo de concepção e desenvol- vimento da sua tecnologia, pode desenvolver parcei- ras com os inúmeros INCT e CEPID , onde será possí- vel aprimorar a sua ideia em conjunto com pesquisa- dores da USP, desenvolver uma tecnologia que se seja protegida por uma patente ou registro de software.
@@ -79,6 +112,7 @@ Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviço
         route: "financiamento",
         title: "Financiamento",
         color: "#214E8C",
+        buttons: [],
         description: `Buscando e captando investimento
 
 A busca por financiamento deve ser uma tarefa contínua do empreendedor ao longo do ciclo de vida de sua empresa. Usualmente, denomina-se a jornada do financiamento da startup como sendo a jornada paralela ao seu ciclo de vida.
@@ -110,6 +144,10 @@ O empreendedor deve incluir no seu playbook, o desenvolvimento de lista de prior
 
     color() {
       return this.currentPage?.color;
+    },
+
+    buttons() {
+      return this.currentPage?.buttons;
     },
 
     previous() {
