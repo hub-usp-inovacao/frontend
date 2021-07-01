@@ -1,11 +1,11 @@
 <template>
   <div class="d-flex justify-space-around">
-    <nuxt-link :to="previous.to" class="icon-link">
-      <v-icon>{{ previousIcon }}</v-icon>
+    <nuxt-link :to="previous.to" class="icon-link" :style="previousStyle">
+      <v-icon :color="previousColor">{{ previousIcon }}</v-icon>
       {{ previous.label }}
     </nuxt-link>
-    <nuxt-link :to="next.to" class="icon-link">
-      <v-icon>{{ nextIcon }}</v-icon>
+    <nuxt-link :to="next.to" class="icon-link" :style="nextStyle">
+      <v-icon :color="nextColor">{{ nextIcon }}</v-icon>
       {{ next.label }}
     </nuxt-link>
   </div>
@@ -22,6 +22,14 @@ export default {
       type: Object,
       required: true,
     },
+    nextColor: {
+      type: String,
+      default: undefined,
+    },
+    previousColor: {
+      type: String,
+      default: undefined,
+    },
   },
 
   computed: {
@@ -34,6 +42,16 @@ export default {
       return this.next.to === "/jornada"
         ? "mdi-circle-outline"
         : "mdi-arrow-right";
+    },
+    nextStyle() {
+      return {
+        color: this.nextColor,
+      };
+    },
+    previousStyle() {
+      return {
+        color: this.previousColor,
+      };
     },
   },
 };

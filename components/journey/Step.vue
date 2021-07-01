@@ -12,6 +12,9 @@
                 {{ title }}
               </div>
             </v-col>
+            <v-col v-if="nextColor != '#212121'" offset="5" cols="1">
+              <div :style="peakabooStyle" class="rounded-lg"></div>
+            </v-col>
           </v-row>
         </v-col>
       </v-row>
@@ -22,7 +25,12 @@
           </v-row>
           <v-row>
             <v-col>
-              <JourneyNav :next="nextLink" :previous="previousLink" />
+              <JourneyNav
+                :next="nextLink"
+                :previous="previousLink"
+                :next-color="nextColor"
+                :previous-color="previousColor"
+              />
             </v-col>
           </v-row>
         </v-col>
@@ -55,7 +63,12 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <JourneyNav :next="nextLink" :previous="previousLink" />
+          <JourneyNav
+            :next="nextLink"
+            :previous="previousLink"
+            :next-color="nextColor"
+            :previous-color="previousColor"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -98,6 +111,14 @@ export default {
       type: String,
       required: true,
     },
+    nextColor: {
+      type: String,
+      default: "#212121",
+    },
+    previousColor: {
+      type: String,
+      default: "#212121",
+    },
   },
 
   computed: {
@@ -120,6 +141,13 @@ export default {
     headerStyle() {
       return {
         backgroundColor: this.color,
+      };
+    },
+
+    peakabooStyle() {
+      return {
+        height: "100%",
+        backgroundColor: this.nextColor,
       };
     },
   },

@@ -7,6 +7,8 @@
       :buttons="buttons"
       :next="next"
       :previous="previous"
+      :next-color="nextColor"
+      :previous-color="previousColor"
     >
     </Step>
   </div>
@@ -32,6 +34,7 @@ export default {
         route: "aprenda",
         title: "Aprenda",
         color: "#C0161B",
+        nextColor: "#E46926",
         buttons: {
           primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],
           secondary: [
@@ -54,6 +57,8 @@ Você pode navegar pelas disciplinas de acordo com o nível de maturidade que vo
         route: "pratica",
         title: "A Ideia na Prática",
         color: "#E46926",
+        nextColor: "#F4C41E",
+        previousColor: "#C0161B",
         buttons: [
           { label: "Empresa Jr." },
           { label: "Ideação" },
@@ -76,6 +81,8 @@ Espaços de convivência e coworking: precisando de um lugar para colocar a sua 
         route: "criar",
         title: "Criar a Empresa",
         color: "#F4C41E",
+        nextColor: "#338C21",
+        previousColor: "#E46926",
         buttons: [
           { label: "CIETEC" },
           { label: "ESALQTEC" },
@@ -91,6 +98,8 @@ Incubadoras e Parques Tecnológicos: encontre uma rede de apoio para se conectar
         route: "aprimorar",
         title: "Aprimorar o Negócio",
         color: "#338C21",
+        nextColor: "#214E8C",
+        previousColor: "#F4C41E",
         buttons: [
           { label: "CEPID" },
           { label: "EMBRAPII" },
@@ -112,6 +121,7 @@ Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviço
         route: "financiamento",
         title: "Financiamento",
         color: "#214E8C",
+        previousColor: "#338C21",
         buttons: [
           { label: "Fomento" },
           { label: "Investidores Anjo" },
@@ -164,6 +174,14 @@ O empreendedor deve incluir no seu playbook, o desenvolvimento de lista de prior
       return currIndex < this.pages.length
         ? this.pages[currIndex + 1]?.route
         : "";
+    },
+
+    nextColor() {
+      return this.currentPage?.nextColor;
+    },
+
+    previousColor() {
+      return this.currentPage?.previousColor;
     },
   },
 };
