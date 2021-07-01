@@ -112,7 +112,11 @@ Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviço
         route: "financiamento",
         title: "Financiamento",
         color: "#214E8C",
-        buttons: [],
+        buttons: [
+          { label: "Fomento" },
+          { label: "Investidores Anjo" },
+          { label: "Capital de Risco" },
+        ],
         description: `Buscando e captando investimento
 
 A busca por financiamento deve ser uma tarefa contínua do empreendedor ao longo do ciclo de vida de sua empresa. Usualmente, denomina-se a jornada do financiamento da startup como sendo a jornada paralela ao seu ciclo de vida.
