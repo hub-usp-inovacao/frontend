@@ -3,7 +3,7 @@
     <v-container class="hidden-sm-and-down">
       <v-row>
         <v-col>
-          <v-row class="roadmap">
+          <v-row :class="roadmap">
             <v-col cols="6">
               <div
                 :style="headerStyle"
@@ -14,6 +14,9 @@
             </v-col>
             <v-col v-if="nextColor != '#212121'" offset="5" cols="1">
               <div :style="peakabooStyle" class="rounded-lg"></div>
+            </v-col>
+            <v-col v-else cols="6">
+              <Party style="height: 60%; max-height: 60%" />
             </v-col>
           </v-row>
         </v-col>
@@ -78,11 +81,13 @@
 <script>
 import JourneyNav from "@/components/journey/JourneyNav.vue";
 import Buttons from "@/components/journey/Buttons.vue";
+import Party from "@/components/journey/Party.vue";
 
 export default {
   components: {
     JourneyNav,
     Buttons,
+    Party,
   },
   props: {
     title: {
@@ -149,6 +154,10 @@ export default {
         height: "100%",
         backgroundColor: this.nextColor,
       };
+    },
+
+    roadmap() {
+      return this.nextColor === "#212121" ? [] : ["roadmap"];
     },
   },
 };
