@@ -32,14 +32,15 @@ export default {
         route: "aprenda",
         title: "Aprenda",
         color: "#C0161B",
-        buttons: [
-          { label: "Graduação" },
-          { label: "Pós-Graduação" },
-          { label: "Quero aprender!" },
-          { label: "Tenho uma ideia, e agora?" },
-          { label: "Preciso testar minha ideia!" },
-          { label: "Tópicos avançados em empreendedorismo" },
-        ],
+        buttons: {
+          primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],
+          secondary: [
+            { label: "Quero aprender!" },
+            { label: "Tenho uma ideia, e agora?" },
+            { label: "Preciso testar minha ideia!" },
+            { label: "Tópicos avançados em empreendedorismo" },
+          ],
+        },
         description: `Processo de aprendizagem e disciplinas
 
 Para aprender um pouco mais sobre inovação e empreendedorismo, curse as disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas de pós-graduação voltadas para os temas de inovação e empreendedorismo, que podem ser encontradas em: 

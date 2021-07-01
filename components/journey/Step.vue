@@ -91,8 +91,10 @@ export default {
       required: true,
     },
     buttons: {
-      type: Array,
       required: true,
+      validator: (prop) => {
+        return prop instanceof Array || prop instanceof Object;
+      },
     },
     next: {
       type: String,
