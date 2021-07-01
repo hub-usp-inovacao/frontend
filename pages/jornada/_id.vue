@@ -55,14 +55,12 @@ Você pode navegar pelas disciplinas de acordo com o nível de maturidade que vo
         title: "A Ideia na Prática",
         color: "#E46926",
         buttons: [
-          { label: "Agente Institucional" },
           { label: "Empresa Jr." },
           { label: "Ideação" },
+          { label: "Grupos e Iniciativas Estudantis" },
           { label: "Entidade Associada" },
           { label: "Entidade Estudantil" },
           { label: "Espaço/coworking" },
-          { label: "Grupos e Iniciativas Estudantis" },
-          { label: "Incubadora e Parque Tecnológico" },
         ],
         description: `Engajamento e exercitando o empreendedorismo
 
@@ -83,6 +81,7 @@ Espaços de convivência e coworking: precisando de um lugar para colocar a sua 
           { label: "ESALQTEC" },
           { label: "HABITS" },
           { label: "SUPERA" },
+          { label: "Incubadoras e Parques Tecnológico" },
         ],
         description: `Processo de incubação, criando minha própria empresa
 
