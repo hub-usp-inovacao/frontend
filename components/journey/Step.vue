@@ -3,20 +3,14 @@
     <v-container class="hidden-sm-and-down">
       <v-row>
         <v-col>
-          <v-row>
+          <v-row class="roadmap">
             <v-col cols="6">
               <div
                 :style="headerStyle"
-                class="py-4 text-center white--text font-weight-bold text-h2 rounded-lg"
+                class="py-4 text-center white--text font-weight-bold text-h4 rounded-lg"
               >
                 {{ title }}
               </div>
-            </v-col>
-            <v-col cols="2">
-              <div
-                style="margin-left: 15vw; height: 100%"
-                class="py-4 rounded-lg orange"
-              ></div>
             </v-col>
           </v-row>
         </v-col>
@@ -125,7 +119,6 @@ export default {
 
     headerStyle() {
       return {
-        marginLeft: "-10vw",
         backgroundColor: this.color,
       };
     },
@@ -136,5 +129,11 @@ export default {
 <style scoped>
 .bg-gray {
   background-color: #ececec;
+}
+
+.roadmap {
+  background-image: url("/hor-road.png");
+  background-position: left center;
+  background-repeat: repeat-x;
 }
 </style>
