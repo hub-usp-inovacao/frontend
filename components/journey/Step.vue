@@ -3,20 +3,20 @@
     <v-container class="hidden-sm-and-down">
       <v-row>
         <v-col>
-          <v-row>
+          <v-row :class="roadmap">
             <v-col cols="6">
               <div
                 :style="headerStyle"
-                class="py-4 text-center white--text font-weight-bold text-h2 rounded-lg"
+                class="py-4 text-center white--text font-weight-bold text-h4 rounded-lg"
               >
                 {{ title }}
               </div>
             </v-col>
-            <v-col cols="2">
-              <div
-                style="margin-left: 15vw; height: 100%"
-                class="py-4 rounded-lg orange"
-              ></div>
+            <v-col v-if="nextColor != '#212121'" offset="5" cols="1">
+              <div :style="peakabooStyle" class="rounded-lg"></div>
+            </v-col>
+            <v-col v-else cols="6">
+              <Party style="height: 60%; max-height: 60%" />
             </v-col>
           </v-row>
         </v-col>
@@ -28,7 +28,12 @@
           </v-row>
           <v-row>
             <v-col>
-              <JourneyNav :next="nextLink" :previous="previousLink" />
+              <JourneyNav
+                :next="nextLink"
+                :previous="previousLink"
+                :next-color="nextColor"
+                :previous-color="previousColor"
+              />
             </v-col>
           </v-row>
         </v-col>
@@ -61,7 +66,12 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <JourneyNav :next="nextLink" :previous="previousLink" />
+          <JourneyNav
+            :next="nextLink"
+            :previous="previousLink"
+            :next-color="nextColor"
+            :previous-color="previousColor"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -71,11 +81,13 @@
 <script>
 import JourneyNav from "@/components/journey/JourneyNav.vue";
 import Buttons from "@/components/journey/Buttons.vue";
+import Party from "@/components/journey/Party.vue";
 
 export default {
   components: {
     JourneyNav,
     Buttons,
+    Party,
   },
   props: {
     title: {
@@ -91,8 +103,10 @@ export default {
       required: true,
     },
     buttons: {
-      type: Array,
       required: true,
+      validator: (prop) => {
+        return prop instanceof Array || prop instanceof Object;
+      },
     },
     next: {
       type: String,
@@ -101,6 +115,14 @@ export default {
     previous: {
       type: String,
       required: true,
+    },
+    nextColor: {
+      type: String,
+      default: "#212121",
+    },
+    previousColor: {
+      type: String,
+      default: "#212121",
     },
   },
 
@@ -123,9 +145,19 @@ export default {
 
     headerStyle() {
       return {
-        marginLeft: "-10vw",
         backgroundColor: this.color,
       };
+    },
+
+    peakabooStyle() {
+      return {
+        height: "100%",
+        backgroundColor: this.nextColor,
+      };
+    },
+
+    roadmap() {
+      return this.nextColor === "#212121" ? [] : ["roadmap"];
     },
   },
 };
@@ -134,5 +166,11 @@ export default {
 <style scoped>
 .bg-gray {
   background-color: #ececec;
+}
+
+.roadmap {
+  background-image: url("/hor-road.png");
+  background-position: left center;
+  background-repeat: repeat-x;
 }
 </style>

@@ -7,6 +7,8 @@
       :buttons="buttons"
       :next="next"
       :previous="previous"
+      :next-color="nextColor"
+      :previous-color="previousColor"
     >
     </Step>
   </div>
@@ -32,14 +34,16 @@ export default {
         route: "aprenda",
         title: "Aprenda",
         color: "#C0161B",
-        buttons: [
-          { label: "Graduação" },
-          { label: "Pós-Graduação" },
-          { label: "Quero aprender!" },
-          { label: "Tenho uma ideia, e agora?" },
-          { label: "Preciso testar minha ideia!" },
-          { label: "Tópicos avançados em empreendedorismo" },
-        ],
+        nextColor: "#E46926",
+        buttons: {
+          primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],
+          secondary: [
+            { label: "Quero aprender!" },
+            { label: "Tenho uma ideia, e agora?" },
+            { label: "Preciso testar minha ideia!" },
+            { label: "Tópicos avançados em empreendedorismo" },
+          ],
+        },
         description: `Processo de aprendizagem e disciplinas
 
 Para aprender um pouco mais sobre inovação e empreendedorismo, curse as disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas de pós-graduação voltadas para os temas de inovação e empreendedorismo, que podem ser encontradas em: 
@@ -53,15 +57,15 @@ Você pode navegar pelas disciplinas de acordo com o nível de maturidade que vo
         route: "pratica",
         title: "A Ideia na Prática",
         color: "#E46926",
+        nextColor: "#F4C41E",
+        previousColor: "#C0161B",
         buttons: [
-          { label: "Agente Institucional" },
           { label: "Empresa Jr." },
           { label: "Ideação" },
+          { label: "Grupos e Iniciativas Estudantis" },
           { label: "Entidade Associada" },
           { label: "Entidade Estudantil" },
           { label: "Espaço/coworking" },
-          { label: "Grupos e Iniciativas Estudantis" },
-          { label: "Incubadora e Parque Tecnológico" },
         ],
         description: `Engajamento e exercitando o empreendedorismo
 
@@ -77,11 +81,14 @@ Espaços de convivência e coworking: precisando de um lugar para colocar a sua 
         route: "criar",
         title: "Criar a Empresa",
         color: "#F4C41E",
+        nextColor: "#338C21",
+        previousColor: "#E46926",
         buttons: [
           { label: "CIETEC" },
           { label: "ESALQTEC" },
           { label: "HABITS" },
           { label: "SUPERA" },
+          { label: "Incubadoras e Parques Tecnológico" },
         ],
         description: `Processo de incubação, criando minha própria empresa
 
@@ -91,6 +98,8 @@ Incubadoras e Parques Tecnológicos: encontre uma rede de apoio para se conectar
         route: "aprimorar",
         title: "Aprimorar o Negócio",
         color: "#338C21",
+        nextColor: "#214E8C",
+        previousColor: "#F4C41E",
         buttons: [
           { label: "CEPID" },
           { label: "EMBRAPII" },
@@ -112,7 +121,12 @@ Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviço
         route: "financiamento",
         title: "Financiamento",
         color: "#214E8C",
-        buttons: [],
+        previousColor: "#338C21",
+        buttons: [
+          { label: "Fomento" },
+          { label: "Investidores Anjo" },
+          { label: "Capital de Risco" },
+        ],
         description: `Buscando e captando investimento
 
 A busca por financiamento deve ser uma tarefa contínua do empreendedor ao longo do ciclo de vida de sua empresa. Usualmente, denomina-se a jornada do financiamento da startup como sendo a jornada paralela ao seu ciclo de vida.
@@ -160,6 +174,14 @@ O empreendedor deve incluir no seu playbook, o desenvolvimento de lista de prior
       return currIndex < this.pages.length
         ? this.pages[currIndex + 1]?.route
         : "";
+    },
+
+    nextColor() {
+      return this.currentPage?.nextColor;
+    },
+
+    previousColor() {
+      return this.currentPage?.previousColor;
     },
   },
 };
