@@ -99,7 +99,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/axios"],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -120,6 +120,11 @@ export default {
           customProperties: true,
         },
       },
+    },
+  },
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BACKEND_URL,
     },
   },
   /*
