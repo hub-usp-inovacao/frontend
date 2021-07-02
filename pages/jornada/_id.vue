@@ -44,13 +44,15 @@ export default {
             { label: "Tópicos avançados em empreendedorismo" },
           ],
         },
-        description: `Processo de aprendizagem e disciplinas
+        description: `Para aprender um pouco mais sobre inovação e empreendedorismo, curse as
+disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia
+relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP
+tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas
+de pós-graduação voltadas para os temas de inovação e empreendedorismo, que
+podem ser encontradas em: https://hubusp.inovacao.usp.br/educacao
 
-Para aprender um pouco mais sobre inovação e empreendedorismo, curse as disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas de pós-graduação voltadas para os temas de inovação e empreendedorismo, que podem ser encontradas em: 
-
-<https://hubusp.inovacao.usp.br/educacao>
-
-Você pode navegar pelas disciplinas de acordo com o nível de maturidade que você busca em empreendedorismo e inovação.
+Você pode navegar pelas disciplinas de acordo com o nível de maturidade que
+você busca em empreendedorismo e inovação:
 `,
       },
       {
@@ -67,15 +69,21 @@ Você pode navegar pelas disciplinas de acordo com o nível de maturidade que vo
           { label: "Entidade Estudantil" },
           { label: "Espaço/coworking" },
         ],
-        description: `Engajamento e exercitando o empreendedorismo
+        description: `Quer encontrar uma galera que esteja a fim de apoiar e trabalhar nas mesmas
+causas que você? Busque a entidade estudantil com a qual você mais se
+identifica e junte-se a essa turma:
 
-Entidades estudantis: quer encontrar uma galera que esteja a fim de apoiar e trabalhar nas mesmas causas que você? Busque a entidade estudantil com a qual você mais se identifica e junte-se a essa turma.
+Quer trabalhar com projetos ligados a inovação e empreendedorismo e ao mesmo
+tempo dar início à sua carreira? As Empresas Júnior são associações de alunos
+que prestam diferentes tipos de serviços, participe.
 
-Empresas Júnior: quer trabalhar com projetos ligados a inovação e empreendedorismo e ao mesmo tempo dar início à sua carreira? As Empresas Jr. associam alunos que prestam diferentes tipos de serviços.
+Na hora de colocar a sua ideia em prática, você pode participar de programas que
+inspiram e promovem o desenvolvimento de iniciativas inovadoras e
+empreendedoras disponíveis para a Comunidade USP:
 
-Na hora de colocar a sua ideia em prática, você pode participar de programas que inspiram e promovem o desenvolvimento de iniciativas inovadoras e em- preendedoras disponíveis para a Comunidade USP.
-
-Espaços de convivência e coworking: precisando de um lugar para colocar a sua ideia em prática? Procure os espaços da USP onde você poderá interagir com projetos e organizações ligadas à inovação e ao empreendedorismo.`,
+Precisando de um lugar para colocar a sua ideia em prática? Procure os espaços
+da Universidade onde você poderá interagir com projetos e organizações ligadas
+à inovação e ao empreendedorismo`,
       },
       {
         route: "criar",
@@ -90,9 +98,12 @@ Espaços de convivência e coworking: precisando de um lugar para colocar a sua 
           { label: "SUPERA" },
           { label: "Incubadoras e Parques Tecnológico" },
         ],
-        description: `Processo de incubação, criando minha própria empresa
+        description: `Encontre uma rede de apoio para se conectar com outras startups e um local para
+instalar sua equipe em uma das 4 Incubadoras e do Parque Tecnológico da USP.
 
-Incubadoras e Parques Tecnológicos: encontre uma rede de apoio para se conectar com outras startups e um local para instalar sua equipe. Atualmente são diferentes espaços, a USP possui 4 incubadoras conveniadas (CIETEC, ESALQTEC, HABITS e SUPERA), além de uma rede de ambientes de inovação no estado de São Paulo que podem abrigar o seu negócio.`,
+Há no estado de São Paulo uma diversificada rede de ambientes de inovação
+com aceleradoras, incubadoras e parques que também podem abrigar o seu
+negócio`,
       },
       {
         route: "aprimorar",
@@ -108,14 +119,20 @@ Incubadoras e Parques Tecnológicos: encontre uma rede de apoio para se conectar
           { label: "Centro de Pesquisa em Engenharia" },
           { label: "Centrais Multiusuário" },
         ],
-        description: `Fortalecer a empresa e aprimorar tecnologias
+        description: `Se você está em processo de concepção e desenvolvimento da sua tecnologia,
+pode desenvolver parceiras com os inúmeros INCT e CEPID , onde será possível
+aprimorar a sua ideia em conjunto com pesquisadores da USP, desenvolver uma
+tecnologia que se seja protegida por uma patente ou registro de software
 
-Se você está em processo de concepção e desenvol- vimento da sua tecnologia, pode desenvolver parcei- ras com os inúmeros INCT e CEPID , onde será possí- vel aprimorar a sua ideia em conjunto com pesquisa- dores da USP, desenvolver uma tecnologia que se seja protegida por uma patente ou registro de software.
+É possível contar com a ajuda de especialistas e suas competências no momento
+de desenvolver o seu produto ou serviço.
+ Você pode consultar quais as
+competências da(o)s pesquisadora(e)s da USP e os serviços e equipamentos
+disponíveis em seus laboratórios.
 
-Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviços especializados ou equipamentos de alta complexidade, verifique essas e outras facilidades no USP Multi.
-
-É possível contar com a ajuda de especialistas e suas competências no momento de desenvolver o seu produto ou serviço. Você pode consultar quais as competências da(o)s pesquisadora(e)s da USP, quem são e como contatá-la(o)s.
-`,
+Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviços
+especializados ou equipamentos de alta complexidade, verifique essas e outras
+facilidades no USP Multi`,
       },
       {
         route: "financiamento",
@@ -127,11 +144,39 @@ Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviço
           { label: "Investidores Anjo" },
           { label: "Capital de Risco" },
         ],
-        description: `Buscando e captando investimento
+        description: `1. A busca por financiamento deve ser uma tarefa contínua do empreendedor ao
+longo do ciclo de vida de sua empresa, esta é uma jornada paralela ao seu ciclo
+de vida. 
 
-A busca por financiamento deve ser uma tarefa contínua do empreendedor ao longo do ciclo de vida de sua empresa. Usualmente, denomina-se a jornada do financiamento da startup como sendo a jornada paralela ao seu ciclo de vida.
+2. Empreendedores com interesse em desenvolver seu negócio a partir de uma
+tecnologia a ser aplicada em um determinado setor econômico, pode se associar
+a empresas da indústria de aplicação de sua tecnologia e acessar financiamento
+de P&D&I da EMBRAPII. Essa fonte de fomento é direcionada para projetos de
+P&D&I desenvolvidos em parceria entre empresas e ICTs credenciados em
+diferentes áreas de competência.
 
-O empreendedor deve incluir no seu playbook, o desenvolvimento de lista de prioridades fontes de recursos que tem interesse em acessar. Normalmente, o empreendedor busca acessar, inicialmente, o capital mais barato com menos exigências contratuais, que usualmente refere-se ao capital de fomento. Capital de fomento refere-se ao financiamento oferecido por organismos públicos para financiamento de novos negócios. Em geral, apresentam condições mais atrativas que as de mercado. Dentre as fontes de fomento para para desenvolvimento de uma tecnologia ainda na fase de projeto ou início da startup, o programa PIPE da (...)`,
+3. O empreendedor deve incluir no seu playbook, uma lista das fontes de recursos
+que tem interesse em acessar. Inicialmente o empreendedor busca acessar o
+capital mais barato com menos exigências contratuais, que constituem-se no
+capital de fomento. É um financiamento oferecido por organismos públicos para
+suportar novos negócios com condições mais atrativas que as de mercado. Estes
+fomentos funcionam em fluxo continuo (FAPESP) ou por meio de editais
+(SEBRAE, CNPQ, FINEP )
+
+O empreendedor também pode acessar o Investimento Anjo, oferecido pelo
+investidor pessoa física com interesse em investir no estágio inicial da startups,
+muitas vezes, antes mesmo do modelo de negócio ter sido validado e da primeira
+venda. Além dos recursos financeiros, o investidor anjo oferece mentoria que,
+muitas vezes, é tão valiosa quanto o capital financeiro. O Empreendedor pode
+entrar em contato com as associações de investidores anjo criadas por ex-alunos
+de algumas unidades da USP ou outras associações de anjos do mercado
+
+Em um estágio mais avançado do ciclo de vida da startup, com histórico de
+vendas, produto validado pelo mercado com interesse em tracionar seu negócio,
+o empreendedor pode acessar os fundos de investimentos Venture Capital
+especializados em Early Stage (pre seed e seed). A melhor forma de acessar
+esses fundos de investimento é se conectar com as associações de investidores
+anjos que possuem forte conexão com Venture Capital.`,
       },
     ],
   }),
