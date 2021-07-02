@@ -140,7 +140,7 @@ export default {
       return Object.keys(this.$reverseCNAE);
     },
     formValid() {
-      return this.update.new_values.length > 0 && this.$refs.form?.validate();
+      return this.update.new_values.length > 0;
     },
   },
 
@@ -172,15 +172,17 @@ export default {
         (_, index) => index !== i
       );
     },
+    runValidation() {
+      return this.formValid && this.$refs.form.validate();
+    },
     async submit() {
       this.loading = true;
 
-      if (this.formValid) {
-        const url = process.env.BACKEND_URL + "/companies";
-        const opts = { method: "PATCH" };
+      if (this.runValidation()) {
+        const company = { ...this.update };
 
         try {
-          const resp = await fetch(url, opts);
+          const resp = await this.$axios.$patch("/companies", { company });
           console.log(resp);
         } catch (e) {
           console.log(e);
