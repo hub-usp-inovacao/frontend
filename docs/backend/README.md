@@ -16,4 +16,8 @@ The runtime view below shows the internal behavior:
 
 <img src="/views/backend.svg" alt="backend view">
 
+_Fetch Entities_ is responsible for fetching data from disciplines and companies.
+
+_Entities_ is the model composed by disciplines and companies model.
+
 [:arrow_left: Go back](/)
