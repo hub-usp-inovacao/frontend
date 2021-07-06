@@ -16,6 +16,36 @@
           </v-col>
         </v-row>
 
+        <v-row>
+          <v-col cols="10">
+            <v-text-field
+              v-model="update.name"
+              label="Seu nome:"
+              :rules="rules.name"
+            />
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="10">
+            <v-text-field
+              v-model="update.email"
+              label="Seu email:"
+              :rules="rules.email"
+            />
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="10">
+            <v-text-field
+              v-model="update.phone"
+              label="Telefone de contato:"
+              :rules="rules.phone"
+            />
+          </v-col>
+        </v-row>
+
         <v-row v-for="(field, i) of update.new_values" :key="i">
           <v-col cols="8" class="d-flex flex-column flex-md-row">
             <v-select
@@ -118,6 +148,9 @@ export default {
 
     update: {
       cnpj: "",
+      name: "",
+      email: "",
+      phone: "",
       new_values: [{ attribute: "", value: "" }],
     },
 
@@ -132,6 +165,13 @@ export default {
       ],
 
       value: [(f) => (f || "").length > 0 || "Valor inválido"],
+
+      phone: [
+        (f) =>
+          /^[\d()+]{8,16}$/.test(f.replaceAll(" ", "")) || "Formato inválido",
+      ],
+
+      email: [(f) => /^\w+@\w+\.\w+/.test(f) || "Formato inválido"],
     },
   }),
 
@@ -179,11 +219,27 @@ export default {
       this.loading = true;
 
       if (this.runValidation()) {
-        const company = { ...this.update };
+        const newValues = this.update.new_values.map(({ attribute, value }) => {
+          const o = {};
+          o[attribute] = value;
+          return o;
+        });
+
+        const company = { ...this.update, new_values: newValues };
 
         try {
-          const resp = await this.$axios.$patch("/companies", { company });
-          console.log(resp);
+          await this.$axios.$patch("/companies", { company });
+          this.update = {
+            cnpj: "",
+            name: "",
+            email: "",
+            phone: "",
+            new_values: [{ attribute: "", value: "" }],
+          };
+
+          alert(
+            "Solicitação enviada com sucesso! Em breve seus dados serão atualizados."
+          );
         } catch (e) {
           console.log(e);
         }
