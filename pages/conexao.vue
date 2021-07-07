@@ -168,7 +168,7 @@
               auto-grow
               autofocus
               :rows="textAreaSize"
-              hint="Máximo 200 palavras"
+              hint="Máximo 500 palavras"
               :rules="rules.text"
             ></v-textarea>
           </div>
@@ -353,7 +353,7 @@ export default {
       ],
       text: [
         (f) => (f || "").length > 0 || "Campo obrigatório",
-        (f) => (f || "").split(" ").length < 200 || "Máximo de 200 palavras!",
+        (f) => (f || "").split(" ").length < 500 || "Máximo de 500 palavras!",
       ],
       confirmation: [(f) => f || "Você deve aceitar para continuar!"],
     },
