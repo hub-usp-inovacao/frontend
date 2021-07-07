@@ -7,6 +7,7 @@ DC = docker-compose
 BG_FLAG = -d
 
 BUILD_SUBCMD = build
+BUILD_NO_CACHE_SUBCMD = build --no-cache
 RUN_SUBCMD = up
 STOP_SUBCMD = down
 
@@ -27,6 +28,9 @@ deploy:
 build_dev:
 	$(DC) -f $(DEVFILE) $(BUILD_SUBCMD)
 
+rebuild_dev:
+	$(DC) -f $(DEVFILE) $(BUILD_NO_CACHE_SUBCMD)
+
 dev:
 	$(DC) -f $(DEVFILE) $(RUN_SUBCMD)
 
@@ -38,6 +42,9 @@ stop_dev:
 
 build_prod:
 	$(DC) -f $(PRODFILE) $(BUILD_SUBCMD)
+
+rebuild_prod:
+	$(DC) -f $(PRODFILE) $(BUILD_NO_CACHE_SUBCMD)
 
 prod:
 	$(DC) -f $(PRODFILE) $(RUN_SUBCMD) $(BG_FLAG)
