@@ -57,7 +57,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col class = "description-lines">
+        <v-col class="description-lines">
           <p v-for="item in description" :key="item.line">{{ item.line }}</p>
         </v-col>
       </v-row>
