@@ -24,7 +24,9 @@
       <v-row>
         <v-col cols="4">
           <v-row>
-            <v-col>{{ description }}</v-col>
+            <v-col>
+            <p v-for="item in description" :key="item.line">{{ item.line }}</p>
+            </v-col>
           </v-row>
           <v-row>
             <v-col>
@@ -95,7 +97,7 @@ export default {
       required: true,
     },
     description: {
-      type: String,
+      type: Array,
       required: true,
     },
     color: {
