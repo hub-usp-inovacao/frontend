@@ -22,7 +22,7 @@
     </v-row>
 
     <v-container class="pa-10">
-      <v-form>
+      <v-form ref="form">
         <div class="my-2 text-h5 font-weight-regular">
           Dados Pessoais
           <v-divider />
@@ -32,12 +32,18 @@
             v-model="values.personal.email"
             label="E-mail"
             placeholder="Seu e-mail"
+            :rules="rules.value"
           />
-          <v-text-field v-model="values.personal.name" label="Nome Completo" />
+          <v-text-field
+            v-model="values.personal.name"
+            label="Nome Completo"
+            :rules="rules.value"
+          />
           <div>
             <v-radio-group
               v-model="values.personal.represent"
               label="Você representa uma:"
+              :rules="rules.value"
               @change="enableOtherOption('personal', 'represent')"
             >
               <v-radio
@@ -48,12 +54,11 @@
               />
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row>
-              <v-col cols="6">
+            <v-row v-if="values.personal.hasOwnProperty('representOther')">
+              <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
-                  v-if="values.personal.hasOwnProperty('representOther')"
                   v-model="values.personal.representOther"
-                  class="mt-n5 pt-0"
+                  :rules="rules.value"
                   placeholder="Outro, qual?"
                   autofocus
                 />
@@ -67,11 +72,20 @@
           <v-divider />
         </div>
         <v-container>
-          <v-text-field v-model="values.org.name" label="Nome" />
-          <v-text-field v-model="values.org.cnpj" label="CNPJ" />
+          <v-text-field
+            v-model="values.org.name"
+            label="Nome"
+            :rules="rules.value"
+          />
+          <v-text-field
+            v-model="values.org.cnpj"
+            label="CNPJ"
+            :rules="rules.cnpj"
+          />
           <v-radio-group
             v-model="values.org.sensitiveData"
             label="Você deseja manter sigilo em relação ao nome da organização?"
+            :rules="rules.value"
           >
             <v-radio :value="true" label="Sim" />
             <v-radio :value="false" label="Não" />
@@ -79,6 +93,7 @@
           <v-radio-group
             v-model="values.org.size"
             label="Qual o porte da organização:"
+            :rules="rules.value"
           >
             <v-radio
               v-for="(option, i) of radioButtonData[1]"
@@ -91,13 +106,23 @@
             v-model="values.org.email"
             label="E-mail"
             placeholder="E-mail da organização"
+            :rules="rules.value"
           />
           <v-text-field
             v-model="values.org.phone"
             label="Telefone de Contato"
+            :rules="rules.value"
           />
-          <v-text-field v-model="values.org.address" label="Endereço" />
-          <v-text-field v-model="values.org.city" label="Cidade" />
+          <v-text-field
+            v-model="values.org.address"
+            label="Endereço"
+            :rules="rules.value"
+          />
+          <v-text-field
+            v-model="values.org.city"
+            label="Cidade"
+            :rules="rules.value"
+          />
         </v-container>
 
         <div class="my-2 text-h5 font-weight-regular">
@@ -115,6 +140,7 @@
                   v-model="values.demand.cnae.major"
                   label="Área Primária"
                   :items="cnaeMajors"
+                  :rules="rules.value"
                   clearable
                 />
               </v-col>
@@ -124,12 +150,12 @@
                   label="Área Secundária"
                   :items="cnaeMinors(values.demand.cnae.major)"
                   no-data-text="Selecione uma área primária antes"
+                  :rules="rules.value"
                   clearable
                 />
               </v-col>
             </v-row>
           </div>
-
           <div>
             <legend class="legendColor">
               Faça um breve resumo de sua demanda (Descrever o seu desafio e/ou
@@ -143,9 +169,9 @@
               autofocus
               :rows="textAreaSize"
               hint="Máximo 200 palavras"
+              :rules="rules.text"
             ></v-textarea>
           </div>
-
           <div>
             <v-radio-group
               v-model="values.demand.expectation"
@@ -161,19 +187,17 @@
               />
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row>
-              <v-col cols="6">
+            <v-row v-if="values.demand.hasOwnProperty('expectationOther')">
+              <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
-                  v-if="values.demand.hasOwnProperty('expectationOther')"
                   v-model="values.demand.expectationOther"
-                  class="mt-n5 pt-0"
+                  :rules="rules.value"
                   placeholder="Outro, qual?"
                   autofocus
                 />
               </v-col>
             </v-row>
           </div>
-
           <v-row>
             <v-col sm="12" md="6">
               <legend class="legendColor">
@@ -185,17 +209,17 @@
                 v-model="values.demand.wantedProfile"
                 :items="cnpqAreas"
                 label="Escolha um perfil"
+                :rules="rules.value"
                 clearable
               >
-                <template v-slot:label> </template>
               </v-select>
             </v-col>
           </v-row>
-
           <div>
             <v-radio-group
               v-model="values.demand.necessity"
               label="Qual a sua necessidade em relação a esses pesquisadores?"
+              :rules="rules.value"
               @change="enableOtherOption('demand', 'necessity')"
             >
               <v-radio
@@ -215,8 +239,10 @@
                   <div class="mb-n3 ml-2">
                     <v-select
                       v-model="selectedArea"
+                      :disabled="!isRadioSelectLabelOn"
                       :items="cnpqAreas"
                       label="Escolha uma área"
+                      :rules="isRadioSelectLabelOn ? rules.value : []"
                       clearable
                       dense
                     />
@@ -225,12 +251,11 @@
               </v-radio>
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row>
-              <v-col cols="6">
+            <v-row v-if="values.demand.hasOwnProperty('necessityOther')">
+              <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
-                  v-if="values.demand.hasOwnProperty('necessityOther')"
                   v-model="values.demand.necessityOther"
-                  class="mt-n5 pt-0"
+                  :rules="rules.value"
                   placeholder="Outro, qual?"
                   autofocus
                 />
@@ -242,6 +267,7 @@
         <v-checkbox
           v-model="confirmation"
           label="Concordo com todas as normas e funcionamento do Programa Conexão USP"
+          :rules="rules.confirmation"
         />
 
         <v-row>
@@ -296,7 +322,6 @@ export default {
         necessity: "",
       },
     },
-    loading: false,
     radioButtonData: [
       ["Empresa", "Organização sem fins lucatrivos", "Governo", "Consultoria"],
       ["Pequena", "Média", "Grande"],
@@ -320,7 +345,20 @@ export default {
         "Identificação de startup para investimento ou contratação de serviços",
       ],
     ],
+    rules: {
+      value: [(f) => (f || "").length > 0 || "Campo obrigatório"],
+      cnpj: [
+        (f) =>
+          /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(f) || "Formato inválido",
+      ],
+      text: [
+        (f) => (f || "").length > 0 || "Campo obrigatório",
+        (f) => (f || "").split(" ").length < 200 || "Máximo de 200 palavras!",
+      ],
+      confirmation: [(f) => f || "Você deve aceitar para continuar!"],
+    },
     selectedArea: "",
+    loading: false,
     confirmation: false,
   }),
   computed: {
@@ -336,6 +374,12 @@ export default {
         name = name.replace(/Ciências (da )?/, "");
         return name;
       });
+    },
+    isRadioSelectLabelOn() {
+      return (
+        this.values.demand.necessity ==
+        "Identificação de especialista para assessoria técnica"
+      );
     },
   },
   methods: {
@@ -374,8 +418,11 @@ export default {
     },
     submit() {
       this.loading = true;
-      this.dataChecking();
-      console.log(this.values);
+      const valid = this.$refs.form.validate();
+      if (valid) {
+        this.dataChecking();
+        console.log(this.values);
+      }
       this.loading = false;
     },
   },
