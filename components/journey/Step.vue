@@ -24,7 +24,7 @@
       <v-row>
         <v-col cols="4">
           <v-row>
-            <v-col>
+            <v-col class = "description-lines">
             <p v-for="item in description" :key="item.line">{{ item.line }}</p>
             </v-col>
           </v-row>
@@ -57,8 +57,8 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12">
-          {{ description }}
+        <v-col class = "description-lines">
+          <p v-for="item in description" :key="item.line">{{ item.line }}</p>
         </v-col>
       </v-row>
       <v-row>
@@ -166,6 +166,12 @@ export default {
 </script>
 
 <style scoped>
+
+.description-lines{
+  overflow: auto;
+  height: 400px;
+}
+
 .bg-gray {
   background-color: #ececec;
 }
