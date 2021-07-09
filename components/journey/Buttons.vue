@@ -37,21 +37,20 @@
 
     <v-row>
       <v-col>
-        <v-card
-          class="rounded-lg d-flex justify-center align-center"
-          height="30vh"
-        >
-          <v-card-text class="text-center">
-            {{ selectedText }}
-          </v-card-text>
-        </v-card>
+        <List  />
       </v-col>
     </v-row>
   </v-div>
 </template>
 
 <script>
+
+import List from "@/components/deeper_levels/List.vue";
+
 export default {
+  components:{
+    List,
+  },
   props: {
     buttons: {
       required: true,
