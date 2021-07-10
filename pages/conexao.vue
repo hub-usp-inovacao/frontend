@@ -87,8 +87,8 @@
             label="Você deseja manter sigilo em relação ao nome da organização?"
             :rules="rules.value"
           >
-            <v-radio :value="true" label="Sim" />
-            <v-radio :value="false" label="Não" />
+            <v-radio value="Sim" label="Sim" />
+            <v-radio value="Não" label="Não" />
           </v-radio-group>
           <v-radio-group
             v-model="values.org.size"
@@ -162,6 +162,7 @@
               problema para o qual busca uma solução)
             </legend>
             <v-textarea
+              v-model="values.demand.description"
               clearable
               dense
               filled
@@ -169,7 +170,7 @@
               autofocus
               :rows="textAreaSize"
               hint="Máximo 500 palavras"
-              :rules="rules.text"
+              :rules="rules.textarea"
             ></v-textarea>
           </div>
           <div>
@@ -317,6 +318,7 @@ export default {
           major: "",
           minor: "",
         },
+        description: "",
         expectation: "",
         wantedProfile: "",
         necessity: "",
@@ -351,7 +353,7 @@ export default {
         (f) =>
           /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(f) || "Formato inválido",
       ],
-      text: [
+      textarea: [
         (f) => (f || "").length > 0 || "Campo obrigatório",
         (f) => (f || "").split(" ").length < 500 || "Máximo de 500 palavras!",
       ],
