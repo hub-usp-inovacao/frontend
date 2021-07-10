@@ -2,12 +2,12 @@
   <v-app>
     <HubNavButton
       v-if="path != '/'"
-      class="hidden-sm-and-down"
+      class="custom-hidden-sm-and-down"
       :margin="path == '/contato' ? false : true"
       :background="path == '/contato' ? false : true"
     />
     <v-toolbar
-      class="hidden-sm-and-down d-flex justify-end"
+      class="custom-hidden-sm-and-down d-flex justify-end"
       color="transparent"
       width="75%"
       style="margin-left: 25%"
@@ -20,7 +20,8 @@
             v-for="(item, i) in items"
             :key="i"
             :to="item.to"
-            class="white--text mx-2 secondary py-4 px-6 subtitle-1"
+            nuxt
+            class="white--text mx-1 py-auto secondary px-4 subtitle-1"
           >
             {{ item.title }}
             <v-icon v-if="item.new" right>mdi-star</v-icon>
@@ -29,7 +30,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-app-bar class="hidden-md-and-up" color="white" dense flat fixed>
+    <v-app-bar class="custom-hidden-md-and-up" color="white" dense flat fixed>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
     </v-app-bar>
 
@@ -42,7 +43,8 @@
           <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
             <v-list-item-title>
               {{ item.title }}
-              <v-icon v-if="item.new" right>mdi-star</v-icon></v-list-item-title>
+              <v-icon v-if="item.new" right>mdi-star</v-icon>
+            </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
         <HubNavButton :margin="false" :background="false" />
@@ -116,6 +118,11 @@ export default {
         new: true,
       },
       {
+        title: "ConexãoUSP",
+        to: "/conexao",
+        new: true,
+      },
+      {
         title: "Contato",
         to: "/contato",
       },
@@ -141,7 +148,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app .v-bottom-navigation .v-btn {
   height: inherit !important;
 }
@@ -150,5 +157,17 @@ export default {
 }
 .zoom:hover {
   transform: scale(1.1);
+}
+
+@media (min-width: 1050px) {
+  .custom-hidden-md-and-up {
+    display: none;
+  }
+}
+
+@media (max-width: 1051px) {
+  .custom-hidden-sm-and-down {
+    display: none;
+  }
 }
 </style>
