@@ -29,19 +29,19 @@
         </div>
         <v-container>
           <v-text-field
-            v-model="values.personal.email"
+            v-model="conexao.personal.email"
             label="E-mail"
             placeholder="Seu e-mail"
             :rules="rules.value"
           />
           <v-text-field
-            v-model="values.personal.name"
+            v-model="conexao.personal.name"
             label="Nome Completo"
             :rules="rules.value"
           />
           <div>
             <v-radio-group
-              v-model="values.personal.represent"
+              v-model="conexao.personal.represent"
               label="Você representa uma:"
               :rules="rules.value"
               @change="enableOtherOption('personal', 'represent')"
@@ -54,10 +54,10 @@
               />
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row v-if="values.personal.hasOwnProperty('representOther')">
+            <v-row v-if="conexao.personal.hasOwnProperty('representOther')">
               <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
-                  v-model="values.personal.representOther"
+                  v-model="conexao.personal.representOther"
                   :rules="rules.value"
                   placeholder="Outro, qual?"
                   autofocus
@@ -73,17 +73,17 @@
         </div>
         <v-container>
           <v-text-field
-            v-model="values.org.name"
+            v-model="conexao.org.name"
             label="Nome"
             :rules="rules.value"
           />
           <v-text-field
-            v-model="values.org.cnpj"
+            v-model="conexao.org.cnpj"
             label="CNPJ"
             :rules="rules.cnpj"
           />
           <v-radio-group
-            v-model="values.org.sensitiveData"
+            v-model="conexao.org.sensitiveData"
             label="Você deseja manter sigilo em relação ao nome da organização?"
             :rules="rules.value"
           >
@@ -91,7 +91,7 @@
             <v-radio value="Não" label="Não" />
           </v-radio-group>
           <v-radio-group
-            v-model="values.org.size"
+            v-model="conexao.org.size"
             label="Qual o porte da organização:"
             :rules="rules.value"
           >
@@ -103,23 +103,23 @@
             />
           </v-radio-group>
           <v-text-field
-            v-model="values.org.email"
+            v-model="conexao.org.email"
             label="E-mail"
             placeholder="E-mail da organização"
             :rules="rules.value"
           />
           <v-text-field
-            v-model="values.org.phone"
+            v-model="conexao.org.phone"
             label="Telefone de Contato"
             :rules="rules.value"
           />
           <v-text-field
-            v-model="values.org.address"
+            v-model="conexao.org.address"
             label="Endereço"
             :rules="rules.value"
           />
           <v-text-field
-            v-model="values.org.city"
+            v-model="conexao.org.city"
             label="Cidade"
             :rules="rules.value"
           />
@@ -137,7 +137,7 @@
             <v-row>
               <v-col>
                 <v-select
-                  v-model="values.demand.cnae.major"
+                  v-model="conexao.demand.cnae.major"
                   label="Área Primária"
                   :items="cnaeMajors"
                   :rules="rules.value"
@@ -146,9 +146,9 @@
               </v-col>
               <v-col>
                 <v-select
-                  v-model="values.demand.cnae.minor"
+                  v-model="conexao.demand.cnae.minor"
                   label="Área Secundária"
-                  :items="cnaeMinors(values.demand.cnae.major)"
+                  :items="cnaeMinors(conexao.demand.cnae.major)"
                   no-data-text="Selecione uma área primária antes"
                   :rules="rules.value"
                   clearable
@@ -162,7 +162,7 @@
               problema para o qual busca uma solução)
             </legend>
             <v-textarea
-              v-model="values.demand.description"
+              v-model="conexao.demand.description"
               clearable
               dense
               filled
@@ -175,9 +175,10 @@
           </div>
           <div>
             <v-radio-group
-              v-model="values.demand.expectation"
+              v-model="conexao.demand.expectation"
               label="Indique sua principal expectativa em relação a solução da
                 demanda:"
+              :rules="rules.value"
               @change="enableOtherOption('demand', 'expectation')"
             >
               <v-radio
@@ -188,10 +189,10 @@
               />
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row v-if="values.demand.hasOwnProperty('expectationOther')">
+            <v-row v-if="conexao.demand.hasOwnProperty('expectationOther')">
               <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
-                  v-model="values.demand.expectationOther"
+                  v-model="conexao.demand.expectationOther"
                   :rules="rules.value"
                   placeholder="Outro, qual?"
                   autofocus
@@ -207,7 +208,7 @@
                 em sua opinião?
               </legend>
               <v-select
-                v-model="values.demand.wantedProfile"
+                v-model="conexao.demand.wantedProfile"
                 :items="cnpqAreas"
                 label="Escolha um perfil"
                 :rules="rules.value"
@@ -218,7 +219,7 @@
           </v-row>
           <div>
             <v-radio-group
-              v-model="values.demand.necessity"
+              v-model="conexao.demand.necessity"
               label="Qual a sua necessidade em relação a esses pesquisadores?"
               :rules="rules.value"
               @change="enableOtherOption('demand', 'necessity')"
@@ -252,10 +253,10 @@
               </v-radio>
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row v-if="values.demand.hasOwnProperty('necessityOther')">
+            <v-row v-if="conexao.demand.hasOwnProperty('necessityOther')">
               <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
-                  v-model="values.demand.necessityOther"
+                  v-model="conexao.demand.necessityOther"
                   :rules="rules.value"
                   placeholder="Outro, qual?"
                   autofocus
@@ -297,7 +298,7 @@ export default {
     Panel,
   },
   data: () => ({
-    values: {
+    conexao: {
       personal: {
         email: "",
         name: "",
@@ -379,17 +380,17 @@ export default {
     },
     isRadioSelectLabelOn() {
       return (
-        this.values.demand.necessity ==
+        this.conexao.demand.necessity ==
         "Identificação de especialista para assessoria técnica"
       );
     },
   },
   methods: {
     enableOtherOption(model, value) {
-      if (this.values[model][value] == "Outro") {
-        this.values[model][`${value}Other`] = "";
+      if (this.conexao[model][value] == "Outro") {
+        this.conexao[model][`${value}Other`] = "";
       } else {
-        delete this.values[model][`${value}Other`];
+        delete this.conexao[model][`${value}Other`];
       }
     },
     cnaeMinors(major) {
@@ -397,33 +398,41 @@ export default {
       return this.$reverseCNAE[major].map(({ minor }) => minor);
     },
     dataChecking() {
-      if (this.values.personal.represent == "Outro") {
-        this.values.personal.represent = this.values.personal.representOther;
-        delete this.values.personal.representOther;
+      if (this.conexao.personal.represent == "Outro") {
+        this.conexao.personal.represent = this.conexao.personal.representOther;
+        delete this.conexao.personal.representOther;
       }
 
-      if (this.values.demand.expectation == "Outro") {
-        this.values.demand.expectation = this.values.demand.expectationOther;
-        delete this.values.demand.expectationOther;
+      if (this.conexao.demand.expectation == "Outro") {
+        this.conexao.demand.expectation = this.conexao.demand.expectationOther;
+        delete this.conexao.demand.expectationOther;
       }
 
-      if (this.values.demand.necessity == "Outro") {
-        this.values.demand.necessity = this.values.demand.necessityOther;
-        delete this.values.demand.necessityOther;
+      if (this.conexao.demand.necessity == "Outro") {
+        this.conexao.demand.necessity = this.conexao.demand.necessityOther;
+        delete this.conexao.demand.necessityOther;
       }
 
       if (
-        this.values.demand.necessity ==
+        this.conexao.demand.necessity ==
         "Identificação de especialista para assessoria técnica"
       )
-        this.values.demand.necessity += " na área de " + this.selectedArea;
+        this.conexao.demand.necessity += " na área de " + this.selectedArea;
     },
-    submit() {
+    async submit() {
       this.loading = true;
       const valid = this.$refs.form.validate();
       if (valid) {
         this.dataChecking();
-        console.log(this.values);
+        try {
+          await this.$axios.$post("/conexao", { conexao: this.conexao });
+          alert(
+            "Formulário enviado com sucesso! Em breve a equipe da AUSPIN entrará em contato com você."
+          );
+          location.reload();
+        } catch (error) {
+          console.log(error);
+        }
       }
       this.loading = false;
     },
