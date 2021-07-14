@@ -108,11 +108,8 @@ da Universidade onde você poderá interagir com projetos e organizações ligad
         nextColor: "#338C21",
         previousColor: "#E46926",
         buttons: [
-          { label: "CIETEC" },
-          { label: "ESALQTEC" },
-          { label: "HABITS" },
-          { label: "SUPERA" },
-          { label: "Incubadoras e Parques Tecnológico" },
+          { label: "Incubadoras da USP" },
+          { label: "Incubadoras Externas da USP" },
         ],
         description: [
           {
