@@ -54,7 +54,7 @@
               />
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row v-if="conexao.personal.hasOwnProperty('representOther')">
+            <v-row v-if="isOtherRpresentEnable">
               <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
                   v-model="conexao.personal.representOther"
@@ -189,7 +189,7 @@
               />
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row v-if="conexao.demand.hasOwnProperty('expectationOther')">
+            <v-row v-if="isOtherExpectationEnable">
               <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
                   v-model="conexao.demand.expectationOther"
@@ -253,7 +253,7 @@
               </v-radio>
               <v-radio label="Outro, qual?" value="Outro" />
             </v-radio-group>
-            <v-row v-if="conexao.demand.hasOwnProperty('necessityOther')">
+            <v-row v-if="isOtherDemandEnable">
               <v-col class="mt-n5 pt-0" cols="6">
                 <v-text-field
                   v-model="conexao.demand.necessityOther"
@@ -384,6 +384,15 @@ export default {
         "Identificação de especialista para assessoria técnica"
       );
     },
+    isOtherRpresentEnable() {
+      return this.conexao.personal.represent == "Outro";
+    },
+    isOtherExpectationEnable() {
+      return this.conexao.demand.expectation == "Outro";
+    },
+    isOtherDemandEnable() {
+      return this.conexao.demand.necessity == "Outro";
+    },
   },
   methods: {
     enableOtherOption(model, value) {
@@ -398,17 +407,17 @@ export default {
       return this.$reverseCNAE[major].map(({ minor }) => minor);
     },
     dataChecking() {
-      if (this.conexao.personal.represent == "Outro") {
+      if (this.isOtherRpresentEnable) {
         this.conexao.personal.represent = this.conexao.personal.representOther;
         delete this.conexao.personal.representOther;
       }
 
-      if (this.conexao.demand.expectation == "Outro") {
+      if (this.isOtherExpectationEnable) {
         this.conexao.demand.expectation = this.conexao.demand.expectationOther;
         delete this.conexao.demand.expectationOther;
       }
 
-      if (this.conexao.demand.necessity == "Outro") {
+      if (this.isOtherDemandEnable) {
         this.conexao.demand.necessity = this.conexao.demand.necessityOther;
         delete this.conexao.demand.necessityOther;
       }
