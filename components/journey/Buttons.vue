@@ -348,6 +348,23 @@ export default {
           "PTS - Parque Tecnológico de Sorocaba",
           "São Carlos Science Park - Parque Tecnológico de São Carlos (Parq Tec)",
           "Softnet - Centro Incubador de Empresas de Software  (Parq Tec)",
+        ]},
+        {"Fomento": [
+          "PIPE",
+          "PITE",
+          "Catalisa",
+          "Programas CNPq",
+          "Finep"
+        ]},
+        {"Investidores Anjo": [
+          "Fea Angels",
+          "Poli Angels"
+        ]},
+        {"EMBRAPII": [
+          "Esalq/usp",
+          "IFSC",
+          "Poli",
+          "Tecnogreen Poli"
         ]}
       ],
 
@@ -361,6 +378,9 @@ export default {
     },
 
     filteredDisciplines(){
+      console.log("OI");
+      console.log(this.buttons.primary);
+
       if (this.buttons.primary == "Graduação" || this.buttons.primary == "Pós-Graduação"){
         if(this.buttons.secondary != undefined){
           const primary = this.buttons.primary;
@@ -371,7 +391,8 @@ export default {
               //concaternar todos os items dos objetos graduação ou pós-graduação
         }
       }
-      else{
+      else if(this.buttons.primary == undefined){
+        console.log("segundoi");
         const category = this.buttons.secondary;
         return this.secondaryCategories.category;
       }
