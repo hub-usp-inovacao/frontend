@@ -1,31 +1,12 @@
 <template>
   <main class="bg-gray">
+    <Header :title="title" :next-color="nextColor" :color="color" />
     <v-container class="hidden-sm-and-down">
-      <v-row>
-        <v-col>
-          <v-row :class="roadmap">
-            <v-col cols="6">
-              <div
-                :style="headerStyle"
-                class="py-4 text-center white--text font-weight-bold text-h4 rounded-lg"
-              >
-                {{ title }}
-              </div>
-            </v-col>
-            <v-col v-if="nextColor != '#212121'" offset="5" cols="1">
-              <div :style="peakabooStyle" class="rounded-lg"></div>
-            </v-col>
-            <v-col v-else cols="6">
-              <Party style="height: 60%; max-height: 60%" />
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
       <v-row>
         <v-col cols="4">
           <v-row>
-            <v-col class = "description-lines">
-            <p v-for="item in description" :key="item.line">{{ item.line }}</p>
+            <v-col class="description-lines">
+              <p v-for="item in description" :key="item">{{ item }}</p>
             </v-col>
           </v-row>
           <v-row>
@@ -40,30 +21,20 @@
           </v-row>
         </v-col>
         <v-col cols="8">
-          <Buttons :buttons="buttons"></Buttons>
+          <!-- Agr aqui teria o slot -->
         </v-col>
       </v-row>
     </v-container>
 
     <v-container class="hidden-md-and-up">
       <v-row>
-        <v-col cols="12">
-          <div
-            :style="headerStyle"
-            class="py-4 text-center white--text font-weight-bold text-h4 rounded-lg"
-          >
-            {{ title }}
-          </div>
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col class="description-lines">
-          <p v-for="item in description" :key="item.line">{{ item.line }}</p>
+          <p v-for="item in description" :key="item">{{ item }}</p>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <Buttons :buttons="buttons"></Buttons>
+          <!-- slot aqui também -->
         </v-col>
       </v-row>
       <v-row>
@@ -82,17 +53,19 @@
 
 <script>
 import JourneyNav from "@/components/journey/JourneyNav.vue";
-import Buttons from "@/components/journey/Buttons.vue";
-import Party from "@/components/journey/Party.vue";
+import Header from "@/components/journey/Header.vue";
 
 export default {
   components: {
+    Header,
     JourneyNav,
-    Buttons,
-    Party,
   },
   props: {
     title: {
+      type: String,
+      required: true,
+    },
+    nextColor: {
       type: String,
       required: true,
     },
@@ -116,7 +89,7 @@ export default {
     },
     previous: {
       type: String,
-      required: true,
+      default: "",
     },
     nextColor: {
       type: String,
@@ -144,41 +117,17 @@ export default {
 
       return { label: "Voltar ao menu", to: "/jornada" };
     },
-
-    headerStyle() {
-      return {
-        backgroundColor: this.color,
-      };
-    },
-
-    peakabooStyle() {
-      return {
-        height: "100%",
-        backgroundColor: this.nextColor,
-      };
-    },
-
-    roadmap() {
-      return this.nextColor === "#212121" ? [] : ["roadmap"];
-    },
   },
 };
 </script>
 
 <style scoped>
-
-.description-lines{
+.description-lines {
   overflow: auto;
   height: 400px;
 }
 
 .bg-gray {
   background-color: #ececec;
-}
-
-.roadmap {
-  background-image: url("/hor-road.png");
-  background-position: left center;
-  background-repeat: repeat-x;
 }
 </style>
