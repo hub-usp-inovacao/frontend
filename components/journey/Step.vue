@@ -21,7 +21,8 @@
           </v-row>
         </v-col>
         <v-col cols="8">
-          <!-- Agr aqui teria o slot -->
+          <slot name="PrimaryButtons"></slot>
+          <slot name="SecondaryButtons"></slot>
         </v-col>
       </v-row>
     </v-container>
@@ -34,7 +35,8 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <!-- slot aqui também -->
+          <slot name="PrimaryButtons"></slot>
+          <slot name="SecondaryButtons"></slot>
         </v-col>
       </v-row>
       <v-row>
