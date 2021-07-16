@@ -5,7 +5,7 @@ import { capitalizeName } from "@/lib/format";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
-  const sheetName = "COMPETENCIAS_ATT";
+  const sheetName = "COMPETENCIAS";
 
   try {
     const resp = await fetch(
