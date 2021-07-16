@@ -10,7 +10,7 @@
                 :key="label"
                 class="white px-6 py-8 ma-1 flex-grow-1 button"
                 max-width="100%"
-                @click="select(label)"
+                @click="select"
               >
                 {{ label }}
               </v-btn>
@@ -23,9 +23,10 @@
               <v-btn
                 v-for="{ label } in secondary"
                 :key="label"
+                href="www"
                 class="white px-6 py-6 ma-1 flex-grow-1 button"
                 max-width="100%"
-                @select="select(label)"
+                @click="select"
               >
                 {{ label }}
               </v-btn>
@@ -63,7 +64,7 @@ export default {
   data: () => ({
 
     Graduação:[
-        { "Quero aprender!":[
+        { id:"QUERO APRENDER!", items:[
         "ACH2657 - Empreendedorismo","ACH5508 - Empreendedorismo Tecnológico","8800004 - Empreendedorismo",
         "LOB1251 - Introdução a Inovação Sistemática com TRIZ",
         "LOB1263 - Introdução a Eco-Inovação Tecnológica",
@@ -115,7 +116,7 @@ export default {
         "MAC0467 - Empreendedorismo Digital",
         "PRG0004 - Inovação e Empreendedorismo",
         "PRG0005 - Fundamentos em Empreendedorismo"] },
-      { "Tenho uma ideia, e agora?": [
+      { id:"TENHO UMA IDEIA, E AGORA?", items:[
         "8800014 - Projetos Especiais em Gestão da Inovação",
         "LOQ4249 - Oficina de Inovação",
         "1800117 - Oficina de Inovação",
@@ -143,7 +144,7 @@ export default {
         "SSC0675 - Projeto Empreendedor I (turma 1)",
         "SSC0676 - Projeto Empreendedor II (turma 2)",
         "PRG0016 - Laboratório de Inovação e Empreendedorismo",] },
-      { "Preciso testar minha ideia!":[
+      { id:"PRECISO TESTAR MINHA IDEIA!", items:[
         "ACH1575 - Inovação em Serviços de Lazer e Turismo",
         "ACH1596 - Intervenções Profissionais em Turismo Empreendimentos Turísticos e Desenvolvimento",
         "ACH2758 - Inovação em Têxtil e Moda",
@@ -176,7 +177,7 @@ export default {
         "ZEB0551 - Gestão e Empreendedorismo no Agronegócio",
         "110450 - Inovação e Qualidade na Cadeia Produtiva do Pescado",
         "SCC0209 - Empreendedores em Informática",]},
-      { "Tópicos avançados em empreendedorismo":[
+      { id:"TÓPICOS AVANÇADOS EM EMPREENDEDORISMO", items:[
         "ACH2008 - Empreendedorismo em Informática",
         "LCE0136 - Ciência de Dados e Gestão para Empregabilidade, Empreendedorismo e Inovação",
         "DCO0216 - Propriedade Intelectual e Acesso ao Conhecimento",
@@ -196,7 +197,7 @@ export default {
         "MAC0458 - Direito e Software livre",]},
       ],
       PósGraduação: [
-        { "Quero aprender!": [
+        { id:"Quero aprender!", items:[
         "6025827 - Gestão de Inovação de Produtos",
         "EAD5837 - Gestão da Inovação Tecnológica na Empresa",
         "EAD5952-4 - Estratégia e Inovação em Corporações Multinacionais",
@@ -227,7 +228,7 @@ export default {
         "EAD5987 - Empreendedorismo Digital e Territórios Criativos Inteligentes",
         "EAP5038 - Empreendedorismo Digital e Territórios Criativos Inteligentes",
         ]},
-        { "Tenho uma ideia, e agora?": [
+        { id:"Tenho uma ideia, e agora?", items:[
         "EAD5806 - Arquiteturas Organizacionais, Inovação e Internacionalização",
         "EAD5959 - Empreendedorismo Social e Negócios Socioambientais",
         "EAP5015 - Marketing para Empreendedorismo",
@@ -247,7 +248,7 @@ export default {
         "EAD5982 - Habilidades Empreendedoras",
         "EAP5025 - Transformações do Trabalho e Empreendedorismo no Mundo Contemporâneo",
         ],},
-        { "Preciso testar minha ideia!":[
+        { id:"Preciso testar minha ideia!", items:[
         "EAD5887 - Gestão Estratégica e Inovação para a Sustentabilidade",
         "EAD5919 - Administração da Inovação em Produtos e Processos",
         "EAP5001-2 - Lean Startup e Modelo de Desenvolvimento de Produtos",
@@ -281,7 +282,7 @@ export default {
         "EAP5039 - Seminário de Inovação e Empreendedorismo II",
         "SHS5965 - Tópicos Especiais em Hidráulica e Saneamento: Oportunidades Interdisciplinares de Inovação e Empreendedorismo Científico",
         ] },
-        { "Tópicos avançados em empreendedorismo": [
+        { id:"Tópicos avançados em empreendedorismo", items:[
           "6025774 - Desenvolvimento de Sistemas de Liberação para a Via Nasal, Ocular e Absorção Pulmonar: uma Inovação na Administração de Fármacos Peptídicos e Protéicos",
           "EAD5865 - Estratégia Tecnológica na Empresa, Inovação e Internacionalização",
           "RAD5032-2 - Internacionalização de Empresas e Inovação",
@@ -295,14 +296,14 @@ export default {
         ]}
       ],
       secondaryCategories: [
-        {"Incubadoras da USP": [
+        {id:"INCUBADORAS DA USP", items:[
           "CIETEC - Centro de Inovação, Empreendedorismo e Tecnologia",
           "ESALQTec - Incubadora de Empresas Agrozootécnicas de Piracicaba",
           "HABITs - Habitat de Inovação Tecnológica e Social/Incubadora-Escola",
           "Supera - Incubadora de Empresas de Base Tecnológica de Ribeirão Preto",
           "Supera Parque de Inovação e Tecnologia",
         ]},
-        {"Incubadoras Externas da USP": [
+        {id:"INCUBADORAS EXTERNAS DA USP", items: [
           "Acematão - Incubadora de Matão",
           "Agende - incubadora Tecnológica de Empresas Guarulhos",
           "CEDIN - Centro de desenvolvimento de Indústrias",
@@ -349,18 +350,18 @@ export default {
           "São Carlos Science Park - Parque Tecnológico de São Carlos (Parq Tec)",
           "Softnet - Centro Incubador de Empresas de Software  (Parq Tec)",
         ]},
-        {"Fomento": [
+        {id:"FOMENTO", items: [
           "PIPE",
           "PITE",
           "Catalisa",
           "Programas CNPq",
           "Finep"
         ]},
-        {"Investidores Anjo": [
+        {id:"INVESTIDORES ANJO", items: [
           "Fea Angels",
           "Poli Angels"
         ]},
-        {"EMBRAPII": [
+        {id:"EMBRAPII", items: [
           "Esalq/usp",
           "IFSC",
           "Poli",
@@ -369,7 +370,8 @@ export default {
       ],
 
 
-    selectedButton: undefined,
+    selectedButtonPrimary: undefined,
+    selectedButtonSecondary: undefined,
   }),
 
   computed: {
@@ -378,23 +380,26 @@ export default {
     },
 
     filteredDisciplines(){
-      console.log("OI");
-      console.log(this.buttons.primary);
+      const primaryButton = this.selectedButtonPrimary;
+      const secondaryButton = this.selectedButtonSecondary;
 
-      if (this.buttons.primary == "Graduação" || this.buttons.primary == "Pós-Graduação"){
-        if(this.buttons.secondary != undefined){
-          const primary = this.buttons.primary;
-          secondary = this.buttons.secondary;
-          return this.primary.secondary; 
+      if (primaryButton == "GRADUAÇÃO" || primaryButton == "PÓS-GRADUAÇÃO"){
+        if(secondaryButton == undefined){
+          // devolve todas as categorias, preciso fazer um concat 
         }
         else{
-              //concaternar todos os items dos objetos graduação ou pós-graduação
+          const index = this.Graduação.findIndex((item) => {
+            return item.id == secondaryButton;
+          });
+          return primaryButton == "GRADUAÇÃO"? this.Graduação[index].items: this.PósGraduação[index].items;
         }
       }
-      else if(this.buttons.primary == undefined){
-        console.log("segundoi");
-        const category = this.buttons.secondary;
-        return this.secondaryCategories.category;
+      else if(primaryButton == undefined && secondaryButton != undefined){
+        const index = this.secondaryCategories.findIndex((item) => {
+            return item.id == secondaryButton;
+          });
+        console.log(this.secondaryCategories[index].items);
+        return this.secondaryCategories[index].items;
       }
     },
 
@@ -409,7 +414,13 @@ export default {
 
   methods: {
     select({ target }) {
-      this.selectedButton = target.innerText;
+      if (target.innerText == "GRADUAÇÃO" || target.innerText == "PÓS-GRADUAÇÃO"){
+        this.selectedButtonPrimary = target.innerText;
+        this.selectedButtonSecondary = undefined;
+      }
+      else{
+        this.selectedButtonSecondary = target.innerText;
+      }
     },
   },
 };

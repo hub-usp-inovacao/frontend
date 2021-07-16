@@ -162,7 +162,6 @@ facilidades no USP Multi`,
         color: "#214E8C",
         previousColor: "#338C21",
         buttons: [
-          { label: "Capital de Risco" },
           { label: "EMBRAPII" },
           { label: "Fomento" },
           { label: "Investidores Anjo" },
