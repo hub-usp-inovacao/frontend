@@ -5,7 +5,7 @@ import { capitalizeName } from "@/lib/format";
 
 async function fetchData(sheetsAPIKey) {
   const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
-  const sheetName = "COMPETENCIAS";
+  const sheetName = "COMPETENCIAS_ATT";
 
   try {
     const resp = await fetch(
@@ -40,35 +40,35 @@ function beginNewSkill(row, $campi) {
 }
 
 function addPhone(base, row) {
-  base.phone = columnValue(row, "AE");
+  base.phone = columnValue(row, "AF");
 }
 
 function addDescription(base, row) {
-  base.descriptionsSkills = columnValue(row, "W");
-  base.descriptionsServices = columnValue(row, "X");
-  base.descriptionsEquipments = columnValue(row, "Y");
+  base.descriptionsSkills = columnValue(row, "X");
+  base.descriptionsServices = columnValue(row, "Y");
+  base.descriptionsEquipments = columnValue(row, "Z");
 }
 
 function addArea(base, row, $knowledgeAreas) {
-  const minor = columnValue(row, "AA");
-  let major = columnValue(row, "Z");
+  const minor = columnValue(row, "AB");
+  let major = columnValue(row, "AA");
   base.areaMinors = minor;
 
-  if(major == undefined || major == ""){
-   major = $knowledgeAreas.find((c) => c.subareas.find((u) => u == minor))?.name;
-   base.areaMajor = major;
-  }
-  else{
+  if (major == undefined || major == "") {
+    major = $knowledgeAreas.find((c) => c.subareas.find((u) => u == minor))
+      ?.name;
+    base.areaMajor = major;
+  } else {
     base.areaMajor = columnValue(row, "Z");
   }
 }
 
 function addKeywords(base, row) {
-  base.keywords = columnValue(row, "AB");
+  base.keywords = columnValue(row, "AC");
 }
 
 function addLattes(base, row) {
-  base.lattes = columnValue(row, "AC");
+  base.lattes = columnValue(row, "AD");
 }
 
 function addLimitDate(base, row) {
@@ -77,25 +77,25 @@ function addLimitDate(base, row) {
 
 function addLabOrGroup(base, row) {
   base.pushLabOrGroup(
-    columnValue(row, "J"),
     columnValue(row, "K"),
-    columnValue(row, "H"),
+    columnValue(row, "L"),
     columnValue(row, "I"),
-    columnValue(row, "L")
+    columnValue(row, "J"),
+    columnValue(row, "M")
   );
   base.pushLabOrGroup(
-    columnValue(row, "O"),
     columnValue(row, "P"),
-    columnValue(row, "M"),
+    columnValue(row, "Q"),
     columnValue(row, "N"),
-    columnValue(row, "Q")
+    columnValue(row, "O"),
+    columnValue(row, "R")
   );
   base.pushLabOrGroup(
-    columnValue(row, "T"),
     columnValue(row, "U"),
-    columnValue(row, "R"),
+    columnValue(row, "V"),
     columnValue(row, "S"),
-    columnValue(row, "V")
+    columnValue(row, "T"),
+    columnValue(row, "W")
   );
 }
 
@@ -110,7 +110,7 @@ function addURL(base, row) {
 }
 
 function addPicture(base, row) {
-  const picID = columnValue(row, "AD");
+  const picID = columnValue(row, "AE");
 
   if (picID != undefined && picID != "N/D")
     base.picture = `https://drive.google.com/uc?export=view&id=${picID}`;
@@ -133,7 +133,7 @@ function skillGenerator(row, $campi, $knowledgeAreas) {
   return base;
 }
 
-export default ({ $campi, $knowledgeAreas}, inject) => {
+export default ({ $campi, $knowledgeAreas }, inject) => {
   inject("fetchSkills", async (payload) => {
     const { sheetsAPIKey, areas } = payload;
 
