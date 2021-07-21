@@ -23,6 +23,7 @@
         <v-col cols="8">
           <slot name="PrimaryButtons"></slot>
           <slot name="SecondaryButtons"></slot>
+          <ListJourney :items="items" />
         </v-col>
       </v-row>
     </v-container>
@@ -37,6 +38,7 @@
         <v-col cols="12">
           <slot name="PrimaryButtons"></slot>
           <slot name="SecondaryButtons"></slot>
+          <ListJourney :items="items" />
         </v-col>
       </v-row>
       <v-row>
@@ -56,18 +58,21 @@
 <script>
 import JourneyNav from "@/components/journey/JourneyNav.vue";
 import Header from "@/components/journey/Header.vue";
+import ListJourney from "@/components/journey/ListJourney.vue";
 
 export default {
   components: {
     Header,
     JourneyNav,
+    ListJourney,
   },
   props: {
-    title: {
-      type: String,
+    items: {
+      type: Array,
       required: true,
+      default: () => [],
     },
-    nextColor: {
+    title: {
       type: String,
       required: true,
     },
