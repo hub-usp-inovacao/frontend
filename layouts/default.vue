@@ -118,11 +118,6 @@ export default {
         new: true,
       },
       {
-        title: "ConexãoUSP",
-        to: "/conexao",
-        new: true,
-      },
-      {
         title: "Contato",
         to: "/contato",
       },
