@@ -421,38 +421,102 @@ você busca em empreendedorismo e inovação:`,
       ],
 
       "PRECISO TESTAR MINHA IDEIA!": [
-        "EAD5887 - Gestão Estratégica e Inovação para a Sustentabilidade",
-        "EAD5919 - Administração da Inovação em Produtos e Processos",
-        "EAP5001-2 - Lean Startup e Modelo de Desenvolvimento de Produtos",
-        "EMP5500-3 - Tecnologia, Inovação e Empreendedorismo em Saúde e Enfermagem",
-        "ENS5921-2 - Tecnologias e Inovação nas Práticas de Cuidados em Atenção Primária de Saúde",
-        "GIA5007 - Gestão da Inovação e da Propriedade Intelectual no Agronegócio",
-        "ODC5823 - Inovação Tecnológica para o Diagnóstico e a Terapêutica em Cirurgia e Traumatologia Buco-Maxilo-Faciais",
-        "PCC5963 - Cadeia Produtiva da Construção: Tecnologia, Sustentabilidade e Inovação",
-        "SIN5019-1 - Laboratório de Inovação em Sistemas de Informação",
-        "SRB5025-2 - Tópicos em Funcionalidade, Tecnologia Assistiva e Inovação em Reabilitação",
-        "PRO5963 - Abordagens para Inovação em Produtos, Serviços e Processos",
-        "DSG5016 - Abordagens para inovação em produtos, serviços e processos",
-        "PRO5766 - Análise e Projeto de Inovação Organizacional",
-        "GIA5032 - Demandas Tecnológicas e Inovação em Sistemas de Produção Animal Baseados em Pastagens",
-        "PCC5964 - Desempenho e Inovação de Sistemas Prediais Hidráulicos",
-        "PRO5857 - Desenvolvimento de Projeto em Organização e Gestão da Inovação",
-        "BTC5853 - Empreendedorismo e Inovação em Saúde",
-        "BAB5711 - Estratégias de Inovação em Biologia Oral",
-        "GOS5725 - Gestão da Inovação em Saúde",
-        "MAN5758 - Gestão da Inovação Tecnológica Relacionada ao Perioperatório",
-        "GIA5027 - Gestão e Inovação na Indústria Aquícola",
-        "PSP5711 - Inovação em Saúde Materna: Evidências, Direitos e Políticas Públicas",
-        "GIA5034 - Inovação na Avicultura",
-        "ENO5955 - Inovação no Processo Educativo na Era Digital",
-        "PCC5975 - Inovação Tecnológica e Industrialização na Construção Civil",
-        "8055752 - Inovação, tecnologia e empreendedorismo em Materiais Odontológicos e Reabilitação Oral",
-        "EAP5026 - Laboratório de Inovação e Empreendedorismo",
-        "ODO5786 - Saúde Digital e Telessaúde: Tecnologia e Inovação em Saúde e Educação",
-        "VPS5709 - Segurança de Alimentos: Temas em Gestão e Inovação",
-        "EAP5013 - Seminário de Inovação e Empreendedorismo I",
-        "EAP5039 - Seminário de Inovação e Empreendedorismo II",
-        "SHS5965 - Tópicos Especiais em Hidráulica e Saneamento: Oportunidades Interdisciplinares de Inovação e Empreendedorismo Científico",
+        {
+          title:
+            "EAD5887 - Gestão Estratégica e Inovação para a Sustentabilidade",
+        },
+        {
+          title: "EAD5919 - Administração da Inovação em Produtos e Processos",
+        },
+        {
+          title:
+            "EAP5001-2 - Lean Startup e Modelo de Desenvolvimento de Produtos",
+        },
+        {
+          title:
+            "EMP5500-3 - Tecnologia, Inovação e Empreendedorismo em Saúde e Enfermagem",
+        },
+        {
+          title:
+            "ENS5921-2 - Tecnologias e Inovação nas Práticas de Cuidados em Atenção Primária de Saúde",
+        },
+        {
+          title:
+            "GIA5007 - Gestão da Inovação e da Propriedade Intelectual no Agronegócio",
+        },
+        {
+          title:
+            "ODC5823 - Inovação Tecnológica para o Diagnóstico e a Terapêutica em Cirurgia e Traumatologia Buco-Maxilo-Faciais",
+        },
+        {
+          title:
+            "PCC5963 - Cadeia Produtiva da Construção: Tecnologia, Sustentabilidade e Inovação",
+        },
+        {
+          title:
+            "SIN5019-1 - Laboratório de Inovação em Sistemas de Informação",
+        },
+        {
+          title:
+            "SRB5025-2 - Tópicos em Funcionalidade, Tecnologia Assistiva e Inovação em Reabilitação",
+        },
+        {
+          title:
+            "PRO5963 - Abordagens para Inovação em Produtos, Serviços e Processos",
+        },
+        {
+          title:
+            "DSG5016 - Abordagens para inovação em produtos, serviços e processos",
+        },
+        { title: "PRO5766 - Análise e Projeto de Inovação Organizacional" },
+        {
+          title:
+            "GIA5032 - Demandas Tecnológicas e Inovação em Sistemas de Produção Animal Baseados em Pastagens",
+        },
+        {
+          title:
+            "PCC5964 - Desempenho e Inovação de Sistemas Prediais Hidráulicos",
+        },
+        {
+          title:
+            "PRO5857 - Desenvolvimento de Projeto em Organização e Gestão da Inovação",
+        },
+        { title: "BTC5853 - Empreendedorismo e Inovação em Saúde" },
+        { title: "BAB5711 - Estratégias de Inovação em Biologia Oral" },
+        { title: "GOS5725 - Gestão da Inovação em Saúde" },
+        {
+          title:
+            "MAN5758 - Gestão da Inovação Tecnológica Relacionada ao Perioperatório",
+        },
+        { title: "GIA5027 - Gestão e Inovação na Indústria Aquícola" },
+        {
+          title:
+            "PSP5711 - Inovação em Saúde Materna: Evidências, Direitos e Políticas Públicas",
+        },
+        { title: "GIA5034 - Inovação na Avicultura" },
+        { title: "ENO5955 - Inovação no Processo Educativo na Era Digital" },
+        {
+          title:
+            "PCC5975 - Inovação Tecnológica e Industrialização na Construção Civil",
+        },
+        {
+          title:
+            "8055752 - Inovação, tecnologia e empreendedorismo em Materiais Odontológicos e Reabilitação Oral",
+        },
+        { title: "EAP5026 - Laboratório de Inovação e Empreendedorismo" },
+        {
+          title:
+            "ODO5786 - Saúde Digital e Telessaúde: Tecnologia e Inovação em Saúde e Educação",
+        },
+        {
+          title: "VPS5709 - Segurança de Alimentos: Temas em Gestão e Inovação",
+        },
+        { title: "EAP5013 - Seminário de Inovação e Empreendedorismo I" },
+        { title: "EAP5039 - Seminário de Inovação e Empreendedorismo II" },
+        {
+          title:
+            "SHS5965 - Tópicos Especiais em Hidráulica e Saneamento: Oportunidades Interdisciplinares de Inovação e Empreendedorismo Científico",
+        },
       ],
 
       "TÓPICOS AVANÇADOS EM EMPREENDEDORISMO": [
