@@ -167,7 +167,6 @@
               dense
               filled
               auto-grow
-              autofocus
               :rows="textAreaSize"
               hint="Máximo 500 palavras"
               :rules="rules.textarea"
