@@ -9,7 +9,7 @@
       previous="pratica"
       next-color="#338C21"
       previous-color="#E46926"
-      :items="filteredDisciplines"
+      :items="filteredIncubators"
     >
       <template v-slot:SecondaryButtons>
         <v-row justify="center">
@@ -137,7 +137,7 @@ negócio`,
   }),
 
   computed: {
-    filteredDisciplines() {
+    filteredIncubators() {
       const secondaryButton = this.selectedButtonSecondary;
 
       if (secondaryButton != undefined) {

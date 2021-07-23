@@ -9,7 +9,7 @@
       previous="aprenda"
       next-color="#F4C41E"
       previous-color="#C0161B"
-      :items="filteredDisciplines"
+      :items="filteredItems"
     >
       <template v-slot:SecondaryButtons>
         <v-row justify="center">
@@ -187,7 +187,7 @@ export default {
   }),
 
   computed: {
-    filteredDisciplines() {
+    filteredItems() {
       const secondaryButton = this.selectedButtonSecondary;
 
       if (secondaryButton != undefined) {

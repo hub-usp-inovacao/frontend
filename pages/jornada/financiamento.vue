@@ -7,7 +7,8 @@
       :buttons="buttons"
       previous="aprimorar"
       previous-color="#338C21"
-      :items="filteredDisciplines"
+      next=""
+      :items="filteredItems"
     >
       <template v-slot:SecondaryButtons>
         <v-row justify="center">
@@ -96,7 +97,7 @@ anjos que possuem forte conexão com Venture Capital.`,
   }),
 
   computed: {
-    filteredDisciplines() {
+    filteredItems() {
       const secondaryButton = this.selectedButtonSecondary;
 
       if (secondaryButton != undefined) {

@@ -9,7 +9,7 @@
       previous="criar"
       next-color="#214E8C"
       previous-color="#F4C41E"
-      :items="filteredDisciplines"
+      :items="filteredItems"
     >
       <template v-slot:SecondaryButtons>
         <v-row justify="center">
@@ -337,7 +337,7 @@ facilidades no USP Multi`,
   }),
 
   computed: {
-    filteredDisciplines() {
+    filteredItems() {
       const secondaryButton = this.selectedButtonSecondary;
 
       if (secondaryButton != undefined) {
