@@ -36,7 +36,7 @@ _Entity FindErrors_ is responsible for generating the errors displayed in the er
 ## Second Version
 
 ::: tip info
-Only Disciplines uses this version yet.
+Only Disciplines and Companies use this version yet.
 :::
 
 This version uses the API exposed by the backend application. The page has two main functionalities:
