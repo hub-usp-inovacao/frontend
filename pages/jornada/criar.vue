@@ -5,7 +5,7 @@
       :description="description"
       color="#F4C41E"
       :buttons="buttons"
-      next="criar"
+      next="aprimorar"
       previous="pratica"
       next-color="#338C21"
       previous-color="#E46926"

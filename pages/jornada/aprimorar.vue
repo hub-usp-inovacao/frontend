@@ -5,8 +5,8 @@
       :description="description"
       color="#338C21"
       :buttons="buttons"
-      next="criar"
-      previous="pratica"
+      next="financiamento"
+      previous="criar"
       next-color="#214E8C"
       previous-color="#F4C41E"
       :items="filteredDisciplines"
@@ -53,7 +53,7 @@ disponíveis em seus laboratórios.`,
 especializados ou equipamentos de alta complexidade, verifique essas e outras
 facilidades no USP Multi`,
     ],
-    route: "financiamento",
+    route: "aprimorar",
     buttons: [
       { label: "CEPID" },
       { label: "INCT" },
