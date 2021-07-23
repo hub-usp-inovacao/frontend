@@ -23,6 +23,11 @@
         <v-icon large>keyboard_arrow_down</v-icon>
       </div>
     </div>
+    <div v-else>
+      <p class="title font-weight-light text-center mb-0">
+        Selecione os filtros acima
+      </p>
+    </div>
   </v-card>
 </template>
 
