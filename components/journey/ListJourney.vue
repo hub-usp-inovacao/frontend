@@ -4,7 +4,7 @@
     class="d-flex flex-column"
     :class="{ 'justify-center': items.length == 0 }"
   >
-    <div v-if="Object.keys(items).length > 0">
+    <div v-if="items.length > 0">
       <div class="d-flex justify-center">
         <v-icon large>keyboard_arrow_up</v-icon>
       </div>
@@ -32,11 +32,6 @@ export default {
     items: {
       type: Array,
       default: () => {},
-    },
-  },
-  watch: {
-    selected() {
-      this.$emit("input", this.selected);
     },
   },
 };

@@ -69,7 +69,6 @@ especializados em Early Stage (pre seed e seed). A melhor forma de acessar
 esses fundos de investimento é se conectar com as associações de investidores
 anjos que possuem forte conexão com Venture Capital.`,
     ],
-    route: "financiamento",
     buttons: [
       { label: "EMBRAPII" },
       { label: "Fomento" },

@@ -53,7 +53,6 @@ disponíveis em seus laboratórios.`,
 especializados ou equipamentos de alta complexidade, verifique essas e outras
 facilidades no USP Multi`,
     ],
-    route: "aprimorar",
     buttons: [
       { label: "CEPID" },
       { label: "INCT" },

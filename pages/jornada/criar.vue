@@ -47,7 +47,6 @@ instalar sua equipe em uma das 4 Incubadoras e do Parque Tecnológico da USP.`,
 com aceleradoras, incubadoras e parques que também podem abrigar o seu
 negócio`,
     ],
-    route: "criar",
     buttons: [
       { label: "Incubadoras e Parques Técnologicos da USP" },
       { label: "Incubadoras e Parques Técnologicos Externos" },

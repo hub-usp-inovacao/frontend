@@ -65,7 +65,6 @@ podem ser encontradas em: https://hubusp.inovacao.usp.br/educacao`,
       `Você pode navegar pelas disciplinas de acordo com o nível de maturidade que
 você busca em empreendedorismo e inovação:`,
     ],
-    route: "aprenda",
     buttons: {
       primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],
       secondary: [
