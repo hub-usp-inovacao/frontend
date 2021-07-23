@@ -1,7 +1,7 @@
 <template>
   <div>
     <Step
-      title="aprenda"
+      title="Aprenda"
       :description="description"
       color="#C0161B"
       :buttons="buttons"

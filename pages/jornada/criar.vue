@@ -49,12 +49,12 @@ negócio`,
     ],
     route: "criar",
     buttons: [
-      { label: "Incubadoras da USP" },
-      { label: "Incubadoras Externas da USP" },
+      { label: "Incubadoras e Parques Técnologicos da USP" },
+      { label: "Incubadoras e Parques Técnologicos Externos" },
     ],
 
     incubadoras: {
-      "INCUBADORAS DA USP": [
+      "INCUBADORAS E PARQUES TÉCNOLOGICOS DA USP": [
         {
           title: "CIETEC - Centro de Inovação, Empreendedorismo e Tecnologia",
         },
@@ -72,7 +72,7 @@ negócio`,
         },
         { title: "Supera Parque de Inovação e Tecnologia" },
       ],
-      "INCUBADORAS EXTERNAS DA USP": [
+      "INCUBADORAS E PARQUES TÉCNOLOGICOS EXTERNOS": [
         { title: "Acematão - Incubadora de Matão" },
         { title: "Agende - incubadora Tecnológica de Empresas Guarulhos" },
         { title: "CEDIN - Centro de desenvolvimento de Indústrias" },
