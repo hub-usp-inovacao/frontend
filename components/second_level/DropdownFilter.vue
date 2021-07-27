@@ -17,7 +17,44 @@
           clearable
           :filter="customFilter"
           autocomplete="disable"
-        ></v-autocomplete>
+        >
+          <template v-if="label == 'Porte'" #prepend>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on">
+                  <v-icon>info</v-icon>
+                </v-btn>
+              </template>
+              <table>
+                <tr>
+                  <th>Porte</th>
+                  <th>Indústria de Transformação</th>
+                  <th>Outros</th>
+                </tr>
+                <tr>
+                  <td>Microempresas</td>
+                  <td>&lt; 19 pessoas</td>
+                  <td>&lt; 9 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Pequena Empresa</td>
+                  <td>de 20 a 99 pessoas</td>
+                  <td>de 10 a 49 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Média Empresa</td>
+                  <td>de 100 a 499 pessoas</td>
+                  <td>de 50 a 99 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Grande Empresa</td>
+                  <td>&gt; 500 pessoas</td>
+                  <td>&gt; 100 pessoas</td>
+                </tr>
+              </table>
+            </v-tooltip>
+          </template>
+        </v-autocomplete>
       </v-col>
     </v-row>
 
@@ -99,3 +136,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+table {
+  text-align: center;
+}
+th,
+td {
+  padding: 10px;
+}
+</style>
