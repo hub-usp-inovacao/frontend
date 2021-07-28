@@ -1,0 +1,587 @@
+<template>
+  <div>
+    <Step
+      title="Aprenda"
+      :description="description"
+      color="#C0161B"
+      :buttons="buttons"
+      next="pratica"
+      next-color="#E46926"
+      :items="filteredDisciplines"
+    >
+      <template v-slot:PrimaryButtons>
+        <v-row justify="center">
+          <v-col cols="6">
+            <div class="d-flex flex-wrap justify-space-around">
+              <v-btn
+                v-for="{ label } in buttons.primary"
+                :key="label"
+                class="white px-6 py-8 ma-1 flex-grow-1 button"
+                max-width="100%"
+                @click="select"
+              >
+                {{ label }}
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </template>
+      <template v-slot:SecondaryButtons>
+        <v-row justify="center">
+          <v-col class="pt-0">
+            <div class="d-flex flex-wrap justify-space-around">
+              <v-btn
+                v-for="{ label } in buttons.secondary"
+                :key="label"
+                class="white px-6 py-6 ma-1 flex-grow-1 button"
+                max-width="100%"
+                @click="select"
+              >
+                {{ label }}
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </template>
+    </Step>
+  </div>
+</template>
+
+<script>
+import Step from "@/components/journey/Step.vue";
+
+export default {
+  components: {
+    Step,
+  },
+  data: () => ({
+    description: [
+      `Para aprender um pouco mais sobre inovação e empreendedorismo, curse as
+disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia
+relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP
+tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas
+de pós-graduação voltadas para os temas de inovação e empreendedorismo, que
+podem ser encontradas em: https://hubusp.inovacao.usp.br/educacao`,
+      `Você pode navegar pelas disciplinas de acordo com o nível de maturidade que
+você busca em empreendedorismo e inovação:`,
+    ],
+    buttons: {
+      primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],
+      secondary: [
+        { label: "Quero aprender!" },
+        { label: "Tenho uma ideia, e agora?" },
+        { label: "Preciso testar minha ideia!" },
+        { label: "Tópicos avançados em empreendedorismo" },
+      ],
+    },
+    graduação: {
+      "QUERO APRENDER!": [
+        { title: "ACH2657 - Empreendedorismo" },
+        { title: "ACH5508 - Empreendedorismo Tecnológico" },
+        { title: "8800004 - Empreendedorismo" },
+        { title: "LOB1251 - Introdução a Inovação Sistemática com TRIZ" },
+        { title: "LOB1263 - Introdução a Eco-Inovação Tecnológica" },
+        { title: "LOQ4234 - Empreendedorismo" },
+        { title: "LOQ4255 - Inovação Tecnológica" },
+        { title: "SEP0531 - Empreendedorismo" },
+        { title: "300021 - Empreendedorismo e Planos de Negócios" },
+        {
+          title:
+            "PCS3579 - Inovação, Tecnologia, Estratégia de Negócio e a Sociedade",
+        },
+        {
+          title:
+            "PCS3879 - Inovação, Tecnologia, Estratégias de Negócio e a Sociedade",
+        },
+        { title: "PMR3410 - Empreendedorismo de Base Tecnológica" },
+        { title: "PRO3416 - Fundamentos de Economia e Empreendimentos" },
+        { title: "PRO3586 - Fundamentos da Gestão da Inovação" },
+        { title: "PRO3587 - Inovação, Sociedade e Tecnologia" },
+        { title: "PRO3612 - Inovação e Empreendedorismo" },
+        { title: "PSI2617 - Inovação em Engenharia" },
+        { title: "PSI3465 - Inovação em Engenharia" },
+        {
+          title:
+            "LCE0136 - Ciência de Dados e Gestão para Empregabilidade Empreendedorismo e Inovação",
+        },
+        { title: "CGF2069 - Gestão da Inovação e Empreendedorismo" },
+        {
+          title: "DCO0216 - Propriedade Intelectual e Acesso ao Conhecimento",
+        },
+        {
+          title: "DCO0220 - Propriedade Intelectual e Acesso ao Conhecimento",
+        },
+        {
+          title:
+            "DCO0222 - Propriedade Intelectual Aplicada: Função e Disfunção da Propriedade Intelectual em Estudos de Casos",
+        },
+        {
+          title:
+            "DCV0516 - Questões Atuais de Direito Privado II: Obrigações, Contratos,Responsabilidade Civil, Direitos Reais, Propriedade Intelectual, Família e Sucessões",
+        },
+        {
+          title:
+            "DCV0524 - Questões Atuais de Direito Privado II: Obrigações, Contratos, Responsabilidade Civil, Direitos Reais, Propriedade Intelectual, Família e Sucessões",
+        },
+        { title: "DEF0529 - Direito da Inovação Tecnológica" },
+        { title: "DEF0545 - Direito da Inovação Tecnológica" },
+        {
+          title: "DIN0438 - Direito Internacional da Propriedade Intelectual",
+        },
+        {
+          title: "DIN0451 - Direito Internacional da Propriedade Intelectual",
+        },
+        { title: "DPP5204 - Propriedade Intelectual" },
+        { title: "DPP6003 - Propriedade Intelectual e Acesso à Informação" },
+        { title: "EAD0910 - Empreendedorismo e Inovação" },
+        { title: "RAD1105 - Gestão da Inovação" },
+        { title: "RAD2103 - Empreendedorismo" },
+        {
+          title:
+            "RAD2221 - Sistema Brasileiro de Inovação: Estrutura, Características e Funcionamento",
+        },
+        { title: "RAD2227 - Estudo de Casos em Organizações e Inovação" },
+        { title: "5920938 - Regulamentação e Propriedade Intelectual" },
+        { title: "5930186 - Empreendedorismo Tecnológico" },
+        { title: "5952041 - Matemática para Empreendedores" },
+        { title: "RAD2177 - Gestão da Criatividade" },
+        { title: "FSL0527 - Inovação e Desenvolvimento Econômico e Social" },
+        { title: "VCI0210 - Empreendedorismo" },
+        { title: "ZEB1052 - Gestão, Inovação e Empreendedorismo" },
+        {
+          title:
+            "ZEB1348 - Fundamentos de Empreendedorismo e Planejamento de Projetos",
+        },
+        {
+          title:
+            "420300 - Empreendedorismo, Inovação e Propriedade Intelectual",
+        },
+        { title: "SSC0570 - Empreendedorismo" },
+        { title: "7600001 - Inovação e Empreendedorismo" },
+        { title: "7600091 - Empreendedorismo" },
+        { title: "FCI0761 - Empreendedorismo" },
+        { title: "MAC0458 - Direito e Software livre" },
+        { title: "MAC0467 - Empreendedorismo Digital" },
+        { title: "PRG0004 - Inovação e Empreendedorismo" },
+        { title: "PRG0005 - Fundamentos em Empreendedorismo" },
+      ],
+      "TENHO UMA IDEIA, E AGORA?": [
+        { title: "8800014 - Projetos Especiais em Gestão da Inovação" },
+        { title: "LOQ4249 - Oficina de Inovação" },
+        { title: "1800117 - Oficina de Inovação" },
+        {
+          title:
+            "SEP0529 - Administração e Empreendedorismo / Management and Entrepreneurship",
+        },
+        { title: "SEP0628 - Projeto Integrado de Inovação" },
+        { title: "PCS2581 - Negócios em Tempo Real" },
+        {
+          title: "PCS2590 - Criação e Administração de Empresas de Computação",
+        },
+        { title: "PEF3111 - Empreendedorismo e Modelos de Negócios" },
+        { title: "PRO2804 - Projeto, Processo e Gestão da Inovação" },
+        { title: "PRO3516 - Desenvolvimento de Soluções de Inovação Social" },
+        { title: "PRO3584 - Projeto, Processo e Gestão da Inovação" },
+        { title: "LES0370 - Formação Empreendedorial: Capacitação pró-ativa" },
+        { title: "EAD0712 - Gestão de Pequenas Empresas Empreendedoras" },
+        {
+          title:
+            "EAD0715 - Gestão da Inovação para a Competitividade Empresarial",
+        },
+        {
+          title: "EAD0724 - Responsabilidade Social e Empreendedorismo Social",
+        },
+        {
+          title:
+            "EAD0906 - Inovação Social e Empreendedorismo Social na Prática",
+        },
+        { title: "RAD2310 - Empreendedorismo Social e Finanças Sociais" },
+        {
+          title:
+            "5962042 - Inteligência Competitiva com Enfoque Empreendedor II",
+        },
+        {
+          title:
+            "5962126 - Inteligência Competitiva com Enfoque Empreendedor I",
+        },
+        { title: "420200 - Gestão de Projetos em Inovação" },
+        { title: "SCC0300 - Projeto Empreendedor I" },
+        { title: "SCC0302 - Projeto Empreendedor II" },
+        { title: "SSC0595 - Projeto Empreendedor I (turma 1)" },
+        { title: "SSC0596 - Projeto Empreendedor II (turma 2)" },
+        { title: "SSC0675 - Projeto Empreendedor I (turma 1)" },
+        { title: "SSC0676 - Projeto Empreendedor II (turma 2)" },
+        { title: "PRG0016 - Laboratório de Inovação e Empreendedorismo" },
+      ],
+      "PRECISO TESTAR MINHA IDEIA!": [
+        { title: "ACH1575 - Inovação em Serviços de Lazer e Turismo" },
+        {
+          title:
+            "ACH1596 - Intervenções Profissionais em Turismo Empreendimentos Turísticos e Desenvolvimento",
+        },
+        { title: "ACH2758 - Inovação em Têxtil e Moda" },
+        { title: "ACH3088 - Empreendedorismo em Gerontologia" },
+        { title: "CJE0656 - Empreendedorismo em Jornalismo" },
+        {
+          title: "CRP0305 - Empreendedorismo e Assessoria de Relações Públicas",
+        },
+        { title: "CRP0494 - Trabalho de Campo em Empreendimento Turístico" },
+        { title: "CRP0528 - Desafios da inovação no Turismo" },
+        {
+          title:
+            "CRP0560 - Empreendedorismo e Gestão da Inovação Aplicados ao Turismo",
+        },
+        {
+          title: "ERG0111 - Inovação e Empreendedorismo em Saúde e Enfermagem",
+        },
+        {
+          title: "ACH1538 - Consultoria e Empreendedorismo em Lazer e Turismo",
+        },
+        { title: "1800313 - Sustentabilidade, Inovação e Empreendedorismo I" },
+        { title: "PCC2541 - Inovação Tecnológica na Produção de Edifícios" },
+        { title: "PMI3817 - Empreendedorismo e Inovação na Cadeia Mineral" },
+        {
+          title: "PMR2540 - Empreendimento de Base Tecnológica em Mecatrônica",
+        },
+        {
+          title:
+            "PRO3588 - Inovação, Empreendedorismo e Gestão de Serviços em Saúde",
+        },
+        {
+          title:
+            "LCF0600 - Empreendedorismo e Inovação Circular em Bioeconomia",
+        },
+        {
+          title:
+            "RAD2318 - Região Metropolitana de Ribeirão Preto: Sociedade, Economia, Tecnologia e Inovação",
+        },
+        { title: "5910192 - Empreendedorismo para Física Médica" },
+        { title: "5913003 - Inovação Tecnológica em Biomedicina" },
+        { title: "5920943 - Empreendedorismo em Biotecnologia Animal" },
+        { title: "MSP4040 - Inovação & Empreendedorismo em Saúde" },
+        { title: "MSP4053 - Inovação e empreendedorismo na medicina" },
+        { title: "MSP4061 - Empreendedorismo e Inovação em Saúde" },
+        { title: "RCB0314 - Inovação e Empreendedorismo em Biotecnologia" },
+        { title: "RIB0301 - Ciência, Invenção, Inovação e Lazer" },
+        { title: "RIB1100 - Inovação em Saúde e Empreendedorismo" },
+        { title: "2500032 - Inovação e Empreendedorismo em Saúde" },
+        { title: "ZEB0426 - Empreendedorismo e Projetos no Agronegócio" },
+        { title: "ZEB0551 - Gestão e Empreendedorismo no Agronegócio" },
+        {
+          title: "110450 - Inovação e Qualidade na Cadeia Produtiva do Pescado",
+        },
+        { title: "SCC0209 - Empreendedores em Informática" },
+      ],
+      "TÓPICOS AVANÇADOS EM EMPREENDEDORISMO": [
+        { title: "ACH2008 - Empreendedorismo em Informática" },
+        {
+          title:
+            "LCE0136 - Ciência de Dados e Gestão para Empregabilidade, Empreendedorismo e Inovação",
+        },
+        { title: "DCO0216 - Propriedade Intelectual e Acesso ao Conhecimento" },
+        { title: "DCO0220 - Propriedade Intelectual e Acesso ao Conhecimento" },
+        {
+          title:
+            "DCO0222 - Propriedade Intelectual Aplicada: Função e Disfunção da Propriedade Intelectual em Estudos de Casos",
+        },
+        {
+          title:
+            "DCV0516 - Questões Atuais de Direito Privado II: Obrigações, Contratos, Responsabilidade Civil, Direitos Reais, Propriedade Intelectual, Família e Sucessões",
+        },
+        {
+          title:
+            "DCV0524 - Questões Atuais de Direito Privado II: Obrigações, Contratos, Responsabilidade Civil, Direitos Reais, Propriedade Intelectual, Família e Sucessões",
+        },
+        { title: "DEF0529 - Direito da Inovação Tecnológica" },
+        { title: "DEF0545 - Direito da Inovação Tecnológica" },
+        { title: "DIN0438 - Direito Internacional da Propriedade Intelectual" },
+        { title: "DIN0451 - Direito Internacional da Propriedade Intelectual" },
+        { title: "DPP5204 - Propriedade Intelectual" },
+        { title: "DPP6003 - Propriedade Intelectual e Acesso à Informação" },
+        { title: "5920938 - Regulamentação e Propriedade Intelectual" },
+        { title: "5952041 - Matemática para Empreendedores" },
+        {
+          title:
+            "420300 - Empreendedorismo, Inovação e Propriedade Intelectual",
+        },
+        { title: "MAC0458 - Direito e Software livre" },
+      ],
+    },
+
+    PósGraduação: {
+      "QUERO APRENDER!": [
+        { title: "6025827 - Gestão de Inovação de Produtos" },
+        { title: "EAD5837 - Gestão da Inovação Tecnológica na Empresa" },
+        {
+          title:
+            "EAD5952-4 - Estratégia e Inovação em Corporações Multinacionais",
+        },
+        { title: "EAE5820 - Desenvolvimento e Inovação" },
+        { title: "EAP5006 - Empreendedorismo Inovador" },
+        { title: "EAP5010 - Inovação e Novos Negócios" },
+        { title: "GIA5004 - Empreendedorismo e Planos de Negócios" },
+        { title: "ICB5738 - Gestão de Projetos em Inovação" },
+        { title: "MAC6909-2 - Empreendedorismo Digital" },
+        { title: "PRO5804-3 - Gestão Estratégica da Inovação" },
+        {
+          title:
+            "RAD5005 - Administração de Pesquisa, Desenvolvimento e Inovação nas Organizações",
+        },
+        { title: "RAD5043 - Empreendedorismo e Inovação" },
+        { title: "SRB5038-1 - Oficina de Inovação e Empreendedorismo" },
+        { title: "VCI5788 - Empreendedorismo" },
+        { title: "EAP5028 - Inovação Global" },
+        {
+          title:
+            "FLS5157 - Desenvolvimento, Instituições e Políticas Públicas de Ciência, Tecnologia e Inovação",
+        },
+        { title: "SEP5848 - Gestão Integrada da Inovação e Tecnologia" },
+        { title: "EAD5979 - Inovação Aberta na Economia Digital" },
+        {
+          title: "EAD5970 - Inovação Ambidestra, Condicionantes e Desempenhos",
+        },
+        { title: "EAP5021 - Inovação de Modelo de Negócio" },
+        { title: "EAD5968 - Inovação Global" },
+        {
+          title:
+            "SEP5847 - Inovação, Mudança Produtiva e Desenvolvimento Humano",
+        },
+        {
+          title:
+            "EAD5981 - Transferência de Conhecimento e Difusão de Inovação",
+        },
+        {
+          title:
+            "EAD5980 - Ecossistemas Empreendedores em Economias em Transição",
+        },
+        { title: "5915771 - Empreendedorismo" },
+        { title: "MAI5027 - Empreendedorismo" },
+        { title: "PBI5229 - Empreendedorismo de Base Tecnológica" },
+        {
+          title:
+            "EAD5987 - Empreendedorismo Digital e Territórios Criativos Inteligentes",
+        },
+        {
+          title:
+            "EAP5038 - Empreendedorismo Digital e Territórios Criativos Inteligentes",
+        },
+      ],
+
+      "TENHO UMA IDEIA, E AGORA?": [
+        {
+          title:
+            "EAD5806 - Arquiteturas Organizacionais, Inovação e Internacionalização",
+        },
+        {
+          title: "EAD5959 - Empreendedorismo Social e Negócios Socioambientais",
+        },
+        { title: "EAP5015 - Marketing para Empreendedorismo" },
+        { title: "EAP5016 - Finanças para empreendedorismo" },
+        {
+          title:
+            "EAP5040 - Comportamento do Consumidor no Contexto da Inovação",
+        },
+        {
+          title:
+            "SEP5838 - Estratégia e Modelagem de Empresas para Inovação Colaborativa",
+        },
+        {
+          title:
+            "EDF5114 - Habilidades Sócio-Emocionais, Inovação e Avaliação de Impactos Sociais",
+        },
+        {
+          title:
+            "PRO5962 - Indústrias Culturais e Criativas, Inovação e Desenvolvimento Tecnológico",
+        },
+        { title: "SEP5837 - Inovação e Sustentabilidade na Manufatura" },
+        {
+          title:
+            "EAP5024 - Comportamento do Consumidor e Qualidade de Vida Voltada para o Ambiente Empreendedor",
+        },
+        {
+          title:
+            "EAP5023 - Criatividade, Resiliência e suas Interfaces com o Empreendedorismo",
+        },
+        { title: "EAD5996 - Efetividade Empreendedora" },
+        { title: "EAP5030 - Efetividade Empreendedora" },
+        {
+          title:
+            "PCS5769 - Empreendedorismo para Cientistas e Engenheiros de Computação",
+        },
+        {
+          title: "EAP5007 - Empreendedorismo Social e Negócios Socioambientais",
+        },
+        { title: "ADM4009 - Finanças para Empreendedores" },
+        { title: "EAD5982 - Habilidades Empreendedoras" },
+        {
+          title:
+            "EAP5025 - Transformações do Trabalho e Empreendedorismo no Mundo Contemporâneo",
+        },
+      ],
+
+      "PRECISO TESTAR MINHA IDEIA!": [
+        {
+          title:
+            "EAD5887 - Gestão Estratégica e Inovação para a Sustentabilidade",
+        },
+        {
+          title: "EAD5919 - Administração da Inovação em Produtos e Processos",
+        },
+        {
+          title:
+            "EAP5001-2 - Lean Startup e Modelo de Desenvolvimento de Produtos",
+        },
+        {
+          title:
+            "EMP5500-3 - Tecnologia, Inovação e Empreendedorismo em Saúde e Enfermagem",
+        },
+        {
+          title:
+            "ENS5921-2 - Tecnologias e Inovação nas Práticas de Cuidados em Atenção Primária de Saúde",
+        },
+        {
+          title:
+            "GIA5007 - Gestão da Inovação e da Propriedade Intelectual no Agronegócio",
+        },
+        {
+          title:
+            "ODC5823 - Inovação Tecnológica para o Diagnóstico e a Terapêutica em Cirurgia e Traumatologia Buco-Maxilo-Faciais",
+        },
+        {
+          title:
+            "PCC5963 - Cadeia Produtiva da Construção: Tecnologia, Sustentabilidade e Inovação",
+        },
+        {
+          title:
+            "SIN5019-1 - Laboratório de Inovação em Sistemas de Informação",
+        },
+        {
+          title:
+            "SRB5025-2 - Tópicos em Funcionalidade, Tecnologia Assistiva e Inovação em Reabilitação",
+        },
+        {
+          title:
+            "PRO5963 - Abordagens para Inovação em Produtos, Serviços e Processos",
+        },
+        {
+          title:
+            "DSG5016 - Abordagens para inovação em produtos, serviços e processos",
+        },
+        { title: "PRO5766 - Análise e Projeto de Inovação Organizacional" },
+        {
+          title:
+            "GIA5032 - Demandas Tecnológicas e Inovação em Sistemas de Produção Animal Baseados em Pastagens",
+        },
+        {
+          title:
+            "PCC5964 - Desempenho e Inovação de Sistemas Prediais Hidráulicos",
+        },
+        {
+          title:
+            "PRO5857 - Desenvolvimento de Projeto em Organização e Gestão da Inovação",
+        },
+        { title: "BTC5853 - Empreendedorismo e Inovação em Saúde" },
+        { title: "BAB5711 - Estratégias de Inovação em Biologia Oral" },
+        { title: "GOS5725 - Gestão da Inovação em Saúde" },
+        {
+          title:
+            "MAN5758 - Gestão da Inovação Tecnológica Relacionada ao Perioperatório",
+        },
+        { title: "GIA5027 - Gestão e Inovação na Indústria Aquícola" },
+        {
+          title:
+            "PSP5711 - Inovação em Saúde Materna: Evidências, Direitos e Políticas Públicas",
+        },
+        { title: "GIA5034 - Inovação na Avicultura" },
+        { title: "ENO5955 - Inovação no Processo Educativo na Era Digital" },
+        {
+          title:
+            "PCC5975 - Inovação Tecnológica e Industrialização na Construção Civil",
+        },
+        {
+          title:
+            "8055752 - Inovação, tecnologia e empreendedorismo em Materiais Odontológicos e Reabilitação Oral",
+        },
+        { title: "EAP5026 - Laboratório de Inovação e Empreendedorismo" },
+        {
+          title:
+            "ODO5786 - Saúde Digital e Telessaúde: Tecnologia e Inovação em Saúde e Educação",
+        },
+        {
+          title: "VPS5709 - Segurança de Alimentos: Temas em Gestão e Inovação",
+        },
+        { title: "EAP5013 - Seminário de Inovação e Empreendedorismo I" },
+        { title: "EAP5039 - Seminário de Inovação e Empreendedorismo II" },
+        {
+          title:
+            "SHS5965 - Tópicos Especiais em Hidráulica e Saneamento: Oportunidades Interdisciplinares de Inovação e Empreendedorismo Científico",
+        },
+      ],
+
+      "TÓPICOS AVANÇADOS EM EMPREENDEDORISMO": [
+        {
+          title:
+            "6025774 - Desenvolvimento de Sistemas de Liberação para a Via Nasal, Ocular e Absorção Pulmonar: uma Inovação na Administração de Fármacos Peptídicos e Protéicos",
+        },
+        {
+          title:
+            "EAD5865 - Estratégia Tecnológica na Empresa, Inovação e Internacionalização",
+        },
+        { title: "RAD5032-2 - Internacionalização de Empresas e Inovação" },
+        {
+          title:
+            "EAD5966 - Ciência, Tecnologia e Inovação: a Dimensão Internacional",
+        },
+        {
+          title:
+            "BTC5839 - Empreendedorismo, Inovação e Propriedade Intelectual - Módulo I",
+        },
+        {
+          title:
+            "TNA5786 - Gestão da Propriedade Intelectual Aplicada à Produção do Conhecimento, Inovação Tecnológica, Pesquisa e Desenvolvimento",
+        },
+        { title: "DCO5873 - Propriedade Intelectual" },
+        { title: "EAD5994 - Gestão de propriedade intelectual" },
+        { title: "EAP5029 - Gestão de propriedade intelectual" },
+        {
+          title:
+            "DIN5888 - Os Fundamentos do Direito Internacional da Propriedade Intelectual",
+        },
+      ],
+    },
+
+    selectedButtonPrimary: undefined,
+    selectedButtonSecondary: undefined,
+  }),
+
+  computed: {
+    filteredDisciplines() {
+      const primaryButton = this.selectedButtonPrimary;
+      const secondaryButton = this.selectedButtonSecondary;
+
+      if (primaryButton != undefined) {
+        if (secondaryButton != undefined) {
+          return primaryButton == "GRADUAÇÃO"
+            ? this.graduação[secondaryButton]
+            : this.PósGraduação[secondaryButton];
+        } else {
+          return [];
+        }
+      }
+
+      return [];
+    },
+  },
+
+  methods: {
+    select({ target }) {
+      const text = target.innerText;
+      if (text == "GRADUAÇÃO" || text == "PÓS-GRADUAÇÃO") {
+        this.selectedButtonPrimary = text;
+      } else {
+        this.selectedButtonSecondary = text;
+      }
+    },
+  },
+};
+</script>
