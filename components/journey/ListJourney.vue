@@ -11,9 +11,9 @@
 
       <v-list rounded height="30rem" max-height="100%" style="overflow-y: auto">
         <v-list-item-group>
-          <v-list-item v-for="i in items" :key="i.title" :value="i">
+          <v-list-item v-for="i in items" :key="i" :value="i">
             <v-list-item-content>
-              <v-list-item-title v-text="i.title" />
+              <v-list-item-title v-text="i" />
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
