@@ -347,6 +347,12 @@ export default {
             name: "Filipe Bernardi",
             role: "Levantamento Competências",
           },
+          {
+            src:
+              "https://drive.google.com/uc?export=view&id=1yzNqua3sY0OI5038WZHPDTzBzw1UE7fU",
+            name: "Ana Bárbara Rodrigues",
+            role: "Levantamento Competências",
+          },
         ],
         notes: [
           "O Levantamento de Competências contou com o apoio do Santander Universidades.",
