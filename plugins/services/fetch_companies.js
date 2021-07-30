@@ -28,7 +28,7 @@ function beginNewCompany(row) {
   const year = columnValue(row, "E");
   const emails = columnValue(row, "H").split(";");
   const description = { long: columnValue(row, "N") };
-  const incubated = "Sim. A empresa está incubada; Sim. A empresa já está graduada"
+  const incubated = "Sim. A empresa está incubada;Sim. A empresa já está graduada"
     .split(";")
     .includes(columnValue(row, "S"));
   const ecosystems = columnValue(row, "T").split(";");
