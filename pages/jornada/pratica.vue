@@ -64,123 +64,11 @@ export default {
     ],
 
     items: {
-      "EMPRESA JR.": [
-        "Biossistec Jr",
-        "Com-Arte Júnio",
-        "Comunica Fono Jr",
-        "CORE Jr",
-        "ECA Jr",
-        "EEL Jr",
-        "EESC Jr",
-        "EJA",
-        "ESALQ Jr. Consultori",
-        "Farma Jr",
-        "Farmacon Jr",
-        "FAUUSP Jr",
-        "FEA Jr",
-        "G.A Jr",
-        "Gamma Jr. Engenhari",
-        "Geo Jr",
-        "Geronto Jr",
-        "IAG Jr",
-        "ICB Jr",
-        "ICMC Jr",
-        "IF Jr",
-        "SINTE",
-        "IME Jr",
-        "InfoBio Jr",
-        "Inova Química Jr",
-        "IO Jr",
-        "IQSC Jr",
-        "Irhis Consultoria Jr. em Psicologi",
-        "Jornalismo Jr",
-        "Júnior FEAR",
-        "Jurisconsultu",
-        "LZT Jr",
-        "Marketing Jr",
-        "Medicina Jr",
-        "Nutri Jr",
-        "Nutrirp Consultoria Jr",
-        "Poli Jr",
-        "Qualimentos Jr",
-        "RI USP Jr",
-        "SanFran Jr",
-        "Síntese Jr",
-        "Têxtil e Moda Jr",
-        "Vertun",
-      ],
-      IDEAÇÃO: [
-        "AWC",
-        "Escritório Piloto",
-        "GEAR Poli",
-        "Geek Vision",
-        "Grupo SEMEAR",
-        "Grupo Turing",
-        "Hardware Livre USP",
-        "HubEE",
-        "IEEE Ramo Estudantil - Poli",
-        "IMEmpreende",
-        "IMESec",
-        "Keep Flying",
-        "Laboratório de Empreendedorismo - FEA",
-        "LESC",
-        "Liga de Mercado Financeiro - FEA",
-        "Liga de Mercado Financeiro - São Carlos",
-        "Liga USP de Gestão Pública",
-        "Neuron",
-        "PET Mecatrônica/Automação e Sistemas",
-        "Poli Finance",
-        "Poli Náutico",
-        "Poli Racing",
-        "PoliMilhagem",
-        "Projeto Jupiter",
-        "REDECOOP",
-        "RGE - São Carlos",
-        "Skyrats",
-        "Tecs: Grupo de Computação Social",
-        "ThundeRatz",
-        "USP Mining Team",
-        "USPGameDev",
-        "USPSC SPIE Student Chapter",
-        "Zenith Aerospace",
-      ],
-      "GRUPOS E INICIATIVAS ESTUDANTIS": [
-        "Grupo de Negócios da Escola Politécnica",
-        "Iniciativas Mercado",
-        "INTENSIVO",
-        "Poli Cidadã",
-        "Poli Consulting Club",
-        "SanFran Social",
-      ],
-      "ENTIDADE ESTUDANTIL": [
-        "AIESEC - Ribeirão Preto",
-        "AIESEC - São Carlos",
-        "CodeLab",
-        "ENACTUS - CAASO",
-        "ENACTUS - EEL",
-        "ENACTUS - ESALQ",
-        "ENACTUS - FD",
-        "ENACTUS - FEA",
-        "ENACTUS - FEARP",
-        "ENACTUS - FZEA",
-        "IEEE Ramo Estudantil - São Carlos",
-        "iTeam USP - São Carlos",
-        "Nexos Gestão Pública",
-        "Núcleo de Empreendedores - FEARP",
-        "Núcleo de Empreendedorismo da USP - NEU",
-        "Núcleo São Carlos",
-      ],
-      "ESPAÇO/COWORKING": [
-        "Arena Santander",
-        "COSMOS",
-        "EESCin",
-        "Espaço 8",
-        "Fab Lab SP",
-        "Hackerspace IFUSP",
-        "INOVALAB@POLI",
-        "Samsung Ocean",
-        "SPARK Brazil",
-      ],
+      "EMPRESA JR.": [],
+      IDEAÇÃO: [],
+      "GRUPOS E INICIATIVAS ESTUDANTIS": [],
+      "ENTIDADE ESTUDANTIL": [],
+      "ESPAÇO/COWORKING": [],
     },
 
     selectedButtonSecondary: undefined,
@@ -196,6 +84,45 @@ export default {
         return [];
       }
     },
+  },
+
+  async beforeMount() {
+    const sheetID = "1MGRBDs-Bb2PGdyUkTN92dM5kqQuw5dtOpFHwAV1FQpA";
+    const sheetName = "INICIATIVAS";
+    const sheetsAPIKey = process.env.sheetsAPIKey;
+
+    let empresaJr = [];
+    let ideacao = [];
+    let grupos = [];
+    let entidade = [];
+    let coworking = [];
+
+    const resp = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
+    );
+    const { values } = await resp.json();
+
+    values.slice(1).forEach((element) => {
+      const name = element[0];
+
+      if (name == "Empresa Jr.") {
+        empresaJr.push({ nome: element[1], url: element[6] });
+      } else if (name == "Ideação") {
+        ideacao.push({ nome: element[1], url: element[6] });
+      } else if (name == "Grupos e Iniciativas Estudantis") {
+        grupos.push({ nome: element[1], url: element[6] });
+      } else if (name == "Entidade Estudantil") {
+        entidade.push({ nome: element[1], url: element[6] });
+      } else if (name == "Espaço/Coworking") {
+        coworking.push({ nome: element[1], url: element[6] });
+      }
+    });
+
+    this.items["EMPRESA JR."] = empresaJr;
+    this.items["IDEAÇÃO"] = ideacao;
+    this.items["GRUPOS E INICIATIVAS ESTUDANTIS"] = grupos;
+    this.items["ENTIDADE ESTUDANTIL"] = entidade;
+    this.items["ESPAÇO/COWORKING"] = coworking;
   },
 
   methods: {
