@@ -91,8 +91,6 @@ facilidades no USP Multi`,
 
     const centraisUrl = "https://uspmulti.prp.usp.br/api/public/centrais";
 
-    // let objectsFromAPI = [];
-
     const response = await fetch(centraisUrl);
     let centraisData = await response.json();
 
