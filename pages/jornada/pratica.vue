@@ -105,16 +105,22 @@ export default {
     values.slice(1).forEach((element) => {
       const name = element[0];
 
-      if (name == "Empresa Jr.") {
-        empresaJr.push({ nome: element[1], url: element[6] });
-      } else if (name == "Ideação") {
-        ideacao.push({ nome: element[1], url: element[6] });
-      } else if (name == "Grupos e Iniciativas Estudantis") {
-        grupos.push({ nome: element[1], url: element[6] });
-      } else if (name == "Entidade Estudantil") {
-        entidade.push({ nome: element[1], url: element[6] });
-      } else if (name == "Espaço/Coworking") {
-        coworking.push({ nome: element[1], url: element[6] });
+      switch (name) {
+        case "Empresa Jr.":
+          empresaJr.push({ nome: element[1], url: element[6] });
+          break;
+        case "Ideação":
+          ideacao.push({ nome: element[1], url: element[6] });
+          break;
+        case "Grupos e Iniciativas Estudantis":
+          grupos.push({ nome: element[1], url: element[6] });
+          break;
+        case "Entidade Estudantil":
+          entidade.push({ nome: element[1], url: element[6] });
+          break;
+        case "Espaço/Coworking":
+          coworking.push({ nome: element[1], url: element[6] });
+          break;
       }
     });
 

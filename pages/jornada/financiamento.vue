@@ -106,7 +106,7 @@ anjos que possuem forte conexão com Venture Capital.`,
     const sheetName = "Upload";
     const sheetsAPIKey = process.env.sheetsAPIKey;
 
-    let embrappi = [];
+    let embrapii = [];
     let fomento = [];
     let investidores = [];
     let earlyStage = [];
@@ -120,20 +120,26 @@ anjos que possuem forte conexão com Venture Capital.`,
     values.slice(1).forEach((element) => {
       const name = element[0];
 
-      if (name == "EMBRAPII") {
-        embrappi.push({ nome: element[1], url: element[2] });
-      } else if (name == "Fomento") {
-        fomento.push({ nome: element[1], url: element[2] });
-      } else if (name == "Investidores anjo") {
-        investidores.push({ nome: element[1], url: element[2] });
-      } else if (name == "Early stage") {
-        earlyStage.push({ nome: element[1], url: element[2] });
-      } else if (name == "Venture capital") {
-        ventureCapital.push({ nome: element[1], url: element[2] });
+      switch (name) {
+        case "EMBRAPII":
+          embrapii.push({ nome: element[1], url: element[2] });
+          break;
+        case "Fomento":
+          fomento.push({ nome: element[1], url: element[2] });
+          break;
+        case "Investidores anjo":
+          investidores.push({ nome: element[1], url: element[2] });
+          break;
+        case "Early stage":
+          earlyStage.push({ nome: element[1], url: element[2] });
+          break;
+        case "Venture capital":
+          ventureCapital.push({ nome: element[1], url: element[2] });
+          break;
       }
     });
 
-    this.items["EMBRAPII"] = embrappi;
+    this.items["EMBRAPII"] = embrapii;
     this.items["FOMENTO"] = fomento;
     this.items["INVESTIDORES ANJO"] = investidores;
     this.items["EARLY STAGE"] = earlyStage;
