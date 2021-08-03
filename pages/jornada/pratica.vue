@@ -34,6 +34,7 @@
 
 <script>
 import Step from "@/components/journey/Step.vue";
+import { formatURL } from "@/lib/format";
 
 export default {
   components: {
@@ -104,22 +105,23 @@ export default {
 
     values.slice(1).forEach((element) => {
       const name = element[0];
+      let newUrl = formatURL(element[6]);
 
       switch (name) {
         case "Empresa Jr.":
-          empresaJr.push({ nome: element[1], url: element[6] });
+          empresaJr.push({ nome: element[1], url: newUrl });
           break;
         case "Ideação":
-          ideacao.push({ nome: element[1], url: element[6] });
+          ideacao.push({ nome: element[1], url: newUrl });
           break;
         case "Grupos e Iniciativas Estudantis":
-          grupos.push({ nome: element[1], url: element[6] });
+          grupos.push({ nome: element[1], url: newUrl });
           break;
         case "Entidade Estudantil":
-          entidade.push({ nome: element[1], url: element[6] });
+          entidade.push({ nome: element[1], url: newUrl });
           break;
         case "Espaço/Coworking":
-          coworking.push({ nome: element[1], url: element[6] });
+          coworking.push({ nome: element[1], url: newUrl });
           break;
       }
     });
