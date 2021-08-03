@@ -33,6 +33,7 @@
 
 <script>
 import Step from "@/components/journey/Step.vue";
+import { formatURL } from "@/lib/format";
 
 export default {
   components: {
@@ -119,22 +120,23 @@ anjos que possuem forte conexão com Venture Capital.`,
 
     values.slice(1).forEach((element) => {
       const name = element[0];
+      let newUrl = formatURL(element[2]);
 
       switch (name) {
         case "EMBRAPII":
-          embrapii.push({ nome: element[1], url: element[2] });
+          embrapii.push({ nome: element[1], url: newUrl });
           break;
         case "Fomento":
-          fomento.push({ nome: element[1], url: element[2] });
+          fomento.push({ nome: element[1], url: newUrl });
           break;
         case "Investidores anjo":
-          investidores.push({ nome: element[1], url: element[2] });
+          investidores.push({ nome: element[1], url: newUrl });
           break;
         case "Early stage":
-          earlyStage.push({ nome: element[1], url: element[2] });
+          earlyStage.push({ nome: element[1], url: newUrl });
           break;
         case "Venture capital":
-          ventureCapital.push({ nome: element[1], url: element[2] });
+          ventureCapital.push({ nome: element[1], url: newUrl });
           break;
       }
     });
