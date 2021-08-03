@@ -53,60 +53,8 @@ negócio`,
     ],
 
     incubadoras: {
-      "INCUBADORAS E PARQUES TÉCNOLOGICOS DA USP": [
-        "CIETEC - Centro de Inovação, Empreendedorismo e Tecnologia",
-        "ESALQTec - Incubadora de Empresas Agrozootécnicas de Piracicaba",
-        "HABITs - Habitat de Inovação Tecnológica e Social/Incubadora-Escola",
-        "Supera - Incubadora de Empresas de Base Tecnológica de Ribeirão Preto",
-        "Supera Parque de Inovação e Tecnologia",
-      ],
-      "INCUBADORAS E PARQUES TÉCNOLOGICOS EXTERNOS": [
-        "Acematão - Incubadora de Matão",
-        "Agende - incubadora Tecnológica de Empresas Guarulhos",
-        "CEDIN - Centro de desenvolvimento de Indústrias",
-        "CIE - Centro Incubador de Empresas",
-        "CIEM - Centro Incubador de Empresas de Marília Miguel Silva",
-        "CINET - Centro Incubador de Empresas (Parq Tec)",
-        "Design-Inn - Incubadora de Desing (Parq Tec)",
-        "IEB - Incubadora Empresarial de Bebedouro",
-        "IEL - Incubadora de Empresas de Leme (Parq Tec)",
-        "INCAMP - Incubadora de Empresas de Base Tecnológica da UNICAMP",
-        "Incubadora de Ciência, Tecnologia e Inovação de Limeira",
-        "Incubadora de Empresas de Americana",
-        "Incubadora de Empresas de Araras",
-        "Incubadora de Empresas de Jundiaí",
-        "Incubadora de Empresas de Lins",
-        "Incubadora de Empresas de Olímpia",
-        "Incubadora de Empresas do Mackenzie",
-        "Incubadora de Empresas José João Sans",
-        "Incubadora de Negócios da ESPM",
-        "Incubadora Hubiz",
-        "Incubadora Inova do IFSP",
-        "Incubadora ITUFABC",
-        "Incubadora Municipal de Empresas de Barueri",
-        "Incubadora Profor",
-        "Incubadora Tecnológica Univap",
-        "Incubadora Zumbitek da Universidade Zumbi dos Palmares ",
-        "INOVAJAB - Unesp Campus de Jaboticabal",
-        "INTEPP - Incubadora Tecnológica de Presidente Prudente",
-        "Parque Científico e Tecnológico da UNICAMP",
-        "Parque Eco Tecnológico Damha",
-        "Parque Tecnológico Botucatu",
-        "Parque Tecnológico CTI-TEC",
-        "Parque Tecnológico da CIATEC",
-        "Parque Tecnológico de Limeira",
-        "Parque Tecnológico de São José Do Rio Preto",
-        "Parque Tecnológico de São José Dos Campos (PqTec)",
-        "Parque Tecnológico Univap",
-        "Plataforma Kaeydos",
-        "Polis de Tecnologia CPQD",
-        "PROCULTURA - Incubadora Cultural de São João de Boa Vista",
-        "Prospecta - Incubadora Tecnológica de Botucatu",
-        "PTS - Parque Tecnológico de Santos",
-        "PTS - Parque Tecnológico de Sorocaba",
-        "São Carlos Science Park - Parque Tecnológico de São Carlos (Parq Tec)",
-        "Softnet - Centro Incubador de Empresas de Software  (Parq Tec)",
-      ],
+      "INCUBADORAS E PARQUES TÉCNOLOGICOS DA USP": [],
+      "INCUBADORAS E PARQUES TÉCNOLOGICOS EXTERNOS": [],
     },
 
     selectedButtonSecondary: undefined,
@@ -117,11 +65,39 @@ negócio`,
       const secondaryButton = this.selectedButtonSecondary;
 
       if (secondaryButton != undefined) {
+        console.log(this.incubadoras[secondaryButton]);
         return this.incubadoras[secondaryButton];
       } else {
         return [];
       }
     },
+  },
+  async beforeMount() {
+    const sheetID = "1kS55eqf_xEfOExh1aEGSvjTFDbtCRWHYSEyh4f31nww";
+    const sheetName = "Upload";
+    const sheetsAPIKey = process.env.sheetsAPIKey;
+
+    let incubadorasUsp = [];
+    let incubadorasExternas = [];
+
+    const resp = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
+    );
+    const { values } = await resp.json();
+
+    values.slice(1).forEach((element) => {
+      element[1] == "Outro"
+        ? incubadorasExternas.push({ nome: element[2], url: element[3] })
+        : incubadorasUsp.push({ nome: element[2], url: element[3] });
+    });
+
+    this.incubadoras[
+      "INCUBADORAS E PARQUES TÉCNOLOGICOS DA USP"
+    ] = incubadorasUsp;
+
+    this.incubadoras[
+      "INCUBADORAS E PARQUES TÉCNOLOGICOS EXTERNOS"
+    ] = incubadorasExternas;
   },
 
   methods: {

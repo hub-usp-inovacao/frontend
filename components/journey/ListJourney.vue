@@ -11,9 +11,15 @@
 
       <v-list rounded height="30rem" max-height="100%" style="overflow-y: auto">
         <v-list-item-group>
-          <v-list-item v-for="i in items" :key="i" :value="i">
+          <v-list-item
+            v-for="i in items"
+            :key="i.nome"
+            :value="i"
+            :href="i.url == 'N/D' ? '' : i.url"
+            target="_blank"
+          >
             <v-list-item-content>
-              <v-list-item-title v-text="i" />
+              <v-list-item-title v-text="i.nome" />
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
