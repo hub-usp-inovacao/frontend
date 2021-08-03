@@ -45,16 +45,6 @@ export default {
       default: () => {},
     },
   },
-
-  computed: {
-    checkLink(link) {
-      if (link == "N/D") {
-        return "";
-      } else {
-        return link;
-      }
-    },
-  },
 };
 </script>
 
