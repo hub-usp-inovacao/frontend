@@ -34,6 +34,7 @@
 
 <script>
 import Step from "@/components/journey/Step.vue";
+import { formatURL } from "@/lib/format";
 
 export default {
   components: {
@@ -110,10 +111,12 @@ facilidades no USP Multi`,
     values.slice(1).forEach((element) => {
       const name = element[0];
 
+      let newUrl = formatURL(element[6]);
+
       if (name == "CEPID") {
-        cepid.push({ nome: element[1], url: element[6] });
+        cepid.push({ nome: element[1], url: newUrl });
       } else if (name == "INCT") {
-        inct.push({ nome: element[1], url: element[6] });
+        inct.push({ nome: element[1], url: newUrl });
       }
     });
 

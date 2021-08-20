@@ -151,7 +151,7 @@ export default {
           items: Array.from(
             this.disciplines.reduce((acc, discipline) => {
               const offeringPeriod = discipline.offeringPeriod;
-              if (offeringPeriod && !acc.has(offeringPeriod))
+              if (offeringPeriod && !acc.has(offeringPeriod) && offeringPeriod!= "N/D")
                 acc.add(offeringPeriod);
               return acc;
             }, new Set())
@@ -250,7 +250,7 @@ export default {
           : undefined;
 
       this.filtered = this.disciplines.filter((discipline) =>
-        discipline.matchesFilter(context)
+        this.$disciplineMatchesFilter(discipline, context)
       );
     },
     async pipeline() {

@@ -34,6 +34,7 @@
 
 <script>
 import Step from "@/components/journey/Step.vue";
+import { formatURL } from "@/lib/format";
 
 export default {
   components: {
@@ -86,9 +87,11 @@ negócio`,
     const { values } = await resp.json();
 
     values.slice(1).forEach((element) => {
+      let newUrl = formatURL(element[3]);
+
       element[1] == "Outro"
-        ? incubadorasExternas.push({ nome: element[2], url: element[3] })
-        : incubadorasUsp.push({ nome: element[2], url: element[3] });
+        ? incubadorasExternas.push({ nome: element[2], url: newUrl })
+        : incubadorasUsp.push({ nome: element[2], url: newUrl });
     });
 
     this.incubadoras[

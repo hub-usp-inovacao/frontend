@@ -4,6 +4,7 @@ export default {
   env: {
     sheetsAPIKey: process.env.sheetsAPIKey,
     sheetID: process.env.sheetID,
+    BACKEND_URL: process.env.BACKEND_URL,
   },
   ssr: true,
   target: "server",
@@ -77,12 +78,16 @@ export default {
     { src: "~/plugins/cnae.js" },
     { src: "~/plugins/company.js" },
     { src: "~/plugins/fuzzySearch.js" },
+    { src: "~/plugins/indexer.js" },
+    { src: "~/plugins/remove_accent.js" },
     { src: "~/plugins/services/fetch_companies.js" },
     { src: "~/plugins/services/fetch_disciplines.js" },
     { src: "~/plugins/services/fetch_iniciatives.js" },
     { src: "~/plugins/services/fetch_patents.js" },
     { src: "~/plugins/services/fetch_pdis.js" },
     { src: "~/plugins/services/fetch_skills.js" },
+    { src: "~/plugins/matching/disciplines.js" },
+    { src: "~/plugins/matching/company.js" },
   ],
 
   serverMiddleware: [{ path: "/", handler: "~/api/index.js" }],
@@ -94,7 +99,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/axios"],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -115,6 +120,11 @@ export default {
           customProperties: true,
         },
       },
+    },
+  },
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BACKEND_URL,
     },
   },
   /*

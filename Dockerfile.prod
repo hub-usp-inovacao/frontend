@@ -2,8 +2,7 @@ FROM node:alpine3.10
 
 ENV PATH_TO_APP=/usr/src/app \
     PORT=3000 \
-    HOST=0.0.0.0 \
-    NODE_ENV=development
+    HOST=0.0.0.0
 
 WORKDIR ${PATH_TO_APP}
 
@@ -17,6 +16,8 @@ COPY . ./
 
 RUN yarn build
 
+ENV NODE_ENV=production
+
 EXPOSE ${PORT}
 
-CMD yarn dev
+CMD yarn start

@@ -248,11 +248,7 @@ export default {
     const route = this.$route;
 
     if (this.dataStatus == "ok" && this.companies.length == 0) {
-      this.fetchSpreadsheets({
-        sheetsAPIKey: process.env.sheetsAPIKey,
-        sheetID: process.env.sheetID,
-        cnae: this.$cnae,
-      });
+      this.fetchSpreadsheets({});
     }
 
     if (route.params.id) {
@@ -284,7 +280,7 @@ export default {
     },
     filterData(context) {
       this.filtered = this.companies.filter((company) =>
-        company.matchesFilter(context)
+        this.$companyMatchesFilter(company, context)
       );
     },
     async pipeline() {

@@ -4,7 +4,7 @@ services:
   solus:
     build:
       context: .
-      target: production
+      dockerfile: Dockerfile.prod
     env_file:
       - .env
     ports:

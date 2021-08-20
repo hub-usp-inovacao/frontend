@@ -49,6 +49,7 @@
 
 <script>
 import Step from "@/components/journey/Step.vue";
+import { formatURL } from "@/lib/format";
 
 export default {
   components: {
@@ -150,34 +151,36 @@ você busca em empreendedorismo e inovação:`,
     const { values } = await resp.json();
 
     values.slice(1).forEach((element) => {
+      let newUrl = formatURL(element[4]);
+
       if (element[0] == "Graduação") {
         switch (element[5]) {
           case "Quero aprender!":
-            gradAprender.push({ nome: element[1], url: element[4] });
+            gradAprender.push({ nome: element[1], url: newUrl });
             break;
           case "Tenho uma ideia, e agora?":
-            gradIdeia.push({ nome: element[1], url: element[4] });
+            gradIdeia.push({ nome: element[1], url: newUrl });
             break;
           case "Preciso testar minha ideia!":
-            gradTestar.push({ nome: element[1], url: element[4] });
+            gradTestar.push({ nome: element[1], url: newUrl });
             break;
           case "Tópicos avançados em Empreendedorismo":
-            gradTopicos.push({ nome: element[1], url: element[4] });
+            gradTopicos.push({ nome: element[1], url: newUrl });
             break;
         }
       } else if (element[0] == "Pós-graduação") {
         switch (element[5]) {
           case "Quero aprender!":
-            posAprender.push({ nome: element[1], url: element[4] });
+            posAprender.push({ nome: element[1], url: newUrl });
             break;
           case "Tenho uma ideia, e agora?":
-            posIdeia.push({ nome: element[1], url: element[4] });
+            posIdeia.push({ nome: element[1], url: newUrl });
             break;
           case "Preciso testar minha ideia!":
-            posTestar.push({ nome: element[1], url: element[4] });
+            posTestar.push({ nome: element[1], url: newUrl });
             break;
           case "Tópicos avançados em Empreendedorismo":
-            posTopicos.push({ nome: element[1], url: element[4] });
+            posTopicos.push({ nome: element[1], url: newUrl });
             break;
         }
       }
