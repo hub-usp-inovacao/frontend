@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <div v-if="!touched" @click="touched = true">
-      <p><span>{{ label }}:</span> {{ lastUpdatedMessage }}</p>
-    </div>
+  <LastUpdated :label="label" :last-updated="lastUpdated" >
     <v-textarea
-      v-else
       :value="value"
       @input="$emit('input', $event)"
       :clearable="clearable"
       rows="2"
       :label="label"
     />
-  </div>
+  </LastUpdated>
 </template>
 
 <script>
+import LastUpdated from "@/components/CompanyForms/inputs/LastUpdated.vue";
+
 export default {
+  components: {
+    LastUpdated,
+  },
   props: {
     clearable: {
       type: Boolean,
@@ -33,16 +34,6 @@ export default {
     lastUpdated: {
       type: String,
       required: true,
-    },
-  },
-
-  data: () => ({
-    touched: false,
-  }),
-
-  computed: {
-    lastUpdatedMessage() {
-      return `Última atualização em ${this.lastUpdated}`;
     },
   },
 }

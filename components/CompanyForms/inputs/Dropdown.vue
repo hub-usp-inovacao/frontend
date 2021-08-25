@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <div v-if="!touched" @click="touched = true">
-      <p><span>{{ label }}:</span> {{ lastUpdatedMessage }}</p>
-    </div>
+  <LastUpdated :label="label" :last-updated="lastUpdated">
     <v-select
-      v-else
       :items="options"
       :value="value"
       :label="label"
       @input="$emit('input', $event)"
       clearable
     />
-  </div>
+  </LastUpdated>
 </template>
 
 <script>
+import LastUpdated from "@/components/CompanyForms/inputs/LastUpdated.vue";
+
 export default {
+  components: {
+    LastUpdated,
+  },
   props: {
     options: {
       type: Array,
@@ -31,16 +32,6 @@ export default {
     lastUpdated: {
       type: String,
       required: true,
-    },
-  },
-
-  data: () => ({
-    touched: false,
-  }),
-
-  computed: {
-    lastUpdatedMessage() {
-      return `Última atualização em ${this.lastUpdated}`
     },
   },
 }
