@@ -33,7 +33,7 @@ export default {
     },
     lastUpdated: {
       type: String,
-      required: true,
+      default: undefined,
     },
   },
 }

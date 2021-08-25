@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-8 mt-2" v-if="!touched" @click="touched = true">
+    <div class="mb-8 mt-2" v-if="displayLastUpdated" @click="touched = true">
       <p><span>{{ label }}:</span> {{ lastUpdatedMessage }}</p>
     </div>
     <div v-else>
@@ -18,7 +18,7 @@ export default {
     },
     lastUpdated: {
       type: String,
-      required: true,
+      default: undefined,
     },
   },
 
@@ -27,6 +27,9 @@ export default {
   }),
 
   computed: {
+    displayLastUpdated() {
+      return this.lastUpdated !== undefined && !this.touched;
+    },
     lastUpdatedMessage() {
       return `Última atualização em ${this.lastUpdated}`
     },
