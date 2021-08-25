@@ -1,11 +1,17 @@
 <template>
-  <v-textarea
-    :value="value"
-    @input="$emit('input', $event)"
-    :clearable="clearable"
-    rows="2"
-    :label="label"
-  />
+  <div>
+    <div v-if="!touched" @click="touched = true">
+      <p><span>{{ label }}:</span> {{ lastUpdatedMessage }}</p>
+    </div>
+    <v-textarea
+      v-else
+      :value="value"
+      @input="$emit('input', $event)"
+      :clearable="clearable"
+      rows="2"
+      :label="label"
+    />
+  </div>
 </template>
 
 <script>
@@ -23,6 +29,20 @@ export default {
     label: {
       type: String,
       required: true,
+    },
+    lastUpdated: {
+      type: String,
+      required: true,
+    },
+  },
+
+  data: () => ({
+    touched: false,
+  }),
+
+  computed: {
+    lastUpdatedMessage() {
+      return `Última atualização em ${this.lastUpdated}`;
     },
   },
 }
