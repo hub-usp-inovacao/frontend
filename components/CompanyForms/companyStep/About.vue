@@ -1,19 +1,29 @@
 <template>
   <v-form>
+    <h2 class="text-h4">Comunicação</h2>
     <LongTextInput v-model="description" label="Breve Descrição" clearable />
-    <div>
-      <div v-for="i in counter" :key="i">
-        <ShortTextInput
-          v-model="technologies[i - 1]"
-          clearable
-          :label="displayLabel(i)"
-        />
-        <v-btn @click="removeTechnology(i)">Remover</v-btn>
-      </div>
-      <v-btn @click="newTechnology">Adicionar tecnologia</v-btn>
-    </div>
     <URLInput label="Site" v-model="site" />
     <ImageUploader label="Logo" @input="file = $event" />
+
+    <h2 class="text-h4 mt-8">Tecnologias</h2>
+    <div>
+      <v-row v-for="i in counter" :key="i" align="center">
+          <v-col cols="10">
+            <ShortTextInput
+              v-model="technologies[i - 1]"
+              clearable
+              :label="displayLabel(i)"
+            />
+          </v-col>
+          <v-col cols="2" align="center">
+            <v-btn @click="removeTechnology(i)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </v-col>
+        
+      </v-row>
+      <v-btn color="primary" @click="newTechnology" rounded>Adicionar tecnologia</v-btn>
+    </div>
   </v-form>
 </template>
 
