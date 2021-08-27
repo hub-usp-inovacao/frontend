@@ -23,7 +23,7 @@ export default {
       required: true,
     },
     value: {
-      required: true,
+      required: false,
     },
     label: {
       type: String,

@@ -25,7 +25,6 @@ export default {
     },
     value: {
       type: String,
-      required: true,
     },
     label: {
       type: String,
