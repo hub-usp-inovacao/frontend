@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-radio-group
-      v-if="switchLabel == undefined"
-      v-model="booleanRadio"
-      column
-    >
+    <v-radio-group v-if="valueFalse != undefined" v-model="booleanRadio" column>
       <v-radio
         :label="valueTrue"
         :color="color"
@@ -23,8 +19,9 @@
     <v-switch
       v-else
       :v-model="booleanSwitch"
-      :label="switchLabel"
+      :label="valueTrue"
       :color="color"
+      :value="value"
       input="$emit('input', $event)"
     >
     </v-switch>
@@ -39,20 +36,15 @@ export default {
     },
     valueTrue: {
       type: String,
+      required: true,
     },
     valueFalse: {
       type: String,
-    },
-    switchValue: {
-      type: String,
+      default: undefined,
     },
     color: {
       type: String,
       default: "blue",
-    },
-    switchLabel: {
-      type: String,
-      default: undefined,
     },
   },
 
