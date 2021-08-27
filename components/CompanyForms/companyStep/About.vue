@@ -1,6 +1,17 @@
 <template>
   <v-form>
-    <LongTextInput label="Breve Descrição" v-model="description" clearable />
+    <LongTextInput v-model="description" label="Breve Descrição" clearable />
+    <div>
+      <div v-for="i in counter" :key="i">
+        <ShortTextInput
+          v-model="technologies[i - 1]"
+          clearable
+          :label="displayLabel(i)"
+        />
+        <v-btn @click="removeTechnology(i)">Remover</v-btn>
+      </div>
+      <v-btn @click="newTechnology">Adicionar tecnologia</v-btn>
+    </div>
   </v-form>
 </template>
 
@@ -14,11 +25,33 @@ export default {
   components: {
     ShortTextInput,
     LongTextInput,
-    ImageUploader, 
+    ImageUploader,
     URLInput,
   },
   data: () => ({
-    description: '',
+    description: "",
+    technologies: [],
+    counter: 0,
   }),
+
+  methods: {
+    displayLabel(i) {
+      return `Tecnologia ${i}`;
+    },
+
+    newTechnology() {
+      this.counter++;
+      this.technologies.push("");
+    },
+
+    removeTechnology(i) {
+      const end = this.technologies.length;
+      const head = this.technologies.slice(0, i - 1);
+      const tail = this.technologies.slice(i, end);
+
+      this.technologies = head.concat(tail);
+      this.counter--;
+    },
+  },
 };
 </script>
