@@ -1,7 +1,22 @@
 <template>
   <div>
-    <input type="radio" :value="valueTrue" input="$emit('input', $event)" />
-    <input type="radio" :value="valueFalse" input="$emit('input', $event)" />
+    <input
+      id="true"
+      v-model="value"
+      type="radio"
+      :value="valueTrue"
+      input="$emit('input', $event)"
+    />
+    <label for="true">{{ valueTrue }}</label>
+    <br />
+    <input
+      id="false"
+      v-model="value"
+      type="radio"
+      :value="valueFalse"
+      input="$emit('input', $event)"
+    />
+    <label for="false">{{ valueFalse }}</label>
   </div>
 </template>
 
@@ -17,6 +32,10 @@ export default {
       required: true,
     },
   },
+
+  data: () => ({
+    value: null,
+  }),
 };
 </script>
 
