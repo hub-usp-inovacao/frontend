@@ -12,6 +12,8 @@
       </div>
       <v-btn @click="newTechnology">Adicionar tecnologia</v-btn>
     </div>
+    <URLInput label="Site" v-model="site" />
+    <ImageUploader label="Logo" @input="file = $event" />
   </v-form>
 </template>
 
@@ -20,6 +22,7 @@ import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue"
 import LongTextInput from "@/components/CompanyForms/inputs/LongTextInput.vue";
 import ImageUploader from "@/components/CompanyForms/inputs/ImageUploader.vue";
 import URLInput from "@/components/CompanyForms/inputs/URLInput.vue";
+
 
 export default {
   components: {
@@ -32,6 +35,8 @@ export default {
     description: "",
     technologies: [],
     counter: 0,
+    site: "",
+    file: undefined,
   }),
 
   methods: {
