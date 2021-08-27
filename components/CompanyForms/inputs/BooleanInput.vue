@@ -1,40 +1,64 @@
 <template>
   <div>
-    <input
-      id="true"
-      v-model="value"
-      type="radio"
-      :value="valueTrue"
+    <v-radio-group
+      v-if="switchLabel == undefined"
+      v-model="booleanRadio"
+      column
+    >
+      <v-radio
+        :label="valueTrue"
+        :color="color"
+        :value="value"
+        input="$emit('input', $event)"
+      >
+      </v-radio>
+      <v-radio
+        :label="valueFalse"
+        :color="color"
+        :value="value"
+        input="$emit('input', $event)"
+      >
+      </v-radio>
+    </v-radio-group>
+    <v-switch
+      v-else
+      :v-model="booleanSwitch"
+      :label="switchLabel"
+      :color="color"
       input="$emit('input', $event)"
-    />
-    <label for="true">{{ valueTrue }}</label>
-    <br />
-    <input
-      id="false"
-      v-model="value"
-      type="radio"
-      :value="valueFalse"
-      input="$emit('input', $event)"
-    />
-    <label for="false">{{ valueFalse }}</label>
+    >
+    </v-switch>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    value: {
+      type: String,
+    },
     valueTrue: {
       type: String,
-      required: true,
     },
     valueFalse: {
       type: String,
-      required: true,
+    },
+    switchValue: {
+      type: String,
+    },
+    color: {
+      type: String,
+      default: "blue",
+    },
+    switchLabel: {
+      type: String,
+      default: undefined,
     },
   },
 
   data: () => ({
-    value: null,
+    booleanRadio: null,
+    booleanSwitch: false,
   }),
 };
 </script>
