@@ -18,6 +18,7 @@
                 v-for="{ label } in buttons"
                 :key="label"
                 class="white px-6 py-6 ma-1 flex-grow-1 button text-capitalize"
+                :color="selected == label ? 'grey' : 'white'"
                 max-width="100%"
                 @click="select"
               >
@@ -78,6 +79,8 @@ anjos que possuem forte conexão com Venture Capital.`,
       { label: "Early Stage" },
       { label: "Venture Capital" },
     ],
+
+    selected: "",
 
     items: {
       EMBRAPII: [],
@@ -151,6 +154,7 @@ anjos que possuem forte conexão com Venture Capital.`,
   methods: {
     select({ target }) {
       let text = target.innerText;
+      this.selected = text;
       text = text.toUpperCase();
       this.selectedButtonSecondary = text;
     },
