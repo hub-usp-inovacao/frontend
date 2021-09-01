@@ -57,10 +57,9 @@ function addArea(base, row, $knowledgeAreas) {
   if (major == undefined || major == "") {
     major = $knowledgeAreas.find((c) => c.subareas.find((u) => u == minor))
       ?.name;
-    base.areaMajor = major;
-  } else {
-    base.areaMajor = columnValue(row, "Z");
   }
+
+  base.areaMajor = major;
 }
 
 function addKeywords(base, row) {
