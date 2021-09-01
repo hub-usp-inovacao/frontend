@@ -18,7 +18,7 @@
               <v-btn
                 v-for="{ label } in buttons"
                 :key="label"
-                class="white px-6 py-6 ma-1 flex-grow-1 button"
+                class="white px-6 py-6 ma-1 flex-grow-1 button text-capitalize"
                 max-width="100%"
                 @click="select"
               >
@@ -127,7 +127,8 @@ facilidades no USP Multi`,
 
   methods: {
     select({ target }) {
-      const text = target.innerText;
+      let text = target.innerText;
+      text = text.toUpperCase();
       this.selectedButtonSecondary = text;
     },
   },

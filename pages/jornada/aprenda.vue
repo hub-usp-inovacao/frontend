@@ -16,7 +16,7 @@
               <v-btn
                 v-for="{ label } in buttons.primary"
                 :key="label"
-                class="white px-6 py-8 ma-1 flex-grow-1 button"
+                class="white px-6 py-8 ma-1 text-10 flex-grow-1 button text-capitalize"
                 max-width="100%"
                 @click="select"
               >
@@ -33,7 +33,7 @@
               <v-btn
                 v-for="{ label } in buttons.secondary"
                 :key="label"
-                class="white px-6 py-6 ma-1 flex-grow-1 button"
+                class="white px-6 py-6 ma-1 flex-grow-1 button text-capitalize"
                 max-width="100%"
                 @click="select"
               >
@@ -199,7 +199,10 @@ você busca em empreendedorismo e inovação:`,
 
   methods: {
     select({ target }) {
-      const text = target.innerText;
+      let text = target.innerText;
+      text = text.toUpperCase();
+
+      console.log(text);
       if (text == "GRADUAÇÃO" || text == "PÓS-GRADUAÇÃO") {
         this.selectedButtonPrimary = text;
       } else {
