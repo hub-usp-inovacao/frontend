@@ -18,7 +18,8 @@
               <v-btn
                 v-for="{ label } in buttons"
                 :key="label"
-                class="white px-6 py-6 ma-1 flex-grow-1 button"
+                class="white px-6 py-6 ma-1 flex-grow-1 button text-capitalize"
+                :color="selected == label ? 'grey' : 'white'"
                 max-width="100%"
                 @click="select"
               >
@@ -63,6 +64,7 @@ export default {
       { label: "Entidade Estudantil" },
       { label: "Espaço/coworking" },
     ],
+    selected: "",
 
     items: {
       "EMPRESA JR.": [],
@@ -135,7 +137,9 @@ export default {
 
   methods: {
     select({ target }) {
-      const text = target.innerText;
+      let text = target.innerText;
+      this.selected = text;
+      text = text.toUpperCase();
       this.selectedButtonSecondary = text;
     },
   },

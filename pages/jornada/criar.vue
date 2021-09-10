@@ -18,7 +18,8 @@
               <v-btn
                 v-for="{ label } in buttons"
                 :key="label"
-                class="white px-6 py-6 ma-1 flex-grow-1 button"
+                class="white px-6 py-6 ma-1 flex-grow-1 button text-capitalize"
+                :color="selected == label ? 'grey' : 'white'"
                 max-width="100%"
                 @click="select"
               >
@@ -49,10 +50,10 @@ com aceleradoras, incubadoras e parques que também podem abrigar o seu
 negócio`,
     ],
     buttons: [
-      { label: "Incubadoras e Parques Técnologicos da USP" },
-      { label: "Incubadoras e Parques Técnologicos Externos" },
+      { label: "Incubadoras E Parques Técnologicos Da USP" },
+      { label: "Incubadoras E Parques Técnologicos Externos" },
     ],
-
+    selected: "",
     incubadoras: {
       "INCUBADORAS E PARQUES TÉCNOLOGICOS DA USP": [],
       "INCUBADORAS E PARQUES TÉCNOLOGICOS EXTERNOS": [],
@@ -66,7 +67,6 @@ negócio`,
       const secondaryButton = this.selectedButtonSecondary;
 
       if (secondaryButton != undefined) {
-        console.log(this.incubadoras[secondaryButton]);
         return this.incubadoras[secondaryButton];
       } else {
         return [];
@@ -105,7 +105,10 @@ negócio`,
 
   methods: {
     select({ target }) {
-      const text = target.innerText;
+      let text = target.innerText;
+      this.selected = text;
+      console.log(this.selected);
+      text = text.toUpperCase();
       this.selectedButtonSecondary = text;
     },
   },

@@ -5,7 +5,7 @@
         <v-col md="6" sm="12">
           <div
             :style="headerStyle"
-            class="py-4 text-center white--text font-weight-bold text-h4 rounded-lg"
+            class="py-4 text-center white--text font-weight-bold text-h5 rounded-lg"
           >
             {{ title }}
           </div>

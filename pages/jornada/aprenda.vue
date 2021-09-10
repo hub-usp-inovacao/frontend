@@ -16,7 +16,8 @@
               <v-btn
                 v-for="{ label } in buttons.primary"
                 :key="label"
-                class="white px-6 py-8 ma-1 flex-grow-1 button"
+                class="white px-6 py-8 ma-1 text-10 flex-grow-1 button text-capitalize"
+                :color="buttons.PrimarySelected == label ? 'grey' : 'white'"
                 max-width="100%"
                 @click="select"
               >
@@ -33,7 +34,8 @@
               <v-btn
                 v-for="{ label } in buttons.secondary"
                 :key="label"
-                class="white px-6 py-6 ma-1 flex-grow-1 button"
+                class="white px-6 py-6 ma-1 flex-grow-1 button text-capitalize"
+                :color="buttons.SecondarySelected == label ? 'grey' : 'white'"
                 max-width="100%"
                 @click="select"
               >
@@ -69,11 +71,13 @@ você busca em empreendedorismo e inovação:`,
     buttons: {
       primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],
       secondary: [
-        { label: "Quero aprender!" },
-        { label: "Tenho uma ideia, e agora?" },
-        { label: "Preciso testar minha ideia!" },
-        { label: "Tópicos avançados em empreendedorismo" },
+        { label: "Quero Aprender!" },
+        { label: "Tenho Uma Ideia, E Agora?" },
+        { label: "Preciso Testar Minha Ideia!" },
+        { label: "Tópicos Avançados Em Empreendedorismo" },
       ],
+      PrimarySelected: "",
+      SecondarySelected: "",
     },
     graduação: {
       "QUERO APRENDER!": [],
@@ -199,10 +203,14 @@ você busca em empreendedorismo e inovação:`,
 
   methods: {
     select({ target }) {
-      const text = target.innerText;
-      if (text == "GRADUAÇÃO" || text == "PÓS-GRADUAÇÃO") {
+      let text = target.innerText;
+
+      if (text == "Graduação" || text == "Pós-Graduação") {
+        this.buttons.PrimarySelected = text;
         this.selectedButtonPrimary = text;
       } else {
+        this.buttons.SecondarySelected = text;
+        text = text.toUpperCase();
         this.selectedButtonSecondary = text;
       }
     },
