@@ -131,7 +131,7 @@ export default {
 <style scoped>
 .description-lines {
   overflow: auto;
-  height: 400px;
+  height: 600px;
 }
 
 .bg-gray {
