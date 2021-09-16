@@ -40,7 +40,7 @@ const rawCampi = [
     ],
   },
   {
-    name: "Butantã / São Sebastião",
+    name: "São Sebastião (Butantã)",
     unities: ["Centro de Biologia Marinha - CEBIMar"],
   },
   {
@@ -110,7 +110,7 @@ const rawCampi = [
 ];
 
 const campi = rawCampi
-  .map((c) => ({name: c.name, unities: c.unities.sort()}))
+  .map((c) => ({ name: c.name, unities: c.unities.sort() }))
   .sort((a, b) => (a.name == b.name ? 0 : a.name < b.name ? -1 : 1));
 
 export default (_, inject) => {
