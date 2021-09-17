@@ -37,6 +37,10 @@ export default {
     value: {
       type: String,
     },
+    lastUpdated: {
+      type: String,
+      default: undefined,
+    },
   },
 
   computed: {
