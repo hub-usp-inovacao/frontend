@@ -1,14 +1,15 @@
 <template>
   <div>
-    <LastUpdated :label="label" :last-updated="lastUpdated" />
-    <v-text-field
-      v-mask="mask"
-      :label="label"
-      type="text"
-      :rules="rules.input"
-      :value="value"
-      @input="$emit('input', $event)"
-    />
+    <LastUpdated :label="label" :last-updated="lastUpdated">
+      <v-text-field
+        v-mask="mask"
+        :label="label"
+        type="text"
+        :rules="rules.input"
+        :value="value"
+        @input="$emit('input', $event)"
+      />
+    </LastUpdated>
   </div>
 </template>
 
