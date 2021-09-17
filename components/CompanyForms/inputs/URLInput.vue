@@ -2,7 +2,7 @@
   <LastUpdated :label="label" :last-updated="lastUpdated">
     <v-text-field
       :label="label"
-      :value="value"
+      :value="url"
       :rules="[rules.url]"
       clearable
       @input="handleInput"
@@ -15,16 +15,8 @@
 import LastUpdated from "@/components/CompanyForms/inputs/LastUpdated.vue";
 
 function validURL(str) {
-  const pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  );
-  return pattern.test(str);
+  const pattern = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+  return !str?.includes(" ") && pattern.test(str);
 }
 
 export default {
@@ -48,14 +40,22 @@ export default {
     },
   },
   data: () => ({
+    isValid: false,
+    url: undefined,
     rules: {
       url: (value) => validURL(value) || "URL inválida.",
     },
   }),
   methods: {
     handleInput(url) {
+      this.url = url;
+
       if (validURL(url)) {
+        this.isValid = true;
         this.$emit("input", url);
+      } else if (this.isValid) {
+        this.isValid = false;
+        this.$emit("input", undefined);
       }
     },
   },

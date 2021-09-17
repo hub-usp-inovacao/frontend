@@ -3,12 +3,13 @@
     <v-file-input
       chips
       :label="label"
+      :value="value"
       accept="image/*"
       @change="handleImage"
     ></v-file-input>
     <v-img
       v-if="showImage"
-      :src="imageSrc"
+      :src="imageUrl"
       max-width="250"
       max-height="250"
     ></v-img>
@@ -20,13 +21,17 @@ import LastUpdated from "@/components/CompanyForms/inputs/LastUpdated.vue";
 
 export default {
   components: { LastUpdated },
+  model: {
+    prop: "value",
+    event: "change",
+  },
   props: {
     label: {
       type: String,
       required: true,
     },
-    url: {
-      type: String,
+    // eslint-disable-next-line vue/require-prop-types
+    value: {
       required: false,
       default: undefined,
     },
@@ -41,23 +46,15 @@ export default {
     imageUrl: undefined,
   }),
   computed: {
-    imageSrc: {
-      get() {
-        return this.imageUrl !== undefined ? this.imageUrl : this.url;
-      },
-      set(newValue) {
-        this.imageUrl = newValue;
-      },
-    },
     showImage() {
-      return this.image || this.imageSrc;
+      return this.image;
     },
   },
   methods: {
     handleImage(newImage) {
       this.image = newImage;
-      this.imageSrc = newImage ? URL.createObjectURL(this.image) : "";
-      this.$emit("input", this.image);
+      this.imageUrl = newImage ? URL.createObjectURL(this.image) : undefined;
+      this.$emit("change", this.image);
     },
   },
 };
