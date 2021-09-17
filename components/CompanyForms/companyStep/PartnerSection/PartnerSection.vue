@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import PartnerList from "@/components/CompanyForms/companyStep/Partner/PartnerList.vue";
-import NewPartnerModal from "@/components/CompanyForms/companyStep/Partner/NewPartnerModal.vue";
+import PartnerList from "@/components/CompanyForms/companyStep/PartnerSection/PartnerList.vue";
+import NewPartnerModal from "@/components/CompanyForms/companyStep/PartnerSection/NewPartnerModal.vue";
 
 export default {
   components: { PartnerList, NewPartnerModal },
