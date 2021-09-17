@@ -88,6 +88,7 @@ export default {
     { src: "~/plugins/services/fetch_skills.js" },
     { src: "~/plugins/matching/disciplines.js" },
     { src: "~/plugins/matching/company.js" },
+    { src: "~/plugins/v-mask.js", mode: "client" },
   ],
 
   serverMiddleware: [{ path: "/", handler: "~/api/index.js" }],
