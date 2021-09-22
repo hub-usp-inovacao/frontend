@@ -23,8 +23,6 @@
     "node-sass": "^4.14.1",
     "nuxt": "^2.13.3",
     "vue-fuse": "^2.2.1",
-    "vue-typer": "^1.2.0",
-    "vuepress-theme-default-prefers-color-scheme": "^2.0.0",
     "vue-typer": "^1.2.0"
   },
   "devDependencies": {
@@ -37,7 +35,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^2.0.5",
-    "sass-loader": "^8.0.0",
-    "vuepress": "^1.8.2"
+    "sass-loader": "^8.0.0"
   }
 }
