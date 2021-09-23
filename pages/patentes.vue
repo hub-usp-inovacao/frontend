@@ -248,8 +248,9 @@ export default {
       );
 
       this.filtered = this.patents.filter((patent) =>
-        patent.matchesFilter({ ...context, primary: primaryCodes })
+        this.$patentMatchesFilter(patent, { ...context, primary: primaryCodes })
       );
+      console.log(this.filtered)
     },
     async pipeline() {
       if (this.filters) this.filterData(this.filters);
