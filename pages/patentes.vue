@@ -139,7 +139,7 @@ export default {
             acc.add(pat.classification.primary.subarea);
           }
 
-          if (pat.classification.secondary.cip.substr(0, 1) == tab.code) {
+          if (pat.classification.secondary?.cip.substr(0, 1) == tab.code) {
             acc.add(pat.classification.secondary.subarea);
           }
 
