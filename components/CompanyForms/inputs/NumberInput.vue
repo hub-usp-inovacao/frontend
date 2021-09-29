@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-text-field v-mask="mask" type="text" :rules="rules.input" @input="$emit('input',$event)" :value="value"/>
+    <v-text-field
+      v-mask="mask"
+      :label="label"
+      type="text"
+      :rules="rules.input"
+      :value="value"
+      @input="$emit('input', $event)"
+    />
   </div>
 </template>
 
@@ -14,23 +21,23 @@ export default {
     rule: {
       type: RegExp,
       required: false,
-      default: () => /./
+      default: () => /./,
     },
     mask: {
       type: String,
-      default: ""
+      default: "",
     },
     value: {
-      type: String
-    }
+      type: String,
+    },
   },
 
   computed: {
     rules() {
       return {
         input: [(f) => this.rule.test(f) || "Formato inválido"],
-      }
-    }
+      };
+    },
   },
 };
 </script>
