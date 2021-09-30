@@ -30,7 +30,7 @@ export default {
   computed: {
     rules() {
       return {
-        input: [(f) => this.rule.test(f) || "Formato inválido"],
+        input: [(f) => this.rule.test(f) || "Campo não pode ser vazio"],
       };
     },
   },
