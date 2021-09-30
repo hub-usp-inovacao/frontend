@@ -3,8 +3,8 @@
     <v-form>
       <ShortTextInput v-model="name" label="Nome" />
       <ShortTextInput v-model="corporateName" label="Razão social" />
-      <NumberInput v-model="year" mask="####" label="Ano" />
-      <NumberInput v-model="cnpj" mask="##.###.###/####-##" label="CNPJ" />
+      <MaskInput v-model="year" mask="####" label="Ano" />
+      <MaskInput v-model="cnpj" mask="##.###.###/####-##" label="CNPJ" />
       <h2>CNAE</h2>
       <v-row>
         <v-col cols="6">
@@ -22,13 +22,13 @@
           />
         </v-col>
       </v-row>
-      <NumberInput v-model="phone" mask="(##) #########" label="Telefone" />
+      <MaskInput v-model="phone" mask="(##) #########" label="Telefone" />
       <ShortTextInput v-model="email" label="Email" />
       <ShortTextInput v-model="address" label="Endereço" />
       <ShortTextInput v-model="neighborhood" label="Bairro" />
       <ShortTextInput v-model="city" label="Cidade" />
       <Dropdown v-model="state" label="Estado" :options="allStates" />
-      <NumberInput v-model="cep" mask="#####-###" label="CEP" />
+      <MaskInput v-model="cep" mask="#####-###" label="CEP" />
     </v-form>
   </v-container>
 </template>
@@ -36,13 +36,13 @@
 <script>
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
-import NumberInput from "@/components/CompanyForms/inputs/NumberInput.vue";
+import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
 
 export default {
   components: {
     ShortTextInput,
     Dropdown,
-    NumberInput,
+    MaskInput,
   },
   data: () => ({
     name: "",
