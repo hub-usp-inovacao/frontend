@@ -17,21 +17,8 @@ export default {
       type: String,
       required: true,
     },
-    rule: {
-      type: Number,
-      required: false,
-      default: () => /./,
-    },
     value: {
       type: String,
-    },
-  },
-
-  computed: {
-    rules() {
-      return {
-        input: [(f) => this.rule.test(f) || "Campo não pode ser vazio"],
-      };
     },
   },
 };
