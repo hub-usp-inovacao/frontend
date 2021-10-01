@@ -3,7 +3,6 @@
     <v-text-field
       type="number"
       :label="label"
-      :rules="rules.input"
       :value="value"
       @input="$emit('input', $event)"
     />
