@@ -4,6 +4,7 @@
       :label="label"
       :value="url"
       :rules="[rules.url]"
+      :hint="hint"
       clearable
       @input="handleInput"
     >
@@ -32,6 +33,11 @@ export default {
       type: String,
       required: false,
       default: undefined,
+    },
+    hint: {
+      type: String,
+      required: false,
+      default: () => "",
     },
     lastUpdated: {
       type: String,

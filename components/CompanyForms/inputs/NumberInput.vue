@@ -4,6 +4,7 @@
       type="number"
       :label="label"
       :value="value"
+      :hint="hint"
       @input="$emit('input', $event)"
     />
   </div>
@@ -18,6 +19,11 @@ export default {
     },
     value: {
       type: String,
+    },
+    hint: {
+      type: String,
+      required: false,
+      default: () => "",
     },
   },
 };

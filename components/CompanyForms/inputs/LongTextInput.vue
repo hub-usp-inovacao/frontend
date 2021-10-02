@@ -1,11 +1,12 @@
 <template>
-  <LastUpdated :label="label" :last-updated="lastUpdated" >
+  <LastUpdated :label="label" :last-updated="lastUpdated">
     <v-textarea
       :value="value"
-      @input="$emit('input', $event)"
       :clearable="clearable"
       rows="2"
       :label="label"
+      :hint="hint"
+      @input="$emit('input', $event)"
     />
   </LastUpdated>
 </template>
@@ -30,10 +31,15 @@ export default {
       type: String,
       required: true,
     },
+    hint: {
+      type: String,
+      required: false,
+      default: () => "",
+    },
     lastUpdated: {
       type: String,
       default: undefined,
     },
   },
-}
+};
 </script>
