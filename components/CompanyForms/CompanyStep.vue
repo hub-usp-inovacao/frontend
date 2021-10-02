@@ -27,8 +27,8 @@ export default {
   data: () => ({
     tab: null,
     items: [
-      { tab: "Base", content: Base },
-      { tab: "Sobre", content: About },
+      { tab: "Dados da empresa", content: Base },
+      { tab: "Sobre a empresa", content: About },
       { tab: "Staff", content: Staff },
     ],
   }),
@@ -37,7 +37,7 @@ export default {
 
 <style>
 .tab-container {
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
 }
 </style>
