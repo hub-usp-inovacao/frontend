@@ -1,22 +1,64 @@
 <template>
-  <v-form>
-    <h2 class="text-h4">Comunicação</h2>
-    <LongTextInput v-model="description" label="Breve Descrição" clearable />
-    <URLInput v-model="site" label="Site" />
-    <ImageUploader label="Logo" @input="file = $event" />
+  <v-container>
+    <v-form>
+      <div class="mt-5 text-h6 font-weight-regular">
+        Comunicação
+        <v-divider />
+        <v-container>
+          <LongTextInput
+            v-model="description"
+            label="Insira uma breve descrição da empresa"
+            clearable
+            hint="Descreva seu negócio, levando em consideração qual tipo de solução a mesma traz para o mercado. Busque deixar claro o posicionamento da mesma no mercado. Essa informação será divulgada."
+          />
+          <URLInput
+            v-model="site"
+            label="Site"
+            hint="Se não possuir, responda N/D."
+          />
+          <ImageUploader
+            v-model="file"
+            label="Logo"
+            hint="O arquivo deve possuir: boa resolução, 180 pixels (3,81 cm) x 180 pixels (3,81 cm) e estar no formato JPG ou PNG. A logomarca será exposta em um fundo branco, dessa forma, optar por uma peça que se adeque a esta configuração."
+          />
 
-    <MultipleInputs
-      title="Tecnologias"
-      input-label="Tecnologia"
-      @items="technologies = $event"
-    />
+          <div class="mt-5 text-h6 font-weight-regular">
+            Tecnologias
+            <v-divider />
+            <v-container>
+              <MultipleInputs
+                input-label="Tecnologia"
+                @items="technologies = $event"
+              />
+            </v-container>
+          </div>
 
-    <MultipleInputs
-      title="Produtos/Serviços"
-      input-label="Produto/Serviço"
-      @items="productsAndServices = $event"
-    />
-  </v-form>
+          <div class="mt-5 text-h6 font-weight-regular">
+            Produtos/serviços
+            <v-divider />
+            <v-container>
+              <MultipleInputs
+                input-label="Produto/Serviço"
+                @items="productsAndServices = $event"
+              />
+            </v-container>
+          </div>
+
+          <div class="mt-5 text-h6 font-weight-regular">
+            Redes sociais
+            <v-divider />
+            <v-container>
+              <MultipleInputs
+                input-label="Rede social"
+                component="URLInput"
+                @items="socialMedias = $event"
+              />
+            </v-container>
+          </div>
+        </v-container>
+      </div>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
@@ -36,6 +78,7 @@ export default {
     description: "",
     technologies: [],
     productsAndServices: [],
+    socialMedias: [],
     site: "",
     file: undefined,
   }),
