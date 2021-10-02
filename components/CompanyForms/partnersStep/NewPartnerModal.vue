@@ -23,24 +23,7 @@
               label="Email"
               hint="Este dado não será publicado."
             />
-            <v-row>
-              <v-col cols="3">
-                <Dropdown
-                  v-model="selectedPhoneType"
-                  label="Tipo de telefone"
-                  :options="phoneTypes"
-                />
-              </v-col>
-              <v-col>
-                <MaskInput
-                  v-model="formData.phone"
-                  label="Telefone"
-                  :mask="phoneMask"
-                  :rule="phoneRegex"
-                  :disabled="isPhoneTypeEmpty"
-                />
-              </v-col>
-            </v-row>
+            <PhoneInput v-model="formData.phone" />
             <NumberInput
               v-model="formData.nusp"
               label="Qual o número USP?"
@@ -74,12 +57,12 @@
 
 <script>
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
-import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
 import NumberInput from "@/components/CompanyForms/inputs/NumberInput.vue";
+import PhoneInput from "@/components/CompanyForms/inputs/PhoneInput.vue";
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
 
 export default {
-  components: { ShortTextInput, MaskInput, NumberInput, Dropdown },
+  components: { ShortTextInput, PhoneInput, NumberInput, Dropdown },
   props: {
     value: {
       type: Boolean,
@@ -96,8 +79,6 @@ export default {
       bond: "",
       unity: "",
     },
-    phoneTypes: ["Fixo", "Celular"],
-    selectedPhoneType: undefined,
     bonds: [
       "Aluno ou ex-aluno (graduação)",
       "Aluno ou ex-aluno (pós-graduação)",
@@ -115,19 +96,6 @@ export default {
       return this.$campi
         .reduce((acc, { unities }) => acc.concat(unities), [])
         .sort();
-    },
-    phoneMask() {
-      return this.selectedPhoneType === "Celular"
-        ? "(##) #####-####"
-        : "(##) ####-####";
-    },
-    phoneRegex() {
-      return this.selectedPhoneType === "Celular"
-        ? /\(\d{2}\) \d{5}-\d{4}/
-        : /\(\d{2}\) \d{4}-\d{4}/;
-    },
-    isPhoneTypeEmpty() {
-      return this.selectedPhoneType === undefined;
     },
   },
   methods: {
