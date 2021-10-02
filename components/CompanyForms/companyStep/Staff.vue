@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import NumberInput from "../inputs/NumberInput.vue";
+import NumberInput from "@/components/CompanyForms/inputs/NumberInput.vue";
 
 export default {
   components: {
