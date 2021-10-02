@@ -4,6 +4,8 @@
       chips
       :label="label"
       :value="value"
+      :hint="hint"
+      persistent-hint
       accept="image/*"
       @change="handleImage"
     ></v-file-input>
@@ -34,6 +36,11 @@ export default {
     value: {
       required: false,
       default: undefined,
+    },
+    hint: {
+      type: String,
+      required: false,
+      default: () => "",
     },
     lastUpdated: {
       type: String,

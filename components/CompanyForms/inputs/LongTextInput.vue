@@ -6,6 +6,7 @@
       rows="2"
       :label="label"
       :hint="hint"
+      persistent-hint
       @input="$emit('input', $event)"
     />
   </LastUpdated>

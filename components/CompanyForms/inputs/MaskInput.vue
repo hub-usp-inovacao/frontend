@@ -9,6 +9,7 @@
         :value="value"
         :disabled="disabled"
         :hint="hint"
+        persistent-hint
         @input="$emit('input', $event)"
       />
     </LastUpdated>

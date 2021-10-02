@@ -5,6 +5,7 @@
       :value="url"
       :rules="[rules.url]"
       :hint="hint"
+      persistent-hint
       clearable
       @input="handleInput"
     >
@@ -16,7 +17,7 @@
 import LastUpdated from "@/components/CompanyForms/inputs/LastUpdated.vue";
 
 function validURL(str) {
-  const pattern = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+  const pattern = /((http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)|N\/D)/g;
   return !str?.includes(" ") && pattern.test(str);
 }
 
