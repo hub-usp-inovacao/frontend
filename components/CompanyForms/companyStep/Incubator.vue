@@ -8,15 +8,19 @@
       Se sim, em qual incubadora ou Parque Tecnológico?
     </h2>
     <Dropdown :options="incubadoras" multiple-option="true" />
+    <MultipleInputs title="Outros:" inputLabel="Incubadora/Parque Tecnológico" @items="outros = $event" />
+
   </div>
 </template>
 
 <script>
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
+import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue"
 
 export default {
   components: {
     Dropdown,
+    MultipleInputs
   },
 
   data: () => ({
@@ -31,8 +35,8 @@ export default {
       "HABITs - Habitat de Inovação Tecnológica e Social/Incubadora-Escola",
       "Supera - Incubadora de Empresas de Base Tecnológica de Ribeirão Preto",
       "Supera Parque de Inovação e Tecnologia",
-      "Outro",
     ],
+    outros: []
   }),
 };
 </script>
