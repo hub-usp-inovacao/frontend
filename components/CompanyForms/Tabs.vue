@@ -16,17 +16,20 @@
 <script>
 import Base from "@/components/CompanyForms/companyStep/Base.vue";
 import About from "@/components/CompanyForms/companyStep/About.vue";
+import Staff from "@/components/CompanyForms/companyStep/Staff.vue";
 
 export default {
   components: {
     Base,
     About,
+    Staff,
   },
   data: () => ({
     tab: null,
     items: [
       { tab: "Base", content: Base },
       { tab: "Sobre", content: About },
+      { tab: "Staff", content: Staff },
     ],
   }),
 };
