@@ -59,14 +59,8 @@ export default {
   },
   data: () => ({
     description: [
-      `Para aprender um pouco mais sobre inovação e empreendedorismo, curse as
-disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia
-relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP
-tem em sua grade cerca de 100 disciplinas de graduação e quase 40 disciplinas
-de pós-graduação voltadas para os temas de inovação e empreendedorismo, que
-podem ser encontradas em: https://hubusp.inovacao.usp.br/educacao`,
-      `Você pode navegar pelas disciplinas de acordo com o nível de maturidade que
-você busca em empreendedorismo e inovação:`,
+      `Para aprender um pouco mais sobre inovação e empreendedorismo, curse as disciplinas com potencial de geração de ideias, projetos, produtos e tecnologia relacionadas a novos negócios, oferecidas por diferentes institutos. Hoje a USP tem em sua grade cerca de 110 disciplinas de graduação e 90 disciplinas de pós-graduação voltadas para os temas de inovação e empreendedorismo.`,
+      `Utilize os filtros acima para navegar pelas disciplinas de acordo com o nível que você está buscando.`,
     ],
     buttons: {
       primary: [{ label: "Graduação" }, { label: "Pós-Graduação" }],

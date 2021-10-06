@@ -49,7 +49,7 @@ export default {
   data: () => ({
     headers: [
       `Na jornada do empreendedorismo há diversos desafios. Se você está no início dela, é importante começar com o aprendizado sobre inovação e empreendedorismo, acessando o tópico “Processo de aprendizagem”. Porém, se você se sente pronto para exercitar o empreendedorismo, pode acessar o tópico “Engajamento e começando a exercitar o empreendedorismo”.`,
-      `Se você já está empreendendo e precisa de uma rede de apoio, consulte o tópico “Processo de Incubação, criando minha própria empresa”, onde você poderá se conectar com outras startups, além de encontrar um local para instalar sua equipe. Para quem já está estabelecido, é interessante acessar o tópico “Aprimorando tecnologias, fortalecendo a empresa”, onde você poderá fortalecer sua empresa e melhorar seu produto. Por fim, para aqueles que buscam maneiras de captação de recursos, o tópico ideal é o “Busca de financiamento”.`,
+      `Se você já está empreendendo e precisa de uma rede de apoio, consulte o tópico “Processo de Incubação, criando minha própria empresa”, onde você poderá se conectar com outras startups, além de encontrar um local para instalar sua equipe. Para quem já está estabelecido, é interessante acessar o tópico “Aprimorando tecnologias, fortalecendo a empresa”, onde você poderá fortalecer sua empresa e melhorar seu produto. Por fim, para aqueles que buscam formas de captar recursos, o tópico ideal é o “Buscando financiamento”.`,
     ],
     rows: [
       {

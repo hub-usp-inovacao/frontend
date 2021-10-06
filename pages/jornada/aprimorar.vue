@@ -43,17 +43,9 @@ export default {
   },
   data: () => ({
     description: [
-      `Se você está em processo de concepção e desenvolvimento da sua tecnologia,
-pode desenvolver parceiras com os inúmeros INCT e CEPID , onde será possível
-aprimorar a sua ideia em conjunto com pesquisadores da USP, desenvolver uma
-tecnologia que se seja protegida por uma patente ou registro de software`,
-      `É possível contar com a ajuda de especialistas e suas competências no momento
-de desenvolver o seu produto ou serviço.`,
-      `Você pode consultar quais as competências da(o)s pesquisadora(e)s da USP e os serviços e equipamentos
-disponíveis em seus laboratórios.`,
-      `Se você precisa finalizar o desenvolvimento do seu produto, ou testar, serviços
-especializados ou equipamentos de alta complexidade, verifique essas e outras
-facilidades no USP Multi`,
+      `Se você está em processo de concepção e desenvolvimento da sua tecnologia, pode desenvolver parcerias com os inúmeros INCT e CEPID , a partir das quais será possível aprimorar a sua ideia em conjunto com pesquisadores da USP e desenvolver uma tecnologia que seja protegida por uma patente ou registro de software.`,
+      `É possível contar com a ajuda de especialistas e suas competências no momento de desenvolver o seu produto ou serviço. Você pode consultar quais as competências da(o)s pesquisadora(e)s da USP, os serviços e equipamentos disponíveis em seus laboratórios.`,
+      `Se você precisa finalizar o desenvolvimento do seu produto ou testá-lo, ou então está em busca por serviços especializados e equipamentos de alta complexidade, verifique as Centrais Multiusuário disponíveis na USP. `,
     ],
     buttons: [
       { label: "CEPID" },
