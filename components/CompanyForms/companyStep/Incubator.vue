@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <h2 class="text-h6 mt-6">
+  <v-container>
+    <h2 class="text-h6 mt-6 font-weight-regular">
       A empresa está ou esteve em alguma incubadora ou Parque tecnológico?
     </h2>
     <Dropdown v-model="value" :options="options" label="" />
-    <h2 class="text-h6 mt-6">
+    <h2 class="text-h6 mt-6 font-weight-regular">
       Se sim, em qual incubadora ou Parque Tecnológico?
     </h2>
     <Dropdown
@@ -13,12 +13,17 @@
       :disabled="value === 'Não'"
       label=""
     />
-    <MultipleInputs
-      title="Outros:"
-      input-label="Incubadora/Parque Tecnológico"
-      @items="outros = $event"
-    />
-  </div>
+    <div class="mt-5 text-h6 font-weight-regular">
+      Outros
+      <v-divider />
+      <v-container>
+        <MultipleInputs
+          input-label="Incubadora/Parque Tecnológico"
+          @items="outros = $event"
+        />
+      </v-container>
+    </div>
+  </v-container>
 </template>
 
 <script>
