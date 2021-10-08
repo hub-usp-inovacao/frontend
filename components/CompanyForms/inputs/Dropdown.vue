@@ -4,8 +4,10 @@
       :items="options"
       :value="value"
       :label="label"
-      @input="$emit('input', $event)"
       clearable
+      :disabled="disabled"
+      :multiple="multipleOption"
+      @input="$emit('input', $event)"
     />
   </LastUpdated>
 </template>
@@ -18,6 +20,14 @@ export default {
     LastUpdated,
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    multipleOption: {
+      type: Boolean,
+      default: false,
+    },
     options: {
       type: Array,
       required: true,
@@ -27,12 +37,12 @@ export default {
     },
     label: {
       type: String,
-      required: true,
+      default: "",
     },
     lastUpdated: {
       type: String,
       default: undefined,
     },
   },
-}
+};
 </script>
