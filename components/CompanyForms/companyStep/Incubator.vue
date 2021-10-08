@@ -3,27 +3,36 @@
     <h2 class="text-h6 mt-6">
       A empresa está ou esteve em alguma incubadora ou Parque tecnológico?
     </h2>
-    <Dropdown :options="options" />
+    <Dropdown v-model="value" :options="options" label="" />
     <h2 class="text-h6 mt-6">
       Se sim, em qual incubadora ou Parque Tecnológico?
     </h2>
-    <Dropdown :options="incubadoras" multiple-option="true" />
-    <MultipleInputs title="Outros:" inputLabel="Incubadora/Parque Tecnológico" @items="outros = $event" />
-
+    <Dropdown
+      :options="incubadoras"
+      multiple-option
+      :disabled="value === 'Não'"
+      label=""
+    />
+    <MultipleInputs
+      title="Outros:"
+      input-label="Incubadora/Parque Tecnológico"
+      @items="outros = $event"
+    />
   </div>
 </template>
 
 <script>
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
-import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue"
+import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue";
 
 export default {
   components: {
     Dropdown,
-    MultipleInputs
+    MultipleInputs,
   },
 
   data: () => ({
+    value: "",
     options: [
       "Não",
       "Sim. A empresa está incubada",
@@ -36,7 +45,7 @@ export default {
       "Supera - Incubadora de Empresas de Base Tecnológica de Ribeirão Preto",
       "Supera Parque de Inovação e Tecnologia",
     ],
-    outros: []
+    outros: [],
   }),
 };
 </script>

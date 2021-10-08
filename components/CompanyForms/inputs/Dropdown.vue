@@ -5,6 +5,7 @@
       :value="value"
       :label="label"
       clearable
+      :disabled="disabled"
       :multiple="multipleOption"
       @input="$emit('input', $event)"
     />
@@ -19,6 +20,10 @@ export default {
     LastUpdated,
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     multipleOption: {
       type: Boolean,
       default: false,
@@ -32,7 +37,7 @@ export default {
     },
     label: {
       type: String,
-      required: true,
+      default: "",
     },
     lastUpdated: {
       type: String,
