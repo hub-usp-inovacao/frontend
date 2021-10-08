@@ -43,18 +43,10 @@ export default {
   },
   data: () => ({
     description: [
-      `Quer encontrar uma galera que esteja a fim de apoiar e trabalhar nas mesmas
-  causas que você? Busque a entidade estudantil com a qual você mais se
-  identifica e junte-se a essa turma:`,
-      `Quer trabalhar com projetos ligados a inovação e empreendedorismo e ao mesmo
-  tempo dar início à sua carreira? As Empresas Júnior são associações de alunos
-  que prestam diferentes tipos de serviços, participe.`,
-      `Na hora de colocar a sua ideia em prática, você pode participar de programas que
-  inspiram e promovem o desenvolvimento de iniciativas inovadoras e
-  empreendedoras disponíveis para a Comunidade USP:`,
-      `Precisando de um lugar para colocar a sua ideia em prática? Procure os espaços
-  da Universidade onde você poderá interagir com projetos e organizações ligadas
-  à inovação e ao empreendedorismo`,
+      `Quer encontrar uma galera que esteja a fim de apoiar e trabalhar nas mesmas causas que você? Busque a entidade estudantil com a qual você mais se identifica e junte-se a essa turma!`,
+      `Quer trabalhar com projetos ligados à inovação e empreendedorismo e ao mesmo tempo iniciar a sua carreira? As Empresas Júnior são associações de alunos que prestam diferentes tipos de serviços, permitindo o desenvolvimento de competências e contato com o mundo dos negócios durante a graduação.`,
+      `Na hora de colocar a sua ideia em prática, você pode participar de programas que inspiram e promovem o desenvolvimento de iniciativas inovadoras e empreendedoras disponíveis para a Comunidade USP.`,
+      `Precisando de um lugar para colocar a sua ideia em prática? Procure os espaços de convivência e coworking, onde você poderá interagir com projetos e organizações ligadas à inovação e ao empreendedorismo`,
     ],
     route: "pratica",
     buttons: [

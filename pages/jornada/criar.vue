@@ -43,11 +43,8 @@ export default {
   },
   data: () => ({
     description: [
-      `Encontre uma rede de apoio para se conectar com outras startups e um local para
-instalar sua equipe em uma das 4 Incubadoras e do Parque Tecnológico da USP.`,
-      `Há no estado de São Paulo uma diversificada rede de ambientes de inovação
-com aceleradoras, incubadoras e parques que também podem abrigar o seu
-negócio`,
+      `Encontre uma rede de apoio para se conectar com outras startups e um local para instalar sua equipe em uma das 4 Incubadoras e do Parque Tecnológico da USP.`,
+      `Há no estado de São Paulo uma diversificada rede de ambientes de inovação com aceleradoras, incubadoras e parques que também podem abrigar o seu negócio.`,
     ],
     buttons: [
       { label: "Incubadoras E Parques Técnologicos Da USP" },
