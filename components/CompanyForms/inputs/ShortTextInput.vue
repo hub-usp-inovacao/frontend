@@ -1,11 +1,13 @@
 <template>
-  <LastUpdated :label="label" :last-updated="lastUpdated" >
+  <LastUpdated :label="label" :last-updated="lastUpdated">
     <v-text-field
       :value="value"
-      @input="$emit('input', $event)"
       :clearable="clearable"
       :counter="counter"
       :label="label"
+      :hint="hint"
+      persistent-hint
+      @input="$emit('input', $event)"
     />
   </LastUpdated>
 </template>
@@ -26,7 +28,7 @@ export default {
     maxLength: {
       type: Number,
       required: false,
-      default: -1
+      default: -1,
     },
     value: {
       type: String,
@@ -34,6 +36,11 @@ export default {
     label: {
       type: String,
       required: true,
+    },
+    hint: {
+      type: String,
+      required: false,
+      default: () => "",
     },
     lastUpdated: {
       type: String,
@@ -46,5 +53,5 @@ export default {
       return this.maxLength <= 0 ? false : this.maxLength;
     },
   },
-}
+};
 </script>

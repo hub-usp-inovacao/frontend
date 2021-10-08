@@ -17,19 +17,24 @@
 import Base from "@/components/CompanyForms/companyStep/Base.vue";
 import About from "@/components/CompanyForms/companyStep/About.vue";
 import Staff from "@/components/CompanyForms/companyStep/Staff.vue";
+import Incubator from "@/components/CompanyForms/companyStep/Incubator.vue";
+import Finance from "@/components/CompanyForms/companyStep/Finance.vue";
 
 export default {
   components: {
     Base,
     About,
     Staff,
+    Finance,
   },
   data: () => ({
     tab: null,
     items: [
-      { tab: "Base", content: Base },
-      { tab: "Sobre", content: About },
-      { tab: "Staff", content: Staff },
+      { tab: "Dados da empresa", content: Base },
+      { tab: "Sobre a empresa", content: About },
+      { tab: "Colaboradores", content: Staff },
+      { tab: "Incubação", content: Incubator },
+      { tab: "Investimentos", content: Finance },
     ],
   }),
 };
@@ -37,7 +42,6 @@ export default {
 
 <style>
 .tab-container {
-  border: 1px solid rgba(0, 0, 0, 0.4);
   padding: 0;
 }
 </style>

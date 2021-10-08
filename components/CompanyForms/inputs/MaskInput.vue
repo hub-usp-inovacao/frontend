@@ -7,6 +7,9 @@
         type="text"
         :rules="rules.input"
         :value="value"
+        :disabled="disabled"
+        :hint="hint"
+        persistent-hint
         @input="$emit('input', $event)"
       />
     </LastUpdated>
@@ -29,7 +32,7 @@ export default {
     rule: {
       type: RegExp,
       required: false,
-      default: () => /./,
+      default: () => /.*/,
     },
     mask: {
       type: String,
@@ -37,6 +40,16 @@ export default {
     },
     value: {
       type: String,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: () => false,
+    },
+    hint: {
+      type: String,
+      required: false,
+      default: () => "",
     },
     lastUpdated: {
       type: String,

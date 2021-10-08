@@ -1,43 +1,60 @@
 <template>
   <div>
-    <h2 class="text-h4 mt-8 mb-8">{{ title }}</h2>
-    <div>
-      <v-row v-for="i in counter" :key="i" align="center">
-        <v-col cols="10">
-          <ShortTextInput
-            v-model="items[i - 1]"
-            clearable
-            :label="displayLabel(i)"
-          />
-        </v-col>
-        <v-col cols="2" align="center">
-          <v-btn @click="removeItem(i)">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-      <v-btn color="primary" rounded @click="newItem"
-        >Adicionar {{ inputLabel }}</v-btn
-      >
-    </div>
+    <v-row v-for="i in counter" :key="i" align="center">
+      <v-col cols="10">
+        <component
+          :is="component"
+          v-model="items[i - 1]"
+          clearable
+          :label="displayLabel(i)"
+          :mask="mask"
+          :rule="rule"
+        ></component>
+      </v-col>
+      <v-col cols="2" align="center">
+        <v-btn @click="removeItem(i)">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-btn color="primary" rounded @click="newItem"
+      >Adicionar {{ inputLabel }}</v-btn
+    >
   </div>
 </template>
 
 <script>
+import { Component } from "vue";
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
+import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
+import PhoneInput from "@/components/CompanyForms/inputs/PhoneInput.vue";
+import URLInput from "@/components/CompanyForms/inputs/URLInput.vue";
 
 export default {
   components: {
     ShortTextInput,
+    PhoneInput,
+    MaskInput,
+    URLInput,
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
     inputLabel: {
       type: String,
       required: true,
+    },
+    component: {
+      type: Component,
+      required: false,
+      default: () => ShortTextInput,
+    },
+    rule: {
+      type: RegExp,
+      required: false,
+      default: () => /.*/,
+    },
+    mask: {
+      type: String,
+      default: "",
     },
   },
 

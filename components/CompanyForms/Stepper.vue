@@ -1,18 +1,20 @@
 <template>
   <v-container>
-    <v-stepper v-model="e1" alt-labels>
+    <v-stepper v-model="e1" alt-labels non-linear>
       <v-stepper-header>
-        <template v-for="number in numberOfSteps">
+        <template v-for="{ id, title } in steps">
           <v-stepper-step
-            :key="`header_${number}`"
-            :complete="isStepCompleted(number)"
-            :step="number"
+            :key="`header_${id}`"
+            editable
+            :step="id"
             color="success"
-          ></v-stepper-step>
+          >
+            {{ title }}
+          </v-stepper-step>
 
           <v-divider
-            v-if="number < numberOfSteps"
-            :key="`divider_${number}`"
+            v-if="id < numberOfSteps"
+            :key="`divider_${id}`"
           ></v-divider>
         </template>
       </v-stepper-header>
@@ -44,19 +46,22 @@
 </template>
 
 <script>
-import PartnerSection from "@/components/CompanyForms/companyStep/PartnerSection/PartnerSection.vue";
+import Vue from "vue";
+import CompanyStep from "@/components/CompanyForms/CompanyStep.vue";
+import PartnersStep from "@/components/CompanyForms/PartnersStep.vue";
 
 export default {
   components: {
-    PartnerSection,
+    PartnersStep,
+    CompanyStep,
   },
   data: () => ({
     e1: 1,
     steps: [
-      { id: 1, component: PartnerSection },
-      { id: 2, component: PartnerSection },
-      { id: 3, component: PartnerSection },
-      { id: 4, component: PartnerSection },
+      { id: 1, title: "Introdução", component: Vue.component() },
+      { id: 2, title: "Sócios", component: PartnersStep },
+      { id: 3, title: "Empresa", component: CompanyStep },
+      { id: 4, title: "Encerramento", component: Vue.component() },
     ],
   }),
   computed: {
