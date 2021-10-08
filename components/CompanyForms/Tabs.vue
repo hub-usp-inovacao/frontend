@@ -16,20 +16,17 @@
 <script>
 import Base from "@/components/CompanyForms/companyStep/Base.vue";
 import About from "@/components/CompanyForms/companyStep/About.vue";
-import Incubator from "@/components/CompanyForms/companyStep/Incubator.vue";
 
 export default {
   components: {
     Base,
     About,
-    Incubator,
   },
   data: () => ({
     tab: null,
     items: [
       { tab: "Base", content: Base },
       { tab: "Sobre", content: About },
-      { tab: "Incubadora", content: Incubator },
     ],
   }),
 };
