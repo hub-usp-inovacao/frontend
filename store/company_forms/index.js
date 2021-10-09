@@ -15,6 +15,7 @@ export const state = () => ({
   description: "",
   technologies: [],
   productsAndServices: [],
+  ods: [],
   socialMedias: [],
   site: "",
   logo: undefined,
@@ -52,6 +53,7 @@ export const getters = {
   description: (s) => s.description,
   technologies: (s) => s.technologies,
   productsAndServices: (s) => s.productsAndServices,
+  ods: (s) => s.ods,
   socialMedias: (s) => s.socialMedias,
   site: (s) => s.site,
   logo: (s) => s.logo,
@@ -101,6 +103,7 @@ export const actions = {
     commit("setFormField", { key: "technologies", value }),
   setProductsAndServices: ({ commit }, value) =>
     commit("setFormField", { key: "productsAndServices", value }),
+  setOds: ({ commit }, value) => commit("setFormField", { key: "ods", value }),
   setSocialMedias: ({ commit }, value) =>
     commit("setFormField", { key: "socialMedias", value }),
   setSite: ({ commit }, value) =>

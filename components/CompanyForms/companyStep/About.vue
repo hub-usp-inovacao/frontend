@@ -6,20 +6,23 @@
         <v-divider />
         <v-container>
           <LongTextInput
-            v-model="description"
+            :value="description"
             label="Insira uma breve descrição da empresa"
             clearable
             hint="Descreva seu negócio, levando em consideração qual tipo de solução a mesma traz para o mercado. Busque deixar claro o posicionamento da mesma no mercado. Essa informação será divulgada."
+            @input="setDescription"
           />
           <URLInput
-            v-model="site"
+            :value="site"
             label="Site"
             hint="Se não possuir, responda N/D."
+            @input="setSite"
           />
           <ImageUploader
-            v-model="file"
+            :value="logo"
             label="Logo"
             hint="O arquivo deve possuir: boa resolução, 180 pixels (3,81 cm) x 180 pixels (3,81 cm) e estar no formato JPG ou PNG. A logomarca será exposta em um fundo branco, dessa forma, optar por uma peça que se adeque a esta configuração."
+            @input="setLogo"
           />
 
           <div class="mt-5 text-h6 font-weight-regular">
@@ -27,8 +30,9 @@
             <v-divider />
             <v-container>
               <MultipleInputs
+                :value="technologies"
                 input-label="Tecnologia"
-                @items="technologies = $event"
+                @input="setTechnologies"
               />
             </v-container>
           </div>
@@ -38,8 +42,9 @@
             <v-divider />
             <v-container>
               <MultipleInputs
+                :value="productsAndServices"
                 input-label="Produto/Serviço"
-                @items="productsAndServices = $event"
+                @input="setProductsAndServices"
               />
             </v-container>
           </div>
@@ -49,10 +54,11 @@
             <v-divider />
             <v-container>
               <Dropdown
-                v-model="ods"
+                :value="ods"
                 :options="odsList"
                 multiple-option
                 label=""
+                @input="setOds"
               />
             </v-container>
           </div>
@@ -62,9 +68,10 @@
             <v-divider />
             <v-container>
               <MultipleInputs
+                :value="socialMedias"
                 input-label="Rede social"
                 component="URLInput"
-                @items="socialMedias = $event"
+                @input="setSocialMedias"
               />
             </v-container>
           </div>
@@ -75,6 +82,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue";
 import LongTextInput from "@/components/CompanyForms/inputs/LongTextInput.vue";
 import ImageUploader from "@/components/CompanyForms/inputs/ImageUploader.vue";
@@ -90,13 +98,6 @@ export default {
     Dropdown,
   },
   data: () => ({
-    description: "",
-    technologies: [],
-    productsAndServices: [],
-    ods: [],
-    socialMedias: [],
-    site: "",
-    file: undefined,
     odsList: [
       "1 - Erradicação da Pobreza",
       "2 - Fome Zero",
@@ -117,5 +118,27 @@ export default {
       "17 - Parcerias e Meios de Implementação",
     ],
   }),
+  computed: {
+    ...mapGetters({
+      description: "company_forms/description",
+      technologies: "company_forms/technologies",
+      productsAndServices: "company_forms/productsAndServices",
+      ods: "company_forms/ods",
+      socialMedias: "company_forms/socialMedias",
+      site: "company_forms/site",
+      logo: "company_forms/logo",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setDescription: "company_forms/setDescription",
+      setTechnologies: "company_forms/setTechnologies",
+      setProductsAndServices: "company_forms/setProductsAndServices",
+      setOds: "company_forms/setOds",
+      setSocialMedias: "company_forms/setSocialMedias",
+      setSite: "company_forms/setSite",
+      setLogo: "company_forms/setLogo",
+    }),
+  },
 };
 </script>
