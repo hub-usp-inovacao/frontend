@@ -6,20 +6,28 @@
         <v-divider />
         <v-container>
           <ShortTextInput
-            v-model="name"
+            :value="name"
             label="Nome fantasia da empresa"
             hint="A empresa será listada no Hub USPInovação a partir do nome fantasia da mesma."
+            @input="setName"
           />
           <ShortTextInput
-            v-model="corporateName"
+            :value="corporateName"
             label="Razão social da empresa"
+            @input="setCorporateName"
           />
-          <Mask v-model="year" mask="####" label="Ano de fundação" />
           <MaskInput
-            v-model="cnpj"
+            :value="year"
+            mask="####"
+            label="Ano de fundação"
+            @input="setYear"
+          />
+          <MaskInput
+            :value="cnpj"
             label="CNPJ"
             mask="##.###.###/####-##"
             hint="SOMENTE empresas formalmente constituídas podem preencher este formulário. Caso a empresa não possua CNPJ ainda, aguarde até a constituição da mesma para realizar o cadastro. Em caso de empresas estabelecidas no exterior, favor entrar em contato pelo e-mail hubusp.inovacao@usp.br"
+            @input="setCnpj"
           />
         </v-container>
       </div>
@@ -34,24 +42,18 @@
               href="http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp?cnpj"
               target="_blank"
               >site da receita</a
-            >.
+            >. Depois copie o CÓDIGO DA ATIVIDADE ECONÔMICA PRINCIPAL e cole
+            como resposta desta pergunta. Insira apenas o código no formato
+            00.00-0-00. Essa informação é essencial para a categorização da
+            empresa.
           </legend>
-          <v-row>
-            <v-col cols="6">
-              <Dropdown
-                v-model="cnae.major"
-                label="Área principal"
-                :options="cnaeMajors"
-              />
-            </v-col>
-            <v-col cols="6">
-              <Dropdown
-                v-model="cnae.minor"
-                label="Área secundária"
-                :options="cnaeMinors(cnae.major)"
-              />
-            </v-col>
-          </v-row>
+          <MaskInput
+            :value="cnae"
+            label="CNAE"
+            mask="##.##-#-##"
+            :rule="/^\d{2}\.\d{2}-\d(-\d{2})?$/"
+            @input="setCnae"
+          />
         </v-container>
       </div>
 
@@ -61,21 +63,35 @@
         <v-container>
           <p class="body-2">Telefones comerciais</p>
           <MultipleInputs
+            :value="phones"
             input-label="Telefone comercial"
             component="PhoneInput"
-            mask="(##) ####-####"
-            @items="phones = $event"
+            @input="setPhones"
           />
-          <ShortTextInput v-model="email" label="Email" />
-          <ShortTextInput v-model="address" label="Endereço" />
-          <ShortTextInput v-model="neighborhood" label="Bairro" />
-          <ShortTextInput v-model="city" label="Cidade sede" />
-          <Dropdown v-model="state" label="Estado" :options="allStates" />
+          <ShortTextInput :value="email" label="Email" @input="setEmail" />
+          <ShortTextInput
+            :value="address"
+            label="Endereço"
+            @input="setAddress"
+          />
+          <ShortTextInput
+            :value="neighborhood"
+            label="Bairro"
+            @input="setNeighborhood"
+          />
+          <ShortTextInput :value="city" label="Cidade sede" @input="setCity" />
+          <Dropdown
+            :value="state"
+            label="Estado"
+            :options="allStates"
+            @input="setState"
+          />
           <MaskInput
-            v-model="cep"
+            :value="cep"
             label="CEP"
             mask="#####-###"
             :rule="/\d{5}-\d{3}/"
+            @input="setCep"
           />
         </v-container>
       </div>
@@ -84,6 +100,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue";
 import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
@@ -97,33 +114,42 @@ export default {
     Dropdown,
   },
   data: () => ({
-    name: "",
-    corporateName: "",
-    year: "",
-    cnpj: "",
-    cnae: {
-      major: "",
-      minor: "",
-    },
-    phones: [],
-    email: "",
-    address: "",
-    neighborhood: "",
-    city: "",
-    state: "",
-    cep: "",
-
     allStates: [],
   }),
   computed: {
-    cnaeMajors() {
-      return Object.keys(this.$reverseCNAE).sort();
-    },
+    ...mapGetters({
+      name: "company_forms/name",
+      corporateName: "company_forms/corporateName",
+      year: "company_forms/year",
+      cnpj: "company_forms/cnpj",
+      cnae: "company_forms/cnae",
+      phones: "company_forms/phones",
+      email: "company_forms/email",
+      address: "company_forms/address",
+      neighborhood: "company_forms/neighborhood",
+      city: "company_forms/city",
+      state: "company_forms/state",
+      cep: "company_forms/cep",
+    }),
   },
-  beforeMount() {
+  created() {
     this.getStates();
   },
   methods: {
+    ...mapActions({
+      setName: "company_forms/setName",
+      setCorporateName: "company_forms/setCorporateName",
+      setYear: "company_forms/setYear",
+      setCnpj: "company_forms/setCnpj",
+      setCnae: "company_forms/setCnae",
+      setPhones: "company_forms/setPhones",
+      setEmail: "company_forms/setEmail",
+      setAddress: "company_forms/setAddress",
+      setNeighborhood: "company_forms/setNeighborhood",
+      setCity: "company_forms/setCity",
+      setState: "company_forms/setState",
+      setCep: "company_forms/setCep",
+    }),
     async getStates() {
       const response = await fetch(
         "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
@@ -132,9 +158,6 @@ export default {
       this.allStates = ufs
         .map(({ nome, sigla }) => `${nome} (${sigla})`)
         .sort();
-    },
-    cnaeMinors(major) {
-      return major ? this.$reverseCNAE[major].map(({ minor }) => minor) : [];
     },
   },
 };
