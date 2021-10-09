@@ -3,23 +3,31 @@
     <h2 class="text-h6 mt-6 font-weight-regular">
       A empresa está ou esteve em alguma incubadora ou Parque tecnológico?
     </h2>
-    <Dropdown v-model="value" :options="options" label="" />
+    <Dropdown
+      :value="incubated"
+      :options="options"
+      label=""
+      @input="setIncubated"
+    />
     <h2 class="text-h6 mt-6 font-weight-regular">
       Se sim, em qual incubadora ou Parque Tecnológico?
     </h2>
     <Dropdown
+      :value="defaultIncubators"
       :options="incubadoras"
       multiple-option
-      :disabled="value === 'Não'"
+      :disabled="disabledIncubatorsSelect"
       label=""
+      @input="setDefaultIncubators"
     />
     <div class="mt-5 text-h6 font-weight-regular">
       Outros
       <v-divider />
       <v-container>
         <MultipleInputs
+          :value="otherIncubators"
           input-label="Incubadora/Parque Tecnológico"
-          @items="outros = $event"
+          @input="setOtherIncubators"
         />
       </v-container>
     </div>
@@ -27,6 +35,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
 import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue";
 
@@ -35,9 +44,7 @@ export default {
     Dropdown,
     MultipleInputs,
   },
-
   data: () => ({
-    value: "",
     options: [
       "Não",
       "Sim. A empresa está incubada",
@@ -50,9 +57,37 @@ export default {
       "Supera - Incubadora de Empresas de Base Tecnológica de Ribeirão Preto",
       "Supera Parque de Inovação e Tecnologia",
     ],
-    outros: [],
   }),
+  computed: {
+    ...mapGetters({
+      incubated: "company_forms/incubated",
+      incubators: "company_forms/incubators",
+    }),
+    disabledIncubatorsSelect() {
+      return this.incubated === "Não";
+    },
+    defaultIncubators() {
+      return this.incubators.filter((inc) =>
+        this.incubadoras.find((i) => i == inc)
+      );
+    },
+    otherIncubators() {
+      return this.incubators.filter(
+        (inc) => !this.incubadoras.find((i) => i == inc)
+      );
+    },
+  },
+  methods: {
+    ...mapActions({
+      setIncubated: "company_forms/setIncubated",
+      setIncubators: "company_forms/setIncubators",
+    }),
+    setDefaultIncubators(incubators) {
+      this.setIncubators(incubators.concat(this.otherIncubators));
+    },
+    setOtherIncubators(other) {
+      this.setIncubators(this.defaultIncubators.concat(other));
+    },
+  },
 };
 </script>
-
-<style></style>
