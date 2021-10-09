@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import PartnerList from "@/components/CompanyForms/partnersStep/PartnerList.vue";
 import NewPartnerModal from "@/components/CompanyForms/partnersStep/NewPartnerModal.vue";
 
@@ -19,17 +20,24 @@ export default {
   components: { PartnerList, NewPartnerModal },
   data: () => ({
     dialog: false,
-    partners: [],
   }),
+  computed: {
+    ...mapGetters({
+      partners: "company_forms/partners",
+    }),
+  },
   methods: {
+    ...mapActions({
+      setPartners: "company_forms/setPartners",
+    }),
     includePartner(partner) {
-      this.partners.push(partner);
+      this.setPartners([...this.partners, partner]);
     },
     removePartner(index) {
       const end = this.partners.length;
       const head = this.partners.slice(0, index);
       const tail = this.partners.slice(index + 1, end);
-      this.partners = head.concat(tail);
+      this.setPartners(head.concat(tail));
     },
   },
 };
