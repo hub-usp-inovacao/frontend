@@ -4,7 +4,7 @@
     :label="label"
     :color="color"
     :value="value"
-    input="$emit('input', $event)"
+    @change="$emit('input', $event)"
   >
   </v-switch>
 </template>
