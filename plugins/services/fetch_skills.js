@@ -3,14 +3,10 @@ import { findErrors } from "@/lib/errors/competencias";
 import { columnValue } from "@/lib/sheets";
 import { capitalizeName } from "@/lib/format";
 
-async function fetchData(sheetsAPIKey) {
-  const sheetID = "1KCEtrqBQ5qs51_EpBOtX-QYYDIxmesr_GZYIXf7AWmE";
-  const sheetName = "COMPETENCIAS";
-
+async function fetchData() {
+  const url = process.env.SKILLS_DATA_SOURCE_URL;
   try {
-    const resp = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-    );
+    const resp = await fetch(url);
 
     const { values } = await resp.json();
     return values;
@@ -133,10 +129,8 @@ function skillGenerator(row, $campi, $knowledgeAreas) {
 }
 
 export default ({ $campi, $knowledgeAreas }, inject) => {
-  inject("fetchSkills", async (payload) => {
-    const { sheetsAPIKey, areas } = payload;
-
-    const values = await fetchData(sheetsAPIKey);
+  inject("fetchSkills", async ({ areas }) => {
+    const values = await fetchData();
     if (values == undefined) return { skills: [], errors: [] };
 
     const skills = values

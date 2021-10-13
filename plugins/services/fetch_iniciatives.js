@@ -2,14 +2,10 @@ import Iniciative from "@/lib/classes/iniciative";
 import { findErrors } from "@/lib/errors/iniciativas";
 import { columnValue } from "@/lib/sheets";
 
-async function fetchData(sheetsAPIKey) {
-  const sheetID = "1MGRBDs-Bb2PGdyUkTN92dM5kqQuw5dtOpFHwAV1FQpA";
-  const sheetName = "INICIATIVAS";
-
+async function fetchData() {
+  const url = process.env.INICIATIVES_DATA_SOURCE_URL;
   try {
-    const resp = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-    );
+    const resp = await fetch(url);
 
     const { values } = await resp.json();
     return values;
@@ -80,10 +76,8 @@ function iniciatveGenerator(row) {
 }
 
 export default (_, inject) => {
-  inject("fetchIniciatives", async (payload) => {
-    const { sheetsAPIKey } = payload;
-
-    const values = await fetchData(sheetsAPIKey);
+  inject("fetchIniciatives", async () => {
+    const values = await fetchData();
     if (values == undefined) return { iniciatives: [], errors: [] };
 
     const iniciatives = values

@@ -3,14 +3,10 @@ import { findErrors } from "@/lib/errors/pdi";
 import { columnValue } from "@/lib/sheets";
 import { fetchCentrals } from "./fetch_centrais";
 
-async function fetchData(sheetsAPIKey) {
-  const sheetID = "1TZWMGvvn6TUmwo8DdWvtkLcbDVqVuif9HKMRPVcb2eo";
-  const sheetName = "PDI";
-
+async function fetchData() {
   try {
-    const resp = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/'${sheetName}'?key=${sheetsAPIKey}`
-    );
+    const url = process.env.PDI_DATA_SOURCE_URL;
+    const resp = await fetch(url);
 
     const { values } = await resp.json();
     return values;
@@ -36,9 +32,9 @@ function beginNewPDI(row, $campi) {
     long: columnValue(row, "L"),
   };
   const coordinator = columnValue(row, "F");
-  
+
   if (campus == undefined || campus == "") {
-    campus = $campi.find( (c) => c.unities.find((u) => u == unity))?.name;
+    campus = $campi.find((c) => c.unities.find((u) => u == unity))?.name;
   }
 
   return new PDI(name, category, campus, unity, description, coordinator);
@@ -71,11 +67,9 @@ function pdiGenerator(row, $campi) {
   return base;
 }
 
-export default ({isDev, $campi}, inject) => {
-  inject("fetchPDIs", async (payload) => {
-    const { sheetsAPIKey } = payload;
-
-    const values = await fetchData(sheetsAPIKey);
+export default ({ isDev, $campi }, inject) => {
+  inject("fetchPDIs", async () => {
+    const values = await fetchData();
     if (values == undefined) return { pdis: [], errors: [] };
 
     const pdis = values
