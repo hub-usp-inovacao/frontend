@@ -42,10 +42,16 @@
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
+    <div v-if="errors.length > 0">
+      <v-alert v-for="error in errors" :key="error" type="error">{{
+        error
+      }}</v-alert>
+    </div>
   </v-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import CompanyStep from "@/components/CompanyForms/CompanyStep.vue";
 import PartnersStep from "@/components/CompanyForms/PartnersStep.vue";
 import IntroStep from "@/components/CompanyForms/IntroStep.vue";
@@ -68,11 +74,17 @@ export default {
     ],
   }),
   computed: {
+    ...mapGetters({
+      errors: "company_forms/errors",
+    }),
     numberOfSteps() {
       return this.steps.length;
     },
   },
   methods: {
+    ...mapActions({
+      updateCompanyForm: "company_forms/updateCompanyForm",
+    }),
     nextStepBtnText(id) {
       const length = this.numberOfSteps;
       const lastId = this.steps[length - 1].id;
@@ -94,7 +106,12 @@ export default {
 
       if (id < lastId) {
         this.e1 = id + 1;
+      } else {
+        this.sendData();
       }
+    },
+    sendData() {
+      this.updateCompanyForm();
     },
   },
 };

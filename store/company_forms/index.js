@@ -34,6 +34,7 @@ export const state = () => ({
     pipeFapesp: "",
     other: "",
   },
+  errors: [],
 });
 
 export const getters = {
@@ -65,10 +66,12 @@ export const getters = {
   receivedInvestments: (s) => s.receivedInvestments,
   investments: (s) => s.investments,
   investmentValues: (s) => s.investmentValues,
+  errors: (s) => s.errors,
 };
 
 export const mutations = {
   setFormField: (s, { key, value }) => (s[key] = value),
+  setErrors: (s, errors) => (s.errors = errors),
 };
 
 export const actions = {
@@ -126,4 +129,136 @@ export const actions = {
     commit("setFormField", { key: "investments", value }),
   setInvestmentValues: ({ commit }, value) =>
     commit("setFormField", { key: "investmentValues", value }),
+
+  updateCompanyForm: async function ({ commit, getters }) {
+    if (!getters.cnpj || !getters.name) {
+      commit("setErrors", [
+        "É necessário informar o nome e o CNPJ da empresa para atualizar os dados",
+      ]);
+      return;
+    }
+
+    const company = prepareCompanyObject(getters);
+    const { status, message } = await this.$updateCompanyData(company);
+
+    if (status !== "ok") {
+      commit("setErrors", [message]);
+    } else {
+      commit("setErrors", []);
+    }
+  },
+};
+
+const prepareCompanyObject = (obj) => {
+  const company = {
+    cnpj: obj.cnpj,
+    name: obj.name,
+    partners_values: obj.partners,
+    new_values: [],
+  };
+
+  if (obj.corporateName)
+    company.new_values.push({
+      "Razão social da empresa": obj.corporateName,
+    });
+
+  if (obj.year) company.new_values.push({ "Ano de fundação": obj.year });
+
+  if (obj.cnae) company.new_values.push({ CNAE: obj.cnae });
+
+  if (obj.email) company.new_values.push({ Email: obj.email });
+
+  if (obj.address) company.new_values.push({ Endereço: obj.address });
+
+  if (obj.neighborhood) company.new_values.push({ Bairro: obj.neighborhood });
+
+  if (obj.city) company.new_values.push({ "Cidade sede": obj.city });
+
+  if (obj.state) company.new_values.push({ Estado: obj.state });
+
+  if (obj.cep) company.new_values.push({ CEP: obj.cep });
+
+  if (obj.description)
+    company.new_values.push({ "Breve descrição": obj.description });
+
+  if (obj.site) company.new_values.push({ Site: obj.site });
+
+  if (obj.logo) company.new_values.push({ "Logo da empresa": obj.logo });
+
+  if (obj.technologies.length > 0)
+    company.new_values.push({ Tecnologias: obj.technologies.join("; ") });
+
+  if (obj.productsAndServices.length > 0)
+    company.new_values.push({
+      "Produtos e serviços": obj.productsAndServices.join("; "),
+    });
+
+  if (obj.socialMedias.length > 0)
+    company.new_values.push({
+      "Redes sociais": obj.socialMedias.join("; "),
+    });
+
+  if (obj.numberOfCTLEmployees)
+    company.new_values.push({
+      "Número de funcionários contratados como CLT": obj.numberOfCTLEmployees,
+    });
+
+  if (obj.numberOfPJColaborators)
+    company.new_values.push({
+      "Número de colaboradores contratados como Pessoa Jurídica (PJ)":
+        obj.numberOfPJColaborators,
+    });
+
+  if (obj.numberOfInterns)
+    company.new_values.push({
+      "Número de estagiários/bolsistas contratados": obj.numberOfInterns,
+    });
+
+  if (obj.incubated)
+    company.new_values.push({
+      "A empresa está ou esteve em alguma incubadora ou Parque tecnológico":
+        obj.incubated,
+    });
+
+  if (obj.receivedInvestments)
+    company.new_values.push({
+      "A empresa recebeu investimento?": "Sim",
+    });
+
+  if (obj.investments.length > 0)
+    company.new_values.push({
+      Investimentos: obj.investments.join("; "),
+    });
+
+  if (obj.investmentValues.own)
+    company.new_values.push({
+      "Valor do investimento próprio (R$)": obj.investmentValues.own,
+    });
+
+  if (obj.investmentValues.angel)
+    company.new_values.push({
+      "Valor do investimento-anjo (R$)": obj.investmentValues.angel,
+    });
+
+  if (obj.investmentValues.ventureCapital)
+    company.new_values.push({
+      "Valor do Venture Capital (R$)": obj.investmentValues.ventureCapital,
+    });
+
+  if (obj.investmentValues.privateEquity)
+    company.new_values.push({
+      "Valor do Private Equity (R$)": obj.investmentValues.privateEquity,
+    });
+
+  if (obj.investmentValues.pipeFapesp)
+    company.new_values.push({
+      "Valor do PIPE-FAPESP (R$)": obj.investmentValues.pipeFapesp,
+    });
+
+  if (obj.investmentValues.other)
+    company.new_values.push({
+      "Valor de outros investimentos (R$)": obj.investmentValues.other,
+    });
+
+  return company;
 };
