@@ -1,13 +1,13 @@
 <template>
-  <About />
+  <Stepper />
 </template>
 
 <script>
-import About from "@/components/CompanyForms/companyStep/About.vue";
+import Stepper from "@/components/CompanyForms/Stepper.vue";
 
 export default {
   components: {
-    About,
+    Stepper,
   },
 };
 </script>
