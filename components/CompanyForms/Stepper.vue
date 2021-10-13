@@ -46,16 +46,17 @@
 </template>
 
 <script>
-import Vue from "vue";
 import CompanyStep from "@/components/CompanyForms/CompanyStep.vue";
 import PartnersStep from "@/components/CompanyForms/PartnersStep.vue";
 import IntroStep from "@/components/CompanyForms/IntroStep.vue";
+import DNAUSPStep from "@/components/CompanyForms/DNAUSPStep.vue";
 
 export default {
   components: {
     PartnersStep,
     CompanyStep,
     IntroStep,
+    DNAUSPStep,
   },
   data: () => ({
     e1: 1,
@@ -63,7 +64,7 @@ export default {
       { id: 1, title: "Introdução", component: IntroStep },
       { id: 2, title: "Sócios", component: PartnersStep },
       { id: 3, title: "Empresa", component: CompanyStep },
-      { id: 4, title: "Encerramento", component: Vue.component() },
+      { id: 4, title: "Encerramento", component: DNAUSPStep },
     ],
   }),
   computed: {
@@ -101,6 +102,6 @@ export default {
 
 <style scoped>
 .component-border {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 0px solid rgba(0, 0, 0, 0.4);
 }
 </style>
