@@ -86,6 +86,7 @@ export default {
     { src: "~/plugins/services/fetch_patents.js" },
     { src: "~/plugins/services/fetch_pdis.js" },
     { src: "~/plugins/services/fetch_skills.js" },
+    { src: "~/plugins/services/update_company.js" },
     { src: "~/plugins/matching/disciplines.js" },
     { src: "~/plugins/matching/company.js" },
     { src: "~/plugins/v-mask.js", mode: "client" },

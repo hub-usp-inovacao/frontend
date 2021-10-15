@@ -4,15 +4,16 @@
       <v-col cols="10">
         <component
           :is="component"
-          v-model="items[i - 1]"
+          :value="value[i - 1]"
           clearable
           :label="displayLabel(i)"
           :mask="mask"
           :rule="rule"
+          @input="changeItem($event, i - 1)"
         ></component>
       </v-col>
       <v-col cols="2" align="center">
-        <v-btn @click="removeItem(i)">
+        <v-btn icon @click="removeItem(i)">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </v-col>
@@ -24,7 +25,6 @@
 </template>
 
 <script>
-import { Component } from "vue";
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
 import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
 import PhoneInput from "@/components/CompanyForms/inputs/PhoneInput.vue";
@@ -43,9 +43,13 @@ export default {
       required: true,
     },
     component: {
-      type: Component,
+      type: String,
       required: false,
-      default: () => ShortTextInput,
+      default: () => "ShortTextInput",
+    },
+    value: {
+      type: Array,
+      default: () => [],
     },
     rule: {
       type: RegExp,
@@ -57,38 +61,34 @@ export default {
       default: "",
     },
   },
-
-  data: () => ({
-    items: [],
-    counter: 0,
-  }),
-
-  watch: {
-    items() {
-      this.$emit("items", this.items);
+  computed: {
+    counter() {
+      return this.value.length;
     },
   },
-
   methods: {
     displayLabel(i) {
       return `${this.inputLabel} ${i}`;
     },
-
     newItem() {
-      this.counter++;
-      this.items.push("");
+      const items = [];
+      Object.assign(items, this.value);
+      items.push("");
+      this.$emit("input", items);
     },
-
+    changeItem(val, pos) {
+      const items = [];
+      Object.assign(items, this.value);
+      items[pos] = val;
+      this.$emit("input", items);
+    },
     removeItem(i) {
-      const end = this.items.length;
-      const head = this.items.slice(0, i - 1);
-      const tail = this.items.slice(i, end);
-
-      this.items = head.concat(tail);
-      this.counter--;
+      const end = this.value.length;
+      const head = this.value.slice(0, i - 1);
+      const tail = this.value.slice(i, end);
+      const items = head.concat(tail);
+      this.$emit("input", items);
     },
   },
 };
 </script>
-
-<style></style>
