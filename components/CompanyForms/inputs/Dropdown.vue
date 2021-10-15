@@ -7,7 +7,7 @@
       clearable
       :disabled="disabled"
       :multiple="multipleOption"
-      @input="$emit('input', $event)"
+      @change="$emit('input', $event)"
     />
   </LastUpdated>
 </template>
