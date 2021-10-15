@@ -154,6 +154,58 @@ export const actions = {
   setInvestmentsValues: ({ commit }, value) =>
     commit("setFormField", { key: "investmentsValues", value }),
 
+  getCompanyData: async function ({ commit }, cnpj) {
+    const { status, message } = await this.$getCompanyData(cnpj);
+
+    if (status !== "ok") {
+      commit("setErrors", [message]);
+    } else {
+      commit("setErrors", []);
+      commit("setFormField", { key: "name", value: message.name });
+      commit("setFormField", {
+        key: "corporateName",
+        value: message.corporateName,
+      });
+      commit("setFormField", { key: "year", value: message.year });
+      commit("setFormField", { key: "cnpj", value: message.cnpj });
+      commit("setFormField", { key: "cnae", value: message.cnae });
+      commit("setFormField", { key: "phones", value: message.phones });
+      commit("setFormField", { key: "email", value: message.email });
+      commit("setFormField", { key: "address", value: message.address });
+      commit("setFormField", {
+        key: "neighborhood",
+        value: message.neighborhood,
+      });
+      commit("setFormField", { key: "city", value: message.city });
+      commit("setFormField", { key: "state", value: message.state });
+      commit("setFormField", { key: "cep", value: message.cep });
+      commit("setFormField", {
+        key: "description",
+        value: message.description,
+      });
+      commit("setFormField", {
+        key: "technologies",
+        value: message.technologies,
+      });
+      commit("setFormField", {
+        key: "productsAndServices",
+        value: message.productsAndServices,
+      });
+
+      commit("setFormField", {
+        key: "socialMedias",
+        value: message.socialMedias,
+      });
+
+      commit("setFormField", { key: "site", value: message.site });
+
+      commit("setFormField", { key: "logo", value: message.logo });
+
+      commit("setFormField", { key: "incubated", value: message.incubated });
+      commit("setFormField", { key: "incubators", value: message.incubators });
+    }
+  },
+
   updateCompanyForm: async function ({ commit, getters }) {
     if (!getters.cnpj || !getters.name) {
       commit("setErrors", [
