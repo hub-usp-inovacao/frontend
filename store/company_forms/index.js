@@ -154,7 +154,7 @@ const prepareCompanyObject = (obj) => {
     cnpj: obj.cnpj,
     name: obj.name,
     partners_values: obj.partners,
-    new_values: [],
+    company_values: [],
   };
 
   if (obj.corporateName)
@@ -265,5 +265,5 @@ const prepareCompanyObject = (obj) => {
       "Valor de outros investimentos (R$)": obj.investmentValues.other,
     });
 
-  return company;
+  return { company };
 };
