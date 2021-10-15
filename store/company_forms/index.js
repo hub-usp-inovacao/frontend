@@ -193,6 +193,11 @@ const prepareCompanyObject = (obj) => {
       "Produtos e serviços": obj.productsAndServices.join("; "),
     });
 
+  if (obj.ods.length > 0)
+    company.new_values.push({
+      "Objetivos de Desenvolvimento Sustentável": obj.ods.join("; "),
+    });
+
   if (obj.socialMedias.length > 0)
     company.new_values.push({
       "Redes sociais": obj.socialMedias.join("; "),
