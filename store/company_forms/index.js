@@ -154,7 +154,8 @@ export const actions = {
   setInvestmentsValues: ({ commit }, value) =>
     commit("setFormField", { key: "investmentsValues", value }),
 
-  getCompanyData: async function ({ commit }, cnpj) {
+  getCompanyData: async function ({ commit, getters }) {
+    const cnpj = getters.cnpj;
     const { status, message } = await this.$getCompanyData(cnpj);
 
     if (status !== "ok") {
@@ -167,7 +168,6 @@ export const actions = {
         value: message.corporateName,
       });
       commit("setFormField", { key: "year", value: message.year });
-      commit("setFormField", { key: "cnpj", value: message.cnpj });
       commit("setFormField", { key: "cnae", value: message.cnae });
       commit("setFormField", { key: "phones", value: message.phones });
       commit("setFormField", { key: "email", value: message.email });

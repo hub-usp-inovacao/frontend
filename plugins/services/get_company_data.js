@@ -18,7 +18,7 @@ export default (_, inject) => {
   inject("getCompanyData", async (cnpj) => {
     const response = await getData(cnpj);
 
-    if (!response) {
+    if (!response || response.status === 404) {
       return {
         status: "failure",
         message:
