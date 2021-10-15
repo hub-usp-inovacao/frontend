@@ -45,6 +45,19 @@
           </div>
 
           <div class="mt-5 text-h6 font-weight-regular">
+            Sua empresa está alinhada a das alguma ODS?
+            <v-divider />
+            <v-container>
+              <Dropdown
+                v-model="ods"
+                :options="odsList"
+                multiple-option
+                label=""
+              />
+            </v-container>
+          </div>
+
+          <div class="mt-5 text-h6 font-weight-regular">
             Redes sociais
             <v-divider />
             <v-container>
@@ -66,6 +79,7 @@ import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue"
 import LongTextInput from "@/components/CompanyForms/inputs/LongTextInput.vue";
 import ImageUploader from "@/components/CompanyForms/inputs/ImageUploader.vue";
 import URLInput from "@/components/CompanyForms/inputs/URLInput.vue";
+import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
 
 export default {
   components: {
@@ -73,14 +87,35 @@ export default {
     LongTextInput,
     ImageUploader,
     URLInput,
+    Dropdown,
   },
   data: () => ({
     description: "",
     technologies: [],
     productsAndServices: [],
+    ods: [],
     socialMedias: [],
     site: "",
     file: undefined,
+    odsList: [
+      "1 - Erradicação da Pobreza",
+      "2 - Fome Zero",
+      "3 - Saúde e Bem Estar",
+      "4 - Educação de Qualidade",
+      "5 - Igualdade de Gênero",
+      "6 - Água Potável e Saneamento",
+      "7 - Energia Limpa e Acessível",
+      "8 - Trabalho Decente e Crescimento Econômico",
+      "9 - Indústria, Inovação e Infraestrutura",
+      "10 - Redução das Desigualdades",
+      "11 - Cidades e Comunidades Sustentáveis",
+      "12 - Consumo e Produção Responsáveis",
+      "13 - Ação Contra a Mudança Global do Clima",
+      "14 - Vida na Água",
+      "15 - Vida Terrestre",
+      "16 - Paz, Justiça e Instituições Eficazes",
+      "17 - Parcerias e Meios de Implementação",
+    ],
   }),
 };
 </script>
