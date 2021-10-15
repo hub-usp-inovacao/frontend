@@ -6,7 +6,10 @@
 
     <v-form ref="form">
       <v-container>
-        <v-row v-if="!ok">
+        <v-row v-if="ok">
+          <Stepper />
+        </v-row>
+        <v-row v-else>
           <v-col cols="10">
             <MaskInput
               v-model="cnpj"
@@ -27,9 +30,6 @@
               Enviar
             </v-btn>
           </v-col>
-        </v-row>
-        <v-row v-if="ok">
-          <Stepper />
         </v-row>
       </v-container>
     </v-form>
