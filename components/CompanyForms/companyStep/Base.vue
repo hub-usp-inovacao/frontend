@@ -65,13 +65,14 @@
           <MultipleInputs
             :value="phones"
             input-label="Telefone comercial"
-            component="PhoneInput"
+            component="ShortTextInput"
             @input="setPhones"
           />
           <ShortTextInput :value="email" label="Email" @input="setEmail" />
-          <ShortTextInput
+          <p class="body-2">Endereços</p>
+          <MultipleInputs
             :value="address"
-            label="Endereço"
+            input-label="Endereço"
             @input="setAddress"
           />
           <ShortTextInput
