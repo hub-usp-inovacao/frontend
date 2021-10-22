@@ -2,7 +2,7 @@ async function getData(cnpj) {
   const backendURL = process.env.BACKEND_URL;
 
   try {
-    const url = `${backendURL}/companies/${cnpj}`;
+    const url = `${backendURL}/companies?cnpj=${cnpj}`;
 
     const resp = await fetch(url);
 

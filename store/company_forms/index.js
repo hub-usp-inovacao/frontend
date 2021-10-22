@@ -170,18 +170,18 @@ export const actions = {
       commit("setFormField", { key: "year", value: message.year });
       commit("setFormField", { key: "cnae", value: message.cnae });
       commit("setFormField", { key: "phones", value: message.phones });
-      commit("setFormField", { key: "email", value: message.email });
-      commit("setFormField", { key: "address", value: message.address });
+      commit("setFormField", { key: "email", value: message.emails[0] });
+      commit("setFormField", { key: "address", value: message.address.venue });
       commit("setFormField", {
         key: "neighborhood",
-        value: message.neighborhood,
+        value: message.address.neighborhood,
       });
-      commit("setFormField", { key: "city", value: message.city });
-      commit("setFormField", { key: "state", value: message.state });
-      commit("setFormField", { key: "cep", value: message.cep });
+      commit("setFormField", { key: "city", value: message.address.city[0] });
+      commit("setFormField", { key: "state", value: message.address.state });
+      commit("setFormField", { key: "cep", value: message.address.cep });
       commit("setFormField", {
         key: "description",
-        value: message.description,
+        value: message.description.long,
       });
       commit("setFormField", {
         key: "technologies",
@@ -189,7 +189,10 @@ export const actions = {
       });
       commit("setFormField", {
         key: "productsAndServices",
-        value: message.productsAndServices,
+        value: message.services
+          .split(";")
+          .map((p) => p.trim())
+          .filter((p) => p.length > 0),
       });
 
       commit("setFormField", {
@@ -201,7 +204,10 @@ export const actions = {
 
       commit("setFormField", { key: "logo", value: message.logo });
 
-      commit("setFormField", { key: "incubated", value: message.incubated });
+      commit("setFormField", {
+        key: "incubated",
+        value: message.incubated ? "Sim. A empresa está incubada" : "Não",
+      });
       commit("setFormField", { key: "incubators", value: message.incubators });
     }
   },
