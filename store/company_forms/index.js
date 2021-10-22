@@ -162,6 +162,7 @@ export const actions = {
       commit("setErrors", [message]);
     } else {
       commit("setErrors", []);
+      commit("setFormField", { key: "partners", value: message.partners });
       commit("setFormField", { key: "name", value: message.name });
       commit("setFormField", {
         key: "corporateName",
