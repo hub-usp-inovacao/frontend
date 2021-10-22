@@ -3,11 +3,12 @@ async function updateData(company) {
 
   try {
     const url = backendURL + "/companies";
-    const body = JSON.stringify(company);
+    const body = new FormData();
+
+    body.append("company", company);
 
     const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Content-Length", body.length.toString());
+    headers.append("Content-Type", "multipart/form-data");
 
     const resp = await fetch(url, {
       method: "PATCH",

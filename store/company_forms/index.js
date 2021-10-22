@@ -9,7 +9,7 @@ export const state = () => ({
   email: "",
   address: "",
   neighborhood: "",
-  city: "",
+  city: [],
   state: "",
   cep: "",
   description: "",

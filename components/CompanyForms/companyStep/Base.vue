@@ -69,10 +69,9 @@
             @input="setPhones"
           />
           <ShortTextInput :value="email" label="Email" @input="setEmail" />
-          <p class="body-2">Endereços</p>
-          <MultipleInputs
+          <ShortTextInput
             :value="address"
-            input-label="Endereço"
+            label="Endereço"
             @input="setAddress"
           />
           <ShortTextInput
@@ -80,7 +79,12 @@
             label="Bairro"
             @input="setNeighborhood"
           />
-          <ShortTextInput :value="city" label="Cidade sede" @input="setCity" />
+          <p class="body-2">Cidades sede</p>
+          <MultipleInputs
+            :value="city"
+            input-label="Cidade sede"
+            @input="setCity"
+          />
           <Dropdown
             :value="state"
             label="Estado"
