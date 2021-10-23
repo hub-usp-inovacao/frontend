@@ -23,7 +23,7 @@
               label="Email"
               hint="Este dado não será publicado."
             />
-            <ShortTextInput v-model="formData.phone" />
+            <ShortTextInput v-model="formData.phone" label="Telefone" />
             <NumberInput
               v-model="formData.nusp"
               label="Qual o número USP?"
