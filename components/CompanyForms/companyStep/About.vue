@@ -6,17 +6,17 @@
         <v-divider />
         <v-container>
           <LongTextInput
-            :value="description"
+            :value="descriptionLong"
             label="Insira uma breve descrição da empresa"
             clearable
             hint="Descreva seu negócio, levando em consideração qual tipo de solução a mesma traz para o mercado. Busque deixar claro o posicionamento da mesma no mercado. Essa informação será divulgada."
-            @input="setDescription"
+            @input="setDescriptionLong"
           />
           <URLInput
-            :value="site"
+            :value="url"
             label="Site"
             hint="Se não possuir, responda N/D."
-            @input="setSite"
+            @input="setUrl"
           />
           <ImageUploader
             :value="logo"
@@ -42,9 +42,9 @@
             <v-divider />
             <v-container>
               <MultipleInputs
-                :value="productsAndServices"
+                :value="services"
                 input-label="Produto/Serviço"
-                @input="setProductsAndServices"
+                @input="setServices"
               />
             </v-container>
           </div>
@@ -120,23 +120,23 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      description: "company_forms/description",
+      descriptionLong: "company_forms/descriptionLong",
       technologies: "company_forms/technologies",
-      productsAndServices: "company_forms/productsAndServices",
+      services: "company_forms/services",
       ods: "company_forms/ods",
       socialMedias: "company_forms/socialMedias",
-      site: "company_forms/site",
+      url: "company_forms/url",
       logo: "company_forms/logo",
     }),
   },
   methods: {
     ...mapActions({
-      setDescription: "company_forms/setDescription",
+      setDescriptionLong: "company_forms/setDescriptionLong",
       setTechnologies: "company_forms/setTechnologies",
-      setProductsAndServices: "company_forms/setProductsAndServices",
+      setServices: "company_forms/setServices",
       setOds: "company_forms/setOds",
       setSocialMedias: "company_forms/setSocialMedias",
-      setSite: "company_forms/setSite",
+      setUrl: "company_forms/setUrl",
       setLogo: "company_forms/setLogo",
     }),
   },

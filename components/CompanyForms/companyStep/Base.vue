@@ -68,12 +68,13 @@
             component="ShortTextInput"
             @input="setPhones"
           />
-          <ShortTextInput :value="email" label="Email" @input="setEmail" />
-          <ShortTextInput
-            :value="address"
-            label="Endereço"
-            @input="setAddress"
+          <p class="body-2 mt-5">Emails</p>
+          <MultipleInputs
+            :value="emails"
+            input-label="Email"
+            @input="setEmails"
           />
+          <ShortTextInput :value="venue" label="Endereço" @input="setVenue" />
           <ShortTextInput
             :value="neighborhood"
             label="Bairro"
@@ -129,8 +130,9 @@ export default {
       cnpj: "company_forms/cnpj",
       cnae: "company_forms/cnae",
       phones: "company_forms/phones",
-      email: "company_forms/email",
+      emails: "company_forms/emails",
       address: "company_forms/address",
+      venue: "company_forms/venue",
       neighborhood: "company_forms/neighborhood",
       city: "company_forms/city",
       state: "company_forms/state",
@@ -148,8 +150,8 @@ export default {
       setCnpj: "company_forms/setCnpj",
       setCnae: "company_forms/setCnae",
       setPhones: "company_forms/setPhones",
-      setEmail: "company_forms/setEmail",
-      setAddress: "company_forms/setAddress",
+      setEmails: "company_forms/setEmails",
+      setVenue: "company_forms/setVenue",
       setNeighborhood: "company_forms/setNeighborhood",
       setCity: "company_forms/setCity",
       setState: "company_forms/setState",
