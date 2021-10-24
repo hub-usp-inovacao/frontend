@@ -162,7 +162,15 @@ export const actions = {
       commit("setErrors", [message]);
     } else {
       commit("setErrors", []);
-      commit("setFormField", { key: "partners", value: message.partners });
+      Object.keys(message).forEach((key) => {
+        const k = snakeToCamelCase(key);
+
+        // eslint-disable-next-line no-prototype-builtins
+        if (getters.hasOwnProperty(k)) {
+          commit("setFormField", { key: k, value: message[key] });
+        }
+      });
+      /* commit("setFormField", { key: "partners", value: message.partners });
       commit("setFormField", { key: "name", value: message.name });
       commit("setFormField", {
         key: "corporateName",
@@ -209,7 +217,7 @@ export const actions = {
         key: "incubated",
         value: message.incubated ? "Sim. A empresa está incubada" : "Não",
       });
-      commit("setFormField", { key: "incubators", value: message.incubators });
+      commit("setFormField", { key: "incubators", value: message.incubators }); */
     }
   },
 
@@ -233,6 +241,21 @@ export const actions = {
       commit("setErrors", []);
     }
   },
+};
+
+const snakeToCamelCase = (key) => {
+  return key
+    .split("_")
+    .map((value, index) => {
+      if (index > 0) {
+        let first = value[0];
+        first = first.toUpperCase();
+        value = first + value.slice(1);
+      }
+
+      return value;
+    })
+    .join("");
 };
 
 const prepareCompanyObject = (obj) => {
