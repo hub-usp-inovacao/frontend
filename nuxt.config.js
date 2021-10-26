@@ -11,9 +11,7 @@ export default {
   },
   ssr: true,
   target: "server",
-  /*
-   ** Headers of the page
-   */
+
   head: {
     titleTemplate: "Hub USPInovação",
     title: "Hub USPInovação",
@@ -60,17 +58,11 @@ export default {
       },
     ],
   },
-  /*
-   ** Customize the progress-bar color
-   */
+
   loading: { color: "#fff" },
-  /*
-   ** Global CSS
-   */
+
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
   plugins: [
     { src: "~/plugins/breakpoint.js" },
     { src: "~/plugins/vue-fuse.js", mode: "client" },
@@ -95,18 +87,8 @@ export default {
 
   serverMiddleware: [{ path: "/", handler: "~/api/index.js" }],
 
-  /*
-   ** Nuxt.js dev-modules
-   */
   buildModules: ["@nuxtjs/vuetify", "@nuxtjs/google-analytics"],
-  /*
-   ** Nuxt.js modules
-   */
   modules: ["@nuxtjs/axios"],
-  /*
-   ** vuetify module configuration
-   ** https://github.com/nuxt-community/vuetify-module
-   */
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
     treeShake: true,
@@ -130,13 +112,7 @@ export default {
       baseURL: process.env.BACKEND_URL,
     },
   },
-  /*
-   ** Build configuration
-   */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     // eslint-disable-next-line no-unused-vars
     extend(config, ctx) {},
   },
