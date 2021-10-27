@@ -23,11 +23,13 @@ export const state = () => ({
   socialMedias: [],
   url: "",
   logo: undefined,
+  collaboratorsLastUpdatedAt: new Date(),
+  investmentsLastUpdatedAt: new Date(),
   numberOfCTLEmployees: "",
   numberOfPJColaborators: "",
   numberOfInterns: "",
   incubated: "",
-  incubators: [],
+  ecosystems: [],
   receivedInvestments: false,
   investments: [],
   investmentsValues: {
@@ -56,6 +58,7 @@ export const getters = {
   city: (s) => s.address.city,
   state: (s) => s.address.state,
   cep: (s) => s.address.cep,
+  description: (s) => s.description,
   descriptionLong: (s) => s.description.long,
   technologies: (s) => s.technologies,
   services: (s) => s.services,
@@ -63,11 +66,13 @@ export const getters = {
   socialMedias: (s) => s.socialMedias,
   url: (s) => s.url,
   logo: (s) => s.logo,
+  collaboratorsLastUpdatedAt: (s) => s.collaboratorsLastUpdatedAt,
+  investmentsLastUpdatedAt: (s) => s.investmentsLastUpdatedAt,
   numberOfCTLEmployees: (s) => s.numberOfCTLEmployees,
   numberOfPJColaborators: (s) => s.numberOfPJColaborators,
   numberOfInterns: (s) => s.numberOfInterns,
   incubated: (s) => s.incubated,
-  incubators: (s) => s.incubators,
+  ecosystems: (s) => s.ecosystems,
   receivedInvestments: (s) => s.receivedInvestments,
   investments: (s) => s.investments,
   investmentsValues: (s) => s.investmentsValues,
@@ -123,8 +128,6 @@ export const actions = {
       key: "address",
       value: { ...getters.address, cep: value },
     }),
-  setDescription: ({ commit }, value) =>
-    commit("setFormField", { key: "description", value }),
   setDescriptionLong: ({ commit }, value) =>
     commit("setFormField", { key: "description", value: { long: value } }),
   setTechnologies: ({ commit }, value) =>
@@ -145,8 +148,8 @@ export const actions = {
     commit("setFormField", { key: "numberOfInterns", value }),
   setIncubated: ({ commit }, value) =>
     commit("setFormField", { key: "incubated", value }),
-  setIncubators: ({ commit }, value) =>
-    commit("setFormField", { key: "incubators", value }),
+  setEcosystems: ({ commit }, value) =>
+    commit("setFormField", { key: "ecosystems", value }),
   setReceivedInvestments: ({ commit }, value) =>
     commit("setFormField", { key: "receivedInvestments", value }),
   setInvestments: ({ commit }, value) =>
@@ -154,10 +157,40 @@ export const actions = {
   setInvestmentsValues: ({ commit }, value) =>
     commit("setFormField", { key: "investmentsValues", value }),
 
+  getCompanyData: async function ({ commit, getters }) {
+    const cnpj = getters.cnpj;
+    const { status, message } = await this.$getCompanyData(cnpj);
+
+    if (status !== "ok") {
+      commit("setErrors", [message]);
+    } else {
+      commit("setErrors", []);
+
+      Object.keys(message).forEach((key) => {
+        const k = snakeToCamelCase(key);
+
+        // eslint-disable-next-line no-prototype-builtins
+        if (getters.hasOwnProperty(k)) {
+          commit("setFormField", { key: k, value: message[key] });
+        }
+      });
+
+      commit("setFormField", {
+        key: "collaboratorsLastUpdatedAt",
+        value: new Date(message["collaborators_last_updated_at"]),
+      });
+      commit("setFormField", {
+        key: "investmentsLastUpdatedAt",
+        value: new Date(message["investments_last_updated_at"]),
+      });
+      commit("setFormField", { key: "logo", value: undefined });
+    }
+  },
+
   updateCompanyForm: async function ({ commit, getters }) {
-    if (!getters.cnpj || !getters.name) {
+    if (!getters.cnpj || !getters.name || getters.partners.length > 0) {
       commit("setErrors", [
-        "É necessário informar o nome e o CNPJ da empresa para atualizar os dados",
+        "É necessário informar o nome, CNPJ e pelo menos um sócio da empresa para atualizar os dados",
       ]);
       return;
     }
@@ -174,6 +207,21 @@ export const actions = {
       commit("setErrors", []);
     }
   },
+};
+
+const snakeToCamelCase = (key) => {
+  return key
+    .split("_")
+    .map((value, index) => {
+      if (index > 0) {
+        let first = value[0];
+        first = first.toUpperCase();
+        value = first + value.slice(1);
+      }
+
+      return value;
+    })
+    .join("");
 };
 
 const prepareCompanyObject = (obj) => {

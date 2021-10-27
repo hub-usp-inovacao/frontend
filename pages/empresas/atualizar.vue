@@ -6,16 +6,24 @@
 
     <v-form ref="form">
       <v-container>
+        <v-row v-if="errors.length > 0">
+          <v-col>
+            <v-alert v-for="error in errors" :key="error" type="error">{{
+              error
+            }}</v-alert>
+          </v-col>
+        </v-row>
         <v-row v-if="ok">
           <Stepper />
         </v-row>
         <v-row v-else>
           <v-col cols="10">
             <MaskInput
-              v-model="cnpj"
+              :value="cnpj"
               label="CNPJ"
               mask="##.###.###/####-##"
               hint="SOMENTE empresas formalmente constituídas podem preencher este formulário."
+              @input="setCnpj"
             />
           </v-col>
           <v-col cols="2" align="bottom">
@@ -24,7 +32,7 @@
               width="100"
               text
               :loading="loading"
-              :disabled="isValid"
+              :disabled="!isValid"
               @click="submit"
             >
               Enviar
@@ -37,6 +45,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import Panel from "@/components/first_level/Panel.vue";
 import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
 import Stepper from "@/components/CompanyForms/Stepper.vue";
@@ -54,22 +63,34 @@ export default {
 
     loading: false,
     ok: false,
-
-    cnpj: "",
   }),
 
   computed: {
+    ...mapGetters({
+      cnpj: "company_forms/cnpj",
+      errors: "company_forms/errors",
+    }),
+
     isValid() {
-      return this.cnpj.length !== 18;
+      return this.cnpj.length === 18;
     },
   },
 
   methods: {
-    submit() {
-      if (this.cnpj.length !== 18) {
-        this.ok = false;
-      } else {
-        this.ok = true;
+    ...mapActions({
+      setCnpj: "company_forms/setCnpj",
+      getCompanyData: "company_forms/getCompanyData",
+    }),
+
+    async submit() {
+      if (this.isValid) {
+        this.loading = true;
+        await this.getCompanyData();
+        this.loading = false;
+
+        if (this.errors.length === 0) {
+          this.ok = true;
+        }
       }
     },
   },
