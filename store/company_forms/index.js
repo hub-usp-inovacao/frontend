@@ -6,18 +6,22 @@ export const state = () => ({
   cnpj: "",
   cnae: "",
   phones: [],
-  email: "",
-  address: "",
-  neighborhood: "",
-  city: "",
-  state: "",
-  cep: "",
-  description: "",
+  emails: [],
+  address: {
+    venue: "",
+    neighborhood: "",
+    city: [],
+    state: "",
+    cep: "",
+  },
+  description: {
+    long: "",
+  },
   technologies: [],
-  productsAndServices: [],
+  services: [],
   ods: [],
   socialMedias: [],
-  site: "",
+  url: "",
   logo: undefined,
   numberOfCTLEmployees: "",
   numberOfPJColaborators: "",
@@ -26,7 +30,7 @@ export const state = () => ({
   incubators: [],
   receivedInvestments: false,
   investments: [],
-  investmentValues: {
+  investmentsValues: {
     own: "",
     angel: "",
     ventureCapital: "",
@@ -45,18 +49,19 @@ export const getters = {
   cnpj: (s) => s.cnpj,
   cnae: (s) => s.cnae,
   phones: (s) => s.phones,
-  email: (s) => s.email,
+  emails: (s) => s.emails,
   address: (s) => s.address,
-  neighborhood: (s) => s.neighborhood,
-  city: (s) => s.city,
-  state: (s) => s.state,
-  cep: (s) => s.cep,
-  description: (s) => s.description,
+  venue: (s) => s.address.venue,
+  neighborhood: (s) => s.address.neighborhood,
+  city: (s) => s.address.city,
+  state: (s) => s.address.state,
+  cep: (s) => s.address.cep,
+  descriptionLong: (s) => s.description.long,
   technologies: (s) => s.technologies,
-  productsAndServices: (s) => s.productsAndServices,
+  services: (s) => s.services,
   ods: (s) => s.ods,
   socialMedias: (s) => s.socialMedias,
-  site: (s) => s.site,
+  url: (s) => s.url,
   logo: (s) => s.logo,
   numberOfCTLEmployees: (s) => s.numberOfCTLEmployees,
   numberOfPJColaborators: (s) => s.numberOfPJColaborators,
@@ -65,7 +70,7 @@ export const getters = {
   incubators: (s) => s.incubators,
   receivedInvestments: (s) => s.receivedInvestments,
   investments: (s) => s.investments,
-  investmentValues: (s) => s.investmentValues,
+  investmentsValues: (s) => s.investmentsValues,
   errors: (s) => s.errors,
 };
 
@@ -89,28 +94,47 @@ export const actions = {
     commit("setFormField", { key: "cnae", value }),
   setPhones: ({ commit }, value) =>
     commit("setFormField", { key: "phones", value }),
-  setEmail: ({ commit }, value) =>
-    commit("setFormField", { key: "email", value }),
+  setEmails: ({ commit }, value) =>
+    commit("setFormField", { key: "emails", value }),
   setAddress: ({ commit }, value) =>
     commit("setFormField", { key: "address", value }),
-  setNeighborhood: ({ commit }, value) =>
-    commit("setFormField", { key: "neighborhood", value }),
-  setCity: ({ commit }, value) =>
-    commit("setFormField", { key: "city", value }),
-  setState: ({ commit }, value) =>
-    commit("setFormField", { key: "state", value }),
-  setCep: ({ commit }, value) => commit("setFormField", { key: "cep", value }),
+  setVenue: ({ commit, getters }, value) =>
+    commit("setFormField", {
+      key: "address",
+      value: { ...getters.address, venue: value },
+    }),
+  setNeighborhood: ({ commit, getters }, value) =>
+    commit("setFormField", {
+      key: "address",
+      value: { ...getters.address, neighborhood: value },
+    }),
+  setCity: ({ commit, getters }, value) =>
+    commit("setFormField", {
+      key: "address",
+      value: { ...getters.address, city: value },
+    }),
+  setState: ({ commit, getters }, value) =>
+    commit("setFormField", {
+      key: "address",
+      value: { ...getters.address, state: value },
+    }),
+  setCep: ({ commit, getters }, value) =>
+    commit("setFormField", {
+      key: "address",
+      value: { ...getters.address, cep: value },
+    }),
   setDescription: ({ commit }, value) =>
     commit("setFormField", { key: "description", value }),
+  setDescriptionLong: ({ commit }, value) =>
+    commit("setFormField", { key: "description", value: { long: value } }),
   setTechnologies: ({ commit }, value) =>
     commit("setFormField", { key: "technologies", value }),
-  setProductsAndServices: ({ commit }, value) =>
-    commit("setFormField", { key: "productsAndServices", value }),
+  setServices: ({ commit }, value) =>
+    commit("setFormField", { key: "services", value }),
   setOds: ({ commit }, value) => commit("setFormField", { key: "ods", value }),
   setSocialMedias: ({ commit }, value) =>
     commit("setFormField", { key: "socialMedias", value }),
-  setSite: ({ commit }, value) =>
-    commit("setFormField", { key: "site", value }),
+  setUrl: ({ commit }, value) => commit("setFormField", { key: "url", value }),
   setLogo: ({ commit }, value) =>
     commit("setFormField", { key: "logo", value }),
   setNumberOfCTLEmployees: ({ commit }, value) =>
@@ -127,8 +151,8 @@ export const actions = {
     commit("setFormField", { key: "receivedInvestments", value }),
   setInvestments: ({ commit }, value) =>
     commit("setFormField", { key: "investments", value }),
-  setInvestmentValues: ({ commit }, value) =>
-    commit("setFormField", { key: "investmentValues", value }),
+  setInvestmentsValues: ({ commit }, value) =>
+    commit("setFormField", { key: "investmentsValues", value }),
 
   updateCompanyForm: async function ({ commit, getters }) {
     if (!getters.cnpj || !getters.name) {
@@ -139,7 +163,10 @@ export const actions = {
     }
 
     const company = prepareCompanyObject(getters);
-    const { status, message } = await this.$updateCompanyData(company);
+    const { status, message } = await this.$updateCompanyData(
+      company,
+      getters.logo
+    );
 
     if (status !== "ok") {
       commit("setErrors", [message]);
@@ -158,111 +185,114 @@ const prepareCompanyObject = (obj) => {
   };
 
   if (obj.corporateName)
-    company.new_values.push({
+    company.company_values.push({
       "Razão social da empresa": obj.corporateName,
     });
 
-  if (obj.year) company.new_values.push({ "Ano de fundação": obj.year });
+  if (obj.year) company.company_values.push({ "Ano de fundação": obj.year });
 
-  if (obj.cnae) company.new_values.push({ CNAE: obj.cnae });
+  if (obj.cnae) company.company_values.push({ CNAE: obj.cnae });
 
-  if (obj.email) company.new_values.push({ Email: obj.email });
+  if (obj.emails.length > 0)
+    company.company_values.push({ Emails: obj.emails });
 
-  if (obj.address) company.new_values.push({ Endereço: obj.address });
+  if (obj.address) company.company_values.push({ Endereço: obj.address });
 
-  if (obj.neighborhood) company.new_values.push({ Bairro: obj.neighborhood });
+  if (obj.neighborhood)
+    company.company_values.push({ Bairro: obj.neighborhood });
 
-  if (obj.city) company.new_values.push({ "Cidade sede": obj.city });
+  if (obj.city.length > 0)
+    company.company_values.push({ "Cidade sede": obj.city });
 
-  if (obj.state) company.new_values.push({ Estado: obj.state });
+  if (obj.state) company.company_values.push({ Estado: obj.state });
 
-  if (obj.cep) company.new_values.push({ CEP: obj.cep });
+  if (obj.cep) company.company_values.push({ CEP: obj.cep });
 
   if (obj.description)
-    company.new_values.push({ "Breve descrição": obj.description });
+    company.company_values.push({ "Breve descrição": obj.description });
 
-  if (obj.site) company.new_values.push({ Site: obj.site });
-
-  if (obj.logo) company.new_values.push({ "Logo da empresa": obj.logo });
+  if (obj.url) company.company_values.push({ Site: obj.url });
 
   if (obj.technologies.length > 0)
-    company.new_values.push({ Tecnologias: obj.technologies.join("; ") });
+    company.company_values.push({
+      Tecnologias: obj.technologies.join("; "),
+    });
 
-  if (obj.productsAndServices.length > 0)
-    company.new_values.push({
-      "Produtos e serviços": obj.productsAndServices.join("; "),
+  if (obj.services.length > 0)
+    company.company_values.push({
+      "Produtos e serviços": obj.services.join("; "),
     });
 
   if (obj.ods.length > 0)
-    company.new_values.push({
+    company.company_values.push({
       "Objetivos de Desenvolvimento Sustentável": obj.ods.join("; "),
     });
 
   if (obj.socialMedias.length > 0)
-    company.new_values.push({
+    company.company_values.push({
       "Redes sociais": obj.socialMedias.join("; "),
     });
 
   if (obj.numberOfCTLEmployees)
-    company.new_values.push({
+    company.company_values.push({
       "Número de funcionários contratados como CLT": obj.numberOfCTLEmployees,
     });
 
   if (obj.numberOfPJColaborators)
-    company.new_values.push({
+    company.company_values.push({
       "Número de colaboradores contratados como Pessoa Jurídica (PJ)":
         obj.numberOfPJColaborators,
     });
 
   if (obj.numberOfInterns)
-    company.new_values.push({
+    company.company_values.push({
       "Número de estagiários/bolsistas contratados": obj.numberOfInterns,
     });
 
   if (obj.incubated)
-    company.new_values.push({
+    company.company_values.push({
       "A empresa está ou esteve em alguma incubadora ou Parque tecnológico":
         obj.incubated,
     });
 
   if (obj.receivedInvestments)
-    company.new_values.push({
+    company.company_values.push({
       "A empresa recebeu investimento?": "Sim",
     });
 
   if (obj.investments.length > 0)
-    company.new_values.push({
+    company.company_values.push({
       Investimentos: obj.investments.join("; "),
     });
 
-  if (obj.investmentValues.own)
-    company.new_values.push({
-      "Valor do investimento próprio (R$)": obj.investmentValues.own,
+  if (obj.investmentsValues.own)
+    company.company_values.push({
+      "Valor do investimento próprio (R$)": obj.investmentsValues.own,
     });
 
-  if (obj.investmentValues.angel)
-    company.new_values.push({
-      "Valor do investimento-anjo (R$)": obj.investmentValues.angel,
+  if (obj.investmentsValues.angel)
+    company.company_values.push({
+      "Valor do investimento-anjo (R$)": obj.investmentsValues.angel,
     });
 
-  if (obj.investmentValues.ventureCapital)
-    company.new_values.push({
-      "Valor do Venture Capital (R$)": obj.investmentValues.ventureCapital,
+  if (obj.investmentsValues.ventureCapital)
+    company.company_values.push({
+      "Valor do Venture Capital (R$)": obj.investmentsValues.ventureCapital,
     });
 
-  if (obj.investmentValues.privateEquity)
-    company.new_values.push({
-      "Valor do Private Equity (R$)": obj.investmentValues.privateEquity,
+  if (obj.investmentsValues.privateEquity)
+    company.company_values.push({
+      "Valor do Private Equity (R$)": obj.investmentsValues.privateEquity,
     });
 
-  if (obj.investmentValues.pipeFapesp)
-    company.new_values.push({
-      "Valor do PIPE-FAPESP (R$)": obj.investmentValues.pipeFapesp,
+  if (obj.investmentsValues.pipeFapesp)
+    company.company_values.push({
+      "Valor do PIPE-FAPESP (R$)": obj.investmentsValues.pipeFapesp,
     });
 
-  if (obj.investmentValues.other)
-    company.new_values.push({
-      "Valor de outros investimentos (R$)": obj.investmentValues.other,
+  if (obj.investmentsValues.other)
+    company.company_values.push({
+      "Valor de outros investimentos (R$)": obj.investmentsValues.other,
     });
 
   return { company };

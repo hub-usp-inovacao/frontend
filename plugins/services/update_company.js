@@ -1,22 +1,30 @@
-async function updateData(company) {
+async function updateData(data, logo) {
   const backendURL = process.env.BACKEND_URL;
 
   try {
     const url = backendURL + "/companies";
-    const body = JSON.stringify(company);
+    console.log(logo);
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("Content-Length", body.length.toString());
 
     const resp = await fetch(url, {
       method: "PATCH",
-      mode: "cors",
       headers,
-      body,
+      body: JSON.stringify(data),
     });
 
-    return await resp.json();
+    if (logo) {
+      const body = new FormData();
+      body.append("company_image", logo);
+
+      await fetch(url, {
+        method: "PATCH",
+        body,
+      });
+    }
+
+    return resp;
   } catch (error) {
     console.log("error occuried while updating...");
     console.log(error);
@@ -25,16 +33,17 @@ async function updateData(company) {
 }
 
 export default (_, inject) => {
-  inject("updateCompanyData", async (company) => {
-    const response = await updateData(company);
+  inject("updateCompanyData", async (data, logo) => {
+    const response = await updateData(data, logo);
 
-    if (!response) {
+    if (!response || response.status < 200 || response.status >= 300) {
       return {
         status: "failure",
         message: "Não foi possível atualizar os dados! Tente novamente.",
       };
     }
 
-    return { status: "ok", message: response };
+    const body = await response.json();
+    return { status: "ok", message: body };
   });
 };

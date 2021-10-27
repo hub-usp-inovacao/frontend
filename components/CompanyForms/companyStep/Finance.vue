@@ -95,7 +95,7 @@ export default {
     ...mapGetters({
       receivedInvestments: "company_forms/receivedInvestments",
       investments: "company_forms/investments",
-      investmentValues: "company_forms/investmentValues",
+      investmentsValues: "company_forms/investmentsValues",
     }),
     preDefinedInvestments() {
       return this.investments.filter((inv) =>
@@ -108,29 +108,29 @@ export default {
       );
     },
     ownValue() {
-      return this.investmentValues.own;
+      return this.investmentsValues.own;
     },
     angelValue() {
-      return this.investmentValues.angel;
+      return this.investmentsValues.angel;
     },
     ventureCapitalValue() {
-      return this.investmentValues.ventureCapital;
+      return this.investmentsValues.ventureCapital;
     },
     privateEquityValue() {
-      return this.investmentValues.privateEquity;
+      return this.investmentsValues.privateEquity;
     },
     pipeFapespValue() {
-      return this.investmentValues.pipeFapesp;
+      return this.investmentsValues.pipeFapesp;
     },
     otherValue() {
-      return this.investmentValues.other;
+      return this.investmentsValues.other;
     },
   },
   methods: {
     ...mapActions({
       setReceivedInvestments: "company_forms/setReceivedInvestments",
       setInvestments: "company_forms/setInvestments",
-      setInvestmentValues: "company_forms/setInvestmentValues",
+      setInvestmentsValues: "company_forms/setInvestmentsValues",
     }),
     setPreDefinedInvestments(preDefinedInvestments) {
       this.setInvestments(preDefinedInvestments.concat(this.otherInvestments));
@@ -139,31 +139,31 @@ export default {
       this.setInvestments(this.preDefinedInvestments.concat(otherInvestments));
     },
     setOwnValue(newValue) {
-      this.setInvestmentValues({ ...this.investmentValues, own: newValue });
+      this.setInvestmentsValues({ ...this.investmentsValues, own: newValue });
     },
     setAngelValue(newValue) {
-      this.setInvestmentValues({ ...this.investmentValues, angel: newValue });
+      this.setInvestmentsValues({ ...this.investmentsValues, angel: newValue });
     },
     setVentureCapitalValue(newValue) {
-      this.setInvestmentValues({
-        ...this.investmentValues,
+      this.setInvestmentsValues({
+        ...this.investmentsValues,
         ventureCapital: newValue,
       });
     },
     setPrivateEquityValue(newValue) {
-      this.setInvestmentValues({
-        ...this.investmentValues,
+      this.setInvestmentsValues({
+        ...this.investmentsValues,
         privateEquity: newValue,
       });
     },
     setPipeFapespValue(newValue) {
-      this.setInvestmentValues({
-        ...this.investmentValues,
+      this.setInvestmentsValues({
+        ...this.investmentsValues,
         pipeFapesp: newValue,
       });
     },
     setOtherValue(newValue) {
-      this.setInvestmentValues({ ...this.investmentValues, other: newValue });
+      this.setInvestmentsValues({ ...this.investmentsValues, other: newValue });
     },
   },
 };

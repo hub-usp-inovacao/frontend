@@ -27,13 +27,11 @@
 <script>
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
 import MaskInput from "@/components/CompanyForms/inputs/MaskInput.vue";
-import PhoneInput from "@/components/CompanyForms/inputs/PhoneInput.vue";
 import URLInput from "@/components/CompanyForms/inputs/URLInput.vue";
 
 export default {
   components: {
     ShortTextInput,
-    PhoneInput,
     MaskInput,
     URLInput,
   },

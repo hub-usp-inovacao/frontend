@@ -23,7 +23,7 @@
               label="Email"
               hint="Este dado não será publicado."
             />
-            <PhoneInput v-model="formData.phone" />
+            <ShortTextInput v-model="formData.phone" label="Telefone" />
             <NumberInput
               v-model="formData.nusp"
               label="Qual o número USP?"
@@ -58,11 +58,10 @@
 <script>
 import ShortTextInput from "@/components/CompanyForms/inputs/ShortTextInput.vue";
 import NumberInput from "@/components/CompanyForms/inputs/NumberInput.vue";
-import PhoneInput from "@/components/CompanyForms/inputs/PhoneInput.vue";
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
 
 export default {
-  components: { ShortTextInput, PhoneInput, NumberInput, Dropdown },
+  components: { ShortTextInput, NumberInput, Dropdown },
   props: {
     value: {
       type: Boolean,

@@ -61,7 +61,7 @@ export default {
     handleImage(newImage) {
       this.image = newImage;
       this.imageUrl = newImage ? URL.createObjectURL(this.image) : undefined;
-      this.$emit("change", this.image);
+      this.$emit("input", this.image);
     },
   },
 };

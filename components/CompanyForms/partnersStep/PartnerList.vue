@@ -9,7 +9,7 @@
       <v-card-subtitle>NUSP: {{ partner.nusp }}</v-card-subtitle>
       <v-card-text>
         Email: {{ partner.email }}<br />
-        Phone: {{ partner.phone }}<br />
+        Telefone: {{ partner.phone }}<br />
         Vínculo: {{ partner.bond }}<br />
         Unidade: {{ partner.unity }}
       </v-card-text>
