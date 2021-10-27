@@ -60,6 +60,11 @@
           </v-row>
           <v-row>
             <v-col>
+              <span>{{ item._area.minors.join("; ") }}</span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <span>{{ item.campus }}</span>
             </v-col>
           </v-row>
