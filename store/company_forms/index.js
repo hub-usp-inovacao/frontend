@@ -23,11 +23,13 @@ export const state = () => ({
   socialMedias: [],
   url: "",
   logo: undefined,
+  collaboratorsLastUpdatedAt: new Date(),
+  investmentsLastUpdatedAt: new Date(),
   numberOfCTLEmployees: "",
   numberOfPJColaborators: "",
   numberOfInterns: "",
   incubated: "",
-  incubators: [],
+  ecosystems: [],
   receivedInvestments: false,
   investments: [],
   investmentsValues: {
@@ -56,6 +58,7 @@ export const getters = {
   city: (s) => s.address.city,
   state: (s) => s.address.state,
   cep: (s) => s.address.cep,
+  description: (s) => s.description,
   descriptionLong: (s) => s.description.long,
   technologies: (s) => s.technologies,
   services: (s) => s.services,
@@ -63,11 +66,13 @@ export const getters = {
   socialMedias: (s) => s.socialMedias,
   url: (s) => s.url,
   logo: (s) => s.logo,
+  collaboratorsLastUpdatedAt: (s) => s.collaboratorsLastUpdatedAt,
+  investmentsLastUpdatedAt: (s) => s.investmentsLastUpdatedAt,
   numberOfCTLEmployees: (s) => s.numberOfCTLEmployees,
   numberOfPJColaborators: (s) => s.numberOfPJColaborators,
   numberOfInterns: (s) => s.numberOfInterns,
   incubated: (s) => s.incubated,
-  incubators: (s) => s.incubators,
+  ecosystems: (s) => s.ecosystems,
   receivedInvestments: (s) => s.receivedInvestments,
   investments: (s) => s.investments,
   investmentsValues: (s) => s.investmentsValues,
@@ -123,8 +128,6 @@ export const actions = {
       key: "address",
       value: { ...getters.address, cep: value },
     }),
-  setDescription: ({ commit }, value) =>
-    commit("setFormField", { key: "description", value }),
   setDescriptionLong: ({ commit }, value) =>
     commit("setFormField", { key: "description", value: { long: value } }),
   setTechnologies: ({ commit }, value) =>
@@ -145,8 +148,8 @@ export const actions = {
     commit("setFormField", { key: "numberOfInterns", value }),
   setIncubated: ({ commit }, value) =>
     commit("setFormField", { key: "incubated", value }),
-  setIncubators: ({ commit }, value) =>
-    commit("setFormField", { key: "incubators", value }),
+  setEcosystems: ({ commit }, value) =>
+    commit("setFormField", { key: "ecosystems", value }),
   setReceivedInvestments: ({ commit }, value) =>
     commit("setFormField", { key: "receivedInvestments", value }),
   setInvestments: ({ commit }, value) =>
@@ -162,6 +165,7 @@ export const actions = {
       commit("setErrors", [message]);
     } else {
       commit("setErrors", []);
+
       Object.keys(message).forEach((key) => {
         const k = snakeToCamelCase(key);
 
@@ -170,61 +174,23 @@ export const actions = {
           commit("setFormField", { key: k, value: message[key] });
         }
       });
-      /* commit("setFormField", { key: "partners", value: message.partners });
-      commit("setFormField", { key: "name", value: message.name });
-      commit("setFormField", {
-        key: "corporateName",
-        value: message.corporateName,
-      });
-      commit("setFormField", { key: "year", value: message.year });
-      commit("setFormField", { key: "cnae", value: message.cnae });
-      commit("setFormField", { key: "phones", value: message.phones });
-      commit("setFormField", { key: "email", value: message.emails[0] });
-      commit("setFormField", { key: "address", value: message.address.venue });
-      commit("setFormField", {
-        key: "neighborhood",
-        value: message.address.neighborhood,
-      });
-      commit("setFormField", { key: "city", value: message.address.city[0] });
-      commit("setFormField", { key: "state", value: message.address.state });
-      commit("setFormField", { key: "cep", value: message.address.cep });
-      commit("setFormField", {
-        key: "description",
-        value: message.description.long,
-      });
-      commit("setFormField", {
-        key: "technologies",
-        value: message.technologies,
-      });
-      commit("setFormField", {
-        key: "productsAndServices",
-        value: message.services
-          .split(";")
-          .map((p) => p.trim())
-          .filter((p) => p.length > 0),
-      });
 
       commit("setFormField", {
-        key: "socialMedias",
-        value: message.socialMedias,
+        key: "collaboratorsLastUpdatedAt",
+        value: new Date(message["collaborators_last_updated_at"]),
       });
-
-      commit("setFormField", { key: "site", value: message.site });
-
-      commit("setFormField", { key: "logo", value: message.logo });
-
       commit("setFormField", {
-        key: "incubated",
-        value: message.incubated ? "Sim. A empresa está incubada" : "Não",
+        key: "investmentsLastUpdatedAt",
+        value: new Date(message["investments_last_updated_at"]),
       });
-      commit("setFormField", { key: "incubators", value: message.incubators }); */
+      commit("setFormField", { key: "logo", value: undefined });
     }
   },
 
   updateCompanyForm: async function ({ commit, getters }) {
-    if (!getters.cnpj || !getters.name) {
+    if (!getters.cnpj || !getters.name || getters.partners.length > 0) {
       commit("setErrors", [
-        "É necessário informar o nome e o CNPJ da empresa para atualizar os dados",
+        "É necessário informar o nome, CNPJ e pelo menos um sócio da empresa para atualizar os dados",
       ]);
       return;
     }

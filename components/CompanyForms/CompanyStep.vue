@@ -32,8 +32,8 @@ export default {
     items: [
       { tab: "Dados da empresa", content: Base },
       { tab: "Sobre a empresa", content: About },
-      { tab: "Colaboradores", content: Staff },
       { tab: "Incubação", content: Incubator },
+      { tab: "Colaboradores", content: Staff },
       { tab: "Investimentos", content: Finance },
     ],
   }),

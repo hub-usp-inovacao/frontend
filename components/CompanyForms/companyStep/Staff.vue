@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <p class="body-2 my-5">
+      Ultima atualização feita em: {{ formattedLastUpdated }}
+    </p>
     <v-form>
       <NumberInput
         :value="numberOfCTLEmployees"
@@ -30,10 +33,15 @@ export default {
   },
   computed: {
     ...mapGetters({
+      collaboratorsLastUpdatedAt: "company_forms/collaboratorsLastUpdatedAt",
       numberOfCTLEmployees: "company_forms/numberOfCTLEmployees",
       numberOfPJColaborators: "company_forms/numberOfPJColaborators",
       numberOfInterns: "company_forms/numberOfInterns",
     }),
+    formattedLastUpdated() {
+      const date = this.collaboratorsLastUpdatedAt;
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    },
   },
   methods: {
     ...mapActions({

@@ -2,7 +2,7 @@
   <LastUpdated :label="label" :last-updated="lastUpdated">
     <v-text-field
       :label="label"
-      :value="url"
+      :value="value"
       :rules="[rules.url]"
       :hint="hint"
       persistent-hint
@@ -48,15 +48,12 @@ export default {
   },
   data: () => ({
     isValid: false,
-    url: undefined,
     rules: {
       url: (value) => validURL(value) || "URL inválida.",
     },
   }),
   methods: {
     handleInput(url) {
-      this.url = url;
-
       if (validURL(url)) {
         this.isValid = true;
         this.$emit("input", url);

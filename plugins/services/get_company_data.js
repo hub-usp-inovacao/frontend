@@ -4,9 +4,7 @@ async function getData(cnpj) {
   try {
     const url = `${backendURL}/companies?cnpj=${cnpj}`;
 
-    const resp = await fetch(url);
-
-    return await resp.json();
+    return await fetch(url);
   } catch (error) {
     console.log("error occuried while updating...");
     console.log(error);
@@ -26,6 +24,7 @@ export default (_, inject) => {
       };
     }
 
-    return { status: "ok", message: response };
+    const data = await response.json();
+    return { status: "ok", message: data };
   });
 };
