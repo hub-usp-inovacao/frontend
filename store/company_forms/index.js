@@ -188,7 +188,7 @@ export const actions = {
   },
 
   updateCompanyForm: async function ({ commit, getters }) {
-    if (!getters.cnpj || !getters.name || getters.partners.length > 0) {
+    if (!getters.cnpj || !getters.name || getters.partners.length === 0) {
       commit("setErrors", [
         "É necessário informar o nome, CNPJ e pelo menos um sócio da empresa para atualizar os dados",
       ]);
