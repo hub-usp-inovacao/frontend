@@ -6,14 +6,9 @@
       max-width="700px"
       @input="$emit('input', $event)"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn class="mt-8 mb-8" color="primary" dark v-bind="attrs" v-on="on">
-          Adicionar sócio
-        </v-btn>
-      </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">Dados do novo sócio</span>
+          <span class="text-h5">{{ modalTitle }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -68,6 +63,11 @@ export default {
       required: true,
       default: () => false,
     },
+    updatedPartner: {
+      type: Object,
+      required: false,
+      default: () => undefined,
+    },
   },
   data: () => ({
     formData: {
@@ -96,12 +96,42 @@ export default {
         .reduce((acc, { unities }) => acc.concat(unities), [])
         .sort();
     },
+    modalTitle() {
+      return this.updatedPartner
+        ? "Atualização do sócio"
+        : "Dados do novo sócio";
+    },
+  },
+  watch: {
+    updatedPartner() {
+      this.formData = this.updatedPartner
+        ? Object.assign({}, this.updatedPartner.partner)
+        : {
+            name: "",
+            email: "",
+            phone: "",
+            nusp: "",
+            bond: "",
+            unity: "",
+          };
+    },
   },
   methods: {
     savePartnerPipeline() {
-      this.save();
+      if (this.updatedPartner) {
+        this.update();
+      } else {
+        this.save();
+      }
+
       this.clearFormDataInputs();
       this.closeDialog();
+    },
+    update() {
+      this.$emit("update", {
+        index: this.updatedPartner.index,
+        newPartner: Object.assign({}, this.formData),
+      });
     },
     save() {
       this.$emit("save", Object.assign({}, this.formData));
