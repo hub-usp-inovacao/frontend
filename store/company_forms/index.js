@@ -40,6 +40,9 @@ export const state = () => ({
     pipeFapesp: "",
     other: "",
   },
+  wantsDna: false,
+  dnaContactName: "",
+  dnaContactEmail: "",
   errors: [],
 });
 
@@ -76,6 +79,9 @@ export const getters = {
   receivedInvestments: (s) => s.receivedInvestments,
   investments: (s) => s.investments,
   investmentsValues: (s) => s.investmentsValues,
+  wantsDna: (s) => s.wantsDna,
+  dnaContactName: (s) => s.dnaContactName,
+  dnaContactEmail: (s) => s.dnaContactEmail,
   errors: (s) => s.errors,
 };
 
@@ -156,6 +162,12 @@ export const actions = {
     commit("setFormField", { key: "investments", value }),
   setInvestmentsValues: ({ commit }, value) =>
     commit("setFormField", { key: "investmentsValues", value }),
+  setWantsDna: ({ commit }, value) =>
+    commit("setFormField", { key: "wantsDna", value }),
+  setDnaContactName: ({ commit }, value) =>
+    commit("setFormField", { key: "dnaContactName", value }),
+  setDnaContactEmail: ({ commit }, value) =>
+    commit("setFormField", { key: "dnaContactEmail", value }),
 
   getCompanyData: async function ({ commit, getters }) {
     const cnpj = getters.cnpj;
@@ -230,6 +242,9 @@ const prepareCompanyObject = (obj) => {
     name: obj.name,
     partners_values: obj.partners,
     company_values: [],
+    dna_values: {
+      wants_dna: obj.wantsDna,
+    },
   };
 
   if (obj.corporateName)
@@ -342,6 +357,11 @@ const prepareCompanyObject = (obj) => {
     company.company_values.push({
       "Valor de outros investimentos (R$)": obj.investmentsValues.other,
     });
+
+  if (obj.wantsDna) {
+    company.dna_values.name = obj.dnaContactName;
+    company.dna_values.email = obj.dnaContactEmail;
+  }
 
   return { company };
 };
