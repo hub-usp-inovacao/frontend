@@ -57,7 +57,7 @@ export default {
     Stepper,
   },
   data: () => ({
-    title: "Atualização de Empresas",
+    title: "Atualização de Empresas DNAUSP",
     description:
       "Representantes das Empresas podem solicitar, nesta página, a atualização dos dados cadastrados.\nPara poder atualizar os dados, você deve inserir abaixo o CNPJ de sua empresa",
 
