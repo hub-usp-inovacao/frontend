@@ -15,6 +15,9 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
+        <v-btn color="blue darker-1" text @click="updatePartner(index)"
+          >Atualizar</v-btn
+        >
         <v-btn color="red darker-1" text @click="removePartner(index)"
           >Excluir</v-btn
         >
@@ -39,6 +42,9 @@ export default {
     },
   },
   methods: {
+    updatePartner(index) {
+      this.$emit("update", index);
+    },
     removePartner(index) {
       this.$emit("remove", index);
     },
