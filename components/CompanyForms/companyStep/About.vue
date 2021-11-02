@@ -50,7 +50,7 @@
           </div>
 
           <div class="mt-5 text-h6 font-weight-regular">
-            Sua empresa está alinhada a das alguma ODS?
+            O negócio da sua empresa está relacionado a algumas das ODS?
             <v-divider />
             <v-container>
               <Dropdown
