@@ -16,9 +16,16 @@
     />
 
     <v-row justify="center">
-      <v-btn class="my-8" color="primary" dark @click="openModalToSave">
+      <v-btn
+        v-if="!limitReached"
+        class="my-8"
+        color="primary"
+        dark
+        @click="openModalToSave"
+      >
         Adicionar sócio
       </v-btn>
+      <p v-else class="body-2 my-8">É possível cadastrar até 5 sócios.</p>
     </v-row>
   </v-container>
 </template>
@@ -38,6 +45,9 @@ export default {
     ...mapGetters({
       partners: "company_forms/partners",
     }),
+    limitReached() {
+      return this.partners.length === 5;
+    },
   },
   methods: {
     ...mapActions({
