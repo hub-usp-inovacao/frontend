@@ -1,10 +1,8 @@
-import Patent from "@/lib/classes/patent";
-
 export const state = () => ({
   isLoading: false,
   patents: [],
   errors: undefined,
-  keys: Patent.keys,
+  keys: ["name", "sumary", "owners", "inventors", "ipcs"],
 });
 
 export const getters = {
@@ -26,7 +24,7 @@ export const actions = {
   fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    const { patents, errors } = await this.$fetchPatents(env);
+    const {patents, errors} = await this.$fetchPatents(env);
     ctx.commit("setErrors", errors);
     ctx.commit("setPatents", patents);
 
