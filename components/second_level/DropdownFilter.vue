@@ -33,8 +33,8 @@
                 </tr>
                 <tr>
                   <td>Microempresas</td>
-                  <td>&lt; 19 pessoas</td>
-                  <td>&lt; 9 pessoas</td>
+                  <td>&le; 19 pessoas</td>
+                  <td>&le; 9 pessoas</td>
                 </tr>
                 <tr>
                   <td>Pequena Empresa</td>
@@ -48,8 +48,8 @@
                 </tr>
                 <tr>
                   <td>Grande Empresa</td>
-                  <td>&gt; 500 pessoas</td>
-                  <td>&gt; 100 pessoas</td>
+                  <td>&ge; 500 pessoas</td>
+                  <td>&ge; 100 pessoas</td>
                 </tr>
               </table>
             </v-tooltip>
