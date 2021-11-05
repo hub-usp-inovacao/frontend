@@ -66,6 +66,17 @@
       label="Outros investimentos (R$)"
       @input="setOtherValue"
     />
+    <div class="mt-5 text-h6 font-weight-regular">
+      Qual foi o faturamento da empresa em 2020? (R$)
+      <NumberInput
+        label="Faturamento"
+        :value="financeValue"
+        @input="setFinanceValue"
+      />
+      <legend class="body-2">
+        Se for R$0,00 digite 0. Este dado NÃO será publicado.
+      </legend>
+    </div>
   </v-container>
 </template>
 
@@ -100,6 +111,7 @@ export default {
       receivedInvestments: "company_forms/receivedInvestments",
       investments: "company_forms/investments",
       investmentsValues: "company_forms/investmentsValues",
+      financeValue: "company_forms/financeValue",
     }),
     formattedLastUpdated() {
       const date = this.investmentsLastUpdatedAt;
@@ -139,6 +151,7 @@ export default {
       setReceivedInvestments: "company_forms/setReceivedInvestments",
       setInvestments: "company_forms/setInvestments",
       setInvestmentsValues: "company_forms/setInvestmentsValues",
+      setFinanceValue: "company_forms/setFinanceValue",
     }),
     setPreDefinedInvestments(preDefinedInvestments) {
       this.setInvestments(preDefinedInvestments.concat(this.otherInvestments));
