@@ -240,137 +240,49 @@ const snakeToCamelCase = (key) => {
     .join("");
 };
 
-const prepareCompanyObject = (obj) => {
-  const company = {
+const prepareCompanyObject = (obj) => ({
+  company: {
     cnpj: obj.cnpj,
     name: obj.name,
     partners_values: obj.partners,
-    company_values: [],
-    dna_values: {
-      wants_dna: obj.wantsDna,
-    },
-  };
-
-  if (obj.corporateName)
-    company.company_values.push({
+    company_values: {
       "Razão social da empresa": obj.corporateName,
-    });
-
-  if (obj.year) company.company_values.push({ "Ano de fundação": obj.year });
-
-  if (obj.cnae) company.company_values.push({ CNAE: obj.cnae });
-
-  if (obj.emails.length > 0)
-    company.company_values.push({ Emails: obj.emails });
-
-  if (obj.address) company.company_values.push({ Endereço: obj.address });
-
-  if (obj.neighborhood)
-    company.company_values.push({ Bairro: obj.neighborhood });
-
-  if (obj.city.length > 0)
-    company.company_values.push({ "Cidade sede": obj.city });
-
-  if (obj.state) company.company_values.push({ Estado: obj.state });
-
-  if (obj.cep) company.company_values.push({ CEP: obj.cep });
-
-  if (obj.description)
-    company.company_values.push({ "Breve descrição": obj.description });
-
-  if (obj.url) company.company_values.push({ Site: obj.url });
-
-  if (obj.technologies.length > 0)
-    company.company_values.push({
+      "Ano de fundação": obj.year,
+      CNAE: obj.cnae,
+      Emails: obj.emails,
+      Endereço: obj.address,
+      Bairro: obj.neighborhood,
+      "Cidade sede": obj.city,
+      Estado: obj.state,
+      CEP: obj.cep,
+      "Breve descrição": obj.description,
+      Site: obj.url,
       Tecnologias: obj.technologies.join("; "),
-    });
-
-  if (obj.services.length > 0)
-    company.company_values.push({
       "Produtos e serviços": obj.services.join("; "),
-    });
-
-  if (obj.ods.length > 0)
-    company.company_values.push({
       "Objetivos de Desenvolvimento Sustentável": obj.ods.join("; "),
-    });
-
-  if (obj.socialMedias.length > 0)
-    company.company_values.push({
       "Redes sociais": obj.socialMedias.join("; "),
-    });
-
-  if (obj.numberOfCTLEmployees)
-    company.company_values.push({
       "Número de funcionários contratados como CLT": obj.numberOfCTLEmployees,
-    });
-
-  if (obj.numberOfPJColaborators)
-    company.company_values.push({
       "Número de colaboradores contratados como Pessoa Jurídica (PJ)":
         obj.numberOfPJColaborators,
-    });
-
-  if (obj.numberOfInterns)
-    company.company_values.push({
       "Número de estagiários/bolsistas contratados": obj.numberOfInterns,
-    });
-
-  if (obj.incubated)
-    company.company_values.push({
       "A empresa está ou esteve em alguma incubadora ou Parque tecnológico":
         obj.incubated,
-    });
-
-  if (obj.receivedInvestments)
-    company.company_values.push({
-      "A empresa recebeu investimento?": "Sim",
-    });
-
-  if (obj.investments.length > 0)
-    company.company_values.push({
+      "A empresa recebeu investimento?": obj.receivedInvestments
+        ? "Sim"
+        : "Não",
       Investimentos: obj.investments.join("; "),
-    });
-
-  if (obj.investmentsValues.own)
-    company.company_values.push({
       "Valor do investimento próprio (R$)": obj.investmentsValues.own,
-    });
-
-  if (obj.investmentsValues.angel)
-    company.company_values.push({
       "Valor do investimento-anjo (R$)": obj.investmentsValues.angel,
-    });
-
-  if (obj.investmentsValues.ventureCapital)
-    company.company_values.push({
       "Valor do Venture Capital (R$)": obj.investmentsValues.ventureCapital,
-    });
-
-  if (obj.investmentsValues.privateEquity)
-    company.company_values.push({
       "Valor do Private Equity (R$)": obj.investmentsValues.privateEquity,
-    });
-
-  if (obj.investmentsValues.pipeFapesp)
-    company.company_values.push({
       "Valor do PIPE-FAPESP (R$)": obj.investmentsValues.pipeFapesp,
-    });
-
-  if (obj.investmentsValues.other)
-    company.company_values.push({
       "Valor de outros investimentos (R$)": obj.investmentsValues.other,
-    });
-
-  if (obj.financeValue)
-    company.company_values.push({
-      Financiamento: obj.financeValue,
-    });
-
-  if (obj.wantsDna) {
-    company.dna_values.name = obj.dnaContactName;
-    company.dna_values.email = obj.dnaContactEmail;
-  }
-
-  return { company };
-};
+      Faturamento: obj.financeValue,
+    },
+    dna_values: {
+      wants_dna: obj.wantsDna,
+      name: obj.wantsDna ? obj.dnaContactName : "",
+      email: obj.wantsDna ? obj.dnaContactEmail : "",
+    },
+  },
+});

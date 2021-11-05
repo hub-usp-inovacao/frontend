@@ -10,12 +10,12 @@
 
     <img :src="require('@/vectors/dnausp.svg')" alt="DNA USP" />
     <div>
-      <h2>Sua empresa gostaria de receber o selo DNA USP?</h2>
+      <h2>Sua empresa gostaria de receber a marca DNA USP?</h2>
       <BooleanInput :value="wantsDna" label="sim" @input="setWantsDna" />
 
       <v-container v-if="wantsDna">
         <h4>
-          Por qual email podemos entrar em contato para tratar do selo DNA USP?
+          Por qual email podemos entrar em contato para tratar da marca DNA USP?
         </h4>
         <ShortTextInput
           :value="dnaContactEmail"

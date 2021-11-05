@@ -31,6 +31,8 @@
         <v-container>
           <p class="body-2">{{ item.campus }}</p>
           <p class="body-2">{{ item.unity }}</p>
+          <p class="body-2">{{ item.offeringPeriod }}</p>
+          <p class="body-2">{{ item.nature }}</p>
         </v-container>
       </template>
       <template #content="{ item }">
@@ -151,7 +153,11 @@ export default {
           items: Array.from(
             this.disciplines.reduce((acc, discipline) => {
               const offeringPeriod = discipline.offeringPeriod;
-              if (offeringPeriod && !acc.has(offeringPeriod) && offeringPeriod!= "N/D")
+              if (
+                offeringPeriod &&
+                !acc.has(offeringPeriod) &&
+                offeringPeriod != "N/D"
+              )
                 acc.add(offeringPeriod);
               return acc;
             }, new Set())

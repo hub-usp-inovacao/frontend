@@ -18,18 +18,18 @@ export default {
     titleTemplate: "Hub USPInovação",
     title: "Hub USPInovação",
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {charset: "utf-8"},
+      {name: "viewport", content: "width=device-width, initial-scale=1"},
       {
         hid: "description",
         name: "description",
         content: process.env.npm_package_description || "",
       },
-      { name: "msapplication-TileColor", content: "#da532c" },
-      { name: "theme-color", content: "#ffffff" },
+      {name: "msapplication-TileColor", content: "#da532c"},
+      {name: "theme-color", content: "#ffffff"},
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon/favicon.ico" },
+      {rel: "icon", type: "image/x-icon", href: "/favicon/favicon.ico"},
       {
         rel: "stylesheet",
         href:
@@ -52,7 +52,7 @@ export default {
         sizes: "16x16",
         href: "/favicon/favicon-16x16.png",
       },
-      { rel: "manifest", href: "/favicon/site.webmanifest" },
+      {rel: "manifest", href: "/favicon/site.webmanifest"},
       {
         rel: "mask-icon",
         href: "/favicon/safari-pinned-tab.svg",
@@ -63,7 +63,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: {color: "#fff"},
   /*
    ** Global CSS
    */
@@ -93,10 +93,11 @@ export default {
     { src: "~/plugins/services/update_company.js" },
     { src: "~/plugins/matching/disciplines.js" },
     { src: "~/plugins/matching/company.js" },
+    { src: "~/plugins/matching/patent.js" },
     { src: "~/plugins/v-mask.js", mode: "client" },
   ],
 
-  serverMiddleware: [{ path: "/", handler: "~/api/index.js" }],
+  serverMiddleware: [{path: "/", handler: "~/api/index.js"}],
 
   /*
    ** Nuxt.js dev-modules
