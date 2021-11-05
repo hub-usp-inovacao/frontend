@@ -18,65 +18,71 @@
             hint="Se não possuir, responda N/D."
             @input="setUrl"
           />
-          <ImageUploader
-            :value="logo"
-            label="Logo"
-            hint="O arquivo deve possuir: boa resolução, 180 pixels (3,81 cm) x 180 pixels (3,81 cm) e estar no formato JPG ou PNG. A logomarca será exposta em um fundo branco, dessa forma, optar por uma peça que se adeque a esta configuração."
-            @input="setLogo"
-          />
-
-          <div class="mt-5 text-h6 font-weight-regular">
-            Tecnologias
-            <v-divider />
-            <v-container>
-              <MultipleInputs
-                :value="technologies"
-                input-label="Tecnologia"
-                @input="setTechnologies"
-              />
-            </v-container>
-          </div>
-
-          <div class="mt-5 text-h6 font-weight-regular">
-            Produtos/serviços
-            <v-divider />
-            <v-container>
-              <MultipleInputs
-                :value="services"
-                input-label="Produto/Serviço"
-                @input="setServices"
-              />
-            </v-container>
-          </div>
-
-          <div class="mt-5 text-h6 font-weight-regular">
-            O negócio da sua empresa está relacionado a algumas das ODS?
-            <v-divider />
-            <v-container>
-              <Dropdown
-                :value="ods"
-                :options="odsList"
-                multiple-option
-                label=""
-                @input="setOds"
-              />
-            </v-container>
-          </div>
-
-          <div class="mt-5 text-h6 font-weight-regular">
-            Redes sociais
-            <v-divider />
-            <v-container>
-              <MultipleInputs
-                :value="socialMedias"
-                input-label="Rede social"
-                component="URLInput"
-                @input="setSocialMedias"
-              />
-            </v-container>
-          </div>
         </v-container>
       </div>
+
+      <div class="mt-5 text-h6 font-weight-regular">
+        Logo
+        <v-divider />
+        <v-container>
+          <p class="body-2">
+            Caso queira exibir o logo da sua empresa na plataforma, envie-o para
+            o email hubusp.inovacao@usp.br com o assunto "Novo logo da empresa
+            X" (sem aspas), onde X é o nome da sua empresa.
+          </p>
+        </v-container>
+      </div>
+
+      <div class="mt-5 text-h6 font-weight-regular">
+        Tecnologias
+        <v-divider />
+        <v-container>
+          <MultipleInputs
+            :value="technologies"
+            input-label="Tecnologia"
+            @input="setTechnologies"
+          />
+        </v-container>
+      </div>
+      <div class="mt-5 text-h6 font-weight-regular">
+        Produtos/serviços
+        <v-divider />
+        <v-container>
+          <MultipleInputs
+            :value="services"
+            input-label="Produto/Serviço"
+            @input="setServices"
+          />
+        </v-container>
+      </div>
+
+      <div class="mt-5 text-h6 font-weight-regular">
+        Sua empresa está alinhada a das alguma ODS?
+        <v-divider />
+        <v-container>
+          <Dropdown
+            :value="ods"
+            :options="odsList"
+            multiple-option
+            label=""
+            @input="setOds"
+          />
+        </v-container>
+      </div>
+
+      <div class="mt-5 text-h6 font-weight-regular">
+        Redes sociais
+        <v-divider />
+        <v-container>
+          <MultipleInputs
+            :value="socialMedias"
+            input-label="Rede social"
+            component="URLInput"
+            @input="setSocialMedias"
+          />
+        </v-container>
+      </div>
+
     </v-form>
   </v-container>
 </template>
@@ -85,7 +91,6 @@
 import { mapGetters, mapActions } from "vuex";
 import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue";
 import LongTextInput from "@/components/CompanyForms/inputs/LongTextInput.vue";
-import ImageUploader from "@/components/CompanyForms/inputs/ImageUploader.vue";
 import URLInput from "@/components/CompanyForms/inputs/URLInput.vue";
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
 
@@ -93,7 +98,6 @@ export default {
   components: {
     MultipleInputs,
     LongTextInput,
-    ImageUploader,
     URLInput,
     Dropdown,
   },
@@ -126,7 +130,6 @@ export default {
       ods: "company_forms/ods",
       socialMedias: "company_forms/socialMedias",
       url: "company_forms/url",
-      logo: "company_forms/logo",
     }),
   },
   methods: {
@@ -137,7 +140,6 @@ export default {
       setOds: "company_forms/setOds",
       setSocialMedias: "company_forms/setSocialMedias",
       setUrl: "company_forms/setUrl",
-      setLogo: "company_forms/setLogo",
     }),
   },
 };
