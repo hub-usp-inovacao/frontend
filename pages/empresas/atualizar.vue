@@ -14,7 +14,24 @@
           </v-col>
         </v-row>
         <v-row v-if="ok">
-          <Stepper />
+          <Stepper @finish="updateCompany" />
+          <v-dialog v-model="successUpdateDialog" persistent max-width="500">
+            <v-card>
+              <v-card-title class="text-h5">
+                Solicitação de atualização enviada!
+              </v-card-title>
+              <v-card-text>
+                Agora os dados da empresa serão validados pela equipe Hub
+                USPInovação e em breve estarão disponíveis na plataforma.
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" text @click="redirect">
+                  Ok!
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-row>
         <v-row v-else>
           <v-col cols="10">
@@ -63,6 +80,7 @@ export default {
 
     loading: false,
     ok: false,
+    successUpdateDialog: false,
   }),
 
   computed: {
@@ -80,6 +98,7 @@ export default {
     ...mapActions({
       setCnpj: "company_forms/setCnpj",
       getCompanyData: "company_forms/getCompanyData",
+      updateCompanyForm: "company_forms/updateCompanyForm",
     }),
 
     async submit() {
@@ -92,6 +111,19 @@ export default {
           this.ok = true;
         }
       }
+    },
+
+    async updateCompany() {
+      const updated = await this.updateCompanyForm();
+
+      if (updated) {
+        this.successUpdateDialog = true;
+      }
+    },
+
+    redirect() {
+      this.successUpdateDialog = false;
+      this.$router.push("/empresas/atualizar");
     },
   },
 };

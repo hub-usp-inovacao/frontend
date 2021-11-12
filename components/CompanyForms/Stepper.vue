@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import CompanyStep from "@/components/CompanyForms/CompanyStep.vue";
 import PartnersStep from "@/components/CompanyForms/PartnersStep.vue";
 import IntroStep from "@/components/CompanyForms/IntroStep.vue";
@@ -74,9 +73,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      updateCompanyForm: "company_forms/updateCompanyForm",
-    }),
     nextStepBtnText(id) {
       const length = this.numberOfSteps;
       const lastId = this.steps[length - 1].id;
@@ -103,7 +99,7 @@ export default {
       }
     },
     sendData() {
-      this.updateCompanyForm();
+      this.$emit("finish");
     },
   },
 };
