@@ -123,7 +123,7 @@ export default {
 
     redirect() {
       this.successUpdateDialog = false;
-      this.$router.push("/empresas/atualizar");
+      this.$router.push("/");
     },
   },
 };
