@@ -19,12 +19,14 @@ import About from "@/components/CompanyForms/companyStep/About.vue";
 import Staff from "@/components/CompanyForms/companyStep/Staff.vue";
 import Incubator from "@/components/CompanyForms/companyStep/Incubator.vue";
 import Finance from "@/components/CompanyForms/companyStep/Finance.vue";
+import Investments from "@/components/CompanyForms/companyStep/Investments.vue";
 
 export default {
   components: {
     Base,
     About,
     Staff,
+    Investments,
     Finance,
   },
   data: () => ({
@@ -34,7 +36,8 @@ export default {
       { tab: "Sobre a empresa", content: About },
       { tab: "Incubação", content: Incubator },
       { tab: "Colaboradores", content: Staff },
-      { tab: "Investimentos", content: Finance },
+      { tab: "Faturamento", content: Finance },
+      { tab: "Investimentos", content: Investments },
     ],
   }),
 };
