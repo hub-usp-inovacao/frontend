@@ -77,10 +77,11 @@
             label="Nome"
             :rules="rules.value"
           />
-          <v-text-field
+          <MaskInput
             v-model="conexao.org.cnpj"
             label="CNPJ"
-            :rules="rules.cnpj"
+            mask="##.###.###/####-##"
+            :rule="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/"
           />
           <v-radio-group
             v-model="conexao.org.sensitiveData"
@@ -90,18 +91,48 @@
             <v-radio value="Sim" label="Sim" />
             <v-radio value="Não" label="Não" />
           </v-radio-group>
-          <v-radio-group
-            v-model="conexao.org.size"
-            label="Qual o porte da organização:"
-            :rules="rules.value"
-          >
-            <v-radio
-              v-for="(option, i) of radioButtonData[1]"
-              :key="i"
-              :value="option"
-              :label="option"
-            />
-          </v-radio-group>
+
+          <v-row>
+            <v-col sm="12" md="6">
+              <v-radio-group
+                v-model="conexao.org.size"
+                label="Qual o porte da organização:"
+                :rules="rules.value"
+              >
+                <v-radio
+                  v-for="(option, i) of radioButtonData[1]"
+                  :key="i"
+                  :value="option"
+                  :label="option"
+                />
+              </v-radio-group>
+            </v-col>
+            <v-col sm="12" md="6">
+              <table>
+                <tr>
+                  <th>Porte</th>
+                  <th>Indústria de Transformação</th>
+                  <th>Outros</th>
+                </tr>
+                <tr>
+                  <td>Pequena Empresa</td>
+                  <td>de 20 a 99 pessoas</td>
+                  <td>de 10 a 49 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Média Empresa</td>
+                  <td>de 100 a 499 pessoas</td>
+                  <td>de 50 a 99 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Grande Empresa</td>
+                  <td>&ge; 500 pessoas</td>
+                  <td>&ge; 100 pessoas</td>
+                </tr>
+              </table>
+            </v-col>
+          </v-row>
+
           <v-text-field
             v-model="conexao.org.email"
             label="E-mail"
@@ -159,7 +190,8 @@
           <div>
             <legend class="legendColor">
               Faça um breve resumo de sua demanda (Descrever o seu desafio e/ou
-              problema para o qual busca uma solução)
+              problema para o qual busca uma solução) e cite qual o objetivo de
+              sua demanda.
             </legend>
             <v-textarea
               v-model="conexao.demand.description"
@@ -172,6 +204,15 @@
               :rules="rules.textarea"
             ></v-textarea>
           </div>
+          <v-file-input
+            chips
+            multiple
+            label="Caso necessário, coloque as fotos relacionadas a sua demanda"
+            :value="value"
+            :hint="hint"
+            persistent-hint
+            accept="image/*"
+          ></v-file-input>
           <div>
             <v-radio-group
               v-model="conexao.demand.expectation"
@@ -200,7 +241,7 @@
             </v-row>
           </div>
           <v-row>
-            <v-col sm="12" md="6">
+            <v-col>
               <legend class="legendColor">
                 Qual o perfil do pesquisador o(a) senhor(a) acredita poder sanar
                 suas necessidades? Ou seja, qual deveria ser sua especialização,
@@ -290,11 +331,14 @@
 </template>
 
 <script>
+import { randomUUID } from "crypto";
 import Panel from "@/components/first_level/Panel.vue";
+import MaskInput from "@/components/connection/MaskInput.vue";
 
 export default {
   components: {
     Panel,
+    MaskInput,
   },
   data: () => ({
     conexao: {
@@ -323,6 +367,7 @@ export default {
         wantedProfile: "",
         necessity: "",
       },
+      images: {},
     },
     radioButtonData: [
       ["Empresa", "Organização sem fins lucatrivos", "Governo", "Consultoria"],
@@ -349,10 +394,6 @@ export default {
     ],
     rules: {
       value: [(f) => (f || "").length > 0 || "Campo obrigatório"],
-      cnpj: [
-        (f) =>
-          /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(f) || "Formato inválido",
-      ],
       textarea: [
         (f) => (f || "").length > 0 || "Campo obrigatório",
         (f) => (f || "").split(" ").length < 500 || "Máximo de 500 palavras!",
@@ -451,5 +492,12 @@ export default {
 <style scoped>
 .legendColor {
   color: rgba(0, 0, 0, 0.6);
+}
+table {
+  text-align: center;
+}
+th,
+td {
+  padding: 5px;
 }
 </style>
