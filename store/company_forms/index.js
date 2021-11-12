@@ -208,7 +208,7 @@ export const actions = {
       commit("setErrors", [
         "É necessário informar o nome, CNPJ e pelo menos um sócio da empresa para atualizar os dados",
       ]);
-      return;
+      return false;
     }
 
     const company = prepareCompanyObject(getters);
@@ -219,9 +219,11 @@ export const actions = {
 
     if (status !== "ok") {
       commit("setErrors", [message]);
-    } else {
-      commit("setErrors", []);
+      return false;
     }
+
+    commit("setErrors", []);
+    return true;
   },
 };
 
