@@ -205,13 +205,10 @@
             ></v-textarea>
           </div>
           <v-file-input
-            chips
             multiple
+            chips
             label="Caso necessário, coloque as fotos relacionadas a sua demanda"
-            :value="value"
-            :hint="hint"
-            persistent-hint
-            accept="image/*"
+            @change="uploadImage"
           ></v-file-input>
           <div>
             <v-radio-group
@@ -305,7 +302,6 @@
             </v-row>
           </div>
         </v-container>
-
         <v-checkbox
           v-model="confirmation"
           label="Concordo com todas as normas e funcionamento do Programa Conexão USP"
@@ -331,7 +327,6 @@
 </template>
 
 <script>
-import { randomUUID } from "crypto";
 import Panel from "@/components/first_level/Panel.vue";
 import MaskInput from "@/components/connection/MaskInput.vue";
 
@@ -367,8 +362,8 @@ export default {
         wantedProfile: "",
         necessity: "",
       },
-      images: {},
     },
+    images: null,
     radioButtonData: [
       ["Empresa", "Organização sem fins lucatrivos", "Governo", "Consultoria"],
       ["Pequena", "Média", "Grande"],
@@ -435,6 +430,9 @@ export default {
     },
   },
   methods: {
+    uploadImage(e) {
+      this.images = e;
+    },
     enableOtherOption(model, value) {
       if (this.conexao[model][value] == "Outro") {
         this.conexao[model][`${value}Other`] = "";
@@ -468,6 +466,21 @@ export default {
       )
         this.conexao.demand.necessity += " na área de " + this.selectedArea;
     },
+    sendImages() {
+      const requestId = self.crypto.randomUUID();
+      let images = this.images;
+
+      if (images) {
+        images.forEach((image) => {
+          let formData = new FormData();
+
+          formData.append("requestId", requestId);
+          formData.append("image", image);
+          this.$axios.$post("/conexao/images", formData);
+        });
+      }
+    },
+
     async submit() {
       this.loading = true;
       const valid = this.$refs.form.validate();
@@ -478,12 +491,13 @@ export default {
           alert(
             "Formulário enviado com sucesso! Em breve a equipe da AUSPIN entrará em contato com você."
           );
+          this.sendImages();
           location.reload();
         } catch (error) {
           console.log(error);
         }
+        this.loading = false;
       }
-      this.loading = false;
     },
   },
 };
