@@ -44,6 +44,8 @@ export const state = () => ({
   wantsDna: false,
   dnaContactName: "",
   dnaContactEmail: "",
+  truthfulInformations: false,
+  permission: [],
   errors: [],
 });
 
@@ -84,6 +86,8 @@ export const getters = {
   wantsDna: (s) => s.wantsDna,
   dnaContactName: (s) => s.dnaContactName,
   dnaContactEmail: (s) => s.dnaContactEmail,
+  truthfulInformations: (s) => s.truthfulInformations,
+  permission: (s) => s.permission,
   errors: (s) => s.errors,
 };
 
@@ -172,6 +176,10 @@ export const actions = {
     commit("setFormField", { key: "dnaContactName", value }),
   setDnaContactEmail: ({ commit }, value) =>
     commit("setFormField", { key: "dnaContactEmail", value }),
+  setTruthfulInformations: ({ commit }, value) =>
+    commit("setFormField", { key: "truthfulInformations", value }),
+  setPermission: ({ commit }, value) =>
+    commit("setFormField", { key: "permission", value }),
 
   getCompanyData: async function ({ commit, getters }) {
     const cnpj = getters.cnpj;
@@ -286,5 +294,7 @@ const prepareCompanyObject = (obj) => ({
       name: obj.wantsDna ? obj.dnaContactName : "",
       email: obj.wantsDna ? obj.dnaContactEmail : "",
     },
+    truthful_informations: obj.ttruthfulInformations,
+    permission: obj.permission,
   },
 });
