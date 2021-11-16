@@ -2,7 +2,7 @@
   <v-container>
     <v-form>
       <div class="mt-5 text-h6 font-weight-regular">
-        Comunicação
+        Descrição da empresa
         <v-divider />
         <v-container>
           <LongTextInput
@@ -11,12 +11,6 @@
             clearable
             hint="Descreva seu negócio, levando em consideração qual tipo de solução a mesma traz para o mercado. Busque deixar claro o posicionamento da mesma no mercado. Essa informação será divulgada."
             @input="setDescriptionLong"
-          />
-          <URLInput
-            :value="url"
-            label="Site"
-            hint="Se não possuir, responda N/D."
-            @input="setUrl"
           />
         </v-container>
       </div>
@@ -71,6 +65,19 @@
       </div>
 
       <div class="mt-5 text-h6 font-weight-regular">
+        Site
+        <v-divider />
+        <v-container>
+          <URLInput
+            :value="url"
+            label="Site"
+            hint="Se não possuir, responda N/D."
+            @input="setUrl"
+          />
+        </v-container>
+      </div>
+
+      <div class="mt-5 text-h6 font-weight-regular">
         Redes sociais
         <v-divider />
         <v-container>
@@ -82,7 +89,6 @@
           />
         </v-container>
       </div>
-
     </v-form>
   </v-container>
 </template>
