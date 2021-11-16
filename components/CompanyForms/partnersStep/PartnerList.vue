@@ -1,7 +1,7 @@
 <template>
   <div v-if="hasPartners" class="d-flex flex-wrap">
     <v-card
-      v-for="(partner, index) in partners"
+      v-for="(partner, index) in formattedPartners"
       :key="partner.nusp"
       class="mx-2 my-2"
     >
@@ -40,8 +40,35 @@ export default {
     hasPartners() {
       return this.partners.length > 0;
     },
+    formattedPartners() {
+      return this.partners.map((partner) => {
+        const phone = this.formatPartnerPhone(partner.phone);
+        const nusp = this.formatPartnerNusp(partner.nusp);
+        return { ...partner, nusp, phone };
+      });
+    },
   },
   methods: {
+    formatPartnerPhone(phone) {
+      const phoneSplitted = phone.split("");
+      return phoneSplitted
+        .map((element, index) => {
+          const isNumber = " -()+".split("").every((char) => element !== char);
+
+          if (index < phoneSplitted.length - 3 && isNumber) return "*";
+
+          return element;
+        })
+        .join("");
+    },
+    formatPartnerNusp(nusp) {
+      const nuspSplitted = nusp.split("");
+      return nuspSplitted
+        .map((element, index) =>
+          index < nuspSplitted.length - 3 ? "*" : element
+        )
+        .join("");
+    },
     updatePartner(index) {
       this.$emit("update", index);
     },
