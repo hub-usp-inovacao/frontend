@@ -31,6 +31,11 @@
         Tecnologias
         <v-divider />
         <v-container>
+          <p class="body-2">
+            Caso a sua empresa atue no desenvolvimento de tecnologias, indique
+            as 5 principais. Não indique tecnologias utilizadas, apenas aquelas
+            desenvolvidas internamente.
+          </p>
           <MultipleInputs
             :value="technologies"
             input-label="Tecnologia"
