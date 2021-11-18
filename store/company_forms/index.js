@@ -294,7 +294,7 @@ const prepareCompanyObject = (obj) => ({
       name: obj.wantsDna ? obj.dnaContactName : "",
       email: obj.wantsDna ? obj.dnaContactEmail : "",
     },
-    truthful_informations: obj.ttruthfulInformations,
+    truthful_informations: obj.truthfulInformations,
     permission: obj.permission,
   },
 });
