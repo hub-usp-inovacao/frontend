@@ -109,13 +109,13 @@ export default {
         to: "/empresas",
       },
       {
+        title: "Patentes",
+        to: "/patentes",
+      },
+      {
         title: "Conexão",
         to: "/conexao",
         new: true,
-      },
-      {
-        title: "Patentes",
-        to: "/patentes",
       },
       {
         title: "Jornada",
