@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <p class="body-2 my-5">
+      Ultima atualização feita em: {{ formattedLastUpdated }}
+    </p>
     <div class="mt-5 text-h6 font-weight-regular">
       Qual foi o faturamento da empresa em 2020? (R$)
       <CurrencyInput
@@ -25,7 +28,12 @@ export default {
   computed: {
     ...mapGetters({
       financeValue: "company_forms/financeValue",
+      revenuesLastUpdatedAt: "company_forms/revenuesLastUpdatedAt",
     }),
+    formattedLastUpdated() {
+      const date = this.revenuesLastUpdatedAt;
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    },
   },
   methods: {
     ...mapActions({

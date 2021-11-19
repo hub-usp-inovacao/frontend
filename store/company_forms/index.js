@@ -25,6 +25,7 @@ export const state = () => ({
   logo: undefined,
   collaboratorsLastUpdatedAt: new Date(),
   investmentsLastUpdatedAt: new Date(),
+  revenuesLastUpdatedAt: new Date(),
   numberOfCTLEmployees: "",
   numberOfPJColaborators: "",
   numberOfInterns: "",
@@ -74,6 +75,7 @@ export const getters = {
   logo: (s) => s.logo,
   collaboratorsLastUpdatedAt: (s) => s.collaboratorsLastUpdatedAt,
   investmentsLastUpdatedAt: (s) => s.investmentsLastUpdatedAt,
+  revenuesLastUpdatedAt: (s) => s.revenuesLastUpdatedAt,
   numberOfCTLEmployees: (s) => s.numberOfCTLEmployees,
   numberOfPJColaborators: (s) => s.numberOfPJColaborators,
   numberOfInterns: (s) => s.numberOfInterns,
@@ -206,6 +208,10 @@ export const actions = {
       commit("setFormField", {
         key: "investmentsLastUpdatedAt",
         value: new Date(message["investments_last_updated_at"]),
+      });
+      commit("setFormField", {
+        key: "revenuesLastUpdatedAt",
+        value: new Date(message["revenues_last_updated_at"]),
       });
       commit("setFormField", { key: "logo", value: undefined });
     }
