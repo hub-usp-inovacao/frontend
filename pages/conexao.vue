@@ -189,7 +189,7 @@
           </div>
           <div>
             <legend class="legendColor">
-              Faça um breve resumo de sua demanda (Descrever o seu desafio e/ou
+              Faça um breve resumo de sua demanda (Descreva o seu desafio e/ou
               problema para o qual busca uma solução) e cite qual o objetivo de
               sua demanda.
             </legend>
@@ -467,16 +467,14 @@ export default {
         this.conexao.demand.necessity += " na área de " + this.selectedArea;
     },
     sendImages() {
-      const requestId = self.crypto.randomUUID();
       let images = this.images;
-
       if (images) {
         images.forEach((image) => {
           let formData = new FormData();
 
-          formData.append("requestId", requestId);
+          formData.append("requestId", this.conexao.requestId);
           formData.append("image", image);
-          this.$axios.$post("/conexao/images", formData);
+          this.$axios.$post("/conexao/image", formData);
         });
       }
     },
@@ -484,14 +482,15 @@ export default {
     async submit() {
       this.loading = true;
       const valid = this.$refs.form.validate();
+      this.conexao.requestId = self.crypto.randomUUID();
       if (valid) {
         this.dataChecking();
         try {
           await this.$axios.$post("/conexao", { conexao: this.conexao });
+          this.sendImages();
           alert(
             "Formulário enviado com sucesso! Em breve a equipe da AUSPIN entrará em contato com você."
           );
-          this.sendImages();
           location.reload();
         } catch (error) {
           console.log(error);
