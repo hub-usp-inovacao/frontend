@@ -77,10 +77,11 @@
             label="Nome"
             :rules="rules.value"
           />
-          <v-text-field
+          <MaskInput
             v-model="conexao.org.cnpj"
             label="CNPJ"
-            :rules="rules.cnpj"
+            mask="##.###.###/####-##"
+            :rule="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/"
           />
           <v-radio-group
             v-model="conexao.org.sensitiveData"
@@ -90,18 +91,48 @@
             <v-radio value="Sim" label="Sim" />
             <v-radio value="Não" label="Não" />
           </v-radio-group>
-          <v-radio-group
-            v-model="conexao.org.size"
-            label="Qual o porte da organização:"
-            :rules="rules.value"
-          >
-            <v-radio
-              v-for="(option, i) of radioButtonData[1]"
-              :key="i"
-              :value="option"
-              :label="option"
-            />
-          </v-radio-group>
+
+          <v-row>
+            <v-col sm="12" md="6">
+              <v-radio-group
+                v-model="conexao.org.size"
+                label="Qual o porte da organização:"
+                :rules="rules.value"
+              >
+                <v-radio
+                  v-for="(option, i) of radioButtonData[1]"
+                  :key="i"
+                  :value="option"
+                  :label="option"
+                />
+              </v-radio-group>
+            </v-col>
+            <v-col sm="12" md="6">
+              <table>
+                <tr>
+                  <th>Porte</th>
+                  <th>Indústria de Transformação</th>
+                  <th>Outros</th>
+                </tr>
+                <tr>
+                  <td>Pequena Empresa</td>
+                  <td>de 20 a 99 pessoas</td>
+                  <td>de 10 a 49 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Média Empresa</td>
+                  <td>de 100 a 499 pessoas</td>
+                  <td>de 50 a 99 pessoas</td>
+                </tr>
+                <tr>
+                  <td>Grande Empresa</td>
+                  <td>&ge; 500 pessoas</td>
+                  <td>&ge; 100 pessoas</td>
+                </tr>
+              </table>
+            </v-col>
+          </v-row>
+
           <v-text-field
             v-model="conexao.org.email"
             label="E-mail"
@@ -158,8 +189,9 @@
           </div>
           <div>
             <legend class="legendColor">
-              Faça um breve resumo de sua demanda (Descrever o seu desafio e/ou
-              problema para o qual busca uma solução)
+              Faça um breve resumo de sua demanda (Descreva o seu desafio e/ou
+              problema para o qual busca uma solução) e cite qual o objetivo de
+              sua demanda.
             </legend>
             <v-textarea
               v-model="conexao.demand.description"
@@ -172,6 +204,12 @@
               :rules="rules.textarea"
             ></v-textarea>
           </div>
+          <v-file-input
+            multiple
+            chips
+            label="Caso necessário, coloque as fotos relacionadas a sua demanda"
+            @change="uploadImage"
+          ></v-file-input>
           <div>
             <v-radio-group
               v-model="conexao.demand.expectation"
@@ -200,7 +238,7 @@
             </v-row>
           </div>
           <v-row>
-            <v-col sm="12" md="6">
+            <v-col>
               <legend class="legendColor">
                 Qual o perfil do pesquisador o(a) senhor(a) acredita poder sanar
                 suas necessidades? Ou seja, qual deveria ser sua especialização,
@@ -264,7 +302,6 @@
             </v-row>
           </div>
         </v-container>
-
         <v-checkbox
           v-model="confirmation"
           label="Concordo com todas as normas e funcionamento do Programa Conexão USP"
@@ -291,10 +328,12 @@
 
 <script>
 import Panel from "@/components/first_level/Panel.vue";
+import MaskInput from "@/components/FormsInputs/MaskInput.vue";
 
 export default {
   components: {
     Panel,
+    MaskInput,
   },
   data: () => ({
     conexao: {
@@ -324,6 +363,7 @@ export default {
         necessity: "",
       },
     },
+    images: null,
     radioButtonData: [
       ["Empresa", "Organização sem fins lucatrivos", "Governo", "Consultoria"],
       ["Pequena", "Média", "Grande"],
@@ -349,10 +389,6 @@ export default {
     ],
     rules: {
       value: [(f) => (f || "").length > 0 || "Campo obrigatório"],
-      cnpj: [
-        (f) =>
-          /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(f) || "Formato inválido",
-      ],
       textarea: [
         (f) => (f || "").length > 0 || "Campo obrigatório",
         (f) => (f || "").split(" ").length < 500 || "Máximo de 500 palavras!",
@@ -394,6 +430,9 @@ export default {
     },
   },
   methods: {
+    uploadImage(e) {
+      this.images = e;
+    },
     enableOtherOption(model, value) {
       if (this.conexao[model][value] == "Outro") {
         this.conexao[model][`${value}Other`] = "";
@@ -427,13 +466,28 @@ export default {
       )
         this.conexao.demand.necessity += " na área de " + this.selectedArea;
     },
+    sendImages() {
+      let images = this.images;
+      if (images) {
+        images.forEach((image) => {
+          let formData = new FormData();
+
+          formData.append("requestId", this.conexao.requestId);
+          formData.append("image", image);
+          this.$axios.$post("/conexao/image", formData);
+        });
+      }
+    },
+
     async submit() {
       this.loading = true;
       const valid = this.$refs.form.validate();
       if (valid) {
+        this.conexao.requestId = self.crypto.randomUUID();
         this.dataChecking();
         try {
           await this.$axios.$post("/conexao", { conexao: this.conexao });
+          this.sendImages();
           alert(
             "Formulário enviado com sucesso! Em breve a equipe da AUSPIN entrará em contato com você."
           );
@@ -451,5 +505,12 @@ export default {
 <style scoped>
 .legendColor {
   color: rgba(0, 0, 0, 0.6);
+}
+table {
+  text-align: center;
+}
+th,
+td {
+  padding: 5px;
 }
 </style>
