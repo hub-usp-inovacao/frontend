@@ -482,8 +482,8 @@ export default {
     async submit() {
       this.loading = true;
       const valid = this.$refs.form.validate();
-      this.conexao.requestId = self.crypto.randomUUID();
       if (valid) {
+        this.conexao.requestId = self.crypto.randomUUID();
         this.dataChecking();
         try {
           await this.$axios.$post("/conexao", { conexao: this.conexao });
