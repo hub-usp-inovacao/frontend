@@ -328,7 +328,7 @@
 
 <script>
 import Panel from "@/components/first_level/Panel.vue";
-import MaskInput from "@/components/connection/MaskInput.vue";
+import MaskInput from "@/components/FormsInputs/MaskInput.vue";
 
 export default {
   components: {
