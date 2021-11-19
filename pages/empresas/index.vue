@@ -85,10 +85,11 @@
           {{ item.description.long }}
         </p>
 
-        <p>
-          <span class="font-weight-bold">Produtos e Serviços:</span>
-          {{ item.services }}
-        </p>
+        <BulletList
+          v-if="item.services.length > 0"
+          title="Produtos e Serviços"
+          :items="item.services"
+        />
 
         <BulletList
           v-if="item.technologies.length > 0"
