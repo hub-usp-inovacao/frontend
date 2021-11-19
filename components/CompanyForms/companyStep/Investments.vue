@@ -37,37 +37,37 @@
           />
         </v-container>
       </div>
-      <NumberInput
+      <CurrencyInput
         v-if="hasInvestmentTypeSelected('Investimento próprio')"
         :value="ownValue"
         label="Valor do investimento próprio (R$)"
         @input="setOwnValue"
       />
-      <NumberInput
+      <CurrencyInput
         v-if="hasInvestmentTypeSelected('Investimento-anjo')"
         :value="angelValue"
         label="Valor do investimento-anjo (R$)"
         @input="setAngelValue"
       />
-      <NumberInput
+      <CurrencyInput
         v-if="hasInvestmentTypeSelected('Venture capital')"
         :value="ventureCapitalValue"
         label="Valor do Venture Capital (R$)"
         @input="setVentureCapitalValue"
       />
-      <NumberInput
+      <CurrencyInput
         v-if="hasInvestmentTypeSelected('Private equity')"
         :value="privateEquityValue"
         label="Valor do Private Equity (R$)"
         @input="setPrivateEquityValue"
       />
-      <NumberInput
+      <CurrencyInput
         v-if="hasInvestmentTypeSelected('PIPE-FAPESP')"
         :value="pipeFapespValue"
         label="Valor do PIPE-FAPESP (R$)"
         @input="setPipeFapespValue"
       />
-      <NumberInput
+      <CurrencyInput
         v-if="hasOtherInvestmentSelected()"
         :value="otherValue"
         label="Outros investimentos (R$)"
@@ -82,14 +82,14 @@ import { mapGetters, mapActions } from "vuex";
 import Dropdown from "@/components/CompanyForms/inputs/Dropdown.vue";
 import BooleanInput from "@/components/CompanyForms/inputs/BooleanInput.vue";
 import MultipleInputs from "@/components/CompanyForms/inputs/MultipleInputs.vue";
-import NumberInput from "@/components/CompanyForms/inputs/NumberInput.vue";
+import CurrencyInput from "@/components/CompanyForms/inputs/CurrencyInput.vue";
 
 export default {
   components: {
     Dropdown,
     BooleanInput,
     MultipleInputs,
-    NumberInput,
+    CurrencyInput,
   },
   data: () => ({
     investimentos: [

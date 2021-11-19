@@ -2,7 +2,7 @@
   <v-container>
     <div class="mt-5 text-h6 font-weight-regular">
       Qual foi o faturamento da empresa em 2020? (R$)
-      <NumberInput
+      <CurrencyInput
         label="Faturamento"
         :value="financeValue"
         @input="setFinanceValue"
@@ -16,11 +16,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import NumberInput from "@/components/CompanyForms/inputs/NumberInput.vue";
+import CurrencyInput from "@/components/CompanyForms/inputs/CurrencyInput.vue";
 
 export default {
   components: {
-    NumberInput,
+    CurrencyInput,
   },
   computed: {
     ...mapGetters({
