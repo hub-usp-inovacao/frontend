@@ -15,57 +15,65 @@
       label=""
       @input="setReceivedInvestments"
     />
-    <h2 class="text-h6 mt-6 font-weight-regular">
-      Se sim, quais investimentos a empresa recebeu?
-    </h2>
-    <Dropdown
-      :value="preDefinedInvestments"
-      :options="investimentos"
-      multiple-option
-      @input="setPreDefinedInvestments"
-    />
-    <div class="mt-5 text-h6 font-weight-regular">
-      Outros
-      <v-divider />
-      <v-container>
-        <MultipleInputs
-          :value="otherInvestments"
-          input-label="Investimento"
-          @items="outros = $event"
-          @input="setOtherInvestments"
-        />
-      </v-container>
+    <div v-if="receivedInvestments">
+      <h2 class="text-h6 mt-6 font-weight-regular">
+        Quais investimentos a empresa recebeu?
+      </h2>
+      <Dropdown
+        :value="preDefinedInvestments"
+        :options="investimentos"
+        multiple-option
+        @input="setPreDefinedInvestments"
+      />
+      <div class="mt-5 text-h6 font-weight-regular">
+        Outros
+        <v-divider />
+        <v-container>
+          <MultipleInputs
+            :value="otherInvestments"
+            input-label="Investimento"
+            @items="outros = $event"
+            @input="setOtherInvestments"
+          />
+        </v-container>
+      </div>
+      <NumberInput
+        v-if="hasInvestmentTypeSelected('Investimento próprio')"
+        :value="ownValue"
+        label="Valor do investimento próprio (R$)"
+        @input="setOwnValue"
+      />
+      <NumberInput
+        v-if="hasInvestmentTypeSelected('Investimento-anjo')"
+        :value="angelValue"
+        label="Valor do investimento-anjo (R$)"
+        @input="setAngelValue"
+      />
+      <NumberInput
+        v-if="hasInvestmentTypeSelected('Venture capital')"
+        :value="ventureCapitalValue"
+        label="Valor do Venture Capital (R$)"
+        @input="setVentureCapitalValue"
+      />
+      <NumberInput
+        v-if="hasInvestmentTypeSelected('Private equity')"
+        :value="privateEquityValue"
+        label="Valor do Private Equity (R$)"
+        @input="setPrivateEquityValue"
+      />
+      <NumberInput
+        v-if="hasInvestmentTypeSelected('PIPE-FAPESP')"
+        :value="pipeFapespValue"
+        label="Valor do PIPE-FAPESP (R$)"
+        @input="setPipeFapespValue"
+      />
+      <NumberInput
+        v-if="hasOtherInvestmentSelected()"
+        :value="otherValue"
+        label="Outros investimentos (R$)"
+        @input="setOtherValue"
+      />
     </div>
-    <NumberInput
-      :value="ownValue"
-      label="Valor do investimento próprio (R$)"
-      @input="setOwnValue"
-    />
-    <NumberInput
-      :value="angelValue"
-      label="Valor do investimento-anjo (R$)"
-      @input="setAngelValue"
-    />
-    <NumberInput
-      :value="ventureCapitalValue"
-      label="Valor do Venture Capital (R$)"
-      @input="setVentureCapitalValue"
-    />
-    <NumberInput
-      :value="privateEquityValue"
-      label="Valor do Private Equity (R$)"
-      @input="setPrivateEquityValue"
-    />
-    <NumberInput
-      :value="pipeFapespValue"
-      label="Valor do PIPE-FAPESP (R$)"
-      @input="setPipeFapespValue"
-    />
-    <NumberInput
-      :value="otherValue"
-      label="Outros investimentos (R$)"
-      @input="setOtherValue"
-    />
   </v-container>
 </template>
 
@@ -140,6 +148,17 @@ export default {
       setInvestments: "company_forms/setInvestments",
       setInvestmentsValues: "company_forms/setInvestmentsValues",
     }),
+    hasInvestmentTypeSelected(type) {
+      return this.preDefinedInvestments.find((inv) => inv === type);
+    },
+    hasOtherInvestmentSelected() {
+      return (
+        this.otherInvestments.length > 0 ||
+        this.preDefinedInvestments.find(
+          (inv) => inv === "Crowdfunding" || inv === "BNDES e/ou FINEP"
+        )
+      );
+    },
     setPreDefinedInvestments(preDefinedInvestments) {
       this.setInvestments(preDefinedInvestments.concat(this.otherInvestments));
     },
