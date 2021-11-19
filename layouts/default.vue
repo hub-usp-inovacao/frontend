@@ -113,11 +113,6 @@ export default {
         to: "/patentes",
       },
       {
-        title: "Conexão",
-        to: "/conexao",
-        new: true,
-      },
-      {
         title: "Jornada",
         to: "/jornada",
         new: true,
