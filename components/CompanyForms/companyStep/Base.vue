@@ -6,17 +6,20 @@
         <v-divider />
         <v-container>
           <ShortTextInput
+            class="mb-8"
             :value="name"
             label="Nome fantasia da empresa"
             hint="A empresa será listada no Hub USPInovação a partir do nome fantasia da mesma."
             @input="setName"
           />
           <ShortTextInput
+            class="mb-4"
             :value="corporateName"
             label="Razão social da empresa"
             @input="setCorporateName"
           />
           <MaskInput
+            class="mb-4"
             :value="year"
             mask="####"
             label="Ano de fundação"
@@ -74,7 +77,12 @@
             input-label="Email"
             @input="setEmails"
           />
-          <ShortTextInput :value="venue" label="Endereço" @input="setVenue" />
+          <ShortTextInput
+            class="mt-8"
+            :value="venue"
+            label="Endereço"
+            @input="setVenue"
+          />
           <ShortTextInput
             :value="neighborhood"
             label="Bairro"
@@ -87,6 +95,7 @@
             @input="setCity"
           />
           <Dropdown
+            class="mt-8"
             :value="state"
             label="Estado"
             :options="allStates"
