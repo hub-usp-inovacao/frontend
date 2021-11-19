@@ -10,6 +10,19 @@
         <component :is="item.content"></component>
       </v-tab-item>
     </v-tabs-items>
+    <div class="ma-4 d-flex justify-space-between">
+      <v-btn
+        class="mr-4"
+        color="primary"
+        :disabled="disableBackButton"
+        @click="previousTab"
+      >
+        {{ backButtonName }}
+      </v-btn>
+      <v-btn color="primary" :disabled="disableNextButton" @click="nextTab">
+        {{ nextButtonName }}
+      </v-btn>
+    </div>
   </v-container>
 </template>
 
@@ -30,7 +43,7 @@ export default {
     Finance,
   },
   data: () => ({
-    tab: null,
+    tab: 0,
     items: [
       { tab: "Dados da empresa", content: Base },
       { tab: "Sobre a empresa", content: About },
@@ -40,6 +53,32 @@ export default {
       { tab: "Investimentos", content: Investments },
     ],
   }),
+  computed: {
+    backButtonName() {
+      if (this.disableBackButton) return "Voltar";
+      const tabName = this.items[this.tab - 1].tab;
+      return `Voltar para "${tabName}"`;
+    },
+    nextButtonName() {
+      if (this.disableNextButton) return "Próximo";
+      const tabName = this.items[this.tab + 1].tab;
+      return `Ir para "${tabName}"`;
+    },
+    disableBackButton() {
+      return this.tab === 0;
+    },
+    disableNextButton() {
+      return this.tab === this.items.length - 1;
+    },
+  },
+  methods: {
+    nextTab() {
+      this.tab = this.tab + 1;
+    },
+    previousTab() {
+      this.tab = this.tab - 1;
+    },
+  },
 };
 </script>
 
