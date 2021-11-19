@@ -117,7 +117,7 @@ export default {
           name: d.name,
           description: d.description.long,
           category: "Educação",
-          id: d.id,
+          id: d._id.$oid,
         }))
         .concat(
           base_pdis.map((p) => ({
@@ -153,7 +153,7 @@ export default {
             name: c.name,
             description: c.description.long,
             category: "Empresas",
-            id: c.id,
+            id: c._id.$oid,
           }))
         )
         .concat(
@@ -161,7 +161,7 @@ export default {
             name: p.name,
             description: p.summary,
             category: "Patentes",
-            id: p.id,
+            id: p._id.$oid,
           }))
         );
     },

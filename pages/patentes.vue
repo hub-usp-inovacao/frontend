@@ -217,7 +217,7 @@ export default {
 
     if (route.params.id) {
       this.routeParam = this.patents.find(
-        (patent) => patent.id == route.params.id
+        (patent) => patent._id.$oid == route.params.id
       );
     } else if (route.query && Object.keys(route.query).length > 0) {
       this.queryParam = route.query;
@@ -250,7 +250,7 @@ export default {
       this.filtered = this.patents.filter((patent) =>
         this.$patentMatchesFilter(patent, { ...context, primary: primaryCodes })
       );
-      console.log(this.filtered)
+      console.log(this.filtered);
     },
     async pipeline() {
       if (this.filters) this.filterData(this.filters);

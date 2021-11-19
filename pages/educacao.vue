@@ -224,7 +224,7 @@ export default {
 
     if (route.params.id) {
       this.routeParam = this.disciplines.find(
-        (discipline) => discipline.id == route.params.id
+        (discipline) => discipline._id.$oid == route.params.id
       );
     } else if (route.query && Object.keys(route.query).length > 0) {
       this.queryParam = route.query;

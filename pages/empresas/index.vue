@@ -254,7 +254,7 @@ export default {
 
     if (route.params.id) {
       this.routeParam = this.companies.find(
-        (company) => company.id == route.params.id
+        (company) => company._id.$oid == route.params.id
       );
     } else if (route.query && Object.keys(route.query).length > 0) {
       this.queryParam = route.query;
