@@ -36,14 +36,24 @@ export default (_, inject) => {
   inject("updateCompanyData", async (data, logo) => {
     const response = await updateData(data, logo);
 
-    if (!response || response.status < 200 || response.status >= 300) {
+    if (!response) {
       return {
-        status: "failure",
-        message: "Não foi possível atualizar os dados! Tente novamente.",
+        error: "Falha de conexão com o servidor. Tente novamente mais tarde.",
       };
     }
 
-    const body = await response.json();
-    return { status: "ok", message: body };
+    if (response.status >= 200 && response.status < 300) {
+      return {};
+    } else if (response.status >= 400 && response.status < 500) {
+      return {
+        error:
+          "Erro na validação dos dados. Verifique os dados preenchidos e tente novamente.",
+      };
+    } else {
+      return {
+        error:
+          "Erro do servidor ao processar os dados. Tente novamente mais tarde.",
+      };
+    }
   });
 };

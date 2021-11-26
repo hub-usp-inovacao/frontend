@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="background">
+    <div id="company_update_background" class="background">
       <Panel :title="title" :description="description" no-search />
     </div>
 
@@ -91,6 +91,14 @@ export default {
 
     isValid() {
       return this.cnpj.length === 18;
+    },
+  },
+
+  watch: {
+    errors() {
+      if (this.errors.length > 0) {
+        this.$vuetify.goTo("#company_update_background");
+      }
     },
   },
 

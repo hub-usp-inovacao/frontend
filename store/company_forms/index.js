@@ -226,13 +226,10 @@ export const actions = {
     }
 
     const company = prepareCompanyObject(getters);
-    const { status, message } = await this.$updateCompanyData(
-      company,
-      getters.logo
-    );
+    const { error } = await this.$updateCompanyData(company, getters.logo);
 
-    if (status !== "ok") {
-      commit("setErrors", [message]);
+    if (error) {
+      commit("setErrors", [error]);
       return false;
     }
 
