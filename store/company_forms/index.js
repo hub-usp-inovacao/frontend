@@ -229,7 +229,7 @@ export const actions = {
     const { error } = await this.$updateCompanyData(company, getters.logo);
 
     if (error) {
-      commit("setErrors", [error]);
+      commit("setErrors", error);
       return false;
     }
 

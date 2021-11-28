@@ -3,7 +3,6 @@ async function updateData(data, logo) {
 
   try {
     const url = backendURL + "/companies";
-    console.log(logo);
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -45,14 +44,15 @@ export default (_, inject) => {
     if (response.status >= 200 && response.status < 300) {
       return {};
     } else if (response.status >= 400 && response.status < 500) {
+      const { error } = await response.json();
       return {
-        error:
-          "Erro na validação dos dados. Verifique os dados preenchidos e tente novamente.",
+        error,
       };
     } else {
       return {
-        error:
+        error: [
           "Erro do servidor ao processar os dados. Tente novamente mais tarde.",
+        ],
       };
     }
   });
