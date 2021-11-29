@@ -37,7 +37,7 @@ export default (_, inject) => {
 
     if (!response) {
       return {
-        error: "Falha de conexão com o servidor. Tente novamente mais tarde.",
+        error: ["Falha de conexão com o servidor. Tente novamente mais tarde."],
       };
     }
 
