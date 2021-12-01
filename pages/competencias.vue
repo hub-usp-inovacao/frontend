@@ -295,7 +295,7 @@ export default {
           : undefined;
 
       this.filtered = this.skills.filter((skill) =>
-        skill.matchesFilter(context)
+        this.$skillMatchesFilter(skill, context)
       );
     },
     async pipeline() {
