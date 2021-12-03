@@ -1,10 +1,16 @@
-import Skill from "@/lib/classes/skill";
-
 export const state = () => ({
   isLoading: false,
   skills: [],
   errors: undefined,
-  keys: Skill.keys,
+  keys: [
+    "name",
+    "labsOrGroupsNames",
+    "labsOrGroupsInitials",
+    "keywords",
+    "descriptionSkills",
+    "descriptionEquipments",
+    "descriptionServices",
+  ],
 });
 
 export const getters = {
