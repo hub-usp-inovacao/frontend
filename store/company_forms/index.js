@@ -225,6 +225,13 @@ export const actions = {
       return false;
     }
 
+    if (!getters.truthfulInformations) {
+      commit("setErrors", [
+        "É necessário declarar que as informações fornecidas são verdadeiras e que a empresa atende aos critérios estabelecidos",
+      ]);
+      return false;
+    }
+
     const company = prepareCompanyObject(getters);
     const { errors } = await this.$updateCompanyData(company, getters.logo);
 
