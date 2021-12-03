@@ -1,4 +1,4 @@
-const indexingKeys = ["name", "descriptionLong", "services", "technologies"];
+const indexingKeys = ["name", "description.long", "services", "technologies"];
 
 export const state = () => ({
   companies: [],
@@ -57,7 +57,7 @@ export const actions = {
     ctx.commit("setLoadingStatus");
 
     const { companies } = await this.$fetchCompanies();
-    const indexed = this.$indexer(companies, indexingKeys);
+    const indexed = this.$indexer("companies", companies);
     ctx.commit("setCompanies", indexed);
 
     ctx.commit("unsetLoadingStatus");

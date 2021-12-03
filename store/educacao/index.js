@@ -1,4 +1,4 @@
-const indexingKeys = ["name", "descriptionLong", "descriptionShort"];
+const indexingKeys = ["name", "description.long", "description.short"];
 
 export const state = () => ({
   disciplines: [],
@@ -38,7 +38,7 @@ export const actions = {
     ctx.commit("setLoadingStatus");
 
     const { disciplines } = await this.$fetchDisciplines(env);
-    const indexed = this.$indexer(disciplines, indexingKeys);
+    const indexed = this.$indexer("disciplines", disciplines);
     ctx.commit("setDisciplines", indexed);
 
     ctx.commit("unsetLoadingStatus");
