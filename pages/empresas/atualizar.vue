@@ -2,6 +2,10 @@
   <section>
     <div id="company_update_background" class="background">
       <Panel :title="title" :description="description" no-search />
+      <v-alert dense border="left" type="warning" class="text-center">
+        Dados sensíveis não são mostrados neste formulário, mas é possível
+        solicitar a modificação dos mesmos.
+      </v-alert>
     </div>
 
     <v-form ref="form">
