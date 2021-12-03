@@ -3,7 +3,6 @@ async function updateData(data, logo) {
 
   try {
     const url = backendURL + "/companies";
-    console.log(logo);
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -36,14 +35,28 @@ export default (_, inject) => {
   inject("updateCompanyData", async (data, logo) => {
     const response = await updateData(data, logo);
 
-    if (!response || response.status < 200 || response.status >= 300) {
+    if (!response) {
       return {
-        status: "failure",
-        message: "Não foi possível atualizar os dados! Tente novamente.",
+        error: ["Falha de conexão com o servidor. Tente novamente mais tarde."],
       };
     }
 
-    const body = await response.json();
-    return { status: "ok", message: body };
+    if (response.status >= 200 && response.status < 300) {
+      return {};
+    } else if (response.status >= 400 && response.status < 500) {
+      const { error, errors } = await response.json();
+      const result = [];
+
+      if (error) result.concat(error);
+      if (errors) result.concat(errors);
+
+      return { errors: result };
+    } else {
+      return {
+        errors: [
+          "Erro do servidor ao processar os dados. Tente novamente mais tarde.",
+        ],
+      };
+    }
   });
 };
