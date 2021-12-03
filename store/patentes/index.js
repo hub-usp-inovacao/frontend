@@ -1,8 +1,10 @@
+const indexingKeys = ["name", "summary", "owners", "inventors", "ipcs"];
+
 export const state = () => ({
   isLoading: false,
   patents: [],
   errors: undefined,
-  keys: ["name", "sumary", "owners", "inventors", "ipcs"],
+  keys: indexingKeys.map((k) => `inspect.${k}`),
 });
 
 export const getters = {
@@ -24,9 +26,10 @@ export const actions = {
   fetchSpreadsheets: async function (ctx, env) {
     ctx.commit("setLoadingStatus");
 
-    const {patents, errors} = await this.$fetchPatents(env);
+    const { patents, errors } = await this.$fetchPatents(env);
+    const indexed = this.$indexer("patents", patents);
     ctx.commit("setErrors", errors);
-    ctx.commit("setPatents", patents);
+    ctx.commit("setPatents", indexed);
 
     ctx.commit("unsetLoadingStatus");
   },
