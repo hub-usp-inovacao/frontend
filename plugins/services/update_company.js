@@ -44,13 +44,16 @@ export default (_, inject) => {
     if (response.status >= 200 && response.status < 300) {
       return {};
     } else if (response.status >= 400 && response.status < 500) {
-      const { error } = await response.json();
-      return {
-        error,
-      };
+      const { error, errors } = await response.json();
+      const result = [];
+
+      if (error) result.concat(error);
+      if (errors) result.concat(errors);
+
+      return { errors: result };
     } else {
       return {
-        error: [
+        errors: [
           "Erro do servidor ao processar os dados. Tente novamente mais tarde.",
         ],
       };
