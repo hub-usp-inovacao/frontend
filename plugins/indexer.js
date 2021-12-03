@@ -20,7 +20,7 @@ export default (ctx, inject) => {
         entity.inspect.description.short = ctx.$removeAccent(
           entity.description.short
         );
-      } else {
+      } else if (name == "patents") {
         entity.inspect.name = ctx.$removeAccent(entity["name"]);
         entity.inspect.summary = ctx.$removeAccent(entity.summary);
         entity.inspect.owners = ctx.$removeAccent(entity.owners);
