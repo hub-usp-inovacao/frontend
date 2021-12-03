@@ -95,8 +95,8 @@ export default {
   },
 
   watch: {
-    errors() {
-      if (this.errors.length > 0) {
+    errors(newErrors) {
+      if (newErrors.length > 0) {
         this.$vuetify.goTo("#company_update_background");
       }
     },
