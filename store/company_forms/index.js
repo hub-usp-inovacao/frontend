@@ -268,25 +268,26 @@ const prepareCompanyObject = (obj) => ({
     company_values: {
       "Razão social da empresa": obj.corporateName,
       "Ano de fundação": obj.year,
-      CNAE: obj.cnae,
+      cnae: obj.cnae,
+      "Telefone comercial": obj.phones,
       Emails: obj.emails,
-      Endereço: obj.address,
+      Endereço: obj.address.venue,
       Bairro: obj.neighborhood,
       "Cidade sede": obj.city,
       Estado: obj.state,
       CEP: obj.cep,
-      "Breve descrição": obj.description,
-      Site: obj.url,
-      Tecnologias: obj.technologies.join("; "),
+      "Breve descrição": obj.description.long,
       "Produtos e serviços": obj.services.join("; "),
-      "Objetivos de Desenvolvimento Sustentável": obj.ods.join("; "),
+      Tecnologias: obj.technologies.join("; "),
+      Site: obj.url,
+      "A empresa está ou esteve em alguma incubadora ou Parque tecnológico":
+        obj.incubated,
+      "Em qual incubadora?": obj.ecosystems,
       "Redes sociais": obj.socialMedias.join("; "),
       "Número de funcionários contratados como CLT": obj.numberOfCTLEmployees,
       "Número de colaboradores contratados como Pessoa Jurídica (PJ)":
         obj.numberOfPJColaborators,
       "Número de estagiários/bolsistas contratados": obj.numberOfInterns,
-      "A empresa está ou esteve em alguma incubadora ou Parque tecnológico":
-        obj.incubated,
       "A empresa recebeu investimento?": obj.receivedInvestments
         ? "Sim"
         : "Não",
@@ -298,6 +299,7 @@ const prepareCompanyObject = (obj) => ({
       "Valor do PIPE-FAPESP (R$)": obj.investmentsValues.pipeFapesp,
       "Valor de outros investimentos (R$)": obj.investmentsValues.other,
       Faturamento: obj.financeValue,
+      "Objetivos de Desenvolvimento Sustentável": obj.ods.join("; "),
     },
     dna_values: {
       wants_dna: obj.wantsDna,
