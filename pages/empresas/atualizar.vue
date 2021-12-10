@@ -9,27 +9,19 @@
 
     <v-form ref="form">
       <v-container>
-        <v-row v-if="errors.length > 0">
-          <v-col>
-            <v-alert v-for="error in errors" :key="error" type="error">{{
-              error
-            }}</v-alert>
-          </v-col>
-        </v-row>
         <v-row v-if="ok">
           <Stepper @finish="updateCompany" />
-          <v-dialog v-model="successUpdateDialog" persistent max-width="500">
+          <v-dialog v-model="dialog.show" persistent max-width="500">
             <v-card>
               <v-card-title class="text-h5">
-                Solicitação de atualização enviada!
+                {{ dialog.title }}
               </v-card-title>
               <v-card-text>
-                Agora os dados da empresa serão validados pela equipe Hub
-                USPInovação e em breve estarão disponíveis na plataforma.
+                {{ dialog.message }}
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green darken-1" text @click="redirect">
+                <v-btn color="green darken-1" text @click="handleOkClick">
                   Ok!
                 </v-btn>
               </v-card-actions>
@@ -83,7 +75,12 @@ export default {
 
     loading: false,
     ok: false,
-    successUpdateDialog: false,
+    dialog: {
+      show: false,
+      status: "",
+      title: "",
+      message: "",
+    },
   }),
 
   computed: {
@@ -94,14 +91,6 @@ export default {
 
     isValid() {
       return this.cnpj.length === 18;
-    },
-  },
-
-  watch: {
-    errors(newErrors) {
-      if (newErrors.length > 0) {
-        this.$vuetify.goTo("#company_update_background");
-      }
     },
   },
 
@@ -128,13 +117,39 @@ export default {
       const updated = await this.updateCompanyForm();
 
       if (updated) {
-        this.successUpdateDialog = true;
+        this.dialog = {
+          show: true,
+          status: "success",
+          title: "Solicitação de atualização enviada!",
+          message:
+            "Agora os dados da empresa serão validados pela equipe Hub USPInovação e em breve estarão disponíveis na plataforma.",
+        };
+      } else {
+        this.dialog = {
+          show: true,
+          status: "error",
+          title: "Erro ao atualizar os dados",
+          message: this.errors.join("; "),
+        };
       }
     },
 
-    redirect() {
-      this.successUpdateDialog = false;
-      this.$router.push("/");
+    clearDialog() {
+      this.dialog = {
+        show: false,
+        status: "",
+        title: "",
+        message: "",
+      };
+    },
+
+    handleOkClick() {
+      const { status } = this.dialog;
+      this.clearDialog();
+
+      if (status === "success") {
+        this.$router.push("/");
+      }
     },
   },
 };
