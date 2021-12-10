@@ -40,19 +40,22 @@ export default {
   },
   methods: {
     handleKeyDown(e) {
-      e.preventDefault();
-      this.moveCursorToTheEnd(e);
+      const TAB = 9;
+      const BACKSPACE = 8;
+      const NUMBERS =
+        (e.keyCode >= 48 && e.keyCode <= 57) ||
+        (e.keyCode >= 96 && e.keyCode <= 105);
 
-      if (e.keyCode === 8) {
-        // backspace
+      if (e.keyCode !== TAB) {
+        e.preventDefault();
+        this.moveCursorToTheEnd(e);
+      }
+
+      if (e.keyCode === BACKSPACE) {
         this.removeLastDigit();
       }
 
-      if (
-        (e.keyCode >= 48 && e.keyCode <= 57) ||
-        (e.keyCode >= 96 && e.keyCode <= 105)
-      ) {
-        // numbers
+      if (NUMBERS) {
         this.updateCurrencyValue(e.key);
       }
     },
