@@ -60,7 +60,7 @@
           </v-row>
           <v-row>
             <v-col>
-              <span>{{ item._area.minors.join("; ") }}</span>
+              <span>{{ item.area.minors.join("; ") }}</span>
             </v-col>
           </v-row>
           <v-row>
@@ -101,7 +101,7 @@
             <v-expansion-panel-content>
               <v-list>
                 <v-list-item
-                  v-for="description in item.descriptions[desc.key]"
+                  v-for="description in item[desc.key]"
                   :key="description"
                 >
                   <v-list-item-icon>
