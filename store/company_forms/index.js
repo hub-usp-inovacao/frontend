@@ -300,6 +300,11 @@ const prepareCompanyObject = (obj) => ({
       "Valor de outros investimentos (R$)": obj.investmentsValues.other,
       Faturamento: obj.financeValue,
       "Objetivos de Desenvolvimento Sustentável": obj.ods.join("; "),
+      "Data da última atualização de Colaboradores": updateCollaboratorsDate(
+        obj
+      ),
+      "Data da última atualização de Faturamento": updateRevenuesDate(obj),
+      "Data da última atualização de Investimento": updateInvestmentsDate(obj),
     },
     dna_values: {
       wants_dna: obj.wantsDna,
@@ -310,3 +315,24 @@ const prepareCompanyObject = (obj) => ({
     permission: obj.permission,
   },
 });
+
+const updateCollaboratorsDate = (obj) => {
+  const keys = [
+    "numberOfCTLEmployees",
+    "numberOfPJColaborators",
+    "numberOfInterns",
+  ];
+  const wasUpdated = keys.some((key) => obj[key]);
+
+  return wasUpdated ? new Date() : obj.collaboratorsLastUpdatedAt;
+};
+
+const updateRevenuesDate = (obj) => {
+  const wasUpdated = obj.financeValue !== "R$ 0,00";
+  return wasUpdated ? new Date() : obj.revenuesLastUpdatedAt;
+};
+
+const updateInvestmentsDate = (obj) => {
+  const wasUpdated = obj.receivedInvestments;
+  return wasUpdated ? new Date() : obj.investmentsLastUpdatedAt;
+};
