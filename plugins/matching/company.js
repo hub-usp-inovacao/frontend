@@ -1,4 +1,4 @@
-const matchesFilter = (company, {primary, secondary, terciary}) => {
+const matchesFilter = (company, { primary, secondary, terciary }) => {
   let primaryMatch = true;
   let secondaryMatch = true;
   let terciaryMatch = true;

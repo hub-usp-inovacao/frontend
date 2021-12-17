@@ -6,7 +6,6 @@
       elevation="0"
       color="transparent"
       height="5em"
-      
       :to="to"
     >
       <svg

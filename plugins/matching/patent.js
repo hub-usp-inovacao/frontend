@@ -1,4 +1,4 @@
-const matchesFilter = (patent, {primary, secondary, terciary}) => {
+const matchesFilter = (patent, { primary, secondary, terciary }) => {
   let primaryMatch = true;
   let secondaryMatch = true;
   let terciaryMatch = true;
@@ -19,8 +19,8 @@ const matchesFilter = (patent, {primary, secondary, terciary}) => {
     terciaryMatch = status === patent.status;
 
   return primaryMatch && secondaryMatch && terciaryMatch;
-}
+};
 
 export default (_, inject) => {
   inject("patentMatchesFilter", matchesFilter);
-}
+};
