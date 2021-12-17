@@ -8,7 +8,7 @@ const matchesFilter = (skill, { primary, secondary, terciary }) => {
   }
 
   if (secondary.length > 0) {
-    secondaryMatch = skill.area.minor.some((minor) =>
+    secondaryMatch = skill.area.minors.some((minor) =>
       secondary.includes(minor)
     );
   }
