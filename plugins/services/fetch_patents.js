@@ -15,13 +15,12 @@ async function fetchData() {
 }
 
 export default (_, inject) => {
-  inject("fetchPatents", async (payload) => {
+  inject("fetchPatents", async () => {
     const values = await fetchData();
-    if (values == undefined) return {patents: []};
+    if (values == undefined) return { patents: [] };
 
-    const patents = values
-      .sort((a, b) => a.name.localeCompare(b.name));
+    const patents = values.sort((a, b) => a.name.localeCompare(b.name));
 
-    return {patents};
+    return { patents };
   });
 };
