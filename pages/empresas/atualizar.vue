@@ -34,7 +34,6 @@
               :value="cnpj"
               label="CNPJ"
               mask="##.###.###/####-##"
-              hint="SOMENTE empresas formalmente constituídas podem preencher este formulário."
               @input="setCnpj"
             />
           </v-col>

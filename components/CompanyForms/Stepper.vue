@@ -25,7 +25,7 @@
           :key="id"
           :step="id"
         >
-          <component :is="component" class="component-border mb-12"></component>
+          <component :is="component" :isUpdate=update class="component-border mb-12"></component>
 
           <v-row class="mr-4" justify="end">
             <v-btn
@@ -57,6 +57,12 @@ export default {
     CompanyStep,
     IntroStep,
     DNAUSPStep,
+  },
+  props: {
+   update: {
+     type: Boolean,
+     default: true,
+   }
   },
   data: () => ({
     e1: 1,
