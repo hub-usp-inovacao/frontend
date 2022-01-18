@@ -1,7 +1,7 @@
 <template>
   <section>
     <div id="company_update_background" class="background">
-      <Panel :title="title" :description="description" no-search />
+      <Panel :title="title" :description="description()" no-search />
       <v-alert dense border="left" type="warning" class="text-center">
         Dados sensíveis não são mostrados neste formulário.
       </v-alert>
@@ -69,8 +69,6 @@ export default {
   },
   data: () => ({
     title: "Atualização de Empresas DNAUSP",
-    description:
-      "Representantes das Empresas podem solicitar, nesta página, a atualização dos dados cadastrados.\nPara poder atualizar os dados, você deve inserir abaixo o CNPJ de sua empresa",
 
     loading: false,
     ok: false,
@@ -99,6 +97,15 @@ export default {
       getCompanyData: "company_forms/getCompanyData",
       updateCompanyForm: "company_forms/updateCompanyForm",
     }),
+
+    description() {
+      if (this.ok == false) {
+        return "Representantes das Empresas podem solicitar, nesta página, a atualização dos dados cadastrados.\n Para prosseguir, insira o CNPJ da empresa abaixo."
+      }
+      else {
+        return ""
+      }
+    },
 
     async submit() {
       if (this.isValid) {

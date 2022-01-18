@@ -40,37 +40,37 @@
       <CurrencyInput
         v-if="hasInvestmentTypeSelected('Investimento próprio')"
         :value="ownValue"
-        label="Valor do investimento próprio (R$)"
+        label="Valor do investimento próprio"
         @input="setOwnValue"
       />
       <CurrencyInput
         v-if="hasInvestmentTypeSelected('Investimento-anjo')"
         :value="angelValue"
-        label="Valor do investimento-anjo (R$)"
+        label="Valor do investimento-anjo"
         @input="setAngelValue"
       />
       <CurrencyInput
         v-if="hasInvestmentTypeSelected('Venture capital')"
         :value="ventureCapitalValue"
-        label="Valor do Venture Capital (R$)"
+        label="Valor do Venture Capital"
         @input="setVentureCapitalValue"
       />
       <CurrencyInput
         v-if="hasInvestmentTypeSelected('Private equity')"
         :value="privateEquityValue"
-        label="Valor do Private Equity (R$)"
+        label="Valor do Private Equity"
         @input="setPrivateEquityValue"
       />
       <CurrencyInput
         v-if="hasInvestmentTypeSelected('PIPE-FAPESP')"
         :value="pipeFapespValue"
-        label="Valor do PIPE-FAPESP (R$)"
+        label="Valor do PIPE-FAPESP"
         @input="setPipeFapespValue"
       />
       <CurrencyInput
         v-if="hasOtherInvestmentSelected()"
         :value="otherValue"
-        label="Outros investimentos (R$)"
+        label="Outros investimentos"
         @input="setOtherValue"
       />
     </div>

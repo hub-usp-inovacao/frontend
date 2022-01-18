@@ -29,7 +29,6 @@
             :value="cnpj"
             label="CNPJ"
             mask="##.###.###/####-##"
-            hint="SOMENTE empresas formalmente constituídas podem preencher este formulário. Caso a empresa não possua CNPJ ainda, aguarde até a constituição da mesma para realizar o cadastro. Em caso de empresas estabelecidas no exterior, favor entrar em contato pelo e-mail hubusp.inovacao@usp.br"
             @input="setCnpj"
           />
         </v-container>
@@ -39,7 +38,7 @@
         CNAE (Classificação Nacional de Atividades Econômicas) da empresa
         <v-divider />
         <v-container>
-          <legend class="body-2">
+          <legend class="body-2 mb-5">
             Para consultar o CNAE cole o CNPJ da empresa no
             <a
               href="http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp?cnpj"
