@@ -33,9 +33,7 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>
-        <p v-for="local in item.local" :key="local" class="body-2 mb-4">
-          {{ local }}
-        </p>
+        <p class="body-2 mb-4">{{ local }}</p>
         <v-row>
           <v-col v-if="item.email">
             <p class="body-2 mb-4 mr-8">{{ item.email }}</p>

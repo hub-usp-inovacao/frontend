@@ -4,7 +4,13 @@ export const state = () => ({
   iniciatives: [],
   isLoading: false,
   errors: undefined,
-  keys: Iniciative.keys,
+  keys = [
+    "name",
+    "descriptionLong",
+    "descriptionShort",
+    "keywords",
+    "services",
+  ],
 });
 
 export const getters = {
