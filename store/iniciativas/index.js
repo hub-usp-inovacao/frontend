@@ -1,5 +1,3 @@
-import Iniciative from "@/lib/classes/iniciative";
-
 export const state = () => ({
   iniciatives: [],
   isLoading: false,
