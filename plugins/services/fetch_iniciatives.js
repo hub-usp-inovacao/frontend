@@ -21,6 +21,6 @@ export default (_, inject) => {
       .filter((i) => i !== null)
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    return { iniciatives };
+    return { iniciatives }
   });
 };

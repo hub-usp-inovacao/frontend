@@ -1,14 +1,14 @@
-const matchesFilter = (skill, { primary, secondary, terciary }) => {
+const matchesFilter = (iniciative, { primary, secondary, terciary }) => {
     let primaryMatch = true;
     let secondaryMatch = true;
     let terciaryMatch = true;
   
     if (primary.length > 0) {
-      primaryMatch = skill.area.major.some((major) => primary.includes(major));
+      primaryMatch = iniciative.area.major.some((major) => primary.includes(major));
     }
   
     if (secondary.length > 0) {
-      secondaryMatch = skill.area.minor.some((minor) =>
+      secondaryMatch = iniciative.area.minor.some((minor) =>
         secondary.includes(minor)
       );
     }
@@ -16,15 +16,15 @@ const matchesFilter = (skill, { primary, secondary, terciary }) => {
     const [campus, unity, bond] = terciary;
   
     if (campus) {
-      terciaryMatch = skill.campus === campus;
+      terciaryMatch = iniciative.campus === campus;
     }
   
     if (unity) {
-      terciaryMatch = terciaryMatch && skill.unities.includes(unity);
+      terciaryMatch = terciaryMatch && iniciative.unities.includes(unity);
     }
   
     if (bond) {
-      terciaryMatch = terciaryMatch && skill.bond === bond;
+      terciaryMatch = terciaryMatch && iniciative.bond === bond;
     }
   
     return primaryMatch && secondaryMatch && terciaryMatch;
