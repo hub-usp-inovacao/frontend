@@ -9,7 +9,7 @@ matchesFilter(iniciatives, { primary, terciary }) {
 
   const [campus] = terciary;
 
-  if (campus) terciaryMatch = iniciatives.local.includes(campus);
+  if (campus) terciaryMatch = iniciatives.local === campus;
 
   return primaryMatch && terciaryMatch;
 }
