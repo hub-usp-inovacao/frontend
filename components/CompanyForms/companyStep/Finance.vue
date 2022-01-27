@@ -4,7 +4,7 @@
       Ultima atualização feita em: {{ formattedLastUpdated }}
     </p>
     <div class="mt-5 text-h6 font-weight-regular">
-      Qual foi o faturamento da empresa em 2020? (R$)
+      Qual foi o faturamento da empresa em {{lastYear()}}?
       <CurrencyInput
         label="Faturamento"
         :value="financeValue"
@@ -39,6 +39,10 @@ export default {
     ...mapActions({
       setFinanceValue: "company_forms/setFinanceValue",
     }),
+    lastYear() {
+      const date = new Date
+      return date.getFullYear() - 1
+    }
   },
 };
 </script>
