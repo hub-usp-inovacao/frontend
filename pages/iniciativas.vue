@@ -33,23 +33,21 @@
       <template #title="{ item }">{{ item.name }}</template>
       <template #detailsText="{ item }">
         <p class="body-2">{{ item.unity }}</p>
-        <p class="body-2 mb-4">{{ local }}</p>
+        <p class="body-2 mb-4">{{ item.localization }}</p>
         <v-row>
           <v-col v-if="item.email">
             <p class="body-2 mb-4 mr-8">{{ item.email }}</p>
           </v-col>
           <v-col>
             <p
-              v-for="phone in item.contact.info"
-              :key="phone"
               class="body-2 mb-4"
             >
-              {{ phone }}
+              {{ item.contact.info }}
             </p>
           </v-col>
         </v-row>
       </template>
-      <template #content="{ item }">{{ item.description.long }}</template>
+      <template #content="{ item }">{{ item.description }}</template>
       <template #actions="{ item }">
         <v-btn
           :href="item.url"

@@ -2,7 +2,7 @@ export const state = () => ({
   iniciatives: [],
   isLoading: false,
   errors: undefined,
-  keys = [
+  keys: [
     "name",
     "descriptionLong",
     "descriptionShort",
