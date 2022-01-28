@@ -1,4 +1,4 @@
-matchesFilter(iniciatives, { primary, terciary }) {
+function matchesFilter(iniciatives, { primary, terciary }) {
   let primaryMatch = true;
   let terciaryMatch = true;
 
@@ -13,3 +13,7 @@ matchesFilter(iniciatives, { primary, terciary }) {
 
   return primaryMatch && terciaryMatch;
 }
+
+export default (_, inject) => {
+  inject("iniciativeMatchesFilter", matchesFilter);
+};

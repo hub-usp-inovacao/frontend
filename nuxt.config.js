@@ -95,6 +95,7 @@ export default {
     { src: "~/plugins/matching/company.js" },
     { src: "~/plugins/matching/patent.js" },
     { src: "~/plugins/matching/skill.js" },
+    { src: "~/plugins/matching/iniciative.js" },
     { src: "~/plugins/v-mask.js", mode: "client" },
   ],
 

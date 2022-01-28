@@ -237,7 +237,7 @@ export default {
     },
     filterData(context) {
       this.filtered = this.iniciatives.filter((iniciative) =>
-        iniciative.matchesFilter(context)
+        this.$iniciativeMatchesFilter(iniciative,context)
       );
     },
     async pipeline() {
